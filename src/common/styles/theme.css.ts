@@ -1,0 +1,143 @@
+import { createGlobalTheme, createThemeContract } from '@vanilla-extract/css';
+
+export const vars = createThemeContract({
+  colors: {
+    // primary, 파랑색
+    primary: {
+      default: null,
+      base: null,
+      container: null,
+      fixed: null,
+      fixed_dim: null,
+      fixed_dim_var: null,
+    },
+
+    // secondary, 남색
+    secondary: {
+      default: null,
+      container: null,
+      fixed: null,
+      on_fixed: null,
+      fixed_dim: null,
+      fixed_var: null,
+    },
+
+    // Tertiary, 청록색
+    tertiary: {
+      default: null,
+      base: null,
+      fixed_dim: null,
+    },
+
+    // error, 빨간색
+    error: {
+      primary: null,
+      container: null,
+      base: null,
+    },
+
+    // surface, 회색
+    surface: {
+      default: null,
+      dim: null,
+      bright: null,
+      variant: null,
+      cont_1: null,
+      cont_2: null,
+      cont_3: null,
+      cont_4: null,
+      cont_5: null,
+      cont_1_var: null,
+      cont_2_var: null,
+      cont_3_var: null,
+      cont_5_var: null,
+      on_surf: null,
+      on_surf_var: null,
+      outline: null,
+      outline_var: null,
+    },
+
+    white: null,
+    black: null,
+  },
+  fonts: {
+    display1: null,
+    display2: null,
+    display3: null,
+    display4: null,
+    title1: null,
+    title2: null,
+    title3: null,
+    title4: null,
+    body1: null,
+    body2: null,
+    body3: null,
+    body4: null,
+  },
+});
+
+createGlobalTheme(':root', vars, {
+  colors: {
+    primary: {
+      default: '#254FDB',
+      base: '#EDF2FD',
+      container: '#04165A',
+      fixed: '#D1DEFB',
+      fixed_dim: '#A5BDF5',
+      fixed_dim_var: '#071F75',
+    },
+    secondary: {
+      default: '#344476',
+      container: '#1E2A54',
+      fixed: '#DADEE8',
+      on_fixed: '#02030B',
+      fixed_dim: '#B6BDD1',
+      fixed_var: '#1E2A54',
+    },
+    tertiary: {
+      default: '#53C3D0',
+      base: '#EAF9FB',
+      fixed_dim: '#A1E3EC',
+    },
+    surface: {
+      default: '#F8F8F9',
+      dim: '#CCCED1',
+      bright: '#FFFFFF',
+      variant: '#F5F5F6',
+      cont_1: '#EEEEF0',
+      cont_2: '#E7E8EA',
+      cont_3: '#E0E1E3',
+      cont_4: '#DADBDD',
+      cont_5: '#D3D4D7',
+      cont_1_var: '#EDEEF1',
+      cont_2_var: '#E6E8EC',
+      cont_3_var: '#DFE1E6',
+      cont_5_var: '#D2D4DA',
+      on_surf: '#030304',
+      on_surf_var: '#292E39',
+      outline: '#5A6379',
+      outline_var: '#BABEC7',
+    },
+    error: {
+      primary: '#BE3439',
+      base: '#FFF1F0',
+      container: '#FFD9D5',
+    },
+    white: '#FFFFFF',
+    black: '#000000',
+  },
+  fonts: {
+    display1: '3.667rem ',
+    display2: '2.889rem ',
+    display3: '2.278rem ',
+    display4: '2rem ',
+    title1: '1.611rem ',
+    title2: '1.444rem ',
+    title3: '1.278rem ',
+    title4: '1.111rem ',
+    body1: '0.889rem ',
+    body2: '0.778rem ',
+    body3: '0.722rem ',
+    body4: '0.556rem ',
+  },
+});
