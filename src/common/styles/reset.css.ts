@@ -4,18 +4,18 @@ import 'sanitize.css';
 globalStyle('*', {
   margin: '0',
   padding: '0',
-  fontFamily: 'var(--font-pretendard), sans-serif;',
+  fontFamily: 'var(--font-pretendard), sans-serif',
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
   boxSizing: 'border-box',
 });
 
 globalStyle('html', {
-  fontFamily: 'var(--font-pretendard), sans-serif;',
+  fontFamily: 'var(--font-pretendard), sans-serif',
 });
 
 globalStyle('body', {
-  fontFamily: 'var(--font-pretendard), sans-serif;',
+  fontFamily: 'var(--font-pretendard), sans-serif',
 });
 
 globalStyle('h1', {
