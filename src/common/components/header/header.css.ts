@@ -2,7 +2,10 @@ import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 export const Container = style({
-  display: 'fixed',
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
 });
 export const Wrapper = style({
   width: '100%',
