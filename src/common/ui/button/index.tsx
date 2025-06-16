@@ -16,7 +16,12 @@ function Button({
   } `;
 
   return (
-    <button className={`${classNames}`} disabled={disabled} {...props}>
+    <button
+      type='button'
+      className={`${classNames}`}
+      disabled={disabled}
+      {...props}
+    >
       {children}
     </button>
   );
