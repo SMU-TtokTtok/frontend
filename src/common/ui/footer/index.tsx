@@ -17,7 +17,9 @@ function Footer({ serviceName, informationUrl }: FooterProps) {
           <Image src={Mainlogo} className={footer.logo} alt='메인로고' />
         </Link>
         <p className={footer.content}>
-          <Link href={informationUrl}>개인정보 처리방침</Link>
+          <Link href={informationUrl} target='_blank' rel='noopener noreferrer'>
+            개인정보 처리방침
+          </Link>
         </p>
         <p className={footer.content}>
           Copyright ⓒ {serviceName}. All Rights Reserved
