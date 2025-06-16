@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
-import { baseButtonStyle, buttonStyle } from './button.css';
+import * as S from './button.css';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: keyof typeof buttonStyle;
+  variant: keyof typeof S.buttonStyle;
 }
 
 function Button({
@@ -11,8 +11,8 @@ function Button({
   disabled,
   ...props
 }: PropsWithChildren<ButtonProps>) {
-  const classNames = `${className ?? ''} ${baseButtonStyle} ${
-    buttonStyle[variant]
+  const classNames = `${className ?? ''} ${S.baseButtonStyle} ${
+    S.buttonStyle[variant]
   } `;
 
   return (
