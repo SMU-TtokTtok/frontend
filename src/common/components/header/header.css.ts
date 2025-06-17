@@ -18,7 +18,7 @@ export const Wrapper = style({
 export const InnerWrapper = style({
   width: '100%',
   maxWidth: '1392px',
-  padding: '0.7778rem 0',
+  padding: '1.111rem 0',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
