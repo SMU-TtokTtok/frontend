@@ -1,5 +1,5 @@
 function ClubList() {
-  return <div>ClubList</div>;
+  return <div>index</div>;
 }
 
 export default ClubList;
