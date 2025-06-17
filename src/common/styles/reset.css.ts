@@ -12,6 +12,7 @@ globalStyle('*', {
 
 globalStyle('html', {
   fontFamily: 'var(--font-pretendard), sans-serif',
+  fontSize: '18px',
 });
 
 globalStyle('body', {
