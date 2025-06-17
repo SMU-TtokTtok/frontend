@@ -1,5 +1,5 @@
 import { globalStyle } from '@vanilla-extract/css';
-import 'sanitize.css';
+//import 'sanitize.css';
 // reset
 globalStyle('*', {
   margin: '0',

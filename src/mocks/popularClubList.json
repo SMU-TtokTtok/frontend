@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "코딩클럽",
+    "separation": "학술",
+    "category": ["프로그래밍", "AI", "웹개발"]
+  },
+  {
+    "id": 2,
+    "name": "뮤직플레이",
+    "separation": "예술",
+    "category": ["밴드", "보컬", "작곡"]
+  },
+  {
+    "id": 3,
+    "name": "드림FC",
+    "separation": "체육",
+    "category": ["축구", "운동", "교류"]
+  },
+  {
+    "id": 4,
+    "name": "필름메이커스",
+    "separation": "예술",
+    "category": ["영상제작", "촬영", "편집"]
+  },
+  {
+    "id": 5,
+    "name": "마케팅 인사이트",
+    "separation": "학술",
+    "category": ["경영", "마케팅", "브랜딩"]
+  },
+  {
+    "id": 6,
+    "name": "여행가들",
+    "separation": "교양",
+    "category": ["여행", "문화", "사진"]
+  }
+]
