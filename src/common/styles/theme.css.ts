@@ -135,9 +135,9 @@ createGlobalTheme(':root', vars, {
     title2: '1.444rem ',
     title3: '1.278rem ',
     title4: '1.111rem ',
-    body1: '0.889rem ',
-    body2: '0.778rem ',
-    body3: '0.722rem ',
-    body4: '0.556rem ',
+    body1: '1.000rem',
+    body2: '0.889rem ',
+    body3: '0.778rem ',
+    body4: '0.722rem ',
   },
 });
