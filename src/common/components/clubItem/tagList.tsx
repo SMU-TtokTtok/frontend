@@ -4,9 +4,9 @@ import * as S from './clubItem.css';
 function TagList({ category }: { category: string[] }) {
   return (
     <>
-      {category?.map((category) => (
-        <Tag key={category} className={S.tagStyle} variant='default'>
-          {category}
+      {category?.map((tag) => (
+        <Tag key={tag} className={S.tagStyle} variant='default'>
+          {tag}
         </Tag>
       ))}
     </>
