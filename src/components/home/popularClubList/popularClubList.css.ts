@@ -53,6 +53,10 @@ export const sliderWrapper = style({
     '&::-webkit-scrollbar': {
       display: 'none',
     },
+    '&': {
+      scrollbarWidth: 'none',
+      msOverflowStyle: 'none',
+    },
   },
 });
 
