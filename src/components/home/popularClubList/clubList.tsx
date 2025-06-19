@@ -1,16 +1,17 @@
+'use client';
 import ClubItem from '@/common/components/clubItem';
-import { ClubItemInfo } from '@/common/model/club';
-interface ClubListProps {
-  clubData: ClubItemInfo[];
-}
+import * as S from './popularClubList.css';
+import { usePopularClubList } from '@/hooks/usePopularClubList';
 
-function ClubList({ clubData }: ClubListProps) {
+function ClubList() {
+  const { data } = usePopularClubList();
+
   return (
-    <div>
-      {clubData.map((club) => (
-        <ClubItem key={club.id} clubData={club} />
+    <ul className={S.PopularClubListWrapper}>
+      {data?.map((club) => (
+        <ClubItem clubData={club} key={club.id} />
       ))}
-    </div>
+    </ul>
   );
 }
 

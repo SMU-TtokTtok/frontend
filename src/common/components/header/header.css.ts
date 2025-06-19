@@ -5,6 +5,7 @@ export const Container = style({
   position: 'fixed',
   top: 0,
   left: 0,
+  zIndex: 1,
   width: '100%',
 });
 export const Wrapper = style({
