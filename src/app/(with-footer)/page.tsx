@@ -12,7 +12,6 @@ export default function Home() {
           <PopularClubList />
         </div>
       </div>
-
       <Filter />
       <ClubList />
     </div>

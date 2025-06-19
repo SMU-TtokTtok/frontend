@@ -3,4 +3,5 @@ export const ROUTES = {
   LOGIN: '/login',
   ADMIN: '/admin',
   SIGNUP: '/signup',
+  CLUB_INFO: (clubId: number) => `/club/${clubId}`,
 };
