@@ -9,6 +9,7 @@ import RecruitStatus from './reqruitStatus';
 import TagList from './tagList';
 import { usePatchFavorite } from '@/hooks/useFavoriteMutation';
 import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/common/constants/routes';
 interface ClubItemProps {
   clubData: ClubItemInfo;
 }
@@ -17,7 +18,7 @@ function ClubItem({ clubData }: ClubItemProps) {
   const { handleFavoriteStatus } = usePatchFavorite();
   const router = useRouter();
   const handleClubDetail = () => {
-    router.push(`/club/${clubData.id}`);
+    router.push(ROUTES.CLUB_INFO(clubData.id));
   };
   return (
     <li className={S.container} onClick={handleClubDetail}>
@@ -35,7 +36,7 @@ function ClubItem({ clubData }: ClubItemProps) {
       </div>
       <p className={S.name}>{clubData.name}</p>
       <div className={S.membersWrapper}>
-        <Image src={person} className={S.person} alt='Star' />
+        <Image src={person} className={S.person} alt='멤버 수' />
         <p className={S.members}>{clubData.members}</p>
       </div>
       <div className={S.categoryWrapper}>
