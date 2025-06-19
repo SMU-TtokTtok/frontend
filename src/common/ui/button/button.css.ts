@@ -17,10 +17,7 @@ export const buttonStyle = styleVariants({
     backgroundColor: vars.colors.surface.cont_3_var,
     color: vars.colors.surface.outline,
   },
-  none: {
-    backgroundColor: '',
-    color: '',
-  },
+  none: {},
 });
 
 export const baseButtonStyle = style({
