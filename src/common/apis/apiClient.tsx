@@ -9,8 +9,8 @@ export default class ApiClient {
     this.baseUrl = baseUrl;
   }
 
-  async get<T>(path: string): Promise<T> {
-    const response = await this.request<T>('GET', path);
+  async get<T>(path: string, body?: any): Promise<T> {
+    const response = await this.request<T>('GET', path, body);
     return this.handleResponse<T>(response);
   }
 
@@ -29,11 +29,7 @@ export default class ApiClient {
     return this.handleResponse<T>(response);
   }
 
-  private async request<T>(
-    method: HTTPMethod,
-    path: string,
-    body?: any
-  ): Promise<Response> {
+  private async request<T>(method: HTTPMethod, path: string, body?: any): Promise<Response> {
     try {
       const url = `${this.baseUrl}${path}`;
       const response = await fetch(url, {
