@@ -5,29 +5,31 @@ import Image from 'next/image';
 import emptyStar from '@/assets/star.svg';
 import ActiveStar from '@/assets/star_active.svg';
 import person from '@/assets/person.svg';
-import RecruitStatus from './reqruitStatus';
+import RecruitStatus from './recruitStatus';
 import TagList from './tagList';
 import { usePatchFavorite } from '@/hooks/useFavoriteMutation';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
 interface ClubItemProps {
   clubData: ClubItemInfo;
+  className?: string;
 }
 
-function ClubItem({ clubData }: ClubItemProps) {
+function ClubItem({ clubData, className }: ClubItemProps) {
   const { handleFavoriteStatus } = usePatchFavorite();
   const router = useRouter();
   const handleClubDetail = () => {
     router.push(ROUTES.CLUB_INFO(clubData.id));
   };
+
   return (
-    <li className={S.container} onClick={handleClubDetail}>
+    <li className={`${S.container} ${className}`} onClick={handleClubDetail}>
       <div className={S.headerWrapper}>
         <p className={S.separation}>{clubData.separation}</p>
         <Image
           src={clubData.bookmark ? ActiveStar : emptyStar}
           className={S.star}
-          alt='Star'
+          alt="즐겨찾기"
           onClick={(e) => {
             e.stopPropagation();
             handleFavoriteStatus({ clubId: clubData.id });
@@ -36,7 +38,7 @@ function ClubItem({ clubData }: ClubItemProps) {
       </div>
       <p className={S.name}>{clubData.name}</p>
       <div className={S.membersWrapper}>
-        <Image src={person} className={S.person} alt='멤버 수' />
+        <Image src={person} className={S.person} alt="멤버 수" />
         <p className={S.members}>{clubData.members}</p>
       </div>
       <div className={S.categoryWrapper}>

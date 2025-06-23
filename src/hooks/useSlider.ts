@@ -5,7 +5,7 @@ export const useSlider = () => {
 
   const handleScrollX = (direction: 'left' | 'right') => {
     if (!scrollRef.current) return;
-    const scrollAmount = 300;
+    const scrollAmount = 350;
     scrollRef.current.scrollBy({
       left: direction === 'left' ? -scrollAmount : scrollAmount,
       behavior: 'smooth',

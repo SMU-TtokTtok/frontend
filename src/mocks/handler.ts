@@ -1,4 +1,3 @@
-import { patchFavorite, popularClubs } from './clubList';
+import { Clubs, patchFavorite, popularClubs } from './clubList';
 
-//test
-export const handlers = [popularClubs, patchFavorite];
+export const handlers = [popularClubs, Clubs, patchFavorite];

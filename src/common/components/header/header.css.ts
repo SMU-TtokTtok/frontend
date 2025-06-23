@@ -43,3 +43,13 @@ export const ButtonStyle = style({
   fontSize: vars.fonts.body3,
   marginRight: '8px',
 });
+
+export const hidden = style({
+  transform: 'translateY(-100%)',
+  transition: 'transform 0.3s ease-in-out',
+});
+
+export const visible = style({
+  transform: 'translateY(0)',
+  transition: 'transform 0.3s ease-in-out',
+});

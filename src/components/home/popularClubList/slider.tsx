@@ -9,19 +9,19 @@ function Slider({ children }: { children: React.ReactNode }) {
   return (
     <div ref={scrollRef} className={S.sliderWrapper}>
       <Button
-        variant='none'
+        variant="none"
         className={S.sliderBtn({ direction: 'left' })}
         onClick={() => handleScrollX('left')}
       >
-        <Image src={Arrow} alt='왼쪽 화살표' />
+        <Image src={Arrow} alt="왼쪽 화살표" />
       </Button>
       {children}
       <Button
-        variant='none'
+        variant="none"
         className={S.sliderBtn({ direction: 'right' })}
         onClick={() => handleScrollX('right')}
       >
-        <Image src={Arrow} alt='오른쪽 화살표' />
+        <Image src={Arrow} alt="오른쪽 화살표" />
       </Button>
     </div>
   );
