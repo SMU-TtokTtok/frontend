@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../common/styles/reset.css.ts';
 import { MSWProvider } from '@/mocks/mswProvider';
+import QueryProvider from './queryProvider';
 
 export const metadata: Metadata = {
   title: '똑똑 - 상명대학교 동아리 리쿠르팅 서비스',
@@ -31,7 +32,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <MSWProvider>{children}</MSWProvider>
+        <QueryProvider>
+          <MSWProvider>{children}</MSWProvider>
+        </QueryProvider>
       </body>
     </html>
   );

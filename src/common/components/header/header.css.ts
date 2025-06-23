@@ -5,6 +5,7 @@ export const Container = style({
   position: 'fixed',
   top: 0,
   left: 0,
+  zIndex: 1,
   width: '100%',
 });
 export const Wrapper = style({
@@ -18,7 +19,7 @@ export const Wrapper = style({
 export const InnerWrapper = style({
   width: '100%',
   maxWidth: '1392px',
-  padding: '0.7778rem 0',
+  padding: '1.111rem 0',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -41,4 +42,14 @@ export const ButtonStyle = style({
   fontWeight: '600',
   fontSize: vars.fonts.body3,
   marginRight: '8px',
+});
+
+export const hidden = style({
+  transform: 'translateY(-100%)',
+  transition: 'transform 0.3s ease-in-out',
+});
+
+export const visible = style({
+  transform: 'translateY(0)',
+  transition: 'transform 0.3s ease-in-out',
 });

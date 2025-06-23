@@ -17,6 +17,12 @@ export const buttonStyle = styleVariants({
     backgroundColor: vars.colors.surface.cont_3_var,
     color: vars.colors.surface.outline,
   },
+  //흰색
+  surface: {
+    backgroundColor: vars.colors.surface.default,
+    color: vars.colors.surface.outline,
+  },
+  none: {},
 });
 
 export const baseButtonStyle = style({

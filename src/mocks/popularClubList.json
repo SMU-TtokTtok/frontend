@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "코딩클럽",
+    "separation": "학술",
+    "members": 25,
+    "category": ["프로그래밍", "AI"],
+    "isRecruiting": true,
+    "bookmark": true
+  },
+  {
+    "id": 2,
+    "name": "뮤직플레이",
+    "separation": "예술",
+    "members": 30,
+    "category": ["밴드", "보컬"],
+    "isRecruiting": false,
+    "bookmark": false
+  },
+  {
+    "id": 3,
+    "name": "드림FC",
+    "separation": "체육",
+    "members": 20,
+    "category": ["축구", "운동"],
+    "isRecruiting": true,
+    "bookmark": false
+  },
+  {
+    "id": 4,
+    "name": "필름메이커스",
+    "separation": "예술",
+    "members": 15,
+    "category": ["영상제작", "촬영"],
+    "isRecruiting": false,
+    "bookmark": false
+  },
+  {
+    "id": 5,
+    "name": "멋쟁이 사자처럼",
+    "separation": "IT",
+    "members": 15,
+    "category": ["코딩", "IT"],
+    "isRecruiting": false,
+    "bookmark": false
+  }
+]

@@ -1,0 +1,26 @@
+import { vars } from '@/common/styles/theme.css';
+import { styleVariants } from '@vanilla-extract/css';
+
+export const tagStyle = styleVariants({
+  //배경: 흰색
+  default: {
+    backgroundColor: vars.colors.surface.default,
+    border: `1px solid ${vars.colors.surface.cont_3}`,
+    color: vars.colors.surface.outline,
+    fontWeight: '600',
+  },
+  //모집 중
+  secondary: {
+    backgroundColor: vars.colors.tertiary.base,
+    border: `1px solid ${vars.colors.tertiary.fixed_dim}`,
+    color: vars.colors.tertiary.default,
+    fontWeight: '600',
+  },
+  //모집 마감
+  tertiary: {
+    backgroundColor: vars.colors.surface.default,
+    border: `1px solid ${vars.colors.surface.cont_3}`,
+    color: vars.colors.surface.cont_5,
+    fontWeight: '600',
+  },
+});
