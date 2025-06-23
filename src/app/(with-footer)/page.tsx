@@ -3,8 +3,10 @@ import ClubList from '@/components/home/clubList';
 import Filter from '@/components/home/filter';
 import PopularClubList from '@/components/home/popularClubList/index';
 import * as S from '@/components/home/popularClubList/popularClubList.css';
+import { useSearchQuery } from '@/hooks/useSearchQuery';
 
 export default function Home() {
+  const { filter } = useSearchQuery();
   return (
     <div>
       <div className={S.Container}>
@@ -12,8 +14,8 @@ export default function Home() {
           <PopularClubList />
         </div>
       </div>
-      <Filter />
-      <ClubList />
+      <Filter selectedOptions={filter} />
+      <ClubList selectedOptions={filter} />
     </div>
   );
 }
