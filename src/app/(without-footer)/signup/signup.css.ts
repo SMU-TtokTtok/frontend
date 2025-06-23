@@ -114,3 +114,44 @@ export const SignupButton = style({
   alignSelf: 'flex-end',
   borderRadius: '6px',
 });
+
+export const CompleteBox = style({
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+
+  backgroundColor: 'white',
+  borderRadius: '12px',
+  padding: '48px',
+  width: '100%',
+  maxWidth: '586px',
+  textAlign: 'center',
+  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.06)',
+});
+
+export const CompleteTitle = style({
+  fontSize: vars.fonts.title3,
+  fontWeight: 700,
+  marginBottom: '16px',
+});
+
+export const CompleteText = style({
+  fontSize: vars.fonts.body2,
+  color: '#272E3B',
+  lineHeight: 1.6,
+  marginBottom: '24px',
+});
+
+export const CompleteHighlight = style({
+  color: '#2563eb',
+  fontWeight: 600,
+});
+
+export const CompleteButton = style({
+  width: '100%',
+  padding: '16px',
+  fontSize: vars.fonts.body1,
+  fontWeight: 600,
+  borderRadius: '6px',
+});
