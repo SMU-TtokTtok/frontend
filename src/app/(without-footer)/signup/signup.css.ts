@@ -93,6 +93,9 @@ export const PolicyBox = style({
   borderRadius: '6px',
   color: '#272E3B',
   fontSize: vars.fonts.body3,
+  whiteSpace: 'pre-line',
+  height: '220px',
+  overflowY: 'auto',
 });
 
 export const FlexAgree = style({
