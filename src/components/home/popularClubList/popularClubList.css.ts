@@ -84,3 +84,8 @@ export const sliderBtn = recipe({
     },
   },
 });
+
+export const cardStyle = style({
+  margin: '0 0.444rem',
+  width: '18.33rem',
+});
