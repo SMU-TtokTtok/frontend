@@ -19,7 +19,6 @@ export const icon = style({
 
 export const panel = style({
   position: 'absolute',
-  top: '52px',
   right: 0,
   backgroundColor: '#fff',
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
