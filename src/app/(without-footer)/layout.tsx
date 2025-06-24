@@ -1,12 +1,12 @@
-import * as S from '../layout.css';
+import * as S from '@/app/layout.css';
 import Header from '@/common/components/header';
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={S.withoutFooterContent}>
+    <>
       <Header />
-      {children}
-    </div>
+      <div className={S.withoutFooterContent}>{children}</div>
+    </>
   );
 }
 
