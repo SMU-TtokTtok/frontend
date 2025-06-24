@@ -62,3 +62,9 @@ export const Button = style({
   fontSize: vars.fonts.body1,
   fontWeight: '600',
 });
+
+export const ErrorText = style({
+  color: 'red',
+  fontSize: '0.85rem',
+  marginTop: '4px',
+});
