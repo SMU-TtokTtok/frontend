@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as S from './signup.css';
 import Button from '@/common/ui/button';
 import { POLICY } from '@/common/constants/policy';
-import { signupSchema, SignupForm } from './schema';
+import { signupSchema, SignupForm } from '@/common/constants/schema';
 import SignupComplete from '@/components/signup/SignupComplete';
 
 export default function Page() {
