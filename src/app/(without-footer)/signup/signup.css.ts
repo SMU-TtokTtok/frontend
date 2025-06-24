@@ -65,6 +65,7 @@ export const Input = style({
   padding: '12px 16px',
   fontSize: vars.fonts.body1,
   flex: ' 1 0 0 ',
+  height: '48px',
 
   selectors: {
     '&::placeholder': {
@@ -157,4 +158,10 @@ export const CompleteButton = style({
   fontSize: vars.fonts.body1,
   fontWeight: 600,
   borderRadius: '6px',
+});
+
+export const ErrorText = style({
+  color: 'red',
+  fontSize: '0.85rem',
+  marginTop: '4px',
 });

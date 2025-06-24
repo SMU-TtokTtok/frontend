@@ -1,17 +1,11 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import * as S from './login.css';
 import Button from '@/common/ui/button/index';
-
-const loginSchema = z.object({
-  email: z.string().email('올바른 이메일 형식을 입력하세요.'),
-  password: z.string().min(1, '비밀번호를 입력해주세요.'),
-});
-type LoginForm = z.infer<typeof loginSchema>;
+import { loginSchema, LoginForm } from './schema';
 
 export default function Page() {
   const router = useRouter();
@@ -57,14 +51,10 @@ export default function Page() {
     }
   };
 
-  const onInvalid = () => {
-    // 아무 것도 안 해도 됨. errors 객체가 이미 렌더링을 처리함
-  };
-
   return (
     <div className={S.Container}>
       <div className={S.LoginText}>로그인</div>
-      <form className={S.BoxContainer} onSubmit={handleSubmit(onValid, onInvalid)}>
+      <form className={S.BoxContainer} onSubmit={handleSubmit(onValid)}>
         <div className={S.AuthText}>이메일</div>
         <input type="email" className={S.Input} {...register('email')} />
         {errors.email && <p className={S.ErrorText}>{errors.email.message}</p>}
