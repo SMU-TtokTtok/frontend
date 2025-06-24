@@ -186,6 +186,10 @@ export const filterBodyBottomWrapper = style({
   alignItems: 'end',
 });
 
+export const panelPosition = style({
+  top: '52px',
+});
+
 export const dropDownItem = recipe({
   base: {
     display: 'flex',

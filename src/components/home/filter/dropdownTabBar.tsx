@@ -20,6 +20,7 @@ function DropDownTabBar({ selectedOptions }: FilterHeaderProps) {
         return (
           <DropDown
             key={key}
+            panelClassName={S.panelPosition}
             toggleButton={
               <Button variant="none" className={S.headerLeftSideButton({ style: key })}>
                 {getSelectedLabel(key, selectedOptions)}

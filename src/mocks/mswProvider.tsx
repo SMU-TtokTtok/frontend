@@ -15,7 +15,6 @@ export const MSWProvider = ({ children }: { children: React.ReactNode }) => {
         isWorkerStarted.current = true;
         const { worker } = await import('./browser');
         await worker.start();
-        console.log('Worker started');
         setIsMocking(true);
       }
     }
@@ -24,8 +23,8 @@ export const MSWProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   if (!isMocking) {
-    return null; 
+    return null;
   }
 
-  return <>{children}</>; 
+  return <>{children}</>;
 };
