@@ -1,66 +1,33 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as S from './signup.css';
 import Button from '@/common/ui/button';
 import { POLICY } from '@/common/constants/policy';
-
-const schema = z
-  .object({
-    email: z.string().email('올바른 이메일 형식을 입력해주세요.'),
-    code: z.string().min(1, '인증코드를 입력해주세요.'),
-    password: z.string().min(1, '비밀번호를 입력해주세요.'),
-    confirmPassword: z.string().min(1, '비밀번호 재입력을 해주세요.'),
-    name: z.string().min(1, '이름을 입력해주세요.'),
-    agree: z.literal(true, {
-      errorMap: () => ({ message: '약관에 동의하셔야 합니다.' }),
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: '비밀번호가 일치하지 않습니다.',
-    path: ['confirmPassword'],
-  });
-
-type FormData = z.infer<typeof schema>;
+import { signupSchema, SignupForm } from './schema';
+import SignupComplete from '@/components/signup/SignupComplete';
 
 export default function Page() {
   const [isComplete, setIsComplete] = useState(false);
   const [userName, setUserName] = useState('');
-  const router = useRouter();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
+  } = useForm<SignupForm>({
+    resolver: zodResolver(signupSchema),
   });
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = (data: SignupForm) => {
     setUserName(data.name);
     setIsComplete(true);
   };
 
   if (isComplete) {
-    return (
-      <div className={S.Container}>
-        <div className={S.CompleteBox}>
-          <div className={S.CompleteTitle}>회원가입 완료!</div>
-          <div className={S.CompleteText}>
-            <span className={S.CompleteHighlight}>{userName}</span>님, 가입을 환영합니다!
-            <br />
-            지금 똑똑에서 나에게 맞는 동아리를 찾아보세요
-          </div>
-          <Button variant="primary" className={S.CompleteButton} onClick={() => router.push('/')}>
-            시작하기
-          </Button>
-        </div>
-      </div>
-    );
+    return <SignupComplete userName={userName} />;
   }
 
   return (
