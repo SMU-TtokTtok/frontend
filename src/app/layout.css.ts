@@ -6,3 +6,15 @@ export const withFooterContent = style({
   backgroundColor: vars.colors.surface.variant,
   minHeight: '80vh',
 });
+
+export const withoutFooterContent = style({
+  marginTop: '4.222rem',
+  backgroundColor: vars.colors.surface.variant,
+  minHeight: '89vh',
+});
+
+export const rawSort = style({
+  display: 'flex',
+  justifyContent: 'start',
+  alignItems: 'start',
+});
