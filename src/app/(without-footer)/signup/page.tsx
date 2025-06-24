@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as S from './signup.css';
+import * as S from '../../../components/signup/signup.css';
 import Button from '@/common/ui/button';
 import { POLICY } from '@/common/constants/policy';
 import { signupSchema, SignupForm } from '@/common/constants/schema';

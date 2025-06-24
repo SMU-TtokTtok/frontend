@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import * as S from '@/app/(without-footer)/signup/signup.css';
+import * as S from '@/components/signup/signup.css';
 import Button from '@/common/ui/button';
 
 interface SignupCompleteProps {
