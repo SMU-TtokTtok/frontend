@@ -1,3 +1,9 @@
+import { ROUTES } from './routes';
+import applicants from '@/assets/clinical_notes.svg';
+import applicantsform from '@/assets/edit_document.svg';
+import clubinfo from '@/assets/fact_check.svg';
+import clubMember from '@/assets/group.svg';
+
 export const FOOTER = {
   serviceName: '똑똑',
   informationUrl:
@@ -11,6 +17,13 @@ export const BREAKPOINTS = {
   desktop: 1024,
   largeDesktop: 1440,
 } as const;
+
+export const ADMIN_SIDEBAR_ITEMS = [
+  { label: '동아리 정보관리', href: ROUTES.ADMIN, img: clubinfo },
+  { label: '부원 명단', href: ROUTES.ADMIN_CLUB_MEMBER, img: clubMember },
+  { label: '지원폼 관리', href: ROUTES.ADMIN_APPLICATIONS_FORM, img: applicantsform },
+  { label: '지원자 관리', href: ROUTES.ADMIN_APPLICATIONS, img: applicants },
+] as const;
 
 export const FILTER = {
   category: ['all', 'sport', 'culture', 'academic', 'etc'],

@@ -12,3 +12,9 @@ export const withoutFooterContent = style({
   backgroundColor: vars.colors.surface.default,
   minHeight: '90vh',
 });
+
+export const rawSort = style({
+  display: 'flex',
+  justifyContent: 'start',
+  alignItems: 'start',
+});
