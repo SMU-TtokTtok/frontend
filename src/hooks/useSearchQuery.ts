@@ -2,12 +2,12 @@
 import { useSearchParams } from 'next/navigation';
 
 export interface SearchQueryReturn {
-  category: string;
-  recruit: string;
-  type: string;
-  sort: string;
-  grade: string;
-  college: string;
+  category?: string;
+  recruit?: string;
+  type?: string;
+  sort?: string;
+  grade?: string;
+  college?: string;
 }
 
 export const useSearchQuery = () => {
