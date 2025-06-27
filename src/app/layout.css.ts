@@ -9,7 +9,7 @@ export const withFooterContent = style({
 
 export const withoutFooterContent = style({
   marginTop: '4.222rem',
-  backgroundColor: vars.colors.surface.default,
+  backgroundColor: vars.colors.surface.variant,
   minHeight: '90vh',
 });
 
