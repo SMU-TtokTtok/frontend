@@ -9,8 +9,8 @@ export default class ApiClient {
     this.baseUrl = baseUrl;
   }
 
-  async get<T>(path: string, body?: any): Promise<T> {
-    const response = await this.request<T>('GET', path, body);
+  async get<T>(path: string): Promise<T> {
+    const response = await this.request<T>('GET', path);
     return this.handleResponse<T>(response);
   }
 
