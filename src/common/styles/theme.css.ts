@@ -6,7 +6,7 @@ export const vars = createThemeContract({
     primary: {
       default: null,
       base: null,
-      container: null,
+      on_cont: null,
       fixed: null,
       fixed_dim: null,
       fixed_dim_var: null,
@@ -81,7 +81,7 @@ createGlobalTheme(':root', vars, {
     primary: {
       default: '#254FDB',
       base: '#EDF2FD',
-      container: '#04165A',
+      on_cont: '#04165A',
       fixed: '#D1DEFB',
       fixed_dim: '#A5BDF5',
       fixed_dim_var: '#071F75',
