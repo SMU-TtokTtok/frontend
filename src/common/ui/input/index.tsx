@@ -1,0 +1,21 @@
+import React, { forwardRef, InputHTMLAttributes } from 'react';
+import * as S from './input.css';
+
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  variant?: 'primary' | 'secondary';
+  isError?: boolean;
+  errorMessage?: string;
+}
+export default forwardRef<HTMLInputElement, InputProps>(function Input(
+  { variant = 'primary', className, isError = false, errorMessage, ...props }: InputProps,
+  ref,
+) {
+  const classNames = `${S.baseinputStyle} ${className ?? ''} ${S.inputStyle[variant]} `;
+
+  return (
+    <>
+      <input className={classNames} ref={ref} {...props} />
+      {isError && <span className={S.errorMessage}>{errorMessage}</span>}
+    </>
+  );
+});
