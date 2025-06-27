@@ -11,17 +11,10 @@ function Button({
   disabled,
   ...props
 }: PropsWithChildren<ButtonProps>) {
-  const classNames = `${className ?? ''} ${S.baseButtonStyle} ${
-    S.buttonStyle[variant]
-  } `;
+  const classNames = `${className ?? ''} ${S.baseButtonStyle} ${S.buttonStyle[variant]} `;
 
   return (
-    <button
-      type='button'
-      className={`${classNames}`}
-      disabled={disabled}
-      {...props}
-    >
+    <button type="button" className={`${classNames}`} disabled={disabled} {...props}>
       {children}
     </button>
   );

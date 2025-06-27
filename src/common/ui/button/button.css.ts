@@ -22,6 +22,7 @@ export const buttonStyle = styleVariants({
     backgroundColor: vars.colors.surface.default,
     color: vars.colors.surface.outline,
   },
+
   none: {},
 });
 
