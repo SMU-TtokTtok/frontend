@@ -1,5 +1,7 @@
-function Index() {
-  return <div>applicantpage</div>;
+import ApplicantsContentPage from '@/components/admin/applicants';
+
+function Applicants() {
+  return <ApplicantsContentPage />;
 }
 
-export default Index;
+export default Applicants;
