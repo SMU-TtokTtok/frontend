@@ -1,0 +1,17 @@
+[
+  { "id": 1, "name": "김지훈", "grade": 1, "department": "경영학과", "status": "평가중" },
+  { "id": 2, "name": "이수민", "grade": 2, "department": "컴퓨터공학과", "status": "합격" },
+  { "id": 3, "name": "박정우", "grade": 3, "department": "전자공학과", "status": "불합격" },
+  { "id": 4, "name": "최유진", "grade": 1, "department": "심리학과", "status": "불합격" },
+  { "id": 5, "name": "정민수", "grade": 4, "department": "수학과", "status": "합격" },
+  { "id": 6, "name": "한예린", "grade": 2, "department": "화학과", "status": "합격" },
+  { "id": 7, "name": "서하늘", "grade": 3, "department": "영어영문학과", "status": "평가중" },
+  { "id": 8, "name": "윤태호", "grade": 1, "department": "기계공학과", "status": "평가중" },
+  { "id": 9, "name": "김도윤", "grade": 2, "department": "물리학과", "status": "합격" },
+  { "id": 10, "name": "배지우", "grade": 4, "department": "경제학과", "status": "불합격" },
+  { "id": 11, "name": "오예준", "grade": 3, "department": "건축학과", "status": "평가중" },
+  { "id": 12, "name": "문지아", "grade": 1, "department": "국어국문학과", "status": "불합격" },
+  { "id": 13, "name": "강주원", "grade": 2, "department": "산업디자인학과", "status": "불합격" },
+  { "id": 14, "name": "이해성", "grade": 3, "department": "철학과", "status": "불합격" },
+  { "id": 15, "name": "조서연", "grade": 4, "department": "정치외교학과", "status": "불합격" }
+]
