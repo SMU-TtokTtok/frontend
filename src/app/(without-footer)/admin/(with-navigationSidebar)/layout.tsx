@@ -1,5 +1,3 @@
-import * as S from '../../../layout.css';
-
 interface LayoutProps {
   children: React.ReactNode;
   navigationSidebar: React.ReactNode;
@@ -8,7 +6,7 @@ interface LayoutProps {
 
 function Layout({ navigationSidebar, main }: LayoutProps) {
   return (
-    <div className={S.rawSort}>
+    <div>
       <div>{navigationSidebar}</div>
       <div>{main}</div>
     </div>

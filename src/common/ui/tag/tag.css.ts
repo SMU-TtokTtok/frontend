@@ -23,4 +23,26 @@ export const tagStyle = styleVariants({
     color: vars.colors.surface.cont_5,
     fontWeight: '600',
   },
-});
+  light_blue: {
+    backgroundColor: vars.colors.tertiary.base,
+    color: vars.colors.tertiary.default,
+    fontWeight: '500',
+  },
+  blue: {
+    backgroundColor: vars.colors.primary.base,
+    color: '#0593FA',
+    fontWeight: '500',
+  },
+  navy: {
+    backgroundColor: vars.colors.primary.base,
+    color: vars.colors.primary.default,
+    fontWeight: '500',
+  },
+  deep_navy: {
+    backgroundColor: vars.colors.primary.base,
+    color: vars.colors.primary.on_cont,
+    fontWeight: '500',
+  },
+} as const);
+
+export type TagVariant = keyof typeof tagStyle;

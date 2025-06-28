@@ -9,9 +9,10 @@ interface SidebarItemProps {
 }
 
 function SidebarItem({ label, href, pathName, img }: SidebarItemProps) {
+  const pathOnly = href.split('?')[0];
   return (
     <Link href={href}>
-      <li className={S.sidebarItem({ isSelected: pathName === href })}>
+      <li className={S.sidebarItem({ isSelected: pathName === pathOnly })}>
         <Image className={S.sidebarItemImage} src={img} alt={label} />
         <span>{label}</span>
       </li>

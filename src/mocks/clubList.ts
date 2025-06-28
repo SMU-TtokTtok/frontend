@@ -11,7 +11,7 @@ export const Clubs = http.get(`${API}/clubs`, () => {
   return HttpResponse.json(clubList, { status: 200 });
 });
 
-export const patchFavorite = http.patch(`${API}/favorite/1`, () => {
+export const patchFavorite = http.patch(`${API}/favorite/:id`, () => {
   return HttpResponse.json(
     { message: '즐겨찾기 상태가 수정되었습니다.' },
     {
