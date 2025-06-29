@@ -16,3 +16,15 @@ export const patchApplicantStatus = async (applicantId: number, status: string) 
   const data = await mainClient.patch(`/applicants/${applicantId}/status`, { status });
   return data;
 };
+
+export const getPassList = async () => {
+  const data = await mainClient.get<ApplicantsInfo[]>(`/applicants/pass`);
+
+  return data;
+};
+
+export const getFailList = async () => {
+  const data = await mainClient.get<ApplicantsInfo[]>(`/applicants/fail`);
+
+  return data;
+};
