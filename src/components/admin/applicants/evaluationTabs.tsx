@@ -16,7 +16,7 @@ function EvaluationTabs({ selectedOptions }: EvaluationTabsProps) {
       <div className={S.evaluationButtonWrapper}>
         <QueryLink extraQuery={{ evaluation: 'document' }}>
           <Button
-            variant={isDocumentEvaluation ? 'primary' : 'tertiary'}
+            variant={'none'}
             className={S.evaluationButton({ isSelected: isDocumentEvaluation })}
           >
             서류
@@ -27,7 +27,7 @@ function EvaluationTabs({ selectedOptions }: EvaluationTabsProps) {
       <div className={S.evaluationButtonWrapper}>
         <QueryLink extraQuery={{ evaluation: 'interview' }}>
           <Button
-            variant={isInterviewEvaluation ? 'primary' : 'tertiary'}
+            variant={'none'}
             className={S.evaluationButton({ isSelected: isInterviewEvaluation })}
           >
             면접
