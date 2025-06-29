@@ -5,4 +5,6 @@ export const clubDataKey = {
 
 export const applicantDataKey = {
   applicantList: ['applicantList'],
+  passList: ['passList'],
+  failList: ['failList'],
 } as const;
