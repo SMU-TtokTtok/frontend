@@ -1,3 +1,4 @@
+import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
@@ -5,9 +6,16 @@ import { recipe } from '@vanilla-extract/recipes';
 export const container = style({
   paddingLeft: '21.222rem',
   paddingRight: '27.778rem',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      paddingLeft: '246px',
+      paddingRight: '20px',
+    },
+  },
 });
 
 export const wrapper = style({
+  position: 'relative',
   maxWidth: '1038px',
   width: '100%',
   display: 'flex',
@@ -20,7 +28,7 @@ export const title = style({
   fontSize: vars.fonts.title2,
   fontWeight: 700,
   color: vars.colors.surface.on_surf,
-  marginTop: '4.778rem',
+  marginTop: '40px',
 });
 
 export const searchTitle = style({
@@ -34,13 +42,15 @@ export const searchWrapper = style({
   marginTop: '3.111rem',
   width: '100%',
 });
+
 export const searchInput = style({
   width: '100%',
   padding: '16px 22px',
 });
 
 export const evaluationTabs = style({
-  marginTop: '2.22rem',
+  //marginTop: '2.22rem',
+  marginTop: '20px',
   width: '100%',
   display: 'flex',
   justifyContent: 'start',
@@ -63,9 +73,13 @@ export const evaluationButton = recipe({
     isSelected: {
       true: {
         fontWeight: 700,
+        backgroundColor: vars.colors.primary.fixed,
+        color: vars.colors.primary.default,
       },
       false: {
         fontWeight: 400,
+        backgroundColor: vars.colors.surface.cont_1,
+        color: vars.colors.surface.outline,
       },
     },
   },
@@ -110,7 +124,7 @@ export const checkbox = style({
 // 지원자 아이템
 
 export const applicantItemWrapper = style({
-  padding: ' 1.25rem 1.111rem',
+  padding: ' 16px 1.111rem',
   backgroundColor: vars.colors.surface.default,
   marginBottom: '0.556rem',
   display: 'flex',
