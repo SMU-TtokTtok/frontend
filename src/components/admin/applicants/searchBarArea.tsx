@@ -5,7 +5,6 @@ import SearchIcon from '@/assets/search.svg';
 function SearchBarArea() {
   return (
     <div className={S.searchWrapper}>
-      <h4 className={S.searchTitle}>지원자 검색</h4>
       <SearchBar
         className={S.searchInput}
         icon={SearchIcon}

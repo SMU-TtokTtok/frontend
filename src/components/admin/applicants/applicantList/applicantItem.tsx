@@ -1,23 +1,22 @@
 import Image from 'next/image';
-import * as S from '../applicants.css';
+import * as S from './applicantItem.css';
 import menu from '@/assets/menu.svg';
 import { ApplicantsInfo } from '@/common/model/applicants';
 import Tag from '@/common/ui/tag';
 import { getGradeStyle } from '@/common/util/getGradeStyle';
 import DropDown from '@/common/components/dropdown';
 import DropDownButton from '@/common/ui/dropdownButton';
-import { usePatchApplicantStatus } from '@/hooks/applicants';
 import { dropDownButtonVariant } from '@/common/ui/dropdownButton/dropdownButton.css';
 interface ApplicantProps {
   applicant: ApplicantsInfo;
+  handleFavoriteStatus: ({ applicantId, status }: { applicantId: number; status: string }) => void;
 }
 const options = [
-  { value: 'evaluating', label: '평가중' },
   { value: 'pass', label: '합격' },
   { value: 'fail', label: '불합격' },
+  { value: 'evaluating', label: '평가중' },
 ];
-function ApplicantItem({ applicant }: ApplicantProps) {
-  const { handleFavoriteStatus } = usePatchApplicantStatus();
+function ApplicantItem({ applicant, handleFavoriteStatus }: ApplicantProps) {
   const getStatusVariant = (status: string): dropDownButtonVariant => {
     switch (status) {
       case '평가중':
