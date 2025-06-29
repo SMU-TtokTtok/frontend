@@ -1,3 +1,4 @@
+import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
@@ -10,10 +11,15 @@ export const sidebarContainer = style({
   height: 'auto',
   display: 'flex',
   flexDirection: 'column',
-  minWidth: 240,
+  width: 240,
   transition: 'background 0.2s',
   borderRadius: '0.444rem',
   backgroundColor: vars.colors.surface.bright,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      width: '206px',
+    },
+  },
 });
 
 export const sidebarTitle = style({
