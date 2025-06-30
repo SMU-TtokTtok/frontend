@@ -2,7 +2,7 @@
 import { ADMIN_SIDEBAR_ITEMS } from '@/common/constants';
 import SidebarItem from './sidebarItem';
 import { usePathname } from 'next/navigation';
-import * as S from '@/common/components/sideBar/sidebar.css';
+import * as S from '@/common/components/navigationSidebar/sidebar.css';
 
 function SidebarList() {
   const pathName = usePathname();

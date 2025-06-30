@@ -14,3 +14,11 @@ export const PatchApplicantStatus = http.patch(
     return HttpResponse.json({ id: applicantId, status }, { status: 200 });
   },
 );
+
+export const PassList = http.get(`${API}/applicants/pass`, () => {
+  return HttpResponse.json(applicantList, { status: 200 });
+});
+
+export const FailList = http.get(`${API}/applicants/fail`, () => {
+  return HttpResponse.json(applicantList, { status: 200 });
+});
