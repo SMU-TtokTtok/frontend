@@ -1,0 +1,264 @@
+import * as S from './clubBox.css';
+import DropDownButton from '@/common/ui/dropdownButton';
+import Button from '@/common/ui/button';
+import person from '@/assets/person.svg';
+import Image from 'next/image';
+import { useState, useRef, useLayoutEffect } from 'react';
+import editIcon from '@/assets/edit.svg';
+
+const handleCloseRecruit = async () => {
+  try {
+    const res = await fetch('/api/club-info/recruiting', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ isRecruiting: false }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      alert('모집이 마감되었습니다!');
+    } else {
+      alert('모집 마감에 실패했습니다.');
+    }
+  } catch {
+    alert('오류가 발생했습니다.');
+  }
+};
+
+type ClubBoxProps = {
+  id: number;
+  name: string;
+  shortDescription: string;
+  type: string;
+  category: string;
+  detailField: string;
+  isRecruiting: boolean;
+  introduction: string;
+  recruitPeriod: string;
+  recruitTarget: string;
+  recruitNumber: string;
+  peopleCount: number;
+  img: string;
+  onChange?: (updated: Partial<ClubBoxProps>) => void;
+};
+
+export default function ClubBox(props: ClubBoxProps) {
+  const { name, shortDescription, type, category, detailField, isRecruiting, peopleCount } = props;
+  const [selectedType, setSelectedType] = useState<'중앙' | '학과' | '연합'>(
+    type as '중앙' | '학과' | '연합',
+  );
+  const dropdownItems = ['중앙', '학과', '연합'];
+
+  // 카테고리 드롭다운 상태 및 항목
+  const [selectedCategory, setSelectedCategory] = useState(category);
+  const categoryItems = ['봉사', '예술', '문화', '학술', '친목', '체육', '종교', '기타'];
+
+  // 모집상태 드롭다운 상태 및 항목
+  const [selectedRecruit, setSelectedRecruit] = useState<'모집중' | '모집마감'>(
+    isRecruiting ? '모집중' : '모집마감',
+  );
+  const recruitItems = ['모집중', '모집마감'];
+
+  // 사용자입력 세부분야 인라인 수정 상태
+  const [customField, setCustomField] = useState(detailField);
+  const [isEditingCustomField, setIsEditingCustomField] = useState(false);
+  // input width 동기화용
+  const spanRef = useRef<HTMLSpanElement>(null);
+  const [inputWidth, setInputWidth] = useState(0);
+  useLayoutEffect(() => {
+    if (spanRef.current) {
+      setInputWidth(spanRef.current.offsetWidth + 2);
+    }
+  }, [customField, isEditingCustomField]);
+
+  // 드롭다운 open 상태 관리
+  const [typeOpen, setTypeOpen] = useState(false);
+  const [categoryOpen, setCategoryOpen] = useState(false);
+  const [recruitOpen, setRecruitOpen] = useState(false);
+
+  // 동아리명, 한줄설명 인라인 수정 상태
+  const [editingName, setEditingName] = useState(false);
+  const [editingDesc, setEditingDesc] = useState(false);
+  const [clubName, setClubName] = useState(name);
+  const [clubDesc, setClubDesc] = useState(shortDescription);
+
+  return (
+    <div className={S.container}>
+      <div className={S.headerflex + ' ' + S.relative}>
+        <div className={S.relative}>
+          <div onClick={() => setTypeOpen((v) => !v)}>
+            <DropDownButton variant="default" className={S.dropDownStyle2}>
+              {selectedType}
+            </DropDownButton>
+          </div>
+          {typeOpen && (
+            <ul className={S.dropdownPanel}>
+              {dropdownItems.map((item) => (
+                <li
+                  key={item}
+                  className={
+                    S.dropdownItem + (selectedType === item ? ' ' + S.selectedDropdownItem : '')
+                  }
+                  onClick={() => {
+                    setSelectedType(item as '중앙' | '학과' | '연합');
+                    props.onChange?.({ type: item });
+                    setTypeOpen(false);
+                  }}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+      <div className={S.clubName} onDoubleClick={() => setEditingName(true)}>
+        {editingName ? (
+          <input
+            value={clubName}
+            autoFocus
+            onChange={(e) => {
+              setClubName(e.target.value);
+              props.onChange?.({ name: e.target.value });
+            }}
+            onBlur={() => setEditingName(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') setEditingName(false);
+            }}
+            className={S.clubNameInput}
+            style={{ width: Math.max(60, clubName.length * 18) }}
+          />
+        ) : clubName.trim() === '' ? (
+          '이곳에는 동아리명이 들어갑니다.'
+        ) : (
+          clubName
+        )}
+      </div>
+      <div className={S.numberFlex}>
+        <Image src={person} alt="사람" width={21} height={21} />
+        <span className={S.numberText}>{peopleCount}</span>
+      </div>
+      <div className={S.desText} onDoubleClick={() => setEditingDesc(true)}>
+        {editingDesc ? (
+          <input
+            value={clubDesc}
+            autoFocus
+            onChange={(e) => {
+              setClubDesc(e.target.value);
+              props.onChange?.({ shortDescription: e.target.value });
+            }}
+            onBlur={() => setEditingDesc(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') setEditingDesc(false);
+            }}
+            className={S.desTextInput}
+            style={{ width: Math.max(80, clubDesc.length * 12) }}
+          />
+        ) : clubDesc.trim() === '' ? (
+          '이곳에는 한줄소개 정도의 간략한 동아리 소개가 들어갑니다.'
+        ) : (
+          clubDesc
+        )}
+      </div>
+      <div className={S.footerFlex}>
+        <div className={S.dropDownFlex}>
+          <div style={{ position: 'relative' }}>
+            <div onClick={() => setCategoryOpen((v) => !v)}>
+              <DropDownButton variant="default" className={S.dropDownStyle}>
+                {selectedCategory}
+              </DropDownButton>
+            </div>
+            {categoryOpen && (
+              <ul className={S.categoryDropdownPanel}>
+                {categoryItems.map((item) => (
+                  <li
+                    key={item}
+                    className={
+                      S.categoryDropdownItem +
+                      (selectedCategory === item ? ' ' + S.selectedCategoryDropdownItem : '')
+                    }
+                    onClick={() => {
+                      setSelectedCategory(item);
+                      props.onChange?.({ category: item });
+                      setCategoryOpen(false);
+                    }}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div
+            className={
+              S.userInputTag + ' ' + (isEditingCustomField ? S.cursorText : S.cursorPointer)
+            }
+            onDoubleClick={() => setIsEditingCustomField(true)}
+          >
+            {isEditingCustomField ? (
+              <>
+                <input
+                  value={customField}
+                  autoFocus
+                  onChange={(e) => {
+                    setCustomField(e.target.value);
+                    props.onChange?.({ detailField: e.target.value });
+                  }}
+                  onBlur={() => setIsEditingCustomField(false)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') setIsEditingCustomField(false);
+                  }}
+                  className={S.customFieldInput}
+                  style={{ width: inputWidth }}
+                />
+                <span ref={spanRef} className={S.customFieldSpan} style={{ width: inputWidth }}>
+                  {customField || ' '}
+                </span>
+              </>
+            ) : (
+              <span className={S.customFieldText}>
+                {customField.trim() === '' ? '사용자입력 세부분야' : customField}
+              </span>
+            )}
+            <span className={S.editIconWrapper} onClick={() => setIsEditingCustomField(true)}>
+              <Image src={editIcon} alt="edit" width={21} height={21} />
+            </span>
+          </div>
+          <div style={{ position: 'relative' }}>
+            <div onClick={() => setRecruitOpen((v) => !v)}>
+              <DropDownButton
+                variant={selectedRecruit === '모집마감' ? 'default' : 'tertiary'}
+                className={S.dropDownStyle}
+              >
+                {selectedRecruit}
+              </DropDownButton>
+            </div>
+            {recruitOpen && (
+              <ul className={S.recruitDropdownPanel}>
+                {recruitItems.map((item) => (
+                  <li
+                    key={item}
+                    className={
+                      S.recruitDropdownItem +
+                      (selectedRecruit === item ? ' ' + S.selectedRecruitDropdownItem : '')
+                    }
+                    onClick={() => {
+                      setSelectedRecruit(item as '모집중' | '모집마감');
+                      props.onChange?.({ isRecruiting: item === '모집중' });
+                      setRecruitOpen(false);
+                    }}
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+        <Button variant="secondary" onClick={handleCloseRecruit} className={S.finishedButton}>
+          지원 마감하기
+        </Button>
+      </div>
+    </div>
+  );
+}
