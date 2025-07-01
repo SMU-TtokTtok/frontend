@@ -7,6 +7,7 @@ import SearchBarArea from './searchBarArea';
 import ApplicantFilterBar from './applicantFilterBar';
 import ApplicantList from './applicantList/applicantList';
 import { ChangeEvent, useState } from 'react';
+import PassFailSidebar from './passFailSidebar';
 
 function ApplicantsContentPage() {
   const searchParams = useSearchParams();
@@ -25,9 +26,9 @@ function ApplicantsContentPage() {
     <div className={S.container}>
       <div className={S.wrapper}>
         <h3 className={S.title}>✏️ 지원자 관리</h3>
+        <PassFailSidebar selectedOptions={selectedOptions} />
         <SearchBarArea />
         <EvaluationTabs selectedOptions={selectedOptions} />
-
         <div className={S.PanelContainer}>
           <ApplicantFilterBar selectedOptions={selectedOptions} onChange={handleEvaluationToggle} />
           <ApplicantList selectedOptions={selectedOptions} />

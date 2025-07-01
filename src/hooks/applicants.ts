@@ -27,14 +27,14 @@ interface usePatchApplicantParams {
 
 export const usePatchApplicantStatus = () => {
   const queryClient = useQueryClient();
-  const { applicantList } = applicantDataKey;
+  const { applicantList, passList, failList } = applicantDataKey;
 
   const favoriteMutation = useMutation({
     mutationFn: ({ applicantId, status }: usePatchApplicantParams) =>
       patchApplicantStatus(applicantId, status),
     onSuccess: () => {
       alert('상태가 변경되었습니다.'); //모달 만들어지면 대체할게요! by 형준
-      queryClient.invalidateQueries({ queryKey: applicantList });
+      queryClient.invalidateQueries({ queryKey: [applicantList, passList, failList] });
     },
   });
 
