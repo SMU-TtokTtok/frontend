@@ -1,0 +1,280 @@
+import { style } from '@vanilla-extract/css';
+import { vars } from '@/common/styles/theme.css';
+
+export const container = style({
+  flex: '1 0 0',
+  borderRadius: '8px',
+  padding: '18px 24px',
+  backgroundColor: 'white',
+  marginBottom: '28px',
+});
+
+export const headerflex = style({
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: '8px',
+});
+
+export const clubName = style({
+  fontSize: vars.fonts.title3,
+  marginBottom: '6px',
+  fontWeight: '600',
+});
+
+export const numberFlex = style({
+  display: 'flex',
+  marginBottom: '14px',
+});
+
+export const numberText = style({
+  fontSize: vars.fonts.body1,
+  color: '#878787;',
+  fontWeight: '500',
+});
+export const desText = style({
+  fontSize: vars.fonts.body1,
+  fontWeight: '400',
+  marginBottom: '21px',
+});
+
+export const footerFlex = style({
+  display: 'flex',
+  justifyContent: 'space-between',
+});
+export const dropDownFlex = style({
+  display: 'flex',
+  gap: '8px',
+  alignItems: 'center',
+});
+
+export const finishedButton = style({
+  padding: '12px 24px',
+  fontSize: vars.fonts.body2,
+  fontWeight: '600',
+  borderRadius: '6px',
+});
+
+export const dropDownStyle = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  padding: '4px 12px',
+  borderRadius: '100px',
+  boxSizing: 'border-box',
+  minHeight: '32px',
+  width: 'fit-content',
+});
+
+export const dropDownStyle2 = style({
+  padding: '6px 0 6px 8px',
+  borderRadius: '4px',
+  backgroundColor: '#E7E8EA',
+  color: '#55637D',
+  // minWidth: '80px',
+  // width: '80px',
+});
+
+export const dropdownPanel = style({
+  position: 'absolute',
+  top: '110%',
+  left: 0,
+  // minWidth: '80px',
+  width: '100%',
+  background: '#f8f8f9',
+  border: '1px solid #e7e8ea',
+  borderRadius: '4px',
+  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+  zIndex: 10,
+  padding: '4px 0',
+});
+
+export const dropdownItem = style({
+  padding: '8px 0',
+  textAlign: 'center',
+  fontFamily: 'Pretendard Variable',
+  fontWeight: 500,
+  fontSize: '16px',
+  color: '#5a6379',
+  cursor: 'pointer',
+  transition: 'background 0.15s',
+  selectors: {
+    '&:hover': {
+      background: '#ececf0',
+    },
+  },
+});
+
+export const selectedDropdownItem = style({
+  background: '#e7e8ea',
+  color: '#2d3648',
+});
+
+export const categoryDropdownPanel = style({
+  position: 'absolute',
+  top: '110%',
+  left: 0,
+  minWidth: '94px',
+  width: '94px',
+  background: '#fff',
+  borderRadius: '8px',
+  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+  zIndex: 10,
+  padding: 0,
+  border: 'none',
+});
+
+export const categoryDropdownItem = style({
+  height: '40px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontFamily: 'Pretendard Variable',
+  fontWeight: 600,
+  fontSize: '16px',
+  color: '#292e39',
+  cursor: 'pointer',
+  transition: 'background 0.15s',
+  selectors: {
+    '&:hover': {
+      background: '#f8f8f9',
+    },
+  },
+});
+
+export const selectedCategoryDropdownItem = style({
+  background: '#e7e8ea',
+  color: '#292e39',
+});
+
+export const recruitDropdownPanel = style({
+  position: 'absolute',
+  top: '110%',
+  left: 0,
+  minWidth: '80px',
+  width: '80px',
+  background: '#fff',
+  borderRadius: '8px',
+  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+  zIndex: 10,
+  padding: 0,
+  border: 'none',
+});
+
+export const recruitDropdownItem = style({
+  height: '40px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontFamily: 'Pretendard Variable',
+  fontWeight: 600,
+  fontSize: '16px',
+  color: '#292e39',
+  cursor: 'pointer',
+  transition: 'background 0.15s',
+  selectors: {
+    '&:hover': {
+      background: '#f8f8f9',
+    },
+  },
+});
+
+export const selectedRecruitDropdownItem = style({
+  background: '#e7e8ea',
+  color: '#292e39',
+});
+
+export const userInputTag = style({
+  display: 'flex',
+  alignItems: 'center',
+  background: '#f8f8f9',
+  border: '1px solid #e7e8ea',
+  borderRadius: '100px',
+  minHeight: '32px',
+  height: '32px',
+  padding: '0 40px 0 16px',
+  position: 'relative',
+  fontFamily: 'Pretendard Variable',
+  fontWeight: 600,
+  fontSize: '16px',
+  color: '#5a6379',
+  boxSizing: 'border-box',
+  cursor: 'pointer',
+});
+
+export const relative = style({
+  position: 'relative',
+});
+
+export const cursorText = style({
+  cursor: 'text',
+});
+
+export const cursorPointer = style({
+  cursor: 'pointer',
+});
+
+export const editIconWrapper = style({
+  position: 'absolute',
+  right: 12,
+  top: '50%',
+  transform: 'translateY(-50%)',
+  cursor: 'pointer',
+});
+
+export const customFieldInput = style({
+  minWidth: 20,
+  border: 'none',
+  background: 'transparent',
+  fontSize: 16,
+  fontWeight: 600,
+  fontFamily: 'Pretendard Variable',
+  color: '#5a6379',
+  textAlign: 'center',
+  outline: 'none',
+  padding: 0,
+});
+
+export const customFieldSpan = style({
+  position: 'absolute',
+  visibility: 'hidden',
+  height: 0,
+  overflow: 'hidden',
+  whiteSpace: 'pre',
+  fontSize: 16,
+  fontWeight: 600,
+  fontFamily: 'Pretendard Variable',
+  padding: 0,
+});
+
+export const customFieldText = style({
+  fontFamily: 'Pretendard Variable',
+  fontWeight: 600,
+  fontSize: 16,
+  color: '#5a6379',
+  lineHeight: '24px',
+  textAlign: 'center',
+  whiteSpace: 'nowrap',
+  display: 'inline-block',
+  width: 'auto',
+});
+
+export const clubNameInput = style({
+  fontSize: vars.fonts.title3,
+  fontWeight: 600,
+  fontFamily: 'Pretendard Variable',
+  color: 'inherit',
+  border: 'none',
+  background: 'transparent',
+  outline: 'none',
+  padding: 0,
+});
+
+export const desTextInput = style({
+  fontSize: vars.fonts.body1,
+  fontWeight: 400,
+  fontFamily: 'Pretendard Variable',
+  color: 'inherit',
+  border: 'none',
+  background: 'transparent',
+  outline: 'none',
+  padding: 0,
+});
