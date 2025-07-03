@@ -4,7 +4,7 @@ import * as S from '@/components/admin/clubInfo/index.css';
 import clubImg from '@/assets/clubImg.svg';
 import Image from 'next/image';
 import ClubBox from '@/components/admin/clubInfo/ClubBox';
-import ClubQuill from '@/components/admin/clubInfo/MDEditor';
+import MDEditor from '@/components/admin/clubInfo/MDEditor';
 import RightSideBar from '@/components/admin/clubInfo/RightSideBar';
 import { useState, useEffect, useRef } from 'react';
 
@@ -115,7 +115,7 @@ function Page() {
           recruitTarget={clubInfo.recruitTarget}
           recruitNumber={clubInfo.recruitNumber}
         />
-        <ClubQuill
+        <MDEditor
           isEditing={isEditing}
           introduction={clubInfo.introduction}
           onChange={handleQuillChange}
