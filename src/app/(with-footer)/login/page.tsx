@@ -73,7 +73,7 @@ export default function Page() {
           </div>
         </div>
 
-        <Button type="submit" variant="secondary" className={S.Button}>
+        <Button type="submit" variant="none" className={S.Button}>
           로그인
         </Button>
       </form>
