@@ -278,3 +278,7 @@ export const desTextInput = style({
   outline: 'none',
   padding: 0,
 });
+
+export const underlineInput = style({
+  textDecoration: 'underline',
+});

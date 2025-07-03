@@ -114,7 +114,7 @@ export default function ClubBox(props: ClubBoxProps) {
           )}
         </div>
       </div>
-      <div className={S.clubName} onDoubleClick={() => setEditingName(true)}>
+      <div className={S.clubName} onDoubleClick={() => props.isEditing && setEditingName(true)}>
         {editingName ? (
           <input
             value={clubName}
@@ -127,7 +127,7 @@ export default function ClubBox(props: ClubBoxProps) {
             onKeyDown={(e) => {
               if (e.key === 'Enter') setEditingName(false);
             }}
-            className={S.clubNameInput}
+            className={S.clubNameInput + ' ' + S.underlineInput}
             style={{ width: Math.max(60, clubName.length * 18) }}
           />
         ) : clubName.trim() === '' ? (
@@ -140,7 +140,7 @@ export default function ClubBox(props: ClubBoxProps) {
         <Image src={person} alt="사람" width={21} height={21} />
         <span className={S.numberText}>{peopleCount}</span>
       </div>
-      <div className={S.desText} onDoubleClick={() => setEditingDesc(true)}>
+      <div className={S.desText} onDoubleClick={() => props.isEditing && setEditingDesc(true)}>
         {editingDesc ? (
           <input
             value={clubDesc}
@@ -153,7 +153,7 @@ export default function ClubBox(props: ClubBoxProps) {
             onKeyDown={(e) => {
               if (e.key === 'Enter') setEditingDesc(false);
             }}
-            className={S.desTextInput}
+            className={S.desTextInput + ' ' + S.underlineInput}
             style={{ width: Math.max(80, clubDesc.length * 12) }}
           />
         ) : clubDesc.trim() === '' ? (
@@ -196,7 +196,7 @@ export default function ClubBox(props: ClubBoxProps) {
             className={
               S.userInputTag + ' ' + (isEditingCustomField ? S.cursorText : S.cursorPointer)
             }
-            onDoubleClick={() => setIsEditingCustomField(true)}
+            onDoubleClick={() => props.isEditing && setIsEditingCustomField(true)}
           >
             {isEditingCustomField ? (
               <>
@@ -211,7 +211,7 @@ export default function ClubBox(props: ClubBoxProps) {
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') setIsEditingCustomField(false);
                   }}
-                  className={S.customFieldInput}
+                  className={S.customFieldInput + ' ' + S.underlineInput}
                   style={{ width: inputWidth }}
                 />
                 <span ref={spanRef} className={S.customFieldSpan} style={{ width: inputWidth }}>
@@ -223,10 +223,14 @@ export default function ClubBox(props: ClubBoxProps) {
                 {customField.trim() === '' ? '사용자입력 세부분야' : customField}
               </span>
             )}
-            <span className={S.editIconWrapper} onClick={() => setIsEditingCustomField(true)}>
+            <span
+              className={S.editIconWrapper}
+              onClick={() => props.isEditing && setIsEditingCustomField(true)}
+            >
               <Image src={editIcon} alt="edit" width={21} height={21} />
             </span>
           </div>
+
           <div style={{ position: 'relative' }}>
             <div onClick={() => props.isEditing && setRecruitOpen((v) => !v)}>
               <DropDownButton
