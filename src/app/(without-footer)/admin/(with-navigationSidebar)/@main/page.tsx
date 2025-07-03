@@ -104,7 +104,7 @@ function Page() {
             )}
           </div>
 
-          <ClubBox {...clubInfo} onChange={handleClubBoxChange} />
+          <ClubBox {...clubInfo} onChange={handleClubBoxChange} isEditing={isEditing} />
         </div>
         <RightSideBar
           onEditClick={() => setIsEditing(true)}
