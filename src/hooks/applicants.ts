@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
-import { applicantDataKey } from './queries/key';
+import { applicantKey } from './queries/key';
 import {
   getApplicantList,
   ApplicantListParams,
@@ -11,7 +11,7 @@ interface UseApplicantListParams {
 }
 
 export const useApplicantList = ({ selectedOptions }: UseApplicantListParams) => {
-  const { applicantList } = applicantDataKey;
+  const { applicantList } = applicantKey;
 
   const { data, isLoading } = useSuspenseQuery({
     queryKey: [applicantList, selectedOptions],
@@ -27,7 +27,7 @@ interface usePatchApplicantParams {
 
 export const usePatchApplicantStatus = () => {
   const queryClient = useQueryClient();
-  const { applicantList, passList, failList } = applicantDataKey;
+  const { applicantList, passList, failList } = applicantKey;
 
   const favoriteMutation = useMutation({
     mutationFn: ({ applicantId, status }: usePatchApplicantParams) =>
