@@ -8,5 +8,6 @@ export const ROUTES = {
   ADMIN_APPLICATIONS: '/admin/applicants?evaluation=document&grade=true',
   ADMIN_CLUB_MEMBER: '/admin/clubMember',
   ADMIN_APPLICATIONS_FORM: '/admin/applicationsForm',
+  ADMIN_APPLICATIONS_CREATE: '/admin/createForm',
   ADMIN_APPLICATIONS_MESSAGE: '/admin/applicants/message',
 };
