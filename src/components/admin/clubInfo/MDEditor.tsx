@@ -6,7 +6,7 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import type { Editor } from '@tiptap/react';
-import './clubQuill.custom.css';
+import './mdEditor.custom.css';
 import { useEffect, useState, useRef } from 'react';
 
 const icons = {

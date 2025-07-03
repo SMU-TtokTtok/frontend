@@ -1,6 +1,6 @@
 'use client';
 
-import * as S from '@/components/admin/clubInfo';
+import * as S from '@/components/admin/clubInfo/index.css';
 import clubImg from '@/assets/clubImg.svg';
 import Image from 'next/image';
 import ClubBox from '@/components/admin/clubInfo/ClubBox';
