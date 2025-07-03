@@ -31,4 +31,10 @@ export const baseButtonStyle = style({
   ':hover': {
     opacity: '0.9',
   },
+  selectors: {
+    '&:disabled': {
+      cursor: 'not-allowed',
+      opacity: 0.6,
+    },
+  },
 });
