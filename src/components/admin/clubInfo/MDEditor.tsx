@@ -1,6 +1,6 @@
 'use client';
 
-import * as S from '@/components/admin/clubInfo/clubQuill.css';
+import * as S from '@/components/admin/clubInfo/mdEditor.css';
 import Button from '@/common/ui/button/index';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
