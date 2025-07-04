@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { applicantDataKey } from './queries/key';
+import { applicantKey } from './queries/key';
 import {
   ApplicantListParams,
   getFailList,
@@ -11,7 +11,7 @@ interface UseApplicantListParams {
 }
 
 export const usePassList = ({ selectedOptions }: UseApplicantListParams) => {
-  const { passList } = applicantDataKey;
+  const { passList } = applicantKey;
 
   const { data, isLoading } = useSuspenseQuery({
     queryKey: [passList, selectedOptions],
@@ -21,7 +21,7 @@ export const usePassList = ({ selectedOptions }: UseApplicantListParams) => {
 };
 
 export const useFailList = ({ selectedOptions }: UseApplicantListParams) => {
-  const { failList } = applicantDataKey;
+  const { failList } = applicantKey;
 
   const { data, isLoading } = useSuspenseQuery({
     queryKey: [failList, selectedOptions],
