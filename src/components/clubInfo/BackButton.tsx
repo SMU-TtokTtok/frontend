@@ -11,7 +11,7 @@ const backFlex = {
 };
 
 const backText = {
-  fontSize: '16px',
+  fontSize: '18px',
   fontWeight: 500,
 };
 
