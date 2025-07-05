@@ -1,4 +1,4 @@
-import { vars } from '@/common/styles/theme.css';
+// import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const container = style({
