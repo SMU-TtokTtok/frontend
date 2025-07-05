@@ -59,4 +59,5 @@ export const star = style({
   position: 'absolute',
   top: '22px',
   right: '30px',
+  cursor: 'pointer',
 });

@@ -1,11 +1,21 @@
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
   position: 'fixed',
   width: '330px',
   right: '100px', //
   top: '200px', //
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      position: 'relative',
+      width: '100%',
+      right: '0',
+      top: '0',
+    },
+  },
 });
 
 export const contentFlex = style({
@@ -41,6 +51,15 @@ export const button = style({
   fontWeight: 600,
   fontSize: vars.fonts.body2,
   borderRadius: '6px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      position: 'absolute',
+      top: '-100px',
+      right: '30px',
+      width: '204px',
+    },
+  },
 });
 
 export const buttonDisabled = style({
