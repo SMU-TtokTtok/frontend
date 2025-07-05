@@ -6,6 +6,7 @@ import person from '@/assets/person.svg';
 import Image from 'next/image';
 import { useState, useRef, useLayoutEffect } from 'react';
 import editIcon from '@/assets/edit.svg';
+import { ClubIntro } from '@/common/model/clubIntro';
 
 const handleCloseRecruit = async () => {
   try {
@@ -25,23 +26,10 @@ const handleCloseRecruit = async () => {
   }
 };
 
-type ClubBoxProps = {
-  id: number;
-  name: string;
-  shortDescription: string;
-  type: string;
-  category: string;
-  detailField: string;
-  isRecruiting: boolean;
-  introduction: string;
-  recruitPeriod: string;
-  recruitTarget: string;
-  recruitNumber: string;
-  peopleCount: number;
-  img: string;
-  onChange?: (updated: Partial<ClubBoxProps>) => void;
+interface ClubBoxProps extends ClubIntro {
+  onChange?: (updated: Partial<ClubIntro>) => void;
   isEditing?: boolean;
-};
+}
 
 export default function ClubBox(props: ClubBoxProps) {
   const { name, shortDescription, type, category, detailField, isRecruiting, peopleCount } = props;
@@ -50,7 +38,7 @@ export default function ClubBox(props: ClubBoxProps) {
   const [selectedType, setSelectedType] = useState<'중앙' | '학과' | '연합'>(
     type as '중앙' | '학과' | '연합',
   );
-  const dropdownItems = ['중앙', '학과', '연합'];
+  const typeItems = ['중앙', '학과', '연합'];
 
   // 카테고리 드롭다운 상태 및 항목
   const [selectedCategory, setSelectedCategory] = useState(category);
@@ -102,7 +90,7 @@ export default function ClubBox(props: ClubBoxProps) {
           )}
           {typeOpen && props.isEditing && (
             <ul className={S.dropdownPanel}>
-              {dropdownItems.map((item) => (
+              {typeItems.map((item) => (
                 <li
                   key={item}
                   className={
