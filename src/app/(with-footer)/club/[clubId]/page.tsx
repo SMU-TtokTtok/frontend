@@ -8,11 +8,11 @@ import RightSide from '@/components/clubInfo/RightSide';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getClubInfo } from '@/components/clubInfo/api/getClubInfo';
-import { ClubIntro } from '@/common/model/clubIntro';
+import { UserClubIntro } from '@/common/model/clubIntro';
 
 export default function Page() {
   const { clubId } = useParams();
-  const [clubIntro, setClubIntro] = useState<ClubIntro | null>(null);
+  const [clubIntro, setClubIntro] = useState<UserClubIntro | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

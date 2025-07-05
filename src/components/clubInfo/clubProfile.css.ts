@@ -15,6 +15,7 @@ export const RightFlex = style({
   backgroundColor: 'white',
   borderRadius: '8px',
   padding: '22px',
+  position: 'relative',
 });
 
 export const type = style({
@@ -52,4 +53,10 @@ export const tagFlex = style({
 export const tagStyle = style({
   padding: '4px 12px',
   borderRadius: '100px',
+});
+
+export const star = style({
+  position: 'absolute',
+  top: '22px',
+  right: '30px',
 });

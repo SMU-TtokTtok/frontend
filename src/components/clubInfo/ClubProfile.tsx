@@ -1,12 +1,23 @@
-import { ClubIntro } from '@/common/model/clubIntro';
+import { UserClubIntro } from '@/common/model/clubIntro';
 import * as S from './clubProfile.css';
 import Image from 'next/image';
 import person from '@/assets/person.svg';
 import Tag from '@/common/ui/tag/index';
+import star from '@/assets/star.svg';
+import star_active from '@/assets/star_active.svg';
 
-export default function ClubProfile({ clubIntro }: { clubIntro: ClubIntro }) {
-  const { name, shortDescription, type, category, detailField, isRecruiting, img, peopleCount } =
-    clubIntro;
+export default function ClubProfile({ clubIntro }: { clubIntro: UserClubIntro }) {
+  const {
+    name,
+    shortDescription,
+    type,
+    category,
+    detailField,
+    isRecruiting,
+    img,
+    peopleCount,
+    isFavorite,
+  } = clubIntro;
 
   return (
     <div className={S.clubProfile}>
@@ -34,6 +45,13 @@ export default function ClubProfile({ clubIntro }: { clubIntro: ClubIntro }) {
             {isRecruiting ? '모집중' : '모집마감'}
           </Tag>
         </div>
+        <Image
+          src={isFavorite ? star_active : star}
+          alt="star"
+          width={29}
+          height={29}
+          className={S.star}
+        />
       </div>
     </div>
   );
