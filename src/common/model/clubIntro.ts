@@ -14,4 +14,6 @@ export interface ClubIntro {
   peopleCount: number;
 }
 
-//즐겨찾기 여부 추가
+export interface UserClubIntro extends ClubIntro {
+  isFavorite: boolean;
+}

@@ -20,6 +20,7 @@ export default function Page() {
       const data = await getClubInfo(Number(clubId));
       setClubIntro(data);
       setLoading(false);
+      console.log(data);
     };
     fetchClubInfo();
   }, [clubId]);
