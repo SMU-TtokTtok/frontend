@@ -2,8 +2,8 @@
 import { style } from '@vanilla-extract/css';
 
 export const container = style({
-  paddingLeft: '100px',
-  paddingRight: '200px',
+  paddingLeft: '264px',
+  paddingRight: '450px',
 });
 
 export const wrapper = style({

@@ -13,3 +13,5 @@ export interface ClubIntro {
   img: string;
   peopleCount: number;
 }
+
+//즐겨찾기 여부 추가
