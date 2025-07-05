@@ -214,7 +214,7 @@ export default function ClubBox(props: ClubBoxProps) {
                   className={S.customFieldInput + ' ' + S.underlineInput}
                   style={{ width: inputWidth }}
                 />
-                <span ref={spanRef} className={S.customFieldSpan} style={{ width: inputWidth }}>
+                <span ref={spanRef} className={S.customFieldSpan}>
                   {customField || ' '}
                 </span>
               </>
@@ -223,12 +223,13 @@ export default function ClubBox(props: ClubBoxProps) {
                 {customField.trim() === '' ? '사용자입력 세부분야' : customField}
               </span>
             )}
-            <span
-              className={S.editIconWrapper}
+            <Image
+              src={editIcon}
+              alt="edit"
+              width={21}
+              height={21}
               onClick={() => props.isEditing && setIsEditingCustomField(true)}
-            >
-              <Image src={editIcon} alt="edit" width={21} height={21} />
-            </span>
+            />
           </div>
 
           <div style={{ position: 'relative' }}>

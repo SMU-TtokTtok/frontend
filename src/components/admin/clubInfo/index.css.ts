@@ -4,7 +4,7 @@ import { style } from '@vanilla-extract/css';
 
 export const container = style({
   paddingLeft: '21.222rem',
-  paddingRight: '27.778rem',
+  paddingRight: '400px',
 });
 
 export const wrapper = style({

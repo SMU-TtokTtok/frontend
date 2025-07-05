@@ -4,7 +4,7 @@ import { vars } from '@/common/styles/theme.css';
 export const container = style({
   position: 'fixed',
   top: '212px',
-  right: '145px',
+  right: '3.8%',
   width: '330px',
 });
 

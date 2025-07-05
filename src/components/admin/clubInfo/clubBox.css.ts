@@ -188,16 +188,10 @@ export const userInputTag = style({
   background: '#f8f8f9',
   border: '1px solid #e7e8ea',
   borderRadius: '100px',
-  minHeight: '32px',
-  height: '32px',
-  padding: '0 40px 0 16px',
+  padding: '4px 8px 4px 12px',
   position: 'relative',
-  fontFamily: 'Pretendard Variable',
   fontWeight: 600,
   fontSize: '16px',
-  color: '#5a6379',
-  boxSizing: 'border-box',
-  cursor: 'pointer',
 });
 
 export const relative = style({
@@ -246,15 +240,14 @@ export const customFieldSpan = style({
 });
 
 export const customFieldText = style({
-  fontFamily: 'Pretendard Variable',
   fontWeight: 600,
   fontSize: 16,
   color: '#5a6379',
   lineHeight: '24px',
   textAlign: 'center',
-  whiteSpace: 'nowrap',
-  display: 'inline-block',
-  width: 'auto',
+  // whiteSpace: 'nowrap',
+  // display: 'inline-block',
+  // width: 'auto',
 });
 
 export const clubNameInput = style({
