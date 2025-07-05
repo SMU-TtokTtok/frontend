@@ -55,7 +55,7 @@ export const button = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       position: 'absolute',
-      top: '-100px',
+      top: '-96px',
       right: '30px',
       width: '204px',
     },

@@ -1,5 +1,6 @@
 import * as S from './clubBox.css';
 import DropDownButton from '@/common/ui/dropdownButton';
+import Tag from '@/common/ui/tag/index';
 import Button from '@/common/ui/button';
 import person from '@/assets/person.svg';
 import Image from 'next/image';
@@ -88,11 +89,17 @@ export default function ClubBox(props: ClubBoxProps) {
     <div className={S.container}>
       <div className={S.headerflex + ' ' + S.relative}>
         <div className={S.relative}>
-          <div onClick={() => props.isEditing && setTypeOpen((v) => !v)}>
-            <DropDownButton variant="default" className={S.dropDownStyle2}>
+          {props.isEditing ? (
+            <div onClick={() => setTypeOpen((v) => !v)}>
+              <DropDownButton variant="default" className={S.dropDownStyle2}>
+                {selectedType}
+              </DropDownButton>
+            </div>
+          ) : (
+            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border4}>
               {selectedType}
-            </DropDownButton>
-          </div>
+            </Tag>
+          )}
           {typeOpen && props.isEditing && (
             <ul className={S.dropdownPanel}>
               {dropdownItems.map((item) => (
@@ -165,11 +172,17 @@ export default function ClubBox(props: ClubBoxProps) {
       <div className={S.footerFlex}>
         <div className={S.dropDownFlex}>
           <div style={{ position: 'relative' }}>
-            <div onClick={() => props.isEditing && setCategoryOpen((v) => !v)}>
-              <DropDownButton variant="default" className={S.dropDownStyle}>
+            {props.isEditing ? (
+              <div onClick={() => setCategoryOpen((v) => !v)}>
+                <DropDownButton variant="default" className={S.dropDownStyle}>
+                  {selectedCategory}
+                </DropDownButton>
+              </div>
+            ) : (
+              <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
                 {selectedCategory}
-              </DropDownButton>
-            </div>
+              </Tag>
+            )}
             {categoryOpen && props.isEditing && (
               <ul className={S.categoryDropdownPanel}>
                 {categoryItems.map((item) => (
@@ -233,14 +246,23 @@ export default function ClubBox(props: ClubBoxProps) {
           </div>
 
           <div style={{ position: 'relative' }}>
-            <div onClick={() => props.isEditing && setRecruitOpen((v) => !v)}>
-              <DropDownButton
-                variant={selectedRecruit === '모집마감' ? 'default' : 'tertiary'}
-                className={S.dropDownStyle}
+            {props.isEditing ? (
+              <div onClick={() => setRecruitOpen((v) => !v)}>
+                <DropDownButton
+                  variant={selectedRecruit === '모집마감' ? 'default' : 'tertiary'}
+                  className={S.dropDownStyle}
+                >
+                  {selectedRecruit}
+                </DropDownButton>
+              </div>
+            ) : (
+              <Tag
+                variant={selectedRecruit === '모집중' ? 'secondary' : 'tertiary'}
+                className={S.selectedTypeText + ' ' + S.border100}
               >
                 {selectedRecruit}
-              </DropDownButton>
-            </div>
+              </Tag>
+            )}
             {recruitOpen && props.isEditing && (
               <ul className={S.recruitDropdownPanel}>
                 {recruitItems.map((item) => (

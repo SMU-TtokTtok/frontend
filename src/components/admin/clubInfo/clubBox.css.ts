@@ -33,8 +33,8 @@ export const numberText = style({
 });
 export const desText = style({
   fontSize: vars.fonts.body1,
-  fontWeight: '400',
   marginBottom: '21px',
+  color: '#55637D',
 });
 
 export const footerFlex = style({
@@ -274,4 +274,20 @@ export const desTextInput = style({
 
 export const underlineInput = style({
   textDecoration: 'underline',
+});
+
+export const selectedTypeText = style({
+  fontSize: '16px',
+  fontWeight: 500,
+  color: '#222',
+  padding: '8px 12px',
+  display: 'inline-block',
+});
+
+export const border4 = style({
+  borderRadius: '4px',
+});
+
+export const border100 = style({
+  borderRadius: '100px',
 });
