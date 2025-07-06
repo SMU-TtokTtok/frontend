@@ -291,3 +291,23 @@ export const border4 = style({
 export const border100 = style({
   borderRadius: '100px',
 });
+
+export const panelContainer = style({
+  marginTop: '5px',
+  width: '100%',
+  textAlign: 'center',
+});
+
+export const panelItem = style({
+  padding: '8px 0',
+  color: '#55637D',
+  fontSize: vars.fonts.body2,
+  fontWeight: 500,
+  cursor: 'pointer',
+
+  selectors: {
+    '&:not(:last-child)': {
+      borderBottom: '1px solid #E7E8EA',
+    },
+  },
+});

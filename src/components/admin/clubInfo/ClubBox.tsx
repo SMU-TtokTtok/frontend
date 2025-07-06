@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useState, useRef, useLayoutEffect } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { ClubIntro } from '@/common/model/clubIntro';
+import DropDown from '@/common/components/dropdown/index';
 
 const handleCloseRecruit = async () => {
   try {
@@ -63,7 +64,7 @@ export default function ClubBox(props: ClubBoxProps) {
   }, [customField, isEditingCustomField]);
 
   // 드롭다운 open 상태 관리
-  const [typeOpen, setTypeOpen] = useState(false);
+  // const [typeOpen, setTypeOpen] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [recruitOpen, setRecruitOpen] = useState(false);
 
@@ -75,39 +76,34 @@ export default function ClubBox(props: ClubBoxProps) {
 
   return (
     <div className={S.container}>
-      <div className={S.headerflex + ' ' + S.relative}>
-        <div className={S.relative}>
-          {props.isEditing ? (
-            <div onClick={() => setTypeOpen((v) => !v)}>
+      <div className={S.headerflex}>
+        {props.isEditing ? (
+          <DropDown
+            toggleButton={
               <DropDownButton variant="default" className={S.dropDownStyle2}>
                 {selectedType}
               </DropDownButton>
-            </div>
-          ) : (
-            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border4}>
-              {selectedType}
-            </Tag>
-          )}
-          {typeOpen && props.isEditing && (
-            <ul className={S.dropdownPanel}>
-              {typeItems.map((item) => (
-                <li
-                  key={item}
-                  className={
-                    S.dropdownItem + (selectedType === item ? ' ' + S.selectedDropdownItem : '')
-                  }
-                  onClick={() => {
-                    setSelectedType(item as '중앙' | '학과' | '연합');
-                    props.onChange?.({ type: item });
-                    setTypeOpen(false);
-                  }}
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+            }
+            panelClassName={S.panelContainer}
+          >
+            {typeItems.map((item) => (
+              <li
+                key={item}
+                onClick={() => {
+                  setSelectedType(item as '중앙' | '학과' | '연합');
+                  // props.onChange?.({ type: item });
+                }}
+                className={S.panelItem}
+              >
+                {item}
+              </li>
+            ))}
+          </DropDown>
+        ) : (
+          <Tag variant="default" className={S.selectedTypeText + ' ' + S.border4}>
+            {type}
+          </Tag>
+        )}
       </div>
       <div className={S.clubName} onDoubleClick={() => props.isEditing && setEditingName(true)}>
         {editingName ? (
@@ -159,39 +155,37 @@ export default function ClubBox(props: ClubBoxProps) {
       </div>
       <div className={S.footerFlex}>
         <div className={S.dropDownFlex}>
-          <div style={{ position: 'relative' }}>
-            {props.isEditing ? (
-              <div onClick={() => setCategoryOpen((v) => !v)}>
-                <DropDownButton variant="default" className={S.dropDownStyle}>
-                  {selectedCategory}
-                </DropDownButton>
-              </div>
-            ) : (
-              <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
+          {props.isEditing ? (
+            <div onClick={() => setCategoryOpen((v) => !v)}>
+              <DropDownButton variant="default" className={S.dropDownStyle}>
                 {selectedCategory}
-              </Tag>
-            )}
-            {categoryOpen && props.isEditing && (
-              <ul className={S.categoryDropdownPanel}>
-                {categoryItems.map((item) => (
-                  <li
-                    key={item}
-                    className={
-                      S.categoryDropdownItem +
-                      (selectedCategory === item ? ' ' + S.selectedCategoryDropdownItem : '')
-                    }
-                    onClick={() => {
-                      setSelectedCategory(item);
-                      props.onChange?.({ category: item });
-                      setCategoryOpen(false);
-                    }}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+              </DropDownButton>
+            </div>
+          ) : (
+            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
+              {selectedCategory}
+            </Tag>
+          )}
+          {categoryOpen && props.isEditing && (
+            <ul className={S.categoryDropdownPanel}>
+              {categoryItems.map((item) => (
+                <li
+                  key={item}
+                  className={
+                    S.categoryDropdownItem +
+                    (selectedCategory === item ? ' ' + S.selectedCategoryDropdownItem : '')
+                  }
+                  onClick={() => {
+                    setSelectedCategory(item);
+                    props.onChange?.({ category: item });
+                    setCategoryOpen(false);
+                  }}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          )}
 
           <div
             className={
