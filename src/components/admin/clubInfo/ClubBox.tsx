@@ -65,7 +65,7 @@ export default function ClubBox(props: ClubBoxProps) {
 
   // 드롭다운 open 상태 관리
   // const [typeOpen, setTypeOpen] = useState(false);
-  const [categoryOpen, setCategoryOpen] = useState(false);
+  // const [categoryOpen, setCategoryOpen] = useState(false);
   const [recruitOpen, setRecruitOpen] = useState(false);
 
   // 동아리명, 한줄설명 인라인 수정 상태
@@ -156,35 +156,31 @@ export default function ClubBox(props: ClubBoxProps) {
       <div className={S.footerFlex}>
         <div className={S.dropDownFlex}>
           {props.isEditing ? (
-            <div onClick={() => setCategoryOpen((v) => !v)}>
-              <DropDownButton variant="default" className={S.dropDownStyle}>
-                {selectedCategory}
-              </DropDownButton>
-            </div>
-          ) : (
-            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
-              {selectedCategory}
-            </Tag>
-          )}
-          {categoryOpen && props.isEditing && (
-            <ul className={S.categoryDropdownPanel}>
+            <DropDown
+              toggleButton={
+                <DropDownButton variant="default" className={S.dropDownStyle}>
+                  {selectedCategory}
+                </DropDownButton>
+              }
+              panelClassName={S.panelContainer}
+            >
               {categoryItems.map((item) => (
                 <li
                   key={item}
-                  className={
-                    S.categoryDropdownItem +
-                    (selectedCategory === item ? ' ' + S.selectedCategoryDropdownItem : '')
-                  }
                   onClick={() => {
                     setSelectedCategory(item);
-                    props.onChange?.({ category: item });
-                    setCategoryOpen(false);
+                    // props.onChange?.({ category: item });
                   }}
+                  className={S.panelItem2}
                 >
                   {item}
                 </li>
               ))}
-            </ul>
+            </DropDown>
+          ) : (
+            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
+              {category}
+            </Tag>
           )}
 
           <div

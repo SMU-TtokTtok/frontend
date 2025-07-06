@@ -311,3 +311,17 @@ export const panelItem = style({
     },
   },
 });
+
+export const panelItem2 = style({
+  padding: '12px 0',
+  color: '#272E3B',
+  fontSize: vars.fonts.body2,
+  fontWeight: 600,
+  cursor: 'pointer',
+
+  selectors: {
+    '&:not(:last-child)': {
+      borderBottom: '1px solid #E7E8EA',
+    },
+  },
+});
