@@ -8,7 +8,7 @@ import { useState, useRef, useLayoutEffect } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { ClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
-import { typeItems, categoryItems, recruitItems } from '@/common/constants/adminOptions';
+import { typeItems, categoryItems, recruitItems } from '@/common/constants/adminOptions';
 
 const handleCloseRecruit = async () => {
   try {
@@ -58,8 +58,6 @@ export default function ClubBox(props: ClubBoxProps) {
   }, [customField, isEditingCustomField]);
 
   // 동아리명, 한줄설명 인라인 수정 상태
-  const [editingName, setEditingName] = useState(false);
-  const [editingDesc, setEditingDesc] = useState(false);
   const [clubName, setClubName] = useState(name);
   const [clubDesc, setClubDesc] = useState(shortDescription);
 
@@ -94,52 +92,42 @@ export default function ClubBox(props: ClubBoxProps) {
           </Tag>
         )}
       </div>
-      <div className={S.clubName} onDoubleClick={() => props.isEditing && setEditingName(true)}>
-        {editingName ? (
+      <div className={S.clubName}>
+        {props.isEditing ? (
           <input
             value={clubName}
             autoFocus
             onChange={(e) => {
               setClubName(e.target.value);
-              props.onChange?.({ name: e.target.value });
+              // props.onChange?.({ name: e.target.value });
             }}
-            onBlur={() => setEditingName(false)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') setEditingName(false);
-            }}
-            className={S.clubNameInput + ' ' + S.underlineInput}
-            style={{ width: Math.max(60, clubName.length * 18) }}
+            className={S.clubNameInput}
           />
         ) : clubName.trim() === '' ? (
           '이곳에는 동아리명이 들어갑니다.'
         ) : (
-          clubName
+          name
         )}
       </div>
       <div className={S.numberFlex}>
         <Image src={person} alt="사람" width={21} height={21} />
         <span className={S.numberText}>{peopleCount}</span>
       </div>
-      <div className={S.desText} onDoubleClick={() => props.isEditing && setEditingDesc(true)}>
-        {editingDesc ? (
+      <div className={S.desText}>
+        {props.isEditing ? (
           <input
             value={clubDesc}
-            autoFocus
+            // autoFocus
             onChange={(e) => {
               setClubDesc(e.target.value);
-              props.onChange?.({ shortDescription: e.target.value });
+              // props.onChange?.({ shortDescription: e.target.value });
             }}
-            onBlur={() => setEditingDesc(false)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') setEditingDesc(false);
-            }}
-            className={S.desTextInput + ' ' + S.underlineInput}
-            style={{ width: Math.max(80, clubDesc.length * 12) }}
+            className={S.desTextInput}
           />
-        ) : clubDesc.trim() === '' ? (
+        ) : shortDescription.trim() === '' ? (
           '이곳에는 한줄소개 정도의 간략한 동아리 소개가 들어갑니다.'
         ) : (
-          clubDesc
+          shortDescription
         )}
       </div>
       <div className={S.footerFlex}>
