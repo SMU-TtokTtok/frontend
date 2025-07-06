@@ -8,6 +8,7 @@ import { useState, useRef, useLayoutEffect } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { ClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
+import { typeItems, categoryItems, recruitItems } from '@/common/constants/adminOptions';
 
 const handleCloseRecruit = async () => {
   try {
@@ -39,17 +40,14 @@ export default function ClubBox(props: ClubBoxProps) {
   const [selectedType, setSelectedType] = useState<'중앙' | '학과' | '연합'>(
     type as '중앙' | '학과' | '연합',
   );
-  const typeItems = ['중앙', '학과', '연합'];
 
   // 카테고리 드롭다운 상태 및 항목
   const [selectedCategory, setSelectedCategory] = useState(category);
-  const categoryItems = ['봉사', '예술', '문화', '학술', '친목', '체육', '종교', '기타'];
 
   // 모집상태 드롭다운 상태 및 항목
   const [selectedRecruit, setSelectedRecruit] = useState<'모집중' | '모집마감'>(
     isRecruiting ? '모집중' : '모집마감',
   );
-  const recruitItems = ['모집중', '모집마감'];
 
   // 사용자입력 세부분야 인라인 수정 상태
   const [customField, setCustomField] = useState(detailField);
@@ -81,7 +79,7 @@ export default function ClubBox(props: ClubBoxProps) {
             }
             panelClassName={S.panelContainer}
           >
-            {typeItems.map((item) => (
+            {typeItems.map((item: '중앙' | '학과' | '연합') => (
               <li
                 key={item}
                 onClick={() => {
@@ -159,7 +157,7 @@ export default function ClubBox(props: ClubBoxProps) {
               }
               panelClassName={S.panelContainer}
             >
-              {categoryItems.map((item) => (
+              {categoryItems.map((item: string) => (
                 <li
                   key={item}
                   onClick={() => {
@@ -230,7 +228,7 @@ export default function ClubBox(props: ClubBoxProps) {
               }
               panelClassName={S.panelContainer}
             >
-              {recruitItems.map((item) => (
+              {recruitItems.map((item: '모집중' | '모집마감') => (
                 <li
                   key={item}
                   onClick={() => {
