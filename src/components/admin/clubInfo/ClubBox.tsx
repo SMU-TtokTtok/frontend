@@ -63,11 +63,6 @@ export default function ClubBox(props: ClubBoxProps) {
     }
   }, [customField, isEditingCustomField]);
 
-  // 드롭다운 open 상태 관리
-  // const [typeOpen, setTypeOpen] = useState(false);
-  // const [categoryOpen, setCategoryOpen] = useState(false);
-  const [recruitOpen, setRecruitOpen] = useState(false);
-
   // 동아리명, 한줄설명 인라인 수정 상태
   const [editingName, setEditingName] = useState(false);
   const [editingDesc, setEditingDesc] = useState(false);
@@ -223,45 +218,39 @@ export default function ClubBox(props: ClubBoxProps) {
             />
           </div>
 
-          <div style={{ position: 'relative' }}>
-            {props.isEditing ? (
-              <div onClick={() => setRecruitOpen((v) => !v)}>
+          {props.isEditing ? (
+            <DropDown
+              toggleButton={
                 <DropDownButton
                   variant={selectedRecruit === '모집마감' ? 'default' : 'tertiary'}
                   className={S.dropDownStyle}
                 >
                   {selectedRecruit}
                 </DropDownButton>
-              </div>
-            ) : (
-              <Tag
-                variant={selectedRecruit === '모집중' ? 'secondary' : 'tertiary'}
-                className={S.selectedTypeText + ' ' + S.border100}
-              >
-                {selectedRecruit}
-              </Tag>
-            )}
-            {recruitOpen && props.isEditing && (
-              <ul className={S.recruitDropdownPanel}>
-                {recruitItems.map((item) => (
-                  <li
-                    key={item}
-                    className={
-                      S.recruitDropdownItem +
-                      (selectedRecruit === item ? ' ' + S.selectedRecruitDropdownItem : '')
-                    }
-                    onClick={() => {
-                      setSelectedRecruit(item as '모집중' | '모집마감');
-                      props.onChange?.({ isRecruiting: item === '모집중' });
-                      setRecruitOpen(false);
-                    }}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+              }
+              panelClassName={S.panelContainer}
+            >
+              {recruitItems.map((item) => (
+                <li
+                  key={item}
+                  onClick={() => {
+                    setSelectedRecruit(item as '모집중' | '모집마감');
+                    // props.onChange?.({ isRecruiting: item === '모집중' });
+                  }}
+                  className={S.panelItem2}
+                >
+                  {item}
+                </li>
+              ))}
+            </DropDown>
+          ) : (
+            <Tag
+              variant={isRecruiting ? 'secondary' : 'tertiary'}
+              className={S.selectedTypeText + ' ' + S.border100}
+            >
+              {isRecruiting ? '모집중' : '모집마감'}
+            </Tag>
+          )}
         </div>
         <Button variant="secondary" onClick={handleCloseRecruit} className={S.finishedButton}>
           지원 마감하기
