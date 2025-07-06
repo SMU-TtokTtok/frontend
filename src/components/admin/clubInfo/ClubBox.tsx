@@ -28,6 +28,9 @@ const handleCloseRecruit = async () => {
   }
 };
 
+type ClubType = (typeof typeItems)[number];
+type ClubCategory = (typeof categoryItems)[number];
+type ClubRecruit = (typeof recruitItems)[number];
 interface ClubBoxProps extends ClubIntro {
   onChange?: (updated: Partial<ClubIntro>) => void;
   isEditing?: boolean;
@@ -36,16 +39,9 @@ interface ClubBoxProps extends ClubIntro {
 export default function ClubBox(props: ClubBoxProps) {
   const { name, shortDescription, type, category, detailField, isRecruiting, peopleCount } = props;
 
-  // 선택된 동아리 분류 상태 및 항목
-  const [selectedType, setSelectedType] = useState<'중앙' | '학과' | '연합'>(
-    type as '중앙' | '학과' | '연합',
-  );
-
-  // 카테고리 드롭다운 상태 및 항목
-  const [selectedCategory, setSelectedCategory] = useState(category);
-
-  // 모집상태 드롭다운 상태 및 항목
-  const [selectedRecruit, setSelectedRecruit] = useState<'모집중' | '모집마감'>(
+  const [selectedType, setSelectedType] = useState<ClubType>(type as ClubType);
+  const [selectedCategory, setSelectedCategory] = useState<ClubCategory>(category as ClubCategory);
+  const [selectedRecruit, setSelectedRecruit] = useState<ClubRecruit>(
     isRecruiting ? '모집중' : '모집마감',
   );
 
@@ -79,11 +75,11 @@ export default function ClubBox(props: ClubBoxProps) {
             }
             panelClassName={S.panelContainer}
           >
-            {typeItems.map((item: '중앙' | '학과' | '연합') => (
+            {typeItems.map((item: ClubType) => (
               <li
                 key={item}
                 onClick={() => {
-                  setSelectedType(item as '중앙' | '학과' | '연합');
+                  setSelectedType(item as ClubType);
                   // props.onChange?.({ type: item });
                 }}
                 className={S.panelItem}
@@ -157,11 +153,11 @@ export default function ClubBox(props: ClubBoxProps) {
               }
               panelClassName={S.panelContainer}
             >
-              {categoryItems.map((item: string) => (
+              {categoryItems.map((item: ClubCategory) => (
                 <li
                   key={item}
                   onClick={() => {
-                    setSelectedCategory(item);
+                    setSelectedCategory(item as ClubCategory);
                     // props.onChange?.({ category: item });
                   }}
                   className={S.panelItem2}
@@ -228,11 +224,11 @@ export default function ClubBox(props: ClubBoxProps) {
               }
               panelClassName={S.panelContainer}
             >
-              {recruitItems.map((item: '모집중' | '모집마감') => (
+              {recruitItems.map((item: ClubRecruit) => (
                 <li
                   key={item}
                   onClick={() => {
-                    setSelectedRecruit(item as '모집중' | '모집마감');
+                    setSelectedRecruit(item as ClubRecruit);
                     // props.onChange?.({ isRecruiting: item === '모집중' });
                   }}
                   className={S.panelItem2}
