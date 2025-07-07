@@ -1,11 +1,19 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
   position: 'fixed',
   top: '212px',
-  right: '145px',
+  right: '3.8%',
   width: '330px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      position: 'static',
+      width: '100%',
+    },
+  },
 });
 
 export const contentBox = style({
@@ -13,6 +21,9 @@ export const contentBox = style({
   borderRadius: '8px',
   padding: '24px 26px',
   marginBottom: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
 });
 
 export const flexRow = style({
@@ -37,4 +48,41 @@ export const modifyButton = style({
   borderRadius: '6px',
   fontSize: vars.fonts.body1,
   fontWeight: '600',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      position: 'absolute',
+      bottom: '120px',
+      right: '0',
+      width: '236px',
+
+      selectors: {
+        '&.cancel': {
+          bottom: '54px',
+        },
+      },
+    },
+  },
+});
+
+export const numberInput = style({
+  appearance: 'textfield',
+  WebkitAppearance: 'textfield',
+  padding: '1px 2px',
+  border: '1px solid #ccc',
+  font: '-webkit-small-control',
+});
+export const dateFlex = style({
+  display: 'flex',
+  flexDirection: 'column',
+});
+
+export const buttonFlex = style({
+  display: 'flex',
+  gap: '4px',
+});
+
+export const button = style({
+  padding: '2px 4px',
+  borderRadius: '4px',
 });

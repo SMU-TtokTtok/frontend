@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import * as S from '../../../components/login/login.css';
 import Button from '@/common/ui/button/index';
-import { loginSchema, LoginForm } from '@/common/constants/schema';
+import { loginSchema, LoginForm } from '@/components/login/schema';
 
 export default function Page() {
   const router = useRouter();

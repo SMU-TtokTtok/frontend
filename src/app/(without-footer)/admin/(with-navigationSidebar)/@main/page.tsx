@@ -1,32 +1,17 @@
 'use client';
 
-import * as S from '@/components/admin/clubInfo/clubInfo.css';
+import * as S from '@/components/admin/clubInfo/index.css';
 import clubImg from '@/assets/clubImg.svg';
 import Image from 'next/image';
 import ClubBox from '@/components/admin/clubInfo/ClubBox';
-import ClubQuill from '@/components/admin/clubInfo/ClubQuill';
+import MDEditor from '@/components/admin/clubInfo/MDEditor';
 import RightSideBar from '@/components/admin/clubInfo/RightSideBar';
 import { useState, useEffect, useRef } from 'react';
-
-type ClubInfo = {
-  id: number;
-  name: string;
-  shortDescription: string;
-  type: string;
-  category: string;
-  detailField: string;
-  isRecruiting: boolean;
-  introduction: string;
-  recruitPeriod: string;
-  recruitTarget: string;
-  recruitNumber: string;
-  peopleCount: number;
-  img: string;
-};
+import { AdminClubIntro } from '@/common/model/clubIntro';
 
 function Page() {
   const [isEditing, setIsEditing] = useState(false);
-  const [clubInfo, setClubInfo] = useState<ClubInfo | null>(null);
+  const [clubInfo, setClubInfo] = useState<AdminClubIntro | null>(null);
   const [loading, setLoading] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -39,12 +24,10 @@ function Page() {
       });
   }, []);
 
-  const handleClubBoxChange = (updated: Partial<ClubInfo>) => {
+  const handleClubInfoChange = (updated: Partial<AdminClubIntro>) => {
     setClubInfo((prev) => (prev ? { ...prev, ...updated } : prev));
   };
-  const handleQuillChange = (introduction: string) => {
-    setClubInfo((prev) => (prev ? { ...prev, introduction } : prev));
-  };
+
   const handleSave = async () => {
     if (!clubInfo) return;
     const patchData = {
@@ -72,53 +55,46 @@ function Page() {
       <div className={S.wrapper}>
         <div className={S.title}>📑 동아리 정보 관리</div>
         <div className={S.flexRow}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Image
-              src={!clubInfo.img || clubInfo.img === '' ? clubImg : clubInfo.img}
-              alt="동아리 사진"
-              width={212}
-              height={224}
-              style={{
-                objectFit: 'cover',
-                borderRadius: 8,
-                cursor: isEditing ? 'pointer' : 'default',
-              }}
-              onClick={() => {
-                if (isEditing && fileInputRef.current) fileInputRef.current.click();
+          <Image
+            src={!clubInfo.img || clubInfo.img === '' ? clubImg : clubInfo.img}
+            alt="동아리 사진"
+            width={212}
+            height={224}
+            className={`${S.imgStyle} ${isEditing ? 'editing' : ''}`}
+            onClick={() => {
+              if (isEditing && fileInputRef.current) fileInputRef.current.click();
+            }}
+          />
+          {isEditing && (
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const url = URL.createObjectURL(file);
+                  setClubInfo((prev) => (prev ? { ...prev, img: url } : prev));
+                }
               }}
             />
-            {isEditing && (
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                style={{ marginTop: 8, display: 'none' }}
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    const url = URL.createObjectURL(file);
-                    setClubInfo((prev) => (prev ? { ...prev, img: url } : prev));
-                  }
-                }}
-              />
-            )}
-          </div>
+          )}
 
-          <ClubBox {...clubInfo} onChange={handleClubBoxChange} />
+          <ClubBox {...clubInfo} onChange={handleClubInfoChange} isEditing={isEditing} />
         </div>
         <RightSideBar
+          {...clubInfo}
           onEditClick={() => setIsEditing(true)}
           isEditing={isEditing}
           handleSave={handleSave}
           onCancel={() => setIsEditing(false)}
-          recruitPeriod={clubInfo.recruitPeriod}
-          recruitTarget={clubInfo.recruitTarget}
-          recruitNumber={clubInfo.recruitNumber}
+          onChange={handleClubInfoChange}
         />
-        <ClubQuill
+        <MDEditor
           isEditing={isEditing}
           introduction={clubInfo.introduction}
-          onChange={handleQuillChange}
+          onChange={(introduction) => handleClubInfoChange({ introduction })}
         />
       </div>
     </div>
