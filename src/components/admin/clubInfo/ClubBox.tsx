@@ -104,7 +104,7 @@ export default function ClubBox(props: ClubBoxProps) {
             className={S.clubNameInput}
           />
         ) : clubName.trim() === '' ? (
-          '이곳에는 동아리명이 들어갑니다.'
+          '동아리명을 입력해주세요'
         ) : (
           name
         )}
@@ -120,12 +120,12 @@ export default function ClubBox(props: ClubBoxProps) {
             // autoFocus
             onChange={(e) => {
               setClubDesc(e.target.value);
-              // props.onChange?.({ shortDescription: e.target.value });
+              props.onChange?.({ shortDescription: e.target.value });
             }}
             className={S.desTextInput}
           />
         ) : shortDescription.trim() === '' ? (
-          '이곳에는 한줄소개 정도의 간략한 동아리 소개가 들어갑니다.'
+          '한줄소개 가능한 동아리 소개를 입력해주세요'
         ) : (
           shortDescription
         )}

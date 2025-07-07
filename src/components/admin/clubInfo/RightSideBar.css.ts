@@ -13,6 +13,9 @@ export const contentBox = style({
   borderRadius: '8px',
   padding: '24px 26px',
   marginBottom: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
 });
 
 export const flexRow = style({
@@ -37,4 +40,8 @@ export const modifyButton = style({
   borderRadius: '6px',
   fontSize: vars.fonts.body1,
   fontWeight: '600',
+});
+
+export const numberInput = style({
+  width: '120px',
 });

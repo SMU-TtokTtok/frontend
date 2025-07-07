@@ -1,9 +1,10 @@
 import * as S from './rightSide.css';
 import Button from '@/common/ui/button/index';
-import { ClubIntro } from '@/common/model/clubIntro';
+import { UserClubIntro } from '@/common/model/clubIntro';
 
-const RightSide = ({ clubIntro }: { clubIntro: ClubIntro }) => {
-  const { recruitPeriod, recruitTarget, recruitNumber, isRecruiting } = clubIntro;
+const RightSide = ({ clubIntro }: { clubIntro: UserClubIntro }) => {
+  const { recruitStartDate, recruitEndDate, recruitTarget, recruitNumber, isRecruiting } =
+    clubIntro;
 
   return (
     <div className={S.container}>
@@ -12,7 +13,9 @@ const RightSide = ({ clubIntro }: { clubIntro: ClubIntro }) => {
           <>
             <div className={S.itemFlex}>
               <div className={S.itemTitle}>모집기간</div>
-              <div className={S.itemContent}>{recruitPeriod}</div>
+              <div className={S.itemContent}>
+                {recruitStartDate} ~ {recruitEndDate}
+              </div>
             </div>
             <div className={S.itemFlex}>
               <div className={S.itemTitle}>모집대상</div>
@@ -20,7 +23,7 @@ const RightSide = ({ clubIntro }: { clubIntro: ClubIntro }) => {
             </div>
             <div className={S.itemFlex}>
               <div className={S.itemTitle}>모집인원</div>
-              <div className={S.itemContent}>{recruitNumber}</div>
+              <div className={S.itemContent}>총 {recruitNumber}명</div>
             </div>
           </>
         ) : (

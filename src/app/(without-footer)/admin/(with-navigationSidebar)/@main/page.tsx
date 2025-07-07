@@ -22,6 +22,8 @@ type ClubInfo = {
   recruitNumber: string;
   peopleCount: number;
   img: string;
+  recruitStartDate: string;
+  recruitEndDate: string;
 };
 
 function Page() {
@@ -39,12 +41,10 @@ function Page() {
       });
   }, []);
 
-  const handleClubBoxChange = (updated: Partial<ClubInfo>) => {
+  const handleClubInfoChange = (updated: Partial<ClubInfo>) => {
     setClubInfo((prev) => (prev ? { ...prev, ...updated } : prev));
   };
-  const handleQuillChange = (introduction: string) => {
-    setClubInfo((prev) => (prev ? { ...prev, introduction } : prev));
-  };
+
   const handleSave = async () => {
     if (!clubInfo) return;
     const patchData = {
@@ -104,21 +104,23 @@ function Page() {
             )}
           </div>
 
-          <ClubBox {...clubInfo} onChange={handleClubBoxChange} isEditing={isEditing} />
+          <ClubBox {...clubInfo} onChange={handleClubInfoChange} isEditing={isEditing} />
         </div>
         <RightSideBar
           onEditClick={() => setIsEditing(true)}
           isEditing={isEditing}
           handleSave={handleSave}
           onCancel={() => setIsEditing(false)}
-          recruitPeriod={clubInfo.recruitPeriod}
+          recruitStartDate={clubInfo.recruitStartDate}
+          recruitEndDate={clubInfo.recruitEndDate}
           recruitTarget={clubInfo.recruitTarget}
           recruitNumber={clubInfo.recruitNumber}
+          onChange={handleClubInfoChange}
         />
         <MDEditor
           isEditing={isEditing}
           introduction={clubInfo.introduction}
-          onChange={handleQuillChange}
+          onChange={(introduction) => handleClubInfoChange({ introduction })}
         />
       </div>
     </div>

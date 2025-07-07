@@ -7,9 +7,10 @@
   "detailField": "IT",
   "isRecruiting": true,
   "introduction": "<h1>코딩클럽</h1><p>함께 공부하고 성장하는 개발자 커뮤니티입니다.</p>",
-  "recruitPeriod": "2025.03.01~03.10",
-  "recruitTarget": "2~3학년",
-  "recruitNumber": "총 10명",
+  "recruitStartDate": "2025.03.01",
+  "recruitEndDate": "03.10",
+  "recruitTarget": [1, 2, 3, 4],
+  "recruitNumber": 10,
   "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxN6g-ooMf5iY7PupOdmkK76Q9uxT4bTz7qw&s",
   "peopleCount": 25,
   "isFavorite": true

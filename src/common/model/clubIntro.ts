@@ -7,9 +7,10 @@ export interface ClubIntro {
   detailField: string;
   isRecruiting: boolean;
   introduction: string;
-  recruitPeriod: string;
-  recruitTarget: string;
-  recruitNumber: string;
+  recruitStartDate: string;
+  recruitEndDate: string;
+  recruitTarget: number[];
+  recruitNumber: number;
   img: string;
   peopleCount: number;
 }
