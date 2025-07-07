@@ -43,7 +43,11 @@ export const modifyButton = style({
 });
 
 export const numberInput = style({
-  width: '120px',
+  appearance: 'textfield',
+  WebkitAppearance: 'textfield',
+  padding: '1px 2px',
+  border: '1px solid #ccc',
+  font: '-webkit-small-control',
 });
 export const dateFlex = style({
   display: 'flex',

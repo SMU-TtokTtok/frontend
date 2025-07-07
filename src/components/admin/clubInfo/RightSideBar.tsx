@@ -65,38 +65,36 @@ export default function RightSideBar(props: RightSideBarProps) {
         </div>
         <div className={S.flexRow}>
           <div className={S.grayText}>모집대상</div>
-          <div className={S.blackText}>
-            {isEditing ? (
-              <input
-                type="number"
-                value={localTarget}
-                onChange={(e) => {
-                  setLocalTarget(e.target.value);
-                  onChange({ recruitTarget: e.target.value });
-                }}
-                className={S.numberInput}
-              />
-            ) : (
-              convertGradeArrayToString(recruitTarget)
-            )}
-          </div>
+
+          {isEditing ? (
+            <input
+              type="number"
+              value={localTarget}
+              onChange={(e) => {
+                setLocalTarget(e.target.value);
+                onChange({ recruitTarget: e.target.value });
+              }}
+              className={S.numberInput}
+            />
+          ) : (
+            <div className={S.blackText}>{convertGradeArrayToString(recruitTarget)}</div>
+          )}
         </div>
         <div className={S.flexRow}>
           <div className={S.grayText}>모집인원</div>
-          <div className={S.blackText}>
-            {isEditing ? (
-              <input
-                value={localNumber}
-                type="number"
-                onChange={(e) => {
-                  setLocalNumber(e.target.value);
-                  onChange({ recruitNumber: Number(e.target.value) });
-                }}
-              />
-            ) : (
-              `총 ${recruitNumber}명`
-            )}
-          </div>
+          {isEditing ? (
+            <input
+              value={localNumber}
+              type="number"
+              className={S.numberInput}
+              onChange={(e) => {
+                setLocalNumber(Number(e.target.value));
+                onChange({ recruitNumber: Number(e.target.value) });
+              }}
+            />
+          ) : (
+            <div className={S.blackText}>총 {recruitNumber}명</div>
+          )}
         </div>
       </div>
       <Button
