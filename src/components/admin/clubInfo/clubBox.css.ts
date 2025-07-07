@@ -6,7 +6,7 @@ export const container = style({
   borderRadius: '8px',
   padding: '18px 24px',
   backgroundColor: 'white',
-  marginBottom: '28px',
+  // marginBottom: '28px',
 });
 
 export const headerflex = style({
@@ -33,8 +33,8 @@ export const numberText = style({
 });
 export const desText = style({
   fontSize: vars.fonts.body1,
-  fontWeight: '400',
   marginBottom: '21px',
+  color: '#55637D',
 });
 
 export const footerFlex = style({
@@ -188,16 +188,10 @@ export const userInputTag = style({
   background: '#f8f8f9',
   border: '1px solid #e7e8ea',
   borderRadius: '100px',
-  minHeight: '32px',
-  height: '32px',
-  padding: '0 40px 0 16px',
+  padding: '4px 8px 4px 12px',
   position: 'relative',
-  fontFamily: 'Pretendard Variable',
   fontWeight: 600,
   fontSize: '16px',
-  color: '#5a6379',
-  boxSizing: 'border-box',
-  cursor: 'pointer',
 });
 
 export const relative = style({
@@ -246,15 +240,14 @@ export const customFieldSpan = style({
 });
 
 export const customFieldText = style({
-  fontFamily: 'Pretendard Variable',
   fontWeight: 600,
   fontSize: 16,
   color: '#5a6379',
   lineHeight: '24px',
   textAlign: 'center',
-  whiteSpace: 'nowrap',
-  display: 'inline-block',
-  width: 'auto',
+  // whiteSpace: 'nowrap',
+  // display: 'inline-block',
+  // width: 'auto',
 });
 
 export const clubNameInput = style({
@@ -262,7 +255,7 @@ export const clubNameInput = style({
   fontWeight: 600,
   fontFamily: 'Pretendard Variable',
   color: 'inherit',
-  border: 'none',
+  border: '1px solid gray',
   background: 'transparent',
   outline: 'none',
   padding: 0,
@@ -273,8 +266,62 @@ export const desTextInput = style({
   fontWeight: 400,
   fontFamily: 'Pretendard Variable',
   color: 'inherit',
-  border: 'none',
+  border: '1px solid gray',
   background: 'transparent',
   outline: 'none',
   padding: 0,
+});
+
+export const underlineInput = style({
+  textDecoration: 'underline',
+});
+
+export const selectedTypeText = style({
+  fontSize: '16px',
+  fontWeight: 500,
+  color: '#222',
+  padding: '8px 12px',
+  display: 'inline-block',
+});
+
+export const border4 = style({
+  borderRadius: '4px',
+});
+
+export const border100 = style({
+  borderRadius: '100px',
+});
+
+export const panelContainer = style({
+  marginTop: '5px',
+  width: '100%',
+  textAlign: 'center',
+});
+
+export const panelItem = style({
+  padding: '8px 0',
+  color: '#55637D',
+  fontSize: vars.fonts.body2,
+  fontWeight: 500,
+  cursor: 'pointer',
+
+  selectors: {
+    '&:not(:last-child)': {
+      borderBottom: '1px solid #E7E8EA',
+    },
+  },
+});
+
+export const panelItem2 = style({
+  padding: '12px 0',
+  color: '#272E3B',
+  fontSize: vars.fonts.body2,
+  fontWeight: 600,
+  cursor: 'pointer',
+
+  selectors: {
+    '&:not(:last-child)': {
+      borderBottom: '1px solid #E7E8EA',
+    },
+  },
 });

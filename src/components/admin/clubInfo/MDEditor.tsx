@@ -1,12 +1,12 @@
 'use client';
 
-import * as S from '@/components/admin/clubInfo/clubQuill.css';
+import * as S from '@/components/admin/clubInfo/mdEditor.css';
 import Button from '@/common/ui/button/index';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import type { Editor } from '@tiptap/react';
-import './clubQuill.custom.css';
+import './mdEditor.custom.css';
 import { useEffect, useState, useRef } from 'react';
 
 const icons = {
