@@ -59,6 +59,11 @@ export const button = style({
       right: '30px',
       width: '204px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      position: 'static',
+      width: '100%',
+      marginBottom: '20px',
+    },
   },
 });
 

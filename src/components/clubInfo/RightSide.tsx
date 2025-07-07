@@ -1,6 +1,7 @@
 import * as S from './rightSide.css';
 import Button from '@/common/ui/button/index';
 import { UserClubIntro } from '@/common/model/clubIntro';
+import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToString';
 
 const RightSide = ({ clubIntro }: { clubIntro: UserClubIntro }) => {
   const { recruitStartDate, recruitEndDate, recruitTarget, recruitNumber, isRecruiting } =
@@ -19,7 +20,7 @@ const RightSide = ({ clubIntro }: { clubIntro: UserClubIntro }) => {
             </div>
             <div className={S.itemFlex}>
               <div className={S.itemTitle}>모집대상</div>
-              <div className={S.itemContent}>{recruitTarget}</div>
+              <div className={S.itemContent}>{convertGradeArrayToString(recruitTarget)}</div>
             </div>
             <div className={S.itemFlex}>
               <div className={S.itemTitle}>모집인원</div>

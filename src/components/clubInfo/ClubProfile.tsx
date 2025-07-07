@@ -26,9 +26,7 @@ export default function ClubProfile({ clubIntro }: { clubIntro: UserClubIntro })
         <div className={S.type} style={{ marginBottom: '2px' }}>
           {type}
         </div>
-        <div className={S.name} style={{ marginBottom: '6px' }}>
-          {name}
-        </div>
+        <div className={S.name}>{name}</div>
         <div className={S.memberFlex}>
           <Image src={person} alt="people" width={23} height={23} />
           <div className={S.member}>{peopleCount}</div>
