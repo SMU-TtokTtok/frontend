@@ -119,7 +119,7 @@ export default function RightSideBar(props: RightSideBarProps) {
       {isEditing && (
         <Button
           variant="tertiary"
-          className={S.modifyButton}
+          className={S.modifyButton + ' ' + 'cancel'}
           onClick={onCancel}
           style={{ marginTop: 8 }}
         >

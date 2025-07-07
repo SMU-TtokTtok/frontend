@@ -55,37 +55,31 @@ function Page() {
       <div className={S.wrapper}>
         <div className={S.title}>📑 동아리 정보 관리</div>
         <div className={S.flexRow}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Image
-              src={!clubInfo.img || clubInfo.img === '' ? clubImg : clubInfo.img}
-              alt="동아리 사진"
-              width={212}
-              height={224}
-              style={{
-                objectFit: 'cover',
-                borderRadius: 8,
-                cursor: isEditing ? 'pointer' : 'default',
-              }}
-              onClick={() => {
-                if (isEditing && fileInputRef.current) fileInputRef.current.click();
+          <Image
+            src={!clubInfo.img || clubInfo.img === '' ? clubImg : clubInfo.img}
+            alt="동아리 사진"
+            width={212}
+            height={224}
+            className={`${S.imgStyle} ${isEditing ? 'editing' : ''}`}
+            onClick={() => {
+              if (isEditing && fileInputRef.current) fileInputRef.current.click();
+            }}
+          />
+          {isEditing && (
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                  const url = URL.createObjectURL(file);
+                  setClubInfo((prev) => (prev ? { ...prev, img: url } : prev));
+                }
               }}
             />
-            {isEditing && (
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                style={{ marginTop: 8, display: 'none' }}
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    const url = URL.createObjectURL(file);
-                    setClubInfo((prev) => (prev ? { ...prev, img: url } : prev));
-                  }
-                }}
-              />
-            )}
-          </div>
+          )}
 
           <ClubBox {...clubInfo} onChange={handleClubInfoChange} isEditing={isEditing} />
         </div>

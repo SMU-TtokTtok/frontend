@@ -1,11 +1,19 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
   position: 'fixed',
   top: '212px',
   right: '3.8%',
   width: '330px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      position: 'static',
+      width: '100%',
+    },
+  },
 });
 
 export const contentBox = style({
@@ -40,6 +48,21 @@ export const modifyButton = style({
   borderRadius: '6px',
   fontSize: vars.fonts.body1,
   fontWeight: '600',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      position: 'absolute',
+      bottom: '120px',
+      right: '0',
+      width: '236px',
+
+      selectors: {
+        '&.cancel': {
+          bottom: '54px',
+        },
+      },
+    },
+  },
 });
 
 export const numberInput = style({

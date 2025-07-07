@@ -6,7 +6,7 @@ export const container = style({
   borderRadius: '8px',
   padding: '18px 24px',
   backgroundColor: 'white',
-  marginBottom: '28px',
+  // marginBottom: '28px',
 });
 
 export const headerflex = style({
