@@ -13,17 +13,15 @@ function Footer({ serviceName, informationUrl }: FooterProps) {
   return (
     <div className={S.container}>
       <div className={S.innerWrapper}>
-        <Link href={ROUTES.ADMIN}>
-          <Image src={Mainlogo} className={S.logo} alt='메인로고' />
+        <Link href={ROUTES.ADMIN_LOGIN}>
+          <Image src={Mainlogo} className={S.logo} alt="메인로고" />
         </Link>
         <p className={S.content}>
-          <Link href={informationUrl} target='_blank' rel='noopener noreferrer'>
+          <Link href={informationUrl} target="_blank" rel="noopener noreferrer">
             개인정보 처리방침
           </Link>
         </p>
-        <p className={S.content}>
-          Copyright ⓒ {serviceName}. All Rights Reserved
-        </p>
+        <p className={S.content}>Copyright ⓒ {serviceName}. All Rights Reserved</p>
       </div>
     </div>
   );
