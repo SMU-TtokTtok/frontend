@@ -1,5 +1,6 @@
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
 export const Container = style({
   display: 'flex',
@@ -24,18 +25,25 @@ export const BoxContainer = style({
   flexDirection: 'column',
 });
 
-export const AuthText = style({
-  fontSize: vars.fonts.body1,
-  fontWeight: '600',
-  marginBottom: '10px',
+export const AuthText = recipe({
+  base: {
+    fontSize: vars.fonts.body1,
+    fontWeight: '600',
+    marginBottom: '10px',
+  },
+  variants: {
+    password: {
+      true: { marginTop: '32px' },
+      false: { marginTop: '0' },
+    },
+  },
 });
 
 export const Input = style({
   padding: '12px 16px',
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   borderRadius: '6px',
   width: '100%',
-  backgroundColor: vars.colors.surface.default,
 });
 
 export const AuthFooter = style({
@@ -67,4 +75,12 @@ export const ErrorText = style({
   color: 'red',
   fontSize: '0.85rem',
   marginTop: '4px',
+});
+
+export const adminLoginButton = style({
+  padding: '16px 170.5px',
+  borderRadius: '6px',
+  fontSize: vars.fonts.body1,
+  fontWeight: '600',
+  marginTop: '94px',
 });
