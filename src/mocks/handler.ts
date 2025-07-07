@@ -2,6 +2,7 @@ import { AdminApplicationForm } from './applicactionForm';
 import { Applicants, FailList, PassList, PatchApplicantStatus } from './applicants';
 import { Clubs, patchFavorite, popularClubs } from './clubList';
 import { getClubInfo, patchClubInfo, patchRecruiting } from './clubInfo/clubInfo';
+import { AdminLogin } from './auth';
 
 export const handlers = [
   popularClubs,
@@ -15,4 +16,5 @@ export const handlers = [
   PassList,
   FailList,
   AdminApplicationForm,
+  AdminLogin,
 ];
