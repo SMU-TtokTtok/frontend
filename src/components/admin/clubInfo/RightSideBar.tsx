@@ -31,48 +31,37 @@ export default function RightSideBar(props: RightSideBarProps) {
   const [localTarget, setLocalTarget] = useState(recruitTarget);
   const [localNumber, setLocalNumber] = useState(recruitNumber);
 
-  // isEditing이 false가 되면 부모값으로 동기화
-  // useEffect(() => {
-  //   if (!isEditing) {
-  //     setLocalStart(recruitStartDate);
-  //     setLocalEnd(recruitEndDate);
-  //     setLocalTarget(recruitTarget);
-  //     setLocalNumber(recruitNumber);
-  //   }
-  // }, [isEditing, recruitStartDate, recruitEndDate, recruitTarget, recruitNumber]);
-
   return (
     <div className={S.container}>
       <div className={S.contentBox}>
         <div className={S.flexRow}>
           <div className={S.grayText}>모집기간</div>
-          <div className={S.blackText}>
-            {isEditing ? (
-              <>
-                <input
-                  type="date"
-                  value={localStart}
-                  onChange={(e) => {
-                    setLocalStart(e.target.value);
-                    onChange({ recruitStartDate: e.target.value });
-                  }}
-                  style={{ marginRight: 8 }}
-                />
-                ~
-                <input
-                  type="date"
-                  value={localEnd}
-                  onChange={(e) => {
-                    setLocalEnd(e.target.value);
-                    onChange({ recruitEndDate: e.target.value });
-                  }}
-                  style={{ marginLeft: 8 }}
-                />
-              </>
-            ) : (
-              `${recruitStartDate} ~ ${recruitEndDate}`
-            )}
-          </div>
+
+          {isEditing ? (
+            <div className={S.dateFlex}>
+              <input
+                type="date"
+                value={localStart}
+                onChange={(e) => {
+                  setLocalStart(e.target.value);
+                  onChange({ recruitStartDate: e.target.value });
+                }}
+              />
+              <span>~</span>
+              <input
+                type="date"
+                value={localEnd}
+                onChange={(e) => {
+                  setLocalEnd(e.target.value);
+                  onChange({ recruitEndDate: e.target.value });
+                }}
+              />
+            </div>
+          ) : (
+            <div className={S.blackText}>
+              {recruitStartDate} ~ {recruitEndDate}
+            </div>
+          )}
         </div>
         <div className={S.flexRow}>
           <div className={S.grayText}>모집대상</div>

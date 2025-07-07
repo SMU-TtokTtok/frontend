@@ -45,3 +45,7 @@ export const modifyButton = style({
 export const numberInput = style({
   width: '120px',
 });
+export const dateFlex = style({
+  display: 'flex',
+  flexDirection: 'column',
+});
