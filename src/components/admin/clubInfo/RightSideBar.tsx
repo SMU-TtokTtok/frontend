@@ -67,15 +67,27 @@ export default function RightSideBar(props: RightSideBarProps) {
           <div className={S.grayText}>모집대상</div>
 
           {isEditing ? (
-            <input
-              type="number"
-              value={localTarget}
-              onChange={(e) => {
-                setLocalTarget(e.target.value);
-                onChange({ recruitTarget: e.target.value });
-              }}
-              className={S.numberInput}
-            />
+            <div className={S.buttonFlex}>
+              {[1, 2, 3, 4].map((grade) => (
+                <Button
+                  key={grade}
+                  variant={localTarget.includes(grade) ? 'secondary' : 'tertiary'}
+                  className={S.button}
+                  onClick={() => {
+                    let newTarget: number[];
+                    if (localTarget.includes(grade)) {
+                      newTarget = localTarget.filter((g) => g !== grade);
+                    } else {
+                      newTarget = [...localTarget, grade].sort();
+                    }
+                    setLocalTarget(newTarget);
+                    onChange({ recruitTarget: newTarget });
+                  }}
+                >
+                  {grade}학년
+                </Button>
+              ))}
+            </div>
           ) : (
             <div className={S.blackText}>{convertGradeArrayToString(recruitTarget)}</div>
           )}

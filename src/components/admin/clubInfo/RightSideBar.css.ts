@@ -53,3 +53,13 @@ export const dateFlex = style({
   display: 'flex',
   flexDirection: 'column',
 });
+
+export const buttonFlex = style({
+  display: 'flex',
+  gap: '4px',
+});
+
+export const button = style({
+  padding: '2px 4px',
+  borderRadius: '4px',
+});
