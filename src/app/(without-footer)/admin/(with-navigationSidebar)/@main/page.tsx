@@ -7,28 +7,11 @@ import ClubBox from '@/components/admin/clubInfo/ClubBox';
 import MDEditor from '@/components/admin/clubInfo/MDEditor';
 import RightSideBar from '@/components/admin/clubInfo/RightSideBar';
 import { useState, useEffect, useRef } from 'react';
-
-type ClubInfo = {
-  id: number;
-  name: string;
-  shortDescription: string;
-  type: string;
-  category: string;
-  detailField: string;
-  isRecruiting: boolean;
-  introduction: string;
-  recruitPeriod: string;
-  recruitTarget: string;
-  recruitNumber: string;
-  peopleCount: number;
-  img: string;
-  recruitStartDate: string;
-  recruitEndDate: string;
-};
+import { AdminClubIntro } from '@/common/model/clubIntro';
 
 function Page() {
   const [isEditing, setIsEditing] = useState(false);
-  const [clubInfo, setClubInfo] = useState<ClubInfo | null>(null);
+  const [clubInfo, setClubInfo] = useState<AdminClubIntro | null>(null);
   const [loading, setLoading] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -41,7 +24,7 @@ function Page() {
       });
   }, []);
 
-  const handleClubInfoChange = (updated: Partial<ClubInfo>) => {
+  const handleClubInfoChange = (updated: Partial<AdminClubIntro>) => {
     setClubInfo((prev) => (prev ? { ...prev, ...updated } : prev));
   };
 
@@ -107,14 +90,11 @@ function Page() {
           <ClubBox {...clubInfo} onChange={handleClubInfoChange} isEditing={isEditing} />
         </div>
         <RightSideBar
+          {...clubInfo}
           onEditClick={() => setIsEditing(true)}
           isEditing={isEditing}
           handleSave={handleSave}
           onCancel={() => setIsEditing(false)}
-          recruitStartDate={clubInfo.recruitStartDate}
-          recruitEndDate={clubInfo.recruitEndDate}
-          recruitTarget={clubInfo.recruitTarget}
-          recruitNumber={clubInfo.recruitNumber}
           onChange={handleClubInfoChange}
         />
         <MDEditor

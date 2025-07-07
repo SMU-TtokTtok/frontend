@@ -6,7 +6,7 @@ import person from '@/assets/person.svg';
 import Image from 'next/image';
 import { useState, useRef, useLayoutEffect } from 'react';
 import editIcon from '@/assets/edit.svg';
-import { ClubIntro } from '@/common/model/clubIntro';
+import { AdminClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
 import { typeItems, categoryItems, recruitItems } from '@/common/constants/adminOptions';
 
@@ -31,8 +31,8 @@ const handleCloseRecruit = async () => {
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
 type ClubRecruit = (typeof recruitItems)[number];
-interface ClubBoxProps extends ClubIntro {
-  onChange?: (updated: Partial<ClubIntro>) => void;
+interface ClubBoxProps extends AdminClubIntro {
+  onChange?: (updated: Partial<AdminClubIntro>) => void;
   isEditing?: boolean;
 }
 

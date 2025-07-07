@@ -1,19 +1,15 @@
 import * as S from './RightSideBar.css';
 import Button from '@/common/ui/button/index';
 import { useState } from 'react';
-import { ClubIntro } from '@/common/model/clubIntro';
+import { AdminClubIntro } from '@/common/model/clubIntro';
 import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToString';
 
-interface RightSideBarProps {
+interface RightSideBarProps extends AdminClubIntro {
   onEditClick: () => void;
   isEditing: boolean;
   handleSave: () => void;
   onCancel: () => void;
-  recruitStartDate: string;
-  recruitEndDate: string;
-  recruitTarget: string;
-  recruitNumber: string;
-  onChange: (fields: Partial<ClubIntro>) => void;
+  onChange: (fields: Partial<AdminClubIntro>) => void;
 }
 
 export default function RightSideBar(props: RightSideBarProps) {
