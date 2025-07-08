@@ -48,9 +48,7 @@ export default function Page() {
                   인증코드 전송
                 </Button>
               </div>
-              {errors.email && (
-                <span style={{ color: 'red', fontSize: '12px' }}>{errors.email.message}</span>
-              )}
+              {errors.email && <span className={S.ErrorMessage}>{errors.email.message}</span>}
             </div>
             <div className={S.SubDetailContainer}>
               <div className={S.BoxSubTitle}>인증코드</div>
@@ -65,9 +63,7 @@ export default function Page() {
                   인증코드 확인
                 </Button>
               </div>
-              {errors.code && (
-                <span style={{ color: 'red', fontSize: '12px' }}>{errors.code.message}</span>
-              )}
+              {errors.code && <span className={S.ErrorMessage}>{errors.code.message}</span>}
             </div>
           </div>
         </div>
@@ -86,9 +82,7 @@ export default function Page() {
                 {...register('password')}
                 disabled={isSubmitting}
               />
-              {errors.password && (
-                <span style={{ color: 'red', fontSize: '12px' }}>{errors.password.message}</span>
-              )}
+              {errors.password && <span className={S.ErrorMessage}>{errors.password.message}</span>}
             </div>
             <div className={S.SubDetailContainer}>
               <div className={S.BoxSubTitle}>비밀번호 재입력</div>
@@ -100,9 +94,7 @@ export default function Page() {
                 disabled={isSubmitting}
               />
               {errors.passwordConfirm && (
-                <span style={{ color: 'red', fontSize: '12px' }}>
-                  {errors.passwordConfirm.message}
-                </span>
+                <span className={S.ErrorMessage}>{errors.passwordConfirm.message}</span>
               )}
             </div>
           </div>

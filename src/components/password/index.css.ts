@@ -195,3 +195,8 @@ export const responsiveBr = style({
     },
   },
 });
+
+export const ErrorMessage = style({
+  color: 'red',
+  fontSize: '12px',
+});
