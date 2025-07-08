@@ -1,12 +1,19 @@
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
+import { BREAKPOINTS } from '@/common/constants/';
 
 export const Wrapper = style({
   minHeight: 'inherit',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      padding: '0 40px',
+    },
+  },
 });
 
 export const Container = style({
@@ -31,8 +38,22 @@ export const BoxContainer = recipe({
   variants: {
     gap: {
       none: { gap: '0' },
-      small: { gap: '112px' },
-      large: { gap: '134px' },
+      small: {
+        gap: '112px',
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+            gap: '100px',
+          },
+        },
+      },
+      large: {
+        gap: '134px',
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+            gap: '122px',
+          },
+        },
+      },
     },
   },
   defaultVariants: {
