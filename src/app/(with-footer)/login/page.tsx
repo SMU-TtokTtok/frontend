@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import * as S from '../../../components/login/login.css';
 import Button from '@/common/ui/button/index';
 import { loginSchema, LoginForm } from '@/components/login/schema';
+import { ROUTES } from '@/common/constants/routes';
 
 export default function Page() {
   const router = useRouter();
@@ -65,7 +66,9 @@ export default function Page() {
 
         <div className={S.AuthFooter}>
           <div className={S.AuthFooterTextContainer}>
-            <div className={S.AuthFooterText}>비밀번호 재설정</div>
+            <div className={S.AuthFooterText} onClick={() => router.push(ROUTES.PASSWORD)}>
+              비밀번호 재설정
+            </div>
             <div className={S.AuthFooterText}>|</div>
             <div className={S.AuthFooterText}>회원가입</div>
           </div>
