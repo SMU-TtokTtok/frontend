@@ -32,8 +32,7 @@ export default function Page() {
         </div>
         <div className={S.BoxContainer({ gap: 'large' })}>
           <div className={S.BoxTitle}>
-            비밀번호
-            <br />
+            비밀번호 <br className={S.responsiveBr} />
             재설정
           </div>
           <div className={S.SubContainer}>

@@ -13,6 +13,10 @@ export const Wrapper = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       padding: '0 40px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '30px 20px 90px 20px',
+      display: 'block',
+    },
   },
 });
 
@@ -21,11 +25,23 @@ export const Container = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '16px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '100%',
+    },
+  },
 });
 
 export const Title = style({
   fontSize: vars.fonts.title2,
   fontWeight: '600',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: '20px',
+    },
+  },
 });
 
 export const BoxContainer = recipe({
@@ -34,6 +50,12 @@ export const BoxContainer = recipe({
     backgroundColor: 'white',
     display: 'flex',
     borderRadius: '8px',
+
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+        flexDirection: 'column',
+      },
+    },
   },
   variants: {
     gap: {
@@ -44,6 +66,9 @@ export const BoxContainer = recipe({
           [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
             gap: '100px',
           },
+          [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+            gap: 0,
+          },
         },
       },
       large: {
@@ -51,6 +76,9 @@ export const BoxContainer = recipe({
         '@media': {
           [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
             gap: '122px',
+          },
+          [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+            gap: 0,
           },
         },
       },
@@ -64,17 +92,39 @@ export const BoxContainer = recipe({
 export const BoxTitle = style({
   fontSize: vars.fonts.title4,
   fontWeight: '600',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      paddingBottom: '16px',
+      borderBottom: '1px solid #EDEEF1',
+      fontSize: '16px',
+      fontWeight: '700',
+    },
+  },
 });
 
 export const BoxSubTitle = style({
   fontSize: vars.fonts.body1,
   fontWeight: '600',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: '14px',
+    },
+  },
 });
 
 export const SubContainer = style({
   display: 'flex',
   gap: '18px',
   flex: '1 0 0',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      flexDirection: 'column',
+      marginTop: '16px',
+    },
+  },
 });
 
 export const SubDetailContainer = style({
@@ -98,6 +148,14 @@ export const Input = style({
       color: '#D2D4D8',
     },
   },
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: '14px',
+      // flex: '1 1 0',
+      minWidth: '0',
+    },
+  },
 });
 
 export const Button = style({
@@ -105,6 +163,12 @@ export const Button = style({
   fontSize: vars.fonts.body2,
   fontWeight: '600',
   borderRadius: '6px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: '12px',
+    },
+  },
 });
 
 export const SubmitButton = style({
@@ -114,4 +178,20 @@ export const SubmitButton = style({
   fontSize: vars.fonts.body2,
   fontWeight: '600',
   alignSelf: 'flex-end',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '100%',
+      fontSize: '14px',
+    },
+  },
+});
+
+export const responsiveBr = style({
+  display: 'inline',
+  '@media': {
+    'screen and (max-width: 1024px)': {
+      display: 'none',
+    },
+  },
 });
