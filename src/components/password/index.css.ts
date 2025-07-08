@@ -118,11 +118,13 @@ export const SubContainer = style({
   display: 'flex',
   gap: '18px',
   flex: '1 0 0',
+  alignItems: 'flex-start',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       flexDirection: 'column',
       marginTop: '16px',
+      alignItems: 'stretch',
     },
   },
 });
@@ -198,5 +200,5 @@ export const responsiveBr = style({
 
 export const ErrorMessage = style({
   color: 'red',
-  fontSize: '12px',
+  fontSize: '14px',
 });
