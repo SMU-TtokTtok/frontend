@@ -1,5 +1,7 @@
+import LoginPage from '@/components/admin/login';
+
 function Login() {
-  return <div>Login</div>;
+  return <LoginPage />;
 }
 
 export default Login;

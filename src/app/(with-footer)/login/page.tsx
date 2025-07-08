@@ -55,13 +55,11 @@ export default function Page() {
     <div className={S.Container}>
       <div className={S.LoginText}>로그인</div>
       <form className={S.BoxContainer} onSubmit={handleSubmit(onValid)}>
-        <div className={S.AuthText}>이메일</div>
+        <div className={S.AuthText({ password: false })}>이메일</div>
         <input type="email" className={S.Input} {...register('email')} />
         {errors.email && <p className={S.ErrorText}>{errors.email.message}</p>}
 
-        <div className={S.AuthText} style={{ marginTop: '32px' }}>
-          비밀번호
-        </div>
+        <div className={S.AuthText({ password: true })}>비밀번호</div>
         <input type="password" className={S.Input} {...register('password')} />
         {errors.password && <p className={S.ErrorText}>{errors.password.message}</p>}
 
@@ -73,7 +71,7 @@ export default function Page() {
           </div>
         </div>
 
-        <Button type="submit" variant="none" className={S.Button}>
+        <Button type="submit" variant="secondary" className={S.Button}>
           로그인
         </Button>
       </form>

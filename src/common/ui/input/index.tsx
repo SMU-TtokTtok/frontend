@@ -10,7 +10,9 @@ export default forwardRef<HTMLInputElement, InputProps>(function Input(
   { variant = 'primary', className, isError = false, errorMessage, ...props }: InputProps,
   ref,
 ) {
-  const classNames = `${S.baseinputStyle} ${className ?? ''} ${S.inputStyle[variant]} `;
+  const classNames = `${S.baseinputStyle({ isError })} ${className ?? ''} ${
+    S.inputStyle[variant]
+  } `;
 
   return (
     <>

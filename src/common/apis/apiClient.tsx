@@ -4,27 +4,29 @@ type HTTPMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 export default class ApiClient {
   private baseUrl: string;
+  private tokenKey: string;
 
-  constructor(baseUrl: string) {
+  constructor(baseUrl: string, tokenKey: string) {
     this.baseUrl = baseUrl;
+    this.tokenKey = tokenKey;
   }
 
-  async get<T>(path: string): Promise<T> {
+  async get<T = any>(path: string): Promise<T> {
     const response = await this.request<T>('GET', path);
     return this.handleResponse<T>(response);
   }
 
-  async post<T>(path: string, body: any): Promise<T> {
+  async post<T = any>(path: string, body: any): Promise<T> {
     const response = await this.request<T>('POST', path, body);
     return this.handleResponse<T>(response);
   }
 
-  async patch<T>(path: string, body: any): Promise<T> {
+  async patch<T = any>(path: string, body: any): Promise<T> {
     const response = await this.request<T>('PATCH', path, body);
     return this.handleResponse<T>(response);
   }
 
-  async delete<T>(path: string): Promise<T> {
+  async delete<T = any>(path: string): Promise<T> {
     const response = await this.request<T>('DELETE', path);
     return this.handleResponse<T>(response);
   }
@@ -32,11 +34,18 @@ export default class ApiClient {
   private async request<T>(method: HTTPMethod, path: string, body?: any): Promise<Response> {
     try {
       const url = `${this.baseUrl}${path}`;
+      const headers: HeadersInit = {
+        'Content-Type': 'application/json',
+      };
+
+      const accessToken = sessionStorage.getItem(this.tokenKey);
+      if (accessToken) {
+        headers['Authorization'] = `Bearer ${accessToken}`;
+      }
+
       const response = await fetch(url, {
         method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: body ? JSON.stringify(body) : undefined,
         credentials: 'include',
       });

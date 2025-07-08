@@ -1,9 +1,19 @@
 import { vars } from '@/common/styles/theme.css';
 import { style, styleVariants } from '@vanilla-extract/css';
+import { recipe } from '@vanilla-extract/recipes';
 
-export const baseinputStyle = style({
-  borderRadius: 6,
-  fontSize: vars.fonts.body1,
+export const baseinputStyle = recipe({
+  base: {
+    borderRadius: 6,
+    fontSize: vars.fonts.body2,
+  },
+  variants: {
+    isError: {
+      true: {
+        border: `1px solid ${vars.colors.error.primary}`,
+      },
+    },
+  },
 });
 
 export const inputStyle = styleVariants({

@@ -13,7 +13,6 @@ export const FOOTER = {
 export const BREAKPOINTS = {
   mobile: 375,
   tablet: 768,
-  // 데스크탑 breakpoint를 모르기 때문에 우선 임의로 설정 by형준
   desktop: 1024,
   largeDesktop: 1440,
 } as const;
@@ -43,4 +42,9 @@ export const FILTER_KO: Record<FilterKey, readonly string[]> = {
   sort: ['최신 등록 순', '인기도 순', '멤버 많은 수'],
   grade: ['1학년', '2학년', '3학년', '4학년'],
   college: ['인문대', '디자인대', '예술대', '융합기술대', '공대'],
+};
+
+export const LOGIN_ERRORS = {
+  adminLogin: '올바른 아이디를 입력해주세요.',
+  adminPassword: '올바른 비밀번호를 입력해주세요.',
 };
