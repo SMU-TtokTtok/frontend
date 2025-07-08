@@ -5,8 +5,8 @@ export const passwordSchema = z
     email: z
       .string()
       .email('올바른 이메일 형식이 아닙니다.')
-      .regex(/^[0-9]{2}\d{7}@sangmyung\\.kr$/, '학교 이메일 형식이 아닙니다.'),
-    code: z.string().min(6, '인증코드는 6자리여야 합니다.').max(6, '인증코드는 6자리여야 합니다.'),
+      .regex(/^[0-9]{2}\d{7}@sangmyung\.kr$/, '학교 이메일 형식이 아닙니다.'),
+    code: z.string().min(1, '인증코드를 입력해 주세요.'),
     password: z
       .string()
       .min(8, '비밀번호는 최소 8자 이상이어야 합니다.')
