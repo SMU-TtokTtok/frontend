@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "name": "코딩클럽",
+    "name": "CCC",
     "separation": "학술",
     "members": 25,
-    "category": ["프로그래밍", "AI"],
+    "category": ["종교", "한국기독학생회"],
     "isRecruiting": true,
     "bookmark": true
   },

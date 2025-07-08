@@ -14,7 +14,7 @@ function SortTabBar({ selectedOptions }: FilterHeaderProps) {
             variant={'none'}
             className={S.ButtonStyle({
               style: 'headerRightside',
-              isSelected: selectedOptions?.sort.includes(label),
+              isSelected: selectedOptions?.sort!.includes(label),
             })}
           >
             {FILTER_KO.sort[FILTER.sort.indexOf(label)]}

@@ -8,7 +8,7 @@ interface TagProps {
 }
 
 function Tag({ variant, children, className, ...props }: PropsWithChildren<TagProps>) {
-  const classNames = `${className ?? ''}  ${S.tagStyle[variant]}`;
+  const classNames = `${className ?? ''} ${S.baseTagStyle} ${S.tagStyle[variant]}`;
   return (
     <div className={classNames} {...props}>
       {children}

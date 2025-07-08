@@ -15,7 +15,7 @@ function CollegeTabBar({ selectedOptions }: FilterProps) {
             variant="none"
             className={S.ButtonStyle({
               style: 'body',
-              isSelected: selectedOptions?.college.includes(label),
+              isSelected: selectedOptions.college!.includes(label),
             })}
           >
             {FILTER_KO.college[FILTER.college.indexOf(label)]}
