@@ -59,7 +59,7 @@ export default function Page() {
         <div className={S.AuthText({ password: false })}>이메일</div>
         <input
           type="email"
-          className={S.Input}
+          className={S.userInput}
           {...register('email')}
           placeholder="20XXXXXXX@sangmyung.kr"
         />
@@ -68,7 +68,7 @@ export default function Page() {
         <div className={S.AuthText({ password: true })}>비밀번호</div>
         <input
           type="password"
-          className={S.Input}
+          className={S.userInput}
           {...register('password')}
           placeholder="비밀번호를 입력하세요"
         />
