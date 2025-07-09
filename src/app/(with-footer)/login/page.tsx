@@ -57,11 +57,21 @@ export default function Page() {
       <div className={S.LoginText}>로그인</div>
       <form className={S.BoxContainer} onSubmit={handleSubmit(onValid)}>
         <div className={S.AuthText({ password: false })}>이메일</div>
-        <input type="email" className={S.Input} {...register('email')} />
+        <input
+          type="email"
+          className={S.Input}
+          {...register('email')}
+          placeholder="20XXXXXXX@sangmyung.kr"
+        />
         {errors.email && <p className={S.ErrorText}>{errors.email.message}</p>}
 
         <div className={S.AuthText({ password: true })}>비밀번호</div>
-        <input type="password" className={S.Input} {...register('password')} />
+        <input
+          type="password"
+          className={S.Input}
+          {...register('password')}
+          placeholder="비밀번호를 입력하세요"
+        />
         {errors.password && <p className={S.ErrorText}>{errors.password.message}</p>}
 
         <div className={S.AuthFooter}>
