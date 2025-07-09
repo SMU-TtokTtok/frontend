@@ -43,7 +43,11 @@ export default function Page() {
             <div className={S.FlexBox}>
               <div className={S.LabelDetailText}>이메일</div>
               <div className={S.FlexBox2}>
-                <input className={S.Input} {...register('email')} />
+                <input
+                  className={S.Input}
+                  {...register('email')}
+                  placeholder="20XXXXXXX@sangmyung.kr"
+                />
                 <Button
                   variant="secondary"
                   className={S.Button}
@@ -58,7 +62,11 @@ export default function Page() {
             <div className={S.FlexBox}>
               <div className={S.LabelDetailText}>인증코드</div>
               <div className={S.FlexBox2}>
-                <input className={S.Input} {...register('code')} />
+                <input
+                  className={S.Input}
+                  {...register('code')}
+                  placeholder="인증코드를 입력하세요"
+                />
                 <Button
                   variant="secondary"
                   className={S.Button}
@@ -80,14 +88,24 @@ export default function Page() {
             <div className={S.FlexBox}>
               <div className={S.LabelDetailText}>비밀번호</div>
               <div className={S.FlexBox2}>
-                <input className={S.Input} type="password" {...register('password')} />
+                <input
+                  className={S.Input}
+                  type="password"
+                  {...register('password')}
+                  placeholder="비밀번호를 입력하세요"
+                />
               </div>
               {errors.password && <p className={S.ErrorText}>{errors.password.message}</p>}
             </div>
             <div className={S.FlexBox}>
               <div className={S.LabelDetailText}>비밀번호 재입력</div>
               <div className={S.FlexBox2}>
-                <input className={S.Input} type="password" {...register('confirmPassword')} />
+                <input
+                  className={S.Input}
+                  type="password"
+                  {...register('confirmPassword')}
+                  placeholder="비밀번호를 재입력하세요"
+                />
               </div>
               {errors.confirmPassword && (
                 <p className={S.ErrorText}>{errors.confirmPassword.message}</p>

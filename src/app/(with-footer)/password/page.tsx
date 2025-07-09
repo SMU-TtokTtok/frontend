@@ -125,7 +125,7 @@ export default function Page() {
               <div className={S.BoxSubTitle}>새 비밀번호</div>
               <Input
                 className={S.Input}
-                placeholder="새 비밀번호 입력를 입력하세요"
+                placeholder="새 비밀번호를 입력하세요"
                 type="password"
                 {...register('password')}
                 disabled={!isVerified}
@@ -136,7 +136,7 @@ export default function Page() {
               <div className={S.BoxSubTitle}>새 비밀번호 재입력</div>
               <Input
                 className={S.Input}
-                placeholder="새 비밀번호 재입력하세요"
+                placeholder="새 비밀번호를 재입력하세요"
                 type="password"
                 {...register('passwordConfirm')}
                 disabled={!isVerified}
