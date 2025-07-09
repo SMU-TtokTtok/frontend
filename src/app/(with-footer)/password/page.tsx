@@ -139,6 +139,7 @@ export default function Page() {
                 placeholder="새 비밀번호 재입력하세요"
                 type="password"
                 {...register('passwordConfirm')}
+                disabled={!isVerified}
               />
               {errors.passwordConfirm && (
                 <span className={S.ErrorMessage}>{errors.passwordConfirm.message}</span>
