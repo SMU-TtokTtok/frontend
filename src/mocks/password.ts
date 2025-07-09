@@ -14,3 +14,18 @@ export const emailCheckHandler = http.post(
     );
   },
 );
+
+export const verifyResetCodeHandler = http.post(
+  '/api/user/auth/verify-reset-code',
+  async ({ request }) => {
+    const body = (await request.json()) as { email?: string; code?: string };
+    const { email, code } = body;
+    if (email && code) {
+      return HttpResponse.json({ success: true, message: '인증 성공!' });
+    }
+    return HttpResponse.json(
+      { success: false, message: '이메일과 인증코드를 모두 입력해 주세요.' },
+      { status: 400 },
+    );
+  },
+);
