@@ -10,7 +10,7 @@ export const withFooterContent = style({
 export const withoutFooterContent = style({
   paddingTop: '4.222rem',
   backgroundColor: vars.colors.surface.variant,
-  minHeight: '90vh',
+  minHeight: '100vh',
 });
 
 export const rawSort = style({
