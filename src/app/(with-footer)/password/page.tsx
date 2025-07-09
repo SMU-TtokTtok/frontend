@@ -6,10 +6,12 @@ import Input from '@/common/ui/input';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { passwordSchema, PasswordFormType } from '@/components/password/schema';
-import { postEmail, postCode } from '@/components/password/api/postEmail';
+import { postEmail, postCode, postResetPassword } from '@/components/password/api/postEmail';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -47,8 +49,23 @@ export default function Page() {
     }
   };
 
-  const onSubmit = () => {
-    alert('완료');
+  const onSubmit = async () => {
+    const email = getValues('email');
+    const verificationCode = getValues('code');
+    const newPassword = getValues('password');
+    const newPasswordConfirm = getValues('passwordConfirm');
+    const response = await postResetPassword({
+      email,
+      verificationCode,
+      newPassword,
+      newPasswordConfirm,
+    });
+    if (response.success) {
+      alert(response.message);
+      router.push('/login');
+    } else {
+      alert(response.message);
+    }
   };
 
   return (

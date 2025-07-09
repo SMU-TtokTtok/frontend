@@ -11,3 +11,14 @@ export const postCode = async (body: { email: string; code: string }) => {
 
   return data;
 };
+
+export const postResetPassword = async (body: {
+  email: string;
+  verificationCode: string;
+  newPassword: string;
+  newPasswordConfirm: string;
+}) => {
+  const data = await mainClient.post('/api/user/auth/reset-password', body);
+
+  return data;
+};
