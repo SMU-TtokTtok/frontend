@@ -55,7 +55,7 @@ export default function Page() {
               <div className={S.InputButtonFlex}>
                 <Input
                   className={S.Input}
-                  placeholder="000000"
+                  placeholder="인증코드를 입력하세요"
                   {...register('code')}
                   disabled={isSubmitting}
                 />
@@ -74,10 +74,10 @@ export default function Page() {
           </div>
           <div className={S.SubContainer}>
             <div className={S.SubDetailContainer}>
-              <div className={S.BoxSubTitle}>비밀번호</div>
+              <div className={S.BoxSubTitle}>새 비밀번호</div>
               <Input
                 className={S.Input}
-                placeholder="abcdefg."
+                placeholder="새 비밀번호 입력를 입력하세요"
                 type="password"
                 {...register('password')}
                 disabled={isSubmitting}
@@ -85,10 +85,10 @@ export default function Page() {
               {errors.password && <span className={S.ErrorMessage}>{errors.password.message}</span>}
             </div>
             <div className={S.SubDetailContainer}>
-              <div className={S.BoxSubTitle}>비밀번호 재입력</div>
+              <div className={S.BoxSubTitle}>새 비밀번호 재입력</div>
               <Input
                 className={S.Input}
-                placeholder="abcdefg."
+                placeholder="새 비밀번호 재입력하세요"
                 type="password"
                 {...register('passwordConfirm')}
                 disabled={isSubmitting}
