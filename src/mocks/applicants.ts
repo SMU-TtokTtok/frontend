@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 import applicantList from './applicantList.json';
 const API = process.env.NEXT_PUBLIC_API_URL ?? '';
 
-export const Applicants = http.get(`${API}/admin/applicants`, () => {
+export const Applicants = http.get(`${API}/admin/:evaluation`, () => {
   return HttpResponse.json(applicantList, { status: 200 });
 });
 
@@ -21,4 +21,15 @@ export const PassList = http.get(`${API}/admin/applicants/pass`, () => {
 
 export const FailList = http.get(`${API}/admin/applicants/fail`, () => {
   return HttpResponse.json(applicantList, { status: 200 });
+});
+
+export const ApplicantSearch = http.get(`${API}/admin/:evaluation/search`, ({ request }) => {
+  const url = new URL(request.url);
+  const search = url.searchParams.get('name') || '';
+  const rawSearch = search.trim();
+  const filteredApplicants = applicantList.filter((applicant) =>
+    applicant.name.includes(rawSearch),
+  );
+
+  return HttpResponse.json(filteredApplicants, { status: 200 });
 });
