@@ -16,7 +16,7 @@ export const emailCheckHandler = http.post(
 );
 
 export const verifyResetCodeHandler = http.post(
-  '/api/user/auth/verify-reset-code',
+  '/api/user/auth/verify-email',
   async ({ request }) => {
     const body = (await request.json()) as { email?: string; code?: string };
     const { email, code } = body;

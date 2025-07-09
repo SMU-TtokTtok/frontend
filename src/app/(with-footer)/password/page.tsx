@@ -6,7 +6,7 @@ import Input from '@/common/ui/input';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { passwordSchema, PasswordFormType } from '@/components/password/schema';
-import { postEmail } from '@/components/password/api/postEmail';
+import { postEmail, postCode } from '@/components/password/api/postEmail';
 
 export default function Page() {
   const {
@@ -22,6 +22,18 @@ export default function Page() {
   const handleSendVerificationCode = async () => {
     const email = getValues('email');
     const response = await postEmail({ email });
+
+    if (response.success) {
+      alert(response.message);
+    } else {
+      alert(response.message);
+    }
+  };
+
+  const handleVerifyCode = async () => {
+    const email = getValues('email');
+    const code = getValues('code');
+    const response = await postCode({ email, code });
 
     if (response.success) {
       alert(response.message);
@@ -68,7 +80,12 @@ export default function Page() {
                   placeholder="인증코드를 입력하세요"
                   {...register('code')}
                 />
-                <Button variant="secondary" className={S.Button} type="button">
+                <Button
+                  variant="secondary"
+                  className={S.Button}
+                  type="button"
+                  onClick={handleVerifyCode}
+                >
                   인증코드 확인
                 </Button>
               </div>
