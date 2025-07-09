@@ -37,3 +37,18 @@ export const userSignupHandler = http.post('/api/user/auth/signup', async ({ req
     { status: 400 },
   );
 });
+
+export const userEmailPostHandler = http.post(
+  '/api/user/auth/send-verification',
+  async ({ request }) => {
+    const body = (await request.json()) as { email?: string };
+    const { email } = body;
+    if (email) {
+      return HttpResponse.json({ success: true, message: '인증코드를 전송하였습니다' });
+    }
+    return HttpResponse.json(
+      { success: false, message: '이메일을 입력해 주세요.' },
+      { status: 400 },
+    );
+  },
+);
