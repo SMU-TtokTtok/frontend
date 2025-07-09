@@ -13,6 +13,7 @@ import { postEmail, postCode } from '@/components/signup/api';
 export default function Page() {
   const [isComplete, setIsComplete] = useState(false);
   const [userName, setUserName] = useState('');
+  const [isVerified, setIsVerified] = useState(false);
 
   const {
     register,
@@ -41,6 +42,7 @@ export default function Page() {
     const response = await postCode({ email, code });
     if (response.success) {
       alert(response.message);
+      setIsVerified(true);
     } else {
       alert(response.message);
     }
@@ -122,6 +124,7 @@ export default function Page() {
                   type="password"
                   {...register('password')}
                   placeholder="비밀번호를 입력하세요"
+                  disabled={!isVerified}
                 />
               </div>
               {errors.password && <p className={S.ErrorText}>{errors.password.message}</p>}
@@ -134,6 +137,7 @@ export default function Page() {
                   type="password"
                   {...register('confirmPassword')}
                   placeholder="비밀번호를 재입력하세요"
+                  disabled={!isVerified}
                 />
               </div>
               {errors.confirmPassword && (
@@ -152,6 +156,7 @@ export default function Page() {
                 className={S.Input}
                 placeholder="본인의 이름을 기재해주세요"
                 {...register('name')}
+                disabled={!isVerified}
               />
             </div>
             {errors.name && <p className={S.ErrorText}>{errors.name.message}</p>}
@@ -171,7 +176,7 @@ export default function Page() {
           </div>
         </div>
 
-        <Button variant="primary" className={S.SignupButton} type="submit">
+        <Button variant="primary" className={S.SignupButton} type="submit" disabled={!isVerified}>
           가입하기
         </Button>
       </form>
