@@ -4,7 +4,7 @@ import { Clubs, patchFavorite, popularClubs } from './clubList';
 import { AdminLogin } from './auth';
 import { getClubInfo, patchClubInfo, patchRecruiting } from './clubInfo/adminClubInfo';
 import { getUserClubInfo } from './clubInfo/userClubInfo';
-import { emailCheckHandler, verifyResetCodeHandler } from './password';
+import { emailCheckHandler, verifyResetCodeHandler, resetPasswordHandler } from './password';
 
 export const handlers = [
   popularClubs,
@@ -22,4 +22,5 @@ export const handlers = [
   AdminLogin,
   emailCheckHandler,
   verifyResetCodeHandler,
+  resetPasswordHandler,
 ];

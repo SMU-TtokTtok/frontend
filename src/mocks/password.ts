@@ -29,3 +29,30 @@ export const verifyResetCodeHandler = http.post(
     );
   },
 );
+
+export const resetPasswordHandler = http.post(
+  '/api/user/auth/reset-password',
+  async ({ request }) => {
+    const body = (await request.json()) as {
+      email?: string;
+      verificationCode?: string;
+      newPassword?: string;
+      newPasswordConfirm?: string;
+    };
+    const { email, verificationCode, newPassword, newPasswordConfirm } = body;
+    if (email && verificationCode && newPassword && newPasswordConfirm) {
+      if (newPassword === newPasswordConfirm) {
+        return HttpResponse.json({ success: true, message: '비밀번호 재설정 성공!' });
+      } else {
+        return HttpResponse.json(
+          { success: false, message: '비밀번호와 비밀번호 확인이 일치하지 않습니다.' },
+          { status: 400 },
+        );
+      }
+    }
+    return HttpResponse.json(
+      { success: false, message: '모든 값을 입력해 주세요.' },
+      { status: 400 },
+    );
+  },
+);
