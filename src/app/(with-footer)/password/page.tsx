@@ -5,27 +5,33 @@ import Button from '@/common/ui/button';
 import Input from '@/common/ui/input';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
 import { passwordSchema, PasswordFormType } from '@/components/password/schema';
+import { postEmail } from '@/components/password/api/postEmail';
 
 export default function Page() {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<PasswordFormType>({
     resolver: zodResolver(passwordSchema),
     mode: 'onBlur',
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSendVerificationCode = async () => {
+    const email = getValues('email');
+    const response = await postEmail({ email });
+
+    if (response.success) {
+      alert(response.message);
+    } else {
+      alert(response.message);
+    }
+  };
 
   const onSubmit = () => {
-    setIsSubmitting(true);
-    // TODO: 서버 요청 등 처리
-    setTimeout(() => {
-      setIsSubmitting(false);
-      alert('제출 완료!');
-    }, 1000);
+    alert('완료');
   };
 
   return (
@@ -42,9 +48,13 @@ export default function Page() {
                   className={S.Input}
                   placeholder="20XXXXXXX@sangmyung.kr"
                   {...register('email')}
-                  disabled={isSubmitting}
                 />
-                <Button variant="secondary" className={S.Button} type="button">
+                <Button
+                  variant="secondary"
+                  className={S.Button}
+                  type="button"
+                  onClick={handleSendVerificationCode}
+                >
                   인증코드 전송
                 </Button>
               </div>
@@ -57,7 +67,6 @@ export default function Page() {
                   className={S.Input}
                   placeholder="인증코드를 입력하세요"
                   {...register('code')}
-                  disabled={isSubmitting}
                 />
                 <Button variant="secondary" className={S.Button} type="button">
                   인증코드 확인
@@ -80,7 +89,6 @@ export default function Page() {
                 placeholder="새 비밀번호 입력를 입력하세요"
                 type="password"
                 {...register('password')}
-                disabled={isSubmitting}
               />
               {errors.password && <span className={S.ErrorMessage}>{errors.password.message}</span>}
             </div>
@@ -91,7 +99,6 @@ export default function Page() {
                 placeholder="새 비밀번호 재입력하세요"
                 type="password"
                 {...register('passwordConfirm')}
-                disabled={isSubmitting}
               />
               {errors.passwordConfirm && (
                 <span className={S.ErrorMessage}>{errors.passwordConfirm.message}</span>
@@ -99,7 +106,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <Button variant="primary" className={S.SubmitButton} type="submit" disabled={isSubmitting}>
+        <Button variant="primary" className={S.SubmitButton} type="submit">
           변경하기
         </Button>
       </form>
