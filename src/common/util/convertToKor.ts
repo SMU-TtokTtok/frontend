@@ -6,9 +6,9 @@ export const convertToKor = (name: string): string => {
       return '합격';
     case 'fail':
       return '불합격';
-    case 'document':
+    case 'applies':
       return '서류';
-    case 'interview':
+    case 'interviews':
       return '면접';
     default:
       return name;

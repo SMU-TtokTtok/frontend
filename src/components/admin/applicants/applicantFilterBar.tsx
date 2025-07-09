@@ -5,39 +5,40 @@ import Checkbox from '@/common/ui/checkbox';
 import { ApplicantListParams } from './api/applicants';
 interface ApplicantFilterBarProps {
   selectedOptions: ApplicantListParams;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function ApplicantFilterBar({ selectedOptions, onChange }: ApplicantFilterBarProps) {
-  const isGrade = selectedOptions.grade;
+function ApplicantFilterBar({ selectedOptions }: ApplicantFilterBarProps) {
+  const sort = selectedOptions.sort;
 
   return (
     <div className={S.filterContainer}>
       <div>
-        <QueryLink extraQuery={{ grade: true }}>
+        <QueryLink extraQuery={{ sort: 'grade' }}>
           <Button
-            className={S.filterButton({ isSelected: isGrade })}
-            variant={isGrade ? 'secondary' : 'surface'}
+            className={S.filterButton({ isSelected: sort === 'grade' })}
+            variant={sort === 'grade' ? 'secondary' : 'surface'}
           >
             학년별
           </Button>
         </QueryLink>
-        <QueryLink extraQuery={{ grade: false }}>
+        <QueryLink extraQuery={{ sort: 'submit' }}>
           <Button
-            className={S.filterButton({ isSelected: isGrade === false })}
-            variant={isGrade ? 'surface' : 'secondary'}
+            className={S.filterButton({ isSelected: sort === 'submit' })}
+            variant={sort === 'submit' ? 'secondary' : 'surface'}
           >
             제출순
           </Button>
         </QueryLink>
       </div>
       <div>
-        <Checkbox
-          label="평가중만 보기"
-          className={S.checkbox}
-          variant="primary"
-          onChange={onChange}
-        />
+        <QueryLink extraQuery={{ isEvaluating: !selectedOptions.isEvaluating }}>
+          <Checkbox
+            label="평가중만 보기"
+            className={S.checkbox}
+            variant="primary"
+            defaultChecked={selectedOptions.isEvaluating}
+          />
+        </QueryLink>
       </div>
     </div>
   );
