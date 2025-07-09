@@ -79,6 +79,8 @@ export const Button = style({
   padding: '16px',
   fontSize: vars.fonts.body2,
   fontWeight: '600',
+
+  alignSelf: 'flex-start',
 });
 
 export const FlexPolicy = style({

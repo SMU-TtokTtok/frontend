@@ -19,6 +19,7 @@ export default function Page() {
     formState: { errors },
   } = useForm<SignupForm>({
     resolver: zodResolver(signupSchema),
+    mode: 'onBlur',
   });
 
   const onSubmit = (data: SignupForm) => {
@@ -58,6 +59,14 @@ export default function Page() {
               <div className={S.LabelDetailText}>인증코드</div>
               <div className={S.FlexBox2}>
                 <input className={S.Input} {...register('code')} />
+                <Button
+                  variant="secondary"
+                  className={S.Button}
+                  type="button"
+                  onClick={() => alert('인증코드를 전송했습니다.')}
+                >
+                  인증코드 확인
+                </Button>
               </div>
               {errors.code && <p className={S.ErrorText}>{errors.code.message}</p>}
             </div>
