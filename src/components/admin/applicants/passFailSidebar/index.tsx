@@ -1,11 +1,11 @@
 import Button from '@/common/ui/button';
 import * as S from './passFailSidebar.css';
-import { ApplicantListParams } from '../api/applicants';
 import { convertToKor } from '@/common/util/convertToKor';
 import { ROUTES } from '@/common/constants/routes';
 import Link from 'next/link';
 import ApplicantGroup from './applicantGroup';
 import { useFailList, usePassList } from '@/hooks/usePassFailList';
+import { ApplicantListParams } from '../api/applicants';
 interface PassFailSidebarProps {
   selectedOptions: ApplicantListParams;
 }

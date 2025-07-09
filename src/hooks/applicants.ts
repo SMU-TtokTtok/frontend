@@ -12,10 +12,11 @@ interface UseApplicantListParams {
 
 export const useApplicantList = ({ selectedOptions }: UseApplicantListParams) => {
   const { applicantList } = applicantKey;
+  const { evaluation, sort, isEvaluating } = selectedOptions;
 
   const { data, isLoading } = useSuspenseQuery({
     queryKey: [applicantList, selectedOptions],
-    queryFn: () => getApplicantList(),
+    queryFn: () => getApplicantList({ evaluation, sort, isEvaluating }),
   });
   return { data, isLoading };
 };
