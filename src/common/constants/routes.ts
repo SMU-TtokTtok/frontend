@@ -6,7 +6,7 @@ export const ROUTES = {
   CLUB_INFO: (clubId: number) => `/club/${clubId}`,
   ADMIN: '/admin',
   ADMIN_LOGIN: '/admin/login',
-  ADMIN_APPLICATIONS: '/admin/applicants?evaluation=document&grade=true',
+  ADMIN_APPLICATIONS: '/admin/applicants?evaluation=applies&sort=grade',
   ADMIN_CLUB_MEMBER: '/admin/clubMember',
   ADMIN_APPLICATIONS_FORM: '/admin/applicationsForm',
   ADMIN_APPLICATIONS_CREATE: '/admin/createForm',
