@@ -5,3 +5,9 @@ export const postEmail = async (body: { email: string }) => {
 
   return data;
 };
+
+export const postCode = async (body: { email: string; code: string }) => {
+  const data = await mainClient.post('/api/user/auth/verify-email', body);
+
+  return data;
+};

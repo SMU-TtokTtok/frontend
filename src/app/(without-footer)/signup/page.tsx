@@ -8,7 +8,7 @@ import Button from '@/common/ui/button';
 import { POLICY } from '@/common/constants/policy';
 import { signupSchema, SignupForm } from '@/components/signup/schema';
 import SignupComplete from '@/components/signup/SignupComplete';
-import { postEmail } from '@/components/signup/api';
+import { postEmail, postCode } from '@/components/signup/api';
 
 export default function Page() {
   const [isComplete, setIsComplete] = useState(false);
@@ -28,6 +28,17 @@ export default function Page() {
     const email = getValues('email');
 
     const response = await postEmail({ email });
+    if (response.success) {
+      alert(response.message);
+    } else {
+      alert(response.message);
+    }
+  };
+
+  const handleSendCode = async () => {
+    const email = getValues('email');
+    const code = getValues('code');
+    const response = await postCode({ email, code });
     if (response.success) {
       alert(response.message);
     } else {
@@ -89,7 +100,7 @@ export default function Page() {
                   variant="secondary"
                   className={S.Button}
                   type="button"
-                  onClick={() => alert('인증코드를 전송했습니다.')}
+                  onClick={handleSendCode}
                 >
                   인증코드 확인
                 </Button>
