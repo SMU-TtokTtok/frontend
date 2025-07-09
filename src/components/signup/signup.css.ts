@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants/';
 
 export const Container = style({
   minHeight: 'inherit',
@@ -7,6 +8,14 @@ export const Container = style({
   paddingBottom: '100px',
   display: 'flex',
   justifyContent: 'center',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      display: 'block',
+      paddingLeft: '40px',
+      paddingRight: '40px',
+    },
+  },
 });
 
 export const BoxContainer = style({
@@ -14,6 +23,12 @@ export const BoxContainer = style({
   flexDirection: 'column',
   gap: '16px',
   width: '1156px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      width: '100%',
+    },
+  },
 });
 
 export const TitleText = style({
@@ -66,6 +81,7 @@ export const Input = style({
   fontSize: vars.fonts.body1,
   flex: ' 1 0 0 ',
   height: '48px',
+  // minWidth: '0',
 
   selectors: {
     '&::placeholder': {
@@ -81,6 +97,7 @@ export const Button = style({
   fontWeight: '600',
 
   alignSelf: 'flex-start',
+  // flexShrink: 0,
 });
 
 export const FlexPolicy = style({
