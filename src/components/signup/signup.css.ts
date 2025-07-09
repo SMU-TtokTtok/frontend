@@ -15,6 +15,9 @@ export const Container = style({
       paddingLeft: '40px',
       paddingRight: '40px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '30px 20px 80px 20px',
+    },
   },
 });
 
@@ -48,12 +51,13 @@ export const LabelBoxContainer = style({
 export const LabelText = style({
   fontSize: vars.fonts.title4,
   fontWeight: '700',
+  whiteSpace: 'nowrap',
 });
 
 export const LabelDetailBox = style({
   display: 'flex',
   gap: '18px',
-  flex: '1 0 0',
+  flex: '1 1 0',
 });
 
 export const LabelDetailText = style({
@@ -65,13 +69,13 @@ export const FlexBox = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '12px',
-  flex: '1 0 0',
+  flex: '1 1 0',
 });
 
 export const FlexBox2 = style({
   display: 'flex',
   gap: '8px',
-  flex: '1 0 0',
+  flex: '1 1 0',
 });
 
 export const Input = style({
@@ -79,9 +83,9 @@ export const Input = style({
   borderRadius: '6px',
   padding: '12px 16px',
   fontSize: vars.fonts.body1,
-  flex: ' 1 0 0 ',
+  flex: ' 1 1 0 ',
   height: '48px',
-  // minWidth: '0',
+  width: '100%', //
 
   selectors: {
     '&::placeholder': {
@@ -95,6 +99,7 @@ export const Button = style({
   padding: '16px',
   fontSize: vars.fonts.body2,
   fontWeight: '600',
+  whiteSpace: 'nowrap',
 
   alignSelf: 'flex-start',
   // flexShrink: 0,
