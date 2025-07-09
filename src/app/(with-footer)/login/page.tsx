@@ -80,7 +80,9 @@ export default function Page() {
               비밀번호 재설정
             </div>
             <div className={S.AuthFooterText}>|</div>
-            <div className={S.AuthFooterText}>회원가입</div>
+            <div className={S.AuthFooterText} onClick={() => router.push(ROUTES.SIGNUP)}>
+              회원가입
+            </div>
           </div>
         </div>
 
