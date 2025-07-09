@@ -37,6 +37,12 @@ export const BoxContainer = style({
 export const TitleText = style({
   fontSize: vars.fonts.title1,
   fontWeight: '600',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: '20px',
+    },
+  },
 });
 
 export const LabelBoxContainer = style({
@@ -46,23 +52,50 @@ export const LabelBoxContainer = style({
   display: 'flex',
   // gap: '112px',
   alignItems: 'flex-start',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      display: 'block',
+      padding: '20px 16px',
+    },
+  },
 });
 
 export const LabelText = style({
   fontSize: vars.fonts.title4,
   fontWeight: '700',
   whiteSpace: 'nowrap',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      paddingBottom: '16px',
+      borderBottom: '1px solid #EDEEF1',
+      fontSize: '16px',
+    },
+  },
 });
 
 export const LabelDetailBox = style({
   display: 'flex',
   gap: '18px',
   flex: '1 1 0',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      display: 'block',
+    },
+  },
 });
 
 export const LabelDetailText = style({
   fontSize: vars.fonts.body1,
   fontWeight: '600',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: '14px',
+    },
+  },
 });
 
 export const FlexBox = style({
@@ -70,6 +103,13 @@ export const FlexBox = style({
   flexDirection: 'column',
   gap: '12px',
   flex: '1 1 0',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      paddingTop: '16px',
+      gap: '8px',
+    },
+  },
 });
 
 export const FlexBox2 = style({
@@ -85,11 +125,18 @@ export const Input = style({
   fontSize: vars.fonts.body1,
   flex: ' 1 1 0 ',
   height: '48px',
-  width: '100%', //
+  width: '100%', // !!
 
   selectors: {
     '&::placeholder': {
       color: '#E0E1E3',
+    },
+  },
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      height: '40px',
+      fontSize: '14px',
     },
   },
 });
@@ -103,6 +150,12 @@ export const Button = style({
 
   alignSelf: 'flex-start',
   // flexShrink: 0,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '12px 16px',
+      fontSize: '14px',
+    },
+  },
 });
 
 export const FlexPolicy = style({
@@ -141,6 +194,13 @@ export const SignupButton = style({
   textAlign: 'center',
   alignSelf: 'flex-end',
   borderRadius: '6px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '100%',
+      fontSize: '14px',
+    },
+  },
 });
 
 export const CompleteBox = style({
@@ -187,5 +247,10 @@ export const CompleteButton = style({
 export const ErrorText = style({
   color: 'red',
   fontSize: '0.85rem',
-  marginTop: '4px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: '12px',
+    },
+  },
 });
