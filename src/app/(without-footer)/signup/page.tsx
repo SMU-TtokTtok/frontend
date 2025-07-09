@@ -8,7 +8,7 @@ import Button from '@/common/ui/button';
 import { POLICY } from '@/common/constants/policy';
 import { signupSchema, SignupForm } from '@/components/signup/schema';
 import SignupComplete from '@/components/signup/SignupComplete';
-import { postEmail, postCode } from '@/components/signup/api';
+import { postEmail, postCode, postSignup } from '@/components/signup/api';
 
 export default function Page() {
   const [isComplete, setIsComplete] = useState(false);
@@ -49,7 +49,14 @@ export default function Page() {
   };
 
   const onSubmit = async (data: SignupForm) => {
-    const response = await userSignupHandler(data);
+    const response = await postSignup({
+      email: data.email,
+      verificationCode: data.code,
+      password: data.password,
+      passwordConfirm: data.confirmPassword,
+      name: data.name,
+      termsAgreed: data.agree,
+    });
     if (response.success) {
       setUserName(data.name);
       setIsComplete(true);

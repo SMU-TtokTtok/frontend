@@ -11,3 +11,16 @@ export const postCode = async (body: { email: string; code: string }) => {
 
   return data;
 };
+
+export const postSignup = async (body: {
+  email: string;
+  verificationCode: string;
+  password: string;
+  passwordConfirm: string;
+  name: string;
+  termsAgreed: boolean;
+}) => {
+  const data = await mainClient.post('/api/user/auth/signup', body);
+
+  return data;
+};
