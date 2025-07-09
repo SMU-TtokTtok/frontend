@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { passwordSchema, PasswordFormType } from '@/components/password/schema';
 import { postEmail, postCode } from '@/components/password/api/postEmail';
+import { useState } from 'react';
 
 export default function Page() {
   const {
@@ -18,6 +19,8 @@ export default function Page() {
     resolver: zodResolver(passwordSchema),
     mode: 'onBlur',
   });
+
+  const [isVerified, setIsVerified] = useState(false);
 
   const handleSendVerificationCode = async () => {
     const email = getValues('email');
@@ -37,8 +40,10 @@ export default function Page() {
 
     if (response.success) {
       alert(response.message);
+      setIsVerified(true); // 인증 성공!
     } else {
       alert(response.message);
+      setIsVerified(false);
     }
   };
 
@@ -106,6 +111,7 @@ export default function Page() {
                 placeholder="새 비밀번호 입력를 입력하세요"
                 type="password"
                 {...register('password')}
+                disabled={!isVerified}
               />
               {errors.password && <span className={S.ErrorMessage}>{errors.password.message}</span>}
             </div>
@@ -123,7 +129,7 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <Button variant="primary" className={S.SubmitButton} type="submit">
+        <Button variant="primary" className={S.SubmitButton} type="submit" disabled={!isVerified}>
           변경하기
         </Button>
       </form>
