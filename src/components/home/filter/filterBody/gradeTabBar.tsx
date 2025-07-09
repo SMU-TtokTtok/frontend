@@ -18,7 +18,7 @@ function GradeTabBar({ selectedOptions }: FilterProps) {
               variant="none"
               className={S.ButtonStyle({
                 style: 'body',
-                isSelected: selectedOptions?.grade.includes(label),
+                isSelected: selectedOptions.grade!.includes(label),
               })}
             >
               {FILTER_KO.grade[FILTER.grade.indexOf(label)]}

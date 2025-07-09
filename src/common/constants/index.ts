@@ -14,7 +14,7 @@ export const BREAKPOINTS = {
   mobile: 375,
   tablet: 768,
   desktop: 1024,
-  largeDesktop: 1440,
+  largeDesktop: 1439,
 } as const;
 
 export const ADMIN_SIDEBAR_ITEMS = [
@@ -25,23 +25,23 @@ export const ADMIN_SIDEBAR_ITEMS = [
 ] as const;
 
 export const FILTER = {
-  category: ['all', 'sport', 'culture', 'academic', 'etc'],
+  category: ['all', 'sport', 'culture', 'academic', 'service', 'religion', 'etc'],
   recruit: ['all', 'recruit', 'notRecruit'],
   type: ['all', 'major', 'central', 'union'],
   sort: ['latest', 'popular', 'member'],
   grade: ['1', '2', '3', '4'],
-  college: ['humanities', 'design', 'art', 'tech', 'engineering'],
+  college: ['humanities', 'design', 'art', 'tech', 'engineering', 'physicaln'],
 } as const;
 
 type FilterKey = keyof typeof FILTER;
 
 export const FILTER_KO: Record<FilterKey, readonly string[]> = {
-  category: ['전체', '스포츠', '문화', '학술', '기타'],
+  category: ['전체', '스포츠', '문화', '학술', '봉사', '종교', '기타'],
   recruit: ['전체', '모집중', '모집마감'],
   type: ['전체', '과동아리', '중앙동아리', '연합동아리'],
   sort: ['최신 등록 순', '인기도 순', '멤버 많은 수'],
   grade: ['1학년', '2학년', '3학년', '4학년'],
-  college: ['인문대', '디자인대', '예술대', '융합기술대', '공대'],
+  college: ['인문대', '디자인대', '예술대', '융합기술대', '공대', '체대'],
 };
 
 export const LOGIN_ERRORS = {

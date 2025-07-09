@@ -1,5 +1,5 @@
 import { vars } from '@/common/styles/theme.css';
-import { styleVariants } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 
 export const tagStyle = styleVariants({
   //배경: 흰색
@@ -46,3 +46,11 @@ export const tagStyle = styleVariants({
 } as const);
 
 export type TagVariant = keyof typeof tagStyle;
+
+export const baseTagStyle = style({
+  display: 'inline-block',
+  maxWidth: '120px',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+});

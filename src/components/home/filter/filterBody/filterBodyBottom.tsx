@@ -2,7 +2,6 @@ import * as S from '../filter.css';
 import { SearchQueryReturn } from '@/hooks/useSearchQuery';
 import TypeTabBar from './typeTabBar';
 import CollegeTabBar from './collegeTabBar';
-import ResetButton from './resetButton';
 export interface FilterProps {
   selectedOptions: SearchQueryReturn;
 }
@@ -17,7 +16,6 @@ function FilterBodyBottom({ selectedOptions }: FilterProps) {
           <CollegeTabBar selectedOptions={selectedOptions} />
         </div>
       </div>
-      <ResetButton />
     </div>
   );
 }
