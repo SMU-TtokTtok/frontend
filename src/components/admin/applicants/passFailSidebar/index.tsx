@@ -8,9 +8,10 @@ import { useFailList, usePassList } from '@/hooks/usePassFailList';
 import { ApplicantListParams } from '../api/applicants';
 interface PassFailSidebarProps {
   selectedOptions: ApplicantListParams;
+  handleModalOpen: () => void;
 }
 
-function PassFailSidebar({ selectedOptions }: PassFailSidebarProps) {
+function PassFailSidebar({ selectedOptions, handleModalOpen }: PassFailSidebarProps) {
   const evaluation = selectedOptions.evaluation;
   const { data: passApplicants } = usePassList({ selectedOptions });
   const { data: failApplicants } = useFailList({ selectedOptions });
@@ -19,11 +20,13 @@ function PassFailSidebar({ selectedOptions }: PassFailSidebarProps) {
       <div className={S.rightSidebar}>
         <div className={S.panel}>
           <ApplicantGroup
+            handleModalOpen={handleModalOpen}
             label={`${convertToKor(evaluation)} 합격 예정자`}
             selectedOptions={selectedOptions}
             applicants={passApplicants}
           />
           <ApplicantGroup
+            handleModalOpen={handleModalOpen}
             label={`${convertToKor(evaluation)} 불합격자`}
             selectedOptions={selectedOptions}
             applicants={failApplicants}

@@ -4,11 +4,12 @@ import ApplicantItem from './applicantItem';
 
 interface ApplicantListProps {
   selectedOptions: ApplicantListParams;
+  handleModalOpen: () => void;
 }
 
-function ApplicantList({ selectedOptions }: ApplicantListProps) {
+function ApplicantList({ selectedOptions, handleModalOpen }: ApplicantListProps) {
   const { data: applicants } = useApplicantList({ selectedOptions });
-  const { handleFavoriteStatus } = usePatchApplicantStatus();
+  const { handleFavoriteStatus } = usePatchApplicantStatus({ handleModalOpen });
 
   return (
     <ul>
