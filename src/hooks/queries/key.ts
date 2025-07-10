@@ -4,6 +4,7 @@ export const clubKey = {
 } as const;
 
 export const applicantKey = {
+  searchApplicant: ['searchApplicant'],
   applicantList: ['applicantList'],
   passList: ['passList'],
   failList: ['failList'],

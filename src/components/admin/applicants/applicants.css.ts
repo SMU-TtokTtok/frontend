@@ -120,4 +120,10 @@ export const checkbox = style({
   height: '1rem',
 });
 
-// 지원자 아이템
+export const noResults = style({
+  fontSize: vars.fonts.body1,
+  fontWeight: 700,
+  color: vars.colors.black,
+  textAlign: 'center',
+  marginTop: '2rem',
+});
