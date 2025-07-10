@@ -2,6 +2,7 @@ export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
   SIGNUP: '/signup',
+  PASSWORD: '/password',
   POPULAR: '/popular',
   CLUB_INFO: (clubId: number) => `/club/${clubId}`,
   ADMIN: '/admin',

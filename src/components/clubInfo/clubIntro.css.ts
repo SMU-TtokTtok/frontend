@@ -24,4 +24,5 @@ export const contentContainer = style({
   width: '100%',
   padding: '26px 28px',
   backgroundColor: 'white',
+  minHeight: '300px',
 });

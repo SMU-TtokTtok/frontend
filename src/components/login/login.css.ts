@@ -84,3 +84,15 @@ export const adminLoginButton = style({
   fontWeight: '600',
   marginTop: '94px',
 });
+
+export const userInput = style({
+  padding: '12px 16px',
+  borderRadius: '6px',
+  backgroundColor: '#F8F8F9',
+  fontSize: vars.fonts.body2,
+  selectors: {
+    '&::placeholder': {
+      color: '#D2D4D8',
+    },
+  },
+});

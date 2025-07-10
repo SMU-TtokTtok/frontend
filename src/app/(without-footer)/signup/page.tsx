@@ -8,22 +8,61 @@ import Button from '@/common/ui/button';
 import { POLICY } from '@/common/constants/policy';
 import { signupSchema, SignupForm } from '@/components/signup/schema';
 import SignupComplete from '@/components/signup/SignupComplete';
+import { postEmail, postCode, postSignup } from '@/components/signup/api';
 
 export default function Page() {
   const [isComplete, setIsComplete] = useState(false);
   const [userName, setUserName] = useState('');
+  const [isVerified, setIsVerified] = useState(false);
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<SignupForm>({
     resolver: zodResolver(signupSchema),
+    mode: 'onBlur',
   });
 
-  const onSubmit = (data: SignupForm) => {
-    setUserName(data.name);
-    setIsComplete(true);
+  const handleSendEmail = async () => {
+    const email = getValues('email');
+
+    const response = await postEmail({ email });
+    if (response.success) {
+      alert(response.message);
+    } else {
+      alert(response.message);
+    }
+  };
+
+  const handleSendCode = async () => {
+    const email = getValues('email');
+    const code = getValues('code');
+    const response = await postCode({ email, code });
+    if (response.success) {
+      alert(response.message);
+      setIsVerified(true);
+    } else {
+      alert(response.message);
+    }
+  };
+
+  const onSubmit = async (data: SignupForm) => {
+    const response = await postSignup({
+      email: data.email,
+      verificationCode: data.code,
+      password: data.password,
+      passwordConfirm: data.confirmPassword,
+      name: data.name,
+      termsAgreed: data.agree,
+    });
+    if (response.success) {
+      setUserName(data.name);
+      setIsComplete(true);
+    } else {
+      alert(response.message);
+    }
   };
 
   if (isComplete) {
@@ -42,12 +81,16 @@ export default function Page() {
             <div className={S.FlexBox}>
               <div className={S.LabelDetailText}>이메일</div>
               <div className={S.FlexBox2}>
-                <input className={S.Input} {...register('email')} />
+                <input
+                  className={S.Input}
+                  {...register('email')}
+                  placeholder="20XXXXXXX@sangmyung.kr"
+                />
                 <Button
                   variant="secondary"
                   className={S.Button}
                   type="button"
-                  onClick={() => alert('인증코드를 전송했습니다.')}
+                  onClick={handleSendEmail}
                 >
                   인증코드 전송
                 </Button>
@@ -57,7 +100,19 @@ export default function Page() {
             <div className={S.FlexBox}>
               <div className={S.LabelDetailText}>인증코드</div>
               <div className={S.FlexBox2}>
-                <input className={S.Input} {...register('code')} />
+                <input
+                  className={S.Input}
+                  {...register('code')}
+                  placeholder="인증코드를 입력하세요"
+                />
+                <Button
+                  variant="secondary"
+                  className={S.Button}
+                  type="button"
+                  onClick={handleSendCode}
+                >
+                  인증코드 확인
+                </Button>
               </div>
               {errors.code && <p className={S.ErrorText}>{errors.code.message}</p>}
             </div>
@@ -71,14 +126,26 @@ export default function Page() {
             <div className={S.FlexBox}>
               <div className={S.LabelDetailText}>비밀번호</div>
               <div className={S.FlexBox2}>
-                <input className={S.Input} type="password" {...register('password')} />
+                <input
+                  className={S.Input}
+                  type="password"
+                  {...register('password')}
+                  placeholder="비밀번호를 입력하세요"
+                  disabled={!isVerified}
+                />
               </div>
               {errors.password && <p className={S.ErrorText}>{errors.password.message}</p>}
             </div>
             <div className={S.FlexBox}>
               <div className={S.LabelDetailText}>비밀번호 재입력</div>
               <div className={S.FlexBox2}>
-                <input className={S.Input} type="password" {...register('confirmPassword')} />
+                <input
+                  className={S.Input}
+                  type="password"
+                  {...register('confirmPassword')}
+                  placeholder="비밀번호를 재입력하세요"
+                  disabled={!isVerified}
+                />
               </div>
               {errors.confirmPassword && (
                 <p className={S.ErrorText}>{errors.confirmPassword.message}</p>
@@ -96,6 +163,7 @@ export default function Page() {
                 className={S.Input}
                 placeholder="본인의 이름을 기재해주세요"
                 {...register('name')}
+                disabled={!isVerified}
               />
             </div>
             {errors.name && <p className={S.ErrorText}>{errors.name.message}</p>}
@@ -115,7 +183,7 @@ export default function Page() {
           </div>
         </div>
 
-        <Button variant="primary" className={S.SignupButton} type="submit">
+        <Button variant="primary" className={S.SignupButton} type="submit" disabled={!isVerified}>
           가입하기
         </Button>
       </form>
