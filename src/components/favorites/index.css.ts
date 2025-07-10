@@ -41,4 +41,5 @@ export const ButtonStyle = style({
   fontSize: vars.fonts.body2,
   fontWeight: '600',
   padding: '10px 16px',
+  borderRadius: '6px',
 });

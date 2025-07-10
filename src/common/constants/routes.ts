@@ -4,7 +4,7 @@ export const ROUTES = {
   SIGNUP: '/signup',
   PASSWORD: '/password',
   POPULAR: '/popular',
-  FAVORITES: '/favorites',
+  FAVORITES: '/favorites?sort=latest',
   CLUB_INFO: (clubId: number) => `/club/${clubId}`,
   ADMIN: '/admin',
   ADMIN_LOGIN: '/admin/login',
