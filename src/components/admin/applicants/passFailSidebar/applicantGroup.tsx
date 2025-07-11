@@ -7,16 +7,21 @@ interface ApplicantGroupProps {
   label: string;
   selectedOptions: ApplicantListParams;
   applicants: ApplicantsInfo[];
+  handleModalOpen: () => void;
 }
 
-export default function ApplicantGroup({ label, applicants }: ApplicantGroupProps) {
+export default function ApplicantGroup({
+  label,
+  applicants,
+  handleModalOpen,
+}: ApplicantGroupProps) {
   return (
     <div className={S.listContainer}>
       <div className={S.labelWrapper}>
         <label className={S.sideBarLabel}>{label}</label>
         <small className={S.plus}>더보기</small>
       </div>
-      <PassFailList applicants={applicants} />
+      <PassFailList applicants={applicants} handleModalOpen={handleModalOpen} />
     </div>
   );
 }
