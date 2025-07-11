@@ -18,7 +18,10 @@ export const useFavoritesInfinite = ({
   enabled,
   sort = 'latest',
 }: UseFavoritesInfiniteParams = {}) => {
-  return useInfiniteQuery<ClubsApiResponse, Error>({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
+    ClubsApiResponse,
+    Error
+  >({
     queryKey: ['favoritesList', sort],
     queryFn: ({ pageParam }) =>
       fetchFavoritesClubs({ sort, size: 20, cursor: pageParam as string }),
@@ -26,4 +29,6 @@ export const useFavoritesInfinite = ({
     getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
     enabled,
   });
+  // console.log(data);
+  return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data };
 };
