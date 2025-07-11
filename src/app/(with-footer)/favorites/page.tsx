@@ -1,6 +1,6 @@
 'use client';
 
-import ClubList from '@/components/home/clubList';
+import FavoritesClub from '@/components/favorites/FavoritesClub';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import SortButtonGroup from '@/components/favorites/SortButtonGroup';
 import { ROUTES } from '@/common/constants/routes';
@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <div>
       <SortButtonGroup title="즐겨찾기" filter={filter} path={ROUTES.FAVORITES} />
-      <ClubList selectedOptions={filter} />
+      <FavoritesClub selectedOptions={filter} />
     </div>
   );
 }
