@@ -31,12 +31,21 @@ function ApplicantsContentPage() {
       <div className={S.container}>
         <div className={S.wrapper}>
           <h3 className={S.title}>✏️ 지원자 관리</h3>
-          <PassFailSidebar selectedOptions={selectedOptions} handleModalOpen={handleModalOpen} />
+          <PassFailSidebar
+            selectedOptions={selectedOptions}
+            handleConfirmModalOpen={handleModalOpen}
+          />
           <SearchBarArea search={search} handleSearchChange={handleSearchChange} />
           <EvaluationTabs selectedOptions={selectedOptions} />
           <div className={S.PanelContainer}>
             <ApplicantFilterBar selectedOptions={selectedOptions} />
-            {search && <SearchResult selectedOptions={selectedOptions} search={search} />}
+            {search && (
+              <SearchResult
+                selectedOptions={selectedOptions}
+                search={search}
+                handleModalOpen={handleModalOpen}
+              />
+            )}
             {!search && (
               <ApplicantList selectedOptions={selectedOptions} handleModalOpen={handleModalOpen} />
             )}

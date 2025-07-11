@@ -7,14 +7,15 @@ import { ApplicantListParams } from './api/applicants';
 interface SearchResultProps {
   selectedOptions: ApplicantListParams;
   search: string;
+  handleModalOpen: () => void;
 }
-function SearchResult({ search, selectedOptions }: SearchResultProps) {
+function SearchResult({ search, selectedOptions, handleModalOpen }: SearchResultProps) {
   const debouncedSearch = useDebounce(search);
   const { data: applicants } = useSearchApplicant({
     debouncedSearch,
     evaluation: selectedOptions.evaluation,
   });
-  const { handleFavoriteStatus } = usePatchApplicantStatus();
+  const { handleFavoriteStatus } = usePatchApplicantStatus({ handleModalOpen });
 
   return (
     <ul>

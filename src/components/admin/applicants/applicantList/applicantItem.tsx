@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import * as S from './applicantItem.css';
+import * as S from './applicantList.css';
 import menu from '@/assets/menu.svg';
 import { ApplicantsInfo } from '@/common/model/applicants';
 import Tag from '@/common/ui/tag';
