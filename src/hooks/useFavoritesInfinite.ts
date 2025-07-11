@@ -1,13 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { ClubItemInfo } from '@/common/model/club';
 import { fetchFavoritesClubs } from '@/components/favorites/api/getFavorites';
-
-interface ClubsApiResponse {
-  clubs: ClubItemInfo[];
-  size: number;
-  hasNext: boolean;
-  nextCursor: string | null;
-}
+import { ClubsInfinite } from '@/common/model/clubInfinite';
 
 interface UseFavoritesInfiniteParams {
   enabled?: boolean;
@@ -19,7 +12,7 @@ export const useFavoritesInfinite = ({
   sort = 'latest',
 }: UseFavoritesInfiniteParams = {}) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
-    ClubsApiResponse,
+    ClubsInfinite,
     Error
   >({
     queryKey: ['favoritesList', sort],

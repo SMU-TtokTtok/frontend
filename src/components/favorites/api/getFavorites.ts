@@ -1,12 +1,5 @@
-import { ClubItemInfo } from '@/common/model/club';
 import { mainClient } from '@/common/apis/ttockTtockClient';
-
-interface ClubsApiResponse {
-  clubs: ClubItemInfo[];
-  size: number;
-  hasNext: boolean;
-  nextCursor: string | null;
-}
+import { ClubsInfinite } from '@/common/model/clubInfinite';
 
 export async function fetchFavoritesClubs({
   sort,
@@ -16,7 +9,7 @@ export async function fetchFavoritesClubs({
   sort: string;
   size: number;
   cursor?: string;
-}): Promise<ClubsApiResponse> {
+}): Promise<ClubsInfinite> {
   const params = new URLSearchParams({ sort, size: String(size) });
   if (typeof cursor === 'string') params.append('cursor', cursor);
 
