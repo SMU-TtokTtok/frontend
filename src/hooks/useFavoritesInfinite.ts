@@ -29,6 +29,6 @@ export const useFavoritesInfinite = ({
     getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
     enabled,
   });
-  // console.log(data);
+
   return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data };
 };
