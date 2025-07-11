@@ -23,21 +23,21 @@ export default function SortButtonGroup({ title, filter, path }: SortButtonGroup
         <div className={S.SortFlex}>
           <Button
             variant={sort === 'latest' ? 'secondary' : 'none'}
-            className={S.ButtonStyle}
+            className={S.ButtonStyle({ selected: sort === 'latest', position: 'first' })}
             onClick={() => router.push(`${path}?sort=latest`)}
           >
             최신등록순
           </Button>
           <Button
             variant={sort === 'member' ? 'secondary' : 'none'}
-            className={S.ButtonStyle}
+            className={S.ButtonStyle({ selected: sort === 'member', position: 'middle' })}
             onClick={() => router.push(`${path}?sort=member`)}
           >
             멤버많은순
           </Button>
           <Button
             variant={sort === 'popular' ? 'secondary' : 'none'}
-            className={S.ButtonStyle}
+            className={S.ButtonStyle({ selected: sort === 'popular', position: 'last' })}
             onClick={() => router.push(`${path}?sort=popular`)}
           >
             인기도순
