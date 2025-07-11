@@ -20,8 +20,8 @@ function PassFailSidebar({ selectedOptions, handleConfirmModalOpen }: PassFailSi
   const { data: failApplicants } = useFailList({ selectedOptions });
   const [isPass, setIsPass] = useState<boolean | null>(null);
 
-  const handlePassTypeChange = () => {
-    setIsPass(!isPass);
+  const handlePassTypeChange = (isPass: boolean) => {
+    setIsPass(isPass);
   };
 
   const {
@@ -35,6 +35,7 @@ function PassFailSidebar({ selectedOptions, handleConfirmModalOpen }: PassFailSi
       <div className={S.rightSidebar}>
         <div className={S.panel}>
           <ApplicantGroup
+            isPass={true}
             handlePassTypeChange={handlePassTypeChange}
             handleModalOpen={handleConfirmModalOpen}
             handleListModalOpen={handleListModalOpen}
@@ -43,6 +44,7 @@ function PassFailSidebar({ selectedOptions, handleConfirmModalOpen }: PassFailSi
             applicants={passApplicants}
           />
           <ApplicantGroup
+            isPass={false}
             handlePassTypeChange={handlePassTypeChange}
             handleModalOpen={handleConfirmModalOpen}
             handleListModalOpen={handleListModalOpen}

@@ -5,15 +5,17 @@ import * as S from './passFailSidebar.css';
 import Empty from '@/common/components/empty';
 
 interface ApplicantGroupProps {
+  isPass: boolean;
   label: string;
   selectedOptions: ApplicantListParams;
   applicants: ApplicantsInfo[];
   handleModalOpen: () => void;
   handleListModalOpen: () => void;
-  handlePassTypeChange: () => void;
+  handlePassTypeChange: (isPass: boolean) => void;
 }
 
 export default function ApplicantGroup({
+  isPass,
   label,
   applicants,
   handleModalOpen,
@@ -21,7 +23,7 @@ export default function ApplicantGroup({
   handlePassTypeChange,
 }: ApplicantGroupProps) {
   const handleListModalOpenWithType = () => {
-    handlePassTypeChange();
+    handlePassTypeChange(isPass);
     handleListModalOpen();
   };
   const emptyMessage = `${label}가 없어요 `;
