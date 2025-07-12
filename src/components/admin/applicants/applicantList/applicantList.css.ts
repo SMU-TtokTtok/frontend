@@ -73,3 +73,14 @@ export const dropDownItem = style({
     },
   },
 });
+
+export const empty = style({
+  fontSize: vars.fonts.body1,
+  fontWeight: 500,
+  color: vars.colors.surface.outline,
+  marginTop: '20px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '190px',
+});

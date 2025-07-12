@@ -4,7 +4,7 @@ interface BodyProps extends PropsWithChildren {
   className?: string;
 }
 function Body({ children, className }: BodyProps) {
-  return <div className={`${S.modalBody} ${className ?? ''}`}>{children}</div>;
+  return <div className={`${S.bodyBaseStyle} ${className ?? ''}`}>{children}</div>;
 }
 
 export default Body;

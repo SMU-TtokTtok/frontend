@@ -6,17 +6,22 @@ import { getGradeStyle } from '@/common/util/getGradeStyle';
 import DropDown from '@/common/components/dropdown';
 import moreVert from '@/assets/more_vert.svg';
 interface ApplicantProps {
+  disableCursor?: boolean;
   applicant: ApplicantsInfo;
-  handleFavoriteStatus: ({ applicantId, status }: { applicantId: number; status: string }) => void;
+  handleFavoriteStatus?: ({ applicantId, status }: { applicantId: number; status: string }) => void;
 }
+
 const options = [
   { value: 'pass', label: '합격' },
   { value: 'fail', label: '불합격' },
   { value: 'evaluating', label: '평가중' },
 ];
-function PassFailItem({ applicant, handleFavoriteStatus }: ApplicantProps) {
+
+function PassFailItem({ applicant, handleFavoriteStatus, disableCursor }: ApplicantProps) {
+  const isHandleFavoriteStatus = !!handleFavoriteStatus;
+  const wrapper = `${S.ItemWrapper} ${disableCursor ? 'disableCursor' : ''}`;
   return (
-    <li className={S.ItemWrapper}>
+    <li className={wrapper}>
       <div className={S.profileSection}>
         <Tag variant={getGradeStyle(applicant.grade)} className={S.grade}>
           {applicant.grade}학년
@@ -25,19 +30,21 @@ function PassFailItem({ applicant, handleFavoriteStatus }: ApplicantProps) {
         <span className={S.verticalLine} />
         <span className={S.department}>{applicant.department}</span>
       </div>
-      <DropDown toggleButton={<Image src={moreVert} alt="more options" />}>
-        {options.map((status) => (
-          <li
-            key={status.value}
-            className={S.dropDownItem}
-            onClick={() =>
-              handleFavoriteStatus({ applicantId: applicant.id, status: status.value })
-            }
-          >
-            {status.label}
-          </li>
-        ))}
-      </DropDown>
+      {isHandleFavoriteStatus && (
+        <DropDown toggleButton={<Image src={moreVert} alt="more options" />}>
+          {options.map((status) => (
+            <li
+              key={status.value}
+              className={S.dropDownItem}
+              onClick={() =>
+                handleFavoriteStatus?.({ applicantId: applicant.id, status: status.value })
+              }
+            >
+              {status.label}
+            </li>
+          ))}
+        </DropDown>
+      )}
     </li>
   );
 }

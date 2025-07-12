@@ -1,6 +1,6 @@
 import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 
 export const rightSidebar = style({
   position: 'fixed',
@@ -17,7 +17,6 @@ export const rightSidebar = style({
 });
 
 export const panel = style({
-  //maxWidth: '330px',
   width: '330px',
   height: 'auto',
   backgroundColor: vars.colors.surface.bright,
@@ -102,6 +101,11 @@ export const ItemWrapper = style({
   backgroundColor: vars.colors.surface.default,
   marginTop: '0.333rem',
   cursor: 'pointer',
+  selectors: {
+    '&.disableCursor': {
+      cursor: 'default',
+    },
+  },
 });
 
 export const profileSection = style({
@@ -164,5 +168,37 @@ export const dropDownItem = style({
       backgroundColor: vars.colors.primary.default,
       color: vars.colors.white,
     },
+  },
+});
+
+export const passFailListModal = style({
+  padding: '18px 26px 30px 26px',
+  maxWidth: '1113px',
+  width: '100%',
+});
+
+export const modalBody = style({
+  maxHeight: '280px',
+  overflowY: 'auto',
+  marginTop: '8px',
+});
+
+export const empty = styleVariants({
+  modal: {
+    fontSize: vars.fonts.body1,
+    fontWeight: 500,
+    color: vars.colors.surface.outline,
+    textAlign: 'center',
+    marginTop: '20px',
+  },
+  sideBar: {
+    fontSize: vars.fonts.body3,
+    fontWeight: 500,
+    color: vars.colors.surface.outline,
+    marginTop: '20px',
+    minHeight: '150px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

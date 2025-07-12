@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom';
 import Content from './content';
 import Body from './body';
 import * as S from './modal.css';
+import Header from './header';
 
 function Modal({
   children,
@@ -23,11 +24,7 @@ function Modal({
 
   return createPortal(
     <ModalProvider value={modalProps}>
-      {isOpen && (
-        <div className={S.modalBase} onClick={onClose}>
-          {children}
-        </div>
-      )}
+      {isOpen && <div className={S.modalBase}>{children}</div>}
     </ModalProvider>,
     document.body,
   );
@@ -37,3 +34,4 @@ export default Modal;
 
 Modal.Content = Content;
 Modal.Body = Body;
+Modal.Header = Header;

@@ -7,7 +7,7 @@ const Content = forwardRef<HTMLDivElement, ContentProps>(function Content(
   { children, className, ...props },
   ref,
 ) {
-  const classNames = `${S.modalContent} ${className ?? ''}`;
+  const classNames = `${S.contentBaseStyle} ${className ?? ''}`;
   return (
     <div ref={ref} {...props} className={classNames}>
       {children}

@@ -16,6 +16,7 @@ export const Button = style({
 });
 
 export const body = style({
+  textAlign: 'center',
   fontSize: vars.fonts.title4,
   fontWeight: 600,
 });

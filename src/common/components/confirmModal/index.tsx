@@ -17,7 +17,7 @@ function ConfirmModal({ isOpen, onClose, children }: PropsWithChildren<ConfirmMo
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.Content ref={ref} className={S.content}>
         <Modal.Body className={S.body}>{children}</Modal.Body>
-        <Button variant="primary" className={S.Button}>
+        <Button variant="primary" className={S.Button} onClick={onClose}>
           확인
         </Button>
       </Modal.Content>

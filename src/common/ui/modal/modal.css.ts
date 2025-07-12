@@ -29,7 +29,7 @@ export const fadeOutStyle = style({
   animation: `${fadeOut} 0.3s ease-in-out forwards`,
 });
 
-export const modalContent = style({
+export const contentBaseStyle = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -42,6 +42,26 @@ export const modalContent = style({
   maxWidth: '80%',
 });
 
-export const modalBody = style({
+export const bodyBaseStyle = style({
   color: vars.colors.surface.on_surf,
+  width: '100%',
+});
+
+export const headerBaseStyle = style({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  width: '100%',
+});
+
+export const labelBaseStyle = style({
+  fontSize: vars.fonts.title4,
+  fontWeight: 700,
+  color: vars.colors.surface.on_surf,
+});
+
+export const closeButtonStyle = style({
+  cursor: 'pointer',
+  width: '24px',
+  height: '24px',
 });
