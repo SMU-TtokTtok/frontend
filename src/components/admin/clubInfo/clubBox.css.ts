@@ -7,6 +7,8 @@ export const container = style({
   padding: '18px 24px',
   backgroundColor: 'white',
   // marginBottom: '28px',
+
+  minWidth: 0,
 });
 
 export const headerflex = style({
@@ -35,6 +37,10 @@ export const desText = style({
   fontSize: vars.fonts.body1,
   marginBottom: '21px',
   color: '#55637D',
+
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
 });
 
 export const footerFlex = style({
