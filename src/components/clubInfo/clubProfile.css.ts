@@ -31,6 +31,8 @@ export const RightFlex = style({
   borderRadius: '8px',
   padding: '22px',
   position: 'relative',
+
+  minWidth: 0, // !
 });
 
 export const type = style({
@@ -86,6 +88,10 @@ export const member = style({
 export const description = style({
   fontSize: vars.fonts.body2,
   marginBottom: '16px',
+
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
