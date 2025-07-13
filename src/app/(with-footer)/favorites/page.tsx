@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <div>
       <SortButtonGroup title="즐겨찾기" filter={filter} />
-      <FavoritesClub selectedOptions={filter} />
+      <FavoritesClub title="즐겨찾기" selectedOptions={filter} />
     </div>
   );
 }
