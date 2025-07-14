@@ -7,14 +7,15 @@ export const lottieContainer = style({
   height: '100px',
 });
 
-export const empty = style({
+export const emptyText = style({
+  width: '100%',
+  backgroundColor: 'white',
+  height: '700px',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  height: '700px',
-  width: '100%',
   maxWidth: '1392px',
-  backgroundColor: 'white',
+  margin: '0 auto',
   borderRadius: '8px',
   fontSize: vars.fonts.title3,
   fontWeight: 500,
@@ -29,6 +30,8 @@ export const empty = style({
       fontSize: '16px',
       fontWeight: 400,
       height: '400px',
+      marginLeft: '20px',
+      marginRight: '20px',
     },
   },
 });

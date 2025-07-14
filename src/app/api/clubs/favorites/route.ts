@@ -3,16 +3,16 @@ import { NextRequest, NextResponse } from 'next/server';
 // 더미 데이터 생성 (id: 1 ~ 100)
 const TOTAL_CLUBS = 100;
 
-// const allClubs = [];
-const allClubs = Array.from({ length: TOTAL_CLUBS }, (_, i) => ({
-  id: i + 1,
-  name: `동아리 ${i + 1}`,
-  separation: '학술',
-  members: 25 + (i % 10),
-  category: ['프로그래밍', 'AI'],
-  isRecruiting: i % 2 === 0,
-  bookmark: i % 3 === 0,
-}));
+const allClubs = [];
+// const allClubs = Array.from({ length: TOTAL_CLUBS }, (_, i) => ({
+//   id: i + 1,
+//   name: `동아리 ${i + 1}`,
+//   separation: '학술',
+//   members: 25 + (i % 10),
+//   category: ['프로그래밍', 'AI'],
+//   isRecruiting: i % 2 === 0,
+//   bookmark: i % 3 === 0,
+// }));
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);

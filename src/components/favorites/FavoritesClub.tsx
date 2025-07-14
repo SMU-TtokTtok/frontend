@@ -8,7 +8,7 @@ import { SearchQueryReturn } from '@/hooks/useSearchQuery';
 import Lottie from 'lottie-react';
 import animationData from '@/assets/loading.json';
 import * as F from './favorites.css';
-
+import Empty from '@/common/components/empty';
 interface FavoritesClubProps {
   selectedOptions: SearchQueryReturn;
   title: string;
@@ -37,17 +37,19 @@ function FavoritesClub({ selectedOptions, title }: FavoritesClubProps) {
 
   return (
     <>
-      <div className={S.container}>
-        {clubs.length === 0 ? (
-          <div className={F.empty}>{title} 목록이 없습니다.</div>
-        ) : (
+      {clubs.length === 0 ? (
+        <Empty className={F.emptyText}>
+          <p>{title} 목록이 없습니다.</p>
+        </Empty>
+      ) : (
+        <div className={S.container}>
           <ul className={S.innerWrapper}>
             {clubs.map((club) => (
               <ClubItem key={club.id} className={S.cardStyle} clubData={club} />
             ))}
           </ul>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* 관찰용 div: 리스트 끝에 도달하면 inView가 true */}
       <div ref={ref} style={{ height: 1 }} />
