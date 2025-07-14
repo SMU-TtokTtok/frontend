@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // 더미 데이터 생성 (id: 1 ~ 100)
 const TOTAL_CLUBS = 100;
+
+// const allClubs = [];
 const allClubs = Array.from({ length: TOTAL_CLUBS }, (_, i) => ({
   id: i + 1,
   name: `동아리 ${i + 1}`,

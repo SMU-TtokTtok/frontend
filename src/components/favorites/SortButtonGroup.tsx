@@ -3,17 +3,15 @@
 import React from 'react';
 import * as S from './index.css';
 import Button from '@/common/ui/button';
-import { useRouter } from 'next/navigation';
 import { SearchQueryReturn } from '@/hooks/useSearchQuery';
+import QueryLink from '@/common/components/queryLink';
 
 interface SortButtonGroupProps {
   title: string;
   filter: SearchQueryReturn;
-  path: string;
 }
 
-export default function SortButtonGroup({ title, filter, path }: SortButtonGroupProps) {
-  const router = useRouter();
+export default function SortButtonGroup({ title, filter }: SortButtonGroupProps) {
   const { sort } = filter;
 
   return (
@@ -21,27 +19,30 @@ export default function SortButtonGroup({ title, filter, path }: SortButtonGroup
       <div className={S.HeaderContainer}>
         <div className={S.TitleText}>{title}</div>
         <div className={S.SortFlex}>
-          <Button
-            variant={sort === 'latest' ? 'secondary' : 'none'}
-            className={S.ButtonStyle({ selected: sort === 'latest', position: 'first' })}
-            onClick={() => router.push(`${path}?sort=latest`)}
-          >
-            최신등록순
-          </Button>
-          <Button
-            variant={sort === 'member' ? 'secondary' : 'none'}
-            className={S.ButtonStyle({ selected: sort === 'member', position: 'middle' })}
-            onClick={() => router.push(`${path}?sort=member`)}
-          >
-            멤버많은순
-          </Button>
-          <Button
-            variant={sort === 'popular' ? 'secondary' : 'none'}
-            className={S.ButtonStyle({ selected: sort === 'popular', position: 'last' })}
-            onClick={() => router.push(`${path}?sort=popular`)}
-          >
-            인기도순
-          </Button>
+          <QueryLink extraQuery={{ sort: 'latest' }} preserveQuery={false}>
+            <Button
+              variant={sort === 'latest' ? 'secondary' : 'none'}
+              className={S.ButtonStyle({ selected: sort === 'latest', position: 'first' })}
+            >
+              최신등록순
+            </Button>
+          </QueryLink>
+          <QueryLink extraQuery={{ sort: 'member' }} preserveQuery={false}>
+            <Button
+              variant={sort === 'member' ? 'secondary' : 'none'}
+              className={S.ButtonStyle({ selected: sort === 'member', position: 'middle' })}
+            >
+              멤버많은순
+            </Button>
+          </QueryLink>
+          <QueryLink extraQuery={{ sort: 'popular' }} preserveQuery={false}>
+            <Button
+              variant={sort === 'popular' ? 'secondary' : 'none'}
+              className={S.ButtonStyle({ selected: sort === 'popular', position: 'last' })}
+            >
+              인기도순
+            </Button>
+          </QueryLink>
         </div>
       </div>
     </div>

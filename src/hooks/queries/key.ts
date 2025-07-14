@@ -13,3 +13,7 @@ export const applicantKey = {
 export const applicationFormKey = {
   adminFormInfo: ['adminFormInfo'],
 };
+
+export const userKey = {
+  favoritesClubList: ['favoritesClubList'],
+} as const;
