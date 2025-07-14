@@ -340,3 +340,20 @@ export const panelItem2 = style({
     },
   },
 });
+
+export const detailFlex = style({
+  display: 'flex',
+  alignItems: 'center',
+  borderRadius: '100px',
+  padding: '4px 8px 4px 12px',
+  backgroundColor: '#F8F8F9',
+  border: '1px solid #E7E8EA',
+});
+export const detailInput = style({
+  // width: 'auto',
+  minWidth: '0px',
+  color: '#55637D',
+  fontSize: vars.fonts.body2,
+  fontWeight: 600,
+  lineHeight: '150%',
+});

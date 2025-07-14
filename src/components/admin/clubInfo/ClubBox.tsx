@@ -4,7 +4,7 @@ import Tag from '@/common/ui/tag/index';
 import Button from '@/common/ui/button';
 import person from '@/assets/person.svg';
 import Image from 'next/image';
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useState, useRef } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
@@ -62,19 +62,10 @@ export default function ClubBox(props: ClubBoxProps) {
   const [selectedRecruit, setSelectedRecruit] = useState<ClubRecruit>(
     isRecruiting ? '모집중' : '모집마감',
   );
-  // 사용자입력 세부분야 인라인 수정 상태
-  const [customField, setCustomField] = useState(detailField);
-  const [isEditingCustomField, setIsEditingCustomField] = useState(false);
-  // input width 동기화용
-  const spanRef = useRef<HTMLSpanElement>(null);
-  const [inputWidth, setInputWidth] = useState(0);
-  useLayoutEffect(() => {
-    if (spanRef.current) {
-      setInputWidth(spanRef.current.offsetWidth + 2);
-    }
-  }, [customField, isEditingCustomField]);
 
-  // 동아리명, 한줄설명 인라인 수정 상태
+  const [customField, setCustomField] = useState(detailField);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const [clubName, setClubName] = useState(name);
   const [clubDesc, setClubDesc] = useState(shortDescription);
 
@@ -204,45 +195,30 @@ export default function ClubBox(props: ClubBoxProps) {
             </Tag>
           )}
 
-          <div
-            className={
-              S.userInputTag + ' ' + (isEditingCustomField ? S.cursorText : S.cursorPointer)
-            }
-            onDoubleClick={() => props.isEditing && setIsEditingCustomField(true)}
-          >
-            {isEditingCustomField ? (
-              <>
-                <input
-                  value={customField}
-                  autoFocus
-                  onChange={(e) => {
-                    setCustomField(e.target.value);
-                    props.onChange?.({ detailField: e.target.value });
-                  }}
-                  onBlur={() => setIsEditingCustomField(false)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') setIsEditingCustomField(false);
-                  }}
-                  className={S.customFieldInput + ' ' + S.underlineInput}
-                  style={{ width: inputWidth }}
-                />
-                <span ref={spanRef} className={S.customFieldSpan}>
-                  {customField || ' '}
-                </span>
-              </>
-            ) : (
-              <span className={S.customFieldText}>
-                {customField.trim() === '' ? '사용자입력 세부분야' : customField}
-              </span>
-            )}
-            <Image
-              src={editIcon}
-              alt="edit"
-              width={21}
-              height={21}
-              onClick={() => props.isEditing && setIsEditingCustomField(true)}
-            />
-          </div>
+          {props.isEditing ? (
+            <div className={S.detailFlex}>
+              <input
+                ref={inputRef}
+                value={customField}
+                onChange={(e) => setCustomField(e.target.value)}
+                className={S.detailInput}
+                type="text"
+                size={6}
+              />
+              <Image
+                src={editIcon}
+                alt="edit"
+                width={20}
+                height={20}
+                onClick={() => inputRef.current?.focus()}
+                style={{ cursor: 'pointer' }}
+              />
+            </div>
+          ) : (
+            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
+              {detailField}
+            </Tag>
+          )}
 
           {props.isEditing ? (
             <DropDown
