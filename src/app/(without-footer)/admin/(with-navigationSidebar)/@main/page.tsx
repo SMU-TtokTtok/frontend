@@ -8,6 +8,7 @@ import MDEditor from '@/components/admin/clubInfo/MDEditor';
 import RightSideBar from '@/components/admin/clubInfo/RightSideBar';
 import { useState, useEffect, useRef } from 'react';
 import { AdminClubIntro } from '@/common/model/clubIntro';
+import EditIcon from '@/assets/edit-photo.svg';
 
 function Page() {
   const [isEditing, setIsEditing] = useState(false);
@@ -56,16 +57,21 @@ function Page() {
       <div className={S.wrapper}>
         <div className={S.title}>📑 동아리 정보 관리</div>
         <div className={S.flexRow}>
-          <Image
-            src={!clubInfo.img || clubInfo.img === '' ? clubImg : clubInfo.img}
-            alt="동아리 사진"
-            width={212}
-            height={224}
-            className={`${S.imgStyle} ${isEditing ? 'editing' : ''}`}
-            onClick={() => {
-              if (isEditing && fileInputRef.current) fileInputRef.current.click();
-            }}
-          />
+          <div className={S.imgContainer}>
+            <Image
+              src={!clubInfo.img || clubInfo.img === '' ? clubImg : clubInfo.img}
+              alt="동아리 사진"
+              width={212}
+              height={224}
+              className={`${S.imgStyle} ${isEditing ? 'editing' : ''}`}
+              onClick={() => {
+                if (isEditing && fileInputRef.current) fileInputRef.current.click();
+              }}
+            />
+            {isEditing && (
+              <Image src={EditIcon} alt="edit" width={48} height={48} className={S.editIcon} />
+            )}
+          </div>
           {isEditing && (
             <input
               ref={fileInputRef}
