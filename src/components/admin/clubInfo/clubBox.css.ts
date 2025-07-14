@@ -316,6 +316,10 @@ export const panelItem = style({
     '&:not(:last-child)': {
       borderBottom: '1px solid #E7E8EA',
     },
+    '&:hover': {
+      backgroundColor: '#E9F2FF',
+      color: '#0052EC',
+    },
   },
 });
 
@@ -329,6 +333,10 @@ export const panelItem2 = style({
   selectors: {
     '&:not(:last-child)': {
       borderBottom: '1px solid #E7E8EA',
+    },
+    '&:hover': {
+      backgroundColor: '#E9F2FF',
+      color: '#0052EC',
     },
   },
 });
