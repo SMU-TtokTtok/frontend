@@ -37,14 +37,23 @@ interface ClubBoxProps extends AdminClubIntro {
 }
 
 export default function ClubBox(props: ClubBoxProps) {
-  const { name, shortDescription, type, category, detailField, isRecruiting, peopleCount } = props;
+  const {
+    name,
+    shortDescription,
+    type,
+    category,
+    detailField,
+    isRecruiting,
+    peopleCount,
+    department,
+  } = props;
 
   const [selectedType, setSelectedType] = useState<ClubType>(type as ClubType);
   const [selectedCategory, setSelectedCategory] = useState<ClubCategory>(category as ClubCategory);
   const [selectedRecruit, setSelectedRecruit] = useState<ClubRecruit>(
     isRecruiting ? '모집중' : '모집마감',
   );
-
+  console.log(department);
   // 사용자입력 세부분야 인라인 수정 상태
   const [customField, setCustomField] = useState(detailField);
   const [isEditingCustomField, setIsEditingCustomField] = useState(false);

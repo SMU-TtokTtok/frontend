@@ -1,4 +1,4 @@
-export interface AdminClubIntro {
+export interface ClubIntro {
   id: number;
   name: string;
   shortDescription: string;
@@ -15,6 +15,10 @@ export interface AdminClubIntro {
   peopleCount: number;
 }
 
-export interface UserClubIntro extends AdminClubIntro {
+export interface UserClubIntro extends ClubIntro {
   isFavorite: boolean;
+}
+
+export interface AdminClubIntro extends ClubIntro {
+  department: string;
 }
