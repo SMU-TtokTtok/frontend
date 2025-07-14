@@ -8,7 +8,12 @@ import { useState, useRef, useLayoutEffect } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
-import { typeItems, categoryItems, recruitItems } from '@/common/constants/adminOptions';
+import {
+  typeItems,
+  categoryItems,
+  recruitItems,
+  departmentItems,
+} from '@/common/constants/adminOptions';
 
 const handleCloseRecruit = async () => {
   try {
@@ -31,6 +36,7 @@ const handleCloseRecruit = async () => {
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
 type ClubRecruit = (typeof recruitItems)[number];
+type ClubDepartment = (typeof departmentItems)[number];
 interface ClubBoxProps extends AdminClubIntro {
   onChange?: (updated: Partial<AdminClubIntro>) => void;
   isEditing?: boolean;
@@ -49,11 +55,13 @@ export default function ClubBox(props: ClubBoxProps) {
   } = props;
 
   const [selectedType, setSelectedType] = useState<ClubType>(type as ClubType);
+  const [selectedDepartment, setSelectedDepartment] = useState<ClubDepartment>(
+    department as ClubDepartment,
+  );
   const [selectedCategory, setSelectedCategory] = useState<ClubCategory>(category as ClubCategory);
   const [selectedRecruit, setSelectedRecruit] = useState<ClubRecruit>(
     isRecruiting ? '모집중' : '모집마감',
   );
-  console.log(department);
   // 사용자입력 세부분야 인라인 수정 상태
   const [customField, setCustomField] = useState(detailField);
   const [isEditingCustomField, setIsEditingCustomField] = useState(false);
@@ -98,6 +106,33 @@ export default function ClubBox(props: ClubBoxProps) {
         ) : (
           <Tag variant="default" className={S.selectedTypeText + ' ' + S.border4}>
             {type}
+          </Tag>
+        )}
+        {props.isEditing ? (
+          <DropDown
+            toggleButton={
+              <DropDownButton variant="default" className={S.dropDownStyle2}>
+                {selectedDepartment}
+              </DropDownButton>
+            }
+            panelClassName={S.panelContainer}
+          >
+            {departmentItems.map((item: ClubDepartment) => (
+              <li
+                key={item}
+                onClick={() => {
+                  setSelectedDepartment(item as ClubDepartment);
+                  // props.onChange?.({ type: item });
+                }}
+                className={S.panelItem}
+              >
+                {item}
+              </li>
+            ))}
+          </DropDown>
+        ) : (
+          <Tag variant="default" className={S.selectedTypeText + ' ' + S.border4}>
+            {department}
           </Tag>
         )}
       </div>

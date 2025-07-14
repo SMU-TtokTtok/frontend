@@ -13,8 +13,9 @@ export const container = style({
 
 export const headerflex = style({
   display: 'flex',
-  justifyContent: 'space-between',
+  // justifyContent: 'space-between',
   marginBottom: '8px',
+  gap: '8px',
 });
 
 export const clubName = style({

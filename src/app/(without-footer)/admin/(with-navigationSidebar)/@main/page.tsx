@@ -33,6 +33,7 @@ function Page() {
     const patchData = {
       img: clubInfo.img,
       type: clubInfo.type,
+      department: clubInfo.department,
       category: clubInfo.category,
       shortDescription: clubInfo.shortDescription,
       isRecruiting: clubInfo.isRecruiting,
