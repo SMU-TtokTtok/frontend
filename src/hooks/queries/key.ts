@@ -16,4 +16,5 @@ export const applicationFormKey = {
 
 export const userKey = {
   favoritesClubList: ['favoritesClubList'],
+  appliedClubList: ['appliedClubList'],
 } as const;
