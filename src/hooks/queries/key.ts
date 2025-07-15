@@ -21,4 +21,5 @@ export const userKey = {
 
 export const clubInfoKey = {
   clubInfo: ['clubInfo'],
+  adminClubInfo: ['adminClubInfo'],
 } as const;

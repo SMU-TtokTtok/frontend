@@ -6,24 +6,16 @@ import Image from 'next/image';
 import ClubBox from '@/components/admin/clubInfo/ClubBox';
 import MDEditor from '@/components/admin/clubInfo/MDEditor';
 import RightSideBar from '@/components/admin/clubInfo/RightSideBar';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import EditIcon from '@/assets/edit-photo.svg';
+import { useAdminClubInfo } from '@/hooks/useClubInfo';
 
 function Page() {
   const [isEditing, setIsEditing] = useState(false);
-  const [clubInfo, setClubInfo] = useState<AdminClubIntro | null>(null);
-  const [loading, setLoading] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    fetch('/api/club-info')
-      .then((res) => res.json())
-      .then((data) => {
-        setClubInfo(data);
-        setLoading(false);
-      });
-  }, []);
+  const { data } = useAdminClubInfo();
+  const [clubInfo, setClubInfo] = useState<AdminClubIntro>(data);
 
   const handleClubInfoChange = (updated: Partial<AdminClubIntro>) => {
     setClubInfo((prev) => (prev ? { ...prev, ...updated } : prev));
@@ -50,7 +42,7 @@ function Page() {
     alert('저장되었습니다!');
   };
 
-  if (loading || !clubInfo) return <div>로딩중...</div>;
+  // if (loading || !clubInfo) return <div>로딩중...</div>;
 
   return (
     <div className={S.container}>
