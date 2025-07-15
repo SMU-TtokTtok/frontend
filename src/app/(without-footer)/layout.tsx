@@ -1,10 +1,10 @@
 import * as S from '@/app/layout.css';
-import Header from '@/common/components/header';
+import AdminHeader from '@/common/components/header/adminHeader';
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header />
+      <AdminHeader />
       <div className={S.withoutFooterContent}>{children}</div>
     </>
   );
