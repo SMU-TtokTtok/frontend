@@ -5,6 +5,7 @@ export const ROUTES = {
   PASSWORD: '/password',
   POPULAR: '/popular',
   FAVORITES: '/favorites',
+  SEARCH: (name: string) => `/search?name=${name}`,
   CLUB_INFO: (clubId: number) => `/club/${clubId}`,
   ADMIN: '/admin',
   ADMIN_LOGIN: '/admin/login',
