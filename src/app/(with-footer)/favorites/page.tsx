@@ -1,9 +1,8 @@
 'use client';
 
-import FavoritesClub from '@/components/favorites/FavoritesClub';
+import InfiniteClubList from '@/components/favorites/InfiniteClublist';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import SortButtonGroup from '@/components/favorites/SortButtonGroup';
-// import { ROUTES } from '@/common/constants/routes';
 import { useFavoritesInfinite } from '@/hooks/useFavoritesInfinite';
 
 export default function Page() {
@@ -12,7 +11,11 @@ export default function Page() {
   return (
     <div>
       <SortButtonGroup title="즐겨찾기" filter={filter} />
-      <FavoritesClub title="즐겨찾기" selectedOptions={filter} useInfinite={useFavoritesInfinite} />
+      <InfiniteClubList
+        title="즐겨찾기"
+        selectedOptions={filter}
+        useInfinite={useFavoritesInfinite}
+      />
     </div>
   );
 }

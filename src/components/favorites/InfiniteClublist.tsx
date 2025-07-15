@@ -10,7 +10,8 @@ import * as F from './favorites.css';
 import Empty from '@/common/components/empty';
 import { ClubsInfinite } from '@/common/model/clubInfinite';
 import type { InfiniteData } from '@tanstack/react-query';
-interface FavoritesClubProps {
+
+interface InfiniteClubListProps {
   useInfinite: (params: { enabled: boolean; sort: string }) => {
     data: InfiniteData<ClubsInfinite, unknown> | undefined;
     fetchNextPage: () => void;
@@ -22,7 +23,7 @@ interface FavoritesClubProps {
   title: string;
 }
 
-function FavoritesClub({ selectedOptions, title, useInfinite }: FavoritesClubProps) {
+function InfiniteClubList({ selectedOptions, title, useInfinite }: InfiniteClubListProps) {
   const sort = selectedOptions.sort || 'latest';
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfinite({
     enabled: true,
@@ -73,4 +74,4 @@ function FavoritesClub({ selectedOptions, title, useInfinite }: FavoritesClubPro
   );
 }
 
-export default FavoritesClub;
+export default InfiniteClubList;
