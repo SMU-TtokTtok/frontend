@@ -30,7 +30,7 @@ export const FILTER = {
   type: ['all', 'major', 'central', 'union'],
   sort: ['latest', 'popular', 'member'],
   grade: ['1', '2', '3', '4'],
-  college: ['humanities', 'design', 'art', 'tech', 'engineering', 'physicaln'],
+  college: ['humanities', 'design', 'art', 'tech', 'engineering'],
 } as const;
 
 type FilterKey = keyof typeof FILTER;
@@ -41,7 +41,7 @@ export const FILTER_KO: Record<FilterKey, readonly string[]> = {
   type: ['전체', '과동아리', '중앙동아리', '연합동아리'],
   sort: ['최신 등록 순', '인기도 순', '멤버 많은 수'],
   grade: ['1학년', '2학년', '3학년', '4학년'],
-  college: ['인문대', '디자인대', '예술대', '융합기술대', '공대', '체대'],
+  college: ['인문대', '디자인대', '예술대', '융합기술대', '공대'],
 };
 
 export const LOGIN_ERRORS = {
