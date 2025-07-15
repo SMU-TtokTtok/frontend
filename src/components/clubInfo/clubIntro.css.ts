@@ -25,4 +25,5 @@ export const contentContainer = style({
   padding: '26px 28px',
   backgroundColor: 'white',
   minHeight: '300px',
+  borderRadius: '0 0 8px 8px',
 });
