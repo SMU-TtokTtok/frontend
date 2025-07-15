@@ -1,5 +1,5 @@
 'use client';
-import { InputHTMLAttributes, useState } from 'react';
+import { InputHTMLAttributes } from 'react';
 import Combobox from './combobox';
 import * as S from './inputCombobox.css';
 import SearchBar from '@/common/ui/searchBar';
@@ -12,6 +12,7 @@ interface InputComboboxProps<T> extends InputHTMLAttributes<HTMLInputElement> {
   img: string;
   comboBoxList?: T[];
   isComboBoxOpen?: boolean;
+  setIsComboBoxOpen: (isOpen: boolean) => void;
   onClick?: () => void;
 }
 
@@ -23,17 +24,17 @@ function InputCombobox<T extends { id: number; name: string; separation: string 
   placeholder,
   comboBoxList,
   isComboBoxOpen = false,
+  setIsComboBoxOpen,
   onClick,
   ...props
 }: InputComboboxProps<T>) {
-  const [open, setOpen] = useState(isComboBoxOpen);
   const container = `${S.container} ${className}`;
 
   const handleClose = () => {
-    setOpen(!open);
+    setIsComboBoxOpen(!isComboBoxOpen);
   };
 
-  const boxRef = useOutsideClick<HTMLUListElement>(() => handleClose());
+  const boxRef = useOutsideClick<HTMLDivElement>(() => handleClose());
 
   return (
     <>

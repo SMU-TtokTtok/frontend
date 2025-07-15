@@ -9,7 +9,7 @@ import mainlogo from '@/assets/mainlogo_wh.svg';
 import * as S from './clientHeader.css';
 import { useSearchClubInfinite } from '@/hooks/useSearchClubInfinite';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputCombobox from '../../inputCombobox';
 import SearchIcon from '@/assets/search.svg';
 import { useRouter } from 'next/navigation';
@@ -19,11 +19,16 @@ function ClientHeader() {
   const isVisible = useScrollObserver();
   const [searchdata, setSearchData] = useState('');
   const debouncedSearch = useDebounce(searchdata);
+  const [isComboBoxOpen, setIsComboBoxOpen] = useState<boolean>(!!debouncedSearch);
 
   const { data: searchList } = useSearchClubInfinite({ debouncedSearch });
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchData(e.target.value);
+    console.log('Search Input Changed:', isComboBoxOpen);
   };
+  useEffect(() => {
+    setIsComboBoxOpen(!!debouncedSearch);
+  }, [debouncedSearch]);
 
   const handleNavigate = () => {
     router.push(ROUTES.SEARCH(debouncedSearch));
@@ -46,7 +51,8 @@ function ClientHeader() {
           img={SearchIcon}
           iconStyle={S.searchIcon}
           comboBoxList={searchList}
-          isComboBoxOpen={!!searchdata}
+          isComboBoxOpen={isComboBoxOpen}
+          setIsComboBoxOpen={setIsComboBoxOpen}
           onChange={handleSearchChange}
           onClick={handleNavigate}
           onKeyDown={handleKeyDown}

@@ -9,13 +9,13 @@ interface ComboboxProps<T> {
 }
 
 export default forwardRef<
-  HTMLUListElement,
+  HTMLDivElement,
   ComboboxProps<{ id: number; name: string; separation: string }>
 >(function Combobox({ comboBoxList }, ref) {
   return (
-    <div className={S.layout}>
+    <div className={S.layout} ref={ref}>
       {comboBoxList.length > 0 && (
-        <ul ref={ref}>
+        <ul>
           {comboBoxList.map((item) => (
             <Link href={ROUTES.CLUB_INFO(item.id)} key={item.id}>
               <li key={item.id} className={S.comboBoxOption}>
