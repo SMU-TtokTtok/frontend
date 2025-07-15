@@ -1,4 +1,5 @@
 'use client';
+
 import { useInView } from 'react-intersection-observer';
 import * as S from '@/components/home/clubList/clubList.css';
 import ClubItem from '@/common/components/clubItem';
@@ -31,7 +32,6 @@ function InfiniteClubList({ selectedOptions, title, useInfinite }: InfiniteClubL
   });
   const clubs = data ? data.pages.flatMap((page) => page.clubs) : [];
   const { ref, inView } = useInView();
-
   // sort가 바뀌면 무한스크롤 새로 시작 (refetch)
   useEffect(() => {
     refetch();

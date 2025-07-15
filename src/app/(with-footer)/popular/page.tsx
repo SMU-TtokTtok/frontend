@@ -3,18 +3,18 @@
 import InfiniteClubList from '@/components/favorites/InfiniteClublist';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import SortButtonGroup from '@/components/favorites/SortButtonGroup';
-import { useFavoritesInfinite } from '@/hooks/useInfiniteCommon';
+import { usePopularInfinite } from '@/hooks/useInfiniteCommon';
 
 export default function Page() {
   const { filter } = useSearchQuery();
 
   return (
     <div>
-      <SortButtonGroup title="즐겨찾기" filter={filter} />
+      <SortButtonGroup title="🏆 인기 동아리" filter={filter} />
       <InfiniteClubList
-        title="즐겨찾기"
+        title="인기 동아리"
         selectedOptions={filter}
-        useInfinite={useFavoritesInfinite}
+        useInfinite={usePopularInfinite}
       />
     </div>
   );
