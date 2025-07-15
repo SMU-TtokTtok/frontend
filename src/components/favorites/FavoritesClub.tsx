@@ -1,5 +1,4 @@
 'use client';
-import { useFavoritesInfinite } from '@/hooks/useFavoritesInfinite';
 import { useInView } from 'react-intersection-observer';
 import * as S from '@/components/home/clubList/clubList.css';
 import ClubItem from '@/common/components/clubItem';
@@ -9,14 +8,23 @@ import Lottie from 'lottie-react';
 import animationData from '@/assets/loading.json';
 import * as F from './favorites.css';
 import Empty from '@/common/components/empty';
+import { ClubsInfinite } from '@/common/model/clubInfinite';
+import type { InfiniteData } from '@tanstack/react-query';
 interface FavoritesClubProps {
+  useInfinite: (params: { enabled: boolean; sort: string }) => {
+    data: InfiniteData<ClubsInfinite, unknown> | undefined;
+    fetchNextPage: () => void;
+    hasNextPage: boolean;
+    isFetchingNextPage: boolean;
+    refetch: () => void;
+  };
   selectedOptions: SearchQueryReturn;
   title: string;
 }
 
-function FavoritesClub({ selectedOptions, title }: FavoritesClubProps) {
+function FavoritesClub({ selectedOptions, title, useInfinite }: FavoritesClubProps) {
   const sort = selectedOptions.sort || 'latest';
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useFavoritesInfinite({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfinite({
     enabled: true,
     sort,
   });
@@ -38,9 +46,7 @@ function FavoritesClub({ selectedOptions, title }: FavoritesClubProps) {
   return (
     <>
       {clubs.length === 0 ? (
-        <Empty className={F.emptyText}>
-          <p>{title} 목록이 없습니다.</p>
-        </Empty>
+        <Empty className={F.emptyText}>{title} 목록이 없습니다</Empty>
       ) : (
         <div className={S.container}>
           <ul className={S.innerWrapper}>

@@ -6,3 +6,8 @@ export interface ClubsInfinite {
   hasNext: boolean;
   nextCursor: string | null;
 }
+
+export interface ClubsInfiniteData {
+  pageParams: (string | undefined)[];
+  pages: ClubsInfinite[];
+}
