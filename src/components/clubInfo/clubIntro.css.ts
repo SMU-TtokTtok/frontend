@@ -10,7 +10,7 @@ export const headerContainer = style({
   display: 'flex',
 });
 
-export const headerItem = style({
+export const headerItem1 = style({
   flex: '1 0 0',
   textAlign: 'center',
   cursor: 'pointer',
@@ -18,6 +18,20 @@ export const headerItem = style({
   borderRadius: '6px 6px 0px 0px',
   fontWeight: 700,
   fontSize: vars.fonts.body2,
+  color: '#0052EC !important',
+  backgroundColor: '#CAE0FF !important',
+});
+
+export const headerItem2 = style({
+  flex: '1 0 0',
+  textAlign: 'center',
+  cursor: 'pointer',
+  padding: '20px 0 ',
+  borderRadius: '6px 6px 0px 0px',
+  // fontWeight: 700,
+  fontSize: vars.fonts.body2,
+  color: '#55637D !important',
+  backgroundColor: '#EEEEF0 !important',
 });
 
 export const contentContainer = style({
