@@ -1,6 +1,5 @@
 import * as S from './RightSideBar.css';
 import Button from '@/common/ui/button/index';
-import { useState } from 'react';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToString';
 
@@ -27,12 +26,6 @@ export default function RightSideBar(props: RightSideBarProps) {
     // refetch,
   } = props;
 
-  // local state로 관리
-  const [localStart, setLocalStart] = useState(recruitStartDate);
-  const [localEnd, setLocalEnd] = useState(recruitEndDate);
-  const [localTarget, setLocalTarget] = useState(recruitTarget);
-  const [localNumber, setLocalNumber] = useState(recruitNumber);
-
   return (
     <div className={S.container}>
       <div className={S.contentBox}>
@@ -43,18 +36,16 @@ export default function RightSideBar(props: RightSideBarProps) {
             <div className={S.dateFlex}>
               <input
                 type="date"
-                value={localStart}
+                value={recruitStartDate}
                 onChange={(e) => {
-                  setLocalStart(e.target.value);
                   onChange({ recruitStartDate: e.target.value });
                 }}
               />
               <span>~</span>
               <input
                 type="date"
-                value={localEnd}
+                value={recruitEndDate}
                 onChange={(e) => {
-                  setLocalEnd(e.target.value);
                   onChange({ recruitEndDate: e.target.value });
                 }}
               />
@@ -73,16 +64,15 @@ export default function RightSideBar(props: RightSideBarProps) {
               {[1, 2, 3, 4].map((grade) => (
                 <Button
                   key={grade}
-                  variant={localTarget.includes(grade) ? 'secondary' : 'tertiary'}
+                  variant={recruitTarget.includes(grade) ? 'secondary' : 'tertiary'}
                   className={S.button}
                   onClick={() => {
                     let newTarget: number[];
-                    if (localTarget.includes(grade)) {
-                      newTarget = localTarget.filter((g) => g !== grade);
+                    if (recruitTarget.includes(grade)) {
+                      newTarget = recruitTarget.filter((g) => g !== grade);
                     } else {
-                      newTarget = [...localTarget, grade].sort();
+                      newTarget = [...recruitTarget, grade].sort();
                     }
-                    setLocalTarget(newTarget);
                     onChange({ recruitTarget: newTarget });
                   }}
                 >
@@ -98,11 +88,10 @@ export default function RightSideBar(props: RightSideBarProps) {
           <div className={S.grayText}>모집인원</div>
           {isEditing ? (
             <input
-              value={localNumber}
+              value={recruitNumber}
               type="number"
               className={S.numberInput}
               onChange={(e) => {
-                setLocalNumber(Number(e.target.value));
                 onChange({ recruitNumber: Number(e.target.value) });
               }}
             />
@@ -124,7 +113,6 @@ export default function RightSideBar(props: RightSideBarProps) {
           className={S.modifyButton + ' ' + 'cancel'}
           onClick={onCancel}
           style={{ marginTop: 8 }}
-          // onClick={refetch}
         >
           돌아가기
         </Button>

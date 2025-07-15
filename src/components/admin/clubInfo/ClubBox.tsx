@@ -4,7 +4,7 @@ import Tag from '@/common/ui/tag/index';
 import Button from '@/common/ui/button';
 import person from '@/assets/person.svg';
 import Image from 'next/image';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
@@ -54,20 +54,7 @@ export default function ClubBox(props: ClubBoxProps) {
     department,
   } = props;
 
-  const [selectedType, setSelectedType] = useState<ClubType>(type as ClubType);
-  const [selectedDepartment, setSelectedDepartment] = useState<ClubDepartment>(
-    department as ClubDepartment,
-  );
-  const [selectedCategory, setSelectedCategory] = useState<ClubCategory>(category as ClubCategory);
-  const [selectedRecruit, setSelectedRecruit] = useState<ClubRecruit>(
-    isRecruiting ? '모집중' : '모집마감',
-  );
-
-  const [customField, setCustomField] = useState(detailField);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const [clubName, setClubName] = useState(name);
-  const [clubDesc, setClubDesc] = useState(shortDescription);
 
   return (
     <div className={S.container}>
@@ -76,7 +63,7 @@ export default function ClubBox(props: ClubBoxProps) {
           <DropDown
             toggleButton={
               <DropDownButton variant="default" className={S.dropDownStyle2}>
-                {selectedType}
+                {type}
               </DropDownButton>
             }
             panelClassName={S.panelContainer}
@@ -85,8 +72,7 @@ export default function ClubBox(props: ClubBoxProps) {
               <li
                 key={item}
                 onClick={() => {
-                  setSelectedType(item as ClubType);
-                  // props.onChange?.({ type: item });
+                  props.onChange?.({ type: item });
                 }}
                 className={S.panelItem}
               >
@@ -103,7 +89,7 @@ export default function ClubBox(props: ClubBoxProps) {
           <DropDown
             toggleButton={
               <DropDownButton variant="default" className={S.dropDownStyle2}>
-                {selectedDepartment}
+                {department}
               </DropDownButton>
             }
             panelClassName={S.panelContainer}
@@ -112,8 +98,7 @@ export default function ClubBox(props: ClubBoxProps) {
               <li
                 key={item}
                 onClick={() => {
-                  setSelectedDepartment(item as ClubDepartment);
-                  // props.onChange?.({ type: item });
+                  props.onChange?.({ department: item });
                 }}
                 className={S.panelItem}
               >
@@ -130,11 +115,10 @@ export default function ClubBox(props: ClubBoxProps) {
       <div className={S.clubName}>
         {props.isEditing ? (
           <input
-            value={clubName}
+            value={name}
             autoFocus
             onChange={(e) => {
-              setClubName(e.target.value);
-              // props.onChange?.({ name: e.target.value });
+              props.onChange?.({ name: e.target.value });
             }}
             className={S.clubNameInput}
           />
@@ -151,10 +135,9 @@ export default function ClubBox(props: ClubBoxProps) {
       <div className={S.desText}>
         {props.isEditing ? (
           <input
-            value={clubDesc}
+            value={shortDescription}
             // autoFocus
             onChange={(e) => {
-              setClubDesc(e.target.value);
               props.onChange?.({ shortDescription: e.target.value });
             }}
             className={S.desTextInput}
@@ -171,7 +154,7 @@ export default function ClubBox(props: ClubBoxProps) {
             <DropDown
               toggleButton={
                 <DropDownButton variant="default" className={S.dropDownStyle}>
-                  {selectedCategory}
+                  {category}
                 </DropDownButton>
               }
               panelClassName={S.panelContainer}
@@ -180,8 +163,7 @@ export default function ClubBox(props: ClubBoxProps) {
                 <li
                   key={item}
                   onClick={() => {
-                    setSelectedCategory(item as ClubCategory);
-                    // props.onChange?.({ category: item });
+                    props.onChange?.({ category: item });
                   }}
                   className={S.panelItem2}
                 >
@@ -199,8 +181,8 @@ export default function ClubBox(props: ClubBoxProps) {
             <div className={S.detailFlex}>
               <input
                 ref={inputRef}
-                value={customField}
-                onChange={(e) => setCustomField(e.target.value)}
+                value={detailField}
+                onChange={(e) => props.onChange?.({ detailField: e.target.value })}
                 className={S.detailInput}
                 type="text"
                 size={6}
@@ -224,10 +206,10 @@ export default function ClubBox(props: ClubBoxProps) {
             <DropDown
               toggleButton={
                 <DropDownButton
-                  variant={selectedRecruit === '모집마감' ? 'default' : 'tertiary'}
+                  variant={isRecruiting ? 'tertiary' : 'default'}
                   className={S.dropDownStyle}
                 >
-                  {selectedRecruit}
+                  {isRecruiting ? '모집중' : '모집마감'}
                 </DropDownButton>
               }
               panelClassName={S.panelContainer}
@@ -236,8 +218,8 @@ export default function ClubBox(props: ClubBoxProps) {
                 <li
                   key={item}
                   onClick={() => {
-                    setSelectedRecruit(item as ClubRecruit);
-                    // props.onChange?.({ isRecruiting: item === '모집중' });
+                    // setSelectedRecruit(item as ClubRecruit);
+                    props.onChange?.({ isRecruiting: item === '모집중' });
                   }}
                   className={S.panelItem2}
                 >
