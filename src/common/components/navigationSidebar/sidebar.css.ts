@@ -6,7 +6,7 @@ import { recipe } from '@vanilla-extract/recipes';
 export const sidebarContainer = style({
   position: 'fixed',
   left: 20,
-  top: 100,
+  top: 85,
   bottom: 20,
   height: 'auto',
   display: 'flex',

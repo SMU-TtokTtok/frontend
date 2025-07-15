@@ -11,6 +11,7 @@ function SearchBarArea({ search, handleSearchChange }: SearchBarAreaProps) {
     <div className={S.searchWrapper}>
       <SearchBar
         className={S.searchInput}
+        iconStyle={S.iconStyle}
         icon={SearchIcon}
         placeholder="지원자 이름을 검색해보세요."
         value={search}
