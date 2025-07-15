@@ -48,6 +48,13 @@ export const searchInput = style({
   padding: '16px 22px',
 });
 
+export const iconStyle = style({
+  width: '31px',
+  height: '31px',
+  right: '7px',
+  cursor: 'pointer',
+});
+
 export const evaluationTabs = style({
   marginTop: '20px',
   width: '100%',
@@ -121,9 +128,9 @@ export const checkbox = style({
 });
 
 export const noResults = style({
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   fontWeight: 700,
-  color: vars.colors.black,
+  color: vars.colors.surface.outline,
   textAlign: 'center',
   marginTop: '2rem',
 });
