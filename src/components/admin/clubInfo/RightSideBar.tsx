@@ -10,6 +10,7 @@ interface RightSideBarProps extends AdminClubIntro {
   handleSave: () => void;
   onCancel: () => void;
   onChange: (fields: Partial<AdminClubIntro>) => void;
+  // refetch: () => void;
 }
 
 export default function RightSideBar(props: RightSideBarProps) {
@@ -23,6 +24,7 @@ export default function RightSideBar(props: RightSideBarProps) {
     recruitTarget,
     recruitNumber,
     onChange,
+    // refetch,
   } = props;
 
   // local state로 관리
@@ -122,6 +124,7 @@ export default function RightSideBar(props: RightSideBarProps) {
           className={S.modifyButton + ' ' + 'cancel'}
           onClick={onCancel}
           style={{ marginTop: 8 }}
+          // onClick={refetch}
         >
           돌아가기
         </Button>

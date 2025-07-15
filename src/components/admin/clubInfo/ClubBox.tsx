@@ -138,7 +138,7 @@ export default function ClubBox(props: ClubBoxProps) {
             }}
             className={S.clubNameInput}
           />
-        ) : clubName.trim() === '' ? (
+        ) : name.trim() === '' ? (
           '동아리명을 입력해주세요'
         ) : (
           name
