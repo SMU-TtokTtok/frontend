@@ -12,7 +12,7 @@ interface SortButtonGroupProps {
 }
 
 export default function SortButtonGroup({ title, filter }: SortButtonGroupProps) {
-  const { sort } = filter;
+  const sort = filter.sort || 'latest';
 
   return (
     <div className={S.HeaderWrapper}>
