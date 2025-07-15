@@ -18,3 +18,7 @@ export const userKey = {
   favoritesClubList: ['favoritesClubList'],
   appliedClubList: ['appliedClubList'],
 } as const;
+
+export const clubInfoKey = {
+  clubInfo: ['clubInfo'],
+} as const;
