@@ -7,6 +7,7 @@ export const ROUTES = {
   FAVORITES: '/favorites',
   APPLIED: '/applied?sort=latest',
   CLUB_INFO: (clubId: number) => `/club/${clubId}`,
+  APPLIY_FORM: (clubId: number) => `/club/${clubId}/apply`,
   ADMIN: '/admin',
   ADMIN_LOGIN: '/admin/login',
   ADMIN_APPLICATIONS: '/admin/applicants?evaluation=applies&sort=grade',
