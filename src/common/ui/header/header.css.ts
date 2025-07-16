@@ -18,8 +18,6 @@ export const Wrapper = style({
 
 export const InnerWrapper = style({
   width: '100%',
-  maxWidth: '1392px',
-  padding: '1.111rem 0',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -31,22 +29,13 @@ export const InnerWrapper = style({
   },
 });
 
-export const Logo = style({
-  width: '50px',
-  height: '36px',
-});
-
-export const ButtonStyle = style({
-  borderRadius: '100px',
-  padding: '8px 16px',
-  fontWeight: '600',
-  fontSize: vars.fonts.body3,
-  marginRight: '8px',
-});
-
 export const hidden = style({
-  transform: 'translateY(-100%)',
-  transition: 'transform 0.3s ease-in-out',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      transform: 'translateY(-100%)',
+      transition: 'transform 0.3s ease-in-out',
+    },
+  },
 });
 
 export const visible = style({

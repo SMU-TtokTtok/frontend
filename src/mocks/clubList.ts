@@ -19,3 +19,15 @@ export const patchFavorite = http.patch(`${API}/favorite/:id`, () => {
     },
   );
 });
+
+export const getSearchList = http.get(`${API}/clubs/search`, ({ request }) => {
+  const url = new URL(request.url);
+  const name = url.searchParams.get('name') || '';
+  const sort = url.searchParams.get('sort') || 'latest';
+
+  const filteredClubs = clubList.filter((club) =>
+    club.name.toLowerCase().includes(name.toLowerCase()),
+  );
+
+  return HttpResponse.json(filteredClubs, { status: 200 });
+});

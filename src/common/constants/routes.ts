@@ -6,6 +6,7 @@ export const ROUTES = {
   POPULAR: '/popular',
   FAVORITES: '/favorites',
   APPLIED: '/applied',
+  SEARCH: (name: string) => `/search?name=${name}`,
   CLUB_INFO: (clubId: number) => `/club/${clubId}`,
   APPLIY_FORM: (clubId: number) => `/club/${clubId}/apply`,
   ADMIN: '/admin',

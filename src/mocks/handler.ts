@@ -6,7 +6,7 @@ import {
   PassList,
   PatchApplicantStatus,
 } from './applicants';
-import { Clubs, patchFavorite, popularClubs } from './clubList';
+import { Clubs, getSearchList, patchFavorite, popularClubs } from './clubList';
 import { AdminLogin } from './auth';
 import { getClubInfo, patchClubInfo, patchRecruiting } from './clubInfo/adminClubInfo';
 import { getUserClubInfo } from './clubInfo/userClubInfo';
@@ -34,4 +34,5 @@ export const handlers = [
   userLoginHandler,
   userSignupHandler,
   userEmailPostHandler,
+  getSearchList,
 ];

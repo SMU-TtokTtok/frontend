@@ -1,6 +1,7 @@
 export const clubKey = {
   popularClubList: ['popularClubList'],
   allClubList: ['allClubList'],
+  searchList: ['searchList'],
 } as const;
 
 export const applicantKey = {
