@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 export default function Page() {
   const { filter } = useSearchQuery();
-  const [total, setTotal] = useState<number | null>(null);
+  const [total, setTotal] = useState<number | null>(0);
 
   const handleTotal = (data: number) => {
     setTotal(data);

@@ -14,7 +14,7 @@ interface SortButtonGroupProps {
 
 export default function SortButtonGroup({ title, filter, total }: SortButtonGroupProps) {
   const sort = filter.sort || 'latest';
-  const isSearch = filter.name !== '';
+  const isSearch = title === '검색결과';
 
   return (
     <div className={S.HeaderWrapper}>
