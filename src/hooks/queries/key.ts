@@ -18,6 +18,8 @@ export const applicationFormKey = {
 export const userKey = {
   favoritesClubList: ['favoritesClubList'],
   appliedClubList: ['appliedClubList'],
+  popularClubList: ['popularClubList'],
+  searchClubList: ['searchClubList'],
 } as const;
 
 export const clubInfoKey = {

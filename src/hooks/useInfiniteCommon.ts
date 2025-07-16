@@ -48,7 +48,7 @@ export const usePopularInfinite = ({ enabled, sort = 'latest' }: UseInfinitePara
     ClubsInfinite,
     Error
   >({
-    queryKey: [...userKey.appliedClubList, sort],
+    queryKey: [...userKey.popularClubList, sort],
     queryFn: ({ pageParam }) => fetchPopularClubs({ sort, size: 20, cursor: pageParam as string }),
     initialPageParam: undefined, // 첫 요청은 cursor 없이
     getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
@@ -63,7 +63,7 @@ export const useSearchInfinite = ({ enabled, sort = 'latest', name }: UseInfinit
     ClubsInfinite,
     Error
   >({
-    queryKey: [...userKey.appliedClubList, sort],
+    queryKey: [...userKey.searchClubList, sort, name],
     queryFn: ({ pageParam }) =>
       fetchSearchClubs({ name, sort, size: 20, cursor: pageParam as string }),
     initialPageParam: undefined, // 첫 요청은 cursor 없이
