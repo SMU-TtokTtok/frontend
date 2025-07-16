@@ -8,6 +8,7 @@ import { useRef } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
+import { patchIsRecruting } from './api/patchIsRecruting';
 import {
   typeItems,
   categoryItems,
@@ -15,14 +16,9 @@ import {
   departmentItems,
 } from '@/common/constants/adminOptions';
 
-const handleCloseRecruit = async () => {
+const handleCloseRecruit = async (isRecruiting: boolean) => {
   try {
-    const res = await fetch('/api/club-info/recruiting', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ isRecruiting: false }),
-    });
-    const data = await res.json();
+    const data = await patchIsRecruting(!isRecruiting);
     if (data.success) {
       alert('모집이 마감되었습니다!');
     } else {
