@@ -13,13 +13,22 @@ interface SortButtonGroupProps {
 
 export default function SortButtonGroup({ title, filter }: SortButtonGroupProps) {
   const sort = filter.sort || 'latest';
+  const isSearch = filter.name !== '';
 
   return (
     <div className={S.HeaderWrapper}>
-      <div className={S.HeaderContainer}>
-        <div className={S.TitleText}>{title}</div>
+      <div className={S.HeaderContainer({ isSearch: isSearch })}>
+        {isSearch ? (
+          <div className={S.SearchTitleText}>
+            총 <span className={S.SearchTitleTextSpan}>24개</span>의 결과가{' '}
+            <br className={S.showOnMobileBr} />
+            검색되었습니다.
+          </div>
+        ) : (
+          <div className={S.TitleText}>{title}</div>
+        )}
         <div className={S.SortFlex}>
-          <QueryLink extraQuery={{ sort: 'latest' }} preserveQuery={false}>
+          <QueryLink extraQuery={{ sort: 'latest' }} preserveQuery={isSearch}>
             <Button
               variant={sort === 'latest' ? 'secondary' : 'none'}
               className={S.ButtonStyle({ selected: sort === 'latest', position: 'first' })}
@@ -27,7 +36,7 @@ export default function SortButtonGroup({ title, filter }: SortButtonGroupProps)
               최신등록순
             </Button>
           </QueryLink>
-          <QueryLink extraQuery={{ sort: 'member' }} preserveQuery={false}>
+          <QueryLink extraQuery={{ sort: 'member' }} preserveQuery={isSearch}>
             <Button
               variant={sort === 'member' ? 'secondary' : 'none'}
               className={S.ButtonStyle({ selected: sort === 'member', position: 'middle' })}
@@ -35,7 +44,7 @@ export default function SortButtonGroup({ title, filter }: SortButtonGroupProps)
               멤버많은순
             </Button>
           </QueryLink>
-          <QueryLink extraQuery={{ sort: 'popular' }} preserveQuery={false}>
+          <QueryLink extraQuery={{ sort: 'popular' }} preserveQuery={isSearch}>
             <Button
               variant={sort === 'popular' ? 'secondary' : 'none'}
               className={S.ButtonStyle({ selected: sort === 'popular', position: 'last' })}
