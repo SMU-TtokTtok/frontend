@@ -6,19 +6,25 @@ import Empty from '../../empty';
 
 interface ComboboxProps<T> {
   comboBoxList: T[];
+  handleSearchBarClose?: () => void;
+  setIsComboBoxOpen: (isOpen: boolean) => void;
 }
 
 export default forwardRef<
   HTMLDivElement,
   ComboboxProps<{ id: number; name: string; separation: string }>
->(function Combobox({ comboBoxList }, ref) {
+>(function Combobox({ comboBoxList, handleSearchBarClose, setIsComboBoxOpen }, ref) {
+  const handleClose = () => {
+    handleSearchBarClose?.();
+    setIsComboBoxOpen(false);
+  };
   return (
     <div className={S.layout} ref={ref}>
       {comboBoxList.length > 0 && (
         <ul>
           {comboBoxList.map((item) => (
             <Link href={ROUTES.CLUB_INFO(item.id)} key={item.id}>
-              <li key={item.id} className={S.comboBoxOption}>
+              <li key={item.id} className={S.comboBoxOption} onClick={handleClose}>
                 <p>{item.name}</p>
                 <span className={S.category}>{item.separation}</span>
               </li>
