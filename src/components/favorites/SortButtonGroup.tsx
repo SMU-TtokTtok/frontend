@@ -9,9 +9,10 @@ import QueryLink from '@/common/components/queryLink';
 interface SortButtonGroupProps {
   title: string;
   filter: SearchQueryReturn;
+  total?: number | null;
 }
 
-export default function SortButtonGroup({ title, filter }: SortButtonGroupProps) {
+export default function SortButtonGroup({ title, filter, total }: SortButtonGroupProps) {
   const sort = filter.sort || 'latest';
   const isSearch = filter.name !== '';
 
@@ -20,7 +21,7 @@ export default function SortButtonGroup({ title, filter }: SortButtonGroupProps)
       <div className={S.HeaderContainer({ isSearch: isSearch })}>
         {isSearch ? (
           <div className={S.SearchTitleText}>
-            총 <span className={S.SearchTitleTextSpan}>24개</span>의 결과가{' '}
+            총 <span className={S.SearchTitleTextSpan}>{total}개</span>의 결과가{' '}
             <br className={S.showOnMobileBr} />
             검색되었습니다.
           </div>
