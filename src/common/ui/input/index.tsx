@@ -2,7 +2,7 @@ import React, { forwardRef, InputHTMLAttributes } from 'react';
 import * as S from './input.css';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'tertiary';
   isError?: boolean;
   errorMessage?: string;
 }

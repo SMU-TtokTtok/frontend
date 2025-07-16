@@ -10,6 +10,7 @@ function SearchBarArea({ search, handleSearchChange }: SearchBarAreaProps) {
   return (
     <div className={S.searchWrapper}>
       <SearchBar
+        variant="tertiary"
         className={S.searchInput}
         iconStyle={S.iconStyle}
         icon={SearchIcon}

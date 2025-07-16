@@ -37,6 +37,15 @@ export const inputStyle = styleVariants({
       color: vars.colors.surface.cont_5,
     },
   },
+  tertiary: {
+    backgroundColor: vars.colors.surface.bright,
+    color: vars.colors.black,
+    fontWeight: 500,
+
+    '$:placeholder': {
+      color: vars.colors.surface.outline_var,
+    },
+  },
 });
 
 export const errorMessage = style({
