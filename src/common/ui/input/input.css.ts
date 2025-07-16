@@ -19,7 +19,7 @@ export const baseinputStyle = recipe({
 export const inputStyle = styleVariants({
   //서치바
   primary: {
-    backgroundColor: vars.colors.surface.bright,
+    backgroundColor: vars.colors.surface.variant,
     color: vars.colors.black,
     fontWeight: 500,
 
