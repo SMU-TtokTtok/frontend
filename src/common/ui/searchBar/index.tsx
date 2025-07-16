@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 interface SearchBarProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'style'> {
   icon: string;
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'tertiary';
   iconStyle?: string;
   onClick?: () => void;
 }

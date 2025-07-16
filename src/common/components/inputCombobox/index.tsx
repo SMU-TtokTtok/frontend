@@ -13,6 +13,7 @@ interface InputComboboxProps<T> extends InputHTMLAttributes<HTMLInputElement> {
   comboBoxList?: T[];
   isComboBoxOpen?: boolean;
   setIsComboBoxOpen: (isOpen: boolean) => void;
+  setIsSearchBarOpen?: (isOpen: boolean) => void;
   onClick?: () => void;
 }
 
@@ -25,6 +26,7 @@ function InputCombobox<T extends { id: number; name: string; separation: string 
   comboBoxList,
   isComboBoxOpen = false,
   setIsComboBoxOpen,
+  setIsSearchBarOpen,
   onClick,
   ...props
 }: InputComboboxProps<T>) {
@@ -32,6 +34,10 @@ function InputCombobox<T extends { id: number; name: string; separation: string 
 
   const handleClose = () => {
     setIsComboBoxOpen(!isComboBoxOpen);
+  };
+
+  const handleSearchBarClose = () => {
+    setIsSearchBarOpen?.(false);
   };
 
   const boxRef = useOutsideClick<HTMLDivElement>(() => handleClose());
@@ -48,7 +54,14 @@ function InputCombobox<T extends { id: number; name: string; separation: string 
           onClick={onClick}
           {...props}
         />
-        {comboBoxList && isComboBoxOpen && <Combobox comboBoxList={comboBoxList} ref={boxRef} />}
+        {comboBoxList && isComboBoxOpen && (
+          <Combobox
+            comboBoxList={comboBoxList}
+            setIsComboBoxOpen={setIsComboBoxOpen}
+            ref={boxRef}
+            handleSearchBarClose={handleSearchBarClose}
+          />
+        )}
       </div>
     </>
   );

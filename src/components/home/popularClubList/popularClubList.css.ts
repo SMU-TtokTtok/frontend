@@ -20,6 +20,11 @@ export const InnerWrapper = style({
   padding: '76px 0 96px 0',
   position: 'relative',
   maxWidth: '1392px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      padding: '22px 0',
+    },
+  },
 });
 export const TitleWrapper = style({
   display: 'flex',
