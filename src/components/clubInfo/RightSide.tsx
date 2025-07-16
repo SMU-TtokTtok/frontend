@@ -2,10 +2,13 @@ import * as S from './rightSide.css';
 import Button from '@/common/ui/button/index';
 import { UserClubIntro } from '@/common/model/clubIntro';
 import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToString';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/common/constants/routes';
 
-const RightSide = ({ clubIntro }: { clubIntro: UserClubIntro }) => {
+const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: number }) => {
   const { recruitStartDate, recruitEndDate, recruitTarget, recruitNumber, isRecruiting } =
     clubIntro;
+  const router = useRouter();
 
   return (
     <div className={S.container}>
@@ -35,6 +38,9 @@ const RightSide = ({ clubIntro }: { clubIntro: UserClubIntro }) => {
         variant={isRecruiting ? 'primary' : 'tertiary'}
         className={`${S.button} ${!isRecruiting ? S.buttonDisabled : ''}`}
         disabled={!isRecruiting}
+        onClick={() => {
+          router.push(ROUTES.APPLIY_FORM(clubId));
+        }}
       >
         {isRecruiting ? '지원하기' : '지원마감'}
       </Button>

@@ -7,12 +7,15 @@ export const container = style({
   padding: '18px 24px',
   backgroundColor: 'white',
   // marginBottom: '28px',
+
+  minWidth: 0,
 });
 
 export const headerflex = style({
   display: 'flex',
-  justifyContent: 'space-between',
+  // justifyContent: 'space-between',
   marginBottom: '8px',
+  gap: '8px',
 });
 
 export const clubName = style({
@@ -35,6 +38,10 @@ export const desText = style({
   fontSize: vars.fonts.body1,
   marginBottom: '21px',
   color: '#55637D',
+
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
 });
 
 export const footerFlex = style({
@@ -309,6 +316,10 @@ export const panelItem = style({
     '&:not(:last-child)': {
       borderBottom: '1px solid #E7E8EA',
     },
+    '&:hover': {
+      backgroundColor: '#E9F2FF',
+      color: '#0052EC',
+    },
   },
 });
 
@@ -323,5 +334,26 @@ export const panelItem2 = style({
     '&:not(:last-child)': {
       borderBottom: '1px solid #E7E8EA',
     },
+    '&:hover': {
+      backgroundColor: '#E9F2FF',
+      color: '#0052EC',
+    },
   },
+});
+
+export const detailFlex = style({
+  display: 'flex',
+  alignItems: 'center',
+  borderRadius: '100px',
+  padding: '4px 8px 4px 12px',
+  backgroundColor: '#F8F8F9',
+  border: '1px solid #E7E8EA',
+});
+export const detailInput = style({
+  // width: 'auto',
+  minWidth: '0px',
+  color: '#55637D',
+  fontSize: vars.fonts.body2,
+  fontWeight: 600,
+  lineHeight: '150%',
 });

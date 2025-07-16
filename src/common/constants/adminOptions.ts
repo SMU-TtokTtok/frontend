@@ -10,3 +10,11 @@ export const categoryItems = [
   '기타',
 ] as const;
 export const recruitItems = ['모집중', '모집마감'] as const;
+
+export const departmentItems = [
+  '글로벌지역학부',
+  '디자인대',
+  '예술대',
+  '융합기술대',
+  '공대',
+] as const;

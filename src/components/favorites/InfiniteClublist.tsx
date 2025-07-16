@@ -1,5 +1,5 @@
 'use client';
-import { useFavoritesInfinite } from '@/hooks/useFavoritesInfinite';
+
 import { useInView } from 'react-intersection-observer';
 import * as S from '@/components/home/clubList/clubList.css';
 import ClubItem from '@/common/components/clubItem';
@@ -7,21 +7,31 @@ import { useEffect } from 'react';
 import { SearchQueryReturn } from '@/hooks/useSearchQuery';
 import Lottie from 'lottie-react';
 import animationData from '@/assets/loading.json';
-import * as L from './lottie.css';
+import * as F from './favorites.css';
+import Empty from '@/common/components/empty';
+import { ClubsInfinite } from '@/common/model/clubInfinite';
+import type { InfiniteData } from '@tanstack/react-query';
 
-interface FavoritesClubProps {
+interface InfiniteClubListProps {
+  useInfinite: (params: { enabled: boolean; sort: string }) => {
+    data: InfiniteData<ClubsInfinite, unknown> | undefined;
+    fetchNextPage: () => void;
+    hasNextPage: boolean;
+    isFetchingNextPage: boolean;
+    refetch: () => void;
+  };
   selectedOptions: SearchQueryReturn;
+  title: string;
 }
 
-function FavoritesClub({ selectedOptions }: FavoritesClubProps) {
+function InfiniteClubList({ selectedOptions, title, useInfinite }: InfiniteClubListProps) {
   const sort = selectedOptions.sort || 'latest';
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useFavoritesInfinite({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfinite({
     enabled: true,
     sort,
   });
   const clubs = data ? data.pages.flatMap((page) => page.clubs) : [];
   const { ref, inView } = useInView();
-
   // sort가 바뀌면 무한스크롤 새로 시작 (refetch)
   useEffect(() => {
     refetch();
@@ -36,19 +46,23 @@ function FavoritesClub({ selectedOptions }: FavoritesClubProps) {
 
   return (
     <>
-      <div className={S.container}>
-        <ul className={S.innerWrapper}>
-          {clubs.map((club) => (
-            <ClubItem key={club.id} className={S.cardStyle} clubData={club} />
-          ))}
-        </ul>
-      </div>
+      {clubs.length === 0 ? (
+        <Empty className={F.emptyText}>{title} 목록이 없습니다</Empty>
+      ) : (
+        <div className={S.container}>
+          <ul className={S.innerWrapper}>
+            {clubs.map((club) => (
+              <ClubItem key={club.id} className={S.cardStyle} clubData={club} />
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* 관찰용 div: 리스트 끝에 도달하면 inView가 true */}
       <div ref={ref} style={{ height: 1 }} />
 
       {isFetchingNextPage && (
-        <div className={L.lottieContainer}>
+        <div className={F.lottieContainer}>
           <Lottie
             animationData={animationData}
             loop={true}
@@ -60,4 +74,4 @@ function FavoritesClub({ selectedOptions }: FavoritesClubProps) {
   );
 }
 
-export default FavoritesClub;
+export default InfiniteClubList;

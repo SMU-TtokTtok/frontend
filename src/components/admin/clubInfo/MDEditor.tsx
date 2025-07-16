@@ -265,11 +265,7 @@ export default function ClubQuill({
         </>
       ) : (
         <>
-          <div
-            className="custom-tiptap-editor"
-            style={{ minHeight: 300, background: '#f8f8f9', borderRadius: 6, padding: 24 }}
-            dangerouslySetInnerHTML={{ __html: htmlContent }}
-          />
+          <div className="custom-tiptap-editor" dangerouslySetInnerHTML={{ __html: htmlContent }} />
         </>
       )}
     </div>

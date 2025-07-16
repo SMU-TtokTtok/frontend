@@ -14,3 +14,13 @@ export const applicantKey = {
 export const applicationFormKey = {
   adminFormInfo: ['adminFormInfo'],
 };
+
+export const userKey = {
+  favoritesClubList: ['favoritesClubList'],
+  appliedClubList: ['appliedClubList'],
+} as const;
+
+export const clubInfoKey = {
+  clubInfo: ['clubInfo'],
+  adminClubInfo: ['adminClubInfo'],
+} as const;

@@ -1,4 +1,5 @@
 import { style } from '@vanilla-extract/css';
+import { vars } from '@/common/styles/theme.css';
 
 export const container = style({
   width: '100%',
@@ -12,7 +13,8 @@ export const buttonIntro = style({
   padding: '22px 0',
   backgroundColor: '#CAE0FF',
   borderRadius: '6px 6px 0px 0px',
-  fontSize: '18px',
+  color: '#0052EC',
+  fontSize: vars.fonts.body2,
   fontWeight: '700',
 });
 
@@ -23,5 +25,6 @@ export const buttonNotice = style({
   backgroundColor: '#EEEEF0',
   borderRadius: '6px 6px 0px 0px',
   color: '#55637D',
-  fontSize: '18px',
+  fontSize: vars.fonts.body2,
+  // fontWeight: '700',
 });

@@ -4,11 +4,16 @@ import Tag from '@/common/ui/tag/index';
 import Button from '@/common/ui/button';
 import person from '@/assets/person.svg';
 import Image from 'next/image';
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useRef } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
-import { typeItems, categoryItems, recruitItems } from '@/common/constants/adminOptions';
+import {
+  typeItems,
+  categoryItems,
+  recruitItems,
+  departmentItems,
+} from '@/common/constants/adminOptions';
 
 const handleCloseRecruit = async () => {
   try {
@@ -31,35 +36,25 @@ const handleCloseRecruit = async () => {
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
 type ClubRecruit = (typeof recruitItems)[number];
+type ClubDepartment = (typeof departmentItems)[number];
 interface ClubBoxProps extends AdminClubIntro {
   onChange?: (updated: Partial<AdminClubIntro>) => void;
   isEditing?: boolean;
 }
 
 export default function ClubBox(props: ClubBoxProps) {
-  const { name, shortDescription, type, category, detailField, isRecruiting, peopleCount } = props;
+  const {
+    name,
+    shortDescription,
+    type,
+    category,
+    detailField,
+    isRecruiting,
+    peopleCount,
+    department,
+  } = props;
 
-  const [selectedType, setSelectedType] = useState<ClubType>(type as ClubType);
-  const [selectedCategory, setSelectedCategory] = useState<ClubCategory>(category as ClubCategory);
-  const [selectedRecruit, setSelectedRecruit] = useState<ClubRecruit>(
-    isRecruiting ? '모집중' : '모집마감',
-  );
-
-  // 사용자입력 세부분야 인라인 수정 상태
-  const [customField, setCustomField] = useState(detailField);
-  const [isEditingCustomField, setIsEditingCustomField] = useState(false);
-  // input width 동기화용
-  const spanRef = useRef<HTMLSpanElement>(null);
-  const [inputWidth, setInputWidth] = useState(0);
-  useLayoutEffect(() => {
-    if (spanRef.current) {
-      setInputWidth(spanRef.current.offsetWidth + 2);
-    }
-  }, [customField, isEditingCustomField]);
-
-  // 동아리명, 한줄설명 인라인 수정 상태
-  const [clubName, setClubName] = useState(name);
-  const [clubDesc, setClubDesc] = useState(shortDescription);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className={S.container}>
@@ -68,7 +63,7 @@ export default function ClubBox(props: ClubBoxProps) {
           <DropDown
             toggleButton={
               <DropDownButton variant="default" className={S.dropDownStyle2}>
-                {selectedType}
+                {type}
               </DropDownButton>
             }
             panelClassName={S.panelContainer}
@@ -77,8 +72,7 @@ export default function ClubBox(props: ClubBoxProps) {
               <li
                 key={item}
                 onClick={() => {
-                  setSelectedType(item as ClubType);
-                  // props.onChange?.({ type: item });
+                  props.onChange?.({ type: item });
                 }}
                 className={S.panelItem}
               >
@@ -91,19 +85,44 @@ export default function ClubBox(props: ClubBoxProps) {
             {type}
           </Tag>
         )}
+        {props.isEditing ? (
+          <DropDown
+            toggleButton={
+              <DropDownButton variant="default" className={S.dropDownStyle2}>
+                {department}
+              </DropDownButton>
+            }
+            panelClassName={S.panelContainer}
+          >
+            {departmentItems.map((item: ClubDepartment) => (
+              <li
+                key={item}
+                onClick={() => {
+                  props.onChange?.({ department: item });
+                }}
+                className={S.panelItem}
+              >
+                {item}
+              </li>
+            ))}
+          </DropDown>
+        ) : (
+          <Tag variant="default" className={S.selectedTypeText + ' ' + S.border4}>
+            {department}
+          </Tag>
+        )}
       </div>
       <div className={S.clubName}>
         {props.isEditing ? (
           <input
-            value={clubName}
+            value={name}
             autoFocus
             onChange={(e) => {
-              setClubName(e.target.value);
-              // props.onChange?.({ name: e.target.value });
+              props.onChange?.({ name: e.target.value });
             }}
             className={S.clubNameInput}
           />
-        ) : clubName.trim() === '' ? (
+        ) : name.trim() === '' ? (
           '동아리명을 입력해주세요'
         ) : (
           name
@@ -116,10 +135,9 @@ export default function ClubBox(props: ClubBoxProps) {
       <div className={S.desText}>
         {props.isEditing ? (
           <input
-            value={clubDesc}
+            value={shortDescription}
             // autoFocus
             onChange={(e) => {
-              setClubDesc(e.target.value);
               props.onChange?.({ shortDescription: e.target.value });
             }}
             className={S.desTextInput}
@@ -136,7 +154,7 @@ export default function ClubBox(props: ClubBoxProps) {
             <DropDown
               toggleButton={
                 <DropDownButton variant="default" className={S.dropDownStyle}>
-                  {selectedCategory}
+                  {category}
                 </DropDownButton>
               }
               panelClassName={S.panelContainer}
@@ -145,8 +163,7 @@ export default function ClubBox(props: ClubBoxProps) {
                 <li
                   key={item}
                   onClick={() => {
-                    setSelectedCategory(item as ClubCategory);
-                    // props.onChange?.({ category: item });
+                    props.onChange?.({ category: item });
                   }}
                   className={S.panelItem2}
                 >
@@ -160,54 +177,39 @@ export default function ClubBox(props: ClubBoxProps) {
             </Tag>
           )}
 
-          <div
-            className={
-              S.userInputTag + ' ' + (isEditingCustomField ? S.cursorText : S.cursorPointer)
-            }
-            onDoubleClick={() => props.isEditing && setIsEditingCustomField(true)}
-          >
-            {isEditingCustomField ? (
-              <>
-                <input
-                  value={customField}
-                  autoFocus
-                  onChange={(e) => {
-                    setCustomField(e.target.value);
-                    props.onChange?.({ detailField: e.target.value });
-                  }}
-                  onBlur={() => setIsEditingCustomField(false)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') setIsEditingCustomField(false);
-                  }}
-                  className={S.customFieldInput + ' ' + S.underlineInput}
-                  style={{ width: inputWidth }}
-                />
-                <span ref={spanRef} className={S.customFieldSpan}>
-                  {customField || ' '}
-                </span>
-              </>
-            ) : (
-              <span className={S.customFieldText}>
-                {customField.trim() === '' ? '사용자입력 세부분야' : customField}
-              </span>
-            )}
-            <Image
-              src={editIcon}
-              alt="edit"
-              width={21}
-              height={21}
-              onClick={() => props.isEditing && setIsEditingCustomField(true)}
-            />
-          </div>
+          {props.isEditing ? (
+            <div className={S.detailFlex}>
+              <input
+                ref={inputRef}
+                value={detailField}
+                onChange={(e) => props.onChange?.({ detailField: e.target.value })}
+                className={S.detailInput}
+                type="text"
+                size={6}
+              />
+              <Image
+                src={editIcon}
+                alt="edit"
+                width={20}
+                height={20}
+                onClick={() => inputRef.current?.focus()}
+                style={{ cursor: 'pointer' }}
+              />
+            </div>
+          ) : (
+            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
+              {detailField}
+            </Tag>
+          )}
 
           {props.isEditing ? (
             <DropDown
               toggleButton={
                 <DropDownButton
-                  variant={selectedRecruit === '모집마감' ? 'default' : 'tertiary'}
+                  variant={isRecruiting ? 'tertiary' : 'default'}
                   className={S.dropDownStyle}
                 >
-                  {selectedRecruit}
+                  {isRecruiting ? '모집중' : '모집마감'}
                 </DropDownButton>
               }
               panelClassName={S.panelContainer}
@@ -216,8 +218,8 @@ export default function ClubBox(props: ClubBoxProps) {
                 <li
                   key={item}
                   onClick={() => {
-                    setSelectedRecruit(item as ClubRecruit);
-                    // props.onChange?.({ isRecruiting: item === '모집중' });
+                    // setSelectedRecruit(item as ClubRecruit);
+                    props.onChange?.({ isRecruiting: item === '모집중' });
                   }}
                   className={S.panelItem2}
                 >

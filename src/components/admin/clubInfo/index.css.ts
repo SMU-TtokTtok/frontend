@@ -43,7 +43,7 @@ export const flexRow = style({
   gap: '24px',
   display: 'flex',
   marginBottom: '28px',
-  alignItems: 'center',
+  // alignItems: 'center',
 });
 
 export const card = style({
@@ -59,11 +59,21 @@ export const imgStyle = style({
   borderRadius: 8,
   alignSelf: 'stretch',
   width: '212px',
-  height: 'auto',
+  height: '100%',
 
   selectors: {
     '&.editing': {
       cursor: 'pointer',
     },
   },
+});
+
+export const imgContainer = style({
+  position: 'relative',
+});
+
+export const editIcon = style({
+  position: 'absolute',
+  bottom: '-16px',
+  right: '-16px',
 });
