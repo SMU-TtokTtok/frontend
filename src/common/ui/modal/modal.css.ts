@@ -1,15 +1,6 @@
 import { vars } from '@/common/styles/theme.css';
-import { style, keyframes } from '@vanilla-extract/css';
-
-const fadeIn = keyframes({
-  from: { opacity: 0 },
-  to: { opacity: 1 },
-});
-
-const fadeOut = keyframes({
-  from: { opacity: 1 },
-  to: { opacity: 0 },
-});
+import { style } from '@vanilla-extract/css';
+import { fadeIn } from '@/common/styles/animation.css';
 
 export const modalBase = style({
   position: 'fixed',
@@ -19,14 +10,6 @@ export const modalBase = style({
   height: '100vh',
   zIndex: 1000,
   backgroundColor: 'rgba(0, 0, 0, 0.6)',
-});
-
-export const fadeInStyle = style({
-  animation: `${fadeIn} 0.3s ease-in-out forwards`,
-});
-
-export const fadeOutStyle = style({
-  animation: `${fadeOut} 0.3s ease-in-out forwards`,
 });
 
 export const contentBaseStyle = style({
@@ -40,6 +23,7 @@ export const contentBaseStyle = style({
   borderRadius: '6px',
   backgroundColor: vars.colors.white,
   maxWidth: '80%',
+  animation: `${fadeIn} 0.3s ease-in-out forwards`,
 });
 
 export const bodyBaseStyle = style({
