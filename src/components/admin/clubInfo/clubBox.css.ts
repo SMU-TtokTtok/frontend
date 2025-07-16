@@ -37,7 +37,7 @@ export const numberText = style({
 export const desText = style({
   fontSize: vars.fonts.body1,
   marginBottom: '21px',
-  color: '#55637D',
+  color: '#878787',
 
   overflow: 'hidden',
   textOverflow: 'ellipsis',
@@ -265,7 +265,8 @@ export const clubNameInput = style({
   border: '1px solid gray',
   background: 'transparent',
   outline: 'none',
-  padding: 0,
+  padding: '2px 0 2px 2px',
+  borderRadius: '4px',
 });
 
 export const desTextInput = style({
@@ -276,7 +277,9 @@ export const desTextInput = style({
   border: '1px solid gray',
   background: 'transparent',
   outline: 'none',
-  padding: 0,
+  padding: '2px 0 2px 2px',
+  width: '100%',
+  borderRadius: '4px',
 });
 
 export const underlineInput = style({

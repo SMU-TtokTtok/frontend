@@ -121,6 +121,7 @@ export default function ClubBox(props: ClubBoxProps) {
               props.onChange?.({ name: e.target.value });
             }}
             className={S.clubNameInput}
+            size={20}
           />
         ) : name.trim() === '' ? (
           '동아리명을 입력해주세요'

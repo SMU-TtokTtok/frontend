@@ -68,9 +68,10 @@ export const modifyButton = style({
 export const numberInput = style({
   appearance: 'textfield',
   WebkitAppearance: 'textfield',
-  padding: '1px 2px',
+  padding: '2px 4px',
   border: '1px solid #ccc',
   font: '-webkit-small-control',
+  height: '24px',
 });
 export const dateFlex = style({
   display: 'flex',
@@ -83,6 +84,6 @@ export const buttonFlex = style({
 });
 
 export const button = style({
-  padding: '2px 4px',
+  padding: '4px 6px',
   borderRadius: '4px',
 });
