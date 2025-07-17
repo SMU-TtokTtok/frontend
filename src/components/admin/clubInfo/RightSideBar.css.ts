@@ -33,12 +33,12 @@ export const flexRow = style({
 
 export const grayText = style({
   color: '#818181',
-  fontSize: '16px',
+  fontSize: vars.fonts.body3,
 });
 
 export const blackText = style({
   color: '#030304',
-  fontSize: '18px',
+  fontSize: vars.fonts.body1,
 });
 
 export const modifyButton = style({
