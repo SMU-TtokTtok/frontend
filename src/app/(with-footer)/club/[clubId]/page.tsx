@@ -16,7 +16,7 @@ export default function Page() {
     <div className={S.container}>
       <div className={S.wrapper}>
         <BackButton />
-        <ClubProfile clubIntro={data} />
+        <ClubProfile clubIntro={data} clubId={Number(clubId)} />
         <RightSide clubIntro={data} clubId={Number(clubId)} />
         <ClubIntroduce introduction={data.introduction} />
       </div>
