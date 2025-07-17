@@ -76,6 +76,13 @@ export const numberInput = style({
 export const dateFlex = style({
   display: 'flex',
   flexDirection: 'column',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      flexDirection: 'row',
+      gap: '10px',
+    },
+  },
 });
 
 export const buttonFlex = style({

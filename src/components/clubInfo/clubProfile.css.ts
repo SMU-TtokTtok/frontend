@@ -33,6 +33,12 @@ export const RightFlex = style({
   position: 'relative',
 
   minWidth: 0, // !
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '18px 16px',
+    },
+  },
 });
 
 export const type = style({
@@ -97,6 +103,7 @@ export const description = style({
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       paddingTop: '12px',
       borderTop: '1px solid #E0E0E0',
+      fontSize: vars.fonts.m_body1,
     },
   },
 });
@@ -109,6 +116,12 @@ export const tagFlex = style({
 export const tagStyle = style({
   padding: '4px 12px',
   borderRadius: '100px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body2,
+    },
+  },
 });
 
 export const star = style({

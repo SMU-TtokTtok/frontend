@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
   width: '100%',
@@ -20,6 +21,13 @@ export const headerItem1 = style({
   fontSize: vars.fonts.body2,
   color: '#0052EC !important',
   backgroundColor: '#CAE0FF !important',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      padding: '16px 0',
+    },
+  },
 });
 
 export const headerItem2 = style({
@@ -32,6 +40,13 @@ export const headerItem2 = style({
   fontSize: vars.fonts.body2,
   color: '#55637D !important',
   backgroundColor: '#EEEEF0 !important',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      padding: '16px 0',
+    },
+  },
 });
 
 export const contentContainer = style({
