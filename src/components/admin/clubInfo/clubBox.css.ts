@@ -71,6 +71,16 @@ export const dropDownStyle = style({
   width: 'fit-content',
 });
 
+export const dropDownStyleWide = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  padding: '4px 12px',
+  borderRadius: '100px',
+  boxSizing: 'border-box',
+  minHeight: '32px',
+  width: '97px',
+});
+
 export const dropDownStyle2 = style({
   padding: '6px 0 6px 8px',
   borderRadius: '4px',
@@ -78,6 +88,15 @@ export const dropDownStyle2 = style({
   color: '#55637D',
   // minWidth: '80px',
   // width: '80px',
+});
+
+export const dropDownStyle2Wide = style({
+  padding: '6px 0 6px 8px',
+  borderRadius: '4px',
+  backgroundColor: '#E7E8EA',
+  color: '#55637D',
+
+  width: '115px',
 });
 
 export const dropdownPanel = style({

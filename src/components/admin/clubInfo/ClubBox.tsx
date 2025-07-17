@@ -21,6 +21,12 @@ const handleCloseRecruit = async (isRecruiting: boolean) => {
     const data = await patchIsRecruting(!isRecruiting);
     if (data.success) {
       alert('모집이 마감되었습니다!');
+      // alert(data.isRecruiting);
+      // props.onChange?.({ isRecruiting: data.isRecruiting });
+      // refetch();
+      // setIsEditing(false);
+      // alert('저장되었습니다!');
+      // router.push('/admin');
     } else {
       alert('모집 마감에 실패했습니다.');
     }
@@ -84,7 +90,7 @@ export default function ClubBox(props: ClubBoxProps) {
         {props.isEditing ? (
           <DropDown
             toggleButton={
-              <DropDownButton variant="default" className={S.dropDownStyle2}>
+              <DropDownButton variant="default" className={S.dropDownStyle2Wide}>
                 {department}
               </DropDownButton>
             }
@@ -204,7 +210,7 @@ export default function ClubBox(props: ClubBoxProps) {
               toggleButton={
                 <DropDownButton
                   variant={isRecruiting ? 'tertiary' : 'default'}
-                  className={S.dropDownStyle}
+                  className={S.dropDownStyleWide}
                 >
                   {isRecruiting ? '모집중' : '모집마감'}
                 </DropDownButton>
