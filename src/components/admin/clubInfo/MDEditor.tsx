@@ -200,7 +200,7 @@ const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
   );
 };
 
-export default function ClubQuill({
+export default function MDEditor({
   isEditing,
   introduction,
   onChange,
