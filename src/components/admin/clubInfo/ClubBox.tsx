@@ -16,25 +16,6 @@ import {
   departmentItems,
 } from '@/common/constants/adminOptions';
 
-const handleCloseRecruit = async (isRecruiting: boolean) => {
-  try {
-    const data = await patchIsRecruting(!isRecruiting);
-    if (data.success) {
-      alert('모집이 마감되었습니다!');
-      // alert(data.isRecruiting);
-      // props.onChange?.({ isRecruiting: data.isRecruiting });
-      // refetch();
-      // setIsEditing(false);
-      // alert('저장되었습니다!');
-      // router.push('/admin');
-    } else {
-      alert('모집 마감에 실패했습니다.');
-    }
-  } catch {
-    alert('오류가 발생했습니다.');
-  }
-};
-
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
 type ClubRecruit = (typeof recruitItems)[number];
@@ -57,6 +38,21 @@ export default function ClubBox(props: ClubBoxProps) {
   } = props;
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleCloseRecruit = async (isRecruiting: boolean) => {
+    try {
+      const data = await patchIsRecruting(!isRecruiting);
+      if (data.success) {
+        alert('모집이 마감되었습니다!');
+        // props.onChange?.({ isRecruiting: data.isRecruiting });
+        // refetch();
+      } else {
+        alert('모집 마감에 실패했습니다.');
+      }
+    } catch {
+      alert('오류가 발생했습니다.');
+    }
+  };
 
   return (
     <div className={S.container}>
@@ -239,7 +235,13 @@ export default function ClubBox(props: ClubBoxProps) {
             </Tag>
           )}
         </div>
-        <Button variant="secondary" onClick={handleCloseRecruit} className={S.finishedButton}>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            handleCloseRecruit(isRecruiting);
+          }}
+          className={S.finishedButton}
+        >
           지원 마감하기
         </Button>
       </div>
