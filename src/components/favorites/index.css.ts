@@ -20,18 +20,27 @@ export const HeaderWrapper = style({
   },
 });
 
-export const HeaderContainer = style({
-  display: 'flex',
-  fontSize: vars.fonts.title2,
-  justifyContent: 'space-between',
-  alignItems: 'center',
-
-  maxWidth: '1392px',
-  width: '100%',
-
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      height: '80px',
+export const HeaderContainer = recipe({
+  base: {
+    display: 'flex',
+    fontSize: vars.fonts.title2,
+    justifyContent: 'space-between',
+    maxWidth: '1392px',
+    width: '100%',
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+        height: '80px',
+      },
+    },
+  },
+  variants: {
+    isSearch: {
+      true: {
+        alignItems: 'flex-end',
+      },
+      false: {
+        alignItems: 'center',
+      },
     },
   },
 });
@@ -59,6 +68,38 @@ export const TitleText = style({
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       fontSize: '20px',
       alignSelf: 'flex-start',
+    },
+  },
+});
+
+export const SearchTitleText = style({
+  fontSize: vars.fonts.body2,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_title2,
+      fontWeight: '500',
+      alignSelf: 'flex-start',
+    },
+  },
+});
+
+export const SearchTitleTextSpan = style({
+  color: '#2650db',
+  fontWeight: '500',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontWeight: '600',
+    },
+  },
+});
+
+export const showOnMobileBr = style({
+  display: 'none',
+  '@media': {
+    'screen and (max-width: 1080px)': {
+      display: 'inline',
     },
   },
 });

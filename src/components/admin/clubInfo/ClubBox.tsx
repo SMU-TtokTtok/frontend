@@ -8,30 +8,13 @@ import { useRef } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
+import { patchIsRecruting } from './api/patchIsRecruting';
 import {
   typeItems,
   categoryItems,
   recruitItems,
   departmentItems,
 } from '@/common/constants/adminOptions';
-
-const handleCloseRecruit = async () => {
-  try {
-    const res = await fetch('/api/club-info/recruiting', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ isRecruiting: false }),
-    });
-    const data = await res.json();
-    if (data.success) {
-      alert('모집이 마감되었습니다!');
-    } else {
-      alert('모집 마감에 실패했습니다.');
-    }
-  } catch {
-    alert('오류가 발생했습니다.');
-  }
-};
 
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
@@ -55,6 +38,21 @@ export default function ClubBox(props: ClubBoxProps) {
   } = props;
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleCloseRecruit = async (isRecruiting: boolean) => {
+    try {
+      const data = await patchIsRecruting(!isRecruiting);
+      if (data.success) {
+        alert('모집이 마감되었습니다!');
+        // props.onChange?.({ isRecruiting: data.isRecruiting });
+        // refetch();
+      } else {
+        alert('모집 마감에 실패했습니다.');
+      }
+    } catch {
+      alert('오류가 발생했습니다.');
+    }
+  };
 
   return (
     <div className={S.container}>
@@ -88,7 +86,7 @@ export default function ClubBox(props: ClubBoxProps) {
         {props.isEditing ? (
           <DropDown
             toggleButton={
-              <DropDownButton variant="default" className={S.dropDownStyle2}>
+              <DropDownButton variant="default" className={S.dropDownStyle2Wide}>
                 {department}
               </DropDownButton>
             }
@@ -121,6 +119,7 @@ export default function ClubBox(props: ClubBoxProps) {
               props.onChange?.({ name: e.target.value });
             }}
             className={S.clubNameInput}
+            size={20}
           />
         ) : name.trim() === '' ? (
           '동아리명을 입력해주세요'
@@ -207,7 +206,7 @@ export default function ClubBox(props: ClubBoxProps) {
               toggleButton={
                 <DropDownButton
                   variant={isRecruiting ? 'tertiary' : 'default'}
-                  className={S.dropDownStyle}
+                  className={S.dropDownStyleWide}
                 >
                   {isRecruiting ? '모집중' : '모집마감'}
                 </DropDownButton>
@@ -236,7 +235,13 @@ export default function ClubBox(props: ClubBoxProps) {
             </Tag>
           )}
         </div>
-        <Button variant="secondary" onClick={handleCloseRecruit} className={S.finishedButton}>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            handleCloseRecruit(isRecruiting);
+          }}
+          className={S.finishedButton}
+        >
           지원 마감하기
         </Button>
       </div>

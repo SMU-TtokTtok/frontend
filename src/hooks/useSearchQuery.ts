@@ -8,6 +8,7 @@ export interface SearchQueryReturn {
   sort?: string;
   grade?: string;
   college?: string;
+  name?: string;
 }
 
 export const useSearchQuery = () => {
@@ -20,6 +21,7 @@ export const useSearchQuery = () => {
     sort: searchParams.get('sort') || '',
     grade: searchParams.get('grade') || '',
     college: searchParams.get('college') || '',
+    name: searchParams.get('name') || '',
   };
   return { filter };
 };

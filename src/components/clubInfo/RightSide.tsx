@@ -4,6 +4,7 @@ import { UserClubIntro } from '@/common/model/clubIntro';
 import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToString';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
+import { formatDateToDot, formatDateToMonthDay } from '@/common/util/formatDate';
 
 const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: number }) => {
   const { recruitStartDate, recruitEndDate, recruitTarget, recruitNumber, isRecruiting } =
@@ -18,7 +19,7 @@ const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: nu
             <div className={S.itemFlex}>
               <div className={S.itemTitle}>모집기간</div>
               <div className={S.itemContent}>
-                {recruitStartDate} ~ {recruitEndDate}
+                {formatDateToDot(recruitStartDate)}~{formatDateToMonthDay(recruitEndDate)}
               </div>
             </div>
             <div className={S.itemFlex}>

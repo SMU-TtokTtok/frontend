@@ -26,6 +26,12 @@ export const contentFlex = style({
   padding: '24px 26px',
   borderRadius: '8px',
   marginBottom: '20px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '18px 16px',
+    },
+  },
 });
 
 export const itemFlex = style({
@@ -38,11 +44,23 @@ export const itemTitle = style({
   fontWeight: 600,
   color: '#818181',
   fontSize: vars.fonts.body3,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body2,
+    },
+  },
 });
 
 export const itemContent = style({
   fontWeight: 500,
   fontSize: vars.fonts.body1,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const button = style({
@@ -55,8 +73,8 @@ export const button = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       position: 'absolute',
-      top: '-90px',
-      right: '30px',
+      top: '-88px',
+      right: '18px',
       width: '204px',
     },
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {

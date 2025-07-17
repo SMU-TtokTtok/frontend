@@ -9,12 +9,12 @@ import Lottie from 'lottie-react';
 import animationData from '@/assets/loading.json';
 import * as F from './favorites.css';
 import Empty from '@/common/components/empty';
-import { ClubsInfinite } from '@/common/model/clubInfinite';
+import { ClubsInfinite, ClubsInfiniteWithTotal } from '@/common/model/clubInfinite';
 import type { InfiniteData } from '@tanstack/react-query';
 
 interface InfiniteClubListProps {
-  useInfinite: (params: { enabled: boolean; sort: string }) => {
-    data: InfiniteData<ClubsInfinite, unknown> | undefined;
+  useInfinite: (params: { enabled: boolean; sort: string; name?: string }) => {
+    data: InfiniteData<ClubsInfiniteWithTotal | ClubsInfinite, unknown> | undefined;
     fetchNextPage: () => void;
     hasNextPage: boolean;
     isFetchingNextPage: boolean;
@@ -22,20 +22,29 @@ interface InfiniteClubListProps {
   };
   selectedOptions: SearchQueryReturn;
   title: string;
+  handleTotal?: (data: number) => void;
 }
 
-function InfiniteClubList({ selectedOptions, title, useInfinite }: InfiniteClubListProps) {
+function InfiniteClubList({
+  selectedOptions,
+  title,
+  useInfinite,
+  handleTotal,
+}: InfiniteClubListProps) {
   const sort = selectedOptions.sort || 'latest';
+  const name = selectedOptions.name || '';
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfinite({
     enabled: true,
     sort,
+    name,
   });
+
   const clubs = data ? data.pages.flatMap((page) => page.clubs) : [];
   const { ref, inView } = useInView();
   // sort가 바뀌면 무한스크롤 새로 시작 (refetch)
   useEffect(() => {
     refetch();
-  }, [sort, refetch]);
+  }, [sort, name, refetch]);
 
   // inView가 true가 되면 fetchNextPage 자동 호출
   useEffect(() => {
@@ -43,6 +52,16 @@ function InfiniteClubList({ selectedOptions, title, useInfinite }: InfiniteClubL
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  useEffect(() => {
+    if (handleTotal) {
+      const firstPage = data?.pages[0];
+      // total이 있는 경우에만 handleTotal 호출
+      if (firstPage && 'total' in firstPage) {
+        handleTotal(firstPage.total);
+      }
+    }
+  }, [handleTotal, data]);
 
   return (
     <>
