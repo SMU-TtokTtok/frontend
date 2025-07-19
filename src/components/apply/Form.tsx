@@ -40,10 +40,6 @@ export default function Form({ clubId }: { clubId: string }) {
           <QuestionsSection questions={data.questions} register={register} errors={errors} />
         )}
 
-        {/* 추후 다른 섹션들이 여기에 추가될 예정 */}
-        {/* 예: <AdditionalInfoSection register={register} errors={errors} /> */}
-        {/* 예: <MotivationSection register={register} errors={errors} /> */}
-
         <div className={S.submitButtonContainer}>
           <button type="submit" className={S.submitButton}>
             지원서 제출

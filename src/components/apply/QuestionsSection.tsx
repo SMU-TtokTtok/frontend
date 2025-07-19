@@ -11,8 +11,7 @@ interface QuestionsSectionProps {
 
 export default function QuestionsSection({ questions, register, errors }: QuestionsSectionProps) {
   const renderQuestion = (question: Question, index: number) => {
-    const fieldName = `questions.${index}` as keyof ApplyFormData;
-    const error = errors[fieldName as keyof ApplyFormData];
+    const error = (errors.questions?.[index] as { answer?: { message: string } })?.answer;
 
     switch (question.questionType) {
       case 'CHECKBOX':
@@ -92,7 +91,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               className={S.shortAnswerInput}
               placeholder="답변을 입력해주세요"
               {...register(`questions.${index}.answer` as keyof ApplyFormData, {
-                required: question.isEssential,
+                required: question.isEssential ? '입력해주세요.' : false,
               })}
             />
             {error && <span className={S.errorMessage}>{error.message}</span>}

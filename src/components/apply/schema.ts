@@ -21,6 +21,8 @@ export const applyFormSchema = z.object({
   grade: z.enum(['1', '2', '3', '4'], { required_error: '현재 학년을 선택해주세요.' }),
   gender: z.enum(['true', 'false'], { required_error: '성별을 선택해주세요.' }),
   questions: z.array(questionAnswerSchema).optional(),
+
+  // questions: z.array(z.any()).optional(),
 });
 
 export type ApplyFormData = z.infer<typeof applyFormSchema>;
