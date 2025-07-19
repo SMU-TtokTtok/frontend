@@ -193,7 +193,6 @@ export const shortAnswerInput = style({
   background: 'white',
   fontSize: vars.fonts.body2,
   lineHeight: '150%',
-  border: '1px solid #E5E7EB',
 
   selectors: {
     '&::placeholder': {
@@ -208,9 +207,8 @@ export const longAnswerTextarea = style({
   background: 'white',
   fontSize: vars.fonts.body2,
   lineHeight: '150%',
-  border: '1px solid #E5E7EB',
   resize: 'vertical',
-  minHeight: '120px',
+  minHeight: '110px',
 
   selectors: {
     '&::placeholder': {
