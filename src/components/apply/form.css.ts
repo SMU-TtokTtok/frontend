@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants/index';
 
 export const container = style({
   padding: '16px',
@@ -9,6 +10,12 @@ export const container = style({
   borderRadius: '8px',
   background: 'white',
   marginBottom: '200px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      marginBottom: '180px',
+    },
+  },
 });
 
 export const FormHeader = style({

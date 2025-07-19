@@ -1,11 +1,20 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants/index';
 
 export const container = style({
   position: 'fixed',
   width: '330px',
   right: '100px',
   top: '200px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      width: '228px',
+      top: '160px',
+      right: '40px',
+    },
+  },
 });
 
 export const BoxFlex = style({
