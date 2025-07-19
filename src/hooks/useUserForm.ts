@@ -2,7 +2,7 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { clubFormKey } from './queries/key';
 import { gethFormInfo } from '@/components/apply/api/getFormInfo';
 
-export const useClubInfo = (clubId: string) => {
+export const useClubInfo = (clubId: number) => {
   const { clubForm } = clubFormKey;
 
   const { data, isLoading } = useSuspenseQuery({

@@ -3,8 +3,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as S from '@/components/apply/form.css';
 import { applyFormSchema, ApplyFormData } from './schema';
 import BasicInfoSection from './BasicInfoSection';
+import { useClubInfo } from '@/hooks/useUserForm';
 
-export default function Form() {
+export default function Form({ clubId }: { clubId: string }) {
+  const { data } = useClubInfo(Number(clubId));
+
   const {
     register,
     handleSubmit,
