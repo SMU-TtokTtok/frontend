@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useForm, FieldErrors } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as S from '@/components/apply/form.css';
 import { applyFormSchema, ApplyFormData } from './schema';
@@ -22,6 +22,10 @@ export default function Form({ clubId }: { clubId: string }) {
     // 여기서 API 호출
   };
 
+  const onError = (errors: FieldErrors<ApplyFormData>) => {
+    console.log('폼 에러:', errors);
+  };
+
   return (
     <div className={S.container}>
       <div className={S.FormHeader}>
@@ -29,7 +33,7 @@ export default function Form({ clubId }: { clubId: string }) {
         <div className={S.FormSubTitle}>{data?.subTitle}</div>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className={S.FormGap}>
+      <form onSubmit={handleSubmit(onSubmit, onError)} className={S.FormGap}>
         <BasicInfoSection register={register} errors={errors} />
 
         {data?.questions && data.questions.length > 0 && (
