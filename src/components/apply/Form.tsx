@@ -5,6 +5,7 @@ import { applyFormSchema, ApplyFormData } from './schema';
 import BasicInfoSection from './BasicInfoSection';
 import QuestionsSection from './QuestionsSection';
 import { useClubInfo } from '@/hooks/useUserForm';
+import Button from '@/common/ui/button';
 
 export default function Form({ clubId }: { clubId: string }) {
   const { data } = useClubInfo(Number(clubId));
@@ -40,11 +41,9 @@ export default function Form({ clubId }: { clubId: string }) {
           <QuestionsSection questions={data.questions} register={register} errors={errors} />
         )}
 
-        <div className={S.submitButtonContainer}>
-          <button type="submit" className={S.submitButton}>
-            지원서 제출
-          </button>
-        </div>
+        <Button type="submit" variant="primary" className={S.submitButton}>
+          제출하기
+        </Button>
       </form>
     </div>
   );

@@ -33,9 +33,6 @@ export default function RightSide() {
           ))}
         </div>
       </div>
-      <Button variant="primary" className={S.Button}>
-        제출하기
-      </Button>
     </div>
   );
 }

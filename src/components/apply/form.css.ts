@@ -246,23 +246,21 @@ export const submitButtonContainer = style({
 });
 
 export const submitButton = style({
-  padding: '16px 32px',
-  borderRadius: '8px',
-  background: '#254FDB',
-  color: 'white',
-  fontSize: vars.fonts.title4,
+  width: '330px',
+  fontSize: vars.fonts.body2,
   fontWeight: '600',
-  border: 'none',
-  cursor: 'pointer',
-  transition: 'background-color 0.2s ease',
+  borderRadius: '6px',
+  padding: '16px 0',
+  position: 'fixed',
+  right: '100px',
+  top: '420px',
+  zIndex: '100',
 
-  selectors: {
-    '&:hover': {
-      background: '#1E3FA8',
-    },
-    '&:disabled': {
-      background: '#D2D4D8',
-      cursor: 'not-allowed',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      width: '228px',
+      top: '380px',
+      right: '40px',
     },
   },
 });
