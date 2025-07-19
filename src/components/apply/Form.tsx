@@ -1,6 +1,23 @@
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import * as S from '@/components/apply/form.css';
+import { applyFormSchema, ApplyFormData } from './schema';
+import BasicInfoSection from './BasicInfoSection';
 
 export default function Form() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ApplyFormData>({
+    resolver: zodResolver(applyFormSchema),
+  });
+
+  const onSubmit = (data: ApplyFormData) => {
+    console.log('폼 데이터:', data);
+    // 여기서 API 호출
+  };
+
   return (
     <div className={S.container}>
       <div className={S.FormHeader}>
@@ -8,114 +25,13 @@ export default function Form() {
         <div className={S.FormSubTitle}>부제목</div>
       </div>
 
-      <div className={S.FormBasicContainer}>
-        <div className={S.FormContentFlex}>
-          <div className={S.FormContentContainer}>
-            <div className={S.FormContentTitle}>
-              이름<span className={S.FormContentTitleEssential}>*</span>
-            </div>
-            <input
-              size={1}
-              type="text"
-              className={S.FormInput}
-              placeholder="이름을 입력해주세요."
-            />
-          </div>
-          <div className={S.FormContentContainer}>
-            <div className={S.FormContentTitle}>
-              나이<span className={S.FormContentTitleEssential}>*</span>
-            </div>
-            <input
-              size={1}
-              type="text"
-              className={S.FormInput}
-              placeholder="나이를 입력해주세요."
-            />
-          </div>
-          <div className={S.FormContentContainer}>
-            <div className={S.FormContentTitle}>
-              학과<span className={S.FormContentTitleEssential}>*</span>
-            </div>
-            <input
-              size={1}
-              type="text"
-              className={S.FormInput}
-              placeholder="학과를 입력해주세요."
-            />
-          </div>
-        </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <BasicInfoSection register={register} errors={errors} />
 
-        <div className={S.FormContentFlex}>
-          <div className={S.FormContentContainer}>
-            <div className={S.FormContentTitle}>
-              이메일<span className={S.FormContentTitleEssential}>*</span>
-            </div>
-            <input size={1} type="text" className={S.FormInput} placeholder="example@gmail.com" />
-          </div>
-          <div className={S.FormContentContainer}>
-            <div className={S.FormContentTitle}>
-              전화번호<span className={S.FormContentTitleEssential}>*</span>
-            </div>
-            <input size={1} type="text" className={S.FormInput} placeholder="010-0000-0000" />
-          </div>
-        </div>
-
-        <div className={S.FormContentContainer}>
-          <div className={S.FormContentTitle}>
-            재학여부<span className={S.FormContentTitleEssential}>*</span>
-          </div>
-          <div className={S.FormContentRadioContainer}>
-            <label className={S.LabelContainer}>
-              <input type="radio" name="isStudent" value="true" />
-              <span className={S.RadioText}>재학</span>
-            </label>
-            <label className={S.LabelContainer}>
-              <input type="radio" name="isStudent" value="false" />
-              <span className={S.RadioText}>졸업</span>
-            </label>
-          </div>
-        </div>
-
-        <div className={S.FormContentContainer}>
-          <div className={S.FormContentTitle}>
-            현재 학년<span className={S.FormContentTitleEssential}>*</span>
-          </div>
-          <div className={S.FormContentRadioContainer}>
-            <label className={S.LabelContainer}>
-              <input type="radio" name="grade" value="true" />
-              <span className={S.RadioText}>1학년</span>
-            </label>
-            <label className={S.LabelContainer}>
-              <input type="radio" name="grade" value="false" />
-              <span className={S.RadioText}>2학년</span>
-            </label>
-            <label className={S.LabelContainer}>
-              <input type="radio" name="grade" value="false" />
-              <span className={S.RadioText}>3학년</span>
-            </label>
-            <label className={S.LabelContainer}>
-              <input type="radio" name="grade" value="false" />
-              <span className={S.RadioText}>4학년</span>
-            </label>
-          </div>
-        </div>
-
-        <div className={S.FormContentContainer}>
-          <div className={S.FormContentTitle}>
-            성별<span className={S.FormContentTitleEssential}>*</span>
-          </div>
-          <div className={S.FormContentRadioContainer}>
-            <label className={S.LabelContainer}>
-              <input type="radio" name="gender" value="true" />
-              <span className={S.RadioText}>남성</span>
-            </label>
-            <label className={S.LabelContainer}>
-              <input type="radio" name="gender" value="false" />
-              <span className={S.RadioText}>여성</span>
-            </label>
-          </div>
-        </div>
-      </div>
+        {/* 추후 다른 섹션들이 여기에 추가될 예정 */}
+        {/* 예: <AdditionalInfoSection register={register} errors={errors} /> */}
+        {/* 예: <MotivationSection register={register} errors={errors} /> */}
+      </form>
     </div>
   );
 }
