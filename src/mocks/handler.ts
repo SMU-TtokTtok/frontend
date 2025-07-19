@@ -12,6 +12,7 @@ import { getClubInfo, patchClubInfo, patchRecruiting } from './clubInfo/adminClu
 import { getUserClubInfo } from './clubInfo/userClubInfo';
 import { emailCheckHandler, verifyResetCodeHandler, resetPasswordHandler } from './password';
 import { userLoginHandler, userSignupHandler, userEmailPostHandler } from './userAuth';
+import { getUserForm } from './userForm/userForm';
 
 export const handlers = [
   popularClubs,
@@ -35,4 +36,5 @@ export const handlers = [
   userSignupHandler,
   userEmailPostHandler,
   getSearchList,
+  getUserForm,
 ];
