@@ -1,5 +1,13 @@
 import { z } from 'zod';
 
+const questionAnswerSchema = z.object({
+  answer: z.union([
+    z.string().min(1, '답변을 입력해주세요.'),
+    z.array(z.string()).min(1, '답변을 선택해주세요.'),
+    z.instanceof(File),
+  ]),
+});
+
 export const applyFormSchema = z.object({
   name: z.string().min(1, '이름을 입력해주세요.'),
   age: z.string().min(1, '나이를 입력해주세요.').regex(/^\d+$/, '숫자만 입력해주세요.'),
@@ -12,6 +20,7 @@ export const applyFormSchema = z.object({
   isStudent: z.enum(['true', 'false'], { required_error: '재학여부를 선택해주세요.' }),
   grade: z.enum(['1', '2', '3', '4'], { required_error: '현재 학년을 선택해주세요.' }),
   gender: z.enum(['true', 'false'], { required_error: '성별을 선택해주세요.' }),
+  questions: z.array(questionAnswerSchema).optional(),
 });
 
 export type ApplyFormData = z.infer<typeof applyFormSchema>;

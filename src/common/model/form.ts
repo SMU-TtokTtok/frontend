@@ -1,4 +1,4 @@
-interface Question {
+export interface Question {
   title: string;
   subTitle: string;
   questionType: 'CHECKBOX' | 'RADIO' | 'SHORT_ANSWER' | 'LONG_ANSWER' | 'FILE';
