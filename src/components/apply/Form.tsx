@@ -25,7 +25,7 @@ export default function Form({ clubId }: { clubId: string }) {
   return (
     <div className={S.container}>
       <div className={S.FormHeader}>
-        <div className={S.FormTitle}>{data?.title} 지원서</div>
+        <div className={S.FormTitle}>{data?.title} </div>
         <div className={S.FormSubTitle}>{data?.subTitle}</div>
       </div>
 
