@@ -19,10 +19,14 @@ export default function QuestionsSection({ questions, register, errors }: Questi
         return (
           <div key={index} className={S.questionContainer}>
             <div className={S.questionHeader}>
-              <span className={S.questionTitle}>{question.title}</span>
-              {question.isEssential && <span className={S.essential}>*</span>}
+              <div className={S.FormContentTitle}>
+                {question.title}
+                {question.isEssential && <span className={S.FormContentTitleEssential}>*</span>}
+              </div>
+              {question.subTitle && (
+                <div className={S.FormContentSubTitle}>{question.subTitle}</div>
+              )}
             </div>
-            {question.subTitle && <div className={S.questionSubTitle}>{question.subTitle}</div>}
             <div className={S.checkboxGroup}>
               {question.content?.map((option: string, optionIndex: number) => (
                 <label key={optionIndex} className={S.checkboxItem}>
@@ -45,10 +49,14 @@ export default function QuestionsSection({ questions, register, errors }: Questi
         return (
           <div key={index} className={S.questionContainer}>
             <div className={S.questionHeader}>
-              <span className={S.questionTitle}>{question.title}</span>
-              {question.isEssential && <span className={S.essential}>*</span>}
+              <div className={S.FormContentTitle}>
+                {question.title}
+                {question.isEssential && <span className={S.FormContentTitleEssential}>*</span>}
+              </div>
+              {question.subTitle && (
+                <div className={S.FormContentSubTitle}>{question.subTitle}</div>
+              )}
             </div>
-            {question.subTitle && <div className={S.questionSubTitle}>{question.subTitle}</div>}
             <div className={S.radioGroup}>
               {question.content?.map((option: string, optionIndex: number) => (
                 <label key={optionIndex} className={S.radioItem}>
@@ -71,10 +79,14 @@ export default function QuestionsSection({ questions, register, errors }: Questi
         return (
           <div key={index} className={S.questionContainer}>
             <div className={S.questionHeader}>
-              <span className={S.questionTitle}>{question.title}</span>
-              {question.isEssential && <span className={S.essential}>*</span>}
+              <div className={S.FormContentTitle}>
+                {question.title}
+                {question.isEssential && <span className={S.FormContentTitleEssential}>*</span>}
+              </div>
+              {question.subTitle && (
+                <div className={S.FormContentSubTitle}>{question.subTitle}</div>
+              )}
             </div>
-            {question.subTitle && <div className={S.questionSubTitle}>{question.subTitle}</div>}
             <input
               type="text"
               className={S.shortAnswerInput}
@@ -91,10 +103,14 @@ export default function QuestionsSection({ questions, register, errors }: Questi
         return (
           <div key={index} className={S.questionContainer}>
             <div className={S.questionHeader}>
-              <span className={S.questionTitle}>{question.title}</span>
-              {question.isEssential && <span className={S.essential}>*</span>}
+              <div className={S.FormContentTitle}>
+                {question.title}
+                {question.isEssential && <span className={S.FormContentTitleEssential}>*</span>}
+              </div>
+              {question.subTitle && (
+                <div className={S.FormContentSubTitle}>{question.subTitle}</div>
+              )}
             </div>
-            {question.subTitle && <div className={S.questionSubTitle}>{question.subTitle}</div>}
             <textarea
               className={S.longAnswerTextarea}
               placeholder="답변을 입력해주세요"
@@ -111,10 +127,14 @@ export default function QuestionsSection({ questions, register, errors }: Questi
         return (
           <div key={index} className={S.questionContainer}>
             <div className={S.questionHeader}>
-              <span className={S.questionTitle}>{question.title}</span>
-              {question.isEssential && <span className={S.essential}>*</span>}
+              <div className={S.FormContentTitle}>
+                {question.title}
+                {question.isEssential && <span className={S.FormContentTitleEssential}>*</span>}
+              </div>
+              {question.subTitle && (
+                <div className={S.FormContentSubTitle}>{question.subTitle}</div>
+              )}
             </div>
-            {question.subTitle && <div className={S.questionSubTitle}>{question.subTitle}</div>}
             <input
               type="file"
               className={S.fileInput}
@@ -131,9 +151,5 @@ export default function QuestionsSection({ questions, register, errors }: Questi
     }
   };
 
-  return (
-    <div className={S.questionsSection}>
-      {questions.map((question, index) => renderQuestion(question, index))}
-    </div>
-  );
+  return <>{questions.map((question, index) => renderQuestion(question, index))}</>;
 }

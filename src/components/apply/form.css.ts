@@ -100,26 +100,35 @@ export const RadioText = style({
   color: '#272E3B',
 });
 
-// Questions Section Styles
-export const questionsSection = style({
+export const FormGap = style({
+  gap: '18px',
   display: 'flex',
   flexDirection: 'column',
-  gap: '32px',
-  padding: '22px',
-  borderRadius: '6px',
-  background: '#F8F8F9',
 });
+
+// Questions Section Styles
+// export const questionsSection = style({
+//   display: 'flex',
+//   flexDirection: 'column',
+//   gap: '32px',
+//   padding: '22px',
+//   borderRadius: '6px',
+//   background: '#F8F8F9',
+// });
 
 export const questionContainer = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: '16px',
+  borderRadius: '6px',
+  padding: '22px',
+  background: '#F8F8F9',
 });
 
 export const questionHeader = style({
   display: 'flex',
-  alignItems: 'center',
-  gap: '4px',
+  flexDirection: 'column',
+  gap: '8px',
 });
 
 export const questionTitle = style({

@@ -29,7 +29,7 @@ export default function Form({ clubId }: { clubId: string }) {
         <div className={S.FormSubTitle}>{data?.subTitle}</div>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className={S.FormGap}>
         <BasicInfoSection register={register} errors={errors} />
 
         {data?.questions && data.questions.length > 0 && (
