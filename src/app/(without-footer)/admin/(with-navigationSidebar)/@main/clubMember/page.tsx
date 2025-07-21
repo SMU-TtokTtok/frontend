@@ -1,7 +1,7 @@
-import React from 'react';
+import ClubMemberPage from '@/components/admin/clubMember/ClubMemberPage';
 
 function Page() {
-  return <div>page</div>;
+  return <ClubMemberPage />;
 }
 
 export default Page;
