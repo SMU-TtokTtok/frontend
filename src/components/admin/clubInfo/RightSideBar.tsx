@@ -2,6 +2,7 @@ import * as S from './RightSideBar.css';
 import Button from '@/common/ui/button/index';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToString';
+import { formatDateToDot, formatDateToMonthDay } from '@/common/util/formatDate';
 
 interface RightSideBarProps extends AdminClubIntro {
   onEditClick: () => void;
@@ -52,7 +53,7 @@ export default function RightSideBar(props: RightSideBarProps) {
             </div>
           ) : (
             <div className={S.blackText}>
-              {recruitStartDate} ~ {recruitEndDate}
+              {formatDateToDot(recruitStartDate)}~{formatDateToMonthDay(recruitEndDate)}
             </div>
           )}
         </div>

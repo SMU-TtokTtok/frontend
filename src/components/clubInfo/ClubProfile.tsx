@@ -5,8 +5,15 @@ import person from '@/assets/person.svg';
 import Tag from '@/common/ui/tag/index';
 import star from '@/assets/star.svg';
 import star_active from '@/assets/star_active.svg';
+import { usePatchFavorite } from '@/hooks/useFavoriteMutation';
 
-export default function ClubProfile({ clubIntro }: { clubIntro: UserClubIntro }) {
+export default function ClubProfile({
+  clubIntro,
+  clubId,
+}: {
+  clubIntro: UserClubIntro;
+  clubId: number;
+}) {
   const {
     name,
     shortDescription,
@@ -18,6 +25,7 @@ export default function ClubProfile({ clubIntro }: { clubIntro: UserClubIntro })
     peopleCount,
     isFavorite,
   } = clubIntro;
+  const { handleFavoriteStatus } = usePatchFavorite();
 
   return (
     <div className={S.clubProfile}>
@@ -49,6 +57,10 @@ export default function ClubProfile({ clubIntro }: { clubIntro: UserClubIntro })
           width={29}
           height={29}
           className={S.star}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleFavoriteStatus({ clubId: clubId });
+          }}
         />
       </div>
     </div>

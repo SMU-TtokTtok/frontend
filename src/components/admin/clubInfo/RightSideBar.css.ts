@@ -33,12 +33,12 @@ export const flexRow = style({
 
 export const grayText = style({
   color: '#818181',
-  fontSize: '16px',
+  fontSize: vars.fonts.body3,
 });
 
 export const blackText = style({
   color: '#030304',
-  fontSize: '18px',
+  fontSize: vars.fonts.body1,
 });
 
 export const modifyButton = style({
@@ -68,13 +68,21 @@ export const modifyButton = style({
 export const numberInput = style({
   appearance: 'textfield',
   WebkitAppearance: 'textfield',
-  padding: '1px 2px',
+  padding: '2px 4px',
   border: '1px solid #ccc',
   font: '-webkit-small-control',
+  height: '24px',
 });
 export const dateFlex = style({
   display: 'flex',
   flexDirection: 'column',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      flexDirection: 'row',
+      gap: '10px',
+    },
+  },
 });
 
 export const buttonFlex = style({
@@ -83,6 +91,6 @@ export const buttonFlex = style({
 });
 
 export const button = style({
-  padding: '2px 4px',
+  padding: '4px 6px',
   borderRadius: '4px',
 });

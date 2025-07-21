@@ -7,7 +7,6 @@ export interface ClubsInfinite {
   nextCursor: string | null;
 }
 
-export interface ClubsInfiniteData {
-  pageParams: (string | undefined)[];
-  pages: ClubsInfinite[];
+export interface ClubsInfiniteWithTotal extends ClubsInfinite {
+  total: number;
 }

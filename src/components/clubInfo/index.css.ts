@@ -29,5 +29,8 @@ export const wrapper = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       maxWidth: 'none',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      gap: '16px',
+    },
   },
 });

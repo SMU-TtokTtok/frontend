@@ -37,7 +37,7 @@ export const numberText = style({
 export const desText = style({
   fontSize: vars.fonts.body1,
   marginBottom: '21px',
-  color: '#55637D',
+  color: '#878787',
 
   overflow: 'hidden',
   textOverflow: 'ellipsis',
@@ -71,6 +71,16 @@ export const dropDownStyle = style({
   width: 'fit-content',
 });
 
+export const dropDownStyleWide = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  padding: '4px 12px',
+  borderRadius: '100px',
+  boxSizing: 'border-box',
+  minHeight: '32px',
+  width: '97px',
+});
+
 export const dropDownStyle2 = style({
   padding: '6px 0 6px 8px',
   borderRadius: '4px',
@@ -78,6 +88,15 @@ export const dropDownStyle2 = style({
   color: '#55637D',
   // minWidth: '80px',
   // width: '80px',
+});
+
+export const dropDownStyle2Wide = style({
+  padding: '6px 0 6px 8px',
+  borderRadius: '4px',
+  backgroundColor: '#E7E8EA',
+  color: '#55637D',
+
+  width: '115px',
 });
 
 export const dropdownPanel = style({
@@ -265,7 +284,8 @@ export const clubNameInput = style({
   border: '1px solid gray',
   background: 'transparent',
   outline: 'none',
-  padding: 0,
+  padding: '2px 0 2px 2px',
+  borderRadius: '4px',
 });
 
 export const desTextInput = style({
@@ -276,7 +296,9 @@ export const desTextInput = style({
   border: '1px solid gray',
   background: 'transparent',
   outline: 'none',
-  padding: 0,
+  padding: '2px 0 2px 2px',
+  width: '100%',
+  borderRadius: '4px',
 });
 
 export const underlineInput = style({
