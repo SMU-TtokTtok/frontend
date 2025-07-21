@@ -26,6 +26,7 @@ function ApplicantsContentPage() {
     sort: searchParams.get('sort') as Sort,
     isEvaluating: searchParams.get('isEvaluating') === 'true',
   };
+
   return (
     <>
       <div className={S.container}>

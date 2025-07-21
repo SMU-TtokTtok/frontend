@@ -14,15 +14,15 @@ import { useStepTwoForm } from './useStepTwoForm';
 export interface RecruitData {
   recruitStartDate: string | null;
   recruitEndDate: string | null;
-  recruitMember: number | null;
-  selectedGrades: number[] | null;
-  withInterview: boolean | null;
+  maxApplyCount: number | null;
+  applicableGrades: number[] | null;
+  hasInterview: boolean | null;
   interviewStartDate: string | null;
   interviewEndDate: string | null;
 }
 
 function RecruitConditionStep() {
-  const withInterview = loadFromSession('withInterview');
+  const withInterview = loadFromSession('hasInterview');
   const { recruitData, handleRecruitData } = useStepTwoForm();
   const isValid = useRecruitValidation(withInterview);
 
@@ -46,7 +46,7 @@ function RecruitConditionStep() {
           {withInterview && <InterviewDate handleRecruitData={handleRecruitData} />}
         </div>
 
-        <div className={S.nextStepButtonWrapper({ step: 2 })}>
+        <div className={S.nextStepButtonWrapper({ step: 2, isInterview: withInterview })}>
           <QueryLink extraQuery={{ step: 3 }}>
             <Button variant={'primary'} disabled={!isValid} className={S.nextStepButton}>
               다음으로

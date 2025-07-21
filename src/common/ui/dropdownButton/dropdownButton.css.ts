@@ -17,6 +17,11 @@ export const dropDownButtonStyle = styleVariants({
     border: `1px solid ${vars.colors.tertiary.fixed_dim}`,
     color: vars.colors.tertiary.default,
   },
+  form: {
+    backgroundColor: vars.colors.surface.cont_1_var,
+    border: 'none',
+    color: vars.colors.surface.on_surf,
+  },
 });
 
 export const baseButtonStyle = style({

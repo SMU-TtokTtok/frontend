@@ -17,11 +17,11 @@ function RecruitTarget({ handleRecruitData }: RecruitTargetProps) {
     setSelectedGrades((prev) =>
       prev.includes(grade) ? prev.filter((g) => g !== grade) : [...prev, grade],
     );
-    handleRecruitData('selectedGrades', selectedGrades);
+    handleRecruitData('applicableGrades', selectedGrades);
   };
 
   useEffect(() => {
-    saveToSession('selectedGrades', selectedGrades);
+    saveToSession('applicableGrades', selectedGrades);
   }, [selectedGrades]);
 
   const isSelected = (grade: number) => selectedGrades.includes(grade);

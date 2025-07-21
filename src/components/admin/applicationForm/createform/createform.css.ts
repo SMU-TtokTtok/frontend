@@ -182,6 +182,19 @@ export const nextStepButtonWrapper = recipe({
         },
       },
     },
+    isInterview: {
+      default: {},
+      true: {
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+            marginTop: '177px',
+          },
+        },
+      },
+      false: {
+        marginTop: '0px',
+      },
+    },
   },
 });
 
@@ -192,6 +205,7 @@ export const targetMemberContainer = style({
   alignItems: 'center',
   gap: '16px',
   marginTop: '18px',
+  position: 'relative',
 });
 
 export const recruitConditionBox = style({

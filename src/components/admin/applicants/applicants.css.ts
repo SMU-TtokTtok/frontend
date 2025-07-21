@@ -125,6 +125,7 @@ export const filterButton = recipe({
 export const checkbox = style({
   width: '1rem',
   height: '1rem',
+  border: `1px solid ${vars.colors.surface.outline_var}`,
 });
 
 export const noResults = style({
