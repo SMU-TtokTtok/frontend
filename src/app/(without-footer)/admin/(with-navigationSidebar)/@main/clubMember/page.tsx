@@ -1,4 +1,4 @@
-import ClubMemberPage from '@/components/admin/clubMember/ClubMemberPage';
+import ClubMemberPage from '@/components/admin/clubMember';
 
 function Page() {
   return <ClubMemberPage />;
