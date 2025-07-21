@@ -1,0 +1,64 @@
+import { z } from 'zod';
+
+// const questionAnswerSchema = z.object({
+//   answer: z.union([
+//     z.string().min(1, '답변을 입력해주세요.'),
+//     z.array(z.string()).min(1, '답변을 선택해주세요.'),
+//     z.instanceof(File),
+//   ]),
+// });
+
+export const applyFormSchema = z.object({
+  name: z.string().min(1, '이름을 입력해주세요.'),
+  age: z.string().min(1, '나이를 입력해주세요.').regex(/^\d+$/, '숫자만 입력해주세요.'),
+  major: z.string().min(1, '학과를 입력해주세요.'),
+  email: z.string().min(1, '이메일을 입력해주세요.').email('올바른 이메일 형식이 아닙니다.'),
+  phone: z
+    .string()
+    .min(1, '전화번호를 입력해주세요.')
+    .regex(/^010-\d{4}-\d{4}$/, '올바른 전화번호 형식이 아닙니다. (예: 010-0000-0000)'),
+  isStudent: z.union([z.string(), z.null()]).superRefine((val, ctx) => {
+    if (!val || val === '') {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '재학여부를 선택해주세요.',
+      });
+    } else if (!['true', 'false'].includes(val)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '올바른 재학여부를 선택해주세요.',
+      });
+    }
+  }),
+  grade: z.union([z.string(), z.null()]).superRefine((val, ctx) => {
+    if (!val || val === '') {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '현재 학년을 선택해주세요.',
+      });
+    } else if (!['1', '2', '3', '4'].includes(val)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '올바른 학년을 선택해주세요.',
+      });
+    }
+  }),
+  gender: z.union([z.string(), z.null()]).superRefine((val, ctx) => {
+    if (!val || val === '') {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '성별을 선택해주세요.',
+      });
+    } else if (!['true', 'false'].includes(val)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: '올바른 성별을 선택해주세요.',
+      });
+    }
+  }),
+  // questions: z.array(questionAnswerSchema).optional(),
+
+  questions: z.array(z.any()).optional(),
+});
+
+export type ApplyFormData = z.infer<typeof applyFormSchema>;

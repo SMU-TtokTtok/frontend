@@ -25,3 +25,5 @@ export const patchRecruiting = http.patch('/admin/api/club/recruiting', async ({
 //   clubInfoData = { ...clubInfoData, ...safeBody };
 //   return HttpResponse.json({ success: true, ...clubInfoData });
 // });
+
+export const patchClubInfo = http.patch('/api/club-info', async ({}) => {});
