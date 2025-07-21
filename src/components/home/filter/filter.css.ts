@@ -9,6 +9,7 @@ export const container = style({
   justifyContent: 'center',
   alignItems: 'center',
   position: 'relative',
+  marginBottom: '13px',
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       padding: '0 20px 72px 20px',
