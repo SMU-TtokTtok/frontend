@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Arrow from '@/assets/dropdown.svg';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: keyof typeof S.dropDownButtonStyle;
+  variant?: keyof typeof S.dropDownButtonStyle;
 }
 
 function DropDownButton({
