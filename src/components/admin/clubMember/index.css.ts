@@ -19,3 +19,11 @@ export const title = style({
   color: '#030304',
   marginTop: '50px',
 });
+
+export const memberPanel = style({
+  width: '100%',
+  backgroundColor: vars.colors.surface.bright,
+  padding: '20px',
+  borderRadius: '8px',
+  marginTop: '20px',
+});
