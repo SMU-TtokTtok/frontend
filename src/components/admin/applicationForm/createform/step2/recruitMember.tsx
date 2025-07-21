@@ -10,8 +10,8 @@ function RecruitMember({ handleRecruitData }: RecruitMemberProps) {
   const handleSessionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const value = e.target.value;
-    saveToSession('recruitMember', parseInt(value));
-    handleRecruitData('recruitMember', parseInt(value));
+    saveToSession('maxApplyCount', parseInt(value));
+    handleRecruitData('maxApplyCount', parseInt(value));
   };
 
   return (

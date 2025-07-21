@@ -1,3 +1,4 @@
+import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
@@ -8,6 +9,20 @@ export const container = style({
   width: '100%',
   height: 'auto',
   position: 'relative',
+});
+
+export const interviewContainer = style({
+  backgroundColor: vars.colors.surface.default,
+  padding: '26px 24px',
+  width: '100%',
+  height: 'auto',
+  position: 'relative',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      position: 'absolute',
+      top: '157px',
+    },
+  },
 });
 
 export const label = style({
@@ -103,7 +118,6 @@ export const calendarContainer = style({
 });
 
 export const inputDateContainer = style({
-  position: 'relative',
   width: '100%',
   display: 'flex',
   justifyContent: 'start',
