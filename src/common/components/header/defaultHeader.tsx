@@ -10,7 +10,6 @@ import Button from '@/common/ui/button';
 
 function DefaultHeader() {
   const isVisible = useScrollObserver();
-
   return (
     <Header isVisible={isVisible} className={S.InnerWrapper}>
       <Link href={ROUTES.HOME}>
