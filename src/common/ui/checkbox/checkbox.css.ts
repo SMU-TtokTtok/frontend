@@ -8,7 +8,6 @@ export const checkboxContainer = style({
 });
 
 export const checkboxBase = style({
-  border: `2px solid ${vars.colors.surface.on_surf_var}`,
   borderRadius: '50%',
   background: vars.colors.surface.bright,
   cursor: 'pointer',
