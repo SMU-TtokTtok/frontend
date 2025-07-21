@@ -10,9 +10,9 @@ export const container = style({
   minWidth: '16.666rem',
   maxWidth: '41rem',
   width: '100%',
-  height: '8.83rem',
+  height: '147px',
   backgroundColor: vars.colors.surface.bright,
-  padding: '1rem 1rem 1.111rem 1rem',
+  padding: '16px',
   cursor: 'pointer',
   borderRadius: '8px',
 });
