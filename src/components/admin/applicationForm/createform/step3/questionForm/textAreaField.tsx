@@ -5,6 +5,7 @@ import DropDownButton from '@/common/ui/dropdownButton';
 import Checkbox from '@/common/ui/checkbox';
 import Image from 'next/image';
 import Delete from '@/assets/delete.svg';
+import check from '@/assets/check_radio.svg';
 import { questionTypes } from './index';
 
 import { ApplicationForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
@@ -58,6 +59,9 @@ function TextAreaField({
             variant="primary"
             className={S.essentialCheckbox}
             label="필수 질문"
+            img={check}
+            imgSize={S.checkImg}
+            defaultChecked={field.isEssential}
             onChange={(e) => handleEssentialChange(fieldId, e.target.checked)}
           />
           <span className={S.horizonLine} />

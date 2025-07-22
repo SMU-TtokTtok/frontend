@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Delete from '@/assets/delete.svg';
 import AddFeild from '@/assets/add_circle.svg';
 import DeleteOption from '@/assets/option_delete.svg';
+import check from '@/assets/check_radio.svg';
 
 import { ApplicationForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import { questionTypes } from './index';
@@ -67,6 +68,9 @@ function CheckboxField({
             variant="primary"
             className={S.essentialCheckbox}
             label="필수 질문"
+            img={check}
+            imgSize={S.checkImg}
+            defaultChecked={field.isEssential}
             onChange={(e) => handleEssentialChange(fieldId, e.target.checked)}
           />
           <span className={S.horizonLine} />

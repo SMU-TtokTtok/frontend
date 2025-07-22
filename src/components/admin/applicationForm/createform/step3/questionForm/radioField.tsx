@@ -4,6 +4,7 @@ import DropDown from '@/common/components/dropdown';
 import DropDownButton from '@/common/ui/dropdownButton';
 import Checkbox from '@/common/ui/checkbox';
 import Image from 'next/image';
+import check from '@/assets/check_radio.svg';
 import AddFeild from '@/assets/add_circle.svg';
 import Delete from '@/assets/delete.svg';
 import DeleteOption from '@/assets/option_delete.svg';
@@ -66,6 +67,9 @@ function RadioField({
             variant="primary"
             className={S.essentialCheckbox}
             label="필수 질문"
+            img={check}
+            imgSize={S.checkImg}
+            defaultChecked={field.isEssential}
             onChange={(e) => handleEssentialChange(fieldId, e.target.checked)}
           />
           <span className={S.horizonLine} />
