@@ -8,6 +8,7 @@ import RightSide from './RightSide';
 
 export default function ClubMemberPage() {
   const [search, setSearch] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
@@ -17,9 +18,7 @@ export default function ClubMemberPage() {
         <div className={S.title}>👥 부원 명단</div>
         <SearchBarArea search={search} handleSearchChange={handleSearchChange} />
         <RightSide />
-        <div className={S.memberPanel}>
-          <MemberList />
-        </div>
+        <div className={S.memberPanel}>{!search && <MemberList />}</div>
       </div>
     </div>
   );
