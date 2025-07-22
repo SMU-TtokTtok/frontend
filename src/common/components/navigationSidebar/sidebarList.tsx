@@ -6,14 +6,13 @@ import * as S from '@/common/components/navigationSidebar/sidebar.css';
 
 function SidebarList() {
   const pathName = usePathname();
-
   return (
     <ul>
       <p className={S.sidebarTitle}>동아리 관리</p>
 
       {ADMIN_SIDEBAR_ITEMS.slice(0, 2).map((item) => (
         <SidebarItem
-          img={item.img}
+          img={pathName === item.href.split('?')[0] ? item.seletedImg : item.img}
           key={item.label}
           label={item.label}
           href={item.href}
@@ -24,7 +23,7 @@ function SidebarList() {
 
       {ADMIN_SIDEBAR_ITEMS.slice(2, 4).map((item) => (
         <SidebarItem
-          img={item.img}
+          img={pathName === item.href.split('?')[0] ? item.seletedImg : item.img}
           key={item.label}
           label={item.label}
           href={item.href}

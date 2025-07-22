@@ -1,8 +1,12 @@
 import { ROUTES } from './routes';
 import applicants from '@/assets/clinical_notes.svg';
+import applicants_selected from '@/assets/clinical_notes_selected.svg';
 import applicantsform from '@/assets/edit_document.svg';
+import applicantsform_selected from '@/assets/edit_document_selected.svg';
 import clubinfo from '@/assets/fact_check.svg';
+import clubinfo_selected from '@/assets/fact_check_selected.svg';
 import clubMember from '@/assets/group.svg';
+import clubMember_selectd from '@/assets/group_selected.svg';
 
 export const FOOTER = {
   serviceName: '똑똑',
@@ -18,10 +22,25 @@ export const BREAKPOINTS = {
 } as const;
 
 export const ADMIN_SIDEBAR_ITEMS = [
-  { label: '동아리 정보관리', href: ROUTES.ADMIN, img: clubinfo },
-  { label: '부원 명단', href: ROUTES.ADMIN_CLUB_MEMBER, img: clubMember },
-  { label: '지원폼 관리', href: ROUTES.ADMIN_APPLICATIONS_FORM, img: applicantsform },
-  { label: '지원자 관리', href: ROUTES.ADMIN_APPLICATIONS, img: applicants },
+  { label: '동아리 정보관리', href: ROUTES.ADMIN, img: clubinfo, seletedImg: clubinfo_selected },
+  {
+    label: '부원 명단',
+    href: ROUTES.ADMIN_CLUB_MEMBER,
+    img: clubMember,
+    seletedImg: clubMember_selectd,
+  },
+  {
+    label: '지원폼 관리',
+    href: ROUTES.ADMIN_APPLICATIONS_FORM,
+    img: applicantsform,
+    seletedImg: applicantsform_selected,
+  },
+  {
+    label: '지원자 관리',
+    href: ROUTES.ADMIN_APPLICATIONS,
+    img: applicants,
+    seletedImg: applicants_selected,
+  },
 ] as const;
 
 export const FILTER = {
