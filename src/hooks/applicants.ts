@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { applicantKey } from './queries/key';
 import {
   getApplicantList,
@@ -14,7 +14,7 @@ export const useApplicantList = ({ selectedOptions }: UseApplicantListParams) =>
   const { applicantList } = applicantKey;
   const { evaluation, sort, isEvaluating } = selectedOptions;
 
-  const { data, isLoading } = useSuspenseQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [applicantList, selectedOptions],
     queryFn: () => getApplicantList({ evaluation, sort, isEvaluating }),
   });

@@ -291,10 +291,11 @@ export const dropDownItem = recipe({
     alignItems: 'center',
     padding: '0.889rem 0',
     fontSize: vars.fonts.title4,
+    fontWeight: '600',
     selectors: {
       '&:hover': {
-        backgroundColor: vars.colors.primary.default,
-        color: vars.colors.white,
+        backgroundColor: vars.colors.primary.base,
+        color: vars.colors.primary.default,
       },
     },
     '@media': {

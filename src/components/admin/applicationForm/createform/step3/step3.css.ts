@@ -9,8 +9,8 @@ export const container = style({
   position: 'relative',
   alignItems: 'start',
   marginTop: '70px',
-  paddingLeft: '380px',
-  paddingRight: '500px',
+  paddingLeft: '308px',
+  paddingRight: '374px',
   maxWidth: '100vw',
   width: '100%',
   '@media': {
@@ -24,7 +24,7 @@ export const container = style({
 export const navigatorContainer = style({
   position: 'fixed',
   top: '188px',
-  right: '146px',
+  right: '24px',
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       position: 'static',

@@ -1,10 +1,10 @@
 export const convertToKor = (name: string): string => {
   switch (name) {
-    case 'evaluating':
+    case 'EVALUATING':
       return '평가중';
-    case 'pass':
+    case 'PASS':
       return '합격';
-    case 'fail':
+    case 'FAIL':
       return '불합격';
     case 'applies':
       return '서류';

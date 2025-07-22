@@ -20,6 +20,7 @@ function RecruitMember({ handleRecruitData }: RecruitMemberProps) {
         모집인원<span className={S.required}>*</span>
       </p>
       <Input
+        variant="tertiary"
         type="number"
         className={S.recruitMember}
         placeholder="숫자를 입력해주세요"

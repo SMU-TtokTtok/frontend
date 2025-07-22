@@ -19,6 +19,8 @@ export const stepActive = style({
   fontSize: vars.fonts.body1,
   fontWeight: 500,
   color: vars.colors.surface.outline,
+});
+export const indicator = style({
   textDecoration: 'underline',
 });
 
@@ -102,11 +104,21 @@ export const selectTypeContainer = style({
   },
 });
 
-export const selectTypeLabel = style({
-  fontSize: vars.fonts.title4,
-  fontWeight: 600,
-  color: vars.colors.surface.on_surf,
-  textAlign: 'center',
+export const selectTypeLabel = recipe({
+  base: {
+    fontSize: vars.fonts.title4,
+    fontWeight: 600,
+    color: vars.colors.surface.on_surf,
+    textAlign: 'center',
+  },
+  variants: {
+    isSelected: {
+      true: {
+        color: vars.colors.primary.default,
+      },
+      false: {},
+    },
+  },
 });
 
 export const selectButtonContainer = style({
@@ -134,18 +146,37 @@ export const selectButton = recipe({
       },
     },
   },
+  variants: {
+    isSelected: {
+      true: {
+        backgroundColor: vars.colors.primary.base,
+      },
+      false: {},
+    },
+  },
 });
 
 export const selected = style({
-  backgroundColor: vars.colors.surface.cont_5,
+  backgroundColor: vars.colors.primary.base,
+  color: vars.colors.primary.default,
 });
 
-export const selectButtonDescription = style({
-  textAlign: 'center',
-  fontSize: vars.fonts.body1,
-  color: vars.colors.surface.outline,
-  fontWeight: 500,
-  marginTop: '10px',
+export const selectButtonDescription = recipe({
+  base: {
+    fontSize: vars.fonts.body1,
+    fontWeight: 500,
+    color: vars.colors.surface.outline,
+    textAlign: 'center',
+    marginTop: '10px',
+  },
+  variants: {
+    isSelected: {
+      true: {
+        color: vars.colors.primary.default,
+      },
+      false: {},
+    },
+  },
 });
 
 export const nextStepButton = style({
