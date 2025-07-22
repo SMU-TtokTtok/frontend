@@ -18,7 +18,7 @@ function Indicator({ step }: IndicatorProps) {
   return (
     <ul className={S.indicatorContainer}>
       {formSteps.map(({ step, label }, index) => (
-        <div key={step}>
+        <div key={step} className={S.indicatorContainer}>
           <li className={step === currentStep ? S.stepActive : S.step}>
             {step}.&nbsp; <span className={step === currentStep ? S.indicator : ''}>{label}</span>
             &nbsp;
