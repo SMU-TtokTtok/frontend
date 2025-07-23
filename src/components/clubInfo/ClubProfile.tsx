@@ -41,13 +41,16 @@ export default function ClubProfile({
         </div>
         <div className={S.description}>{shortDescription}</div>
         <div className={S.tagFlex}>
-          <Tag variant="default" className={S.tagStyle}>
+          <Tag variant="default" className={S.tagStyle + ' ' + S.tagFont}>
             {category}
           </Tag>
-          <Tag variant="default" className={S.tagStyle}>
+          <Tag variant="default" className={S.tagStyle + ' ' + S.tagFont}>
             {detailField}
           </Tag>
-          <Tag variant={isRecruiting ? 'secondary' : 'tertiary'} className={S.tagStyle}>
+          <Tag
+            variant={isRecruiting ? 'secondary' : 'tertiary'}
+            className={S.tagStyle + ' ' + S.tagFont}
+          >
             {isRecruiting ? '모집중' : '모집마감'}
           </Tag>
         </div>

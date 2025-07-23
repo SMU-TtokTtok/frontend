@@ -39,6 +39,7 @@ export const grayText = style({
 export const blackText = style({
   color: '#030304',
   fontSize: vars.fonts.body1,
+  fontWeight: 500,
 });
 
 export const modifyButton = style({

@@ -281,10 +281,10 @@ export const clubNameInput = style({
   fontWeight: 600,
   fontFamily: 'Pretendard Variable',
   color: 'inherit',
-  border: '1px solid gray',
+  border: '1px solid #E0E1E3',
   background: 'transparent',
   outline: 'none',
-  padding: '2px 0 2px 2px',
+  padding: '4px',
   borderRadius: '4px',
 });
 
@@ -293,10 +293,10 @@ export const desTextInput = style({
   fontWeight: 400,
   fontFamily: 'Pretendard Variable',
   color: 'inherit',
-  border: '1px solid gray',
+  border: '1px solid #E0E1E3',
   background: 'transparent',
   outline: 'none',
-  padding: '2px 0 2px 2px',
+  padding: '4px',
   width: '100%',
   borderRadius: '4px',
 });
@@ -309,8 +309,9 @@ export const selectedTypeText = style({
   fontSize: '16px',
   fontWeight: 500,
   color: '#222',
-  padding: '8px 12px',
+  padding: '4px 12px',
   display: 'inline-block',
+  lineHeight: '150%',
 });
 
 export const border4 = style({
