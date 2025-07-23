@@ -1,12 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 
-export const memberItemList = style({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '8px',
-});
-
 export const container = style({
   display: 'flex',
   justifyContent: 'space-between',

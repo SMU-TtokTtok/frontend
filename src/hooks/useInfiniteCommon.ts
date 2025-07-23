@@ -7,6 +7,7 @@ import { ClubsInfinite } from '@/common/model/clubInfinite';
 import { userKey } from './queries/key';
 import { getClubMember } from '@/components/admin/clubMember/api/getClubMember';
 import { ClubMember } from '@/components/admin/clubMember/api/getClubMember';
+import { useMemo } from 'react';
 
 interface UseInfiniteParams {
   enabled?: boolean;
@@ -94,5 +95,10 @@ export const useClubMemberInfinite = ({ enabled }: UseInfiniteParams = {}) => {
     enabled,
   });
 
-  return { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch };
+  const clubMembers = useMemo(() => {
+    if (!data?.pages) return [];
+    return data.pages.flatMap((page) => page.clubMembers || []);
+  }, [data?.pages]);
+
+  return { clubMembers, fetchNextPage, hasNextPage, isFetchingNextPage, refetch };
 };
