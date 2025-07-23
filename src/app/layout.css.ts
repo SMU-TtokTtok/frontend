@@ -3,7 +3,7 @@ import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const withFooterContent = style({
-  paddingTop: '4.222rem',
+  paddingTop: '60px',
   backgroundColor: vars.colors.surface.variant,
   minHeight: '90vh',
   '@media': {

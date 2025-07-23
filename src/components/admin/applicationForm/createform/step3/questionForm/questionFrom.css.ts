@@ -68,7 +68,7 @@ export const description = style({
   fontSize: vars.fonts.body1,
   color: vars.colors.primary.on_cont,
   padding: '12px 5px',
-  marginTop: '8px',
+  marginTop: '15px',
   resize: 'none',
   height: '50px',
   borderBottom: `1px solid ${vars.colors.primary.fixed}`,
@@ -204,6 +204,10 @@ export const questionDescription = style({
       backgroundColor: vars.colors.surface.cont_1_var,
     },
   },
+});
+export const checkImg = style({
+  width: '22px',
+  height: '22px',
 });
 
 export const previewFeild = style({

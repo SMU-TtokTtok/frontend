@@ -3,7 +3,7 @@ import Button from '@/common/ui/button';
 import Header from '@/common/ui/header';
 import Image from 'next/image';
 import Link from 'next/link';
-import mainlogo from '@/assets/mainlogo_wh.svg';
+import Mainlogo from '@/assets/mainlogo_wh.svg';
 import * as S from './clientHeader.css';
 import InputCombobox from '../../inputCombobox';
 import SearchIcon from '@/assets/search.svg';
@@ -29,7 +29,7 @@ function Desktop<T extends { id: number; name: string; separation: string }>({
   return (
     <Header isVisible={isVisible} className={S.DesktopInnerWrapper}>
       <Link href={ROUTES.HOME}>
-        <Image src={mainlogo} className={S.Logo} alt="Main Logo" />
+        <Image src={Mainlogo} className={S.Logo} alt="Main Logo" />
       </Link>
       <div className={S.RightArea}>
         <InputCombobox

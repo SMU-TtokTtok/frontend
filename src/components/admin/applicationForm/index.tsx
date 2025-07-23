@@ -12,7 +12,7 @@ function ApplicationFormPage() {
   return (
     <div className={S.formContainer}>
       <h3 className={S.title}>📋 지원폼 관리</h3>
-      <div>{data.name}</div>
+      <div>{data?.name}</div>
     </div>
   );
 }

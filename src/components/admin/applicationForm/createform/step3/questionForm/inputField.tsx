@@ -6,6 +6,7 @@ import Checkbox from '@/common/ui/checkbox';
 import Image from 'next/image';
 import { questionTypes } from './index';
 import Delete from '@/assets/delete.svg';
+import check from '@/assets/check_radio.svg';
 import { ApplicationForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import { convertToKor } from '@/common/util/convertToKor';
 import { ZodFormattedError } from 'zod';
@@ -57,6 +58,9 @@ function InputField({
             variant="primary"
             className={S.essentialCheckbox}
             label="필수 질문"
+            img={check}
+            imgSize={S.checkImg}
+            defaultChecked={field.isEssential}
             onChange={(e) => handleEssentialChange(fieldId, e.target.checked)}
           />
           <span className={S.horizonLine} />

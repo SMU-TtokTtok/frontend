@@ -10,15 +10,15 @@ export const container = style({
   minWidth: '16.666rem',
   maxWidth: '41rem',
   width: '100%',
-  height: '8.83rem',
+  height: '147px',
   backgroundColor: vars.colors.surface.bright,
-  padding: '1rem 1rem 1.111rem 1rem',
+  padding: '16px',
   cursor: 'pointer',
   borderRadius: '8px',
 });
 
 export const separation = style({
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   fontWeight: '500',
   color: vars.colors.surface.outline,
   marginBottom: '2px',
@@ -49,7 +49,7 @@ export const person = style({
 });
 
 export const name = style({
-  fontSize: vars.fonts.title3,
+  fontSize: vars.fonts.title4,
   fontWeight: '600',
   color: vars.colors.surface.on_surf,
   marginBottom: '5px',
@@ -73,6 +73,7 @@ export const membersWrapper = style({
 export const members = style({
   fontSize: vars.fonts.body2,
   fontWeight: '500',
+  color: vars.colors.surface.outline,
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       fontSize: vars.fonts.m_body2,
@@ -88,7 +89,7 @@ export const categoryWrapper = style({
 export const tagStyle = style({
   borderRadius: '5.555rem',
   padding: '0.22rem 0.67rem',
-  fontSize: vars.fonts.body2,
+  fontSize: vars.fonts.body3,
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       fontSize: vars.fonts.m_body2,

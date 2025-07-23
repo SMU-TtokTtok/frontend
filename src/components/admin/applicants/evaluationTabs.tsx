@@ -1,4 +1,3 @@
-'use client';
 import Button from '@/common/ui/button';
 import * as S from './applicants.css';
 import QueryLink from '@/common/components/queryLink';
@@ -16,6 +15,7 @@ function EvaluationTabs({ selectedOptions }: EvaluationTabsProps) {
       <div className={S.evaluationButtonWrapper}>
         <QueryLink extraQuery={{ evaluation: 'applies' }}>
           <Button
+            type="button"
             variant={'none'}
             className={S.evaluationButton({ isSelected: isDocumentEvaluation })}
           >
@@ -27,6 +27,7 @@ function EvaluationTabs({ selectedOptions }: EvaluationTabsProps) {
       <div className={S.evaluationButtonWrapper}>
         <QueryLink extraQuery={{ evaluation: 'interviews' }}>
           <Button
+            type="button"
             variant={'none'}
             className={S.evaluationButton({ isSelected: isInterviewEvaluation })}
           >

@@ -4,7 +4,9 @@ import { style, styleVariants } from '@vanilla-extract/css';
 
 export const rightSidebar = style({
   position: 'fixed',
-  right: 146,
+  //ight: 146,
+  right: 24,
+
   top: 129,
 
   '@media': {
@@ -101,6 +103,7 @@ export const ItemWrapper = style({
   backgroundColor: vars.colors.surface.default,
   marginTop: '0.333rem',
   cursor: 'pointer',
+  borderRadius: '6px',
   selectors: {
     '&.disableCursor': {
       cursor: 'default',
@@ -122,6 +125,7 @@ export const grade = style({
   padding: '0.222rem  ',
   textAlign: 'center',
   border: 'none',
+  borderRadius: '4px',
 });
 
 export const name = style({
@@ -165,16 +169,15 @@ export const dropDownItem = style({
   padding: '12px 20px',
   selectors: {
     '&:hover': {
-      backgroundColor: vars.colors.primary.default,
-      color: vars.colors.white,
+      backgroundColor: vars.colors.primary.base,
+      color: vars.colors.primary.default,
     },
   },
 });
 
 export const passFailListModal = style({
   padding: '18px 26px 30px 26px',
-  maxWidth: '1113px',
-  width: '100%',
+  width: '600px',
 });
 
 export const modalBody = style({

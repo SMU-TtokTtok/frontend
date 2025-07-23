@@ -1,34 +1,41 @@
 import Image from 'next/image';
 import * as S from './applicantList.css';
 import menu from '@/assets/menu.svg';
+import passArrow from '@/assets/arrow_pass.svg';
+import failArrow from '@/assets/arrow_fail.svg';
 import { ApplicantsInfo } from '@/common/model/applicants';
 import Tag from '@/common/ui/tag';
 import { getGradeStyle } from '@/common/util/getGradeStyle';
 import DropDown from '@/common/components/dropdown';
 import DropDownButton from '@/common/ui/dropdownButton';
 import { dropDownButtonVariant } from '@/common/ui/dropdownButton/dropdownButton.css';
+import { convertToKor } from '@/common/util/convertToKor';
 interface ApplicantProps {
   applicant: ApplicantsInfo;
   handleFavoriteStatus: ({ applicantId, status }: { applicantId: number; status: string }) => void;
 }
 const options = [
-  { value: 'pass', label: '합격' },
-  { value: 'fail', label: '불합격' },
-  { value: 'evaluating', label: '평가중' },
+  { value: 'PASS', label: '합격' },
+  { value: 'FAIL', label: '불합격' },
+  { value: 'EVALUATING', label: '평가중' },
 ];
 function ApplicantItem({ applicant, handleFavoriteStatus }: ApplicantProps) {
   const getStatusVariant = (status: string): dropDownButtonVariant => {
     switch (status) {
-      case '평가중':
+      case 'EVALUATING':
         return 'default';
-      case '합격':
+      case 'PASS':
         return 'tertiary';
-      case '불합격':
+      case 'FAIL':
         return 'error';
       default:
         return 'default';
     }
   };
+
+  const imgSrc =
+    applicant.status === 'PASS' ? passArrow : applicant.status === 'FAIL' ? failArrow : undefined;
+
   return (
     <li className={S.applicantItemWrapper}>
       <div className={S.profileSection}>
@@ -45,8 +52,9 @@ function ApplicantItem({ applicant, handleFavoriteStatus }: ApplicantProps) {
           <DropDownButton
             variant={getStatusVariant(applicant.status)}
             className={S.dropDownButtonStyle}
+            img={imgSrc}
           >
-            {applicant.status}
+            {convertToKor(applicant.status)}
           </DropDownButton>
         }
       >

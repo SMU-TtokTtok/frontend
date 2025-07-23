@@ -1,3 +1,4 @@
+'use client';
 import { ApplicantListParams } from '../api/applicants';
 import { useApplicantList, usePatchApplicantStatus } from '@/hooks/applicants';
 import ApplicantItem from './applicantItem';
@@ -13,14 +14,14 @@ interface ApplicantListProps {
 function ApplicantList({ selectedOptions, handleModalOpen }: ApplicantListProps) {
   const { data: applicants } = useApplicantList({ selectedOptions });
   const { handleFavoriteStatus } = usePatchApplicantStatus({ handleModalOpen });
-  const isEmpty = applicants.length === 0;
+  const isEmpty = applicants?.length === 0;
 
   return (
     <>
       {isEmpty && <Empty className={S.empty}>{MESSAGE.empty.noApplicant}</Empty>}
       {!isEmpty && (
         <ul>
-          {applicants.map((applicant) => {
+          {applicants?.map((applicant) => {
             return (
               <ApplicantItem
                 key={applicant.id}

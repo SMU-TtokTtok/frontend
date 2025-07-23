@@ -2,6 +2,7 @@ import Button from '@/common/ui/button';
 import * as S from './applicants.css';
 import QueryLink from '@/common/components/queryLink';
 import Checkbox from '@/common/ui/checkbox';
+import Check from '@/assets/check_radio.svg';
 import { ApplicantListParams } from './api/applicants';
 interface ApplicantFilterBarProps {
   selectedOptions: ApplicantListParams;
@@ -31,12 +32,14 @@ function ApplicantFilterBar({ selectedOptions }: ApplicantFilterBarProps) {
         </QueryLink>
       </div>
       <div>
-        <QueryLink extraQuery={{ isEvaluating: !selectedOptions.isEvaluating }}>
+        <QueryLink extraQuery={{ isEvaluating: `${!selectedOptions.isEvaluating}` }}>
           <Checkbox
             label="평가중만 보기"
             className={S.checkbox}
             variant="primary"
             defaultChecked={selectedOptions.isEvaluating}
+            img={Check}
+            imgSize={S.checkImg}
           />
         </QueryLink>
       </div>
