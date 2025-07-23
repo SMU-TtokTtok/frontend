@@ -1,4 +1,4 @@
-import { ApplicationForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
+import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import InputField from './inputField';
 import TextAreaField from './textAreaField';
 import CheckboxField from './checkboxField';
@@ -9,7 +9,7 @@ import FileField from './fileField';
 interface FormFieldFactoryProps {
   field: ApplyFormField;
   fieldId: number;
-  errors?: ZodFormattedError<ApplicationForm>;
+  errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
   handleQuestionTypeChange: (type: QuestionType) => void;
   handleUpdateField: (fieldId: number, data: ApplyFormField) => void;

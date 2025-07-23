@@ -1,4 +1,4 @@
-import { AdminApplicationForm, postApplicantForm } from './applicactionForm';
+import { AdminApplicationForm, patchApplicantForm, postApplicantForm } from './applicactionForm';
 import {
   Applicants,
   ApplicantSearch,
@@ -38,4 +38,5 @@ export const handlers = [
   getSearchList,
   postApplicantForm,
   getUserForm,
+  patchApplicantForm,
 ];
