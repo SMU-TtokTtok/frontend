@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import * as S from './rightSide.css';
 import Button from '@/common/ui/button/index';
 import { UserClubIntro } from '@/common/model/clubIntro';
@@ -5,14 +6,39 @@ import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToStri
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
 import { formatDateToDot, formatDateToMonthDay } from '@/common/util/formatDate';
+import { sidebarTop } from './rightSide.css';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
 
 const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: number }) => {
   const { recruitStartDate, recruitEndDate, recruitTarget, recruitNumber, isRecruiting } =
     clubIntro;
   const router = useRouter();
 
+  // 스크롤에 따라다니는 사이드바를 위한 상태
+  const [barPosition, setBarPosition] = useState(200);
+
+  // 스크롤 이벤트 핸들러
+  const handleScroll = () => {
+    const position = 200 + window.scrollY;
+    setBarPosition(position);
+  };
+
+  // 스크롤 이벤트 리스너 등록
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <div className={S.container}>
+    <div
+      className={S.container}
+      style={assignInlineVars({
+        [sidebarTop]: `${barPosition}px`,
+      })}
+    >
       <div className={S.contentFlex}>
         {isRecruiting ? (
           <>

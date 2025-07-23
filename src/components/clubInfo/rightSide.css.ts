@@ -1,12 +1,15 @@
 import { vars } from '@/common/styles/theme.css';
-import { style } from '@vanilla-extract/css';
+import { createVar, style } from '@vanilla-extract/css';
 import { BREAKPOINTS } from '@/common/constants';
 
+export const sidebarTop = createVar();
+
 export const container = style({
-  position: 'fixed',
+  position: 'absolute',
   width: '330px',
-  right: '100px', //
-  top: '200px', //
+  right: '100px',
+  transition: 'top 0.7s ease-out',
+  top: sidebarTop, // 동적 값이 들어갈 자리
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
@@ -14,6 +17,7 @@ export const container = style({
       width: '100%',
       right: '0',
       top: '0',
+      transition: 'none',
     },
   },
 });
