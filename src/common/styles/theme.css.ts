@@ -59,6 +59,7 @@ export const vars = createThemeContract({
 
     white: null,
     black: null,
+    charcoal: null,
   },
   fonts: {
     display1: null,
@@ -137,6 +138,7 @@ createGlobalTheme(':root', vars, {
     },
     white: '#FFFFFF',
     black: '#000000',
+    charcoal: '#272E3B',
   },
   fonts: {
     display1: '3.667rem ',
