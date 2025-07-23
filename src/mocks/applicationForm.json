@@ -1,0 +1,37 @@
+{
+  "title": "2025 상반기 개발 직군 지원서",
+  "subTitle": "개발자 포지션 지원자를 위한 기본 정보 및 성향 조사",
+  "questions": [
+    {
+      "title": "사용 가능한 기술 스택을 선택해주세요.",
+      "subTitle": "중복 선택 가능합니다.",
+      "questionType": "CHECKBOX",
+      "isEssential": true,
+      "content": ["JavaScript", "TypeScript", "React", "Node.js", "Python", "Django", "Spring Boot"]
+    },
+    {
+      "title": "협업 시 가장 중요하다고 생각하는 가치는 무엇인가요?",
+      "subTitle": "하나만 선택해주세요.",
+      "questionType": "RADIO",
+      "isEssential": true,
+      "content": ["소통", "책임감", "속도", "유연성"]
+    },
+    {
+      "title": "자기소개를 간단히 작성해주세요.",
+      "subTitle": "300자 이내",
+      "questionType": "LONG_ANSWER",
+      "isEssential": false,
+      "content": []
+    }
+  ],
+  "beforeForms": [
+    {
+      "formId": "prev_2024_winter_dev",
+      "createdAt": "2024-12-10T09:30:00Z"
+    },
+    {
+      "formId": "prev_2023_summer_design",
+      "createdAt": "2023-06-20T14:00:00Z"
+    }
+  ]
+}
