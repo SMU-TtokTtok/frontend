@@ -30,8 +30,9 @@ export interface PreviousStepForm {
   interviewStartDate: { present: boolean };
   interviewEndDate: { present: boolean };
 }
-export interface ApplicationForm extends PreviousStepForm {
+
+export interface QuestionStepForm {
   title: string;
   subTitle: string;
-  applyForm: ApplyFormField[];
+  questions: ApplyFormField[];
 }

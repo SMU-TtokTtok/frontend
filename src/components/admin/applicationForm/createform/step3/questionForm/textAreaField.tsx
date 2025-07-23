@@ -8,13 +8,13 @@ import Delete from '@/assets/delete.svg';
 import check from '@/assets/check_radio.svg';
 import { questionTypes } from './index';
 
-import { ApplicationForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
+import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import { convertToKor } from '@/common/util/convertToKor';
 import { ZodFormattedError } from 'zod';
 interface InputFieldProps {
   fieldId: number;
   field: ApplyFormField;
-  errors?: ZodFormattedError<ApplicationForm>;
+  errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
   handleQuestionTypeChange: (type: QuestionType) => void;
   handleUpdateField: (fieldId: number, data: ApplyFormField) => void;
@@ -85,7 +85,7 @@ function TextAreaField({
           }}
         />
         {errors && isSubmit && (
-          <span className={S.errorMessage}>{errors.applyForm?.[fieldId]?.title?._errors}</span>
+          <span className={S.errorMessage}>{errors.questions?.[fieldId]?.title?._errors}</span>
         )}
       </div>
 

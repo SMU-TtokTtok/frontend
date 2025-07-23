@@ -1,4 +1,4 @@
-import { ApplicationForm } from '@/common/model/applicationForm';
+import { QuestionStepForm } from '@/common/model/applicationForm';
 import { z } from 'zod';
 export enum QuestionType {
   LONG_ANSWER = 'LONG_ANSWER',
@@ -39,10 +39,10 @@ const ApplyFormFieldSchema = z
 
 const ApplicationFormSchema = z.object({
   title: z.string().min(1, '폼 제목은 필수입니다.'),
-  applyForm: z.array(ApplyFormFieldSchema),
+  questions: z.array(ApplyFormFieldSchema),
 });
 
-export const useApplicationFormValidation = (formData: ApplicationForm) => {
+export const useApplicationFormValidation = (formData: QuestionStepForm) => {
   const validate = () => {
     const result = ApplicationFormSchema.safeParse(formData);
 
