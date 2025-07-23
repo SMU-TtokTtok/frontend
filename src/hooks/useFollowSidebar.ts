@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 interface UseFollowSidebarProps {
   initialPosition?: number;
@@ -11,10 +11,10 @@ export const useFollowSidebar = ({
 }: UseFollowSidebarProps = {}) => {
   const [barPosition, setBarPosition] = useState(initialPosition);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const position = initialPosition + window.scrollY + offset;
     setBarPosition(position);
-  };
+  }, [initialPosition, offset]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -22,7 +22,7 @@ export const useFollowSidebar = ({
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [initialPosition, offset]);
+  }, [handleScroll]);
 
   return { barPosition };
 };
