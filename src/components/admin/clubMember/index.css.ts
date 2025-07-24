@@ -26,4 +26,5 @@ export const memberPanel = style({
   padding: '20px',
   borderRadius: '8px',
   marginTop: '20px',
+  marginBottom: '200px',
 });

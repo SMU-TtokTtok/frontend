@@ -1,7 +1,10 @@
-import { style } from '@vanilla-extract/css';
+import { style, createVar } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 
+export const sidebarTop = createVar();
+
 export const container = style({
+  position: 'absolute',
   width: '330px',
   backgroundColor: 'white',
   padding: '22px 26px',
@@ -9,8 +12,8 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '8px',
-  position: 'fixed',
-  top: '220px',
+  transition: 'top 0.7s ease-out',
+  top: sidebarTop,
   right: '146px',
 });
 
