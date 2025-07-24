@@ -4,8 +4,8 @@ import { style } from '@vanilla-extract/css';
 import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
-  paddingLeft: '21.222rem',
-  paddingRight: '400px',
+  paddingLeft: '300px',
+  paddingRight: '380px',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
@@ -16,7 +16,7 @@ export const container = style({
 });
 
 export const wrapper = style({
-  maxWidth: '1038px',
+  // maxWidth: '1038px',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',

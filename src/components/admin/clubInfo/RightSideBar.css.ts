@@ -7,7 +7,8 @@ export const sidebarTop = createVar();
 export const container = style({
   position: 'absolute',
   // top: '212px',
-  right: '3.8%',
+  // right: '3.8%',
+  right: '24px',
   width: '330px',
   transition: 'top 0.7s ease-out',
   top: sidebarTop, // 동적 값이 들어갈 자리

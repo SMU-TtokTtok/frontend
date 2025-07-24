@@ -14,7 +14,7 @@ export const container = style({
   gap: '8px',
   transition: 'top 0.7s ease-out',
   top: sidebarTop,
-  right: '146px',
+  right: '24px',
 });
 
 export const ItemFlex = style({
