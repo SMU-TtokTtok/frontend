@@ -356,6 +356,14 @@ export const panelItem = style({
       backgroundColor: '#E9F2FF',
       color: '#0052EC',
     },
+    '&:first-child': {
+      borderTopLeftRadius: '4px',
+      borderTopRightRadius: '4px',
+    },
+    '&:last-child': {
+      borderBottomLeftRadius: '4px',
+      borderBottomRightRadius: '4px',
+    },
   },
 });
 
@@ -374,6 +382,14 @@ export const panelItem2 = style({
     '&:hover': {
       backgroundColor: '#E9F2FF',
       color: '#0052EC',
+    },
+    '&:first-child': {
+      borderTopLeftRadius: '4px',
+      borderTopRightRadius: '4px',
+    },
+    '&:last-child': {
+      borderBottomLeftRadius: '4px',
+      borderBottomRightRadius: '4px',
     },
   },
 });
