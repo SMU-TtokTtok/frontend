@@ -1,12 +1,16 @@
-import { style } from '@vanilla-extract/css';
+import { createVar, style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 import { BREAKPOINTS } from '@/common/constants';
 
+export const sidebarTop = createVar();
+
 export const container = style({
-  position: 'fixed',
-  top: '212px',
+  position: 'absolute',
+  // top: '212px',
   right: '3.8%',
   width: '330px',
+  transition: 'top 0.7s ease-out',
+  top: sidebarTop, // 동적 값이 들어갈 자리
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
@@ -39,6 +43,7 @@ export const grayText = style({
 export const blackText = style({
   color: '#030304',
   fontSize: vars.fonts.body1,
+  fontWeight: 500,
 });
 
 export const modifyButton = style({
@@ -68,10 +73,11 @@ export const modifyButton = style({
 export const numberInput = style({
   appearance: 'textfield',
   WebkitAppearance: 'textfield',
-  padding: '2px 4px',
+  padding: '4px 6px',
   border: '1px solid #ccc',
   font: '-webkit-small-control',
-  height: '24px',
+  width: '60px',
+  borderRadius: '4px',
 });
 export const dateFlex = style({
   display: 'flex',

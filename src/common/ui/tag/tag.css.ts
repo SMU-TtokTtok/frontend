@@ -43,6 +43,14 @@ export const tagStyle = styleVariants({
     color: vars.colors.primary.on_cont,
     fontWeight: '500',
   },
+
+  //역할 태그
+  white: {
+    backgroundColor: vars.colors.white,
+    color: vars.colors.charcoal,
+    fontWeight: '600',
+    border: `1px solid ${vars.colors.surface.cont_3}`,
+  },
 } as const);
 
 export type TagVariant = keyof typeof tagStyle;

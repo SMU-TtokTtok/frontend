@@ -5,14 +5,25 @@ import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToStri
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
 import { formatDateToDot, formatDateToMonthDay } from '@/common/util/formatDate';
+import { useFollowSidebar } from '@/hooks/useFollowSidebar';
+import { sidebarTop } from './rightSide.css';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
 
 const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: number }) => {
   const { recruitStartDate, recruitEndDate, recruitTarget, recruitNumber, isRecruiting } =
     clubIntro;
   const router = useRouter();
 
+  // 커스텀 훅 사용
+  const { barPosition } = useFollowSidebar({ initialPosition: 200 });
+
   return (
-    <div className={S.container}>
+    <div
+      className={S.container}
+      style={assignInlineVars({
+        [sidebarTop]: `${barPosition}px`,
+      })}
+    >
       <div className={S.contentFlex}>
         {isRecruiting ? (
           <>

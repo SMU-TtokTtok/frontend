@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { recipe } from '@vanilla-extract/recipes';
 
 export const container = style({
   flex: '1 0 0',
@@ -34,14 +35,25 @@ export const numberText = style({
   color: '#878787;',
   fontWeight: '500',
 });
-export const desText = style({
-  fontSize: vars.fonts.body1,
-  marginBottom: '21px',
-  color: '#878787',
+export const desText = recipe({
+  base: {
+    fontSize: vars.fonts.body1,
+    color: '#878787',
 
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
+  variants: {
+    isEditing: {
+      true: {
+        marginBottom: '3px',
+      },
+      false: {
+        marginBottom: '21px',
+      },
+    },
+  },
 });
 
 export const footerFlex = style({
@@ -281,10 +293,10 @@ export const clubNameInput = style({
   fontWeight: 600,
   fontFamily: 'Pretendard Variable',
   color: 'inherit',
-  border: '1px solid gray',
+  border: '1px solid #E0E1E3',
   background: 'transparent',
   outline: 'none',
-  padding: '2px 0 2px 2px',
+  padding: '4px',
   borderRadius: '4px',
 });
 
@@ -293,10 +305,10 @@ export const desTextInput = style({
   fontWeight: 400,
   fontFamily: 'Pretendard Variable',
   color: 'inherit',
-  border: '1px solid gray',
+  border: '1px solid #E0E1E3',
   background: 'transparent',
   outline: 'none',
-  padding: '2px 0 2px 2px',
+  padding: '4px',
   width: '100%',
   borderRadius: '4px',
 });
@@ -309,8 +321,9 @@ export const selectedTypeText = style({
   fontSize: '16px',
   fontWeight: 500,
   color: '#222',
-  padding: '8px 12px',
+  padding: '4px 12px',
   display: 'inline-block',
+  lineHeight: '150%',
 });
 
 export const border4 = style({
@@ -333,6 +346,7 @@ export const panelItem = style({
   fontSize: vars.fonts.body2,
   fontWeight: 500,
   cursor: 'pointer',
+  backgroundColor: vars.colors.surface.default,
 
   selectors: {
     '&:not(:last-child)': {
@@ -351,6 +365,7 @@ export const panelItem2 = style({
   fontSize: vars.fonts.body2,
   fontWeight: 600,
   cursor: 'pointer',
+  backgroundColor: vars.colors.surface.default,
 
   selectors: {
     '&:not(:last-child)': {
