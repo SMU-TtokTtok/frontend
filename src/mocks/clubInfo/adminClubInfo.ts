@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 import clubInformation from './adminClubInfo.json';
 
-export const getClubInfo = http.get('/admin/api/club', () => {
+export const getClubInfo = http.get('/api/admin/club/intro', () => {
   return HttpResponse.json(clubInformation);
 });
 

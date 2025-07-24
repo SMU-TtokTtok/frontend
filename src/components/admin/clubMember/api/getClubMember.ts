@@ -20,7 +20,7 @@ export const getClubMember = async ({ page = 1, size = 5 }: { page?: number; siz
   const userName = '홍길동';
   const params = new URLSearchParams({ page: String(page), size: String(size) });
   const data = await adminClient.get<ClubMember>(
-    `/api/members?clubId=${clubId}&userName=${userName}&${params.toString()}`,
+    `/club/member?clubId=${clubId}&userName=${userName}&${params.toString()}`,
   );
 
   return data;

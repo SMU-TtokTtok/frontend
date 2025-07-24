@@ -9,7 +9,7 @@ interface GradeCount {
 }
 
 export const getGradeCount = async () => {
-  const data = await adminClient.get<GradeCount>(`/api/members/grade-count`);
+  const data = await adminClient.get<GradeCount>(`/members/grade-count`);
 
   return data;
 };
