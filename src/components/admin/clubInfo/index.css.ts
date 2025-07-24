@@ -35,7 +35,7 @@ export const wrapper = style({
 export const title = style({
   fontSize: vars.fonts.title3,
   fontWeight: '700',
-  marginTop: '86px',
+  marginTop: '50px',
   marginBottom: '20px',
 });
 

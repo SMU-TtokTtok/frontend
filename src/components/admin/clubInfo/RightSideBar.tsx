@@ -29,7 +29,7 @@ export default function RightSideBar(props: RightSideBarProps) {
     // refetch,
   } = props;
 
-  const { barPosition } = useFollowSidebar({ initialPosition: 212 });
+  const { barPosition } = useFollowSidebar({ initialPosition: 176 });
 
   return (
     <div
