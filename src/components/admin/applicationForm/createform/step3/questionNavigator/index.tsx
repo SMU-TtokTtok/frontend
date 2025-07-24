@@ -9,7 +9,7 @@ function QuestionNavigator({ fields }: QuestionNavigatorProps) {
   return (
     <div className={S.container}>
       <h4 className={S.label}>질문 목차</h4>
-      {fields.map((field, index) => (
+      {fields?.map((field, index) => (
         <div key={index} className={S.itemContainer}>
           <p className={S.sequenceItem}>
             {index + 1}. {field.title}

@@ -12,7 +12,8 @@ import { useState } from 'react';
 
 function FormQuestionStep() {
   const {
-    formData,
+    questionsData,
+    previousStepData,
     handleQuestionTypeChange,
     handleAddField,
     handleUpdateField,
@@ -26,12 +27,18 @@ function FormQuestionStep() {
   } = useApplicationForm();
   const [isSubmit, setIsSubmit] = useState(false);
   const { handleCreateForm } = useCreateFormMutation();
-  const { result, errors } = useApplicationFormValidation(formData);
+  const { result, errors } = useApplicationFormValidation(questionsData);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmit(true);
+
+    const mergedFormData = {
+      ...previousStepData,
+      ...questionsData,
+    };
+
     if (result.success) {
-      handleCreateForm(formData);
+      handleCreateForm(mergedFormData);
     }
     if (errors) {
       console.error('Validation errors:', errors);
@@ -43,7 +50,7 @@ function FormQuestionStep() {
       <form className={S.container} onSubmit={(e) => handleSubmit(e)}>
         <Indicator step={3} />
         <QuestionForm
-          formData={formData}
+          formData={questionsData}
           errors={errors}
           isSubmit={isSubmit}
           handleQuestionTypeChange={handleQuestionTypeChange}
@@ -58,7 +65,7 @@ function FormQuestionStep() {
           handleChangeSubTitle={handleChangeSubTitle}
         />
         <div className={S.navigatorContainer}>
-          <QuestionNavigator fields={formData.applyForm} />
+          <QuestionNavigator fields={questionsData.questions} />
           <Button type="submit" variant="primary" className={S.submitButton}>
             제작 완료 및 업로드
           </Button>

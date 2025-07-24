@@ -3,7 +3,7 @@ import * as S from './questionFrom.css';
 import AddFeild from '@/assets/add_circle.svg';
 import FormFieldFactory from './questionFactory';
 import ApplicantInfoField from './applicantInfoField/applicantInfoField';
-import { ApplicationForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
+import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import { ZodFormattedError } from 'zod';
 export const questionTypes = [
   { type: 'SHORT_ANSWER', label: '단답형' },
@@ -14,8 +14,8 @@ export const questionTypes = [
 ];
 
 interface QuestionFormProps {
-  formData: ApplicationForm;
-  errors?: ZodFormattedError<ApplicationForm>;
+  formData: QuestionStepForm;
+  errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
   handleChangeTitle: (title: string) => void;
   handleChangeSubTitle: (subTitle: string) => void;
@@ -50,7 +50,7 @@ function QuestionForm({
         <div className={S.titleContainer({ title: 'formTitle' })}>
           <input
             className={S.title}
-            value={formData.title}
+            value={formData.title ?? ''}
             onChange={(e) => handleChangeTitle(e.target.value)}
             placeholder="지원폼 제목을 입력해주세요."
           />
@@ -61,13 +61,13 @@ function QuestionForm({
 
         <textarea
           className={S.description}
-          value={formData.subTitle}
+          value={formData.subTitle ?? ''}
           onChange={(e) => handleChangeSubTitle(e.target.value)}
           placeholder="동아리에 대한 간략한 소개를 해주세요.(선택)"
         />
       </div>
       <ApplicantInfoField />
-      {formData?.applyForm?.map((field, index) => (
+      {formData?.questions?.map((field, index) => (
         <FormFieldFactory
           key={index}
           fieldId={index}

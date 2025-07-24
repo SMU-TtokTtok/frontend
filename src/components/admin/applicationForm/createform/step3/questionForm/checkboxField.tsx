@@ -9,7 +9,7 @@ import AddFeild from '@/assets/add_circle.svg';
 import DeleteOption from '@/assets/option_delete.svg';
 import check from '@/assets/check_radio.svg';
 
-import { ApplicationForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
+import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import { questionTypes } from './index';
 import { convertToKor } from '@/common/util/convertToKor';
 import { ZodFormattedError } from 'zod';
@@ -17,7 +17,7 @@ import { ZodFormattedError } from 'zod';
 interface InputFieldProps {
   fieldId: number;
   field: ApplyFormField;
-  errors?: ZodFormattedError<ApplicationForm>;
+  errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
   handleQuestionTypeChange: (type: QuestionType) => void;
   handleUpdateField: (fieldId: number, data: ApplyFormField) => void;
@@ -94,7 +94,7 @@ function CheckboxField({
           }}
         />
         {errors && isSubmit && (
-          <span className={S.errorMessage}>{errors.applyForm?.[fieldId]?.title?._errors}</span>
+          <span className={S.errorMessage}>{errors.questions?.[fieldId]?.title?._errors}</span>
         )}
       </div>
 
@@ -134,7 +134,7 @@ function CheckboxField({
             </div>
             {errors && isSubmit && (
               <span className={S.errorMessage}>
-                {errors.applyForm?.[fieldId]?.content?.[index]?._errors}
+                {errors.questions?.[fieldId]?.content?.[index]?._errors}
               </span>
             )}
           </div>

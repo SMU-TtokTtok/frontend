@@ -1,9 +1,14 @@
-import { ApplicationForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
+import {
+  QuestionStepForm,
+  ApplyFormField,
+  PreviousStepForm,
+  QuestionType,
+} from '@/common/model/applicationForm';
 import { loadFromSession } from '@/common/util/sessionStorageUtil';
 import { useState } from 'react';
 
 export const useApplicationForm = () => {
-  const [formData, setFormData] = useState<ApplicationForm>({
+  const [previousStepData, setPreviousStepData] = useState<PreviousStepForm>({
     hasInterview: loadFromSession('hasInterview') ?? false,
     recruitStartDate: loadFromSession('recruitStartDate') ?? '',
     recruitEndDate: loadFromSession('recruitEndDate') ?? '',
@@ -15,10 +20,13 @@ export const useApplicationForm = () => {
     interviewEndDate: {
       present: true,
     },
+  });
+
+  const [questionsData, setQeustionsData] = useState<QuestionStepForm>({
     title: '',
     subTitle: '',
 
-    applyForm: [
+    questions: [
       {
         title: '',
         subTitle: '',
@@ -30,18 +38,18 @@ export const useApplicationForm = () => {
   });
 
   const handleQuestionTypeChange = (type: QuestionType, fieldId: number) => {
-    setFormData((prev) => {
-      const newApplyForm = [...prev.applyForm];
-      newApplyForm[fieldId].questionType = type;
-      return { ...prev, applyForm: newApplyForm };
+    setQeustionsData((prev) => {
+      const newQuestions = [...prev.questions];
+      newQuestions[fieldId].questionType = type;
+      return { ...prev, questions: newQuestions };
     });
   };
 
   const handleAddField = ({ newField }: { newField?: ApplyFormField } = {}) => {
     if (newField) {
-      setFormData((prev) => ({
+      setQeustionsData((prev) => ({
         ...prev,
-        applyForm: [...prev.applyForm, newField],
+        questions: [...prev.questions, newField],
       }));
       return;
     }
@@ -54,51 +62,51 @@ export const useApplicationForm = () => {
       content: [''],
     };
 
-    setFormData((prev) => ({
+    setQeustionsData((prev) => ({
       ...prev,
-      applyForm: [...prev.applyForm, newBaseField],
+      questions: [...prev.questions, newBaseField],
     }));
   };
 
   const handleUpdateField = (fieldId: number, updatedField: ApplyFormField) => {
-    setFormData((prev) => {
-      const newApplyForm = [...prev.applyForm];
-      newApplyForm[fieldId] = updatedField;
-      return { ...prev, applyForm: newApplyForm };
+    setQeustionsData((prev) => {
+      const newQuestions = [...prev.questions];
+      newQuestions[fieldId] = updatedField;
+      return { ...prev, questions: newQuestions };
     });
   };
 
   const handleDeleteField = (fieldId: number) => {
-    setFormData((prev) => {
-      const newApplyForm = prev.applyForm.filter((_, index) => index !== fieldId);
-      return { ...prev, applyForm: newApplyForm };
+    setQeustionsData((prev) => {
+      const newQuestions = prev.questions.filter((_, index) => index !== fieldId);
+      return { ...prev, questions: newQuestions };
     });
   };
 
   const handleEssentialChange = (fieldId: number, isEssential: boolean) => {
-    setFormData((prev) => {
-      const newApplyForm = [...prev.applyForm];
-      newApplyForm[fieldId].isEssential = isEssential;
-      return { ...prev, applyForm: newApplyForm };
+    setQeustionsData((prev) => {
+      const newQuestions = [...prev.questions];
+      newQuestions[fieldId].isEssential = isEssential;
+      return { ...prev, questions: newQuestions };
     });
   };
 
   const handleOptionChange = (fieldId: number, optionIndex: number, value: string) => {
-    setFormData((prev) => {
-      const newApplyForm = [...prev.applyForm];
-      const field = newApplyForm[fieldId];
+    setQeustionsData((prev) => {
+      const newQuestions = [...prev.questions];
+      const field = newQuestions[fieldId];
       if (field.content) {
         field.content[optionIndex] = value;
       } else {
         field.content = [value];
       }
-      return { ...prev, applyForm: newApplyForm };
+      return { ...prev, questions: newQuestions };
     });
   };
 
   const handleOptionAdd = (fieldId: number) => {
-    setFormData((prev) => {
-      const newApplyForm = prev.applyForm.map((field, index) => {
+    setQeustionsData((prev) => {
+      const newQuestions = prev.questions.map((field, index) => {
         if (index === fieldId) {
           return {
             ...field,
@@ -107,13 +115,13 @@ export const useApplicationForm = () => {
         }
         return field;
       });
-      return { ...prev, applyForm: newApplyForm };
+      return { ...prev, questions: newQuestions };
     });
   };
 
   const handleOptionDelete = (fieldId: number, optionIndex: number) => {
-    setFormData((prev) => {
-      const newApplyForm = prev.applyForm.map((field, index) => {
+    setQeustionsData((prev) => {
+      const newQuestions = prev.questions.map((field, index) => {
         if (index === fieldId) {
           return {
             ...field,
@@ -122,21 +130,22 @@ export const useApplicationForm = () => {
         }
         return field;
       });
-      return { ...prev, applyForm: newApplyForm };
+      return { ...prev, questions: newQuestions };
     });
   };
 
   const handleChangeTitle = (title: string) => {
-    setFormData((prev) => ({ ...prev, title }));
+    setQeustionsData((prev) => ({ ...prev, title }));
   };
 
   const handleChangeSubTitle = (subTitle: string) => {
-    setFormData((prev) => ({ ...prev, subTitle }));
+    setQeustionsData((prev) => ({ ...prev, subTitle }));
   };
 
   return {
-    formData,
-    setFormData,
+    questionsData,
+    previousStepData,
+    setQeustionsData,
     handleQuestionTypeChange,
     handleAddField,
     handleUpdateField,
