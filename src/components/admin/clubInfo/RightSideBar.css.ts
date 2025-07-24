@@ -73,10 +73,11 @@ export const modifyButton = style({
 export const numberInput = style({
   appearance: 'textfield',
   WebkitAppearance: 'textfield',
-  padding: '2px 4px',
+  padding: '4px 6px',
   border: '1px solid #ccc',
   font: '-webkit-small-control',
-  height: '24px',
+  width: '60px',
+  borderRadius: '4px',
 });
 export const dateFlex = style({
   display: 'flex',
