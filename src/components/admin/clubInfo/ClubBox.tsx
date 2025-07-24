@@ -131,7 +131,7 @@ export default function ClubBox(props: ClubBoxProps) {
         <Image src={person} alt="사람" width={21} height={21} />
         <span className={S.numberText}>{peopleCount}</span>
       </div>
-      <div className={S.desText}>
+      <div className={S.desText({ isEditing: props.isEditing })}>
         {props.isEditing ? (
           <input
             value={shortDescription}
