@@ -21,6 +21,7 @@ export const grade = style({
   padding: '4px 6px',
   fontSize: vars.fonts.body2,
   fontWeight: '500',
+  border: 'none !important',
 });
 
 export const name = style({
