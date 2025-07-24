@@ -60,7 +60,7 @@ export default function ClubBox(props: ClubBoxProps) {
         {props.isEditing ? (
           <DropDown
             toggleButton={
-              <DropDownButton variant="default" className={S.dropDownStyle2}>
+              <DropDownButton variant="gray" className={S.dropDownStyle2}>
                 {type}
               </DropDownButton>
             }
@@ -86,7 +86,7 @@ export default function ClubBox(props: ClubBoxProps) {
         {props.isEditing ? (
           <DropDown
             toggleButton={
-              <DropDownButton variant="default" className={S.dropDownStyle2Wide}>
+              <DropDownButton variant="gray" className={S.dropDownStyle2Wide}>
                 {department}
               </DropDownButton>
             }
@@ -152,7 +152,7 @@ export default function ClubBox(props: ClubBoxProps) {
           {props.isEditing ? (
             <DropDown
               toggleButton={
-                <DropDownButton variant="default" className={S.dropDownStyle}>
+                <DropDownButton variant="gray" className={S.dropDownStyle}>
                   {category}
                 </DropDownButton>
               }

@@ -47,7 +47,7 @@ export const desText = recipe({
   variants: {
     isEditing: {
       true: {
-        marginBottom: '0',
+        marginBottom: '3px',
       },
       false: {
         marginBottom: '21px',
@@ -346,6 +346,7 @@ export const panelItem = style({
   fontSize: vars.fonts.body2,
   fontWeight: 500,
   cursor: 'pointer',
+  backgroundColor: vars.colors.surface.default,
 
   selectors: {
     '&:not(:last-child)': {
@@ -364,6 +365,7 @@ export const panelItem2 = style({
   fontSize: vars.fonts.body2,
   fontWeight: 600,
   cursor: 'pointer',
+  backgroundColor: vars.colors.surface.default,
 
   selectors: {
     '&:not(:last-child)': {
