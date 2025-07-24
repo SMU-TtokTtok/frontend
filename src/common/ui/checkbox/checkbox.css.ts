@@ -5,10 +5,10 @@ export const checkboxContainer = style({
   justifyContent: 'center',
   alignItems: 'center',
   gap: '6px',
+  position: 'relative',
 });
 
 export const checkboxBase = style({
-  border: `2px solid ${vars.colors.surface.on_surf_var}`,
   borderRadius: '50%',
   background: vars.colors.surface.bright,
   cursor: 'pointer',
@@ -19,12 +19,18 @@ export const checkboxStyle = styleVariants({
     appearance: 'none',
     selectors: {
       '&:checked': {
-        background: vars.colors.primary.default,
-        borderColor: vars.colors.primary.default,
+        borderColor: vars.colors.secondary.container,
       },
     },
   },
   none: {},
+});
+
+export const checkBaseStyle = style({
+  position: 'absolute',
+  left: 0,
+  top: 0,
+  pointerEvents: 'none',
 });
 
 export const checkboxLabel = style({

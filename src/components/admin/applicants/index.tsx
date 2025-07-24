@@ -1,12 +1,11 @@
 'use client';
-
 import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 import * as S from './applicants.css';
 import EvaluationTabs from './evaluationTabs';
 import SearchBarArea from './searchBarArea';
 import ApplicantFilterBar from './applicantFilterBar';
 import ApplicantList from './applicantList/applicantList';
-import { useState } from 'react';
 import PassFailSidebar from './passFailSidebar';
 import SearchResult from './searchResult';
 import { Evaluation, Sort } from './api/applicants';
@@ -26,6 +25,7 @@ function ApplicantsContentPage() {
     sort: searchParams.get('sort') as Sort,
     isEvaluating: searchParams.get('isEvaluating') === 'true',
   };
+
   return (
     <>
       <div className={S.container}>

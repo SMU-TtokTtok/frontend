@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Arrow from '@/assets/dropdown.svg';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant: keyof typeof S.dropDownButtonStyle;
+  variant?: keyof typeof S.dropDownButtonStyle;
+  img?: string;
 }
 
 function DropDownButton({
@@ -12,6 +13,7 @@ function DropDownButton({
   children,
   className,
   disabled,
+  img,
   ...props
 }: PropsWithChildren<ButtonProps>) {
   const classNames = `${className ?? ''} ${S.baseButtonStyle} ${S.dropDownButtonStyle[variant]} `;
@@ -19,7 +21,7 @@ function DropDownButton({
   return (
     <button type="button" className={`${classNames}`} disabled={disabled} {...props}>
       {children}
-      <Image src={Arrow} alt="드롭다운" />
+      <Image src={img ?? Arrow} alt="드롭다운" />
     </button>
   );
 }

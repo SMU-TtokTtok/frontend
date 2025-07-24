@@ -38,11 +38,51 @@ export const makeFormButton = style({
 
 // form 수정 페이지
 export const formContainer = style({
-  padding: '44px 500px 0 382px',
+  paddingLeft: '280px',
+  paddingRight: '374px',
+  paddingTop: '57px',
+  maxWidth: '100vw',
+  width: '100%',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      paddingLeft: '246px',
+      paddingRight: '100px',
+    },
+  },
 });
 
 export const title = style({
   fontSize: vars.fonts.title2,
   fontWeight: 600,
   color: vars.colors.surface.on_surf,
+});
+
+export const navigatorContainer = style({
+  position: 'fixed',
+  top: '188px',
+  right: '24px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      position: 'static',
+      display: 'flex',
+      justifyContent: 'end',
+      alignItems: 'center',
+      width: '100%',
+    },
+  },
+});
+
+export const submitButton = style({
+  padding: '16px 0px',
+  fontSize: vars.fonts.body2,
+  fontWeight: '600',
+  borderRadius: '6px',
+  position: 'relative',
+  width: '100%',
+  marginTop: '16px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      width: '224px',
+    },
+  },
 });

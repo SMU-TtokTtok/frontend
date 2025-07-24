@@ -12,7 +12,7 @@ function SelectTypeStep() {
 
   const handleSelectWithSession = (isInterview: boolean) => {
     setWithInterview(isInterview);
-    saveToSession('withInterview', isInterview);
+    saveToSession('hasInterview', isInterview);
     removeFromSession('interviewEndDate');
     removeFromSession('interviewStartDate');
   };

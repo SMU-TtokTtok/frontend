@@ -9,6 +9,7 @@ export const applicantItemWrapper = style({
   justifyContent: 'space-between',
   alignItems: 'center',
   cursor: 'pointer',
+  borderRadius: '6px',
 });
 
 export const profileSection = style({
@@ -25,6 +26,7 @@ export const applicantGrade = style({
   padding: '0.222rem  ',
   textAlign: 'center',
   border: 'none',
+  borderRadius: '4px',
 });
 
 export const applicantName = style({
@@ -68,8 +70,8 @@ export const dropDownItem = style({
   padding: '12px 20px',
   selectors: {
     '&:hover': {
-      backgroundColor: vars.colors.primary.default,
-      color: vars.colors.white,
+      backgroundColor: vars.colors.primary.base,
+      color: vars.colors.primary.default,
     },
   },
 });

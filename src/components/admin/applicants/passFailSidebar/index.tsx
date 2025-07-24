@@ -1,3 +1,4 @@
+'use client';
 import Button from '@/common/ui/button';
 import * as S from './passFailSidebar.css';
 import { convertToKor } from '@/common/util/convertToKor';

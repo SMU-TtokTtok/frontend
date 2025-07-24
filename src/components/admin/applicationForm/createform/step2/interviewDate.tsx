@@ -7,7 +7,7 @@ interface InterviewDateProps {
 
 function InterviewDate({ handleRecruitData }: InterviewDateProps) {
   return (
-    <div className={S.container}>
+    <div className={S.interviewContainer}>
       <p className={S.label}>
         면접기간<span className={S.required}>*</span>
       </p>

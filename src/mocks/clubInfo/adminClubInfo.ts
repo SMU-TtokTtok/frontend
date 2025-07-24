@@ -11,7 +11,7 @@ export const getClubInfo = http.get('/admin/api/club', () => {
 // let isRecruiting = true;
 // let clubInfoData: ClubInfo = { ...clubInformation };
 
-export const patchRecruiting = http.patch('/admin/api/club/recruiting', async ({ request }) => {
+export const patchRecruiting = http.patch('/api/admin/club/recruiting', async ({ request }) => {
   const body = (await request.json()) as { isRecruiting?: boolean };
   if (typeof body.isRecruiting === 'boolean') {
     return HttpResponse.json({ success: true, isRecruiting: body.isRecruiting });
@@ -26,4 +26,4 @@ export const patchRecruiting = http.patch('/admin/api/club/recruiting', async ({
 //   return HttpResponse.json({ success: true, ...clubInfoData });
 // });
 
-export const patchClubInfo = http.patch('/api/club-info', async ({}) => {});
+export const patchClubInfo = http.patch('/api/admin/club-info', async ({}) => {});

@@ -1,3 +1,4 @@
+'use client';
 import ApplicantItem from './applicantList/applicantItem';
 import * as S from './applicants.css';
 import { usePatchApplicantStatus } from '@/hooks/applicants';

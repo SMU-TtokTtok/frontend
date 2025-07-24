@@ -4,8 +4,8 @@ import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const container = style({
-  paddingLeft: '21.222rem',
-  paddingRight: '27.778rem',
+  paddingLeft: '285px',
+  paddingRight: '378px',
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       paddingLeft: '246px',
@@ -16,7 +16,6 @@ export const container = style({
 
 export const wrapper = style({
   position: 'relative',
-  maxWidth: '1038px',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -94,7 +93,10 @@ export const evaluationButton = recipe({
 export const PanelContainer = style({
   width: '100%',
   backgroundColor: vars.colors.surface.bright,
-  padding: '1.22rem 1.78rem',
+  padding: '16px 20px',
+  minHeight: '207px',
+  borderBottomLeftRadius: '8px',
+  borderBottomRightRadius: '8px',
 });
 
 export const filterContainer = style({
@@ -123,6 +125,12 @@ export const filterButton = recipe({
 });
 
 export const checkbox = style({
+  width: '1rem',
+  height: '1rem',
+  border: `1px solid ${vars.colors.surface.outline_var}`,
+});
+
+export const checkImg = style({
   width: '1rem',
   height: '1rem',
 });
