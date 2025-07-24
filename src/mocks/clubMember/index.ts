@@ -6,6 +6,6 @@ export const getGradeCount = http.get('/api/admin/members/grade-count', () => {
   return HttpResponse.json(gradeCount);
 });
 
-export const getSearchMembers = http.get('/api/admin/members/search', () => {
+export const getSearchMembers = http.get('/api/admin/club/members/search', () => {
   return HttpResponse.json(searchMembers);
 });

@@ -12,7 +12,6 @@ export default function SearchResult({ search }: SearchResultProps) {
   const { data: clubMembers } = useSearchClubMember({
     search: debouncedSearch,
   });
-
   const members = clubMembers?.clubMembers || [];
 
   return (
