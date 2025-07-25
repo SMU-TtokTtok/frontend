@@ -7,6 +7,9 @@ import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import Lottie from 'lottie-react';
 import loading from '@/assets/loading.json';
+import addExecutive from '@/assets/add_excutive.svg';
+import addMember from '@/assets/add_member.svg';
+import Image from 'next/image';
 
 export default function MemberList() {
   const { clubMembers, fetchNextPage, hasNextPage, isFetchingNextPage } = useClubMemberInfinite({
@@ -26,11 +29,18 @@ export default function MemberList() {
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  const isEmpty = clubMembers.length === 0;
+  // const isEmpty = clubMembers.length === 0;
+  const isEmpty = true;
 
   return (
     <>
-      {isEmpty && <Empty>{MESSAGE.empty.noClubMember}</Empty>}
+      {isEmpty && (
+        <div className={S.emptyContainer}>
+          <Image src={addExecutive} alt="addExecutive" className={S.addCursor} />
+          <div className={S.border}></div>
+          <Image src={addMember} alt="addMember" className={S.addCursor} />
+        </div>
+      )}
       {!isEmpty && (
         <ul className={S.memberItemList}>
           {clubMembers.map((member, index) => {

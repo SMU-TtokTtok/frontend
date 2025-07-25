@@ -19,3 +19,17 @@ export const divider = style({
   marginBottom: '8px',
   width: '100%',
 });
+
+export const emptyContainer = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '16px',
+});
+
+export const border = style({
+  height: '1px',
+  backgroundColor: '#D2D4D8',
+});
+export const addCursor = style({
+  cursor: 'pointer',
+});
