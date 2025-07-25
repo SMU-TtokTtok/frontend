@@ -13,13 +13,6 @@ export const container = style({
   flexDirection: 'column',
 });
 
-export const title = style({
-  fontSize: vars.fonts.title2,
-  fontWeight: 600,
-  color: '#030304',
-  marginTop: '50px',
-});
-
 export const memberPanel = style({
   width: '100%',
   backgroundColor: vars.colors.surface.bright,
