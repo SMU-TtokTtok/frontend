@@ -1,6 +1,7 @@
 import * as S from './memberItem.css';
 import Tag from '@/common/ui/tag';
 import { getKoreanGrade } from '@/common/util/getKoreanGrade';
+import { getRoleDisplayName } from '@/common/util/gerKoreanRole';
 
 interface MemberItemProps {
   // memberId: string;
@@ -22,7 +23,7 @@ export default function MemberItem({ name, major, role, grade }: MemberItemProps
         <div className={S.major}>{major}</div>
       </div>
       <Tag variant="white" className={S.role}>
-        {role}
+        {getRoleDisplayName(role)}
       </Tag>
     </div>
   );
