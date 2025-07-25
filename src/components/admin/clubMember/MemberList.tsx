@@ -33,9 +33,21 @@ export default function MemberList() {
       {isEmpty && <Empty>{MESSAGE.empty.noClubMember}</Empty>}
       {!isEmpty && (
         <ul className={S.memberItemList}>
-          {clubMembers.map((member) => (
-            <MemberItem key={member.memberId} {...member} />
-          ))}
+          {clubMembers.map((member, index) => {
+            const nextMember = clubMembers[index + 1];
+            const isExecutiveGroup = ['PRESIDENT', 'VICE_PRESIDENT', 'EXECUTIVE'].includes(
+              member.role,
+            );
+            const isNextMember = nextMember && nextMember.role === 'MEMBER';
+            const shouldShowDivider = isExecutiveGroup && isNextMember;
+
+            return (
+              <div key={member.memberId}>
+                <MemberItem {...member} />
+                {shouldShowDivider && <div className={S.divider} />}
+              </div>
+            );
+          })}
           {/* 무한스크롤 트리거 요소 */}
           <li ref={ref} style={{ height: '1px', visibility: 'hidden' }}></li>
           {isFetchingNextPage && (
