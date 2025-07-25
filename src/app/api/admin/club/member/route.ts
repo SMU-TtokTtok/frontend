@@ -23,6 +23,8 @@ const MOCK_MEMBERS: ClubMember[] = Array.from({ length: 37 }).map((_, i) => ({
   grade: GRADES[i % 4],
   major: `학과${(i % 5) + 1}`,
   role: i === 0 ? 'PRESIDENT' : i === 1 ? 'VICE_PRESIDENT' : i < 5 ? 'EXECUTIVE' : 'MEMBER',
+  // role: 'EXECUTIVE',
+  // role: 'MEMBER',
 }));
 
 export async function GET(req: NextRequest) {

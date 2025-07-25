@@ -22,7 +22,7 @@ export default function ClubMemberPage() {
         <SearchBarArea search={search} handleSearchChange={handleSearchChange} />
         <RightSide />
         <div className={S.memberPanel}>
-          {!search && <MemberList />}
+          {!search && <MemberList isEditing={isEditing} />}
           {search && <SearchResult search={search} />}
         </div>
       </div>
