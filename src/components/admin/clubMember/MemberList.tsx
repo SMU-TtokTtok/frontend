@@ -10,12 +10,14 @@ import loading from '@/assets/loading.json';
 import addExecutive from '@/assets/add_excutive.svg';
 import addMember from '@/assets/add_member.svg';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/common/constants/routes';
 
 export default function MemberList() {
   const { clubMembers, fetchNextPage, hasNextPage, isFetchingNextPage } = useClubMemberInfinite({
     enabled: true,
   });
-
+  const router = useRouter();
   // 무한스크롤을 위한 useInView 훅
   const { ref, inView } = useInView({
     threshold: 0,
@@ -29,16 +31,26 @@ export default function MemberList() {
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  // const isEmpty = clubMembers.length === 0;
-  const isEmpty = true;
+  const isEmpty = clubMembers.length === 0;
+  // const isEmpty = true;
 
   return (
     <>
       {isEmpty && (
         <div className={S.emptyContainer}>
-          <Image src={addExecutive} alt="addExecutive" className={S.addCursor} />
+          <Image
+            src={addExecutive}
+            alt="addExecutive"
+            className={S.addCursor}
+            onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=EXECUTIVE')}
+          />
           <div className={S.border}></div>
-          <Image src={addMember} alt="addMember" className={S.addCursor} />
+          <Image
+            src={addMember}
+            alt="addMember"
+            className={S.addCursor}
+            onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=MEMBER')}
+          />
         </div>
       )}
       {!isEmpty && (
