@@ -10,6 +10,9 @@ import { ApplicantListParams } from '../api/applicants';
 import { useModal } from '@/hooks/useModal';
 import PassFailListModal from './passFailListModal';
 import { useState } from 'react';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { useFollowSidebar } from '@/hooks/useFollowSidebar';
+
 interface PassFailSidebarProps {
   selectedOptions: ApplicantListParams;
   handleConfirmModalOpen: () => void;
@@ -25,6 +28,8 @@ function PassFailSidebar({ selectedOptions, handleConfirmModalOpen }: PassFailSi
     setIsPass(isPass);
   };
 
+  const { barPosition } = useFollowSidebar({ initialPosition: 129 });
+
   const {
     isOpen: isListModalOpen,
     handleModalOpen: handleListModalOpen,
@@ -33,7 +38,12 @@ function PassFailSidebar({ selectedOptions, handleConfirmModalOpen }: PassFailSi
 
   return (
     <>
-      <div className={S.rightSidebar}>
+      <div
+        className={S.rightSidebar}
+        style={assignInlineVars({
+          [S.sidebarTop]: `${barPosition}px`,
+        })}
+      >
         <div className={S.panel}>
           <ApplicantGroup
             isPass={true}

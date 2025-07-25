@@ -5,7 +5,7 @@ import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 
 export default function RightSide() {
   const { data } = useGradeCount();
-  const { barPosition } = useFollowSidebar({ initialPosition: 220 });
+  const { barPosition } = useFollowSidebar({ initialPosition: 216 });
 
   return (
     <div

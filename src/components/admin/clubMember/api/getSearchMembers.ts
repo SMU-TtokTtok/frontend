@@ -13,7 +13,7 @@ export const getSearchMembers = async (search: string) => {
   const username = '홍길동';
   const clubId = 1;
   const data = await adminClient.get<ClubMember>(
-    `/api/members/search?username=${username}&clubId=${clubId}&keyword=${search}`,
+    `/club/members/search?username=${username}&clubId=${clubId}&keyword=${search}`,
   );
 
   return data;

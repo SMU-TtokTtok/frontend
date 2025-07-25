@@ -317,21 +317,26 @@ export const underlineInput = style({
   textDecoration: 'underline',
 });
 
-export const selectedTypeText = style({
-  fontSize: '16px',
-  fontWeight: 500,
-  color: '#222',
-  padding: '4px 12px',
-  display: 'inline-block',
-  lineHeight: '150%',
-});
-
-export const border4 = style({
-  borderRadius: '4px',
-});
-
-export const border100 = style({
-  borderRadius: '100px',
+export const selectedTypeText = recipe({
+  base: {
+    fontSize: vars.fonts.body3,
+    fontWeight: 500,
+    color: '#222',
+    display: 'inline-block',
+    lineHeight: '150%',
+  },
+  variants: {
+    position: {
+      header: {
+        padding: '4px 8px',
+        borderRadius: '4px',
+      },
+      footer: {
+        padding: '4px 12px',
+        borderRadius: '100px',
+      },
+    },
+  },
 });
 
 export const panelContainer = style({
@@ -356,6 +361,14 @@ export const panelItem = style({
       backgroundColor: '#E9F2FF',
       color: '#0052EC',
     },
+    '&:first-child': {
+      borderTopLeftRadius: '4px',
+      borderTopRightRadius: '4px',
+    },
+    '&:last-child': {
+      borderBottomLeftRadius: '4px',
+      borderBottomRightRadius: '4px',
+    },
   },
 });
 
@@ -374,6 +387,14 @@ export const panelItem2 = style({
     '&:hover': {
       backgroundColor: '#E9F2FF',
       color: '#0052EC',
+    },
+    '&:first-child': {
+      borderTopLeftRadius: '4px',
+      borderTopRightRadius: '4px',
+    },
+    '&:last-child': {
+      borderBottomLeftRadius: '4px',
+      borderBottomRightRadius: '4px',
     },
   },
 });

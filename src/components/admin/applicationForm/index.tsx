@@ -11,6 +11,8 @@ import Button from '@/common/ui/button';
 import { useUpdateFormMutation } from '@/hooks/useAdminFormMutation';
 import ConfirmModal from '@/common/components/confirmModal';
 import { useModal } from '@/hooks/useModal';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 
 function ApplicationFormPage() {
   const { data } = useAdminForm(1);
@@ -51,6 +53,8 @@ function ApplicationFormPage() {
     }
   };
 
+  const { barPosition } = useFollowSidebar({ initialPosition: 188 });
+
   useEffect(() => {
     setQeustionsData(data);
   }, []);
@@ -80,7 +84,12 @@ function ApplicationFormPage() {
           handleChangeTitle={handleChangeTitle}
           handleChangeSubTitle={handleChangeSubTitle}
         />
-        <div className={S.navigatorContainer}>
+        <div
+          className={S.navigatorContainer}
+          style={assignInlineVars({
+            [S.sidebarTop]: `${barPosition}px`,
+          })}
+        >
           <QuestionNavigator fields={questionsData.questions} />
           <Button type="submit" variant="primary" className={S.submitButton}>
             저장하기

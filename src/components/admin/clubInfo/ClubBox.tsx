@@ -79,7 +79,7 @@ export default function ClubBox(props: ClubBoxProps) {
             ))}
           </DropDown>
         ) : (
-          <Tag variant="default" className={S.selectedTypeText + ' ' + S.border4}>
+          <Tag variant="default" className={S.selectedTypeText({ position: 'header' })}>
             {type}
           </Tag>
         )}
@@ -105,7 +105,7 @@ export default function ClubBox(props: ClubBoxProps) {
             ))}
           </DropDown>
         ) : (
-          <Tag variant="default" className={S.selectedTypeText + ' ' + S.border4}>
+          <Tag variant="default" className={S.selectedTypeText({ position: 'header' })}>
             {department}
           </Tag>
         )}
@@ -171,7 +171,7 @@ export default function ClubBox(props: ClubBoxProps) {
               ))}
             </DropDown>
           ) : (
-            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
+            <Tag variant="default" className={S.selectedTypeText({ position: 'footer' })}>
               {category}
             </Tag>
           )}
@@ -196,7 +196,7 @@ export default function ClubBox(props: ClubBoxProps) {
               />
             </div>
           ) : (
-            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
+            <Tag variant="default" className={S.selectedTypeText({ position: 'footer' })}>
               {detailField}
             </Tag>
           )}
@@ -229,7 +229,7 @@ export default function ClubBox(props: ClubBoxProps) {
           ) : (
             <Tag
               variant={isRecruiting ? 'secondary' : 'tertiary'}
-              className={S.selectedTypeText + ' ' + S.border100}
+              className={S.selectedTypeText({ position: 'footer' })}
             >
               {isRecruiting ? '모집중' : '모집마감'}
             </Tag>

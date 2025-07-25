@@ -1,6 +1,6 @@
 import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
-import { style } from '@vanilla-extract/css';
+import { createVar, style } from '@vanilla-extract/css';
 // empty 페이지
 export const emptyContainer = style({
   padding: '44px 146px 0 382px',
@@ -57,10 +57,14 @@ export const title = style({
   color: vars.colors.surface.on_surf,
 });
 
+export const sidebarTop = createVar();
+
 export const navigatorContainer = style({
-  position: 'fixed',
-  top: '188px',
+  position: 'absolute',
+  top: sidebarTop,
   right: '24px',
+  transition: 'top 0.7s ease-out',
+
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       position: 'static',
