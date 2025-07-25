@@ -14,3 +14,18 @@ export const getGradeStyle = (grade: number): TagVariant => {
       return 'default';
   }
 };
+
+export const getGradeStyle2 = (grade: string): TagVariant => {
+  switch (grade) {
+    case 'FIRST_GRADE':
+      return 'light_blue';
+    case 'SECOND_GRADE':
+      return 'blue';
+    case 'THIRD_GRADE':
+      return 'navy';
+    case 'FOURTH_GRADE':
+      return 'deep_navy';
+    default:
+      return 'default';
+  }
+};
