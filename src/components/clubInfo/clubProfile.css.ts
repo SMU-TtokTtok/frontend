@@ -132,6 +132,6 @@ export const star = style({
 });
 
 export const tagFont = style({
-  fontSize: vars.fonts.body2,
+  fontSize: vars.fonts.body3,
   lineHeight: '150%',
 });
