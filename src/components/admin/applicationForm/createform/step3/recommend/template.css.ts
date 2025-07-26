@@ -58,5 +58,5 @@ export const templateItemContainer = style({
 export const templateItemLabel = style({
   fontSize: vars.fonts.body1,
   color: vars.colors.surface.on_surf_var,
-  fontWeight: 600,
+  fontWeight: 500,
 });

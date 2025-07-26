@@ -5,8 +5,8 @@ import { BREAKPOINTS } from '@/common/constants';
 export const container = style({
   position: 'fixed',
   width: '330px',
-  right: '100px', //
-  top: '200px', //
+  right: '100px',
+  top: '200px',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
