@@ -34,7 +34,7 @@
     },
     {
       "title": "기술스택을 선택해주세요.",
-      "subTitle": "복수 선택 가능합니다.",
+      "subTitle": "하나만 선택 가능합니다.",
       "questionType": "RADIO",
       "isEssential": false,
       "content": ["React", "Next", "Vue"],

@@ -46,16 +46,22 @@ export const ApplicantInfo = http.get(`${API}/api/admin/applies/:applicantId`, (
 
   return HttpResponse.json(applicantInfo, { status: 200 });
 });
+const mockMemos: { id: string; applicantId: string; content: string }[] = [];
 
 export const PostMemo = http.post(
   `${API}/api/admin/applies/:applicantId/memos`,
   async ({ request, params }) => {
     const { applicantId } = params;
     const body = (await request.json()) as { content: string };
-    return HttpResponse.json(
-      { id: 'newMemoId', applicantId, content: body.content },
-      { status: 201 },
-    );
+
+    const newMemo = {
+      id: String(Date.now()),
+      applicantId: String(applicantId),
+      content: body.content,
+    };
+    mockMemos.push(newMemo);
+
+    return HttpResponse.json(newMemo, { status: 201 });
   },
 );
 
