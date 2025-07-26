@@ -4,6 +4,7 @@ import {
   getApplicantList,
   ApplicantListParams,
   patchApplicantStatus,
+  getApplicantInfo,
 } from '@/components/admin/applicants/api/applicants';
 
 interface UseApplicantListParams {
@@ -46,4 +47,15 @@ export const usePatchApplicantStatus = ({ handleModalOpen }: { handleModalOpen: 
   return {
     handleFavoriteStatus,
   };
+};
+
+export const useApplicantInfo = (applicantId: number) => {
+  const { applicantInfo } = applicantKey;
+
+  const { data, isLoading } = useQuery({
+    queryKey: [applicantInfo, applicantId],
+    queryFn: () => getApplicantInfo(applicantId),
+  });
+
+  return { data, isLoading };
 };
