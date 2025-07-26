@@ -94,7 +94,7 @@ export const member = style({
 export const description = style({
   fontSize: vars.fonts.body2,
   marginBottom: '16px',
-
+  color: '#55637D',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
@@ -129,4 +129,9 @@ export const star = style({
   top: '22px',
   right: '30px',
   cursor: 'pointer',
+});
+
+export const tagFont = style({
+  fontSize: vars.fonts.body3,
+  lineHeight: '150%',
 });

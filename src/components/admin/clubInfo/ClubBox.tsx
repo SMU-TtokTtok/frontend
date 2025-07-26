@@ -60,7 +60,7 @@ export default function ClubBox(props: ClubBoxProps) {
         {props.isEditing ? (
           <DropDown
             toggleButton={
-              <DropDownButton variant="default" className={S.dropDownStyle2}>
+              <DropDownButton variant="gray" className={S.dropDownStyle2}>
                 {type}
               </DropDownButton>
             }
@@ -79,14 +79,14 @@ export default function ClubBox(props: ClubBoxProps) {
             ))}
           </DropDown>
         ) : (
-          <Tag variant="default" className={S.selectedTypeText + ' ' + S.border4}>
+          <Tag variant="default" className={S.selectedTypeText({ position: 'header' })}>
             {type}
           </Tag>
         )}
         {props.isEditing ? (
           <DropDown
             toggleButton={
-              <DropDownButton variant="default" className={S.dropDownStyle2Wide}>
+              <DropDownButton variant="gray" className={S.dropDownStyle2Wide}>
                 {department}
               </DropDownButton>
             }
@@ -105,7 +105,7 @@ export default function ClubBox(props: ClubBoxProps) {
             ))}
           </DropDown>
         ) : (
-          <Tag variant="default" className={S.selectedTypeText + ' ' + S.border4}>
+          <Tag variant="default" className={S.selectedTypeText({ position: 'header' })}>
             {department}
           </Tag>
         )}
@@ -119,7 +119,7 @@ export default function ClubBox(props: ClubBoxProps) {
               props.onChange?.({ name: e.target.value });
             }}
             className={S.clubNameInput}
-            size={20}
+            size={14}
           />
         ) : name.trim() === '' ? (
           '동아리명을 입력해주세요'
@@ -131,7 +131,7 @@ export default function ClubBox(props: ClubBoxProps) {
         <Image src={person} alt="사람" width={21} height={21} />
         <span className={S.numberText}>{peopleCount}</span>
       </div>
-      <div className={S.desText}>
+      <div className={S.desText({ isEditing: props.isEditing })}>
         {props.isEditing ? (
           <input
             value={shortDescription}
@@ -152,7 +152,7 @@ export default function ClubBox(props: ClubBoxProps) {
           {props.isEditing ? (
             <DropDown
               toggleButton={
-                <DropDownButton variant="default" className={S.dropDownStyle}>
+                <DropDownButton variant="gray" className={S.dropDownStyle}>
                   {category}
                 </DropDownButton>
               }
@@ -171,7 +171,7 @@ export default function ClubBox(props: ClubBoxProps) {
               ))}
             </DropDown>
           ) : (
-            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
+            <Tag variant="default" className={S.selectedTypeText({ position: 'footer' })}>
               {category}
             </Tag>
           )}
@@ -196,7 +196,7 @@ export default function ClubBox(props: ClubBoxProps) {
               />
             </div>
           ) : (
-            <Tag variant="default" className={S.selectedTypeText + ' ' + S.border100}>
+            <Tag variant="default" className={S.selectedTypeText({ position: 'footer' })}>
               {detailField}
             </Tag>
           )}
@@ -229,7 +229,7 @@ export default function ClubBox(props: ClubBoxProps) {
           ) : (
             <Tag
               variant={isRecruiting ? 'secondary' : 'tertiary'}
-              className={S.selectedTypeText + ' ' + S.border100}
+              className={S.selectedTypeText({ position: 'footer' })}
             >
               {isRecruiting ? '모집중' : '모집마감'}
             </Tag>

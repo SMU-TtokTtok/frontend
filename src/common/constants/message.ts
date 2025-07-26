@@ -5,6 +5,7 @@ export const MESSAGE = {
   },
   empty: {
     noApplicant: '지원자가 없어요.',
+    noClubMember: '부원이 없어요.',
     noDocumentPassed: '서류 합격한 지원자가 없어요.',
     noDocumentFailed: '서류 불합격한 지원자가 없어요.',
     noInterviewPassed: '면접 합격한 지원자가 없어요.',

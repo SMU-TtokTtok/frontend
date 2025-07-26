@@ -3,6 +3,8 @@ import Button from '@/common/ui/button/index';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToString';
 import { formatDateToDot, formatDateToMonthDay } from '@/common/util/formatDate';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 
 interface RightSideBarProps extends AdminClubIntro {
   onEditClick: () => void;
@@ -27,8 +29,15 @@ export default function RightSideBar(props: RightSideBarProps) {
     // refetch,
   } = props;
 
+  const { barPosition } = useFollowSidebar({ initialPosition: 176 });
+
   return (
-    <div className={S.container}>
+    <div
+      className={S.container}
+      style={assignInlineVars({
+        [S.sidebarTop]: `${barPosition}px`,
+      })}
+    >
       <div className={S.contentBox}>
         <div className={S.flexRow}>
           <div className={S.grayText}>모집기간</div>

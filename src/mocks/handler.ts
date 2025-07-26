@@ -17,6 +17,7 @@ import { getUserClubInfo } from './clubInfo/userClubInfo';
 import { emailCheckHandler, verifyResetCodeHandler, resetPasswordHandler } from './password';
 import { userLoginHandler, userSignupHandler, userEmailPostHandler } from './userAuth';
 import { getUserForm } from './userForm/userForm';
+import { getGradeCount, getSearchMembers } from './clubMember';
 
 export const handlers = [
   popularClubs,
@@ -42,6 +43,8 @@ export const handlers = [
   getSearchList,
   postApplicantForm,
   getUserForm,
+  getGradeCount,
+  getSearchMembers,
   patchApplicantForm,
   ApplicantInfo,
   PostMemo,

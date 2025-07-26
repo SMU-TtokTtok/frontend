@@ -1,13 +1,17 @@
 import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
-import { style, styleVariants } from '@vanilla-extract/css';
+import { style, styleVariants, createVar } from '@vanilla-extract/css';
+
+export const sidebarTop = createVar();
 
 export const rightSidebar = style({
-  position: 'fixed',
+  position: 'absolute',
   //ight: 146,
-  right: 24,
+  //right: 24,
+  right: '-360px',
 
-  top: 129,
+  top: sidebarTop,
+  transition: 'top 0.7s ease-out',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
