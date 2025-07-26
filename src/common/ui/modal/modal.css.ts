@@ -36,6 +36,7 @@ export const headerBaseStyle = style({
   justifyContent: 'space-between',
   alignItems: 'center',
   width: '100%',
+  position: 'relative',
 });
 
 export const labelBaseStyle = style({

@@ -9,15 +9,23 @@ import Empty from '@/common/components/empty';
 interface SearchResultProps {
   selectedOptions: ApplicantListParams;
   search: string;
-  handleModalOpen: () => void;
+  handleConfirmModalOpen: () => void;
+  handleSelectApplicant: (applicantId: number) => void;
 }
-function SearchResult({ search, selectedOptions, handleModalOpen }: SearchResultProps) {
+function SearchResult({
+  search,
+  selectedOptions,
+  handleConfirmModalOpen,
+  handleSelectApplicant,
+}: SearchResultProps) {
   const debouncedSearch = useDebounce(search);
   const { data: applicants } = useSearchApplicant({
     debouncedSearch,
     evaluation: selectedOptions.evaluation,
   });
-  const { handleFavoriteStatus } = usePatchApplicantStatus({ handleModalOpen });
+  const { handleFavoriteStatus } = usePatchApplicantStatus({
+    handleModalOpen: handleConfirmModalOpen,
+  });
 
   return (
     <ul>
@@ -27,6 +35,7 @@ function SearchResult({ search, selectedOptions, handleModalOpen }: SearchResult
             key={applicant.id}
             applicant={applicant}
             handleFavoriteStatus={handleFavoriteStatus}
+            handleSelectApplicant={() => handleSelectApplicant(applicant.id)}
           />
         );
       })}

@@ -12,10 +12,28 @@ import { Evaluation, Sort } from './api/applicants';
 import { useModal } from '@/hooks/useModal';
 import ConfirmModal from '@/common/components/confirmModal';
 import { MESSAGE } from '@/common/constants/message';
+import ApplicantDetailModal from './applicantDetailModal';
 function ApplicantsContentPage() {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState('');
-  const { isOpen, handleModalOpen, handleModalClose } = useModal();
+  const [selectedApplicantId, setSelectedApplicantId] = useState<number>(0);
+  const {
+    isOpen: isConfirmModalOpen,
+    handleModalOpen: handleConfirmModalOpen,
+    handleModalClose: handleConfirmModalClose,
+  } = useModal();
+
+  const {
+    isOpen: isApplicantDetailModalOpen,
+    handleModalOpen: handleApplicantDetailModalOpen,
+    handleModalClose: handleApplicantDetailModalClose,
+  } = useModal();
+
+  const handleSelectApplicant = (applicantId: number) => {
+    setSelectedApplicantId(applicantId);
+    handleApplicantDetailModalOpen();
+  };
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
@@ -33,7 +51,7 @@ function ApplicantsContentPage() {
           <h3 className={S.title}>✏️ 지원자 관리</h3>
           <PassFailSidebar
             selectedOptions={selectedOptions}
-            handleConfirmModalOpen={handleModalOpen}
+            handleConfirmModalOpen={handleConfirmModalOpen}
           />
           <SearchBarArea search={search} handleSearchChange={handleSearchChange} />
           <EvaluationTabs selectedOptions={selectedOptions} />
@@ -41,20 +59,30 @@ function ApplicantsContentPage() {
             <ApplicantFilterBar selectedOptions={selectedOptions} />
             {search && (
               <SearchResult
-                selectedOptions={selectedOptions}
                 search={search}
-                handleModalOpen={handleModalOpen}
+                selectedOptions={selectedOptions}
+                handleConfirmModalOpen={handleConfirmModalOpen}
+                handleSelectApplicant={handleSelectApplicant}
               />
             )}
             {!search && (
-              <ApplicantList selectedOptions={selectedOptions} handleModalOpen={handleModalOpen} />
+              <ApplicantList
+                selectedOptions={selectedOptions}
+                handleConfirmModalOpen={handleConfirmModalOpen}
+                handleSelectApplicant={handleSelectApplicant}
+              />
             )}
           </div>
         </div>
       </div>
-      <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
+      <ConfirmModal isOpen={isConfirmModalOpen} onClose={handleConfirmModalClose}>
         {MESSAGE.applicantsStatus.confirm}
       </ConfirmModal>
+      <ApplicantDetailModal
+        applicantId={selectedApplicantId}
+        isOpen={isApplicantDetailModalOpen}
+        onClose={handleApplicantDetailModalClose}
+      />
     </>
   );
 }
