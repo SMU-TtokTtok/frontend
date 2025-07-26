@@ -13,13 +13,14 @@ import { convertToKor } from '@/common/util/convertToKor';
 interface ApplicantProps {
   applicant: ApplicantsInfo;
   handleFavoriteStatus: ({ applicantId, status }: { applicantId: number; status: string }) => void;
+  handleSelectApplicant: (applicantId: number) => void;
 }
 const options = [
   { value: 'PASS', label: '합격' },
   { value: 'FAIL', label: '불합격' },
   { value: 'EVALUATING', label: '평가중' },
 ];
-function ApplicantItem({ applicant, handleFavoriteStatus }: ApplicantProps) {
+function ApplicantItem({ applicant, handleFavoriteStatus, handleSelectApplicant }: ApplicantProps) {
   const getStatusVariant = (status: string): dropDownButtonVariant => {
     switch (status) {
       case 'EVALUATING':
@@ -37,7 +38,7 @@ function ApplicantItem({ applicant, handleFavoriteStatus }: ApplicantProps) {
     applicant.status === 'PASS' ? passArrow : applicant.status === 'FAIL' ? failArrow : undefined;
 
   return (
-    <li className={S.applicantItemWrapper}>
+    <li className={S.applicantItemWrapper} onClick={() => handleSelectApplicant(applicant.id)}>
       <div className={S.profileSection}>
         <Image src={menu} alt="menu" />
         <Tag variant={getGradeStyle(applicant.grade)} className={S.applicantGrade}>
@@ -62,9 +63,10 @@ function ApplicantItem({ applicant, handleFavoriteStatus }: ApplicantProps) {
           <li
             key={status.value}
             className={S.dropDownItem}
-            onClick={() =>
-              handleFavoriteStatus({ applicantId: applicant.id, status: status.value })
-            }
+            onClick={(e) => {
+              e.stopPropagation();
+              handleFavoriteStatus({ applicantId: applicant.id, status: status.value });
+            }}
           >
             {status.label}
           </li>
