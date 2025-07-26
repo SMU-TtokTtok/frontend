@@ -28,7 +28,7 @@ export const header = style({
 
 export const title = style({
   fontSize: vars.fonts.title4,
-  padding: '12px 5px',
+  padding: '7px 5px',
   width: '100%',
   borderBottom: `1px solid ${vars.colors.primary.fixed}`,
   transition: 'background-color 0.3s ease-in-out',
@@ -167,7 +167,7 @@ export const deleteButton = style({
 });
 
 export const questionTitle = style({
-  fontSize: vars.fonts.body2,
+  fontSize: vars.fonts.body1,
   width: '100%',
   fontWeight: 600,
   color: vars.colors.surface.outline,
@@ -185,7 +185,7 @@ export const questionTitle = style({
 });
 
 export const questionDescription = style({
-  fontSize: vars.fonts.body4,
+  fontSize: vars.fonts.body2,
   width: '100%',
   fontWeight: 500,
   height: '40px',
@@ -237,7 +237,7 @@ export const radioOption = style({
 });
 
 export const radioOptionInput = style({
-  fontSize: vars.fonts.body3,
+  fontSize: vars.fonts.body2,
   color: vars.colors.surface.outline,
   marginLeft: '8px',
   width: '100px',
@@ -288,8 +288,9 @@ export const applicantInfoField = style({
 
 export const applicantInfoInput = style({
   width: '100%',
-  fontSize: vars.fonts.body3,
+  fontSize: vars.fonts.body2,
   color: vars.colors.surface.outline,
+  fontWeight: 400,
   padding: '12px 16px',
   borderRadius: '6px',
   selectors: {
@@ -324,7 +325,6 @@ export const columnSort = style({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'start',
-  gap: '12px',
   width: '100%',
 });
 

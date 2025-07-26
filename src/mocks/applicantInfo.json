@@ -1,0 +1,45 @@
+{
+  "name": "홍길동",
+  "age": 21,
+  "major": "컴퓨터공학과",
+  "email": "honggildong@example.com",
+  "phone": "010-1234-5678",
+  "studentStatus": "ENROLLED",
+  "grade": "SECOND_GRADE",
+  "gender": "MALE",
+  "answers": [
+    {
+      "title": "지원 동기를 작성해주세요.",
+      "subTitle": "지원 배경과 목표를 포함해주세요.",
+      "questionType": "SHORT_ANSWER",
+      "isEssential": true,
+      "content": [""],
+      "value": "기술 역량 향상과 팀워크 경험을 쌓고 싶어서 지원했습니다. "
+    },
+    {
+      "title": "자신의 강점을 작성해주세요.",
+      "subTitle": "개인적인 강점과 기술적 역량을 포함해주세요.",
+      "questionType": "LONG_ANSWER",
+      "isEssential": false,
+      "content": ["프론트엔드", "백엔드", "AI", "기획"],
+      "value": "저는 문제 해결 능력이 뛰어나고, 새로운 기술을 빠르게 습득하는 데 강점을 가지고 있습니다. 또한, 팀 프로젝트에서 협업을 통해 시너지를 내는 것을 중요하게 생각합니다. 프론트엔드 개발에 대한 깊은 이해와 경험이 있으며, React와 Vue.js를 활용한 프로젝트 경험이 있습니다. 또한, 백엔드 개발에도 관심이 많아 Node.js와 Express.js를 사용한 서버 개발 경험이 있습니다. AI 분야에도 흥미가 있어 머신러닝 관련 프로젝트를 진행한 경험이 있습니다. 기획 단계에서도 사용자 경험을 고려한 UI/UX 설계를 중요시하며, 팀원들과의 원활한 소통을 통해 프로젝트를 성공적으로 이끌어 나갈 수 있습니다. 저는 항상 새로운 도전을 즐기며, 기술적 역량을 지속적으로 향상시키기 위해 노력하고 있습니다."
+    },
+    {
+      "title": "관심 있는 분야를 선택해주세요.",
+      "subTitle": "복수 선택 가능합니다.",
+      "questionType": "CHECKBOX",
+      "isEssential": false,
+      "content": ["프론트엔드", "백엔드", "AI", "기획"],
+      "value": "프론트엔드"
+    },
+    {
+      "title": "기술스택을 선택해주세요.",
+      "subTitle": "하나만 선택 가능합니다.",
+      "questionType": "RADIO",
+      "isEssential": false,
+      "content": ["React", "Next", "Vue"],
+      "value": "React"
+    }
+  ],
+  "memos": []
+}

@@ -1,5 +1,5 @@
 import { adminClient } from '@/common/apis/ttockTtockClient';
-import { ApplicantsInfo } from '@/common/model/applicants';
+import { ApplicantInfo, ApplicantsInfo } from '@/common/model/applicants';
 export type Sort = 'grade' | 'submit';
 export type Evaluation = 'applies' | 'interviews';
 export interface ApplicantListParams {
@@ -35,5 +35,24 @@ export const getPassList = async () => {
 export const getFailList = async () => {
   const data = await adminClient.get<ApplicantsInfo[]>(`/applicants/fail`);
 
+  return data;
+};
+
+export const getApplicantInfo = async (applicantId: number) => {
+  const data = await adminClient.get<ApplicantInfo>(`/applies/${applicantId}`);
+
+  return data;
+};
+
+export const postMemo = async (applicantId: number, content: string) => {
+  const data = await adminClient.post(`/applies/${applicantId}/memos`, { content });
+  return data;
+};
+export const deleteMemo = async (applicantId: number, memoId: string) => {
+  const data = await adminClient.delete(`/applies/${applicantId}/memos/${memoId}`);
+  return data;
+};
+export const patchMemo = async (applicantId: number, memoId: string, content: string) => {
+  const data = await adminClient.patch(`/applies/${applicantId}/memos/${memoId}`, { content });
   return data;
 };

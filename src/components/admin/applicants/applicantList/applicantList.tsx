@@ -8,12 +8,19 @@ import { MESSAGE } from '@/common/constants/message';
 
 interface ApplicantListProps {
   selectedOptions: ApplicantListParams;
-  handleModalOpen: () => void;
+  handleConfirmModalOpen: () => void;
+  handleSelectApplicant: (applicantId: number) => void;
 }
 
-function ApplicantList({ selectedOptions, handleModalOpen }: ApplicantListProps) {
+function ApplicantList({
+  selectedOptions,
+  handleConfirmModalOpen,
+  handleSelectApplicant,
+}: ApplicantListProps) {
   const { data: applicants } = useApplicantList({ selectedOptions });
-  const { handleFavoriteStatus } = usePatchApplicantStatus({ handleModalOpen });
+  const { handleFavoriteStatus } = usePatchApplicantStatus({
+    handleModalOpen: handleConfirmModalOpen,
+  });
   const isEmpty = applicants?.length === 0;
 
   return (
@@ -27,6 +34,7 @@ function ApplicantList({ selectedOptions, handleModalOpen }: ApplicantListProps)
                 key={applicant.id}
                 applicant={applicant}
                 handleFavoriteStatus={handleFavoriteStatus}
+                handleSelectApplicant={handleSelectApplicant}
               />
             );
           })}

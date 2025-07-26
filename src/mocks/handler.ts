@@ -1,10 +1,14 @@
 import { AdminApplicationForm, patchApplicantForm, postApplicantForm } from './applicactionForm';
 import {
+  ApplicantInfo,
   Applicants,
   ApplicantSearch,
+  DeleteMemo,
   FailList,
   PassList,
   PatchApplicantStatus,
+  PatchMemo,
+  PostMemo,
 } from './applicants';
 import { Clubs, getSearchList, patchFavorite, popularClubs } from './clubList';
 import { AdminLogin } from './auth';
@@ -42,4 +46,8 @@ export const handlers = [
   getGradeCount,
   getSearchMembers,
   patchApplicantForm,
+  ApplicantInfo,
+  PostMemo,
+  PatchMemo,
+  DeleteMemo,
 ];
