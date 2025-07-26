@@ -18,7 +18,14 @@ function DropDown({ children, toggleButton, panelClassName, isOpen = false }: Pr
   };
   return (
     <div className={S.container} ref={dropdownRef}>
-      <div onClick={() => setOpen(!open)}>{toggleButton}</div>
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          setOpen(!open);
+        }}
+      >
+        {toggleButton}
+      </div>
       {open && <ul className={`${S.panel} ${panelClassName}`}>{children}</ul>}
     </div>
   );
