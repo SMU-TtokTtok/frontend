@@ -4,10 +4,9 @@ import DropDown from '@/common/components/dropdown';
 import DropDownButton from '@/common/ui/dropdownButton';
 import Checkbox from '@/common/ui/checkbox';
 import Image from 'next/image';
+import { questionTypes } from './index';
 import Delete from '@/assets/delete.svg';
 import check from '@/assets/check_radio.svg';
-import { questionTypes } from './index';
-
 import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import { convertToKor } from '@/common/util/convertToKor';
 import { ZodFormattedError } from 'zod';
@@ -16,24 +15,31 @@ interface InputFieldProps {
   field: ApplyFormField;
   errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
+  scrollRefs: React.RefObject<HTMLDivElement[]>;
   handleQuestionTypeChange: (type: QuestionType) => void;
   handleUpdateField: (fieldId: number, data: ApplyFormField) => void;
   handleDeleteField: (fieldId: number) => void;
   handleEssentialChange: (fieldId: number, isEssential: boolean) => void;
 }
 
-function TextAreaField({
+function InputField({
   fieldId,
   field,
   errors,
   isSubmit,
+  scrollRefs,
   handleQuestionTypeChange,
   handleUpdateField,
   handleDeleteField,
   handleEssentialChange,
 }: InputFieldProps) {
   return (
-    <div className={S.formFeildBlock}>
+    <div
+      className={S.formFeildBlock}
+      ref={(el) => {
+        if (el) scrollRefs.current[fieldId] = el as HTMLDivElement;
+      }}
+    >
       <div className={S.fieldToolBar}>
         <DropDown
           toggleButton={
@@ -99,9 +105,9 @@ function TextAreaField({
         }}
       />
 
-      <textarea className={S.previewFeild} disabled placeholder="서술형 텍스트" />
+      <input className={S.previewFeild} disabled placeholder="단답형 텍스트" />
     </div>
   );
 }
 
-export default TextAreaField;
+export default InputField;
