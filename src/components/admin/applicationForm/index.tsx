@@ -3,10 +3,10 @@ import { useAdminForm } from '@/hooks/useAdminForm';
 import * as S from './applicationForm.css';
 import EmptyPage from './emptyPage';
 import { useApplicationForm } from '@/hooks/useApplicationForm';
-import { useEffect, useState } from 'react';
-import QuestionForm from './createform/step3/questionForm';
+import { useEffect, useRef, useState } from 'react';
+import QuestionForm from './questionForm';
 import { useApplicationFormValidation } from '@/hooks/useApplicationFormVaildation';
-import QuestionNavigator from './createform/step3/questionNavigator';
+import QuestionNavigator from './questionNavigator';
 import Button from '@/common/ui/button';
 import { useUpdateFormMutation } from '@/hooks/useAdminFormMutation';
 import ConfirmModal from '@/common/components/confirmModal';
@@ -37,6 +37,12 @@ function ApplicationFormPage() {
   const [isSubmit, setIsSubmit] = useState(false);
   const { handleUpdateForm } = useUpdateFormMutation();
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
+  const scrollRefs = useRef<HTMLDivElement[]>([]);
+
+  const handleScrollTo = (index: number) => {
+    const target = scrollRefs.current[index];
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const mergeFormData = {
     ...questionsData,
@@ -83,6 +89,7 @@ function ApplicationFormPage() {
           handleOptionDelete={handleOptionDelete}
           handleChangeTitle={handleChangeTitle}
           handleChangeSubTitle={handleChangeSubTitle}
+          scrollRefs={scrollRefs}
         />
         <div
           className={S.navigatorContainer}
@@ -90,7 +97,7 @@ function ApplicationFormPage() {
             [S.sidebarTop]: `${barPosition}px`,
           })}
         >
-          <QuestionNavigator fields={questionsData.questions} />
+          <QuestionNavigator fields={questionsData.questions} handleScrollTo={handleScrollTo} />
           <Button type="submit" variant="primary" className={S.submitButton}>
             저장하기
           </Button>

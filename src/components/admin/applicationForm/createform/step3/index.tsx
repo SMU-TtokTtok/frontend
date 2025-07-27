@@ -2,13 +2,13 @@
 import Indicator from '../indicator';
 import RecommendTemplate from './recommend/Template';
 import * as S from './step3.css';
-import QuestionForm from './questionForm';
+import QuestionForm from '../../questionForm';
 import { useApplicationForm } from '@/hooks/useApplicationForm';
-import QuestionNavigator from './questionNavigator';
+import QuestionNavigator from '../../questionNavigator';
 import Button from '@/common/ui/button';
 import { useCreateFormMutation } from '@/hooks/useCreateFormMutation';
 import { useApplicationFormValidation } from '@/hooks/useApplicationFormVaildation';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 function FormQuestionStep() {
   const {
@@ -28,6 +28,13 @@ function FormQuestionStep() {
   const [isSubmit, setIsSubmit] = useState(false);
   const { handleCreateForm } = useCreateFormMutation();
   const { result, errors } = useApplicationFormValidation(questionsData);
+  const scrollRefs = useRef<HTMLDivElement[]>([]);
+
+  const handleScrollTo = (index: number) => {
+    const target = scrollRefs.current[index];
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmit(true);
@@ -56,6 +63,7 @@ function FormQuestionStep() {
           handleQuestionTypeChange={handleQuestionTypeChange}
           handleAddField={handleAddField}
           handleUpdateField={handleUpdateField}
+          scrollRefs={scrollRefs}
           handleDeleteField={handleDeleteField}
           handleEssentialChange={handleEssentialChange}
           handleOptionChange={handleOptionChange}
@@ -65,7 +73,7 @@ function FormQuestionStep() {
           handleChangeSubTitle={handleChangeSubTitle}
         />
         <div className={S.navigatorContainer}>
-          <QuestionNavigator fields={questionsData.questions} />
+          <QuestionNavigator fields={questionsData.questions} handleScrollTo={handleScrollTo} />
           <Button type="submit" variant="primary" className={S.submitButton}>
             제작 완료 및 업로드
           </Button>
