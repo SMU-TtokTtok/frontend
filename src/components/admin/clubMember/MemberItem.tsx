@@ -6,6 +6,9 @@ import { getGradeStyle2 } from '@/common/util/getGradeStyle';
 import cancel from '@/assets/cancel.svg';
 import Image from 'next/image';
 import { useDeleteClubMember } from '@/hooks/useClubMember';
+import DropDown from '@/common/components/dropdown/index';
+import DropDownButton from '@/common/ui/dropdownButton';
+import { roleItems } from '@/common/constants/adminOptions';
 
 interface MemberItemProps {
   memberId: string;
@@ -37,9 +40,26 @@ export default function MemberItem({
           <div className={S.bar}>|</div>
           <div className={S.major}>{major}</div>
         </div>
-        <Tag variant="white" className={S.role}>
-          {getRoleDisplayName(role)}
-        </Tag>
+        {isEditing ? (
+          <DropDown
+            toggleButton={
+              <DropDownButton variant="default" className={S.dropDownStyle}>
+                {getRoleDisplayName(role)}
+              </DropDownButton>
+            }
+            panelClassName={S.panelContainer}
+          >
+            {roleItems.map((item) => (
+              <li key={item} className={S.panelItem}>
+                {item}
+              </li>
+            ))}
+          </DropDown>
+        ) : (
+          <Tag variant="white" className={S.role}>
+            {getRoleDisplayName(role)}
+          </Tag>
+        )}
       </div>
       {isEditing && (
         <Image

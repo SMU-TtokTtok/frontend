@@ -58,3 +58,45 @@ export const isEditingContainer = styleVariants({
     display: 'block',
   },
 });
+
+export const dropDownStyle = style({
+  padding: '8px 8px 8px 16px',
+  fontSize: vars.fonts.body2,
+  fontWeight: '600',
+  lineHeight: '150%',
+  borderRadius: '100px',
+});
+
+export const panelContainer = style({
+  marginTop: '5px',
+  width: '100%',
+  textAlign: 'center',
+});
+
+export const panelItem = style({
+  padding: '8px 0',
+  color: '#292E39',
+  fontSize: vars.fonts.body2,
+  fontWeight: 600,
+  cursor: 'pointer',
+  backgroundColor: vars.colors.surface.bright,
+  lineHeight: '150%',
+
+  selectors: {
+    '&:not(:last-child)': {
+      borderBottom: '1px solid #E7E8EA',
+    },
+    '&:hover': {
+      backgroundColor: '#E9F2FF',
+      color: '#0052EC',
+    },
+    '&:first-child': {
+      borderTopLeftRadius: '4px',
+      borderTopRightRadius: '4px',
+    },
+    '&:last-child': {
+      borderBottomLeftRadius: '4px',
+      borderBottomRightRadius: '4px',
+    },
+  },
+});
