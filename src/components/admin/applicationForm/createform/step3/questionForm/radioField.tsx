@@ -114,6 +114,7 @@ function RadioField({
                 type="radio"
                 name={`radio-${fieldId}`}
                 id={`radio-${fieldId}-${index}`}
+                className={S.radio}
                 readOnly
                 disabled
               />

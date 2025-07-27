@@ -115,6 +115,7 @@ function CheckboxField({
                 type="checkbox"
                 name={`radio-${fieldId}`}
                 id={`radio-${fieldId}-${index}`}
+                className={S.checkbox}
                 readOnly
                 disabled
               />
