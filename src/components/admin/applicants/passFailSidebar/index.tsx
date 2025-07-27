@@ -28,7 +28,7 @@ function PassFailSidebar({ selectedOptions, handleConfirmModalOpen }: PassFailSi
     setIsPass(isPass);
   };
 
-  const { barPosition } = useFollowSidebar({ initialPosition: 129 });
+  const { barPosition } = useFollowSidebar({ initialPosition: 40 });
 
   const {
     isOpen: isListModalOpen,
