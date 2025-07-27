@@ -6,6 +6,7 @@ export interface ClubMember {
     name: string;
     major: string;
     role: string;
+    memberId: string;
   }[];
 }
 

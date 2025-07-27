@@ -1,6 +1,8 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { getGradeCount } from '@/components/admin/clubMember/api/getGradeCount';
 import { getSearchMembers } from '@/components/admin/clubMember/api/getSearchMembers';
+import { clubMemberKey } from './queries/key';
+import { deleteClubMember } from '@/components/admin/clubMember/api/deleteClubMember';
 
 export const useGradeCount = () => {
   const { data, isLoading } = useSuspenseQuery({
@@ -16,4 +18,22 @@ export const useSearchClubMember = ({ search }: { search: string }) => {
     queryFn: () => getSearchMembers(search),
   });
   return { data, isLoading };
+};
+
+export const useDeleteClubMember = () => {
+  const queryClient = useQueryClient();
+  const { clubMember } = clubMemberKey;
+
+  const deleteClubMemberMutation = useMutation({
+    mutationFn: (memberId: string) => deleteClubMember(memberId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [clubMember] });
+    },
+  });
+
+  const handleDeleteClubMember = (memberId: string) => {
+    deleteClubMemberMutation.mutate(memberId);
+  };
+
+  return { handleDeleteClubMember };
 };

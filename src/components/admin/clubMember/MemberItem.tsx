@@ -5,9 +5,10 @@ import { getRoleDisplayName } from '@/common/util/gerKoreanRole';
 import { getGradeStyle2 } from '@/common/util/getGradeStyle';
 import cancel from '@/assets/cancel.svg';
 import Image from 'next/image';
+import { useDeleteClubMember } from '@/hooks/useClubMember';
 
 interface MemberItemProps {
-  // memberId: string;
+  memberId: string;
   name: string;
   major: string;
   role: string;
@@ -15,7 +16,16 @@ interface MemberItemProps {
   isEditing: boolean;
 }
 
-export default function MemberItem({ name, major, role, grade, isEditing }: MemberItemProps) {
+export default function MemberItem({
+  memberId,
+  name,
+  major,
+  role,
+  grade,
+  isEditing,
+}: MemberItemProps) {
+  const { handleDeleteClubMember } = useDeleteClubMember();
+
   return (
     <div className={S.isEditingContainer[isEditing ? 'true' : 'false']}>
       <div className={S.container}>
@@ -32,7 +42,14 @@ export default function MemberItem({ name, major, role, grade, isEditing }: Memb
         </Tag>
       </div>
       {isEditing && (
-        <Image src={cancel} alt="cancel" width={30} height={30} style={{ cursor: 'pointer' }} />
+        <Image
+          src={cancel}
+          alt="cancel"
+          width={30}
+          height={30}
+          style={{ cursor: 'pointer' }}
+          onClick={() => handleDeleteClubMember(memberId)}
+        />
       )}
     </div>
   );
