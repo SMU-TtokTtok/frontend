@@ -13,7 +13,7 @@ export default function ClubMemberAddPage() {
     <div className={S.wrapper}>
       <div className={S.container}>
         <Header role={role || ''}></Header>
-        <Form></Form>
+        <Form role={role || ''}></Form>
       </div>
     </div>
   );

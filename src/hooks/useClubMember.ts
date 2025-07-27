@@ -62,7 +62,7 @@ export const usePatchClubMember = () => {
   return { handlePatchClubMember };
 };
 
-export const usePostClubMember = () => {
+export const usePostClubMember = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
   const { clubMember } = clubMemberKey;
 
@@ -71,6 +71,7 @@ export const usePostClubMember = () => {
       postClubMember(body, role),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
+      onSuccess?.(); // 성공 시 콜백 실행
     },
   });
 

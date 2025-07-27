@@ -5,8 +5,9 @@ import ClubMemberForm from './ClubMemberForm';
 import { clubMemberAddSchema, ClubMemberAddData } from './schema';
 import Button from '@/common/ui/button';
 import { useRouter } from 'next/navigation';
+import { usePostClubMember } from '@/hooks/useClubMember';
 
-export default function Form() {
+export default function Form({ role }: { role: string }) {
   const router = useRouter();
   const {
     register,
@@ -15,10 +16,23 @@ export default function Form() {
   } = useForm<ClubMemberAddData>({
     resolver: zodResolver(clubMemberAddSchema),
   });
+  const { handlePostClubMember } = usePostClubMember(() => {
+    router.back();
+  });
 
   const onSubmit = (data: ClubMemberAddData) => {
-    console.log(data);
-    // TODO: API 호출 로직 추가
+    handlePostClubMember(
+      {
+        name: data.name,
+        studentNum: Number(data.studentId),
+        major: data.major,
+        email: data.email,
+        phone: data.phone,
+        grade: data.grade || '',
+        gender: data.gender || '',
+      },
+      role,
+    );
   };
 
   return (
