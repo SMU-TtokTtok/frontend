@@ -4,6 +4,10 @@ import { getSearchMembers } from '@/components/admin/clubMember/api/getSearchMem
 import { clubMemberKey } from './queries/key';
 import { deleteClubMember } from '@/components/admin/clubMember/api/deleteClubMember';
 import { patchClubMember } from '@/components/admin/clubMember/api/patchClubMember';
+import {
+  postClubMember,
+  postClubMemberBody,
+} from '@/components/admin/clubMember/api/postClubMember';
 
 export const useGradeCount = () => {
   const { data, isLoading } = useSuspenseQuery({
@@ -56,4 +60,23 @@ export const usePatchClubMember = () => {
   };
 
   return { handlePatchClubMember };
+};
+
+export const usePostClubMember = () => {
+  const queryClient = useQueryClient();
+  const { clubMember } = clubMemberKey;
+
+  const postClubMemberMutation = useMutation({
+    mutationFn: ({ body, role }: { body: postClubMemberBody; role: string }) =>
+      postClubMember(body, role),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [clubMember] });
+    },
+  });
+
+  const handlePostClubMember = (body: postClubMemberBody, role: string) => {
+    postClubMemberMutation.mutate({ body, role });
+  };
+
+  return { handlePostClubMember };
 };
