@@ -4,11 +4,9 @@ type HTTPMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 export default class ApiClient {
   private baseUrl: string;
-  private tokenKey: string;
 
-  constructor(baseUrl: string, tokenKey: string) {
+  constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
-    this.tokenKey = tokenKey;
   }
 
   async get<T = any>(path: string): Promise<T> {
@@ -37,11 +35,6 @@ export default class ApiClient {
       const headers: HeadersInit = {
         'Content-Type': 'application/json',
       };
-
-      const accessToken = sessionStorage.getItem(this.tokenKey);
-      if (accessToken) {
-        headers['Authorization'] = `Bearer ${accessToken}`;
-      }
 
       const response = await fetch(url, {
         method,
