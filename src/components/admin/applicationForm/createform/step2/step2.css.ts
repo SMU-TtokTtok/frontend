@@ -1,6 +1,6 @@
 import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 
 export const container = style({
@@ -130,4 +130,8 @@ export const imgBox = style({
   borderTopRightRadius: '6px',
   borderBottomRightRadius: '6px',
   cursor: 'pointer',
+});
+
+globalStyle('.custom-calendar .rdp-caption_label', {
+  paddingLeft: '15px',
 });
