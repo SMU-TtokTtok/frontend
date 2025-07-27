@@ -118,7 +118,14 @@ export const filterButton = recipe({
   variants: {
     isSelected: {
       true: {
+        backgroundColor: vars.colors.primary.base,
+        color: vars.colors.primary.default,
         fontWeight: 600,
+      },
+      false: {
+        backgroundColor: vars.colors.surface.bright,
+        color: vars.colors.surface.outline,
+        fontWeight: 400,
       },
     },
   },
