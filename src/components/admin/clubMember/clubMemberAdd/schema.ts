@@ -9,11 +9,11 @@ export const clubMemberAddSchema = z.object({
   grade: z
     .string()
     .nullable()
-    .refine((val) => val !== null, '학년을 선택해주세요.'),
+    .refine((val) => val !== null && val.length > 0, '학년을 선택해주세요.'),
   gender: z
     .string()
     .nullable()
-    .refine((val) => val !== null, '성별을 선택해주세요.'),
+    .refine((val) => val !== null && val.length > 0, '성별을 선택해주세요.'),
 });
 
 export type ClubMemberAddData = z.infer<typeof clubMemberAddSchema>;
