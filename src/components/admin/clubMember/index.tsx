@@ -23,7 +23,7 @@ export default function ClubMemberPage() {
         <RightSide />
         <div className={S.memberPanel}>
           {!search && <MemberList isEditing={isEditing} />}
-          {search && <SearchResult search={search} />}
+          {search && <SearchResult search={search} isEditing={isEditing} />}
         </div>
       </div>
     </div>

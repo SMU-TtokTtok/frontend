@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 
 export const container = style({
@@ -8,6 +8,7 @@ export const container = style({
   padding: '10px 20px',
   borderRadius: '6px',
   backgroundColor: '#F8F8F9',
+  flexGrow: 1,
 });
 
 export const withOutRoleContainer = style({
@@ -45,4 +46,15 @@ export const role = style({
   padding: '8px 16px',
   fontSize: vars.fonts.body2,
   lineHeight: '150%',
+});
+
+export const isEditingContainer = styleVariants({
+  true: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '16px',
+  },
+  false: {
+    display: 'block',
+  },
 });

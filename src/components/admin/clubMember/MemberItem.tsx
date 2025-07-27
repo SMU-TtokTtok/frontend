@@ -3,6 +3,8 @@ import Tag from '@/common/ui/tag';
 import { getKoreanGrade } from '@/common/util/getKoreanGrade';
 import { getRoleDisplayName } from '@/common/util/gerKoreanRole';
 import { getGradeStyle2 } from '@/common/util/getGradeStyle';
+import cancel from '@/assets/cancel.svg';
+import Image from 'next/image';
 
 interface MemberItemProps {
   // memberId: string;
@@ -10,22 +12,28 @@ interface MemberItemProps {
   major: string;
   role: string;
   grade: string;
+  isEditing: boolean;
 }
 
-export default function MemberItem({ name, major, role, grade }: MemberItemProps) {
+export default function MemberItem({ name, major, role, grade, isEditing }: MemberItemProps) {
   return (
-    <div className={S.container}>
-      <div className={S.withOutRoleContainer}>
-        <Tag variant={getGradeStyle2(grade)} className={S.grade}>
-          {getKoreanGrade(grade)}
+    <div className={S.isEditingContainer[isEditing ? 'true' : 'false']}>
+      <div className={S.container}>
+        <div className={S.withOutRoleContainer}>
+          <Tag variant={getGradeStyle2(grade)} className={S.grade}>
+            {getKoreanGrade(grade)}
+          </Tag>
+          <div className={S.name}>{name}</div>
+          <div className={S.bar}>|</div>
+          <div className={S.major}>{major}</div>
+        </div>
+        <Tag variant="white" className={S.role}>
+          {getRoleDisplayName(role)}
         </Tag>
-        <div className={S.name}>{name}</div>
-        <div className={S.bar}>|</div>
-        <div className={S.major}>{major}</div>
       </div>
-      <Tag variant="white" className={S.role}>
-        {getRoleDisplayName(role)}
-      </Tag>
+      {isEditing && (
+        <Image src={cancel} alt="cancel" width={30} height={30} style={{ cursor: 'pointer' }} />
+      )}
     </div>
   );
 }

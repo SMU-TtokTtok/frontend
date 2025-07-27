@@ -90,7 +90,7 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
 
             return (
               <div key={member.memberId}>
-                <MemberItem {...member} />
+                <MemberItem {...member} isEditing={isEditing} />
                 {shouldShowDivider && (
                   <>
                     <div className={S.divider} />
