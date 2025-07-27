@@ -9,6 +9,7 @@ import { useDeleteClubMember } from '@/hooks/useClubMember';
 import DropDown from '@/common/components/dropdown/index';
 import DropDownButton from '@/common/ui/dropdownButton';
 import { roleItems } from '@/common/constants/adminOptions';
+import { usePatchClubMember } from '@/hooks/useClubMember';
 
 interface MemberItemProps {
   memberId: string;
@@ -28,7 +29,7 @@ export default function MemberItem({
   isEditing,
 }: MemberItemProps) {
   const { handleDeleteClubMember } = useDeleteClubMember();
-
+  const { handlePatchClubMember } = usePatchClubMember();
   return (
     <div className={S.isEditingContainer[isEditing ? 'true' : 'false']}>
       <div className={S.container}>
@@ -50,7 +51,11 @@ export default function MemberItem({
             panelClassName={S.panelContainer}
           >
             {roleItems.map((item) => (
-              <li key={item} className={S.panelItem}>
+              <li
+                key={item}
+                className={S.panelItem}
+                onClick={() => handlePatchClubMember({ memberId, role: item })}
+              >
                 {item}
               </li>
             ))}

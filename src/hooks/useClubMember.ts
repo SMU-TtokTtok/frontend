@@ -3,6 +3,7 @@ import { getGradeCount } from '@/components/admin/clubMember/api/getGradeCount';
 import { getSearchMembers } from '@/components/admin/clubMember/api/getSearchMembers';
 import { clubMemberKey } from './queries/key';
 import { deleteClubMember } from '@/components/admin/clubMember/api/deleteClubMember';
+import { patchClubMember } from '@/components/admin/clubMember/api/patchClubMember';
 
 export const useGradeCount = () => {
   const { data, isLoading } = useSuspenseQuery({
@@ -36,4 +37,23 @@ export const useDeleteClubMember = () => {
   };
 
   return { handleDeleteClubMember };
+};
+
+export const usePatchClubMember = () => {
+  const queryClient = useQueryClient();
+  const { clubMember } = clubMemberKey;
+
+  const patchClubMemberMutation = useMutation({
+    mutationFn: ({ memberId, role }: { memberId: string; role: string }) =>
+      patchClubMember(memberId, role),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [clubMember] });
+    },
+  });
+
+  const handlePatchClubMember = ({ memberId, role }: { memberId: string; role: string }) => {
+    patchClubMemberMutation.mutate({ memberId, role });
+  };
+
+  return { handlePatchClubMember };
 };
