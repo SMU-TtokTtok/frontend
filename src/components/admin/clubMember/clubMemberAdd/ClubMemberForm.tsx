@@ -137,11 +137,11 @@ export default function ClubMemberForm({ register, errors }: ClubMemberFormProps
         </div>
         <div className={S.FormContentRadioContainer}>
           <label className={S.LabelContainer}>
-            <input type="radio" value="male" {...register('gender')} />
+            <input type="radio" value="MALE" {...register('gender')} />
             <span className={S.RadioText}>남성</span>
           </label>
           <label className={S.LabelContainer}>
-            <input type="radio" value="female" {...register('gender')} />
+            <input type="radio" value="FEMALE" {...register('gender')} />
             <span className={S.RadioText}>여성</span>
           </label>
         </div>
