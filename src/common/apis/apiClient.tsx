@@ -2,6 +2,16 @@
 
 type HTTPMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
+export class CustomHttpError extends Error {
+  status: number;
+
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+  }
+}
+
 export default class ApiClient {
   private baseUrl: string;
   private tokenKey: string;
@@ -51,12 +61,15 @@ export default class ApiClient {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        throw new CustomHttpError(
+          `HTTP ${response.status}: ${response.statusText}`,
+          response.status,
+        );
       }
 
       return response;
     } catch (error) {
-      throw new Error(`API 요청 실패: ${error}`);
+      throw new CustomHttpError(`API 요청 실패: ${error}`, (error as CustomHttpError).status);
     }
   }
 
