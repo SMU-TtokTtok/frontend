@@ -43,7 +43,7 @@ export default function Form() {
   return (
     <form className={S.container} onSubmit={handleSubmit(onSubmit)}>
       <div className={S.messageContainer}>
-        <div className={S.sectionTitle}>합격 예정자 결과 내용</div>
+        <div className={S.sectionTitle}>합격 예정자 이메일</div>
         <div className={S.mainContainer}>
           <input placeholder="제목" className={S.input} {...register('passTitle')} />
           {errors.passTitle && <p className={S.errorText}>{errors.passTitle.message}</p>}
@@ -57,7 +57,7 @@ export default function Form() {
         </div>
       </div>
       <div className={S.messageContainer}>
-        <div className={S.sectionTitle}>불합격 예정자 결과 내용</div>
+        <div className={S.sectionTitle}>불합격 예정자 이메일</div>
         <div className={S.mainContainer}>
           <input placeholder="제목" className={S.input} {...register('failTitle')} />
           {errors.failTitle && <p className={S.errorText}>{errors.failTitle.message}</p>}
