@@ -1,5 +1,20 @@
+'use client';
+
+import * as S from './index.css';
+import { useSearchParams } from 'next/navigation';
+import Header from './Header';
+import Form from './Form';
+
 function Message() {
-  return <div>Message</div>;
+  const searchParams = useSearchParams();
+  const evaluation = searchParams.get('evaluation') || 'applies';
+
+  return (
+    <div className={S.wrapper}>
+      <Header evaluation={evaluation} />
+      <Form />
+    </div>
+  );
 }
 
 export default Message;
