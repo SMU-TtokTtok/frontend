@@ -92,3 +92,10 @@ export const note = style({
   color: '#C3C3C3',
   textAlign: 'center',
 });
+
+export const errorText = style({
+  fontSize: vars.fonts.body3,
+  fontWeight: 400,
+  color: '#FF3B30',
+  marginTop: '4px',
+});
