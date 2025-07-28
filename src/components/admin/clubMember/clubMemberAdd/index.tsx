@@ -4,6 +4,7 @@ import * as S from './index.css';
 import Header from './Header';
 import Form from './Form';
 import { useSearchParams } from 'next/navigation';
+import RightSide from '@/components/admin/clubMember/RightSide';
 
 export default function ClubMemberAddPage() {
   const searchParams = useSearchParams();
@@ -15,6 +16,7 @@ export default function ClubMemberAddPage() {
         <Header role={role || ''}></Header>
         <Form role={role || ''}></Form>
       </div>
+      <RightSide />
     </div>
   );
 }
