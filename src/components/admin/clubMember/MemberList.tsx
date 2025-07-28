@@ -7,13 +7,10 @@ import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import Lottie from 'lottie-react';
 import loading from '@/assets/loading.json';
-import addExecutive from '@/assets/add_excutive.svg';
-import addMember from '@/assets/add_member.svg';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
-import addExecutiveIcon from '@/assets/add_excutive.svg';
-import addMemberIcon from '@/assets/add_member.svg';
+
+import AddButton from './ui/AddButton';
 
 export default function MemberList({ isEditing }: { isEditing: boolean }) {
   const { clubMembers, fetchNextPage, hasNextPage, isFetchingNextPage } = useClubMemberInfinite({
@@ -40,17 +37,12 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
     <>
       {isEmpty && (
         <div className={S.emptyContainer}>
-          <Image
-            src={addExecutive}
-            alt="addExecutive"
-            className={S.addCursor}
+          <AddButton
+            role="임원진"
             onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=EXECUTIVE')}
           />
-          <div className={S.border}></div>
-          <Image
-            src={addMember}
-            alt="addMember"
-            className={S.addCursor}
+          <AddButton
+            role="부원"
             onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=MEMBER')}
           />
         </div>
@@ -58,20 +50,16 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
       {!isEmpty && (
         <ul className={S.memberItemList}>
           {isEditing && (
-            <Image
-              src={addExecutiveIcon}
-              alt="addExecutive"
-              className={S.addCursor}
+            <AddButton
+              role="임원진"
               onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=EXECUTIVE')}
             />
           )}
           {isEditing && clubMembers.every((member) => member.role === 'MEMBER') && (
             <>
               <div className={S.divider} />
-              <Image
-                src={addMemberIcon}
-                alt="addMember"
-                className={S.addCursor}
+              <AddButton
+                role="부원"
                 onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=MEMBER')}
               />
             </>
@@ -95,10 +83,8 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
                   <>
                     <div className={S.divider} />
                     {isEditing && (
-                      <Image
-                        src={addMemberIcon}
-                        alt="addMember"
-                        className={S.addCursor}
+                      <AddButton
+                        role="부원"
                         onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=MEMBER')}
                       />
                     )}
