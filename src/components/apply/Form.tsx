@@ -46,9 +46,10 @@ export default function Form({ clubId }: { clubId: string }) {
         <div className={S.BoxFlex}>
           <div className={S.BoxTitle}>목차</div>
           <div className={S.BoxContentContainer}>
+            <div className={S.contentText}>1. 기본인적사항</div>
             {data?.questions?.map((question, index) => (
               <div className={S.contentText} key={index}>
-                {index + 1}. {question.title}
+                {index + 2}. {question.title}
               </div>
             ))}
           </div>
