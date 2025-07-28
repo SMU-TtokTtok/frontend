@@ -15,7 +15,7 @@ const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: nu
   const router = useRouter();
 
   // 커스텀 훅 사용
-  const { barPosition } = useFollowSidebar({ initialPosition: 184 });
+  const { barPosition } = useFollowSidebar({ initialPosition: 124 });
 
   return (
     <div
