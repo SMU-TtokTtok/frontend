@@ -22,7 +22,11 @@ export const buttonStyle = styleVariants({
     backgroundColor: vars.colors.surface.default,
     color: vars.colors.surface.outline,
   },
-
+  //연한회색
+  lightGray: {
+    backgroundColor: vars.colors.surface.variant,
+    color: vars.colors.surface.outline,
+  },
   none: {},
 });
 
