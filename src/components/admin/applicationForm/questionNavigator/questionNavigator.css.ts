@@ -25,6 +25,12 @@ export const sequenceItem = style({
   fontSize: vars.fonts.body2,
   color: vars.colors.surface.on_surf,
   fontWeight: '500',
+  cursor: 'pointer',
+
+  ':hover': {
+    color: vars.colors.primary.default,
+    textDecoration: 'underline',
+  },
 });
 
 export const itemContainer = style({

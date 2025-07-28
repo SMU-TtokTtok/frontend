@@ -36,10 +36,12 @@ function ClubItem({ clubData, className }: ClubItemProps) {
           }}
         />
       </div>
-      <p className={S.name}>{clubData.name}</p>
-      <div className={S.membersWrapper}>
-        <Image src={person} className={S.person} alt="멤버 수" />
-        <p className={S.members}>{clubData.members}</p>
+      <div className={S.content}>
+        <p className={S.name}>{clubData.name}</p>
+        <div className={S.membersWrapper}>
+          <Image src={person} className={S.person} alt="멤버 수" />
+          <p className={S.members}>{clubData.members}</p>
+        </div>
       </div>
       <div className={S.categoryWrapper}>
         <TagList category={clubData.category} />

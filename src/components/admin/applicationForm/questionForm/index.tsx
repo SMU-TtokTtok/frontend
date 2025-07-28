@@ -27,6 +27,7 @@ interface QuestionFormProps {
   handleOptionChange: (fieldId: number, optionIndex: number, value: string) => void;
   handleOptionAdd: (fieldId: number) => void;
   handleOptionDelete: (fieldId: number, optionIndex: number) => void;
+  scrollRefs: React.RefObject<HTMLDivElement[]>;
 }
 
 function QuestionForm({
@@ -43,6 +44,7 @@ function QuestionForm({
   handleOptionChange,
   handleOptionAdd,
   handleOptionDelete,
+  scrollRefs,
 }: QuestionFormProps) {
   return (
     <div className={S.container}>
@@ -71,6 +73,7 @@ function QuestionForm({
         <FormFieldFactory
           key={index}
           fieldId={index}
+          scrollRefs={scrollRefs}
           field={field}
           errors={errors}
           isSubmit={isSubmit}

@@ -17,6 +17,9 @@ export const container = style({
   borderRadius: '8px',
 });
 
+export const content = style({
+  padding: ' 0px 4px',
+});
 export const separation = style({
   fontSize: vars.fonts.body2,
   fontWeight: '500',
@@ -35,6 +38,7 @@ export const headerWrapper = style({
   alignItems: 'center',
   width: '100%',
   marginBottom: '2px',
+  padding: '0 4px',
 });
 export const star = style({
   display: 'block',

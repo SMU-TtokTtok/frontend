@@ -28,6 +28,7 @@ export const header = style({
 
 export const title = style({
   fontSize: vars.fonts.title4,
+  fontWeight: 600,
   padding: '7px 5px',
   width: '100%',
   borderBottom: `1px solid ${vars.colors.primary.fixed}`,
@@ -54,10 +55,10 @@ export const titleContainer = recipe({
   variants: {
     title: {
       formTitle: {
-        height: '61px',
+        marginBottom: '16px',
       },
       questionTitle: {
-        height: '65px',
+        marginBottom: '8px',
       },
     },
   },
@@ -66,9 +67,9 @@ export const titleContainer = recipe({
 export const description = style({
   width: '100%',
   fontSize: vars.fonts.body1,
+  fontWeight: 500,
   color: vars.colors.primary.on_cont,
   padding: '12px 5px',
-  marginTop: '15px',
   resize: 'none',
   height: '50px',
   borderBottom: `1px solid ${vars.colors.primary.fixed}`,
@@ -195,7 +196,6 @@ export const questionDescription = style({
   padding: '12px 5px',
   resize: 'none',
   transition: 'background-color 0.3s ease-in-out',
-  marginTop: '8px',
   selectors: {
     '&:hover': {
       backgroundColor: vars.colors.surface.cont_1_var,
@@ -316,7 +316,7 @@ export const rawsort = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  gap: '12px',
+  gap: '20px',
   marginBottom: '40px',
 });
 
@@ -333,4 +333,14 @@ export const applicantInfoRadio = style({
   height: '20px',
   border: `1px solid ${vars.colors.surface.outline_var}`,
   cursor: 'not-allowed !important',
+});
+
+export const checkbox = style({
+  width: '20px',
+  height: '20px',
+});
+
+export const radio = style({
+  width: '20px',
+  height: '20px',
 });
