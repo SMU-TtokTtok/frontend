@@ -29,3 +29,9 @@ export const memberPanel = style({
   marginTop: '20px',
   marginBottom: '200px',
 });
+
+export const searchResultContainer = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '8px',
+});
