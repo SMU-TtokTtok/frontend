@@ -3,8 +3,10 @@ import Button from '@/common/ui/button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { messageSchema, type MessageForm } from './schema';
+import { usePostMessage } from '@/hooks/useMessage';
 
 export default function Form() {
+  const { handlePostMessage } = usePostMessage();
   const {
     register,
     handleSubmit,
@@ -25,7 +27,17 @@ export default function Form() {
 
   const onSubmit = (data: MessageForm) => {
     console.log('폼 제출:', data);
-    // 폼 제출 로직
+    const bodyData = {
+      pass: {
+        title: data.passTitle,
+        body: data.passMessage,
+      },
+      fail: {
+        title: data.failTitle,
+        body: data.failMessage,
+      },
+    };
+    handlePostMessage(bodyData);
   };
 
   return (
