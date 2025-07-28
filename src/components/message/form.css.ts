@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
   display: 'flex',
@@ -69,6 +70,12 @@ export const submitContainer = style({
   gap: '10px',
   width: '330px',
   alignSelf: 'flex-end',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      width: '236px',
+    },
+  },
 });
 
 export const button = style({
