@@ -11,7 +11,7 @@ export const wrapper = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       paddingLeft: '40px',
-      paddingRight: '292px',
+      paddingRight: '40px',
     },
   },
 });

@@ -12,6 +12,12 @@ export const rightSideContainer = style({
   gap: '20px',
   width: '330px',
   flexDirection: 'column',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      width: '228px',
+    },
+  },
 });
 
 export const submitButton = style({
@@ -37,7 +43,7 @@ export const BoxTitle = style({
   color: '#030304',
 });
 
-export const ContentContainer = style({
+export const BoxContentContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '6px',

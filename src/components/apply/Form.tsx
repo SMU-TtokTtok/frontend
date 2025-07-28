@@ -64,7 +64,7 @@ export default function Form({ clubId }: { clubId: string }) {
       <div className={S.rightSideContainer}>
         <div className={S.BoxFlex}>
           <div className={S.BoxTitle}>목차</div>
-          <div className={S.ContentContainer}>
+          <div className={S.BoxContentContainer}>
             {content.map((item, index) => (
               <div className={S.contentText} key={index}>
                 {index + 1}. {item.content}
