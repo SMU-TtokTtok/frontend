@@ -2,7 +2,63 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 import { BREAKPOINTS } from '@/common/constants/index';
 
-export const container = style({
+export const wrapper = style({
+  display: 'flex',
+  gap: '24px',
+});
+
+export const rightSideContainer = style({
+  display: 'flex',
+  gap: '20px',
+  width: '330px',
+  flexDirection: 'column',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      width: '228px',
+    },
+  },
+});
+
+export const submitButton = style({
+  width: '100%',
+  borderRadius: '6px',
+  padding: '16px 0',
+  fontSize: vars.fonts.body2,
+  fontWeight: '600',
+});
+
+export const BoxFlex = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '16px',
+  backgroundColor: 'white',
+  padding: '22px 24px',
+  borderRadius: '8px',
+});
+
+export const BoxTitle = style({
+  fontSize: vars.fonts.title4,
+  fontWeight: '700',
+  color: '#030304',
+});
+
+export const BoxContentContainer = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '6px',
+});
+
+export const contentText = style({
+  fontSize: vars.fonts.body2,
+  color: '#030304',
+
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+});
+
+export const contentContainer = style({
   padding: '16px',
   display: 'flex',
   flexDirection: 'column',
@@ -10,6 +66,8 @@ export const container = style({
   borderRadius: '8px',
   background: 'white',
   marginBottom: '200px',
+  flexGrow: 1,
+  flexShrink: 1,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
@@ -28,7 +86,7 @@ export const FormHeader = style({
 });
 
 export const FormTitle = style({
-  fontSize: vars.fonts.title3,
+  fontSize: vars.fonts.title4,
   fontWeight: '600',
   color: '#001762',
 });
@@ -61,7 +119,7 @@ export const FormContentContainer = style({
 });
 
 export const FormContentTitle = style({
-  fontSize: vars.fonts.title4,
+  fontSize: vars.fonts.body1,
   fontWeight: '600',
   color: '#030304',
 });
@@ -102,7 +160,7 @@ export const LabelContainer = style({
 });
 
 export const RadioText = style({
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   fontWeight: '500',
   color: '#272E3B',
 });
@@ -170,7 +228,7 @@ export const checkboxItem = style({
 });
 
 export const checkboxLabel = style({
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   fontWeight: '500',
   color: '#272E3B',
 });
@@ -189,7 +247,7 @@ export const radioItem = style({
 });
 
 export const radioLabel = style({
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   fontWeight: '500',
   color: '#272E3B',
 });
@@ -243,24 +301,4 @@ export const submitButtonContainer = style({
   display: 'flex',
   justifyContent: 'center',
   padding: '24px 0',
-});
-
-export const submitButton = style({
-  width: '330px',
-  fontSize: vars.fonts.body2,
-  fontWeight: '600',
-  borderRadius: '6px',
-  padding: '16px 0',
-  position: 'fixed',
-  right: '100px',
-  top: '420px',
-  zIndex: '100',
-
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
-      width: '228px',
-      top: '380px',
-      right: '40px',
-    },
-  },
 });

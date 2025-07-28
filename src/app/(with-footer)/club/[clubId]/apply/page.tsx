@@ -4,7 +4,7 @@
 import * as S from '@/components/apply/index.css';
 import BackButton from '@/components/clubInfo/BackButton';
 import Form from '@/components/apply/Form';
-import RightSide from '@/components/apply/RightSide';
+// import RightSide from '@/components/apply/RightSide';
 import { useParams } from 'next/navigation';
 
 export default function Page() {
@@ -12,11 +12,11 @@ export default function Page() {
   const clubId = params.clubId as string;
 
   return (
-    <div className={S.container}>
-      <div className={S.wrapper}>
+    <div className={S.wrapper}>
+      <div className={S.container}>
         <BackButton title="지원 폼 작성" />
         <Form clubId={clubId} />
-        <RightSide />
+        {/* <RightSide /> */}
       </div>
     </div>
   );

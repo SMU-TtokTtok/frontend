@@ -9,12 +9,22 @@ interface ClubMember {
   role: string;
 }
 
+const GRADES = ['FIRST_GRADE', 'SECOND_GRADE', 'THIRD_GRADE', 'FOURTH_GRADE'] as const;
+export const ROLES = {
+  PRESIDENT: '회장',
+  VICE_PRESIDENT: '부회장',
+  EXECUTIVE: '임원진',
+  MEMBER: '부원',
+} as const;
+
 const MOCK_MEMBERS: ClubMember[] = Array.from({ length: 37 }).map((_, i) => ({
   memberId: `${i + 1}`,
   name: `멤버${i + 1}`,
-  grade: `${(i % 4) + 1}`,
+  grade: GRADES[i % 4],
   major: `학과${(i % 5) + 1}`,
-  role: i % 2 === 0 ? '부원' : '임원',
+  role: i === 0 ? 'PRESIDENT' : i === 1 ? 'VICE_PRESIDENT' : i < 5 ? 'EXECUTIVE' : 'MEMBER',
+  // role: 'EXECUTIVE',
+  // role: 'MEMBER',
 }));
 
 export async function GET(req: NextRequest) {

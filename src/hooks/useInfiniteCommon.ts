@@ -4,7 +4,7 @@ import { fetchAppliedClubs } from '@/components/applied/api/getApplied';
 import { fetchPopularClubs } from '@/components/popular/api/getPopular';
 import { fetchSearchClubs } from '@/components/search/api/getSearch';
 import { ClubsInfinite } from '@/common/model/clubInfinite';
-import { userKey } from './queries/key';
+import { userKey, clubMemberKey } from './queries/key';
 import { getClubMember } from '@/components/admin/clubMember/api/getClubMember';
 import { ClubMember } from '@/components/admin/clubMember/api/getClubMember';
 import { useMemo } from 'react';
@@ -82,7 +82,7 @@ export const useClubMemberInfinite = ({ enabled }: UseInfiniteParams = {}) => {
     ClubMember,
     Error
   >({
-    queryKey: ['clubMemberList'],
+    queryKey: [clubMemberKey.clubMember],
     queryFn: ({ pageParam }) => getClubMember({ page: pageParam as number }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

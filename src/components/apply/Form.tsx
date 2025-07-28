@@ -9,7 +9,6 @@ import Button from '@/common/ui/button';
 
 export default function Form({ clubId }: { clubId: string }) {
   const { data } = useClubInfo(Number(clubId));
-
   const {
     register,
     handleSubmit,
@@ -28,23 +27,36 @@ export default function Form({ clubId }: { clubId: string }) {
   };
 
   return (
-    <div className={S.container}>
-      <div className={S.FormHeader}>
-        <div className={S.FormTitle}>{data?.title} </div>
-        <div className={S.FormSubTitle}>{data?.subTitle}</div>
-      </div>
+    <form onSubmit={handleSubmit(onSubmit, onError)} className={S.wrapper}>
+      <div className={S.contentContainer}>
+        <div className={S.FormHeader}>
+          <div className={S.FormTitle}>{data?.title} </div>
+          <div className={S.FormSubTitle}>{data?.subTitle}</div>
+        </div>
 
-      <form onSubmit={handleSubmit(onSubmit, onError)} className={S.FormGap}>
         <BasicInfoSection register={register} errors={errors} />
 
         {data?.questions && data.questions.length > 0 && (
           <QuestionsSection questions={data.questions} register={register} errors={errors} />
         )}
+      </div>
 
+      <div className={S.rightSideContainer}>
+        <div className={S.BoxFlex}>
+          <div className={S.BoxTitle}>목차</div>
+          <div className={S.BoxContentContainer}>
+            <div className={S.contentText}>1. 기본인적사항</div>
+            {data?.questions?.map((question, index) => (
+              <div className={S.contentText} key={index}>
+                {index + 2}. {question.title}
+              </div>
+            ))}
+          </div>
+        </div>
         <Button type="submit" variant="primary" className={S.submitButton}>
           제출하기
         </Button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
 }

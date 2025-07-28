@@ -7,6 +7,8 @@ import MemberList from './MemberList';
 import RightSide from './RightSide';
 import SearchResult from './SearchResult';
 
+import Header from './Header';
+
 export default function ClubMemberPage() {
   const [search, setSearch] = useState('');
   const [isEditing, setIsEditing] = useState(false);
@@ -16,12 +18,12 @@ export default function ClubMemberPage() {
   return (
     <div className={S.wrapper}>
       <div className={S.container}>
-        <div className={S.title}>👥 부원 명단</div>
+        <Header isEditing={isEditing} setIsEditing={setIsEditing} />
         <SearchBarArea search={search} handleSearchChange={handleSearchChange} />
         <RightSide />
         <div className={S.memberPanel}>
-          {!search && <MemberList />}
-          {search && <SearchResult search={search} />}
+          {!search && <MemberList isEditing={isEditing} />}
+          {search && <SearchResult search={search} isEditing={isEditing} />}
         </div>
       </div>
     </div>

@@ -5,9 +5,12 @@ import { BREAKPOINTS } from '@/common/constants';
 export const sidebarTop = createVar();
 
 export const container = style({
-  position: 'absolute',
-  width: '330px',
-  right: '100px',
+  position: 'relative',
+  flexBasis: '330px',
+  // width: '330px',
+  flexShrink: 0,
+  flexGrow: 0,
+  // right: '100px',
   transition: 'top 0.7s ease-out',
   top: sidebarTop, // 동적 값이 들어갈 자리
 
@@ -15,8 +18,9 @@ export const container = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       position: 'relative',
       width: '100%',
-      right: '0',
+      // right: '0',
       top: '0',
+      flexBasis: 'auto',
       transition: 'none',
     },
   },

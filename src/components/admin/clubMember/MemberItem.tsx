@@ -1,28 +1,81 @@
 import * as S from './memberItem.css';
 import Tag from '@/common/ui/tag';
+import { getKoreanGrade } from '@/common/util/getKoreanGrade';
+import { getRoleDisplayName } from '@/common/util/gerKoreanRole';
+import { getGradeStyle2 } from '@/common/util/getGradeStyle';
+import cancel from '@/assets/cancel.svg';
+import Image from 'next/image';
+import { useDeleteClubMember } from '@/hooks/useClubMember';
+import DropDown from '@/common/components/dropdown/index';
+import DropDownButton from '@/common/ui/dropdownButton';
+import { roleItems } from '@/common/constants/adminOptions';
+import { usePatchClubMember } from '@/hooks/useClubMember';
 
 interface MemberItemProps {
-  // memberId: string;
+  memberId: string;
   name: string;
   major: string;
   role: string;
   grade: string;
+  isEditing: boolean;
 }
 
-export default function MemberItem({ name, major, role, grade }: MemberItemProps) {
+export default function MemberItem({
+  memberId,
+  name,
+  major,
+  role,
+  grade,
+  isEditing,
+}: MemberItemProps) {
+  const { handleDeleteClubMember } = useDeleteClubMember();
+  const { handlePatchClubMember } = usePatchClubMember();
   return (
-    <div className={S.container}>
-      <div className={S.withOutRoleContainer}>
-        <Tag variant="secondary" className={S.grade}>
-          {grade}학년
-        </Tag>
-        <div className={S.name}>{name}</div>
-        <div className={S.bar}>|</div>
-        <div className={S.major}>{major}</div>
+    <div className={S.isEditingContainer[isEditing ? 'true' : 'false']}>
+      <div className={S.container}>
+        <div className={S.withOutRoleContainer}>
+          <Tag variant={getGradeStyle2(grade)} className={S.grade}>
+            {getKoreanGrade(grade)}
+          </Tag>
+          <div className={S.name}>{name}</div>
+          <div className={S.bar}>|</div>
+          <div className={S.major}>{major}</div>
+        </div>
+        {isEditing ? (
+          <DropDown
+            toggleButton={
+              <DropDownButton variant="default" className={S.dropDownStyle}>
+                {getRoleDisplayName(role)}
+              </DropDownButton>
+            }
+            panelClassName={S.panelContainer}
+          >
+            {roleItems.map((item) => (
+              <li
+                key={item}
+                className={S.panelItem}
+                onClick={() => handlePatchClubMember({ memberId, role: item })}
+              >
+                {item}
+              </li>
+            ))}
+          </DropDown>
+        ) : (
+          <Tag variant="white" className={S.role}>
+            {getRoleDisplayName(role)}
+          </Tag>
+        )}
       </div>
-      <Tag variant="white" className={S.role}>
-        {role}
-      </Tag>
+      {isEditing && (
+        <Image
+          src={cancel}
+          alt="cancel"
+          width={30}
+          height={30}
+          style={{ cursor: 'pointer' }}
+          onClick={() => handleDeleteClubMember(memberId)}
+        />
+      )}
     </div>
   );
 }

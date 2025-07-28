@@ -1,5 +1,6 @@
 import { style, createVar } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const sidebarTop = createVar();
 
@@ -15,6 +16,12 @@ export const container = style({
   transition: 'top 0.7s ease-out',
   top: sidebarTop,
   right: '24px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      display: 'none',
+    },
+  },
 });
 
 export const ItemFlex = style({
