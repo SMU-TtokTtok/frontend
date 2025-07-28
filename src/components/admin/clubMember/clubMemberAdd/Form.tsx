@@ -6,6 +6,7 @@ import { clubMemberAddSchema, ClubMemberAddData } from './schema';
 import Button from '@/common/ui/button';
 import { useRouter } from 'next/navigation';
 import { usePostClubMember } from '@/hooks/useClubMember';
+import { ROUTES } from '@/common/constants/routes';
 
 export default function Form({ role }: { role: string }) {
   const router = useRouter();
@@ -17,7 +18,7 @@ export default function Form({ role }: { role: string }) {
     resolver: zodResolver(clubMemberAddSchema),
   });
   const { handlePostClubMember } = usePostClubMember(() => {
-    router.back();
+    router.push(ROUTES.ADMIN_CLUB_MEMBER);
   });
 
   const onSubmit = (data: ClubMemberAddData) => {
