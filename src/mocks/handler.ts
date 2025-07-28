@@ -11,7 +11,7 @@ import {
   PostMemo,
 } from './applicants';
 import { Clubs, getSearchList, patchFavorite, popularClubs } from './clubList';
-import { AdminLogin } from './auth';
+import { AdminLogin, AdminRefresh } from './auth';
 import { getClubInfo, patchClubInfo, patchRecruiting } from './clubInfo/adminClubInfo';
 import { getUserClubInfo } from './clubInfo/userClubInfo';
 import { emailCheckHandler, verifyResetCodeHandler, resetPasswordHandler } from './password';
@@ -50,4 +50,5 @@ export const handlers = [
   PostMemo,
   PatchMemo,
   DeleteMemo,
+  AdminRefresh,
 ];
