@@ -86,7 +86,7 @@ export const FormHeader = style({
 });
 
 export const FormTitle = style({
-  fontSize: vars.fonts.title3,
+  fontSize: vars.fonts.title4,
   fontWeight: '600',
   color: '#001762',
 });
@@ -119,7 +119,7 @@ export const FormContentContainer = style({
 });
 
 export const FormContentTitle = style({
-  fontSize: vars.fonts.title4,
+  fontSize: vars.fonts.body1,
   fontWeight: '600',
   color: '#030304',
 });
@@ -160,7 +160,7 @@ export const LabelContainer = style({
 });
 
 export const RadioText = style({
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   fontWeight: '500',
   color: '#272E3B',
 });
@@ -228,7 +228,7 @@ export const checkboxItem = style({
 });
 
 export const checkboxLabel = style({
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   fontWeight: '500',
   color: '#272E3B',
 });
@@ -247,7 +247,7 @@ export const radioItem = style({
 });
 
 export const radioLabel = style({
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   fontWeight: '500',
   color: '#272E3B',
 });

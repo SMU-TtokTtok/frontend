@@ -9,7 +9,6 @@ import Button from '@/common/ui/button';
 
 export default function Form({ clubId }: { clubId: string }) {
   const { data } = useClubInfo(Number(clubId));
-  console.log(data);
   const {
     register,
     handleSubmit,
