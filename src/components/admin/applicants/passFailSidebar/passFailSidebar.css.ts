@@ -8,7 +8,7 @@ export const rightSidebar = style({
   position: 'absolute',
   //ight: 146,
   //right: 24,
-  right: '-360px',
+  right: '-350px',
 
   top: sidebarTop,
   transition: 'top 0.7s ease-out',

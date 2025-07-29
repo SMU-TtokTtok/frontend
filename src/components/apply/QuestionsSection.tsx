@@ -35,6 +35,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
                     {...register(`questions.${index}.answer` as keyof ApplyFormData, {
                       required: question.isEssential,
                     })}
+                    className={S.checkboxInput}
                   />
                   <span className={S.checkboxLabel}>{option}</span>
                 </label>
@@ -65,6 +66,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
                     {...register(`questions.${index}.answer` as keyof ApplyFormData, {
                       required: question.isEssential,
                     })}
+                    className={S.radioInput}
                   />
                   <span className={S.radioLabel}>{option}</span>
                 </label>
@@ -150,5 +152,13 @@ export default function QuestionsSection({ questions, register, errors }: Questi
     }
   };
 
-  return <>{questions.map((question, index) => renderQuestion(question, index))}</>;
+  return (
+    <>
+      {questions.map((question, index) => (
+        <div key={index} id={`question-${index}`}>
+          {renderQuestion(question, index)}
+        </div>
+      ))}
+    </>
+  );
 }

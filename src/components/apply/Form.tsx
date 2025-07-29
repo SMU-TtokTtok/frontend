@@ -6,8 +6,20 @@ import BasicInfoSection from './BasicInfoSection';
 import QuestionsSection from './QuestionsSection';
 import { useClubInfo } from '@/hooks/useUserForm';
 import Button from '@/common/ui/button';
+import { useFollowSidebar } from '@/hooks/useFollowSidebar';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { sidebarTop } from './form.css';
+
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+};
 
 export default function Form({ clubId }: { clubId: string }) {
+  const { barPosition } = useFollowSidebar({ initialPosition: 0 });
+
   const { data } = useClubInfo(Number(clubId));
   const {
     register,
@@ -41,13 +53,24 @@ export default function Form({ clubId }: { clubId: string }) {
         )}
       </div>
 
-      <div className={S.rightSideContainer}>
+      <div
+        className={S.rightSideContainer}
+        style={assignInlineVars({
+          [sidebarTop]: `${barPosition}px`,
+        })}
+      >
         <div className={S.BoxFlex}>
           <div className={S.BoxTitle}>목차</div>
           <div className={S.BoxContentContainer}>
-            <div className={S.contentText}>1. 기본인적사항</div>
+            <div className={S.contentText} onClick={() => scrollToSection('basic-info')}>
+              1. 기본인적사항
+            </div>
             {data?.questions?.map((question, index) => (
-              <div className={S.contentText} key={index}>
+              <div
+                className={S.contentText}
+                key={index}
+                onClick={() => scrollToSection(`question-${index}`)}
+              >
                 {index + 2}. {question.title}
               </div>
             ))}
@@ -57,6 +80,10 @@ export default function Form({ clubId }: { clubId: string }) {
           제출하기
         </Button>
       </div>
+
+      <Button type="submit" variant="primary" className={S.submitButtonMobile}>
+        제출하기
+      </Button>
     </form>
   );
 }

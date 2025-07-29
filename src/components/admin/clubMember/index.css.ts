@@ -3,8 +3,8 @@ import { vars } from '@/common/styles/theme.css';
 import { BREAKPOINTS } from '@/common/constants';
 
 export const wrapper = style({
-  paddingLeft: '300px',
-  paddingRight: '380px',
+  paddingLeft: '280px',
+  paddingRight: '374px',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {

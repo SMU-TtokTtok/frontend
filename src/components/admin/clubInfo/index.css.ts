@@ -4,8 +4,8 @@ import { style } from '@vanilla-extract/css';
 import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
-  paddingLeft: '300px',
-  paddingRight: '380px',
+  paddingLeft: '280px',
+  paddingRight: '374px',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {

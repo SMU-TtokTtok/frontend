@@ -11,6 +11,9 @@ export const backFlex = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       marginTop: '40px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginTop: '24px',
+    },
   },
 });
 
