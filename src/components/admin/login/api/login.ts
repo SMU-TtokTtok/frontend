@@ -5,3 +5,9 @@ export const postLogin = async ({ login, password }: { login: string; password: 
 
   return data;
 };
+
+export const postAdminRefresh = async () => {
+  const data = await adminClient.post(`/auth/re-issue`, {});
+
+  return data;
+};

@@ -15,18 +15,12 @@ function ApplicantFilterBar({ selectedOptions }: ApplicantFilterBarProps) {
     <div className={S.filterContainer}>
       <div>
         <QueryLink extraQuery={{ sort: 'grade' }}>
-          <Button
-            className={S.filterButton({ isSelected: sort === 'grade' })}
-            variant={sort === 'grade' ? 'secondary' : 'surface'}
-          >
+          <Button className={S.filterButton({ isSelected: sort === 'grade' })} variant={'none'}>
             학년별
           </Button>
         </QueryLink>
         <QueryLink extraQuery={{ sort: 'submit' }}>
-          <Button
-            className={S.filterButton({ isSelected: sort === 'submit' })}
-            variant={sort === 'submit' ? 'secondary' : 'surface'}
-          >
+          <Button className={S.filterButton({ isSelected: sort === 'submit' })} variant={'none'}>
             제출순
           </Button>
         </QueryLink>

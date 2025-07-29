@@ -1,18 +1,22 @@
 import { useClubMemberInfinite } from '@/hooks/useInfiniteCommon';
 import MemberItem from './MemberItem';
 import * as S from './memberList.css';
-import Empty from '@/common/components/empty';
-import { MESSAGE } from '@/common/constants/message';
+// import Empty from '@/common/components/empty';
+// import { MESSAGE } from '@/common/constants/message';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import Lottie from 'lottie-react';
 import loading from '@/assets/loading.json';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/common/constants/routes';
 
-export default function MemberList() {
+import AddButton from './ui/AddButton';
+
+export default function MemberList({ isEditing }: { isEditing: boolean }) {
   const { clubMembers, fetchNextPage, hasNextPage, isFetchingNextPage } = useClubMemberInfinite({
     enabled: true,
   });
-
+  const router = useRouter();
   // 무한스크롤을 위한 useInView 훅
   const { ref, inView } = useInView({
     threshold: 0,
@@ -27,15 +31,68 @@ export default function MemberList() {
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   const isEmpty = clubMembers.length === 0;
+  // const isEmpty = true;
 
   return (
     <>
-      {isEmpty && <Empty>{MESSAGE.empty.noClubMember}</Empty>}
+      {isEmpty && (
+        <div className={S.emptyContainer}>
+          <AddButton
+            role="임원진"
+            onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=EXECUTIVE')}
+          />
+          <AddButton
+            role="부원"
+            onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=MEMBER')}
+          />
+        </div>
+      )}
       {!isEmpty && (
         <ul className={S.memberItemList}>
-          {clubMembers.map((member) => (
-            <MemberItem key={member.memberId} {...member} />
-          ))}
+          {isEditing && (
+            <AddButton
+              role="임원진"
+              onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=EXECUTIVE')}
+            />
+          )}
+          {isEditing && clubMembers.every((member) => member.role === 'MEMBER') && (
+            <>
+              <div className={S.divider} />
+              <AddButton
+                role="부원"
+                onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=MEMBER')}
+              />
+            </>
+          )}
+          {clubMembers.map((member, index) => {
+            const nextMember = clubMembers[index + 1];
+            const isExecutiveGroup = ['PRESIDENT', 'VICE_PRESIDENT', 'EXECUTIVE'].includes(
+              member.role,
+            );
+            const isNextMember = nextMember && nextMember.role === 'MEMBER';
+            const isLastExecutive = isExecutiveGroup && (!nextMember || isNextMember);
+            const allMembersAreExecutive = clubMembers.every((m) =>
+              ['PRESIDENT', 'VICE_PRESIDENT', 'EXECUTIVE'].includes(m.role),
+            );
+            const shouldShowDivider = isLastExecutive && (isEditing || !allMembersAreExecutive);
+
+            return (
+              <div key={member.memberId}>
+                <MemberItem {...member} isEditing={isEditing} />
+                {shouldShowDivider && (
+                  <>
+                    <div className={S.divider} />
+                    {isEditing && (
+                      <AddButton
+                        role="부원"
+                        onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=MEMBER')}
+                      />
+                    )}
+                  </>
+                )}
+              </div>
+            );
+          })}
           {/* 무한스크롤 트리거 요소 */}
           <li ref={ref} style={{ height: '1px', visibility: 'hidden' }}></li>
           {isFetchingNextPage && (

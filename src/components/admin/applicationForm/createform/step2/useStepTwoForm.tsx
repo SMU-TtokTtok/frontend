@@ -6,9 +6,9 @@ export const useStepTwoForm = () => {
   const [recruitData, setRecruitData] = useState<RecruitData>({
     recruitStartDate: loadFromSession('recruitStartDate'),
     recruitEndDate: loadFromSession('recruitEndDate'),
-    recruitMember: loadFromSession('recruitMember'),
-    selectedGrades: loadFromSession('selectedGrades'),
-    withInterview: loadFromSession('withInterview'),
+    maxApplyCount: loadFromSession('maxApplyCount'),
+    applicableGrades: loadFromSession('selectedGrades'),
+    hasInterview: loadFromSession('hasInterview'),
     interviewStartDate: loadFromSession('interviewStartDate'),
     interviewEndDate: loadFromSession('interviewEndDate'),
   });

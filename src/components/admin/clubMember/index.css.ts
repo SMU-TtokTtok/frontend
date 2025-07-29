@@ -1,9 +1,17 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const wrapper = style({
   paddingLeft: '300px',
   paddingRight: '380px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      paddingLeft: '246px',
+      paddingRight: '20px',
+    },
+  },
 });
 
 export const container = style({
@@ -13,13 +21,6 @@ export const container = style({
   flexDirection: 'column',
 });
 
-export const title = style({
-  fontSize: vars.fonts.title2,
-  fontWeight: 600,
-  color: '#030304',
-  marginTop: '50px',
-});
-
 export const memberPanel = style({
   width: '100%',
   backgroundColor: vars.colors.surface.bright,
@@ -27,4 +28,10 @@ export const memberPanel = style({
   borderRadius: '8px',
   marginTop: '20px',
   marginBottom: '200px',
+});
+
+export const searchResultContainer = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '8px',
 });

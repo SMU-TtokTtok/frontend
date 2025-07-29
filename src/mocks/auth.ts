@@ -8,3 +8,7 @@ export const AdminLogin = http.post(`${API}/api/admin/auth/login`, async ({ requ
   }
   return HttpResponse.json({ message: '로그인 실패' }, { status: 401 });
 });
+
+export const AdminRefresh = http.post(`${API}/api/admin/auth/re-issue`, async () => {
+  return HttpResponse.json({ accessToken: 'new_access_token' }, { status: 200 });
+});

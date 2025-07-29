@@ -32,9 +32,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <QueryProvider>
-          <MSWProvider>{children}</MSWProvider>
-        </QueryProvider>
+        <MSWProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </MSWProvider>
       </body>
     </html>
   );

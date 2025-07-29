@@ -18,3 +18,5 @@ export const departmentItems = [
   '융합기술대',
   '공대',
 ] as const;
+
+export const roleItems = ['회장', '부회장', '임원진', '부원'] as const;

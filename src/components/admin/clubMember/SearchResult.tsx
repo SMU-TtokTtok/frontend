@@ -2,12 +2,14 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { useSearchClubMember } from '@/hooks/useClubMember';
 import Empty from '@/common/components/empty';
 import MemberItem from './MemberItem';
+import * as S from './index.css';
 
 interface SearchResultProps {
   search: string;
+  isEditing: boolean;
 }
 
-export default function SearchResult({ search }: SearchResultProps) {
+export default function SearchResult({ search, isEditing }: SearchResultProps) {
   const debouncedSearch = useDebounce(search);
   const { data: clubMembers } = useSearchClubMember({
     search: debouncedSearch,
@@ -15,13 +17,13 @@ export default function SearchResult({ search }: SearchResultProps) {
   const members = clubMembers?.clubMembers || [];
 
   return (
-    <ul>
+    <ul className={S.searchResultContainer}>
       {members.length === 0 ? (
         <Empty>
           검색하신 부원이 없어요! <br /> 부원 이름을 확인해주세요.
         </Empty>
       ) : (
-        members.map((member, index) => <MemberItem key={index} {...member} />)
+        members.map((member, index) => <MemberItem key={index} {...member} isEditing={isEditing} />)
       )}
     </ul>
   );

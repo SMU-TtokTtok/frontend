@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import * as S from '@/components/clubInfo/index.css';
 import BackButton from '@/components/clubInfo/BackButton';
 import ClubProfile from '@/components/clubInfo/ClubProfile';
@@ -11,14 +12,29 @@ import { useClubInfo } from '@/hooks/useClubInfo';
 export default function Page() {
   const { clubId } = useParams();
   const { data } = useClubInfo(Number(clubId));
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsLargeScreen(window.innerWidth >= 1440);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   return (
-    <div className={S.container}>
-      <div className={S.wrapper}>
-        <BackButton />
-        <ClubProfile clubIntro={data} clubId={Number(clubId)} />
-        <RightSide clubIntro={data} clubId={Number(clubId)} />
-        <ClubIntroduce introduction={data.introduction} />
+    <div className={S.wrapper}>
+      <div className={S.container}>
+        <div className={S.leftcontainer}>
+          <BackButton />
+          <ClubProfile clubIntro={data} clubId={Number(clubId)} />
+          {!isLargeScreen && <RightSide clubIntro={data} clubId={Number(clubId)} />}
+          <ClubIntroduce introduction={data.introduction} />
+        </div>
+
+        {isLargeScreen && <RightSide clubIntro={data} clubId={Number(clubId)} />}
       </div>
     </div>
   );

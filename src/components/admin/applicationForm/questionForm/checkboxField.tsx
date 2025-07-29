@@ -5,35 +5,51 @@ import DropDownButton from '@/common/ui/dropdownButton';
 import Checkbox from '@/common/ui/checkbox';
 import Image from 'next/image';
 import Delete from '@/assets/delete.svg';
+import AddFeild from '@/assets/add_circle.svg';
+import DeleteOption from '@/assets/option_delete.svg';
 import check from '@/assets/check_radio.svg';
-import { questionTypes } from './index';
 
 import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
+import { questionTypes } from './index';
 import { convertToKor } from '@/common/util/convertToKor';
 import { ZodFormattedError } from 'zod';
+
 interface InputFieldProps {
   fieldId: number;
   field: ApplyFormField;
   errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
+  scrollRefs: React.RefObject<HTMLDivElement[]>;
   handleQuestionTypeChange: (type: QuestionType) => void;
   handleUpdateField: (fieldId: number, data: ApplyFormField) => void;
   handleDeleteField: (fieldId: number) => void;
   handleEssentialChange: (fieldId: number, isEssential: boolean) => void;
+  handleOptionChange: (fieldId: number, optionIndex: number, value: string) => void;
+  handleOptionAdd: (fieldId: number) => void;
+  handleOptionDelete: (fieldId: number, optionIndex: number) => void;
 }
 
-function TextAreaField({
+function CheckboxField({
   fieldId,
   field,
   errors,
   isSubmit,
+  scrollRefs,
   handleQuestionTypeChange,
   handleUpdateField,
   handleDeleteField,
   handleEssentialChange,
+  handleOptionChange,
+  handleOptionAdd,
+  handleOptionDelete,
 }: InputFieldProps) {
   return (
-    <div className={S.formFeildBlock}>
+    <div
+      className={S.formFeildBlock}
+      ref={(el) => {
+        if (el) scrollRefs.current[fieldId] = el as HTMLDivElement;
+      }}
+    >
       <div className={S.fieldToolBar}>
         <DropDown
           toggleButton={
@@ -98,10 +114,48 @@ function TextAreaField({
           handleUpdateField(fieldId, newField);
         }}
       />
-
-      <textarea className={S.previewFeild} disabled placeholder="서술형 텍스트" />
+      <div className={S.fieldRadioOptions}>
+        {field.content.map((option, index) => (
+          <div key={index}>
+            <div key={index} className={S.radioOption}>
+              <input
+                type="checkbox"
+                name={`radio-${fieldId}`}
+                id={`radio-${fieldId}-${index}`}
+                className={S.checkbox}
+                readOnly
+                disabled
+              />
+              <input
+                type="text"
+                placeholder="선택지"
+                className={S.radioOptionInput}
+                value={option}
+                onChange={(e) => handleOptionChange(fieldId, index, e.target.value)}
+              />
+              <Image
+                src={DeleteOption}
+                alt="선택지 삭제하기"
+                className={S.deleteOptionButton}
+                onClick={() => handleOptionDelete(fieldId, index)}
+              />
+            </div>
+            {errors && isSubmit && (
+              <span className={S.errorMessage}>
+                {errors.questions?.[fieldId]?.content?.[index]?._errors}
+              </span>
+            )}
+          </div>
+        ))}
+      </div>
+      <Image
+        src={AddFeild}
+        className={S.addOptionButton}
+        alt="항목 추가하기"
+        onClick={() => handleOptionAdd(fieldId)}
+      />
     </div>
   );
 }
 
-export default TextAreaField;
+export default CheckboxField;

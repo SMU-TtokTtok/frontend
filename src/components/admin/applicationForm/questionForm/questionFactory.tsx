@@ -8,6 +8,7 @@ import FileField from './fileField';
 
 interface FormFieldFactoryProps {
   field: ApplyFormField;
+  scrollRefs: React.RefObject<HTMLDivElement[]>;
   fieldId: number;
   errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
@@ -23,6 +24,7 @@ interface FormFieldFactoryProps {
 function FormFieldFactory({
   fieldId,
   field,
+  scrollRefs,
   errors,
   isSubmit,
   handleQuestionTypeChange,
@@ -39,6 +41,7 @@ function FormFieldFactory({
         <TextAreaField
           fieldId={fieldId}
           field={field}
+          scrollRefs={scrollRefs}
           errors={errors}
           isSubmit={isSubmit}
           handleQuestionTypeChange={handleQuestionTypeChange}
@@ -52,6 +55,7 @@ function FormFieldFactory({
         <InputField
           fieldId={fieldId}
           field={field}
+          scrollRefs={scrollRefs}
           errors={errors}
           isSubmit={isSubmit}
           handleQuestionTypeChange={handleQuestionTypeChange}
@@ -65,6 +69,7 @@ function FormFieldFactory({
         <CheckboxField
           fieldId={fieldId}
           field={field}
+          scrollRefs={scrollRefs}
           errors={errors}
           isSubmit={isSubmit}
           handleQuestionTypeChange={handleQuestionTypeChange}
@@ -82,6 +87,7 @@ function FormFieldFactory({
         <RadioField
           fieldId={fieldId}
           field={field}
+          scrollRefs={scrollRefs}
           errors={errors}
           isSubmit={isSubmit}
           handleQuestionTypeChange={handleQuestionTypeChange}
