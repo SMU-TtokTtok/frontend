@@ -11,13 +11,16 @@ export const getClubInfo = http.get('/api/admin/club/intro', () => {
 // let isRecruiting = true;
 // let clubInfoData: ClubInfo = { ...clubInformation };
 
-export const patchRecruiting = http.patch('/api/admin/club/recruiting', async ({ request }) => {
-  const body = (await request.json()) as { isRecruiting?: boolean };
-  if (typeof body.isRecruiting === 'boolean') {
-    return HttpResponse.json({ success: true, isRecruiting: body.isRecruiting });
-  }
-  return HttpResponse.json({ success: false }, { status: 400 });
-});
+export const patchRecruiting = http.patch(
+  '/api/admin/clubs/1/toggle-recruiting',
+  async ({ request }) => {
+    const body = (await request.json()) as { isRecruiting?: boolean };
+    if (typeof body.isRecruiting === 'boolean') {
+      return HttpResponse.json({ success: true, isRecruiting: body.isRecruiting });
+    }
+    return HttpResponse.json({ success: false }, { status: 400 });
+  },
+);
 
 // export const patchClubInfo = http.patch('/api/club-info', async ({ request }) => {
 //   const body = await request.json();
