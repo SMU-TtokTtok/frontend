@@ -6,8 +6,13 @@ import BasicInfoSection from './BasicInfoSection';
 import QuestionsSection from './QuestionsSection';
 import { useClubInfo } from '@/hooks/useUserForm';
 import Button from '@/common/ui/button';
+import { useFollowSidebar } from '@/hooks/useFollowSidebar';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { sidebarTop } from './form.css';
 
 export default function Form({ clubId }: { clubId: string }) {
+  const { barPosition } = useFollowSidebar({ initialPosition: 0 });
+
   const { data } = useClubInfo(Number(clubId));
   const {
     register,
@@ -41,7 +46,12 @@ export default function Form({ clubId }: { clubId: string }) {
         )}
       </div>
 
-      <div className={S.rightSideContainer}>
+      <div
+        className={S.rightSideContainer}
+        style={assignInlineVars({
+          [sidebarTop]: `${barPosition}px`,
+        })}
+      >
         <div className={S.BoxFlex}>
           <div className={S.BoxTitle}>목차</div>
           <div className={S.BoxContentContainer}>

@@ -1,6 +1,8 @@
-import { style } from '@vanilla-extract/css';
+import { createVar, style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 import { BREAKPOINTS } from '@/common/constants/index';
+
+export const sidebarTop = createVar();
 
 export const wrapper = style({
   display: 'flex',
@@ -18,6 +20,10 @@ export const rightSideContainer = style({
   gap: '20px',
   width: '330px',
   flexDirection: 'column',
+  transition: 'top 0.7s ease-out',
+  top: sidebarTop,
+  position: 'relative',
+  alignSelf: 'flex-start', //!!
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
