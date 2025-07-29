@@ -9,7 +9,7 @@ interface BasicInfoSectionProps {
 
 export default function BasicInfoSection({ register, errors }: BasicInfoSectionProps) {
   return (
-    <div className={S.FormBasicContainer}>
+    <div id="basic-info" className={S.FormBasicContainer}>
       <div className={S.FormContentFlex}>
         <div className={S.FormContentContainer}>
           <div className={S.FormContentTitle}>

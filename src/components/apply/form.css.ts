@@ -87,6 +87,19 @@ export const contentText = style({
   whiteSpace: 'nowrap',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
+
+  selectors: {
+    '&:hover': {
+      color: '#0052EC',
+      cursor: 'pointer',
+      textDecorationLine: 'underline',
+      textDecorationStyle: 'solid',
+      textDecorationSkipInk: 'auto',
+      textDecorationThickness: 'auto',
+      textUnderlineOffset: 'auto',
+      textUnderlinePosition: 'from-font',
+    },
+  },
 });
 
 export const contentContainer = style({

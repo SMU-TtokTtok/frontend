@@ -152,5 +152,13 @@ export default function QuestionsSection({ questions, register, errors }: Questi
     }
   };
 
-  return <>{questions.map((question, index) => renderQuestion(question, index))}</>;
+  return (
+    <>
+      {questions.map((question, index) => (
+        <div key={index} id={`question-${index}`}>
+          {renderQuestion(question, index)}
+        </div>
+      ))}
+    </>
+  );
 }
