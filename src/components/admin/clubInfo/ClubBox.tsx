@@ -42,8 +42,8 @@ export default function ClubBox(props: ClubBoxProps) {
   const { handleRecruitmentToggle } = useRecruitmentToggle(handleModalOpen);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleCloseRecruit = (isRecruiting: boolean) => {
-    handleRecruitmentToggle(!isRecruiting);
+  const handleCloseRecruit = () => {
+    handleRecruitmentToggle();
   };
 
   return (
@@ -204,7 +204,7 @@ export default function ClubBox(props: ClubBoxProps) {
           <Button
             variant="secondary"
             onClick={() => {
-              handleCloseRecruit(recruiting);
+              handleCloseRecruit();
             }}
             className={S.finishedButton}
           >

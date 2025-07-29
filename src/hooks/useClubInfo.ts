@@ -29,8 +29,8 @@ export const useRecruitmentToggle = (handleModalOpen: () => void) => {
   const { adminClubInfo } = clubInfoKey;
 
   const patchIsRecrutingMutation = useMutation({
-    mutationFn: async (isRecruiting: boolean) => {
-      const response = await patchIsRecruting(isRecruiting);
+    mutationFn: async () => {
+      const response = await patchIsRecruting();
       return response;
     },
     onSuccess: () => {
@@ -39,8 +39,8 @@ export const useRecruitmentToggle = (handleModalOpen: () => void) => {
     },
   });
 
-  const handleRecruitmentToggle = (isRecruiting: boolean) => {
-    patchIsRecrutingMutation.mutate(isRecruiting);
+  const handleRecruitmentToggle = () => {
+    patchIsRecrutingMutation.mutate();
   };
 
   return {
