@@ -21,10 +21,10 @@ export default function RightSideBar(props: RightSideBarProps) {
     isEditing,
     handleSave,
     onCancel,
-    recruitStartDate,
-    recruitEndDate,
-    recruitTarget,
-    recruitNumber,
+    applyStartDate,
+    applyDeadLine,
+    grades,
+    maxApplyCount,
     onChange,
     // refetch,
   } = props;
@@ -46,23 +46,23 @@ export default function RightSideBar(props: RightSideBarProps) {
             <div className={S.dateFlex}>
               <input
                 type="date"
-                value={recruitStartDate}
+                value={applyStartDate}
                 onChange={(e) => {
-                  onChange({ recruitStartDate: e.target.value });
+                  onChange({ applyStartDate: e.target.value });
                 }}
               />
               <span>~</span>
               <input
                 type="date"
-                value={recruitEndDate}
+                value={applyDeadLine}
                 onChange={(e) => {
-                  onChange({ recruitEndDate: e.target.value });
+                  onChange({ applyDeadLine: e.target.value });
                 }}
               />
             </div>
           ) : (
             <div className={S.blackText}>
-              {formatDateToDot(recruitStartDate)}~{formatDateToMonthDay(recruitEndDate)}
+              {formatDateToDot(applyStartDate)}~{formatDateToMonthDay(applyDeadLine)}
             </div>
           )}
         </div>
@@ -74,39 +74,39 @@ export default function RightSideBar(props: RightSideBarProps) {
               {[1, 2, 3, 4].map((grade) => (
                 <Button
                   key={grade}
-                  variant={recruitTarget.includes(grade) ? 'secondary' : 'tertiary'}
+                  variant={grades.includes(grade.toString()) ? 'secondary' : 'tertiary'}
                   className={S.button}
                   onClick={() => {
-                    let newTarget: number[];
-                    if (recruitTarget.includes(grade)) {
-                      newTarget = recruitTarget.filter((g) => g !== grade);
+                    let newTarget: string[];
+                    if (grades.includes(grade.toString())) {
+                      newTarget = grades.filter((g) => g !== grade.toString());
                     } else {
-                      newTarget = [...recruitTarget, grade].sort();
+                      newTarget = [...grades, grade.toString()].sort();
                     }
-                    onChange({ recruitTarget: newTarget });
+                    onChange({ grades: newTarget });
                   }}
                 >
-                  {grade}학년
+                  {grade}
                 </Button>
               ))}
             </div>
           ) : (
-            <div className={S.blackText}>{convertGradeArrayToString(recruitTarget)}</div>
+            <div className={S.blackText}>{convertGradeArrayToString(grades)}</div>
           )}
         </div>
         <div className={S.flexRow}>
           <div className={S.grayText}>모집인원</div>
           {isEditing ? (
             <input
-              value={recruitNumber}
+              value={maxApplyCount}
               type="number"
               className={S.numberInput}
               onChange={(e) => {
-                onChange({ recruitNumber: Number(e.target.value) });
+                onChange({ maxApplyCount: Number(e.target.value) });
               }}
             />
           ) : (
-            <div className={S.blackText}>총 {recruitNumber}명</div>
+            <div className={S.blackText}>총 {maxApplyCount}명</div>
           )}
         </div>
       </div>

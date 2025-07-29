@@ -14,7 +14,7 @@ import { useAdminClubInfo } from '@/hooks/useClubInfo';
 function Page() {
   const [isEditing, setIsEditing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { data, refetch } = useAdminClubInfo();
+  const { data } = useAdminClubInfo();
   const [clubInfo, setClubInfo] = useState<AdminClubIntro>(data);
 
   const handleClubInfoChange = (updated: Partial<AdminClubIntro>) => {
@@ -22,22 +22,22 @@ function Page() {
   };
 
   const handleSave = async () => {
-    if (!clubInfo) return;
-    const patchData = {
-      img: clubInfo.img,
-      type: clubInfo.type,
-      department: clubInfo.department,
-      category: clubInfo.category,
-      shortDescription: clubInfo.shortDescription,
-      isRecruiting: clubInfo.isRecruiting,
-      detailField: clubInfo.detailField,
-      introduction: clubInfo.introduction,
-    };
-    await fetch('/api/club-info', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(patchData),
-    });
+    // if (!clubInfo) return;
+    // const patchData = {
+    //   img: clubInfo.img,
+    //   type: clubInfo.type,
+    //   department: clubInfo.department,
+    //   category: clubInfo.category,
+    //   shortDescription: clubInfo.shortDescription,
+    //   isRecruiting: clubInfo.isRecruiting,
+    //   detailField: clubInfo.detailField,
+    //   introduction: clubInfo.introduction,
+    // };
+    // await fetch('/api/club-info', {
+    //   method: 'PATCH',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(patchData),
+    // });
     setIsEditing(false);
     alert('저장되었습니다!');
   };
@@ -55,7 +55,11 @@ function Page() {
         <div className={S.flexRow}>
           <div className={S.imgContainer}>
             <Image
-              src={!clubInfo.img || clubInfo.img === '' ? clubImg : clubInfo.img}
+              src={
+                !clubInfo.profileImageUrl || clubInfo.profileImageUrl === ''
+                  ? clubImg
+                  : clubInfo.profileImageUrl
+              }
               alt="동아리 사진"
               width={212}
               height={224}
@@ -100,8 +104,8 @@ function Page() {
         />
         <MDEditor
           isEditing={isEditing}
-          introduction={clubInfo.introduction}
-          onChange={(introduction) => handleClubInfoChange({ introduction })}
+          introduction={clubInfo.content}
+          onChange={(content) => handleClubInfoChange({ content })}
         />
       </div>
     </div>

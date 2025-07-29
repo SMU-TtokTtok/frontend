@@ -11,7 +11,7 @@ import DropDown from '@/common/components/dropdown/index';
 import {
   typeItems,
   categoryItems,
-  recruitItems,
+  // recruitItems,
   departmentItems,
 } from '@/common/constants/adminOptions';
 import { useRecruitmentToggle } from '@/hooks/useClubInfo';
@@ -20,7 +20,7 @@ import { useModal } from '@/hooks/useModal';
 
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
-type ClubRecruit = (typeof recruitItems)[number];
+// type ClubRecruit = (typeof recruitItems)[number];
 type ClubDepartment = (typeof departmentItems)[number];
 interface ClubBoxProps extends AdminClubIntro {
   onChange?: (updated: Partial<AdminClubIntro>) => void;
@@ -30,13 +30,13 @@ interface ClubBoxProps extends AdminClubIntro {
 export default function ClubBox(props: ClubBoxProps) {
   const {
     name,
-    shortDescription,
-    type,
-    category,
-    detailField,
-    isRecruiting,
-    peopleCount,
-    department,
+    summary,
+    clubType,
+    clubCategory,
+    customCategory,
+    recruiting,
+    clubMemberCount,
+    clubUniv,
   } = props;
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
   const { handleRecruitmentToggle } = useRecruitmentToggle(handleModalOpen);
@@ -54,7 +54,7 @@ export default function ClubBox(props: ClubBoxProps) {
             <DropDown
               toggleButton={
                 <DropDownButton variant="gray" className={S.dropDownStyle2}>
-                  {type}
+                  {clubType}
                 </DropDownButton>
               }
               panelClassName={S.panelContainer}
@@ -63,7 +63,7 @@ export default function ClubBox(props: ClubBoxProps) {
                 <li
                   key={item}
                   onClick={() => {
-                    props.onChange?.({ type: item });
+                    props.onChange?.({ clubType: item });
                   }}
                   className={S.panelItem}
                 >
@@ -73,14 +73,14 @@ export default function ClubBox(props: ClubBoxProps) {
             </DropDown>
           ) : (
             <Tag variant="default" className={S.selectedTypeText({ position: 'header' })}>
-              {type}
+              {clubType}
             </Tag>
           )}
           {props.isEditing ? (
             <DropDown
               toggleButton={
                 <DropDownButton variant="gray" className={S.dropDownStyle2Wide}>
-                  {department}
+                  {clubUniv}
                 </DropDownButton>
               }
               panelClassName={S.panelContainer}
@@ -89,7 +89,7 @@ export default function ClubBox(props: ClubBoxProps) {
                 <li
                   key={item}
                   onClick={() => {
-                    props.onChange?.({ department: item });
+                    props.onChange?.({ clubUniv: item });
                   }}
                   className={S.panelItem}
                 >
@@ -99,7 +99,7 @@ export default function ClubBox(props: ClubBoxProps) {
             </DropDown>
           ) : (
             <Tag variant="default" className={S.selectedTypeText({ position: 'header' })}>
-              {department}
+              {clubUniv}
             </Tag>
           )}
         </div>
@@ -122,22 +122,22 @@ export default function ClubBox(props: ClubBoxProps) {
         </div>
         <div className={S.numberFlex}>
           <Image src={person} alt="사람" width={21} height={21} />
-          <span className={S.numberText}>{peopleCount}</span>
+          <span className={S.numberText}>{clubMemberCount}</span>
         </div>
         <div className={S.desText({ isEditing: props.isEditing })}>
           {props.isEditing ? (
             <input
-              value={shortDescription}
+              value={summary}
               // autoFocus
               onChange={(e) => {
-                props.onChange?.({ shortDescription: e.target.value });
+                props.onChange?.({ summary: e.target.value });
               }}
               className={S.desTextInput}
             />
-          ) : shortDescription.trim() === '' ? (
+          ) : summary.trim() === '' ? (
             '한줄소개 가능한 동아리 소개를 입력해주세요'
           ) : (
-            shortDescription
+            summary
           )}
         </div>
         <div className={S.footerFlex}>
@@ -146,7 +146,7 @@ export default function ClubBox(props: ClubBoxProps) {
               <DropDown
                 toggleButton={
                   <DropDownButton variant="gray" className={S.dropDownStyle}>
-                    {category}
+                    {clubCategory}
                   </DropDownButton>
                 }
                 panelClassName={S.panelContainer}
@@ -155,7 +155,7 @@ export default function ClubBox(props: ClubBoxProps) {
                   <li
                     key={item}
                     onClick={() => {
-                      props.onChange?.({ category: item });
+                      props.onChange?.({ clubCategory: item });
                     }}
                     className={S.panelItem2}
                   >
@@ -165,7 +165,7 @@ export default function ClubBox(props: ClubBoxProps) {
               </DropDown>
             ) : (
               <Tag variant="default" className={S.selectedTypeText({ position: 'footer' })}>
-                {category}
+                {clubCategory}
               </Tag>
             )}
 
@@ -173,8 +173,8 @@ export default function ClubBox(props: ClubBoxProps) {
               <div className={S.detailFlex}>
                 <input
                   ref={inputRef}
-                  value={detailField}
-                  onChange={(e) => props.onChange?.({ detailField: e.target.value })}
+                  value={customCategory}
+                  onChange={(e) => props.onChange?.({ customCategory: e.target.value })}
                   className={S.detailInput}
                   type="text"
                   size={6}
@@ -190,30 +190,30 @@ export default function ClubBox(props: ClubBoxProps) {
               </div>
             ) : (
               <Tag variant="default" className={S.selectedTypeText({ position: 'footer' })}>
-                {detailField}
+                {customCategory}
               </Tag>
             )}
 
             <Tag
-              variant={isRecruiting ? 'secondary' : 'tertiary'}
+              variant={recruiting ? 'secondary' : 'tertiary'}
               className={S.selectedTypeText({ position: 'footer' })}
             >
-              {isRecruiting ? '모집중' : '모집마감'}
+              {recruiting ? '모집중' : '모집마감'}
             </Tag>
           </div>
           <Button
             variant="secondary"
             onClick={() => {
-              handleCloseRecruit(isRecruiting);
+              handleCloseRecruit(recruiting);
             }}
             className={S.finishedButton}
           >
-            {isRecruiting ? '지원 마감하기' : '모집 시작하기'}
+            {recruiting ? '지원 마감하기' : '모집 시작하기'}
           </Button>
         </div>
       </div>
       <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
-        {isRecruiting ? '지원마감이 완료되었습니다' : '모집이 시작되었습니다'}
+        {recruiting ? '지원마감이 완료되었습니다' : '모집이 시작되었습니다'}
       </ConfirmModal>
     </>
   );
