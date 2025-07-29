@@ -139,6 +139,7 @@ export const FormHeader = style({
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       padding: '16px 20px',
       border: '1px solid #CAE0FF',
+      gap: '8px',
     },
   },
 });
