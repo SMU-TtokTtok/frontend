@@ -194,39 +194,12 @@ export default function ClubBox(props: ClubBoxProps) {
               </Tag>
             )}
 
-            {props.isEditing ? (
-              <DropDown
-                toggleButton={
-                  <DropDownButton
-                    variant={isRecruiting ? 'tertiary' : 'default'}
-                    className={S.dropDownStyleWide}
-                  >
-                    {isRecruiting ? '모집중' : '모집마감'}
-                  </DropDownButton>
-                }
-                panelClassName={S.panelContainer}
-              >
-                {recruitItems.map((item: ClubRecruit) => (
-                  <li
-                    key={item}
-                    onClick={() => {
-                      // setSelectedRecruit(item as ClubRecruit);
-                      props.onChange?.({ isRecruiting: item === '모집중' });
-                    }}
-                    className={S.panelItem2}
-                  >
-                    {item}
-                  </li>
-                ))}
-              </DropDown>
-            ) : (
-              <Tag
-                variant={isRecruiting ? 'secondary' : 'tertiary'}
-                className={S.selectedTypeText({ position: 'footer' })}
-              >
-                {isRecruiting ? '모집중' : '모집마감'}
-              </Tag>
-            )}
+            <Tag
+              variant={isRecruiting ? 'secondary' : 'tertiary'}
+              className={S.selectedTypeText({ position: 'footer' })}
+            >
+              {isRecruiting ? '모집중' : '모집마감'}
+            </Tag>
           </div>
           <Button
             variant="secondary"
