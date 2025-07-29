@@ -57,6 +57,10 @@ export default function Form({ clubId }: { clubId: string }) {
           제출하기
         </Button>
       </div>
+
+      <Button type="submit" variant="primary" className={S.submitButtonMobile}>
+        제출하기
+      </Button>
     </form>
   );
 }

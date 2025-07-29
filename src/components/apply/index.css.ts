@@ -13,6 +13,10 @@ export const wrapper = style({
       paddingLeft: '40px',
       paddingRight: '40px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      paddingLeft: '20px',
+      paddingRight: '20px',
+    },
   },
 });
 
@@ -23,4 +27,10 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '20px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '100%',
+    },
+  },
 });
