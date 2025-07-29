@@ -107,11 +107,11 @@ export default function BasicInfoSection({ register, errors }: BasicInfoSectionP
         </div>
         <div className={S.FormContentRadioContainer}>
           <label className={S.LabelContainer}>
-            <input type="radio" value="true" {...register('isStudent')} />
+            <input type="radio" value="true" {...register('isStudent')} className={S.radioInput} />
             <span className={S.RadioText}>재학</span>
           </label>
           <label className={S.LabelContainer}>
-            <input type="radio" value="false" {...register('isStudent')} />
+            <input type="radio" value="false" {...register('isStudent')} className={S.radioInput} />
             <span className={S.RadioText}>졸업</span>
           </label>
         </div>
@@ -128,19 +128,19 @@ export default function BasicInfoSection({ register, errors }: BasicInfoSectionP
         </div>
         <div className={S.FormContentRadioContainer}>
           <label className={S.LabelContainer}>
-            <input type="radio" value="1" {...register('grade')} />
+            <input type="radio" value="1" {...register('grade')} className={S.radioInput} />
             <span className={S.RadioText}>1학년</span>
           </label>
           <label className={S.LabelContainer}>
-            <input type="radio" value="2" {...register('grade')} />
+            <input type="radio" value="2" {...register('grade')} className={S.radioInput} />
             <span className={S.RadioText}>2학년</span>
           </label>
           <label className={S.LabelContainer}>
-            <input type="radio" value="3" {...register('grade')} />
+            <input type="radio" value="3" {...register('grade')} className={S.radioInput} />
             <span className={S.RadioText}>3학년</span>
           </label>
           <label className={S.LabelContainer}>
-            <input type="radio" value="4" {...register('grade')} />
+            <input type="radio" value="4" {...register('grade')} className={S.radioInput} />
             <span className={S.RadioText}>4학년</span>
           </label>
         </div>
@@ -157,11 +157,11 @@ export default function BasicInfoSection({ register, errors }: BasicInfoSectionP
         </div>
         <div className={S.FormContentRadioContainer}>
           <label className={S.LabelContainer}>
-            <input type="radio" value="true" {...register('gender')} />
+            <input type="radio" value="true" {...register('gender')} className={S.radioInput} />
             <span className={S.RadioText}>남성</span>
           </label>
           <label className={S.LabelContainer}>
-            <input type="radio" value="false" {...register('gender')} />
+            <input type="radio" value="false" {...register('gender')} className={S.radioInput} />
             <span className={S.RadioText}>여성</span>
           </label>
         </div>

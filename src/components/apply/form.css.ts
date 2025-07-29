@@ -447,3 +447,13 @@ export const submitButtonContainer = style({
   justifyContent: 'center',
   padding: '24px 0',
 });
+
+export const radioInput = style({
+  width: '20px',
+  height: '20px',
+});
+
+export const checkboxInput = style({
+  width: '20px',
+  height: '20px',
+});
