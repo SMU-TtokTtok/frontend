@@ -208,12 +208,12 @@ export default function ClubBox(props: ClubBoxProps) {
             }}
             className={S.finishedButton}
           >
-            지원 마감하기
+            {isRecruiting ? '지원 마감하기' : '모집 시작하기'}
           </Button>
         </div>
       </div>
       <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
-        지원마감이 완료되었습니다
+        {isRecruiting ? '지원마감이 완료되었습니다' : '모집이 시작되었습니다'}
       </ConfirmModal>
     </>
   );
