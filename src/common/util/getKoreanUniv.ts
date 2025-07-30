@@ -1,9 +1,9 @@
 export function getKoreanUniv(code: string): string {
   switch (code) {
     case 'GLOBAL_AREA':
-      return '글로벌지역 학부';
+      return '글로벌지역학부';
     case 'DESIGN':
-      return '디자인대학';
+      return '디자인대';
     case 'ENGINEERING':
       return '공대';
     case 'CONVERGENCE_TECHNOLOGY':

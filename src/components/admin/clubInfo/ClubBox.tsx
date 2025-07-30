@@ -12,16 +12,19 @@ import {
   typeItems,
   categoryItems,
   // recruitItems,
-  departmentItems,
+  univItems,
 } from '@/common/constants/adminOptions';
 import { useRecruitmentToggle } from '@/hooks/useClubInfo';
 import ConfirmModal from '@/common/components/confirmModal';
 import { useModal } from '@/hooks/useModal';
+import { getKoreanType } from '@/common/util/getKoreanType';
+import { getKoreanUniv } from '@/common/util/getKoreanUniv';
+import { getKoreanCategory } from '@/common/util/getKoreanCategory';
 
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
 // type ClubRecruit = (typeof recruitItems)[number];
-type ClubDepartment = (typeof departmentItems)[number];
+type ClubDepartment = (typeof univItems)[number];
 interface ClubBoxProps extends AdminClubIntro {
   onChange?: (updated: Partial<AdminClubIntro>) => void;
   isEditing?: boolean;
@@ -54,7 +57,7 @@ export default function ClubBox(props: ClubBoxProps) {
             <DropDown
               toggleButton={
                 <DropDownButton variant="gray" className={S.dropDownStyle2}>
-                  {clubType}
+                  {getKoreanType(clubType)}
                 </DropDownButton>
               }
               panelClassName={S.panelContainer}
@@ -67,25 +70,25 @@ export default function ClubBox(props: ClubBoxProps) {
                   }}
                   className={S.panelItem}
                 >
-                  {item}
+                  {getKoreanType(item)}
                 </li>
               ))}
             </DropDown>
           ) : (
             <Tag variant="default" className={S.selectedTypeText({ position: 'header' })}>
-              {clubType}
+              {getKoreanType(clubType)}
             </Tag>
           )}
           {props.isEditing ? (
             <DropDown
               toggleButton={
                 <DropDownButton variant="gray" className={S.dropDownStyle2Wide}>
-                  {clubUniv}
+                  {getKoreanUniv(clubUniv)}
                 </DropDownButton>
               }
               panelClassName={S.panelContainer}
             >
-              {departmentItems.map((item: ClubDepartment) => (
+              {univItems.map((item: ClubDepartment) => (
                 <li
                   key={item}
                   onClick={() => {
@@ -93,13 +96,13 @@ export default function ClubBox(props: ClubBoxProps) {
                   }}
                   className={S.panelItem}
                 >
-                  {item}
+                  {getKoreanUniv(item)}
                 </li>
               ))}
             </DropDown>
           ) : (
             <Tag variant="default" className={S.selectedTypeText({ position: 'header' })}>
-              {clubUniv}
+              {getKoreanUniv(clubUniv)}
             </Tag>
           )}
         </div>
@@ -146,7 +149,7 @@ export default function ClubBox(props: ClubBoxProps) {
               <DropDown
                 toggleButton={
                   <DropDownButton variant="gray" className={S.dropDownStyle}>
-                    {clubCategory}
+                    {getKoreanCategory(clubCategory)}
                   </DropDownButton>
                 }
                 panelClassName={S.panelContainer}
@@ -159,13 +162,13 @@ export default function ClubBox(props: ClubBoxProps) {
                     }}
                     className={S.panelItem2}
                   >
-                    {item}
+                    {getKoreanCategory(item)}
                   </li>
                 ))}
               </DropDown>
             ) : (
               <Tag variant="default" className={S.selectedTypeText({ position: 'footer' })}>
-                {clubCategory}
+                {getKoreanCategory(clubCategory)}
               </Tag>
             )}
 
