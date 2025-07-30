@@ -10,6 +10,8 @@ import DropDown from '@/common/components/dropdown/index';
 import DropDownButton from '@/common/ui/dropdownButton';
 import { roleItems } from '@/common/constants/adminOptions';
 import { usePatchClubMember } from '@/hooks/useClubMember';
+import ConfirmModal from '@/common/components/confirmModal';
+import { useModal } from '@/hooks/useModal';
 
 interface MemberItemProps {
   memberId: string;
@@ -28,54 +30,61 @@ export default function MemberItem({
   grade,
   isEditing,
 }: MemberItemProps) {
-  const { handleDeleteClubMember } = useDeleteClubMember();
+  const { isOpen, handleModalClose, handleModalOpen } = useModal();
+  const { handleDeleteClubMember } = useDeleteClubMember(handleModalOpen);
   const { handlePatchClubMember } = usePatchClubMember();
+
   return (
-    <div className={S.isEditingContainer[isEditing ? 'true' : 'false']}>
-      <div className={S.container}>
-        <div className={S.withOutRoleContainer}>
-          <Tag variant={getGradeStyle2(grade)} className={S.grade}>
-            {getKoreanGrade(grade)}
-          </Tag>
-          <div className={S.name}>{name}</div>
-          <div className={S.bar}>|</div>
-          <div className={S.major}>{major}</div>
+    <>
+      <div className={S.isEditingContainer[isEditing ? 'true' : 'false']}>
+        <div className={S.container}>
+          <div className={S.withOutRoleContainer}>
+            <Tag variant={getGradeStyle2(grade)} className={S.grade}>
+              {getKoreanGrade(grade)}
+            </Tag>
+            <div className={S.name}>{name}</div>
+            <div className={S.bar}>|</div>
+            <div className={S.major}>{major}</div>
+          </div>
+          {isEditing ? (
+            <DropDown
+              toggleButton={
+                <DropDownButton variant="default" className={S.dropDownStyle}>
+                  {getRoleDisplayName(role)}
+                </DropDownButton>
+              }
+              panelClassName={S.panelContainer}
+            >
+              {roleItems.map((item) => (
+                <li
+                  key={item}
+                  className={S.panelItem}
+                  onClick={() => handlePatchClubMember({ memberId, role: item })}
+                >
+                  {item}
+                </li>
+              ))}
+            </DropDown>
+          ) : (
+            <Tag variant="white" className={S.role}>
+              {getRoleDisplayName(role)}
+            </Tag>
+          )}
         </div>
-        {isEditing ? (
-          <DropDown
-            toggleButton={
-              <DropDownButton variant="default" className={S.dropDownStyle}>
-                {getRoleDisplayName(role)}
-              </DropDownButton>
-            }
-            panelClassName={S.panelContainer}
-          >
-            {roleItems.map((item) => (
-              <li
-                key={item}
-                className={S.panelItem}
-                onClick={() => handlePatchClubMember({ memberId, role: item })}
-              >
-                {item}
-              </li>
-            ))}
-          </DropDown>
-        ) : (
-          <Tag variant="white" className={S.role}>
-            {getRoleDisplayName(role)}
-          </Tag>
+        {isEditing && (
+          <Image
+            src={cancel}
+            alt="cancel"
+            width={30}
+            height={30}
+            style={{ cursor: 'pointer' }}
+            onClick={() => handleDeleteClubMember(memberId)}
+          />
         )}
       </div>
-      {isEditing && (
-        <Image
-          src={cancel}
-          alt="cancel"
-          width={30}
-          height={30}
-          style={{ cursor: 'pointer' }}
-          onClick={() => handleDeleteClubMember(memberId)}
-        />
-      )}
-    </div>
+      <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
+        삭제가 완료되었습니다.
+      </ConfirmModal>
+    </>
   );
 }

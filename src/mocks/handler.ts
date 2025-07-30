@@ -17,7 +17,7 @@ import { getUserClubInfo } from './clubInfo/userClubInfo';
 import { emailCheckHandler, verifyResetCodeHandler, resetPasswordHandler } from './password';
 import { userLoginHandler, userSignupHandler, userEmailPostHandler } from './userAuth';
 import { getUserForm } from './userForm/userForm';
-import { getGradeCount, getSearchMembers } from './clubMember';
+import { getGradeCount, getSearchMembers, deleteClubMember } from './clubMember';
 
 export const handlers = [
   popularClubs,
@@ -51,4 +51,5 @@ export const handlers = [
   PatchMemo,
   DeleteMemo,
   AdminRefresh,
+  deleteClubMember,
 ];
