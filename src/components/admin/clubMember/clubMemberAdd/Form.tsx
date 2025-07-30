@@ -22,7 +22,7 @@ export default function Form({ role }: { role: string }) {
   });
   const { handlePostClubMember } = usePostClubMember(() => {
     handleModalOpen();
-    router.push(ROUTES.ADMIN_CLUB_MEMBER);
+    // router.push(ROUTES.ADMIN_CLUB_MEMBER);
   });
 
   const onSubmit = (data: ClubMemberAddData) => {
@@ -61,7 +61,11 @@ export default function Form({ role }: { role: string }) {
           </div>
         </form>
       </div>
-      <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
+      <ConfirmModal
+        isOpen={isOpen}
+        onClose={handleModalClose}
+        redirectTo={ROUTES.ADMIN_CLUB_MEMBER}
+      >
         추가가 완료되었습니다
       </ConfirmModal>
     </>
