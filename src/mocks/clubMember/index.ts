@@ -17,3 +17,7 @@ export const deleteClubMember = http.delete('/api/admin/members/:clubId/:memberI
 export const patchClubMember = http.patch('/api/admin/members/:clubId/:memberId/role', () => {
   return HttpResponse.json({ success: true }, { status: 200 });
 });
+
+export const postClubMember = http.post('/api/admin/members/:clubId/add', () => {
+  return HttpResponse.json({ success: true }, { status: 200 });
+});
