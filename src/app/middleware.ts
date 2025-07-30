@@ -1,22 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|fonts|images).*)'],
+  matcher: ['/admin/:path*'],
 };
 
 const protectedRoutes = ['/admin'];
-const publicRoutes = ['admin/login'];
+const publicRoutes = ['/admin/login'];
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  console.log('Middleware Pathname:', pathname);
-  if (pathname.startsWith('/admin')) {
-    const accessToken = request.cookies.get('accessToken')?.value;
-    console.log(accessToken);
+
+  if (publicRoutes.some((route) => pathname.startsWith(route))) {
+    return NextResponse.next();
+  }
+  /*
+  if (protectedRoutes.some((route) => pathname.startsWith(route))) {
+    const accessToken = request.cookies.get('ttac');
+    console.log('ACCESS TOKEN:', accessToken);
     if (!accessToken) {
       const loginUrl = new URL('/admin/login', request.url);
+      loginUrl.searchParams.set('redirected', 'unauthorized');
       return NextResponse.redirect(loginUrl);
     }
-  }
+  }*/
 
   return NextResponse.next();
 }
