@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { HTTP_STATUS } from '../constants/httpStatus';
+
 type HTTPMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 export class CustomHttpError extends Error {
@@ -67,6 +69,10 @@ export default class ApiClient {
   }
 
   private async handleResponse<T>(response: Response): Promise<T> {
+    if (response.status === HTTP_STATUS.NO_CONTENT) {
+      return {} as T;
+    }
+
     return (await response.json()) as T;
   }
 }
