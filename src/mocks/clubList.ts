@@ -8,7 +8,7 @@ export const popularClubs = http.get(`${API}/popular`, () => {
 });
 
 export const Clubs = http.get(`${API}/clubs`, () => {
-  return HttpResponse.json(clubList, { status: 500 });
+  return HttpResponse.json(clubList, { status: 200 });
 });
 
 export const patchFavorite = http.patch(`${API}/favorite/:id`, () => {

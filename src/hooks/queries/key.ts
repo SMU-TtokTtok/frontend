@@ -4,6 +4,10 @@ export const clubKey = {
   searchList: ['searchList'],
 } as const;
 
+export const adminProfileKey = {
+  adminProfile: ['adminProfile'],
+};
+
 export const applicantKey = {
   searchApplicant: ['searchApplicant'],
   applicantList: ['applicantList'],

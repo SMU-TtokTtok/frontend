@@ -9,6 +9,22 @@ export const AdminLogin = http.post(`${API}/api/admin/auth/login`, async ({ requ
   return HttpResponse.json({ message: '로그인 실패' }, { status: 401 });
 });
 
+export const AdminLogout = http.post(`${API}/api/admin/auth/logout`, async ({ request }) => {
+  const { login, password } = (await request.json()) as { login: string; password: string };
+  return HttpResponse.json({ message: '로그아웃 성공' }, { status: 200 });
+});
+
 export const AdminRefresh = http.post(`${API}/api/admin/auth/re-issue`, async () => {
   return HttpResponse.json({ accessToken: 'new_access_token' }, { status: 200 });
+});
+
+export const AdminProfile = http.get(`${API}/api/admin/auth/info`, async () => {
+  return HttpResponse.json(
+    {
+      id: 'club-001',
+      name: '멋쟁이사자처럼',
+    },
+
+    { status: 200 },
+  );
 });

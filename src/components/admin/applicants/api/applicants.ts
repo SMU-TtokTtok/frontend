@@ -1,4 +1,5 @@
 import { adminClient } from '@/common/apis/ttockTtockClient';
+import { API } from '@/common/constants/endpoints';
 import { ApplicantInfo, ApplicantsInfo } from '@/common/model/applicants';
 export type Sort = 'grade' | 'submit';
 export type Evaluation = 'applies' | 'interviews';
@@ -27,13 +28,13 @@ export const patchApplicantStatus = async (applicantId: number, status: string) 
 };
 
 export const getPassList = async () => {
-  const data = await adminClient.get<ApplicantsInfo[]>(`/applicants/pass`);
+  const data = await adminClient.get<ApplicantsInfo[]>(`${API.ADMIN.APPLICATIONS_PASS}`);
 
   return data;
 };
 
 export const getFailList = async () => {
-  const data = await adminClient.get<ApplicantsInfo[]>(`/applicants/fail`);
+  const data = await adminClient.get<ApplicantsInfo[]>(`${API.ADMIN.APPLICATIONS_FAIL}`);
 
   return data;
 };

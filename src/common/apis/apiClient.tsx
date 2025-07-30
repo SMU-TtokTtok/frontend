@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { HTTP_STATUS } from '../constants/httpStatus';
+
 type HTTPMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 export class CustomHttpError extends Error {
@@ -14,11 +16,9 @@ export class CustomHttpError extends Error {
 
 export default class ApiClient {
   private baseUrl: string;
-  private tokenKey: string;
 
-  constructor(baseUrl: string, tokenKey: string) {
+  constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
-    this.tokenKey = tokenKey;
   }
 
   async get<T = any>(path: string): Promise<T> {
@@ -48,11 +48,6 @@ export default class ApiClient {
         'Content-Type': 'application/json',
       };
 
-      const accessToken = sessionStorage.getItem(this.tokenKey);
-      if (accessToken) {
-        headers['Authorization'] = `Bearer ${accessToken}`;
-      }
-
       const response = await fetch(url, {
         method,
         headers,
@@ -74,6 +69,10 @@ export default class ApiClient {
   }
 
   private async handleResponse<T>(response: Response): Promise<T> {
+    if (response.status === HTTP_STATUS.NO_CONTENT) {
+      return {} as T;
+    }
+
     return (await response.json()) as T;
   }
 }

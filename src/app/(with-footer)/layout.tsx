@@ -7,8 +7,8 @@ import ClientHeader from '@/common/components/header/clientHeader';
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      {/* <DefaultHeader /> */}
-      <ClientHeader />
+      <DefaultHeader />
+      {/* <ClientHeader /> */}
       <div className={S.withFooterContent}>{children}</div>
       <Footer serviceName={FOOTER.serviceName} informationUrl={FOOTER.informationUrl} />
     </>
