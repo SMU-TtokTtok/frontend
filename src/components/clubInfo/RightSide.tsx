@@ -4,7 +4,7 @@ import { UserClubIntro } from '@/common/model/clubIntro';
 import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToString';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
-import { formatDateToDot, formatDateToMonthDay } from '@/common/util/formatDate';
+import { formatDateToDot2, formatToMonthDay2 } from '@/common/util/formatDate';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import { sidebarTop } from './rightSide.css';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
@@ -29,7 +29,7 @@ const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: nu
             <div className={S.itemFlex}>
               <div className={S.itemTitle}>모집기간</div>
               <div className={S.itemContent}>
-                {formatDateToDot(applyStartDate)}~{formatDateToMonthDay(applyDeadLine)}
+                {formatDateToDot2(applyStartDate)}~{formatToMonthDay2(applyDeadLine)}
               </div>
             </div>
             <div className={S.itemFlex}>
