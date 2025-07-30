@@ -13,3 +13,7 @@ export const getSearchMembers = http.get('/api/admin/members/:clubId/search', ()
 export const deleteClubMember = http.delete('/api/admin/members/:clubId/:memberId', () => {
   return HttpResponse.json({ success: true }, { status: 200 });
 });
+
+export const patchClubMember = http.patch('/api/admin/members/:clubId/:memberId/role', () => {
+  return HttpResponse.json({ success: true }, { status: 200 });
+});

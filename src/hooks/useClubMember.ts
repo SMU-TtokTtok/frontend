@@ -45,7 +45,7 @@ export const useDeleteClubMember = (handleModalOpen: () => void) => {
   return { handleDeleteClubMember };
 };
 
-export const usePatchClubMember = () => {
+export const usePatchClubMember = (handleModalOpen: () => void) => {
   const queryClient = useQueryClient();
   const { clubMember } = clubMemberKey;
 
@@ -55,6 +55,7 @@ export const usePatchClubMember = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
       // queryClient.invalidateQueries({ queryKey: ['gradeCount'] });
+      handleModalOpen();
     },
   });
 

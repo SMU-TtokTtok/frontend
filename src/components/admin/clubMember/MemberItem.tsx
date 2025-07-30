@@ -31,8 +31,14 @@ export default function MemberItem({
   isEditing,
 }: MemberItemProps) {
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
+  const {
+    isOpen: isEditModalOpen,
+    handleModalClose: handleEditModalClose,
+    handleModalOpen: handleEditModalOpen,
+  } = useModal();
+
   const { handleDeleteClubMember } = useDeleteClubMember(handleModalOpen);
-  const { handlePatchClubMember } = usePatchClubMember();
+  const { handlePatchClubMember } = usePatchClubMember(handleEditModalOpen);
 
   return (
     <>
@@ -83,7 +89,10 @@ export default function MemberItem({
         )}
       </div>
       <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
-        삭제가 완료되었습니다.
+        삭제가 완료되었습니다
+      </ConfirmModal>
+      <ConfirmModal isOpen={isEditModalOpen} onClose={handleEditModalClose}>
+        수정이 완료되었습니다
       </ConfirmModal>
     </>
   );
