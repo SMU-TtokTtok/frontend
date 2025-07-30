@@ -11,11 +11,8 @@ export interface ClubMember {
 }
 
 export const getSearchMembers = async (search: string) => {
-  const username = '홍길동';
   const clubId = 1;
-  const data = await adminClient.get<ClubMember>(
-    `/club/members/search?username=${username}&clubId=${clubId}&keyword=${search}`,
-  );
+  const data = await adminClient.get<ClubMember>(`/members/${clubId}/search?keyword=${search}`);
 
   return data;
 };

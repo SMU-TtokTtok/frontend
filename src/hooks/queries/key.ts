@@ -37,5 +37,5 @@ export const clubFormKey = {
 } as const;
 
 export const clubMemberKey = {
-  clubMember: 'clubMember',
+  clubMember: ['clubMember'],
 } as const;

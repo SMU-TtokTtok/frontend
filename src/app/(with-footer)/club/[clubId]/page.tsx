@@ -31,7 +31,7 @@ export default function Page() {
           <BackButton />
           <ClubProfile clubIntro={data} clubId={Number(clubId)} />
           {!isLargeScreen && <RightSide clubIntro={data} clubId={Number(clubId)} />}
-          <ClubIntroduce introduction={data.introduction} />
+          <ClubIntroduce introduction={data.content} />
         </div>
 
         {isLargeScreen && <RightSide clubIntro={data} clubId={Number(clubId)} />}

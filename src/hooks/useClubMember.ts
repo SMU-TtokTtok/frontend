@@ -25,7 +25,7 @@ export const useSearchClubMember = ({ search }: { search: string }) => {
   return { data, isLoading };
 };
 
-export const useDeleteClubMember = () => {
+export const useDeleteClubMember = (handleModalOpen: () => void) => {
   const queryClient = useQueryClient();
   const { clubMember } = clubMemberKey;
 
@@ -33,6 +33,8 @@ export const useDeleteClubMember = () => {
     mutationFn: (memberId: string) => deleteClubMember(memberId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
+      queryClient.invalidateQueries({ queryKey: ['gradeCount'] });
+      handleModalOpen();
     },
   });
 
@@ -43,7 +45,7 @@ export const useDeleteClubMember = () => {
   return { handleDeleteClubMember };
 };
 
-export const usePatchClubMember = () => {
+export const usePatchClubMember = (handleModalOpen: () => void) => {
   const queryClient = useQueryClient();
   const { clubMember } = clubMemberKey;
 
@@ -52,6 +54,8 @@ export const usePatchClubMember = () => {
       patchClubMember(memberId, role),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
+      // queryClient.invalidateQueries({ queryKey: ['gradeCount'] });
+      handleModalOpen();
     },
   });
 
@@ -71,6 +75,7 @@ export const usePostClubMember = (onSuccess?: () => void) => {
       postClubMember(body, role),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
+      queryClient.invalidateQueries({ queryKey: ['gradeCount'] });
       onSuccess?.(); // 성공 시 콜백 실행
     },
   });

@@ -7,9 +7,12 @@ import Button from '@/common/ui/button';
 import { useRouter } from 'next/navigation';
 import { usePostClubMember } from '@/hooks/useClubMember';
 import { ROUTES } from '@/common/constants/routes';
+import { useModal } from '@/hooks/useModal';
+import ConfirmModal from '@/common/components/confirmModal';
 
 export default function Form({ role }: { role: string }) {
   const router = useRouter();
+  const { isOpen, handleModalClose, handleModalOpen } = useModal();
   const {
     register,
     handleSubmit,
@@ -18,7 +21,8 @@ export default function Form({ role }: { role: string }) {
     resolver: zodResolver(clubMemberAddSchema),
   });
   const { handlePostClubMember } = usePostClubMember(() => {
-    router.push(ROUTES.ADMIN_CLUB_MEMBER);
+    handleModalOpen();
+    // router.push(ROUTES.ADMIN_CLUB_MEMBER);
   });
 
   const onSubmit = (data: ClubMemberAddData) => {
@@ -37,24 +41,33 @@ export default function Form({ role }: { role: string }) {
   };
 
   return (
-    <div className={S.container}>
-      <div className={S.title}>추가할 부원의 정보를 입력하세요</div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <ClubMemberForm register={register} errors={errors} />
-        <div className={S.ButtonContainer}>
-          <Button
-            variant="tertiary"
-            type="button"
-            onClick={() => router.back()}
-            className={S.Button}
-          >
-            취소하기
-          </Button>
-          <Button variant="primary" type="submit" className={S.Button}>
-            추가하기
-          </Button>
-        </div>
-      </form>
-    </div>
+    <>
+      <div className={S.container}>
+        <div className={S.title}>추가할 부원의 정보를 입력하세요</div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <ClubMemberForm register={register} errors={errors} />
+          <div className={S.ButtonContainer}>
+            <Button
+              variant="tertiary"
+              type="button"
+              onClick={() => router.back()}
+              className={S.Button}
+            >
+              취소하기
+            </Button>
+            <Button variant="primary" type="submit" className={S.Button}>
+              추가하기
+            </Button>
+          </div>
+        </form>
+      </div>
+      <ConfirmModal
+        isOpen={isOpen}
+        onClose={handleModalClose}
+        redirectTo={ROUTES.ADMIN_CLUB_MEMBER}
+      >
+        추가가 완료되었습니다
+      </ConfirmModal>
+    </>
   );
 }

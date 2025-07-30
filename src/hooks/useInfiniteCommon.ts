@@ -82,7 +82,7 @@ export const useClubMemberInfinite = ({ enabled }: UseInfiniteParams = {}) => {
     ClubMember,
     Error
   >({
-    queryKey: [clubMemberKey.clubMember],
+    queryKey: [...clubMemberKey.clubMember],
     queryFn: ({ pageParam }) => getClubMember({ page: pageParam as number }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

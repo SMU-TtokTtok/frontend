@@ -1,24 +1,23 @@
 export interface ClubIntro {
-  id: number;
   name: string;
-  shortDescription: string;
-  type: string;
-  category: string;
-  detailField: string;
-  isRecruiting: boolean;
-  introduction: string;
-  recruitStartDate: string;
-  recruitEndDate: string;
-  recruitTarget: number[];
-  recruitNumber: number;
-  img: string;
-  peopleCount: number;
+  clubType: string;
+  clubCategory: string;
+  customCategory: string;
+  recruiting: boolean;
+  summary: string;
+  profileImageUrl: string;
+  clubMemberCount: number;
+  applyStartDate: string;
+  applyDeadLine: string;
+  grades: string[];
+  maxApplyCount: number;
+  content: string;
 }
 
 export interface UserClubIntro extends ClubIntro {
-  isFavorite: boolean;
+  bookmarked: boolean;
 }
 
 export interface AdminClubIntro extends ClubIntro {
-  department: string;
+  clubUniv: string;
 }

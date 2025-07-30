@@ -6,6 +6,8 @@ import Tag from '@/common/ui/tag/index';
 import star from '@/assets/star.svg';
 import star_active from '@/assets/star_active.svg';
 import { usePatchFavorite } from '@/hooks/useFavoriteMutation';
+import { getKoreanType } from '@/common/util/getKoreanType';
+import { getKoreanCategory } from '@/common/util/getKoreanCategory';
 
 export default function ClubProfile({
   clubIntro,
@@ -16,46 +18,46 @@ export default function ClubProfile({
 }) {
   const {
     name,
-    shortDescription,
-    type,
-    category,
-    detailField,
-    isRecruiting,
-    img,
-    peopleCount,
-    isFavorite,
+    summary,
+    clubType,
+    clubCategory,
+    customCategory,
+    recruiting,
+    profileImageUrl,
+    clubMemberCount,
+    bookmarked,
   } = clubIntro;
   const { handleFavoriteStatus } = usePatchFavorite();
 
   return (
     <div className={S.clubProfile}>
-      <Image src={img} alt={name} width={212} height={206} className={S.imageStyle} />
+      <Image src={profileImageUrl} alt={name} width={212} height={206} className={S.imageStyle} />
       <div className={S.RightFlex}>
         <div className={S.type} style={{ marginBottom: '2px' }}>
-          {type}
+          {getKoreanType(clubType)}
         </div>
         <div className={S.name}>{name}</div>
         <div className={S.memberFlex}>
           <Image src={person} alt="people" width={23} height={23} />
-          <div className={S.member}>{peopleCount}</div>
+          <div className={S.member}>{clubMemberCount}</div>
         </div>
-        <div className={S.description}>{shortDescription}</div>
+        <div className={S.description}>{summary}</div>
         <div className={S.tagFlex}>
           <Tag variant="default" className={S.tagStyle + ' ' + S.tagFont}>
-            {category}
+            {getKoreanCategory(clubCategory)}
           </Tag>
           <Tag variant="default" className={S.tagStyle + ' ' + S.tagFont}>
-            {detailField}
+            {customCategory}
           </Tag>
           <Tag
-            variant={isRecruiting ? 'secondary' : 'tertiary'}
+            variant={recruiting ? 'secondary' : 'tertiary'}
             className={S.tagStyle + ' ' + S.tagFont}
           >
-            {isRecruiting ? '모집중' : '모집마감'}
+            {recruiting ? '모집중' : '모집마감'}
           </Tag>
         </div>
         <Image
-          src={isFavorite ? star_active : star}
+          src={bookmarked ? star_active : star}
           alt="star"
           width={29}
           height={29}
