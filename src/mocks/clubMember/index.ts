@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 import gradeCount from './gradeCount.json';
 import searchMembers from './searchResult.json';
 
-export const getGradeCount = http.get('/api/admin/members/grade-count', () => {
+export const getGradeCount = http.get('/api/admin/members/:clubId/total-count', () => {
   return HttpResponse.json(gradeCount);
 });
 
