@@ -8,12 +8,7 @@ import { useRef } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
-import {
-  typeItems,
-  categoryItems,
-  // recruitItems,
-  univItems,
-} from '@/common/constants/adminOptions';
+import { typeItems, categoryItems, univItems } from '@/common/constants/adminOptions';
 import { useRecruitmentToggle } from '@/hooks/useClubInfo';
 import ConfirmModal from '@/common/components/confirmModal';
 import { useModal } from '@/hooks/useModal';
@@ -23,7 +18,6 @@ import { getKoreanCategory } from '@/common/util/getKoreanCategory';
 
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
-// type ClubRecruit = (typeof recruitItems)[number];
 type ClubDepartment = (typeof univItems)[number];
 interface ClubBoxProps extends AdminClubIntro {
   onChange?: (updated: Partial<AdminClubIntro>) => void;

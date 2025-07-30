@@ -5,6 +5,7 @@ import { convertGradeArrayToString } from '@/common/util/convertGradeArrayToStri
 import { formatDateToDot, formatDateToMonthDay } from '@/common/util/formatDate';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
+import { getKoreanGrade } from '@/common/util/getKoreanGrade';
 
 interface RightSideBarProps extends AdminClubIntro {
   onEditClick: () => void;
@@ -28,7 +29,6 @@ export default function RightSideBar(props: RightSideBarProps) {
     onChange,
     // refetch,
   } = props;
-
   const { barPosition } = useFollowSidebar({ initialPosition: 176 });
 
   return (
@@ -71,22 +71,22 @@ export default function RightSideBar(props: RightSideBarProps) {
 
           {isEditing ? (
             <div className={S.buttonFlex}>
-              {[1, 2, 3, 4].map((grade) => (
+              {['FIRST_GRADE', 'SECOND_GRADE', 'THIRD_GRADE', 'FOURTH_GRADE'].map((grade) => (
                 <Button
                   key={grade}
-                  variant={grades.includes(grade.toString()) ? 'secondary' : 'tertiary'}
+                  variant={grades.includes(grade) ? 'secondary' : 'tertiary'}
                   className={S.button}
                   onClick={() => {
                     let newTarget: string[];
-                    if (grades.includes(grade.toString())) {
-                      newTarget = grades.filter((g) => g !== grade.toString());
+                    if (grades.includes(grade)) {
+                      newTarget = grades.filter((g) => g !== grade);
                     } else {
-                      newTarget = [...grades, grade.toString()].sort();
+                      newTarget = [...grades, grade].sort();
                     }
                     onChange({ grades: newTarget });
                   }}
                 >
-                  {grade}
+                  {getKoreanGrade(grade)}
                 </Button>
               ))}
             </div>
