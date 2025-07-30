@@ -17,6 +17,7 @@ function ApplicantsContentPage() {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState('');
   const [selectedApplicantId, setSelectedApplicantId] = useState<number>(0);
+  const [confirmMessage, setConfirmMessage] = useState<string>(MESSAGE.applicantsStatus.confirm);
   const {
     isOpen: isConfirmModalOpen,
     handleModalOpen: handleConfirmModalOpen,
@@ -28,6 +29,11 @@ function ApplicantsContentPage() {
     handleModalOpen: handleApplicantDetailModalOpen,
     handleModalClose: handleApplicantDetailModalClose,
   } = useModal();
+
+  const openConfirmModalWithMessage = (message: string) => {
+    setConfirmMessage(message);
+    handleConfirmModalOpen();
+  };
 
   const handleSelectApplicant = (applicantId: number) => {
     setSelectedApplicantId(applicantId);
@@ -51,7 +57,7 @@ function ApplicantsContentPage() {
           <h3 className={S.title}>✏️ 지원자 관리</h3>
           <PassFailSidebar
             selectedOptions={selectedOptions}
-            handleConfirmModalOpen={handleConfirmModalOpen}
+            openConfirmModalWithMessage={openConfirmModalWithMessage}
           />
           <SearchBarArea search={search} handleSearchChange={handleSearchChange} />
           <EvaluationTabs selectedOptions={selectedOptions} />
@@ -61,14 +67,14 @@ function ApplicantsContentPage() {
               <SearchResult
                 search={search}
                 selectedOptions={selectedOptions}
-                handleConfirmModalOpen={handleConfirmModalOpen}
+                openConfirmModalWithMessage={openConfirmModalWithMessage}
                 handleSelectApplicant={handleSelectApplicant}
               />
             )}
             {!search && (
               <ApplicantList
                 selectedOptions={selectedOptions}
-                handleConfirmModalOpen={handleConfirmModalOpen}
+                openConfirmModalWithMessage={openConfirmModalWithMessage}
                 handleSelectApplicant={handleSelectApplicant}
               />
             )}
@@ -76,7 +82,7 @@ function ApplicantsContentPage() {
         </div>
       </div>
       <ConfirmModal isOpen={isConfirmModalOpen} onClose={handleConfirmModalClose}>
-        {MESSAGE.applicantsStatus.confirm}
+        {confirmMessage}
       </ConfirmModal>
       <ApplicantDetailModal
         applicantId={selectedApplicantId}

@@ -9,7 +9,7 @@ interface ApplicantGroupProps {
   label: string;
   selectedOptions: ApplicantListParams;
   applicants: ApplicantsInfo[];
-  handleModalOpen: () => void;
+  openConfirmModalWithMessage: (message: string) => void;
   handleListModalOpen: () => void;
   handlePassTypeChange: (isPass: boolean) => void;
 }
@@ -18,7 +18,7 @@ export default function ApplicantGroup({
   isPass,
   label,
   applicants,
-  handleModalOpen,
+  openConfirmModalWithMessage,
   handleListModalOpen,
   handlePassTypeChange,
 }: ApplicantGroupProps) {
@@ -38,7 +38,10 @@ export default function ApplicantGroup({
       </div>
       {applicants.length === 0 && <Empty className={S.empty['sideBar']}>{emptyMessage}</Empty>}
       {applicants.length > 0 && (
-        <PassFailList applicants={applicants} handleModalOpen={handleModalOpen} />
+        <PassFailList
+          applicants={applicants}
+          openConfirmModalWithMessage={openConfirmModalWithMessage}
+        />
       )}
     </div>
   );

@@ -9,13 +9,13 @@ import Empty from '@/common/components/empty';
 interface SearchResultProps {
   selectedOptions: ApplicantListParams;
   search: string;
-  handleConfirmModalOpen: () => void;
+  openConfirmModalWithMessage: (message: string) => void;
   handleSelectApplicant: (applicantId: number) => void;
 }
 function SearchResult({
   search,
   selectedOptions,
-  handleConfirmModalOpen,
+  openConfirmModalWithMessage,
   handleSelectApplicant,
 }: SearchResultProps) {
   const debouncedSearch = useDebounce(search);
@@ -24,7 +24,7 @@ function SearchResult({
     evaluation: selectedOptions.evaluation,
   });
   const { handleFavoriteStatus } = usePatchApplicantStatus({
-    handleModalOpen: handleConfirmModalOpen,
+    openConfirmModalWithMessage,
   });
 
   return (

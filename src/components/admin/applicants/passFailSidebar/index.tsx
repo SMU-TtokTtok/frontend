@@ -12,17 +12,23 @@ import PassFailListModal from './passFailListModal';
 import { useState } from 'react';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
+import { useConnectApplicant } from '@/hooks/useConnectAplicant';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 interface PassFailSidebarProps {
   selectedOptions: ApplicantListParams;
-  handleConfirmModalOpen: () => void;
+  openConfirmModalWithMessage: (message: string) => void;
 }
 
-function PassFailSidebar({ selectedOptions, handleConfirmModalOpen }: PassFailSidebarProps) {
+function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassFailSidebarProps) {
   const evaluation = selectedOptions.evaluation;
   const { data: passApplicants } = usePassList({ selectedOptions });
   const { data: failApplicants } = useFailList({ selectedOptions });
   const [isPass, setIsPass] = useState<boolean | null>(null);
+  const { handleConnectApplicants } = useConnectApplicant({
+    openConfirmModalWithMessage: openConfirmModalWithMessage,
+  });
+  const { profile } = useAuthStore();
 
   const handlePassTypeChange = (isPass: boolean) => {
     setIsPass(isPass);
@@ -48,7 +54,7 @@ function PassFailSidebar({ selectedOptions, handleConfirmModalOpen }: PassFailSi
           <ApplicantGroup
             isPass={true}
             handlePassTypeChange={handlePassTypeChange}
-            handleModalOpen={handleConfirmModalOpen}
+            openConfirmModalWithMessage={openConfirmModalWithMessage}
             handleListModalOpen={handleListModalOpen}
             label={`${convertToKor(evaluation)} 합격 예정자`}
             selectedOptions={selectedOptions}
@@ -57,7 +63,7 @@ function PassFailSidebar({ selectedOptions, handleConfirmModalOpen }: PassFailSi
           <ApplicantGroup
             isPass={false}
             handlePassTypeChange={handlePassTypeChange}
-            handleModalOpen={handleConfirmModalOpen}
+            openConfirmModalWithMessage={openConfirmModalWithMessage}
             handleListModalOpen={handleListModalOpen}
             label={`${convertToKor(evaluation)} 불합격 예정자`}
             selectedOptions={selectedOptions}
@@ -65,14 +71,26 @@ function PassFailSidebar({ selectedOptions, handleConfirmModalOpen }: PassFailSi
           />
         </div>
 
-        <div className={S.sendButtonWrapper}>
-          <Link href={ROUTES.ADMIN_APPLICATIONS_MESSAGE}>
-            <Button variant="primary" className={S.sendButton}>
-              결과 전송하기
+        <div className={S.buttonWrapper}>
+          <div className={S.connectButtonWrapper}>
+            <Button
+              variant="secondary"
+              className={S.baseButton['connectButton']}
+              onClick={() => handleConnectApplicants({ clubId: profile!.clubId })}
+            >
+              부원 연동하기
             </Button>
-          </Link>
+          </div>
 
-          <small className={S.buttonDescription}>클릭 시, 메시지 작성란으로 이동합니다.</small>
+          <div className={S.sendButtonWrapper}>
+            <Link href={ROUTES.ADMIN_APPLICATIONS_MESSAGE}>
+              <Button variant="primary" className={S.baseButton['sendButton']}>
+                결과 전송하기
+              </Button>
+            </Link>
+
+            <small className={S.buttonDescription}>클릭 시, 메시지 작성란으로 이동합니다.</small>
+          </div>
         </div>
       </div>
       <PassFailListModal

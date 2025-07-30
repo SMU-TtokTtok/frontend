@@ -40,6 +40,11 @@ export const searchTitle = style({
 export const searchWrapper = style({
   marginTop: '3.111rem',
   width: '100%',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      marginTop: '130px',
+    },
+  },
 });
 
 export const searchInput = style({
