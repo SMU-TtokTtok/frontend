@@ -7,6 +7,9 @@ import Input from '@/common/ui/input';
 import { z } from 'zod';
 import { useLoginMutation } from '@/hooks/useAdminMutation';
 import { LOGIN_ERRORS } from '@/common/constants';
+import { useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 const loginSchema = z.object({
   login: z.string().min(1, LOGIN_ERRORS.adminLogin),
@@ -24,7 +27,14 @@ function LoginPage() {
     resolver: zodResolver(loginSchema),
   });
 
+  const searchParams = useSearchParams();
   const { handleLogin } = useLoginMutation();
+  const redirected = searchParams.get('redirected');
+  useEffect(() => {
+    if (redirected === 'unauthorized') {
+      alert('세션이 만료되어 다시 로그인해주세요.');
+    }
+  }, [redirected]);
 
   return (
     <div className={S.Container}>

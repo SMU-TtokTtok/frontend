@@ -17,11 +17,11 @@ export const PatchApplicantStatus = http.patch(
   },
 );
 
-export const PassList = http.get(`${API}/api/admin/applicants/pass`, () => {
+export const PassList = http.get(`${API}/api/admin/applies/passed`, () => {
   return HttpResponse.json(applicantList, { status: 200 });
 });
 
-export const FailList = http.get(`${API}/api/admin/applicants/fail`, () => {
+export const FailList = http.get(`${API}/api/admin/applies/failed`, () => {
   return HttpResponse.json([], { status: 200 });
 });
 
