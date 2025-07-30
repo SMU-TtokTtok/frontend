@@ -5,11 +5,11 @@ import { ApplicantsInfo } from '@/common/model/applicants';
 
 interface ApplicantListProps {
   applicants: ApplicantsInfo[];
-  handleModalOpen: () => void;
+  openConfirmModalWithMessage: (message: string) => void;
 }
 
-function PassFailList({ applicants, handleModalOpen }: ApplicantListProps) {
-  const { handleFavoriteStatus } = usePatchApplicantStatus({ handleModalOpen });
+function PassFailList({ applicants, openConfirmModalWithMessage }: ApplicantListProps) {
+  const { handleFavoriteStatus } = usePatchApplicantStatus({ openConfirmModalWithMessage });
 
   return (
     <ul>

@@ -6,8 +6,6 @@ export const sidebarTop = createVar();
 
 export const rightSidebar = style({
   position: 'absolute',
-  //ight: 146,
-  //right: 24,
   right: '-350px',
 
   top: sidebarTop,
@@ -39,31 +37,64 @@ export const panel = style({
   },
 });
 
-export const sendButtonWrapper = style({
+export const buttonWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   marginTop: '28px',
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       position: 'absolute',
-      top: '40px',
+      top: '380px',
       right: '0px',
       marginTop: '0px',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'start',
+      width: '100%',
     },
   },
 });
 
-export const sendButton = style({
-  width: '330px',
-  height: '53px',
-  borderRadius: '0.333rem',
-  fontSize: vars.fonts.body2,
-  fontWeight: 600,
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
-      width: '236px',
+export const connectButtonWrapper = style({
+  width: '100%',
+});
+
+export const baseButton = styleVariants({
+  sendButton: {
+    width: '330px',
+    height: '53px',
+    borderRadius: '0.333rem',
+    fontSize: vars.fonts.body2,
+    fontWeight: 600,
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+        width: '100%',
+        maxWidth: '550px',
+      },
     },
   },
+  connectButton: {
+    width: '330px',
+    height: '53px',
+    borderRadius: '0.333rem',
+    fontSize: vars.fonts.body2,
+    fontWeight: 600,
+    border: `1px solid ${vars.colors.primary.fixed}`,
+    marginBottom: '10px',
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+        width: '100%',
+        maxWidth: '550px',
+      },
+    },
+  },
+});
+
+export const sendButtonWrapper = style({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'flex-start',
+  width: '100%',
 });
 
 export const buttonDescription = style({

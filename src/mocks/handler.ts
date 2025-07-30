@@ -9,6 +9,7 @@ import {
   PatchApplicantStatus,
   PatchMemo,
   PostMemo,
+  PutConnectApplicant,
 } from './applicants';
 import { Clubs, getSearchList, patchFavorite, popularClubs } from './clubList';
 import { AdminLogin, AdminLogout, AdminProfile, AdminRefresh } from './auth';
@@ -56,6 +57,7 @@ export const handlers = [
   PostMemo,
   PatchMemo,
   DeleteMemo,
+  PutConnectApplicant,
   AdminRefresh,
   deleteClubMember,
   patchClubMember,

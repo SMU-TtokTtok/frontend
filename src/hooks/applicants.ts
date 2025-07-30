@@ -27,7 +27,11 @@ interface usePatchApplicantParams {
   status: string;
 }
 
-export const usePatchApplicantStatus = ({ handleModalOpen }: { handleModalOpen: () => void }) => {
+export const usePatchApplicantStatus = ({
+  openConfirmModalWithMessage,
+}: {
+  openConfirmModalWithMessage: (message: string) => void;
+}) => {
   const queryClient = useQueryClient();
   const { applicantList, passList, failList } = applicantKey;
 
@@ -36,7 +40,7 @@ export const usePatchApplicantStatus = ({ handleModalOpen }: { handleModalOpen: 
       patchApplicantStatus(applicantId, status),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [applicantList, passList, failList] });
-      handleModalOpen();
+      openConfirmModalWithMessage('지원자의 상태가 변경되었습니다.');
     },
   });
 

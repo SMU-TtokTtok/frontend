@@ -2,7 +2,7 @@
 
 import { HTTP_STATUS } from '../constants/httpStatus';
 
-type HTTPMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type HTTPMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT';
 
 export class CustomHttpError extends Error {
   status: number;
@@ -33,6 +33,11 @@ export default class ApiClient {
 
   async patch<T = any>(path: string, body: any): Promise<T> {
     const response = await this.request<T>('PATCH', path, body);
+    return this.handleResponse<T>(response);
+  }
+
+  async put<T = any>(path: string, body: any): Promise<T> {
+    const response = await this.request<T>('PUT', path, body);
     return this.handleResponse<T>(response);
   }
 

@@ -85,3 +85,14 @@ export const PatchMemo = http.patch(
     return HttpResponse.json({ id: memoId, applicantId, content }, { status: 200 });
   },
 );
+
+export const PutConnectApplicant = http.put(
+  `${API}/api/admin/applies/:clubId/finalize`,
+  ({ params }) => {
+    const { clubId } = params;
+    return HttpResponse.json(
+      { message: `Applicants connected for club ${clubId}` },
+      { status: 200 },
+    );
+  },
+);

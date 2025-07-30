@@ -57,3 +57,8 @@ export const patchMemo = async (applicantId: number, memoId: string, content: st
   const data = await adminClient.patch(`/applies/${applicantId}/memos/${memoId}`, { content });
   return data;
 };
+
+export const putConnectApplicant = async (clubId: string) => {
+  const data = await adminClient.put(`/applies/${clubId}/finalize`, {});
+  return data;
+};

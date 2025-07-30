@@ -8,18 +8,18 @@ import { MESSAGE } from '@/common/constants/message';
 
 interface ApplicantListProps {
   selectedOptions: ApplicantListParams;
-  handleConfirmModalOpen: () => void;
+  openConfirmModalWithMessage: (message: string) => void;
   handleSelectApplicant: (applicantId: number) => void;
 }
 
 function ApplicantList({
   selectedOptions,
-  handleConfirmModalOpen,
+  openConfirmModalWithMessage,
   handleSelectApplicant,
 }: ApplicantListProps) {
   const { data: applicants } = useApplicantList({ selectedOptions });
   const { handleFavoriteStatus } = usePatchApplicantStatus({
-    handleModalOpen: handleConfirmModalOpen,
+    openConfirmModalWithMessage,
   });
   const isEmpty = applicants?.length === 0;
 
