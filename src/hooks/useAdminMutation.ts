@@ -46,8 +46,9 @@ export const useLogoutMutation = () => {
       queryClient.invalidateQueries({ queryKey: adminProfile });
       router.push(ROUTES.ADMIN_LOGIN);
     },
-    onError: () => {
+    onError: (error) => {
       alert('로그아웃 중 오류가 발생했습니다.');
+      console.error('Logout error:', error);
     },
   });
 
