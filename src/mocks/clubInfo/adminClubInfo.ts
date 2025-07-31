@@ -19,7 +19,7 @@ export const patchClubInfo = http.patch('/api/admin/clubs/:clubId/content', asyn
 export const postImage = http.post('/api/admin/clubs/:clubId/update-image', async () => {
   return HttpResponse.json(
     {
-      imgKey: 'key',
+      url: 'https://example.com/image.png',
     },
     { status: 200 },
   );

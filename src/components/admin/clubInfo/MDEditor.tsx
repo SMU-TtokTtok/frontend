@@ -9,7 +9,7 @@ import type { Editor } from '@tiptap/react';
 import './mdEditor.custom.css';
 import { useEffect, useState, useRef } from 'react';
 import { postImage } from './api/postImage';
-import { getImageUrl } from './api/getUrl';
+// import { getImageUrl } from './api/getUrl';
 
 const icons = {
   h1: (
@@ -120,10 +120,10 @@ const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
         const response = await postImage(file);
 
         // 3. 업로드된 이미지의 실제 URL 가져오기
-        const response2 = await getImageUrl(response.imgKey);
+        // const response2 = await getImageUrl(response.imgKey);
 
         // 4. 임시 URL을 실제 URL로 교체
-        editor.chain().focus().setImage({ src: response2.url }).run();
+        editor.chain().focus().setImage({ src: response.url }).run();
 
         // 5. 메모리 누수 방지를 위한 임시 URL 정리
         URL.revokeObjectURL(placeholderUrl);
