@@ -49,8 +49,9 @@
 .toolbar-btn:last-child {
   margin-right: 0;
 }
-.toolbar-btn:hover {
-  background: transparent;
+.toolbar-btn:hover,
+.toolbar-btn-title:hover {
+  background: #cae0ff;
 }
 .custom-tiptap-editor {
   background: white;
@@ -67,6 +68,7 @@
   min-height: 300px;
   border-radius: 0 0 8px 8px;
   padding: 24px 30px 24px 30px;
+  line-height: 1.5;
 }
 .custom-tiptap-editor h1 {
   font-size: 26px;
