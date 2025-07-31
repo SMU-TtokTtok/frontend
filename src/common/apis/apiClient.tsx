@@ -49,9 +49,16 @@ export default class ApiClient {
   private async request<T>(method: HTTPMethod, path: string, body?: any): Promise<Response> {
     try {
       const url = `${this.baseUrl}${path}`;
-      const headers: HeadersInit = {
-        'Content-Type': 'application/json',
-      };
+
+      const isFormData = body instanceof FormData;
+
+      const headers: HeadersInit = isFormData
+        ? {
+            'Content-Type': 'multipart/form-data',
+          }
+        : {
+            'Content-Type': 'application/json',
+          };
 
       const response = await fetch(url, {
         method,

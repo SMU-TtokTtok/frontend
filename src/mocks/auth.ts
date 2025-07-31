@@ -21,8 +21,8 @@ export const AdminRefresh = http.post(`${API}/api/admin/auth/re-issue`, async ()
 export const AdminProfile = http.get(`${API}/api/admin/auth/info`, async () => {
   return HttpResponse.json(
     {
-      id: 'club-001',
-      name: '멋쟁이사자처럼',
+      clubId: 'club-001',
+      clubName: '멋쟁이사자처럼',
     },
 
     { status: 200 },
