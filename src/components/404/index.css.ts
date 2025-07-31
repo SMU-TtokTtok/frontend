@@ -89,3 +89,15 @@ export const stringText2Break = style({
     },
   },
 });
+
+export const notFoundImage = style({
+  width: '111px',
+  height: '111px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '74px',
+      height: '74px',
+    },
+  },
+});
