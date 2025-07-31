@@ -1,7 +1,7 @@
 import * as S from './filter.css';
 import DropDown from '@/common/components/dropdown';
 import QueryLink from '@/common/components/queryLink';
-import { FILTER, FILTER_KO } from '@/common/constants';
+import { FILTER_CONFIG } from '@/common/constants';
 import Button from '@/common/ui/button';
 import Image from 'next/image';
 import Arrow from '@/assets/drop.svg';
@@ -10,7 +10,7 @@ import { FilterHeaderProps, getSelectedLabel } from './filterHeader';
 
 const dropdownFilters = [
   { label: '분야', key: 'category' },
-  { label: '모집여부', key: 'recruit' },
+  { label: '모집여부', key: 'recruiting' },
 ] as const;
 
 function DropDownTabBar({ selectedOptions }: FilterHeaderProps) {
@@ -28,9 +28,9 @@ function DropDownTabBar({ selectedOptions }: FilterHeaderProps) {
               </Button>
             }
           >
-            {FILTER[key].map((option, idx) => (
-              <QueryLink key={option} extraQuery={{ [key]: option }}>
-                <li className={S.dropDownItem({ style: key })}>{FILTER_KO[key][idx]}</li>
+            {FILTER_CONFIG[key].map((option) => (
+              <QueryLink key={option.value} extraQuery={{ [key]: option.value }}>
+                <li className={S.dropDownItem({ style: key })}>{option.label}</li>
               </QueryLink>
             ))}
           </DropDown>

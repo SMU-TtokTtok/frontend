@@ -3,10 +3,10 @@ import { useSearchParams } from 'next/navigation';
 
 export interface SearchQueryReturn {
   category?: string;
-  recruit?: string;
+  recruiting?: string;
   type?: string;
   sort?: string;
-  grade?: string;
+  grades?: string;
   college?: string;
   name?: string;
 }
@@ -16,10 +16,10 @@ export const useSearchQuery = () => {
 
   const filter: SearchQueryReturn = {
     category: searchParams.get('category') || '',
-    recruit: searchParams.get('recruit') || '',
+    recruiting: searchParams.get('recruiting') || '',
     type: searchParams.get('type') || '',
     sort: searchParams.get('sort') || '',
-    grade: searchParams.get('grade') || '',
+    grades: searchParams.get('grades') || '',
     college: searchParams.get('college') || '',
     name: searchParams.get('name') || '',
   };

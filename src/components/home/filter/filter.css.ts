@@ -90,7 +90,7 @@ export const headerLeftSideButton = recipe({
           },
         },
       },
-      recruit: {
+      recruiting: {
         width: '7.444rem',
         '@media': {
           [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
@@ -246,7 +246,7 @@ export const filterWrapper = recipe({
   },
   variants: {
     marginBottom: {
-      grade: {
+      grades: {
         marginBottom: '	0.889rem',
       },
     },
@@ -314,7 +314,7 @@ export const dropDownItem = recipe({
           },
         },
       },
-      recruit: {
+      recruiting: {
         width: '7.444rem',
         '@media': {
           [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
