@@ -50,17 +50,21 @@ export const useRecruitmentToggle = (handleModalOpen: () => void) => {
   };
 };
 
-export const useAdminClubPatch = () => {
+export const useAdminClubPatch = (handleModalOpen: () => void) => {
   const queryClient = useQueryClient();
   const { adminClubInfo } = clubInfoKey;
 
   const patchClubInfoMutation = useMutation({
-    mutationFn: async (body: { request: Partial<AdminClubIntro>; profileImageUrl: File | null }) => {
+    mutationFn: async (body: {
+      request: Partial<AdminClubIntro>;
+      profileImageUrl: File | null;
+    }) => {
       const response = await patchClubInfo(body);
       return response;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [adminClubInfo] });
+      handleModalOpen();
     },
   });
 
