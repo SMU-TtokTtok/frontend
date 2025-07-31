@@ -1,9 +1,11 @@
+'use client';
 import Modal from '@/common/ui/modal/modal';
-import React from 'react';
+import React, { Suspense } from 'react';
 import UserInfo from './userInfo';
 import Memo from './memo';
 import { useApplicantInfo } from '@/hooks/applicants';
 import * as S from './applicantDetailModal.css';
+import LoadingSpinner from '@/common/ui/loading';
 
 interface ApplicantDetailProps {
   applicantId: number;
@@ -14,8 +16,11 @@ function ApplicantDetail({ applicantId }: ApplicantDetailProps) {
 
   return (
     <Modal.Body className={S.body}>
-      {applicant && <UserInfo data={applicant} />}
-      {applicant && <Memo data={applicant} applicantId={applicantId} />}
+      <Suspense fallback={<LoadingSpinner />}>
+        {applicant && <UserInfo data={applicant} />}
+
+        {applicant && <Memo data={applicant} applicantId={applicantId} />}
+      </Suspense>
     </Modal.Body>
   );
 }

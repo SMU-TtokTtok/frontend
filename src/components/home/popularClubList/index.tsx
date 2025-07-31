@@ -3,6 +3,8 @@ import ClubList from './clubList';
 import Slider from './slider';
 import Link from 'next/link';
 import { ROUTES } from '@/common/constants/routes';
+import LoadingSpinner from '@/common/ui/loading';
+import { Suspense } from 'react';
 
 function PopularClubList() {
   return (
@@ -13,9 +15,11 @@ function PopularClubList() {
           <p className={S.Plus}>더보기</p>
         </Link>
       </div>
-      <Slider>
-        <ClubList />
-      </Slider>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Slider>
+          <ClubList />
+        </Slider>
+      </Suspense>
     </div>
   );
 }

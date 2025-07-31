@@ -3,7 +3,7 @@ import { useAdminForm } from '@/hooks/useAdminForm';
 import * as S from './applicationForm.css';
 import EmptyPage from './emptyPage';
 import { useApplicationForm } from '@/hooks/useApplicationForm';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import QuestionForm from './questionForm';
 import { useApplicationFormValidation } from '@/hooks/useApplicationFormVaildation';
 import QuestionNavigator from './questionNavigator';
@@ -13,6 +13,7 @@ import ConfirmModal from '@/common/components/confirmModal';
 import { useModal } from '@/hooks/useModal';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
+import LoadingSpinner from '@/common/ui/loading';
 
 function ApplicationFormPage() {
   const { data } = useAdminForm(1);
@@ -75,22 +76,24 @@ function ApplicationFormPage() {
     <>
       <form className={S.formContainer} onSubmit={handleSubmit}>
         <h3 className={S.title}>📋 지원폼 관리</h3>
-        <QuestionForm
-          formData={questionsData}
-          errors={errors}
-          isSubmit={isSubmit}
-          handleQuestionTypeChange={handleQuestionTypeChange}
-          handleAddField={handleAddField}
-          handleUpdateField={handleUpdateField}
-          handleDeleteField={handleDeleteField}
-          handleEssentialChange={handleEssentialChange}
-          handleOptionChange={handleOptionChange}
-          handleOptionAdd={handleOptionAdd}
-          handleOptionDelete={handleOptionDelete}
-          handleChangeTitle={handleChangeTitle}
-          handleChangeSubTitle={handleChangeSubTitle}
-          scrollRefs={scrollRefs}
-        />
+        <Suspense fallback={<LoadingSpinner />}>
+          <QuestionForm
+            formData={questionsData}
+            errors={errors}
+            isSubmit={isSubmit}
+            handleQuestionTypeChange={handleQuestionTypeChange}
+            handleAddField={handleAddField}
+            handleUpdateField={handleUpdateField}
+            handleDeleteField={handleDeleteField}
+            handleEssentialChange={handleEssentialChange}
+            handleOptionChange={handleOptionChange}
+            handleOptionAdd={handleOptionAdd}
+            handleOptionDelete={handleOptionDelete}
+            handleChangeTitle={handleChangeTitle}
+            handleChangeSubTitle={handleChangeSubTitle}
+            scrollRefs={scrollRefs}
+          />
+        </Suspense>
         <div
           className={S.navigatorContainer}
           style={assignInlineVars({

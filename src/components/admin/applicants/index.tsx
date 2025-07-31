@@ -1,6 +1,6 @@
 'use client';
 import { useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import * as S from './applicants.css';
 import EvaluationTabs from './evaluationTabs';
 import SearchBarArea from './searchBarArea';
@@ -13,6 +13,7 @@ import { useModal } from '@/hooks/useModal';
 import ConfirmModal from '@/common/components/confirmModal';
 import { MESSAGE } from '@/common/constants/message';
 import ApplicantDetailModal from './applicantDetailModal';
+import LoadingSpinner from '@/common/ui/loading';
 function ApplicantsContentPage() {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState('');
@@ -64,19 +65,23 @@ function ApplicantsContentPage() {
           <div className={S.PanelContainer}>
             <ApplicantFilterBar selectedOptions={selectedOptions} />
             {search && (
-              <SearchResult
-                search={search}
-                selectedOptions={selectedOptions}
-                openConfirmModalWithMessage={openConfirmModalWithMessage}
-                handleSelectApplicant={handleSelectApplicant}
-              />
+              <Suspense fallback={<LoadingSpinner />}>
+                <SearchResult
+                  search={search}
+                  selectedOptions={selectedOptions}
+                  openConfirmModalWithMessage={openConfirmModalWithMessage}
+                  handleSelectApplicant={handleSelectApplicant}
+                />
+              </Suspense>
             )}
             {!search && (
-              <ApplicantList
-                selectedOptions={selectedOptions}
-                openConfirmModalWithMessage={openConfirmModalWithMessage}
-                handleSelectApplicant={handleSelectApplicant}
-              />
+              <Suspense fallback={<LoadingSpinner />}>
+                <ApplicantList
+                  selectedOptions={selectedOptions}
+                  openConfirmModalWithMessage={openConfirmModalWithMessage}
+                  handleSelectApplicant={handleSelectApplicant}
+                />
+              </Suspense>
             )}
           </div>
         </div>
