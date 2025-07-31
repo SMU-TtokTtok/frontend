@@ -9,7 +9,7 @@ import RightSideBar from '@/components/admin/clubInfo/RightSideBar';
 import { useState, useRef, useEffect } from 'react';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import EditIcon from '@/assets/edit-photo.svg';
-import { useAdminClubInfo } from '@/hooks/useClubInfo';
+import { useAdminClubInfo, useAdminClubPatch } from '@/hooks/useClubInfo';
 
 function Page() {
   const [isEditing, setIsEditing] = useState(false);
@@ -17,27 +17,15 @@ function Page() {
   const { data } = useAdminClubInfo();
   const [clubInfo, setClubInfo] = useState<AdminClubIntro>(data);
 
+  const { handleClubInfoPatch } = useAdminClubPatch();
+
   const handleClubInfoChange = (updated: Partial<AdminClubIntro>) => {
     setClubInfo((prev) => (prev ? { ...prev, ...updated } : prev));
   };
 
   const handleSave = async () => {
-    // if (!clubInfo) return;
-    // const patchData = {
-    //   img: clubInfo.img,
-    //   type: clubInfo.type,
-    //   department: clubInfo.department,
-    //   category: clubInfo.category,
-    //   shortDescription: clubInfo.shortDescription,
-    //   isRecruiting: clubInfo.isRecruiting,
-    //   detailField: clubInfo.detailField,
-    //   introduction: clubInfo.introduction,
-    // };
-    // await fetch('/api/club-info', {
-    //   method: 'PATCH',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(patchData),
-    // });
+    console.log(clubInfo);
+    handleClubInfoPatch(clubInfo);
     setIsEditing(false);
     alert('저장되었습니다!');
   };
