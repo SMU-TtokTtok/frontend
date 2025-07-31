@@ -70,7 +70,7 @@ function Page() {
                 const file = e.target.files?.[0];
                 if (file) {
                   const url = URL.createObjectURL(file);
-                  setClubInfo((prev) => (prev ? { ...prev, img: url } : prev));
+                  setClubInfo((prev) => (prev ? { ...prev, profileImageUrl: url } : prev));
                 }
               }}
             />
