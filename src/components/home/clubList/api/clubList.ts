@@ -2,12 +2,26 @@ import { mainClient } from '@/common/apis/ttockTtockClient';
 import { API } from '@/common/constants/endpoints';
 import { ClubItemInfo } from '@/common/model/club';
 import { ClubsInfinite } from '@/common/model/clubInfinite';
+type recruiting = 'all' | 'recruit' | 'notRecruit';
+type sortType = 'ALL' | 'CENTRAL' | 'UNION' | 'DEPARTMENT';
+type sort = 'latest' | 'popular' | 'member_count';
+type category =
+  | 'All'
+  | 'ARTS'
+  | 'ACADEMIC'
+  | 'CULTURE'
+  | 'SPORTS'
+  | 'VOLUNTEER'
+  | 'RELIGION'
+  | 'ETC';
+type grades = 'FIRST_GRADE' | 'SECOND_GRADE' | 'THIRD_GRADE' | 'FOURTH_GRADE';
+
 type GetClubListParams = {
-  category?: string;
-  type?: string;
-  grades?: string[];
-  recruiting?: boolean;
-  sort?: string;
+  category?: category;
+  type?: sortType;
+  grades?: grades[];
+  recruiting?: recruiting;
+  sort?: sort;
   size?: number;
   cursor?: string;
 };
