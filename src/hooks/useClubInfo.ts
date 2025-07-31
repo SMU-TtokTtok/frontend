@@ -4,6 +4,7 @@ import { getClubInfo } from '@/components/clubInfo/api/getClubInfo';
 import { getAdminClubInfo } from '@/components/admin/clubInfo/api/getClubInfo';
 import { patchIsRecruting } from '@/components/admin/clubInfo/api/patchIsRecruting';
 import { patchClubInfo } from '@/components/admin/clubInfo/api/pactchClubInfo';
+import { AdminClubIntro } from '@/common/model/clubIntro';
 
 export const useClubInfo = (clubId: number) => {
   const { clubInfo } = clubInfoKey;
@@ -54,7 +55,7 @@ export const useAdminClubPatch = () => {
   const { adminClubInfo } = clubInfoKey;
 
   const patchClubInfoMutation = useMutation({
-    mutationFn: async (body: any) => {
+    mutationFn: async (body: { request: Partial<AdminClubIntro>; profileImageUrl: File | null }) => {
       const response = await patchClubInfo(body);
       return response;
     },
@@ -63,8 +64,8 @@ export const useAdminClubPatch = () => {
     },
   });
 
-  const handleClubInfoPatch = (body: any) => {
-    patchClubInfoMutation.mutate(body);
+  const handleClubInfoPatch = (request: Partial<AdminClubIntro>, profileImageUrl: File | null) => {
+    patchClubInfoMutation.mutate({ request, profileImageUrl });
   };
 
   return {

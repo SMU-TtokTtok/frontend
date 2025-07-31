@@ -64,4 +64,5 @@ export const handlers = [
   postClubMember,
   AdminProfile,
   AdminLogout,
+  patchClubInfo,
 ];

@@ -16,16 +16,33 @@ function Page() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { data } = useAdminClubInfo();
   const [clubInfo, setClubInfo] = useState<AdminClubIntro>(data);
-
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { handleClubInfoPatch } = useAdminClubPatch();
 
   const handleClubInfoChange = (updated: Partial<AdminClubIntro>) => {
     setClubInfo((prev) => (prev ? { ...prev, ...updated } : prev));
   };
 
+  const getChangedFields = (): Partial<AdminClubIntro> => {
+    if (!clubInfo || !data) return {};
+
+    const changedFields: Partial<AdminClubIntro> = {};
+
+    // 각 필드를 비교하여 변경된 것만 추출 (profileImageUrl 제외)
+    Object.keys(clubInfo).forEach((key) => {
+      const typedKey = key as keyof AdminClubIntro;
+      if (typedKey !== 'profileImageUrl' && clubInfo[typedKey] !== data[typedKey]) {
+        (changedFields as Record<string, unknown>)[key] = clubInfo[typedKey];
+      }
+    });
+
+    return changedFields;
+  };
+
   const handleSave = async () => {
-    console.log(clubInfo);
-    handleClubInfoPatch(clubInfo);
+    const changedFields = getChangedFields();
+
+    handleClubInfoPatch(changedFields, selectedFile);
     setIsEditing(false);
     alert('저장되었습니다!');
   };
@@ -34,7 +51,8 @@ function Page() {
     if (data) {
       setClubInfo(data);
     }
-  }, [isEditing, data]); // <- data 변경 감지
+    setSelectedFile(null);
+  }, [data, isEditing]); // <- data 변경 감지
 
   return (
     <div className={S.container}>
@@ -71,6 +89,7 @@ function Page() {
                 if (file) {
                   const url = URL.createObjectURL(file);
                   setClubInfo((prev) => (prev ? { ...prev, profileImageUrl: url } : prev));
+                  setSelectedFile(file);
                 }
               }}
             />
