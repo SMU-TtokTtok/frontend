@@ -8,6 +8,8 @@ import Image from '@tiptap/extension-image';
 import type { Editor } from '@tiptap/react';
 import './mdEditor.custom.css';
 import { useEffect, useState, useRef } from 'react';
+import { postImage } from './api/postImage';
+import { getImageUrl } from './api/getUrl';
 
 const icons = {
   h1: (
@@ -106,11 +108,31 @@ const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && editor) {
-      const url = URL.createObjectURL(file);
-      editor.chain().focus().setImage({ src: url }).run();
+      try {
+        // 1. 임시 이미지 표시 (사용자 경험 향상)
+        const placeholderUrl = URL.createObjectURL(file);
+        editor.chain().focus().setImage({ src: placeholderUrl }).run();
+
+        // 2. 이미지 파일을 서버에 업로드
+        const response = await postImage(file);
+
+        // 3. 업로드된 이미지의 실제 URL 가져오기
+        const response2 = await getImageUrl(response.imgKey);
+
+        // 4. 임시 URL을 실제 URL로 교체
+        editor.chain().focus().setImage({ src: response2.url }).run();
+
+        // 5. 메모리 누수 방지를 위한 임시 URL 정리
+        URL.revokeObjectURL(placeholderUrl);
+      } catch (error) {
+        console.error('이미지 업로드 실패:', error);
+        alert('이미지 업로드에 실패했습니다.');
+      } finally {
+        // 로딩 상태 해제 등의 정리 작업
+      }
     }
   };
 
