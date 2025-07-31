@@ -18,7 +18,6 @@ function ApplicantDetail({ applicantId }: ApplicantDetailProps) {
     <Modal.Body className={S.body}>
       <Suspense fallback={<LoadingSpinner />}>
         {applicant && <UserInfo data={applicant} />}
-
         {applicant && <Memo data={applicant} applicantId={applicantId} />}
       </Suspense>
     </Modal.Body>
