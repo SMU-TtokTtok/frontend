@@ -5,6 +5,7 @@ export const API = {
     LOGIN: '/api/login',
     LOGOUT: '/api/logout',
     REFRESH: '/api/refresh',
+    CLUBS: '/api/clubs',
   },
   ADMIN: {
     LOGIN: '/auth/login',
