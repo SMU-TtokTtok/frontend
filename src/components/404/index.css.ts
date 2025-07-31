@@ -25,6 +25,7 @@ export const container = style({
   borderRadius: '8px',
   backgroundColor: 'white',
   gap: '16px',
+  width: '500px',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {

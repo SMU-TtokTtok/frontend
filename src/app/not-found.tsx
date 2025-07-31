@@ -14,10 +14,7 @@ export default function NotFound() {
           <Image src={notFound} alt="404" className={S.notFoundImage} />
           <div className={S.stringTextContainer}>
             <div className={S.stringText}>문제가 발생했습니다!</div>
-            <div className={S.stringText2}>
-              일시적인 오류입니다. <br className={S.stringText2Break} />
-              잠시 후에 다시 시도해주세요
-            </div>
+            <div className={S.stringText2}>페이지를 찾을 수 없습니다</div>
           </div>
         </div>
       </div>
