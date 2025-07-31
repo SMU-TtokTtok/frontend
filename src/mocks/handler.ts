@@ -13,7 +13,13 @@ import {
 } from './applicants';
 import { Clubs, getSearchList, patchFavorite, popularClubs } from './clubList';
 import { AdminLogin, AdminLogout, AdminProfile, AdminRefresh } from './auth';
-import { getClubInfo, patchClubInfo, patchRecruiting } from './clubInfo/adminClubInfo';
+import {
+  getClubInfo,
+  patchClubInfo,
+  patchRecruiting,
+  postImage,
+  getImage,
+} from './clubInfo/adminClubInfo';
 import { getUserClubInfo } from './clubInfo/userClubInfo';
 import { emailCheckHandler, verifyResetCodeHandler, resetPasswordHandler } from './password';
 import { userLoginHandler, userSignupHandler, userEmailPostHandler } from './userAuth';
@@ -65,4 +71,6 @@ export const handlers = [
   AdminProfile,
   AdminLogout,
   patchClubInfo,
+  postImage,
+  getImage,
 ];
