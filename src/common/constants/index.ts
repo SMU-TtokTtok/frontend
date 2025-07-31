@@ -43,27 +43,44 @@ export const ADMIN_SIDEBAR_ITEMS = [
   },
 ] as const;
 
-export const FILTER = {
-  category: ['all', 'sport', 'culture', 'academic', 'service', 'religion', 'etc'],
-  recruit: ['all', 'recruit', 'notRecruit'],
-  type: ['all', 'major', 'central', 'union'],
-  sort: ['latest', 'popular', 'member'],
-  grade: ['1', '2', '3', '4'],
-  college: ['humanities', 'design', 'art', 'tech', 'engineering'],
-} as const;
-
-type FilterKey = keyof typeof FILTER;
-
-export const FILTER_KO: Record<FilterKey, readonly string[]> = {
-  category: ['전체', '스포츠', '문화', '학술', '봉사', '종교', '기타'],
-  recruit: ['전체', '모집중', '모집마감'],
-  type: ['전체', '과동아리', '중앙동아리', '연합동아리'],
-  sort: ['최신등록 순', '인기도 순', '멤버많은 수'],
-  grade: ['1학년', '2학년', '3학년', '4학년'],
-  college: ['인문대', '디자인대', '예술대', '융합기술대', '공대'],
-};
-
-export const LOGIN_ERRORS = {
-  adminLogin: '올바른 아이디를 입력해주세요.',
-  adminPassword: '올바른 비밀번호를 입력해주세요.',
+export const FILTER_CONFIG = {
+  category: [
+    { value: 'all', label: '전체' },
+    { value: 'SPORTS', label: '스포츠' },
+    { value: 'ARTS', label: '예술' },
+    { value: 'CULTURE', label: '문화' },
+    { value: 'ACADEMIC', label: '학술' },
+    { value: 'VOLUNTEER', label: '봉사' },
+    { value: 'RELIGION', label: '종교' },
+    { value: 'ETC', label: '기타' },
+  ],
+  recruiting: [
+    { value: 'all', label: '전체' },
+    { value: 'recruit', label: '모집중' },
+    { value: 'notRecruit', label: '모집마감' },
+  ],
+  type: [
+    { value: 'ALL', label: '전체' },
+    { value: 'CENTRAL', label: '과동아리' },
+    { value: 'UNION', label: '중앙동아리' },
+    { value: 'DEPARTMENT', label: '연합동아리' },
+  ],
+  sort: [
+    { value: 'latest', label: '최신등록 순' },
+    { value: 'popular', label: '인기도 순' },
+    { value: 'member_count', label: '멤버많은 수' },
+  ],
+  grades: [
+    { value: 'FIRST_GRADE', label: '1학년' },
+    { value: 'SECOND_GRADE', label: '2학년' },
+    { value: 'THIRD_GRADE', label: '3학년' },
+    { value: 'FOURTH_GRADE', label: '4학년' },
+  ],
+  college: [
+    { value: 'humanities', label: '인문대' },
+    { value: 'design', label: '디자인대' },
+    { value: 'art', label: '예술대' },
+    { value: 'tech', label: '융합기술대' },
+    { value: 'engineering', label: '공대' },
+  ],
 };

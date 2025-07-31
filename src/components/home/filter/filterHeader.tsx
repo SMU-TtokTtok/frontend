@@ -1,27 +1,19 @@
 import React from 'react';
 import * as S from './filter.css';
-import { FILTER, FILTER_KO } from '@/common/constants';
+import { FILTER_CONFIG } from '@/common/constants';
 import { SearchQueryReturn } from '@/hooks/useSearchQuery';
 import DropDownTabBar from './dropdownTabBar';
 import SortTabBar from './sortTabBar';
-
 export interface FilterHeaderProps {
   selectedOptions?: SearchQueryReturn;
 }
-const dropdownFilters = [
-  { label: '분야', key: 'category' },
-  { label: '모집여부', key: 'recruit' },
-] as const;
 
-export const getSelectedLabel = (
-  key: keyof typeof FILTER,
-  selectedOptions?: SearchQueryReturn,
-): string => {
+type FilterKey = keyof typeof FILTER_CONFIG;
+
+export const getSelectedLabel = (key: FilterKey, selectedOptions?: SearchQueryReturn): string => {
   const selected = selectedOptions?.[key] as string | undefined;
-  const index = selected ? FILTER[key].indexOf(selected) : -1;
-  return index !== -1
-    ? FILTER_KO[key][index]
-    : dropdownFilters.find((f) => f.key === key)?.label ?? '';
+  const option = FILTER_CONFIG[key].find((o) => o.value === selected);
+  return option ? option.label : FILTER_CONFIG[key][0].label;
 };
 
 function FilterHeader({ selectedOptions }: FilterHeaderProps) {

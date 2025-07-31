@@ -6,14 +6,13 @@ import Button from '@/common/ui/button/index';
 import Input from '@/common/ui/input';
 import { z } from 'zod';
 import { useLoginMutation } from '@/hooks/useAdminMutation';
-import { LOGIN_ERRORS } from '@/common/constants';
 import { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useAuthStore } from '@/common/store/adminAuthStore';
+import { MESSAGE } from '@/common/constants/message';
 
 const loginSchema = z.object({
-  login: z.string().min(1, LOGIN_ERRORS.adminLogin),
-  password: z.string().min(1, LOGIN_ERRORS.adminPassword),
+  login: z.string().min(1, MESSAGE.error.adminLogin),
+  password: z.string().min(1, MESSAGE.error.adminPassword),
 });
 
 export type AdminLoginForm = z.infer<typeof loginSchema>;

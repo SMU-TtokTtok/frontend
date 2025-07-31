@@ -11,4 +11,8 @@ export const MESSAGE = {
     noInterviewPassed: '면접 합격한 지원자가 없어요.',
     noInterviewFailed: '면접 불합격한 지원자가 없어요.',
   },
+  error: {
+    adminLogin: '올바른 아이디를 입력해주세요.',
+    adminPassword: '올바른 비밀번호를 입력해주세요.',
+  },
 };

@@ -1,23 +1,23 @@
 import * as S from './filter.css';
 import QueryLink from '@/common/components/queryLink';
-import { FILTER, FILTER_KO } from '@/common/constants';
+import { FILTER_CONFIG } from '@/common/constants';
 import Button from '@/common/ui/button';
 import { FilterHeaderProps } from './filterHeader';
 
 function SortTabBar({ selectedOptions }: FilterHeaderProps) {
   return (
     <div className={S.headerRightSide}>
-      {FILTER.sort.map((label) => (
-        <QueryLink key={label} extraQuery={{ sort: label }}>
+      {FILTER_CONFIG.sort.map((option) => (
+        <QueryLink key={option.value} extraQuery={{ sort: option.value }}>
           <Button
-            key={label}
+            key={option.value}
             variant={'none'}
             className={S.ButtonStyle({
               style: 'headerRightside',
-              isSelected: selectedOptions?.sort!.includes(label),
+              isSelected: selectedOptions?.sort!.includes(option.value),
             })}
           >
-            {FILTER_KO.sort[FILTER.sort.indexOf(label)]}
+            {option.label}
           </Button>
         </QueryLink>
       ))}
