@@ -1,9 +1,12 @@
 export interface ClubItemInfo {
-  id: number;
+  id: string;
   name: string;
-  separation: string;
-  members: number;
-  category: string[];
-  isRecruiting: boolean;
-  bookmark: boolean;
+  clubType: string;
+  clubCategory: string;
+  customCategory: string;
+  summary: string;
+  profileImageUrl: string;
+  clubMemberCount: number;
+  recruiting: boolean;
+  bookmarked: boolean;
 }
