@@ -3,7 +3,7 @@ import { fetchFavoritesClubs } from '@/components/favorites/api/getFavorites';
 import { fetchAppliedClubs } from '@/components/applied/api/getApplied';
 import { fetchPopularClubs } from '@/components/popular/api/getPopular';
 import { fetchSearchClubs } from '@/components/search/api/getSearch';
-import { ClubsInfinite } from '@/common/model/clubInfinite';
+import { Clubs } from '@/common/model/clubInfinite';
 import { userKey, clubMemberKey } from './queries/key';
 import { getClubMember } from '@/components/admin/clubMember/api/getClubMember';
 import { ClubMember } from '@/components/admin/clubMember/api/getClubMember';
@@ -17,7 +17,7 @@ interface UseInfiniteParams {
 
 export const useFavoritesInfinite = ({ enabled, sort = 'latest' }: UseInfiniteParams = {}) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
-    ClubsInfinite,
+    Clubs,
     Error
   >({
     queryKey: [...userKey.favoritesClubList, sort],
@@ -33,7 +33,7 @@ export const useFavoritesInfinite = ({ enabled, sort = 'latest' }: UseInfinitePa
 
 export const useAppliedInfinite = ({ enabled, sort = 'latest' }: UseInfiniteParams = {}) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
-    ClubsInfinite,
+    Clubs,
     Error
   >({
     queryKey: [...userKey.appliedClubList, sort],
@@ -48,7 +48,7 @@ export const useAppliedInfinite = ({ enabled, sort = 'latest' }: UseInfinitePara
 
 export const usePopularInfinite = ({ enabled, sort = 'latest' }: UseInfiniteParams = {}) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
-    ClubsInfinite,
+    Clubs,
     Error
   >({
     queryKey: [...userKey.popularClubList, sort],
@@ -63,7 +63,7 @@ export const usePopularInfinite = ({ enabled, sort = 'latest' }: UseInfinitePara
 
 export const useSearchInfinite = ({ enabled, sort = 'latest', name }: UseInfiniteParams = {}) => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
-    ClubsInfinite,
+    Clubs,
     Error
   >({
     queryKey: [...userKey.searchClubList, sort, name],

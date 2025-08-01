@@ -7,7 +7,7 @@ export interface SearchQueryReturn {
   type?: string;
   sort?: string;
   grades?: string;
-  college?: string;
+  clubUniv?: string;
   name?: string;
 }
 
@@ -15,13 +15,13 @@ export const useSearchQuery = () => {
   const searchParams = useSearchParams();
 
   const filter: SearchQueryReturn = {
-    category: searchParams.get('category') || '',
-    recruiting: searchParams.get('recruiting') || '',
-    type: searchParams.get('type') || '',
-    sort: searchParams.get('sort') || '',
-    grades: searchParams.get('grades') || '',
-    college: searchParams.get('college') || '',
-    name: searchParams.get('name') || '',
+    category: searchParams.get('category') || undefined,
+    recruiting: searchParams.get('recruiting') || undefined,
+    type: searchParams.get('type') || undefined,
+    sort: searchParams.get('sort') || undefined,
+    grades: searchParams.get('grades') || undefined,
+    clubUniv: searchParams.get('clubUniv') || undefined,
+    name: searchParams.get('name') || undefined,
   };
   return { filter };
 };
