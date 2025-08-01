@@ -23,7 +23,15 @@ export default function Page() {
 
   const onSubmit = async (data: LoginForm) => {
     console.log(data);
-    const response = await postLogin(data);
+
+    // 학번을 이메일로 변환
+    const loginData = {
+      email: `${data.studentId}@sangmyung.kr`,
+      password: data.password,
+      rememberMe: data.rememberMe,
+    };
+
+    const response = await postLogin(loginData);
 
     if (response.success) {
       router.push('/');
@@ -36,14 +44,15 @@ export default function Page() {
     <div className={S.Container}>
       <div className={S.LoginText}>로그인</div>
       <form className={S.BoxContainer} onSubmit={handleSubmit(onSubmit)}>
-        <div className={S.AuthText({ password: false })}>이메일</div>
+        <div className={S.AuthText({ password: false })}>학번</div>
         <input
-          type="email"
+          type="text"
           className={S.userInput}
-          {...register('email')}
-          placeholder="20XXXXXXX@sangmyung.kr"
+          {...register('studentId')}
+          placeholder="학번을 입력하세요"
+          maxLength={9}
         />
-        {errors.email && <p className={S.ErrorText}>{errors.email.message}</p>}
+        {errors.studentId && <p className={S.ErrorText}>{errors.studentId.message}</p>}
 
         <div className={S.AuthText({ password: true })}>비밀번호</div>
         <input
