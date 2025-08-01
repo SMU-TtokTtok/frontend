@@ -83,14 +83,8 @@ export const Input = style({
 
 export const AuthFooter = style({
   display: 'flex',
-  justifyContent: 'flex-end',
+  justifyContent: 'space-between',
   marginTop: '13px',
-});
-
-export const AuthFooterTextContainer = style({
-  display: 'flex',
-  gap: '10px',
-  cursor: 'pointer',
   marginBottom: '94px',
 
   '@media': {
@@ -98,6 +92,12 @@ export const AuthFooterTextContainer = style({
       marginBottom: '54px',
     },
   },
+});
+
+export const AuthFooterTextContainer = style({
+  display: 'flex',
+  gap: '10px',
+  cursor: 'pointer',
 });
 
 export const AuthFooterText = style({
@@ -148,6 +148,23 @@ export const userInput = style({
   selectors: {
     '&::placeholder': {
       color: '#D2D4D8',
+    },
+  },
+});
+
+export const CheckboxContainer = style({
+  display: 'flex',
+  gap: '4px',
+  alignItems: 'center',
+});
+
+export const CheckboxText = style({
+  fontSize: vars.fonts.body3,
+  color: '#55637D',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body1,
     },
   },
 });

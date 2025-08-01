@@ -22,6 +22,7 @@ export default function Page() {
   });
 
   const onSubmit = async (data: LoginForm) => {
+    console.log(data);
     const response = await postLogin(data);
 
     if (response.success) {
@@ -54,6 +55,10 @@ export default function Page() {
         {errors.password && <p className={S.ErrorText}>{errors.password.message}</p>}
 
         <div className={S.AuthFooter}>
+          <div className={S.CheckboxContainer}>
+            <input type="checkbox" {...register('rememberMe')} />
+            <div className={S.CheckboxText}>로그인 상태 유지</div>
+          </div>
           <div className={S.AuthFooterTextContainer}>
             <div className={S.AuthFooterText} onClick={() => router.push(ROUTES.PASSWORD)}>
               비밀번호 재설정
