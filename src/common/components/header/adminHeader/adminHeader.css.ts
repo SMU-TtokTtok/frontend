@@ -38,3 +38,17 @@ export const RightAreaText = style({
   fontWeight: 600,
   marginLeft: '8px',
 });
+
+export const RightSideContainer = style({
+  display: 'flex',
+  justifyContent: 'start',
+  alignItems: 'center',
+  gap: '30px',
+});
+
+export const RightSideText = style({
+  fontSize: vars.fonts.body2,
+  color: vars.colors.surface.bright,
+  fontWeight: 500,
+  cursor: 'pointer',
+});

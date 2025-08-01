@@ -25,7 +25,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 }));
 
 export const AdminAuthProvider = ({ children }: PropsWithChildren) => {
-  const { data: profile, isLoading } = useAdminProfile();
+  const { data: profile } = useAdminProfile();
   const setProfile = useAuthStore((state) => state.setProfile);
 
   useEffect(() => {

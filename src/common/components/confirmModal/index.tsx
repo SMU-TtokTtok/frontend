@@ -19,9 +19,9 @@ function ConfirmModal({
 }: PropsWithChildren<ConfirmModalProps>) {
   usePreventScroll(isOpen);
   const router = useRouter();
-  const ref = useOutsideClick(() => onClose());
+  const ref = useOutsideClick(() => handleClose());
 
-  const handleConfirm = () => {
+  const handleClose = () => {
     onClose();
     if (redirectTo) {
       router.push(redirectTo);
@@ -32,7 +32,7 @@ function ConfirmModal({
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.Content ref={ref} className={S.content}>
         <Modal.Body className={S.body}>{children}</Modal.Body>
-        <Button variant="primary" className={S.Button} onClick={handleConfirm}>
+        <Button variant="primary" className={S.Button} onClick={handleClose}>
           확인
         </Button>
       </Modal.Content>
