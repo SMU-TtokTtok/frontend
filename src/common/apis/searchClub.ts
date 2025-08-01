@@ -1,8 +1,6 @@
 import { API } from '../constants/endpoints';
-import { ClubItemInfo } from '../model/club';
 import { Clubs } from '../model/clubInfinite';
 import { mainClient } from './ttockTtockClient';
-// type은 임시로 작성했어요 by 형준
 export type sort = 'latest' | 'popular' | 'member_count';
 
 type GetClubSearchListParams = {
@@ -14,6 +12,7 @@ type GetClubSearchListParams = {
 
 export const getClubSearchList = async (params: GetClubSearchListParams) => {
   const { debouncedSearch, sort, size, cursor } = params;
+
   const queryParams = new URLSearchParams();
   if (debouncedSearch) queryParams.append('keyword', debouncedSearch ?? '');
   if (sort) queryParams.append('sort', sort);
