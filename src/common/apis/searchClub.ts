@@ -1,12 +1,26 @@
+import { API } from '../constants/endpoints';
 import { ClubItemInfo } from '../model/club';
+import { Clubs } from '../model/clubInfinite';
 import { mainClient } from './ttockTtockClient';
 // type은 임시로 작성했어요 by 형준
-export type sort = 'latest' | 'popular' | 'member';
+export type sort = 'latest' | 'popular' | 'member_count';
 
-export const getClubSearchList = async (debouncedSearch: string, sort: sort) => {
-  const data = await mainClient.get<ClubItemInfo[]>(
-    `/clubs/search?name=${debouncedSearch}&sort=${sort}`,
-  );
+type GetClubSearchListParams = {
+  debouncedSearch: string;
+  sort?: sort;
+  size?: number;
+  cursor?: string;
+};
+
+export const getClubSearchList = async (params: GetClubSearchListParams) => {
+  const { debouncedSearch, sort, size, cursor } = params;
+  const queryParams = new URLSearchParams();
+  if (debouncedSearch) queryParams.append('keyword', debouncedSearch ?? '');
+  if (sort) queryParams.append('sort', sort);
+  if (size !== undefined) queryParams.append('size', String(params.size));
+  if (cursor) queryParams.append('cursor', cursor);
+
+  const data = await mainClient.get<Clubs>(`${API.USER.SEARCH}?${queryParams.toString()}`);
 
   return data;
 };

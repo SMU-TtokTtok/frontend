@@ -12,7 +12,7 @@ interface ComboboxProps<T> {
 
 export default forwardRef<
   HTMLDivElement,
-  ComboboxProps<{ id: number; name: string; separation: string }>
+  ComboboxProps<{ id: string; name: string; clubType: string }>
 >(function Combobox({ comboBoxList, handleSearchBarClose, setIsComboBoxOpen }, ref) {
   const handleClose = () => {
     handleSearchBarClose?.();
@@ -26,7 +26,7 @@ export default forwardRef<
             <Link href={ROUTES.CLUB_INFO(item.id)} key={item.id}>
               <li key={item.id} className={S.comboBoxOption} onClick={handleClose}>
                 <p>{item.name}</p>
-                <span className={S.category}>{item.separation}</span>
+                <span className={S.category}>{item.clubType}</span>
               </li>
             </Link>
           ))}
