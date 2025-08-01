@@ -19,13 +19,14 @@ export default function Page() {
     formState: { errors },
   } = useForm<PasswordFormType>({
     resolver: zodResolver(passwordSchema),
-    mode: 'onBlur',
+    mode: 'onSubmit',
   });
 
   const [isVerified, setIsVerified] = useState(false);
 
   const handleSendVerificationCode = async () => {
-    const email = getValues('email');
+    const studentId = getValues('studentId');
+    const email = `${studentId}@sangmyung.kr`;
     const response = await postEmail({ email });
 
     if (response.success) {
@@ -36,7 +37,8 @@ export default function Page() {
   };
 
   const handleVerifyCode = async () => {
-    const email = getValues('email');
+    const studentId = getValues('studentId');
+    const email = `${studentId}@sangmyung.kr`;
     const code = getValues('code');
     const response = await postCode({ email, code });
 
@@ -49,16 +51,14 @@ export default function Page() {
     }
   };
 
-  const onSubmit = async () => {
-    const email = getValues('email');
-    const verificationCode = getValues('code');
-    const newPassword = getValues('password');
-    const newPasswordConfirm = getValues('passwordConfirm');
+  const onSubmit = async (data: PasswordFormType) => {
+    console.log(data);
+    const email = `${data.studentId}@sangmyung.kr`;
     const response = await postResetPassword({
       email,
-      verificationCode,
-      newPassword,
-      newPasswordConfirm,
+      verificationCode: data.code,
+      newPassword: data.password,
+      newPasswordConfirm: data.passwordConfirm,
     });
     if (response.success) {
       alert(response.message);
@@ -78,11 +78,16 @@ export default function Page() {
             <div className={S.SubDetailContainer}>
               <div className={S.BoxSubTitle}>이메일</div>
               <div className={S.InputButtonFlex}>
-                <Input
-                  className={S.Input}
-                  placeholder="20XXXXXXX@sangmyung.kr"
-                  {...register('email')}
-                />
+                <div className={S.EmailBox}>
+                  <Input
+                    size={1}
+                    className={S.Input}
+                    placeholder="학번을 입력하세요"
+                    {...register('studentId')}
+                  />
+                  <div className={S.EmailText}>@sangmyung.kr</div>
+                </div>
+
                 <Button
                   variant="secondary"
                   className={S.Button}
@@ -92,7 +97,9 @@ export default function Page() {
                   인증코드 전송
                 </Button>
               </div>
-              {errors.email && <span className={S.ErrorMessage}>{errors.email.message}</span>}
+              {errors.studentId && (
+                <span className={S.ErrorMessage}>{errors.studentId.message}</span>
+              )}
             </div>
             <div className={S.SubDetailContainer}>
               <div className={S.BoxSubTitle}>인증코드</div>

@@ -116,6 +116,25 @@ export const FlexBox2 = style({
   display: 'flex',
   gap: '8px',
   flex: '1 1 0',
+  justifyContent: 'space-between',
+});
+
+export const EmailBox = style({
+  display: 'flex',
+  gap: '8px',
+  alignItems: 'center',
+  flex: '1 1',
+});
+export const EmailText = style({
+  fontSize: vars.fonts.body2,
+  fontWeight: '500',
+  color: '#55637D',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const Input = style({

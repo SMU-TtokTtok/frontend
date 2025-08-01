@@ -22,11 +22,12 @@ export default function Page() {
     formState: { errors },
   } = useForm<SignupForm>({
     resolver: zodResolver(signupSchema),
-    mode: 'onBlur',
+    mode: 'onSubmit',
   });
 
   const handleSendEmail = async () => {
-    const email = getValues('email');
+    const studentId = getValues('studentId');
+    const email = `${studentId}@sangmyung.kr`;
 
     const response = await postEmail({ email });
     if (response.success) {
@@ -37,7 +38,8 @@ export default function Page() {
   };
 
   const handleSendCode = async () => {
-    const email = getValues('email');
+    const studentId = getValues('studentId');
+    const email = `${studentId}@sangmyung.kr`;
     const code = getValues('code');
     const response = await postCode({ email, code });
     if (response.success) {
@@ -50,7 +52,7 @@ export default function Page() {
 
   const onSubmit = async (data: SignupForm) => {
     const response = await postSignup({
-      email: data.email,
+      email: `${data.studentId}@sangmyung.kr`,
       verificationCode: data.code,
       password: data.password,
       passwordConfirm: data.confirmPassword,
@@ -81,11 +83,15 @@ export default function Page() {
             <div className={S.FlexBox}>
               <div className={S.LabelDetailText}>이메일</div>
               <div className={S.FlexBox2}>
-                <input
-                  className={S.Input}
-                  {...register('email')}
-                  placeholder="20XXXXXXX@sangmyung.kr"
-                />
+                <div className={S.EmailBox}>
+                  <input
+                    className={S.Input}
+                    {...register('studentId')}
+                    placeholder="학번을 입력하세요"
+                  />
+                  <div className={S.EmailText}>@sangmyung.kr</div>
+                </div>
+
                 <Button
                   variant="secondary"
                   className={S.Button}
@@ -95,7 +101,7 @@ export default function Page() {
                   인증코드 전송
                 </Button>
               </div>
-              {errors.email && <p className={S.ErrorText}>{errors.email.message}</p>}
+              {errors.studentId && <p className={S.ErrorText}>{errors.studentId.message}</p>}
             </div>
             <div className={S.FlexBox}>
               <div className={S.LabelDetailText}>인증코드</div>
