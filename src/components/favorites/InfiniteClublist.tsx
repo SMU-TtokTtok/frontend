@@ -9,12 +9,12 @@ import Lottie from 'lottie-react';
 import animationData from '@/assets/loading.json';
 import * as F from './favorites.css';
 import Empty from '@/common/components/empty';
-import { ClubsInfinite, ClubsInfiniteWithTotal } from '@/common/model/clubInfinite';
+import { Clubs, ClubsInfiniteWithTotal } from '@/common/model/clubInfinite';
 import type { InfiniteData } from '@tanstack/react-query';
 
 interface InfiniteClubListProps {
   useInfinite: (params: { enabled: boolean; sort: string; name?: string }) => {
-    data: InfiniteData<ClubsInfiniteWithTotal | ClubsInfinite, unknown> | undefined;
+    data: InfiniteData<ClubsInfiniteWithTotal | Clubs, unknown> | undefined;
     fetchNextPage: () => void;
     hasNextPage: boolean;
     isFetchingNextPage: boolean;

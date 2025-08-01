@@ -3,7 +3,7 @@ import { patchFavorite } from '@/components/home/popularClubList/api/popularList
 import { clubKey } from '@/hooks/queries/key';
 import { useModal } from './useModal';
 interface usePatchFavoriteParams {
-  clubId: number;
+  clubId: string;
 }
 export const usePatchFavorite = () => {
   const queryClient = useQueryClient();

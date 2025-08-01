@@ -1,5 +1,5 @@
 import { mainClient } from '@/common/apis/ttockTtockClient';
-import { ClubsInfinite } from '@/common/model/clubInfinite';
+import { Clubs } from '@/common/model/clubInfinite';
 
 export async function fetchSearchClubs({
   sort,
@@ -11,7 +11,7 @@ export async function fetchSearchClubs({
   size: number;
   cursor?: string;
   name?: string;
-}): Promise<ClubsInfinite> {
+}): Promise<Clubs> {
   // console.log(name, size, sort);
   const params = new URLSearchParams({ sort, name: name || '', size: String(size) });
   // console.log(params.toString());

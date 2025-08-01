@@ -1,5 +1,5 @@
 import { mainClient } from '@/common/apis/ttockTtockClient';
-import { ClubsInfinite } from '@/common/model/clubInfinite';
+import { Clubs } from '@/common/model/clubInfinite';
 
 export async function fetchAppliedClubs({
   sort,
@@ -9,7 +9,7 @@ export async function fetchAppliedClubs({
   sort: string;
   size: number;
   cursor?: string;
-}): Promise<ClubsInfinite> {
+}): Promise<Clubs> {
   const params = new URLSearchParams({ sort, size: String(size) });
   if (typeof cursor === 'string') params.append('cursor', cursor);
 

@@ -1,19 +1,44 @@
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { clubKey } from './queries/key';
-import { getClubList } from '@/components/home/clubList/api/clubList';
+import {
+  category,
+  clubUniv,
+  getClubList,
+  grades,
+  recruiting,
+  sort,
+  sortType,
+} from '@/components/home/clubList/api/clubList';
 import { SearchQueryReturn } from './useSearchQuery';
+import { Clubs } from '@/common/model/clubInfinite';
 
 interface UseClubListParams {
   selectedOptions: SearchQueryReturn;
-  page?: number;
+  enabled?: boolean;
 }
 
-// backend와 상의후 인피티트 쿼리로 변경 예정 by 형준
-export const useClubSInfinite = ({ selectedOptions, page }: UseClubListParams) => {
+export const useClubsInfinite = ({ enabled, selectedOptions }: UseClubListParams) => {
   const { allClubList } = clubKey;
-  const { data, isLoading } = useSuspenseQuery({
-    queryKey: [allClubList, selectedOptions],
-    queryFn: () => getClubList(page || 1),
-  });
-  return { data, isLoading };
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } =
+    useInfiniteQuery<Clubs, Error>({
+      queryKey: [allClubList, selectedOptions],
+      queryFn: ({ pageParam }) =>
+        getClubList({
+          category: selectedOptions.category as category,
+          recruiting: selectedOptions.recruiting as recruiting,
+          type: selectedOptions.type as sortType,
+          sort: selectedOptions.sort as sort,
+          grades: selectedOptions.grades ? [selectedOptions.grades as grades] : undefined,
+          clubUniv: selectedOptions.clubUniv as clubUniv,
+          size: 20,
+          cursor: pageParam as string,
+        }),
+      initialPageParam: undefined,
+      getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
+      enabled,
+    });
+
+  const clubs = data ? data.pages.flatMap((page) => page.clubs) : [];
+
+  return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, clubs, isLoading };
 };

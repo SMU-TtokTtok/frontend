@@ -1,4 +1,5 @@
 import { BREAKPOINTS } from '@/common/constants';
+import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const container = style({
@@ -37,4 +38,15 @@ export const innerWrapper = style({
 
 export const cardStyle = style({
   width: '100%',
+});
+
+export const emptyText = style({
+  fontSize: vars.fonts.title3,
+  fontWeight: 500,
+  color: vars.colors.surface.outline,
+  marginTop: '20px',
+  minHeight: '150px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
 });
