@@ -19,6 +19,7 @@ export default function Page() {
     // setError,
   } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
+    mode: 'onSubmit',
   });
 
   const onSubmit = async (data: LoginForm) => {
