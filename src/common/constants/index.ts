@@ -45,7 +45,7 @@ export const ADMIN_SIDEBAR_ITEMS = [
 
 export const FILTER_CONFIG = {
   category: [
-    { value: 'all', label: '전체' },
+    { value: 'null', label: '전체' },
     { value: 'SPORTS', label: '스포츠' },
     { value: 'ARTS', label: '예술' },
     { value: 'CULTURE', label: '문화' },
@@ -55,15 +55,15 @@ export const FILTER_CONFIG = {
     { value: 'ETC', label: '기타' },
   ],
   recruiting: [
-    { value: 'all', label: '전체' },
-    { value: 'recruit', label: '모집중' },
-    { value: 'notRecruit', label: '모집마감' },
+    { value: 'null', label: '전체' },
+    { value: 'true', label: '모집중' },
+    { value: 'false', label: '모집마감' },
   ],
   type: [
-    { value: 'ALL', label: '전체' },
-    { value: 'CENTRAL', label: '과동아리' },
-    { value: 'UNION', label: '중앙동아리' },
-    { value: 'DEPARTMENT', label: '연합동아리' },
+    { value: 'null', label: '전체' },
+    { value: 'CENTRAL', label: '중앙동아리' },
+    { value: 'UNION', label: '연합동아리' },
+    { value: 'DEPARTMENT', label: '과동아리' },
   ],
   sort: [
     { value: 'latest', label: '최신등록 순' },
@@ -76,11 +76,11 @@ export const FILTER_CONFIG = {
     { value: 'THIRD_GRADE', label: '3학년' },
     { value: 'FOURTH_GRADE', label: '4학년' },
   ],
-  college: [
-    { value: 'humanities', label: '인문대' },
-    { value: 'design', label: '디자인대' },
-    { value: 'art', label: '예술대' },
-    { value: 'tech', label: '융합기술대' },
-    { value: 'engineering', label: '공대' },
+  clubUniv: [
+    { value: 'GLOBAL_AREA', label: '글로벌융합대' },
+    { value: 'DESIGN', label: '디자인대' },
+    { value: 'ENGINEERING', label: '공대' },
+    { value: 'CONVERGENCE_TECHNOLOGY', label: '융합기술대' },
+    { value: 'ARTS', label: '예술대' },
   ],
 };
