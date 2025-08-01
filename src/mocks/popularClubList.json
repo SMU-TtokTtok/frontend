@@ -1,47 +1,212 @@
-[
-  {
-    "id": 1,
-    "name": "CCC",
-    "separation": "학술",
-    "members": 25,
-    "category": ["종교", "한국기독학생회"],
-    "isRecruiting": true,
-    "bookmark": true
-  },
-  {
-    "id": 2,
-    "name": "뮤직플레이",
-    "separation": "예술",
-    "members": 30,
-    "category": ["밴드", "보컬"],
-    "isRecruiting": false,
-    "bookmark": false
-  },
-  {
-    "id": 3,
-    "name": "드림FC",
-    "separation": "체육",
-    "members": 20,
-    "category": ["축구", "운동"],
-    "isRecruiting": true,
-    "bookmark": false
-  },
-  {
-    "id": 4,
-    "name": "필름메이커스",
-    "separation": "예술",
-    "members": 15,
-    "category": ["영상제작", "촬영"],
-    "isRecruiting": false,
-    "bookmark": false
-  },
-  {
-    "id": 5,
-    "name": "멋쟁이 사자처럼",
-    "separation": "IT",
-    "members": 15,
-    "category": ["코딩", "IT"],
-    "isRecruiting": false,
-    "bookmark": false
-  }
-]
+{
+  "clubs": [
+    {
+      "id": "club-002",
+      "name": "상명축구부",
+      "clubType": "CENTRAL",
+      "clubCategory": "SPORTS",
+      "customCategory": "축구",
+      "summary": "축구를 통한 건강한 대학생활",
+      "profileImageUrl": "https://example.com/soccer.jpg",
+      "clubMemberCount": 25,
+      "recruiting": true,
+      "bookmarked": false
+    },
+    {
+      "id": "club-012",
+      "name": "댄스크루",
+      "clubType": "UNION",
+      "clubCategory": "CULTURE",
+      "customCategory": "댄스",
+      "summary": "리듬 속에서 찾는 자유로움",
+      "profileImageUrl": "https://example.com/dance.jpg",
+      "clubMemberCount": 16,
+      "recruiting": true,
+      "bookmarked": false
+    },
+    {
+      "id": "club-003",
+      "name": "코딩마스터",
+      "clubType": "DEPARTMENT",
+      "clubCategory": "ACADEMIC",
+      "customCategory": "프로그래밍",
+      "summary": "프로그래밍 실력 향상을 위한 스터디",
+      "profileImageUrl": "https://example.com/code.jpg",
+      "clubMemberCount": 18,
+      "recruiting": true,
+      "bookmarked": false
+    },
+    {
+      "id": "club-001",
+      "name": "그림사랑",
+      "clubType": "CENTRAL",
+      "clubCategory": "CULTURE",
+      "customCategory": "회화",
+      "summary": "미술을 사랑하는 사람들의 모임",
+      "profileImageUrl": "https://example.com/art1.jpg",
+      "clubMemberCount": 15,
+      "recruiting": true,
+      "bookmarked": false
+    },
+    {
+      "id": "club-010",
+      "name": "테니스부",
+      "clubType": "CENTRAL",
+      "clubCategory": "SPORTS",
+      "customCategory": "테니스",
+      "summary": "라켓과 공으로 만나는 우아한 스포츠",
+      "profileImageUrl": "https://example.com/tennis.jpg",
+      "clubMemberCount": 13,
+      "recruiting": true,
+      "bookmarked": false
+    },
+    {
+      "id": "club-022",
+      "name": "러닝크루",
+      "clubType": "CENTRAL",
+      "clubCategory": "SPORTS",
+      "customCategory": "달리기",
+      "summary": "건강한 달리기 문화 만들기",
+      "profileImageUrl": "https://example.com/running.jpg",
+      "clubMemberCount": 15,
+      "recruiting": false,
+      "bookmarked": false
+    },
+    {
+      "id": "club-006",
+      "name": "농구동아리",
+      "clubType": "CENTRAL",
+      "clubCategory": "SPORTS",
+      "customCategory": "농구",
+      "summary": "슛! 골! 함께하는 농구의 즐거움",
+      "profileImageUrl": "https://example.com/basketball.jpg",
+      "clubMemberCount": 14,
+      "recruiting": true,
+      "bookmarked": false
+    },
+    {
+      "id": "club-026",
+      "name": "스터디모임",
+      "clubType": "UNION",
+      "clubCategory": "ACADEMIC",
+      "customCategory": "스터디",
+      "summary": "함께 공부하며 성장하기",
+      "profileImageUrl": "https://example.com/study.jpg",
+      "clubMemberCount": 13,
+      "recruiting": false,
+      "bookmarked": false
+    },
+    {
+      "id": "club-008",
+      "name": "포토클럽",
+      "clubType": "UNION",
+      "clubCategory": "CULTURE",
+      "customCategory": "사진",
+      "summary": "셔터 속에 담는 아름다운 순간들",
+      "profileImageUrl": "https://example.com/photo.jpg",
+      "clubMemberCount": 11,
+      "recruiting": true,
+      "bookmarked": false
+    },
+    {
+      "id": "club-030",
+      "name": "자유동아리",
+      "clubType": "DEPARTMENT",
+      "clubCategory": "ETC",
+      "customCategory": "자유활동",
+      "summary": "자유로운 활동과 새로운 도전",
+      "profileImageUrl": "https://example.com/free.jpg",
+      "clubMemberCount": 11,
+      "recruiting": false,
+      "bookmarked": false
+    },
+    {
+      "id": "club-016",
+      "name": "기타동아리",
+      "clubType": "CENTRAL",
+      "clubCategory": "CULTURE",
+      "customCategory": "기타",
+      "summary": "기타 선율로 전하는 마음",
+      "profileImageUrl": "https://example.com/guitar.jpg",
+      "clubMemberCount": 11,
+      "recruiting": false,
+      "bookmarked": false
+    },
+    {
+      "id": "club-004",
+      "name": "나눔봉사단",
+      "clubType": "UNION",
+      "clubCategory": "VOLUNTEER",
+      "customCategory": "사회봉사",
+      "summary": "사회에 보탬이 되는 봉사활동",
+      "profileImageUrl": "https://example.com/volunteer.jpg",
+      "clubMemberCount": 12,
+      "recruiting": true,
+      "bookmarked": false
+    },
+    {
+      "id": "club-019",
+      "name": "사랑나눔",
+      "clubType": "CENTRAL",
+      "clubCategory": "VOLUNTEER",
+      "customCategory": "복지봉사",
+      "summary": "사랑을 실천하는 봉사활동",
+      "profileImageUrl": "https://example.com/love.jpg",
+      "clubMemberCount": 11,
+      "recruiting": false,
+      "bookmarked": false
+    },
+    {
+      "id": "club-014",
+      "name": "환경지키미",
+      "clubType": "UNION",
+      "clubCategory": "VOLUNTEER",
+      "customCategory": "환경보호",
+      "summary": "지구를 위한 작은 실천",
+      "profileImageUrl": "https://example.com/env.jpg",
+      "clubMemberCount": 11,
+      "recruiting": false,
+      "bookmarked": false
+    },
+    {
+      "id": "club-027",
+      "name": "게임동아리",
+      "clubType": "CENTRAL",
+      "clubCategory": "ETC",
+      "customCategory": "게임",
+      "summary": "게임을 통한 즐거운 소통",
+      "profileImageUrl": "https://example.com/game.jpg",
+      "clubMemberCount": 10,
+      "recruiting": false,
+      "bookmarked": false
+    },
+    {
+      "id": "club-018",
+      "name": "요리연구회",
+      "clubType": "DEPARTMENT",
+      "clubCategory": "CULTURE",
+      "customCategory": "요리",
+      "summary": "맛있는 요리로 행복한 시간",
+      "profileImageUrl": "https://example.com/cooking.jpg",
+      "clubMemberCount": 9,
+      "recruiting": false,
+      "bookmarked": false
+    },
+    {
+      "id": "club-033",
+      "name": "전자공학동아리",
+      "clubType": "DEPARTMENT",
+      "clubCategory": "ACADEMIC",
+      "customCategory": "전자공학",
+      "summary": "전자공학 실험실습",
+      "profileImageUrl": "https://example.com/electronics.jpg",
+      "clubMemberCount": 10,
+      "recruiting": true,
+      "bookmarked": false
+    }
+  ],
+  "size": 17,
+  "totalCount": 17,
+  "hasNext": false,
+  "nextCursor": null
+}

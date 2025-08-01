@@ -4,7 +4,7 @@ import clubList from './clubList.json';
 import { API } from '@/common/constants/endpoints';
 const BASEAPI = process.env.NEXT_PUBLIC_API_URL ?? '';
 
-export const popularClubs = http.get(`${BASEAPI}/popular`, () => {
+export const popularClubs = http.get(`${BASEAPI}${API.USER.POPULAR_CLUBS}`, () => {
   return HttpResponse.json(popularClubList, { status: 200 });
 });
 
@@ -26,7 +26,7 @@ export const getSearchList = http.get(`${BASEAPI}/clubs/search`, ({ request }) =
   const name = url.searchParams.get('name') || '';
   const sort = url.searchParams.get('sort') || 'latest';
 
-  const filteredClubs = clubList.filter((club) =>
+  const filteredClubs = clubList.clubs.filter((club) =>
     club.name.toLowerCase().includes(name.toLowerCase()),
   );
 
