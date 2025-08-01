@@ -9,7 +9,9 @@ function ClubList() {
   return (
     <ul className={S.PopularClubListWrapper}>
       {data &&
-        data.map((club) => <ClubItem clubData={club} key={club.id} className={S.cardStyle} />)}
+        data.clubs.map((club) => (
+          <ClubItem clubData={club} key={club.id} className={S.cardStyle} />
+        ))}
     </ul>
   );
 }

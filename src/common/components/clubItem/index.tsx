@@ -6,10 +6,11 @@ import emptyStar from '@/assets/star.svg';
 import ActiveStar from '@/assets/star_active.svg';
 import person from '@/assets/person.svg';
 import RecruitStatus from './recruitStatus';
-import TagList from './tagList';
 import { usePatchFavorite } from '@/hooks/useFavoriteMutation';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
+import Tag from '@/common/ui/tag';
+import { FILTER_CONFIG } from '@/common/constants';
 interface ClubItemProps {
   clubData: ClubItemInfo;
   className?: string;
@@ -21,13 +22,16 @@ function ClubItem({ clubData, className }: ClubItemProps) {
   const handleClubDetail = () => {
     router.push(ROUTES.CLUB_INFO(clubData.id));
   };
-
+  const clubType = FILTER_CONFIG.type.find((value) => clubData.clubType === value.value)?.label;
+  const clubCategory = FILTER_CONFIG.category.find(
+    (value) => clubData.clubCategory === value.value,
+  )?.label;
   return (
     <li className={`${S.container} ${className}`} onClick={handleClubDetail}>
       <div className={S.headerWrapper}>
-        <p className={S.separation}>{clubData.separation}</p>
+        <p className={S.separation}>{clubType}</p>
         <Image
-          src={clubData.bookmark ? ActiveStar : emptyStar}
+          src={clubData.bookmarked ? ActiveStar : emptyStar}
           className={S.star}
           alt="즐겨찾기"
           onClick={(e) => {
@@ -40,13 +44,20 @@ function ClubItem({ clubData, className }: ClubItemProps) {
         <p className={S.name}>{clubData.name}</p>
         <div className={S.membersWrapper}>
           <Image src={person} className={S.person} alt="멤버 수" />
-          <p className={S.members}>{clubData.members}</p>
+          <p className={S.members}>{clubData.clubMemberCount}</p>
         </div>
       </div>
       <div className={S.categoryWrapper}>
-        <TagList category={clubData.category} />
+        <Tag key={clubData.clubCategory} className={S.tagStyle} variant="default">
+          {clubCategory}
+        </Tag>
+        {clubData.customCategory && (
+          <Tag key={clubData.customCategory} className={S.tagStyle} variant="default">
+            {clubData.customCategory}
+          </Tag>
+        )}
         <span className={S.verticalLine} />
-        <RecruitStatus isRecruiting={clubData.isRecruiting} />
+        <RecruitStatus isRecruiting={clubData.recruiting} />
       </div>
     </li>
   );

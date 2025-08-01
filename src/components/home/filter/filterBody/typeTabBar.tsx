@@ -14,7 +14,7 @@ function TypeTabBar({ selectedOptions }: FilterProps) {
             variant="none"
             className={S.ButtonStyle({
               style: 'body',
-              isSelected: selectedOptions?.type!.includes(option.value),
+              isSelected: selectedOptions?.type === option.value,
             })}
           >
             {option.label}
