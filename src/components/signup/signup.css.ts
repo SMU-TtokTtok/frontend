@@ -129,6 +129,12 @@ export const EmailText = style({
   fontSize: vars.fonts.body2,
   fontWeight: '500',
   color: '#55637D',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const Input = style({

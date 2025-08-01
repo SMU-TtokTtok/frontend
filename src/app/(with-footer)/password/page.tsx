@@ -19,7 +19,7 @@ export default function Page() {
     formState: { errors },
   } = useForm<PasswordFormType>({
     resolver: zodResolver(passwordSchema),
-    mode: 'onBlur',
+    mode: 'onSubmit',
   });
 
   const [isVerified, setIsVerified] = useState(false);
@@ -78,11 +78,16 @@ export default function Page() {
             <div className={S.SubDetailContainer}>
               <div className={S.BoxSubTitle}>이메일</div>
               <div className={S.InputButtonFlex}>
-                <Input
-                  className={S.Input}
-                  placeholder="20XXXXXXX@sangmyung.kr"
-                  {...register('email')}
-                />
+                <div className={S.EmailBox}>
+                  <Input
+                    size={1}
+                    className={S.Input}
+                    placeholder="학번을 입력하세요"
+                    {...register('email')}
+                  />
+                  <div className={S.EmailText}>@sangmyung.kr</div>
+                </div>
+
                 <Button
                   variant="secondary"
                   className={S.Button}

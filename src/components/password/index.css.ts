@@ -54,6 +54,7 @@ export const BoxContainer = recipe({
     '@media': {
       [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
         flexDirection: 'column',
+        padding: '20px 16px',
       },
     },
   },
@@ -133,18 +134,23 @@ export const SubDetailContainer = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '12px',
-  flex: '1 0 0',
+  flex: '1 1 0',
+  minWidth: '0',
+  width: '100%',
 });
 
 export const InputButtonFlex = style({
   display: 'flex',
   gap: '8px',
+  width: '100%',
 });
 
 export const Input = style({
-  flex: '1 0 0',
+  flex: '1 1 0',
   padding: '12px 16px',
   backgroundColor: '#F8F8F9 !important',
+  lineHeight: '1.5',
+  minWidth: '0',
   selectors: {
     '&::placeholder': {
       color: '#D2D4D8',
@@ -153,9 +159,10 @@ export const Input = style({
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      fontSize: '14px',
       // flex: '1 1 0',
-      minWidth: '0',
+      minWidth: '96px',
+      padding: '10px 12px',
+      fontSize: vars.fonts.m_body2,
     },
   },
 });
@@ -165,10 +172,12 @@ export const Button = style({
   fontSize: vars.fonts.body2,
   fontWeight: '600',
   borderRadius: '6px',
+  flexShrink: 0,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       fontSize: '12px',
+      padding: '10px 12px',
     },
   },
 });
@@ -201,4 +210,35 @@ export const responsiveBr = style({
 export const ErrorMessage = style({
   color: 'red',
   fontSize: '14px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: '12px',
+    },
+  },
+});
+
+export const EmailText = style({
+  fontSize: vars.fonts.body2,
+  fontWeight: '500',
+  color: '#55637D',
+  // wordWrap: 'break-word',
+  overflowWrap: 'break-word',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      flexShrink: 1,
+      minWidth: 0,
+    },
+  },
+});
+
+export const EmailBox = style({
+  display: 'flex',
+  gap: '8px',
+  alignItems: 'center',
+  flexGrow: 1,
+  flexShrink: 1,
+  minWidth: 0,
 });
