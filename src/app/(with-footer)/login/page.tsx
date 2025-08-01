@@ -22,15 +22,12 @@ export default function Page() {
   });
 
   const onSubmit = async (data: LoginForm) => {
-    console.log(data);
-
     // 학번을 이메일로 변환
     const loginData = {
       email: `${data.studentId}@sangmyung.kr`,
       password: data.password,
       rememberMe: data.rememberMe,
     };
-
     const response = await postLogin(loginData);
 
     if (response.success) {
