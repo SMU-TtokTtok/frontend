@@ -12,8 +12,16 @@ export const API = {
     LOGIN: '/auth/login',
     LOGOUT: '/auth/logout',
     RE_ISSUE: '/auth/re-issue',
-    APPLICATIONS: '/applies',
-    APPLICATIONS_PASS: '/applies/passed',
-    APPLICATIONS_FAIL: '/applies/failed',
+    APPLICANTS: '/applies',
+    APPLICANTS_PASS: '/applies/passed',
+    APPLICANTS_FAIL: '/applies/failed',
+    APPLICANTS_SEARCH: '/applies/search',
+    APPLICANTS_STATUS: (applicantId: string) => `/applies/evaluations/${applicantId}`,
+    APPLICANTS_DETAIL: (applicantId: string) => `/applies/${applicantId}`,
+    APPLICANTS_MEMO_CREATE: (applicantId: string) => `/applies/${applicantId}/memos`,
+    APPLICANTS_MEMO_DELETE: (applicantId: string, memoId: string) =>
+      `/applies/${applicantId}/memos/${memoId}`,
+    APPLICANTS_MEMO_UPDATE: (applicantId: string, memoId: string) =>
+      `/applies/${applicantId}/memos/${memoId}`,
   },
 };
