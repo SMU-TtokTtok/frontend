@@ -1,13 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import * as S from './index.css';
 import SearchBarArea from './SearchBarArea';
 import MemberList from './MemberList';
 import RightSide from './RightSide';
 import SearchResult from './SearchResult';
-
 import Header from './Header';
+import LoadingSpinner from '@/common/ui/loading';
 
 export default function ClubMemberPage() {
   const [search, setSearch] = useState('');
@@ -23,7 +23,11 @@ export default function ClubMemberPage() {
         <RightSide />
         <div className={S.memberPanel}>
           {!search && <MemberList isEditing={isEditing} />}
-          {search && <SearchResult search={search} isEditing={isEditing} />}
+          {search && (
+            <Suspense fallback={<LoadingSpinner />}>
+              <SearchResult search={search} isEditing={isEditing} />
+            </Suspense>
+          )}
         </div>
       </div>
     </div>

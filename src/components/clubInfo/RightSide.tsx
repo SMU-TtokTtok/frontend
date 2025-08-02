@@ -9,7 +9,7 @@ import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import { sidebarTop } from './rightSide.css';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
-const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: number }) => {
+const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: string }) => {
   const { applyStartDate, applyDeadLine, grades, maxApplyCount, recruiting } = clubIntro;
   const router = useRouter();
 

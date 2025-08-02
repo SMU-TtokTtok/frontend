@@ -11,7 +11,7 @@ interface QuestionsSectionProps {
 
 export default function QuestionsSection({ questions, register, errors }: QuestionsSectionProps) {
   const renderQuestion = (question: Question, index: number) => {
-    const error = (errors.questions?.[index] as { answer?: { message: string } })?.answer;
+    const error = errors.questions?.[index] as { message: string } | undefined;
 
     switch (question.questionType) {
       case 'CHECKBOX':
@@ -32,7 +32,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
                   <input
                     type="checkbox"
                     value={option}
-                    {...register(`questions.${index}.answer` as keyof ApplyFormData, {
+                    {...register(`questions.${index}.value` as keyof ApplyFormData, {
                       required: question.isEssential,
                     })}
                     className={S.checkboxInput}
@@ -63,7 +63,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
                   <input
                     type="radio"
                     value={option}
-                    {...register(`questions.${index}.answer` as keyof ApplyFormData, {
+                    {...register(`questions.${index}.value` as keyof ApplyFormData, {
                       required: question.isEssential,
                     })}
                     className={S.radioInput}
@@ -92,7 +92,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               type="text"
               className={S.shortAnswerInput}
               placeholder="답변을 입력해주세요"
-              {...register(`questions.${index}.answer` as keyof ApplyFormData, {
+              {...register(`questions.${index}.value` as keyof ApplyFormData, {
                 required: question.isEssential ? '입력해주세요.' : false,
               })}
             />
@@ -116,7 +116,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               className={S.longAnswerTextarea}
               placeholder="답변을 입력해주세요"
               rows={5}
-              {...register(`questions.${index}.answer` as keyof ApplyFormData, {
+              {...register(`questions.${index}.value` as keyof ApplyFormData, {
                 required: question.isEssential,
               })}
             />
@@ -139,7 +139,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
             <input
               type="file"
               className={S.fileInput}
-              {...register(`questions.${index}.answer` as keyof ApplyFormData, {
+              {...register(`questions.${index}.value` as keyof ApplyFormData, {
                 required: question.isEssential,
               })}
             />

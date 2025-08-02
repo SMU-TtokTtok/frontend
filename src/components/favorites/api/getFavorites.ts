@@ -13,7 +13,7 @@ export async function fetchFavoritesClubs({
   const params = new URLSearchParams({ sort, size: String(size) });
   if (typeof cursor === 'string') params.append('cursor', cursor);
 
-  const res = await mainClient.get(`/api/clubs/favorites?${params.toString()}`);
+  const res = await mainClient.get(`/api/favorites?${params.toString()}`);
   // const res = await fetch(`/api/clubs/favorites?${params.toString()}`);
 
   return res;

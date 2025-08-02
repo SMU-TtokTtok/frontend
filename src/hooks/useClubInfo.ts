@@ -6,7 +6,7 @@ import { patchIsRecruting } from '@/components/admin/clubInfo/api/patchIsRecruti
 import { patchClubInfo } from '@/components/admin/clubInfo/api/pactchClubInfo';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 
-export const useClubInfo = (clubId: number) => {
+export const useClubInfo = (clubId: string) => {
   const { clubInfo } = clubInfoKey;
 
   const { data, isLoading } = useSuspenseQuery({

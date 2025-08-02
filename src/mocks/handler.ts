@@ -23,7 +23,7 @@ import {
 import { getUserClubInfo } from './clubInfo/userClubInfo';
 import { emailCheckHandler, verifyResetCodeHandler, resetPasswordHandler } from './password';
 import { userLoginHandler, userSignupHandler, userEmailPostHandler } from './userAuth';
-import { getUserForm } from './userForm/userForm';
+import { getUserForm, postUserForm } from './userForm/userForm';
 import {
   getGradeCount,
   getSearchMembers,
@@ -31,6 +31,7 @@ import {
   patchClubMember,
   postClubMember,
 } from './clubMember';
+import { postMessage } from './message';
 
 export const handlers = [
   popularClubs,
@@ -73,4 +74,6 @@ export const handlers = [
   patchClubInfo,
   postImage,
   getImage,
+  postUserForm,
+  postMessage,
 ];

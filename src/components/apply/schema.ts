@@ -17,13 +17,13 @@ export const applyFormSchema = z.object({
     .string()
     .min(1, '전화번호를 입력해주세요.')
     .regex(/^010-\d{4}-\d{4}$/, '올바른 전화번호 형식이 아닙니다. (예: 010-0000-0000)'),
-  isStudent: z.union([z.string(), z.null()]).superRefine((val, ctx) => {
+  studentStatus: z.union([z.string(), z.null()]).superRefine((val, ctx) => {
     if (!val || val === '') {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: '재학여부를 선택해주세요.',
       });
-    } else if (!['true', 'false'].includes(val)) {
+    } else if (!['ENROLLED', 'ABSENCE'].includes(val)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: '올바른 재학여부를 선택해주세요.',
@@ -36,7 +36,7 @@ export const applyFormSchema = z.object({
         code: z.ZodIssueCode.custom,
         message: '현재 학년을 선택해주세요.',
       });
-    } else if (!['1', '2', '3', '4'].includes(val)) {
+    } else if (!['FIRST_GRADE', 'SECOND_GRADE', 'THIRD_GRADE', 'FOURTH_GRADE'].includes(val)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: '올바른 학년을 선택해주세요.',
@@ -49,7 +49,7 @@ export const applyFormSchema = z.object({
         code: z.ZodIssueCode.custom,
         message: '성별을 선택해주세요.',
       });
-    } else if (!['true', 'false'].includes(val)) {
+    } else if (!['MALE', 'FEMALE'].includes(val)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: '올바른 성별을 선택해주세요.',
