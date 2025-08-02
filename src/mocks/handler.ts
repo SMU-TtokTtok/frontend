@@ -31,6 +31,7 @@ import {
   patchClubMember,
   postClubMember,
 } from './clubMember';
+import { postMessage } from './message';
 
 export const handlers = [
   popularClubs,
@@ -74,4 +75,5 @@ export const handlers = [
   postImage,
   getImage,
   postUserForm,
+  postMessage,
 ];
