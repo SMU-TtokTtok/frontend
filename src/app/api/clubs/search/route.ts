@@ -3,13 +3,16 @@ import { NextRequest, NextResponse } from 'next/server';
 // 더미 데이터 생성 (id: 1 ~ 100)
 const TOTAL_CLUBS = 100;
 const allClubs = Array.from({ length: TOTAL_CLUBS }, (_, i) => ({
-  id: i + 1,
+  id: String(i + 1),
   name: `동아리 ${i + 1}`,
-  separation: '학술',
-  members: 25 + (i % 10),
-  category: ['프로그래밍', 'AI'],
-  isRecruiting: i % 2 === 0,
-  bookmark: i % 3 === 0,
+  clubType: 'CENTRAL',
+  clubCategory: 'VOLUNTEER',
+  customCategory: 'string',
+  summary: 'string',
+  profileImageUrl: 'string',
+  clubMemberCount: 0,
+  recruiting: true,
+  bookmarked: true,
 }));
 
 export async function GET(req: NextRequest) {
@@ -27,13 +30,13 @@ export async function GET(req: NextRequest) {
 
   // 정렬
   if (sort === 'latest') {
-    filtered.sort((a, b) => b.id - a.id);
+    filtered.sort((a, b) => Number(b.id) - Number(a.id));
   } else if (sort === 'member') {
-    filtered.sort((a, b) => b.members - a.members);
+    filtered.sort((a, b) => b.clubMemberCount - a.clubMemberCount);
   } else if (sort === 'popular') {
     filtered.sort((a, b) => {
-      if (a.bookmark === b.bookmark) return b.id - a.id;
-      return b.bookmark ? 1 : -1;
+      if (a.bookmarked === b.bookmarked) return Number(b.id) - Number(a.id);
+      return a.bookmarked ? 1 : -1;
     });
   }
 
