@@ -15,11 +15,17 @@ export const useClubInfo = (clubId: string) => {
 
 export const usePostForm = () => {
   const postFormMutation = useMutation({
-    mutationFn: ({ body, clubId }: { body: any; clubId: string }) => postFormInfo(body, clubId),
-    onSuccess: () => {},
+    mutationFn: ({ body, clubId }: { body: FormData; clubId: string }) =>
+      postFormInfo(body, clubId),
+    onSuccess: () => {
+      alert('제출 완료');
+    },
+    onError: () => {
+      alert('제출 실패');
+    },
   });
 
-  const handlePostForm = (body: any, clubId: string) => {
+  const handlePostForm = (body: FormData, clubId: string) => {
     postFormMutation.mutate({ body, clubId });
   };
 

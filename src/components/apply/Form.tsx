@@ -1,10 +1,11 @@
+import React from 'react';
 import { useForm, FieldErrors } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as S from '@/components/apply/form.css';
 import { applyFormSchema, ApplyFormData } from './schema';
 import BasicInfoSection from './BasicInfoSection';
 import QuestionsSection from './QuestionsSection';
-import { useClubInfo } from '@/hooks/useUserForm';
+import { useClubInfo, usePostForm } from '@/hooks/useUserForm';
 import Button from '@/common/ui/button';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
@@ -20,17 +21,85 @@ const scrollToSection = (sectionId: string) => {
 export default function Form({ clubId }: { clubId: string }) {
   const { barPosition } = useFollowSidebar({ initialPosition: 0 });
 
-  const { data } = useClubInfo(Number(clubId));
+  const { data: clubData } = useClubInfo(clubId);
+  const { handlePostForm } = usePostForm();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<ApplyFormData>({
     resolver: zodResolver(applyFormSchema),
   });
 
+  // 질문 데이터가 로드되면 questionId 설정
+  React.useEffect(() => {
+    if (clubData?.questions) {
+      clubData.questions.forEach((question, index) => {
+        setValue(`questions.${index}.questionId`, question.questionId);
+      });
+    }
+  }, [clubData?.questions, setValue]);
+
   const onSubmit = (data: ApplyFormData) => {
-    console.log('폼 데이터:', data);
+    const formData = new FormData();
+
+    const questionIds: string[] = ['5'];
+
+    const answers =
+      data.questions?.map((question) => {
+        let value;
+
+        // 답변 타입에 따라 value 처리
+        if (Array.isArray(question.value)) {
+          // 체크박스의 경우 배열을 그대로 사용
+          value = question.value;
+        } else if (question.value instanceof FileList) {
+          // FileList의 경우 첫 번째 파일을 사용
+          if (question.value.length === 0) {
+            value = null;
+          } else {
+            value = null;
+            // questionIds.push(question.questionId);
+            formData.append('files', question.value[0]);
+          }
+        } else {
+          // 문자열 답변의 경우 그대로 사용
+          value = question.value || '';
+        }
+
+        return {
+          questionId: question.questionId,
+          value: value,
+        };
+      }) || [];
+
+    const requestData = {
+      name: data.name,
+      age: Number(data.age),
+      major: data.major,
+      email: data.email,
+      phone: data.phone,
+      studentStatus: data.studentStatus,
+      grade: data.grade,
+      answers: answers,
+    };
+
+    formData.append(
+      'request',
+      new Blob([JSON.stringify(requestData)], { type: 'application/json' }),
+    );
+
+    if (questionIds.length > 0) {
+      formData.append(
+        'questionIds',
+        new Blob([JSON.stringify(questionIds)], { type: 'application/json' }),
+      );
+    }
+    // console.log(requestData);
+    // console.log(questionIds);
+
+    handlePostForm(formData, clubId);
     // 여기서 API 호출
   };
 
@@ -42,14 +111,14 @@ export default function Form({ clubId }: { clubId: string }) {
     <form onSubmit={handleSubmit(onSubmit, onError)} className={S.wrapper}>
       <div className={S.contentContainer}>
         <div className={S.FormHeader}>
-          <div className={S.FormTitle}>{data?.title} </div>
-          <div className={S.FormSubTitle}>{data?.subTitle}</div>
+          <div className={S.FormTitle}>{clubData?.title} </div>
+          <div className={S.FormSubTitle}>{clubData?.subTitle}</div>
         </div>
 
         <BasicInfoSection register={register} errors={errors} />
 
-        {data?.questions && data.questions.length > 0 && (
-          <QuestionsSection questions={data.questions} register={register} errors={errors} />
+        {clubData?.questions && clubData.questions.length > 0 && (
+          <QuestionsSection questions={clubData.questions} register={register} errors={errors} />
         )}
       </div>
 
@@ -65,7 +134,7 @@ export default function Form({ clubId }: { clubId: string }) {
             <div className={S.contentText} onClick={() => scrollToSection('basic-info')}>
               1. 기본인적사항
             </div>
-            {data?.questions?.map((question, index) => (
+            {clubData?.questions?.map((question, index) => (
               <div
                 className={S.contentText}
                 key={index}
