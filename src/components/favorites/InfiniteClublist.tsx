@@ -11,6 +11,7 @@ import * as F from './favorites.css';
 import Empty from '@/common/components/empty';
 import { Clubs, ClubsInfiniteWithTotal } from '@/common/model/clubInfinite';
 import type { InfiniteData } from '@tanstack/react-query';
+import LoadingSpinner from '@/common/ui/loading';
 
 interface InfiniteClubListProps {
   useInfinite: (params: { enabled: boolean; sort: string; name?: string }) => {
@@ -62,6 +63,8 @@ function InfiniteClubList({
       }
     }
   }, [handleTotal, data]);
+
+  if (data === undefined) return <LoadingSpinner />;
 
   return (
     <>
