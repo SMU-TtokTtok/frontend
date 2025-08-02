@@ -1,4 +1,4 @@
-import { ApplicantsInfo } from '@/common/model/applicants';
+import { Applicant } from '@/common/model/applicants';
 import Modal from '@/common/ui/modal/modal';
 import { convertToKor } from '@/common/util/convertToKor';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
@@ -11,7 +11,7 @@ import Empty from '@/common/components/empty';
 
 interface PassFailListModalProps {
   isPass: boolean | null;
-  applicants: ApplicantsInfo[];
+  applicants: Applicant[];
   evaluation: string;
   isOpen: boolean;
   onClose: () => void;
@@ -28,6 +28,7 @@ function PassFailListModal({
   const ref = useOutsideClick(() => onClose());
   const title = isPass ? `${convertToKor(evaluation)} 합격` : `${convertToKor(evaluation)} 불합격`;
   const isEmpty = applicants.length === 0;
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.Content ref={ref} className={S.passFailListModal}>

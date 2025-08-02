@@ -14,13 +14,13 @@ function ApplicantFilterBar({ selectedOptions }: ApplicantFilterBarProps) {
   return (
     <div className={S.filterContainer}>
       <div>
-        <QueryLink extraQuery={{ sort: 'grade' }}>
-          <Button className={S.filterButton({ isSelected: sort === 'grade' })} variant={'none'}>
+        <QueryLink extraQuery={{ sort: 'GRADE' }}>
+          <Button className={S.filterButton({ isSelected: sort === 'GRADE' })} variant={'none'}>
             학년별
           </Button>
         </QueryLink>
-        <QueryLink extraQuery={{ sort: 'submit' }}>
-          <Button className={S.filterButton({ isSelected: sort === 'submit' })} variant={'none'}>
+        <QueryLink extraQuery={{ sort: 'SUBMIT' }}>
+          <Button className={S.filterButton({ isSelected: sort === 'SUBMIT' })} variant={'none'}>
             제출순
           </Button>
         </QueryLink>

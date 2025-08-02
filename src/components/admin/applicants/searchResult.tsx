@@ -10,7 +10,7 @@ interface SearchResultProps {
   selectedOptions: ApplicantListParams;
   search: string;
   openConfirmModalWithMessage: (message: string) => void;
-  handleSelectApplicant: (applicantId: number) => void;
+  handleSelectApplicant: (applicantId: string) => void;
 }
 function SearchResult({
   search,
@@ -19,7 +19,7 @@ function SearchResult({
   handleSelectApplicant,
 }: SearchResultProps) {
   const debouncedSearch = useDebounce(search);
-  const { data: applicants } = useSearchApplicant({
+  const { applicants } = useSearchApplicant({
     debouncedSearch,
     evaluation: selectedOptions.evaluation,
   });
@@ -33,6 +33,7 @@ function SearchResult({
         return (
           <ApplicantItem
             key={applicant.id}
+            selectedOptions={selectedOptions}
             applicant={applicant}
             handleFavoriteStatus={handleFavoriteStatus}
             handleSelectApplicant={() => handleSelectApplicant(applicant.id)}

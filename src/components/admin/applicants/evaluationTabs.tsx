@@ -7,13 +7,13 @@ interface EvaluationTabsProps {
 }
 
 function EvaluationTabs({ selectedOptions }: EvaluationTabsProps) {
-  const isDocumentEvaluation = selectedOptions.evaluation === 'applies';
-  const isInterviewEvaluation = selectedOptions.evaluation === 'interviews';
+  const isDocumentEvaluation = selectedOptions.evaluation === 'DOCUMENT';
+  const isInterviewEvaluation = selectedOptions.evaluation === 'INTERVIEW';
 
   return (
     <div className={S.evaluationTabs}>
       <div className={S.evaluationButtonWrapper}>
-        <QueryLink extraQuery={{ evaluation: 'applies' }}>
+        <QueryLink extraQuery={{ evaluation: 'DOCUMENT' }}>
           <Button
             type="button"
             variant={'none'}
@@ -25,7 +25,7 @@ function EvaluationTabs({ selectedOptions }: EvaluationTabsProps) {
       </div>
 
       <div className={S.evaluationButtonWrapper}>
-        <QueryLink extraQuery={{ evaluation: 'interviews' }}>
+        <QueryLink extraQuery={{ evaluation: 'INTERVIEW' }}>
           <Button
             type="button"
             variant={'none'}

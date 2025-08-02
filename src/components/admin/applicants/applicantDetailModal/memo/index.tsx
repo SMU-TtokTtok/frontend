@@ -2,13 +2,13 @@ import * as S from './memo.css';
 import Image from 'next/image';
 import add from '@/assets/add_circle.svg';
 import MemoItem from './memoItem';
-import { ApplicantInfo, Memo as IMemo } from '@/common/model/applicants';
+import { ApplicantDetailInfo, Memo as IMemo } from '@/common/model/applicants';
 import { useState } from 'react';
 import { useMemoMutations } from '@/hooks/memo';
 import Empty from '@/common/components/empty';
 interface MemoProps {
-  data: ApplicantInfo;
-  applicantId: number;
+  data: ApplicantDetailInfo;
+  applicantId: string;
 }
 
 function Memo({ data, applicantId }: MemoProps) {
@@ -18,7 +18,7 @@ function Memo({ data, applicantId }: MemoProps) {
   const handleAddMemo = () => {
     const newMemo: IMemo = {
       id: String(Date.now()),
-      content: '',
+      content: '메모를 입력해주세요',
     };
     postMemo(
       { applicantId, content: newMemo.content },
@@ -30,14 +30,14 @@ function Memo({ data, applicantId }: MemoProps) {
     );
   };
 
-  const handleChangeMemo = (memoId: number, content: string) => {
+  const handleChangeMemo = (memoId: string, content: string) => {
     const updatedMemo = memos.map((memo) =>
       memo.id === String(memoId) ? { ...memo, content } : memo,
     );
     setMemos(updatedMemo);
   };
 
-  const handleSaveMemo = (memoId: number, content: string) => {
+  const handleSaveMemo = (memoId: string, content: string) => {
     patchMemo({
       applicantId: applicantId,
       memoId: String(memoId),
@@ -45,7 +45,7 @@ function Memo({ data, applicantId }: MemoProps) {
     });
   };
 
-  const handleDeleteMemo = (memoId: number) => {
+  const handleDeleteMemo = (memoId: string) => {
     const updatedMemos = memos.filter((memo) => memo.id !== String(memoId));
     deleteMemo(
       { applicantId: applicantId, memoId: String(memoId) },

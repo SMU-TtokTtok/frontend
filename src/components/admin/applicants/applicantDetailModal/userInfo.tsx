@@ -3,10 +3,10 @@ import LabelWithText from './labelWithText';
 import Checkbox from '@/common/ui/checkbox';
 import check from '@/assets/check_radio.svg';
 import AnswerFactory from './answerFactory/answerFactory';
-import { ApplicantInfo } from '@/common/model/applicants';
+import { ApplicantDetailInfo } from '@/common/model/applicants';
 
 interface UserInfoProps {
-  data: ApplicantInfo;
+  data: ApplicantDetailInfo;
 }
 
 function UserInfo({ data }: UserInfoProps) {

@@ -23,7 +23,7 @@ export const applicantGrade = style({
   width: '49px',
   height: '1.5rem',
   fontSize: vars.fonts.body2,
-  padding: '0.222rem  ',
+  padding: '0.222rem',
   textAlign: 'center',
   border: 'none',
   borderRadius: '4px',

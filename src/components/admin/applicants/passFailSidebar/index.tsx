@@ -22,8 +22,8 @@ interface PassFailSidebarProps {
 
 function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassFailSidebarProps) {
   const evaluation = selectedOptions.evaluation;
-  const { data: passApplicants } = usePassList({ selectedOptions });
-  const { data: failApplicants } = useFailList({ selectedOptions });
+  const { passApplicants } = usePassList({ selectedOptions });
+  const { failApplicants } = useFailList({ selectedOptions });
   const [isPass, setIsPass] = useState<boolean | null>(null);
   const { handleConnectApplicants } = useConnectApplicant({
     openConfirmModalWithMessage: openConfirmModalWithMessage,
