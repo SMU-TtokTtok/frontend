@@ -99,11 +99,11 @@ export default function Form({ clubId }: { clubId: string }) {
     }
     // console.log(requestData);
     // console.log(questionIds);
-    for (const [key, value] of formData) {
-      console.log(key, value);
-    }
+    // for (const [key, value] of formData) {
+    //   console.log(key, value);
+    // }
+
     handlePostForm(formData, clubId);
-    // 여기서 API 호출
   };
 
   const onError = (errors: FieldErrors<ApplyFormData>) => {
