@@ -1,5 +1,3 @@
-// apiRoutes.ts
-
 export const API = {
   USER: {
     LOGIN: '/api/login',
@@ -7,6 +5,7 @@ export const API = {
     REFRESH: '/api/refresh',
     CLUBS: '/api/clubs',
     POPULAR_CLUBS: '/api/clubs/banner/popular',
+    SEARCH: '/api/clubs/search',
   },
   ADMIN: {
     LOGIN: '/auth/login',

@@ -20,6 +20,12 @@ export const convertToKor = (name: string): string => {
       return '객관식';
     case 'FILE':
       return '파일';
+    case 'CENTRAL':
+      return '중앙동아리';
+    case 'DEPARTMENT':
+      return '과동아리';
+    case 'UNION':
+      return '연합동아리';
     default:
       return name;
   }

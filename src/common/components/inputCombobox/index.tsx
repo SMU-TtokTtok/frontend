@@ -17,7 +17,7 @@ interface InputComboboxProps<T> extends InputHTMLAttributes<HTMLInputElement> {
   onClick?: () => void;
 }
 
-function InputCombobox<T extends { id: number; name: string; separation: string }>({
+function InputCombobox<T extends { id: string; name: string; clubType: string }>({
   className,
   img,
   iconStyle,

@@ -23,7 +23,7 @@ interface MobileProps<T> {
   searchList: T[];
 }
 
-function Mobile<T extends { id: number; name: string; separation: string }>({
+function Mobile<T extends { id: string; name: string; clubType: string }>({
   isVisible,
   isComboBoxOpen,
   setIsComboBoxOpen,

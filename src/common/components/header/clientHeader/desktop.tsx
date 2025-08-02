@@ -17,7 +17,7 @@ interface DesktopProps<T> {
   searchList: T[];
 }
 
-function Desktop<T extends { id: number; name: string; separation: string }>({
+function Desktop<T extends { id: string; name: string; clubType: string }>({
   isVisible,
   isComboBoxOpen,
   setIsComboBoxOpen,

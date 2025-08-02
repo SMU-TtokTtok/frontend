@@ -1,19 +1,37 @@
 'use client';
 
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { clubKey } from './queries/key';
 import { getClubSearchList, sort } from '@/common/apis/searchClub';
+import { Clubs } from '@/common/model/clubInfinite';
 interface useSearchClubParams {
   debouncedSearch: string;
   sort?: sort;
+  enabled?: boolean;
 }
 
-export const useSearchClubInfinite = ({ debouncedSearch, sort }: useSearchClubParams) => {
+export const useSearchClubInfinite = ({ debouncedSearch, sort, enabled }: useSearchClubParams) => {
   const { searchList } = clubKey;
 
-  const { data, isLoading } = useSuspenseQuery({
-    queryKey: [searchList, debouncedSearch],
-    queryFn: () => getClubSearchList(debouncedSearch, (sort as sort) ?? 'latest'),
+  const isSearchEnabled = !!debouncedSearch;
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery<
+    Clubs,
+    Error
+  >({
+    queryKey: [searchList, debouncedSearch, sort],
+    queryFn: ({ pageParam }) =>
+      getClubSearchList({
+        debouncedSearch,
+        sort: (sort as sort) ?? 'latest',
+        size: 20,
+        cursor: pageParam as string,
+      }),
+    initialPageParam: undefined,
+    getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
+    enabled: isSearchEnabled,
   });
-  return { data, isLoading };
+
+  const clubs = data ? data.pages.flatMap((page) => page.clubs) : [];
+
+  return { clubs, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage };
 };

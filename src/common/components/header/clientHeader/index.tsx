@@ -16,7 +16,7 @@ function ClientHeader() {
     handleKeyDown,
   } = useCombobox();
   const isVisible = useScrollObserver();
-  const { data: searchList } = useSearchClubInfinite({ debouncedSearch });
+  const { clubs: searchList } = useSearchClubInfinite({ debouncedSearch });
 
   return (
     <>
@@ -27,7 +27,7 @@ function ClientHeader() {
         handleSearchChange={handleSearchChange}
         handleNavigate={handleNavigate}
         handleKeyDown={handleKeyDown}
-        searchList={searchList}
+        searchList={searchList ?? []}
       />
       <Mobile
         isVisible={isVisible}
@@ -36,7 +36,7 @@ function ClientHeader() {
         handleSearchChange={handleSearchChange}
         handleNavigate={handleNavigate}
         handleKeyDown={handleKeyDown}
-        searchList={searchList}
+        searchList={searchList ?? []}
       />
     </>
   );
