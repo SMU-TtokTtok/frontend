@@ -53,9 +53,7 @@ export default class ApiClient {
       const isFormData = body instanceof FormData;
 
       const headers: HeadersInit = isFormData
-        ? {
-            'Content-Type': 'multipart/form-data',
-          }
+        ? {}
         : {
             'Content-Type': 'application/json',
           };
@@ -63,7 +61,7 @@ export default class ApiClient {
       const response = await fetch(url, {
         method,
         headers,
-        body: body ? JSON.stringify(body) : undefined,
+        body: isFormData ? body : body ? JSON.stringify(body) : undefined,
         credentials: 'include',
       });
 
