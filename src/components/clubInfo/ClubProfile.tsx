@@ -8,6 +8,7 @@ import star_active from '@/assets/star_active.svg';
 import { usePatchFavorite } from '@/hooks/useFavoriteMutation';
 import { getKoreanType } from '@/common/util/getKoreanType';
 import { getKoreanCategory } from '@/common/util/getKoreanCategory';
+import clubImg from '@/assets/clubImg.svg';
 
 export default function ClubProfile({
   clubIntro,
@@ -31,7 +32,13 @@ export default function ClubProfile({
 
   return (
     <div className={S.clubProfile}>
-      <Image src={profileImageUrl} alt={name} width={212} height={206} className={S.imageStyle} />
+      <Image
+        src={profileImageUrl || clubImg}
+        alt={name}
+        width={212}
+        height={206}
+        className={S.imageStyle}
+      />
       <div className={S.RightFlex}>
         <div className={S.type} style={{ marginBottom: '2px' }}>
           {getKoreanType(clubType)}

@@ -65,11 +65,7 @@ function AdminClubInfoPage() {
           <div className={S.flexRow}>
             <div className={S.imgContainer}>
               <Image
-                src={
-                  !clubInfo.profileImageUrl || clubInfo.profileImageUrl === ''
-                    ? clubImg
-                    : clubInfo.profileImageUrl
-                }
+                src={clubInfo.profileImageUrl || clubImg}
                 alt="동아리 사진"
                 width={212}
                 height={224}
