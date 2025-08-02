@@ -44,7 +44,7 @@ export default function Form({ clubId }: { clubId: string }) {
   const onSubmit = (data: ApplyFormData) => {
     const formData = new FormData();
 
-    const questionIds: string[] = ['5'];
+    const questionIds: string[] = [];
 
     const answers =
       data.questions?.map((question) => {
@@ -60,7 +60,7 @@ export default function Form({ clubId }: { clubId: string }) {
             value = null;
           } else {
             value = null;
-            // questionIds.push(question.questionId);
+            questionIds.push(question.questionId);
             formData.append('files', question.value[0]);
           }
         } else {
@@ -83,8 +83,9 @@ export default function Form({ clubId }: { clubId: string }) {
       studentStatus: data.studentStatus,
       grade: data.grade,
       answers: answers,
+      applyFormId: clubData?.formId,
+      gender: data.gender,
     };
-
     formData.append(
       'request',
       new Blob([JSON.stringify(requestData)], { type: 'application/json' }),
@@ -98,7 +99,9 @@ export default function Form({ clubId }: { clubId: string }) {
     }
     // console.log(requestData);
     // console.log(questionIds);
-
+    for (const [key, value] of formData) {
+      console.log(key, value);
+    }
     handlePostForm(formData, clubId);
     // 여기서 API 호출
   };
