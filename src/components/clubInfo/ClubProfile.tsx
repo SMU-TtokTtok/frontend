@@ -14,7 +14,7 @@ export default function ClubProfile({
   clubId,
 }: {
   clubIntro: UserClubIntro;
-  clubId: number;
+  clubId: string;
 }) {
   const {
     name,

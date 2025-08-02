@@ -3,7 +3,7 @@ import { clubFormKey } from './queries/key';
 import { gethFormInfo } from '@/components/apply/api/getFormInfo';
 import { postFormInfo } from '@/components/apply/api/postFormInfo';
 
-export const useClubInfo = (clubId: number) => {
+export const useClubInfo = (clubId: string) => {
   const { clubForm } = clubFormKey;
 
   const { data, isLoading } = useSuspenseQuery({

@@ -12,7 +12,7 @@ import LoadingSpinner from '@/common/ui/loading';
 
 export default function ClubInfoPage() {
   const { clubId } = useParams();
-  const { data } = useClubInfo(Number(clubId));
+  const { data } = useClubInfo(clubId as string);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
 
   useEffect(() => {
@@ -31,12 +31,12 @@ export default function ClubInfoPage() {
         <div className={S.container}>
           <div className={S.leftcontainer}>
             <BackButton />
-            <ClubProfile clubIntro={data} clubId={Number(clubId)} />
-            {!isLargeScreen && <RightSide clubIntro={data} clubId={Number(clubId)} />}
+            <ClubProfile clubIntro={data} clubId={clubId as string} />
+            {!isLargeScreen && <RightSide clubIntro={data} clubId={clubId as string} />}
             <ClubIntroduce introduction={data.content} />
           </div>
 
-          {isLargeScreen && <RightSide clubIntro={data} clubId={Number(clubId)} />}
+          {isLargeScreen && <RightSide clubIntro={data} clubId={clubId as string} />}
         </div>
       </div>
     </Suspense>
