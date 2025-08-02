@@ -13,12 +13,12 @@ export const useClubInfo = (clubId: string) => {
   return { data, isLoading };
 };
 
-export const usePostForm = () => {
+export const usePostForm = (handleEditModalOpen: () => void) => {
   const postFormMutation = useMutation({
     mutationFn: ({ body, clubId }: { body: FormData; clubId: string }) =>
       postFormInfo(body, clubId),
     onSuccess: () => {
-      alert('제출 완료');
+      handleEditModalOpen();
     },
     onError: () => {
       alert('제출 실패');

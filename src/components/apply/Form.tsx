@@ -10,6 +10,9 @@ import Button from '@/common/ui/button';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { sidebarTop } from './form.css';
+import ConfirmModal from '@/common/components/confirmModal';
+import { useModal } from '@/hooks/useModal';
+import { ROUTES } from '@/common/constants/routes';
 
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId);
@@ -20,9 +23,13 @@ const scrollToSection = (sectionId: string) => {
 
 export default function Form({ clubId }: { clubId: string }) {
   const { barPosition } = useFollowSidebar({ initialPosition: 0 });
-
+  const {
+    isOpen: isEditModalOpen,
+    handleModalClose: handleEditModalClose,
+    handleModalOpen: handleEditModalOpen,
+  } = useModal();
   const { data: clubData } = useClubInfo(clubId);
-  const { handlePostForm } = usePostForm();
+  const { handlePostForm } = usePostForm(handleEditModalOpen);
   const {
     register,
     handleSubmit,
@@ -111,51 +118,60 @@ export default function Form({ clubId }: { clubId: string }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit, onError)} className={S.wrapper}>
-      <div className={S.contentContainer}>
-        <div className={S.FormHeader}>
-          <div className={S.FormTitle}>{clubData?.title} </div>
-          <div className={S.FormSubTitle}>{clubData?.subTitle}</div>
-        </div>
-
-        <BasicInfoSection register={register} errors={errors} />
-
-        {clubData?.questions && clubData.questions.length > 0 && (
-          <QuestionsSection questions={clubData.questions} register={register} errors={errors} />
-        )}
-      </div>
-
-      <div
-        className={S.rightSideContainer}
-        style={assignInlineVars({
-          [sidebarTop]: `${barPosition}px`,
-        })}
-      >
-        <div className={S.BoxFlex}>
-          <div className={S.BoxTitle}>목차</div>
-          <div className={S.BoxContentContainer}>
-            <div className={S.contentText} onClick={() => scrollToSection('basic-info')}>
-              1. 기본인적사항
-            </div>
-            {clubData?.questions?.map((question, index) => (
-              <div
-                className={S.contentText}
-                key={index}
-                onClick={() => scrollToSection(`question-${index}`)}
-              >
-                {index + 2}. {question.title}
-              </div>
-            ))}
+    <>
+      <form onSubmit={handleSubmit(onSubmit, onError)} className={S.wrapper}>
+        <div className={S.contentContainer}>
+          <div className={S.FormHeader}>
+            <div className={S.FormTitle}>{clubData?.title} </div>
+            <div className={S.FormSubTitle}>{clubData?.subTitle}</div>
           </div>
+
+          <BasicInfoSection register={register} errors={errors} />
+
+          {clubData?.questions && clubData.questions.length > 0 && (
+            <QuestionsSection questions={clubData.questions} register={register} errors={errors} />
+          )}
         </div>
-        <Button type="submit" variant="primary" className={S.submitButton}>
+
+        <div
+          className={S.rightSideContainer}
+          style={assignInlineVars({
+            [sidebarTop]: `${barPosition}px`,
+          })}
+        >
+          <div className={S.BoxFlex}>
+            <div className={S.BoxTitle}>목차</div>
+            <div className={S.BoxContentContainer}>
+              <div className={S.contentText} onClick={() => scrollToSection('basic-info')}>
+                1. 기본인적사항
+              </div>
+              {clubData?.questions?.map((question, index) => (
+                <div
+                  className={S.contentText}
+                  key={index}
+                  onClick={() => scrollToSection(`question-${index}`)}
+                >
+                  {index + 2}. {question.title}
+                </div>
+              ))}
+            </div>
+          </div>
+          <Button type="submit" variant="primary" className={S.submitButton}>
+            제출하기
+          </Button>
+        </div>
+
+        <Button type="submit" variant="primary" className={S.submitButtonMobile}>
           제출하기
         </Button>
-      </div>
-
-      <Button type="submit" variant="primary" className={S.submitButtonMobile}>
-        제출하기
-      </Button>
-    </form>
+      </form>
+      <ConfirmModal
+        isOpen={isEditModalOpen}
+        onClose={handleEditModalClose}
+        redirectTo={ROUTES.CLUB_INFO(clubId)}
+      >
+        지원이 완료되었습니다
+      </ConfirmModal>
+    </>
   );
 }
