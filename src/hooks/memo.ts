@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { applicantKey } from './queries/key';
 import { deleteMemo, patchMemo, postMemo } from '@/components/admin/applicants/api/applicants';
-import { ApplicantInfo } from '@/common/model/applicants';
+import { ApplicantDetailInfo } from '@/common/model/applicants';
 
 interface UsePostMemoParams {
-  applicantId: number;
+  applicantId: string;
   content: string;
 }
 
@@ -17,9 +17,9 @@ export const usePostMemo = () => {
     onMutate: async (newMemo) => {
       await queryClient.cancelQueries({ queryKey: [applicantInfo] });
 
-      const previousData = queryClient.getQueryData<ApplicantInfo>([applicantInfo]);
+      const previousData = queryClient.getQueryData<ApplicantDetailInfo>([applicantInfo]);
 
-      queryClient.setQueryData<ApplicantInfo>([applicantInfo], (old) => {
+      queryClient.setQueryData<ApplicantDetailInfo>([applicantInfo], (old) => {
         if (!old) return old;
         return {
           ...old,
@@ -42,7 +42,7 @@ export const usePostMemo = () => {
 };
 
 interface UseDeleteMemoParams {
-  applicantId: number;
+  applicantId: string;
   memoId: string;
 }
 
@@ -56,9 +56,9 @@ export const useDeleteMemo = () => {
     onMutate: async (deleteTarget) => {
       await queryClient.cancelQueries({ queryKey: [applicantInfo] });
 
-      const previousData = queryClient.getQueryData<ApplicantInfo>([applicantInfo]);
+      const previousData = queryClient.getQueryData<ApplicantDetailInfo>([applicantInfo]);
 
-      queryClient.setQueryData<ApplicantInfo>([applicantInfo], (old) => {
+      queryClient.setQueryData<ApplicantDetailInfo>([applicantInfo], (old) => {
         if (!old) return old;
         return {
           ...old,
@@ -84,7 +84,7 @@ export const useDeleteMemo = () => {
 };
 
 interface UsePatchMemoParams {
-  applicantId: number;
+  applicantId: string;
   memoId: string;
   content: string;
 }
@@ -100,9 +100,8 @@ export const usePatchMemo = () => {
     onMutate: async (updatedMemo) => {
       await queryClient.cancelQueries({ queryKey: [applicantInfo] });
 
-      const previousData = queryClient.getQueryData<ApplicantInfo>([applicantInfo]);
-
-      queryClient.setQueryData<ApplicantInfo>([applicantInfo], (old) => {
+      const previousData = queryClient.getQueryData<ApplicantDetailInfo>([applicantInfo]);
+      queryClient.setQueryData<ApplicantDetailInfo>([applicantInfo], (old) => {
         if (!old) return old;
         return {
           ...old,

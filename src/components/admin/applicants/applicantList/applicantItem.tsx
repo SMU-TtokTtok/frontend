@@ -3,24 +3,40 @@ import * as S from './applicantList.css';
 import menu from '@/assets/menu.svg';
 import passArrow from '@/assets/arrow_pass.svg';
 import failArrow from '@/assets/arrow_fail.svg';
-import { ApplicantsInfo } from '@/common/model/applicants';
+import { Applicant } from '@/common/model/applicants';
 import Tag from '@/common/ui/tag';
 import { getGradeStyle } from '@/common/util/getGradeStyle';
 import DropDown from '@/common/components/dropdown';
 import DropDownButton from '@/common/ui/dropdownButton';
 import { dropDownButtonVariant } from '@/common/ui/dropdownButton/dropdownButton.css';
 import { convertToKor } from '@/common/util/convertToKor';
+import { getKoreanGrade } from '@/common/util/getKoreanGrade';
+import { ApplicantListParams, Evaluation } from '../api/applicants';
 interface ApplicantProps {
-  applicant: ApplicantsInfo;
-  handleFavoriteStatus: ({ applicantId, status }: { applicantId: number; status: string }) => void;
-  handleSelectApplicant: (applicantId: number) => void;
+  applicant: Applicant;
+  selectedOptions: ApplicantListParams;
+  handleFavoriteStatus: ({
+    applicantId,
+    status,
+    evaluation,
+  }: {
+    applicantId: string;
+    status: string;
+    evaluation: Evaluation;
+  }) => void;
+  handleSelectApplicant: (applicantId: string) => void;
 }
 const options = [
   { value: 'PASS', label: '합격' },
   { value: 'FAIL', label: '불합격' },
   { value: 'EVALUATING', label: '평가중' },
 ];
-function ApplicantItem({ applicant, handleFavoriteStatus, handleSelectApplicant }: ApplicantProps) {
+function ApplicantItem({
+  applicant,
+  handleFavoriteStatus,
+  handleSelectApplicant,
+  selectedOptions,
+}: ApplicantProps) {
   const getStatusVariant = (status: string): dropDownButtonVariant => {
     switch (status) {
       case 'EVALUATING':
@@ -42,11 +58,11 @@ function ApplicantItem({ applicant, handleFavoriteStatus, handleSelectApplicant 
       <div className={S.profileSection}>
         <Image src={menu} alt="menu" />
         <Tag variant={getGradeStyle(applicant.grade)} className={S.applicantGrade}>
-          {applicant.grade}학년
+          {getKoreanGrade(applicant.grade)}
         </Tag>
         <span className={S.applicantName}>{applicant.name}</span>
         <span className={S.verticalLine} />
-        <span className={S.applicantDepartment}>{applicant.department}</span>
+        <span className={S.applicantDepartment}>{applicant.major}</span>
       </div>
       <DropDown
         toggleButton={
@@ -65,7 +81,11 @@ function ApplicantItem({ applicant, handleFavoriteStatus, handleSelectApplicant 
             className={S.dropDownItem}
             onClick={(e) => {
               e.stopPropagation();
-              handleFavoriteStatus({ applicantId: applicant.id, status: status.value });
+              handleFavoriteStatus({
+                applicantId: applicant.id,
+                status: status.value,
+                evaluation: selectedOptions.evaluation,
+              });
             }}
           >
             {status.label}

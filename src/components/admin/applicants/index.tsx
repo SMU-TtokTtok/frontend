@@ -17,7 +17,7 @@ import LoadingSpinner from '@/common/ui/loading';
 function ApplicantsContentPage() {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState('');
-  const [selectedApplicantId, setSelectedApplicantId] = useState<number>(0);
+  const [selectedApplicantId, setSelectedApplicantId] = useState<string>('0');
   const [confirmMessage, setConfirmMessage] = useState<string>(MESSAGE.applicantsStatus.confirm);
   const {
     isOpen: isConfirmModalOpen,
@@ -36,7 +36,7 @@ function ApplicantsContentPage() {
     handleConfirmModalOpen();
   };
 
-  const handleSelectApplicant = (applicantId: number) => {
+  const handleSelectApplicant = (applicantId: string) => {
     setSelectedApplicantId(applicantId);
     handleApplicantDetailModalOpen();
   };
@@ -83,6 +83,7 @@ function ApplicantsContentPage() {
                 />
               </Suspense>
             )}
+            <div />
           </div>
         </div>
       </div>

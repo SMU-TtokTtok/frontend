@@ -9,7 +9,7 @@ import { useOutsideClick } from '@/hooks/useOutsideClick';
 import ApplicantDetail from './applicantDetail';
 
 interface ApplicantDetailModalProps {
-  applicantId: number;
+  applicantId: string;
   onClose: () => void;
   isOpen: boolean;
 }

@@ -11,7 +11,7 @@ export const ROUTES = {
   APPLIY_FORM: (clubId: string) => `/club/${clubId}/apply`,
   ADMIN: '/admin',
   ADMIN_LOGIN: '/admin/login',
-  ADMIN_APPLICATIONS: '/admin/applicants?evaluation=applies&sort=grade',
+  ADMIN_APPLICATIONS: '/admin/applicants?evaluation=DOCUMENT&sort=GRADE',
   ADMIN_CLUB_MEMBER: '/admin/clubMember',
   ADMIN_CLUB_MEMBER_ADD: '/admin/clubMember/add',
   ADMIN_APPLICATIONS_FORM: '/admin/applicationsForm',

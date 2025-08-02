@@ -7,9 +7,9 @@ import Button from '@/common/ui/button';
 
 interface MemoItemProps {
   memo: Memo;
-  onUpdate: (memoId: number, content: string) => void;
-  onDelete: (memoId: number) => void;
-  onSave: (memoId: number, content: string) => void;
+  onUpdate: (memoId: string, content: string) => void;
+  onDelete: (memoId: string) => void;
+  onSave: (memoId: string, content: string) => void;
 }
 function MemoItem({ memo, onUpdate, onDelete, onSave }: MemoItemProps) {
   return (
@@ -18,13 +18,13 @@ function MemoItem({ memo, onUpdate, onDelete, onSave }: MemoItemProps) {
         className={S.memoItemTextarea}
         value={memo.content}
         placeholder="메모를 입력하세요"
-        onChange={(e) => onUpdate(Number(memo.id), e.target.value)}
+        onChange={(e) => onUpdate(String(memo.id), e.target.value)}
       />
       <div className={S.buttonGroup}>
         <Button
           variant="primary"
           className={S.memoSaveButton}
-          onClick={() => onSave(Number(memo.id), memo.content)}
+          onClick={() => onSave(String(memo.id), memo.content)}
         >
           저장하기
         </Button>
@@ -32,7 +32,7 @@ function MemoItem({ memo, onUpdate, onDelete, onSave }: MemoItemProps) {
           src={close}
           className={S.memoItemDelete}
           alt="삭제하기"
-          onClick={() => onDelete(Number(memo.id))}
+          onClick={() => onDelete(String(memo.id))}
         />
       </div>
     </li>

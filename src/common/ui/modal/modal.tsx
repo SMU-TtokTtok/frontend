@@ -1,3 +1,4 @@
+'use client';
 import React, { PropsWithChildren } from 'react';
 import ModalProvider from './modalProvider';
 import { type ModalContextProps } from '@/common/store/modalContext';

@@ -1,15 +1,16 @@
 import { http, HttpResponse } from 'msw';
 import applicantList from './applicantList.json';
 import applicantInfo from './applicantInfo.json';
+import { API } from '@/common/constants/endpoints';
 
-const API = process.env.NEXT_PUBLIC_API_URL ?? '';
+const BASE_API = process.env.NEXT_PUBLIC_API_URL ?? '';
 
-export const Applicants = http.get(`${API}/api/admin/:evaluation`, () => {
+export const Applicants = http.get(`${BASE_API}${API.ADMIN.APPLICANTS}`, () => {
   return HttpResponse.json(applicantList, { status: 200 });
 });
 
 export const PatchApplicantStatus = http.patch(
-  `${API}/api/admin/applicants/:applicantId/status`,
+  `${BASE_API}/api/admin/applicants/:applicantId/status`,
   ({ params }) => {
     const { applicantId } = params;
     const status = 'evaluating';
@@ -17,39 +18,45 @@ export const PatchApplicantStatus = http.patch(
   },
 );
 
-export const PassList = http.get(`${API}/api/admin/applies/passed`, () => {
+export const PassList = http.get(`${BASE_API}/api/admin/applies/passed`, () => {
   return HttpResponse.json(applicantList, { status: 200 });
 });
 
-export const FailList = http.get(`${API}/api/admin/applies/failed`, () => {
+export const FailList = http.get(`${BASE_API}/api/admin/applies/failed`, () => {
   return HttpResponse.json([], { status: 200 });
 });
 
-export const ApplicantSearch = http.get(`${API}/api/admin/:evaluation/search`, ({ request }) => {
-  const url = new URL(request.url);
-  const search = url.searchParams.get('name') || '';
-  const rawSearch = search.trim();
-  const filteredApplicants = applicantList.filter((applicant) =>
-    applicant.name.includes(rawSearch),
-  );
+export const ApplicantSearch = http.get(
+  `${BASE_API}/api/admin/:evaluation/search`,
+  ({ request }) => {
+    const url = new URL(request.url);
+    const search = url.searchParams.get('name') || '';
+    const rawSearch = search.trim();
+    const filteredApplicants = applicantList.filter((applicant) =>
+      applicant.name.includes(rawSearch),
+    );
 
-  return HttpResponse.json(filteredApplicants, { status: 200 });
-});
+    return HttpResponse.json(filteredApplicants, { status: 200 });
+  },
+);
 
-export const ApplicantInfo = http.get(`${API}/api/admin/applies/:applicantId`, ({ params }) => {
-  const { applicantId } = params;
-  const applicant = applicantList.find((applicant) => applicant.id === Number(applicantId));
+export const ApplicantInfo = http.get(
+  `${BASE_API}/api/admin/applies/:applicantId`,
+  ({ params }) => {
+    const { applicantId } = params;
+    const applicant = applicantList.find((applicant) => applicant.id === Number(applicantId));
 
-  if (!applicant) {
-    return HttpResponse.json({ message: 'Applicant not found' }, { status: 404 });
-  }
+    if (!applicant) {
+      return HttpResponse.json({ message: 'Applicant not found' }, { status: 404 });
+    }
 
-  return HttpResponse.json(applicantInfo, { status: 200 });
-});
+    return HttpResponse.json(applicantInfo, { status: 200 });
+  },
+);
 const mockMemos: { id: string; applicantId: string; content: string }[] = [];
 
 export const PostMemo = http.post(
-  `${API}/api/admin/applies/:applicantId/memos`,
+  `${BASE_API}/api/admin/applies/:applicantId/memos`,
   async ({ request, params }) => {
     const { applicantId } = params;
     const body = (await request.json()) as { content: string };
@@ -66,7 +73,7 @@ export const PostMemo = http.post(
 );
 
 export const DeleteMemo = http.delete(
-  `${API}/api/admin/applies/:applicantId/memos/:memoId`,
+  `${BASE_API}/api/admin/applies/:applicantId/memos/:memoId`,
   ({ params }) => {
     const { applicantId, memoId } = params;
     return HttpResponse.json(
@@ -77,7 +84,7 @@ export const DeleteMemo = http.delete(
 );
 
 export const PatchMemo = http.patch(
-  `${API}/api/admin/applies/:applicantId/memos/:memoId`,
+  `${BASE_API}/api/admin/applies/:applicantId/memos/:memoId`,
   async ({ request, params }) => {
     const { applicantId, memoId } = params;
     const content = (await request.json()) as { content: string };
@@ -87,7 +94,7 @@ export const PatchMemo = http.patch(
 );
 
 export const PutConnectApplicant = http.put(
-  `${API}/api/admin/applies/:clubId/finalize`,
+  `${BASE_API}/api/admin/applies/:clubId/finalize`,
   ({ params }) => {
     const { clubId } = params;
     return HttpResponse.json(

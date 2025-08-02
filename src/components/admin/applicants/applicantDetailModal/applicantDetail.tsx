@@ -8,7 +8,7 @@ import * as S from './applicantDetailModal.css';
 import LoadingSpinner from '@/common/ui/loading';
 
 interface ApplicantDetailProps {
-  applicantId: number;
+  applicantId: string;
 }
 
 function ApplicantDetail({ applicantId }: ApplicantDetailProps) {

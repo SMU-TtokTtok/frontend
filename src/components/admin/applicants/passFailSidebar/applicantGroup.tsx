@@ -1,4 +1,4 @@
-import { ApplicantsInfo } from '@/common/model/applicants';
+import { Applicant } from '@/common/model/applicants';
 import { ApplicantListParams } from '../api/applicants';
 import PassFailList from './passFailList';
 import * as S from './passFailSidebar.css';
@@ -8,7 +8,7 @@ interface ApplicantGroupProps {
   isPass: boolean;
   label: string;
   selectedOptions: ApplicantListParams;
-  applicants: ApplicantsInfo[];
+  applicants: Applicant[];
   openConfirmModalWithMessage: (message: string) => void;
   handleListModalOpen: () => void;
   handlePassTypeChange: (isPass: boolean) => void;
@@ -18,6 +18,7 @@ export default function ApplicantGroup({
   isPass,
   label,
   applicants,
+  selectedOptions,
   openConfirmModalWithMessage,
   handleListModalOpen,
   handlePassTypeChange,
@@ -39,6 +40,7 @@ export default function ApplicantGroup({
       {applicants.length === 0 && <Empty className={S.empty['sideBar']}>{emptyMessage}</Empty>}
       {applicants.length > 0 && (
         <PassFailList
+          selectedOptions={selectedOptions}
           applicants={applicants}
           openConfirmModalWithMessage={openConfirmModalWithMessage}
         />

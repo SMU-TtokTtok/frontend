@@ -1,14 +1,24 @@
 import { Gender, QuestionType } from './applicationForm';
-export interface ApplicantsInfo {
-  id: number;
+
+export interface Applicant {
+  id: string;
   name: string;
-  grade: number;
-  department: string;
-  status: string;
+  grade: Grade;
+  major: string;
+  status: Status;
+  interviewDate?: string;
 }
 
-type Grade = 'FIRST_GRADE' | 'SECOND_GRADE' | 'THIRD_GRADE' | 'FOURTH_GRADE';
+export interface ApplicantsInfo {
+  currentPage: number;
+  totalPage: number;
+  totalCount: number;
+  applicants: Applicant[];
+}
+
+export type Grade = 'FIRST_GRADE' | 'SECOND_GRADE' | 'THIRD_GRADE' | 'FOURTH_GRADE';
 type StudentStatus = 'ENROLLED' | 'ABSENCE';
+type Status = 'EVALUATING' | 'PASS' | 'FAIL';
 
 export interface Answer {
   title: string;
@@ -24,7 +34,7 @@ export interface Memo {
   content: string;
 }
 
-export interface ApplicantInfo {
+export interface ApplicantDetailInfo {
   name: string;
   age: number;
   major: string;
