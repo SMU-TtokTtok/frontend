@@ -81,7 +81,7 @@ export const useSearchInfinite = ({ enabled, sort = 'latest', name }: UseInfinit
 export const useClubMemberInfinite = ({ enabled, clubId }: UseInfiniteParams) => {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
     useInfiniteQuery<ClubMember, Error>({
-      queryKey: [...clubMemberKey.clubMember],
+      queryKey: [clubMemberKey.clubMember],
       queryFn: ({ pageParam }) => getClubMember({ page: pageParam as number, clubId: clubId }),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => {

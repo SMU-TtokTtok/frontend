@@ -25,12 +25,12 @@ export const useSearchClubMember = ({ search, clubId }: { search: string; clubId
   return { data, isLoading };
 };
 
-export const useDeleteClubMember = (handleModalOpen: () => void) => {
+export const useDeleteClubMember = (handleModalOpen: () => void, clubId: string) => {
   const queryClient = useQueryClient();
   const { clubMember } = clubMemberKey;
 
   const deleteClubMemberMutation = useMutation({
-    mutationFn: (memberId: string) => deleteClubMember(memberId),
+    mutationFn: (memberId: string) => deleteClubMember(memberId, clubId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
       queryClient.invalidateQueries({ queryKey: ['gradeCount'] });
@@ -45,13 +45,13 @@ export const useDeleteClubMember = (handleModalOpen: () => void) => {
   return { handleDeleteClubMember };
 };
 
-export const usePatchClubMember = (handleModalOpen: () => void) => {
+export const usePatchClubMember = (handleModalOpen: () => void, clubId: string) => {
   const queryClient = useQueryClient();
   const { clubMember } = clubMemberKey;
 
   const patchClubMemberMutation = useMutation({
     mutationFn: ({ memberId, role }: { memberId: string; role: string }) =>
-      patchClubMember(memberId, role),
+      patchClubMember(memberId, role, clubId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
       // queryClient.invalidateQueries({ queryKey: ['gradeCount'] });
