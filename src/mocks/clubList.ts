@@ -21,7 +21,7 @@ export const patchFavorite = http.patch(`${BASEAPI}/favorite/:id`, () => {
   );
 });
 
-export const getSearchList = http.get(`${BASEAPI}/clubs/search`, ({ request }) => {
+export const getSearchList = http.get(`${BASEAPI}${API.USER.SEARCH}`, ({ request }) => {
   const url = new URL(request.url);
   const name = url.searchParams.get('name') || '';
   const sort = url.searchParams.get('sort') || 'latest';

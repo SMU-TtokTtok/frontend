@@ -1,18 +1,22 @@
 import { http, HttpResponse } from 'msw';
 import applicationForm from './applicationForm.json';
-const API = process.env.NEXT_PUBLIC_API_URL ?? '';
+import { API } from '@/common/constants/endpoints';
+const BASE_API = process.env.NEXT_PUBLIC_API_URL ?? '';
 
-export const AdminApplicationForm = http.get(`${API}/api/admin/forms/:clubId`, () => {
+export const AdminApplicationForm = http.get(`${BASE_API}${API.ADMIN.FORMS(':clubId')}`, () => {
   return HttpResponse.json(applicationForm, { status: 200 });
 });
 
 export const postApplicantForm = http.post(
-  `${API}/api/admin/forms/clubs/:clubId`,
+  `${BASE_API}${API.ADMIN.FORMS(':clubId')}`,
   ({ request }) => {
     return HttpResponse.json({ success: true, data: request.body }, { status: 200 });
   },
 );
 
-export const patchApplicantForm = http.patch(`${API}/api/admin/forms/:clubId`, ({ request }) => {
-  return HttpResponse.json({ success: true, data: request.body }, { status: 200 });
-});
+export const patchApplicantForm = http.patch(
+  `${BASE_API}${API.ADMIN.FORMS_UPDATE(':formId')}`,
+  ({ request }) => {
+    return HttpResponse.json({ success: true, data: request.body }, { status: 200 });
+  },
+);

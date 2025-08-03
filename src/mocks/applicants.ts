@@ -10,7 +10,7 @@ export const Applicants = http.get(`${BASE_API}${API.ADMIN.APPLICANTS}`, () => {
 });
 
 export const PatchApplicantStatus = http.patch(
-  `${BASE_API}/api/admin/applicants/:applicantId/status`,
+  `${BASE_API}${API.ADMIN.APPLICANTS_STATUS(':applicantId')}`,
   ({ params }) => {
     const { applicantId } = params;
     const status = 'evaluating';
@@ -18,16 +18,16 @@ export const PatchApplicantStatus = http.patch(
   },
 );
 
-export const PassList = http.get(`${BASE_API}/api/admin/applies/passed`, () => {
+export const PassList = http.get(`${BASE_API}${API.ADMIN.APPLICANTS_PASS}`, () => {
   return HttpResponse.json(applicantList, { status: 200 });
 });
 
-export const FailList = http.get(`${BASE_API}/api/admin/applies/failed`, () => {
+export const FailList = http.get(`${BASE_API}${API.ADMIN.APPLICANTS_FAIL}`, () => {
   return HttpResponse.json([], { status: 200 });
 });
 
 export const ApplicantSearch = http.get(
-  `${BASE_API}/api/admin/:evaluation/search`,
+  `${BASE_API}${API.ADMIN.APPLICANTS_SEARCH}`,
   ({ request }) => {
     const url = new URL(request.url);
     const search = url.searchParams.get('name') || '';
@@ -41,7 +41,7 @@ export const ApplicantSearch = http.get(
 );
 
 export const ApplicantInfo = http.get(
-  `${BASE_API}/api/admin/applies/:applicantId`,
+  `${BASE_API}${API.ADMIN.APPLICANTS_DETAIL(':applicantId')}`,
   ({ params }) => {
     const { applicantId } = params;
     const applicant = applicantList.find((applicant) => applicant.id === Number(applicantId));
@@ -56,7 +56,7 @@ export const ApplicantInfo = http.get(
 const mockMemos: { id: string; applicantId: string; content: string }[] = [];
 
 export const PostMemo = http.post(
-  `${BASE_API}/api/admin/applies/:applicantId/memos`,
+  `${BASE_API}${API.ADMIN.APPLICANTS_MEMO_CREATE(':applicantId')}`,
   async ({ request, params }) => {
     const { applicantId } = params;
     const body = (await request.json()) as { content: string };
@@ -73,7 +73,7 @@ export const PostMemo = http.post(
 );
 
 export const DeleteMemo = http.delete(
-  `${BASE_API}/api/admin/applies/:applicantId/memos/:memoId`,
+  `${BASE_API}${API.ADMIN.APPLICANTS_MEMO_DELETE(':applicantId', ':memoId')}`,
   ({ params }) => {
     const { applicantId, memoId } = params;
     return HttpResponse.json(
@@ -84,7 +84,7 @@ export const DeleteMemo = http.delete(
 );
 
 export const PatchMemo = http.patch(
-  `${BASE_API}/api/admin/applies/:applicantId/memos/:memoId`,
+  `${BASE_API}${API.ADMIN.APPLICANTS_MEMO_UPDATE(':applicantId', ':memoId')}`,
   async ({ request, params }) => {
     const { applicantId, memoId } = params;
     const content = (await request.json()) as { content: string };
@@ -94,7 +94,7 @@ export const PatchMemo = http.patch(
 );
 
 export const PutConnectApplicant = http.put(
-  `${BASE_API}/api/admin/applies/:clubId/finalize`,
+  `${BASE_API}${API.ADMIN.APPLICANTS_CONNECTION(':clubId')}`,
   ({ params }) => {
     const { clubId } = params;
     return HttpResponse.json(
