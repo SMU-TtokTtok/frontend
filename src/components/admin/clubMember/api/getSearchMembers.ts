@@ -10,8 +10,7 @@ export interface ClubMember {
   }[];
 }
 
-export const getSearchMembers = async (search: string) => {
-  const clubId = 1;
+export const getSearchMembers = async (search: string, clubId: string) => {
   const data = await adminClient.get<ClubMember>(`/members/${clubId}/search?keyword=${search}`);
 
   return data;

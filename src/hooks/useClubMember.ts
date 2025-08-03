@@ -9,18 +9,18 @@ import {
   postClubMemberBody,
 } from '@/components/admin/clubMember/api/postClubMember';
 
-export const useGradeCount = () => {
+export const useGradeCount = ({ clubId }: { clubId: string }) => {
   const { data, isLoading } = useSuspenseQuery({
-    queryKey: ['gradeCount'],
-    queryFn: () => getGradeCount(),
+    queryKey: ['gradeCount', clubId],
+    queryFn: () => getGradeCount(clubId),
   });
   return { data, isLoading };
 };
 
-export const useSearchClubMember = ({ search }: { search: string }) => {
+export const useSearchClubMember = ({ search, clubId }: { search: string; clubId: string }) => {
   const { data, isLoading } = useSuspenseQuery({
-    queryKey: ['searchClubMember', search],
-    queryFn: () => getSearchMembers(search),
+    queryKey: ['searchClubMember', search, clubId],
+    queryFn: () => getSearchMembers(search, clubId),
   });
   return { data, isLoading };
 };

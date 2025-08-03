@@ -10,13 +10,15 @@ import loading from '@/assets/loading.json';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
 import LoadingSpinner from '@/common/ui/loading';
-
+import { useAuthStore } from '@/common/store/adminAuthStore';
 import AddButton from './ui/AddButton';
 
 export default function MemberList({ isEditing }: { isEditing: boolean }) {
+  const { profile } = useAuthStore();
   const { clubMembers, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useClubMemberInfinite({
       enabled: true,
+      clubId: profile!.clubId,
     });
   const router = useRouter();
   // 무한스크롤을 위한 useInView 훅
@@ -24,7 +26,6 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
     threshold: 0,
     rootMargin: '100px', // 100px 전에 미리 로드
   });
-
   // inView가 true이고 다음 페이지가 있으면 다음 페이지 로드
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
@@ -81,7 +82,7 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
             const shouldShowDivider = isLastExecutive && (isEditing || !allMembersAreExecutive);
 
             return (
-              <div key={member.memberId}>
+              <div key={index}>
                 <MemberItem {...member} isEditing={isEditing} />
                 {shouldShowDivider && (
                   <>

@@ -15,10 +15,16 @@ export interface ClubMember {
   ];
 }
 
-export const getClubMember = async ({ page = 1, size = 5 }: { page?: number; size?: number }) => {
-  const clubId = 1;
+export const getClubMember = async ({
+  page = 1,
+  size = 5,
+  clubId,
+}: {
+  page?: number;
+  size?: number;
+  clubId: string;
+}) => {
   const params = new URLSearchParams({ page: String(page), size: String(size) });
   const data = await adminClient.get<ClubMember>(`/members/${clubId}?${params.toString()}`);
-
   return data;
 };

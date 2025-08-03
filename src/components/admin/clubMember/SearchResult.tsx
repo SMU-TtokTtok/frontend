@@ -3,6 +3,7 @@ import { useSearchClubMember } from '@/hooks/useClubMember';
 import Empty from '@/common/components/empty';
 import MemberItem from './MemberItem';
 import * as S from './index.css';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 interface SearchResultProps {
   search: string;
@@ -10,9 +11,11 @@ interface SearchResultProps {
 }
 
 export default function SearchResult({ search, isEditing }: SearchResultProps) {
+  const { profile } = useAuthStore();
   const debouncedSearch = useDebounce(search);
   const { data: clubMembers } = useSearchClubMember({
     search: debouncedSearch,
+    clubId: profile!.clubId,
   });
   const members = clubMembers?.clubMembers || [];
 

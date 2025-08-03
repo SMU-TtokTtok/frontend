@@ -13,6 +13,7 @@ interface UseInfiniteParams {
   enabled?: boolean;
   sort?: string;
   name?: string;
+  clubId: string;
 }
 
 export const useFavoritesInfinite = ({ enabled, sort = 'latest' }: UseInfiniteParams = {}) => {
@@ -77,11 +78,11 @@ export const useSearchInfinite = ({ enabled, sort = 'latest', name }: UseInfinit
   return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data };
 };
 
-export const useClubMemberInfinite = ({ enabled }: UseInfiniteParams = {}) => {
+export const useClubMemberInfinite = ({ enabled, clubId }: UseInfiniteParams) => {
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
     useInfiniteQuery<ClubMember, Error>({
       queryKey: [...clubMemberKey.clubMember],
-      queryFn: ({ pageParam }) => getClubMember({ page: pageParam as number }),
+      queryFn: ({ pageParam }) => getClubMember({ page: pageParam as number, clubId: clubId }),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => {
         // 다음 페이지가 있으면 다음 페이지 번호 반환, 없으면 undefined
