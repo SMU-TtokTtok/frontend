@@ -24,5 +24,6 @@ export const API = {
       `/applies/${applicantId}/memos/${memoId}`,
     FORMS: (clubId: string) => `/forms/${clubId}`,
     FORMS_UPDATE: (formId: string) => `/forms/${formId}`,
+    APPLICANTS_CONNECTION: (clubId: string) => `/applies/${clubId}/finalize`,
   },
 };
