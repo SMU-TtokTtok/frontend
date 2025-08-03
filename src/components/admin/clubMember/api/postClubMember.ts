@@ -6,14 +6,15 @@ export interface postClubMemberBody {
   studentNum: number;
   major: string;
   email: string;
-  phone: string;
+  phoneNumber: string;
   grade: string;
   gender: string;
 }
 
-export const postClubMember = async (body: postClubMemberBody, role: string) => {
-  //clubId는 로그인 로직 후에 수정 by현우
-  const clubId = 1;
+export const postClubMember = async (body: postClubMemberBody, role: string, clubId: string) => {
+  // console.log(body);
+  // console.log(role);
+  // console.log(clubId);
   const data = await adminClient.post(`/members/${clubId}/add?role=${role}`, body);
 
   return data;

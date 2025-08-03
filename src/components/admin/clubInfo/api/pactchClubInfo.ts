@@ -19,15 +19,28 @@ export interface PatchClubInfoBody {
   profileImageUrl: File | null;
 }
 
-export const patchClubInfo = async (body: PatchClubInfoBody) => {
-  const clubId = 1;
+export const patchClubInfo = async (body: PatchClubInfoBody, clubId: string) => {
+  console.log(body);
   const formData = new FormData();
-  formData.append('request', JSON.stringify(body.request));
-  if (body.profileImageUrl) {
-    formData.append('profileImageUrl', body.profileImageUrl);
+  let hasData = false;
+
+  if (body.request && Object.keys(body.request).length > 0) {
+    formData.append(
+      'request',
+      new Blob([JSON.stringify(body.request)], { type: 'application/json' }),
+    );
+    hasData = true;
   }
-  //추후에 id반영
-  const data = await adminClient.patch(`/clubs/${clubId}/content`, body);
+  if (body.profileImageUrl) {
+    formData.append('profileImage', body.profileImageUrl);
+    hasData = true;
+  }
+
+  if (!hasData) {
+    return;
+  }
+
+  const data = await adminClient.patch(`/clubs/${clubId}/content`, formData);
 
   return data;
 };

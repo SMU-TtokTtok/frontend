@@ -12,7 +12,7 @@ function Message() {
   return (
     <div className={S.wrapper}>
       <Header evaluation={evaluation} />
-      <Form />
+      <Form kind={evaluation} />
     </div>
   );
 }

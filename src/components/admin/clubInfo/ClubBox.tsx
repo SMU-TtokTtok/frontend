@@ -15,6 +15,7 @@ import { useModal } from '@/hooks/useModal';
 import { getKoreanType } from '@/common/util/getKoreanType';
 import { getKoreanUniv } from '@/common/util/getKoreanUniv';
 import { getKoreanCategory } from '@/common/util/getKoreanCategory';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
@@ -25,6 +26,7 @@ interface ClubBoxProps extends AdminClubIntro {
 }
 
 export default function ClubBox(props: ClubBoxProps) {
+  const { profile } = useAuthStore();
   const {
     name,
     summary,
@@ -36,7 +38,7 @@ export default function ClubBox(props: ClubBoxProps) {
     clubUniv,
   } = props;
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
-  const { handleRecruitmentToggle } = useRecruitmentToggle(handleModalOpen);
+  const { handleRecruitmentToggle } = useRecruitmentToggle(handleModalOpen, profile!.clubId);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCloseRecruit = () => {
@@ -111,10 +113,8 @@ export default function ClubBox(props: ClubBoxProps) {
               className={S.clubNameInput}
               size={14}
             />
-          ) : name.trim() === '' ? (
-            '동아리명을 입력해주세요'
           ) : (
-            name
+            name || '동아리명을 입력해주세요'
           )}
         </div>
         <div className={S.numberFlex}>
@@ -131,10 +131,8 @@ export default function ClubBox(props: ClubBoxProps) {
               }}
               className={S.desTextInput}
             />
-          ) : summary.trim() === '' ? (
-            '한줄소개 가능한 동아리 소개를 입력해주세요'
           ) : (
-            summary
+            summary || '한줄소개 가능한 동아리 소개를 입력해주세요'
           )}
         </div>
         <div className={S.footerFlex}>
@@ -187,7 +185,7 @@ export default function ClubBox(props: ClubBoxProps) {
               </div>
             ) : (
               <Tag variant="default" className={S.selectedTypeText({ position: 'footer' })}>
-                {customCategory}
+                {customCategory.trim() === '' ? '없음' : customCategory}
               </Tag>
             )}
 

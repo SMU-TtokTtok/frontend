@@ -16,23 +16,23 @@ export const useClubInfo = (clubId: string) => {
   return { data, isLoading };
 };
 
-export const useAdminClubInfo = () => {
+export const useAdminClubInfo = (clubId: string) => {
   const { adminClubInfo } = clubInfoKey;
 
   const { data, isLoading, refetch } = useSuspenseQuery({
     queryKey: [adminClubInfo],
-    queryFn: () => getAdminClubInfo(),
+    queryFn: () => getAdminClubInfo(clubId),
   });
   return { data, isLoading, refetch };
 };
 
-export const useRecruitmentToggle = (handleModalOpen: () => void) => {
+export const useRecruitmentToggle = (handleModalOpen: () => void, clubId: string) => {
   const queryClient = useQueryClient();
   const { adminClubInfo } = clubInfoKey;
 
   const patchIsRecrutingMutation = useMutation({
     mutationFn: async () => {
-      const response = await patchIsRecruting();
+      const response = await patchIsRecruting(clubId);
       return response;
     },
     onSuccess: () => {
@@ -50,7 +50,7 @@ export const useRecruitmentToggle = (handleModalOpen: () => void) => {
   };
 };
 
-export const useAdminClubPatch = (handleModalOpen: () => void) => {
+export const useAdminClubPatch = (handleModalOpen: () => void, clubId: string) => {
   const queryClient = useQueryClient();
   const { adminClubInfo } = clubInfoKey;
 
@@ -59,7 +59,7 @@ export const useAdminClubPatch = (handleModalOpen: () => void) => {
       request: Partial<AdminClubIntro>;
       profileImageUrl: File | null;
     }) => {
-      const response = await patchClubInfo(body);
+      const response = await patchClubInfo(body, clubId);
       return response;
     },
     onSuccess: () => {

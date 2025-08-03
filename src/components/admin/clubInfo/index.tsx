@@ -12,16 +12,18 @@ import EditIcon from '@/assets/edit-photo.svg';
 import { useAdminClubInfo, useAdminClubPatch } from '@/hooks/useClubInfo';
 import ConfirmModal from '@/common/components/confirmModal';
 import { useModal } from '@/hooks/useModal';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 function AdminClubInfoPage() {
   const [isEditing, setIsEditing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { data } = useAdminClubInfo();
+  const { profile } = useAuthStore();
+
+  const { data } = useAdminClubInfo(profile!.clubId);
   const [clubInfo, setClubInfo] = useState<AdminClubIntro>(data);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
-
-  const { handleClubInfoPatch } = useAdminClubPatch(handleModalOpen);
+  const { handleClubInfoPatch } = useAdminClubPatch(handleModalOpen, profile!.clubId);
 
   const handleClubInfoChange = (updated: Partial<AdminClubIntro>) => {
     setClubInfo((prev) => (prev ? { ...prev, ...updated } : prev));

@@ -8,8 +8,7 @@ interface GradeCount {
   fourthGradeCount: number;
 }
 
-export const getGradeCount = async () => {
-  const clubId = 1;
+export const getGradeCount = async (clubId: string) => {
   //추후에 id 반영
   const data = await adminClient.get<GradeCount>(`/members/${clubId}/total-count`);
 

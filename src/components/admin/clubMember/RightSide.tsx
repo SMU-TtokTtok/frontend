@@ -2,11 +2,12 @@ import * as S from './rightSide.css';
 import { useGradeCount } from '@/hooks/useClubMember';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 export default function RightSide() {
-  const { data } = useGradeCount();
+  const { profile } = useAuthStore();
+  const { data } = useGradeCount({ clubId: profile!.clubId });
   const { barPosition } = useFollowSidebar({ initialPosition: 216 });
-
   return (
     <div
       className={S.container}

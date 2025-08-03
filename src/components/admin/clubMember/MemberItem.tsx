@@ -12,6 +12,7 @@ import { roleItems } from '@/common/constants/adminOptions';
 import { usePatchClubMember } from '@/hooks/useClubMember';
 import ConfirmModal from '@/common/components/confirmModal';
 import { useModal } from '@/hooks/useModal';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 interface MemberItemProps {
   memberId: string;
@@ -30,6 +31,7 @@ export default function MemberItem({
   grade,
   isEditing,
 }: MemberItemProps) {
+  const { profile } = useAuthStore();
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
   const {
     isOpen: isEditModalOpen,
@@ -37,8 +39,8 @@ export default function MemberItem({
     handleModalOpen: handleEditModalOpen,
   } = useModal();
 
-  const { handleDeleteClubMember } = useDeleteClubMember(handleModalOpen);
-  const { handlePatchClubMember } = usePatchClubMember(handleEditModalOpen);
+  const { handleDeleteClubMember } = useDeleteClubMember(handleModalOpen, profile!.clubId);
+  const { handlePatchClubMember } = usePatchClubMember(handleEditModalOpen, profile!.clubId);
 
   return (
     <>
@@ -67,7 +69,7 @@ export default function MemberItem({
                   className={S.panelItem}
                   onClick={() => handlePatchClubMember({ memberId, role: item })}
                 >
-                  {item}
+                  {getRoleDisplayName(item)}
                 </li>
               ))}
             </DropDown>
