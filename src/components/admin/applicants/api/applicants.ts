@@ -136,7 +136,13 @@ export const patchMemo = async (applicantId: string, memoId: string, content: st
   return data;
 };
 
-export const putConnectApplicant = async (clubId: string) => {
-  const data = await adminClient.put(`/applies/${clubId}/finalize`, {});
+export const putConnectApplicant = async (clubId: string, evaluation: Evaluation) => {
+  const queryParams = new URLSearchParams();
+  queryParams.append('kind', evaluation);
+
+  const data = await adminClient.put(
+    `${API.ADMIN.APPLICANTS_CONNECTION(clubId)}?${queryParams.toString()}`,
+    {},
+  );
   return data;
 };
