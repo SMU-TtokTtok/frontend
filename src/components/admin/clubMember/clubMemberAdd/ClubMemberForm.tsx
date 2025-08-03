@@ -108,19 +108,39 @@ export default function ClubMemberForm({ register, errors }: ClubMemberFormProps
         </div>
         <div className={S.FormContentRadioContainer}>
           <label className={S.LabelContainer}>
-            <input type="radio" value="1" {...register('grade')} className={S.radioInput} />
+            <input
+              type="radio"
+              value="FIRST_GRADE"
+              {...register('grade')}
+              className={S.radioInput}
+            />
             <span className={S.RadioText}>1학년</span>
           </label>
           <label className={S.LabelContainer}>
-            <input type="radio" value="2" {...register('grade')} className={S.radioInput} />
+            <input
+              type="radio"
+              value="SECOND_GRADE"
+              {...register('grade')}
+              className={S.radioInput}
+            />
             <span className={S.RadioText}>2학년</span>
           </label>
           <label className={S.LabelContainer}>
-            <input type="radio" value="3" {...register('grade')} className={S.radioInput} />
+            <input
+              type="radio"
+              value="THIRD_GRADE"
+              {...register('grade')}
+              className={S.radioInput}
+            />
             <span className={S.RadioText}>3학년</span>
           </label>
           <label className={S.LabelContainer}>
-            <input type="radio" value="4" {...register('grade')} className={S.radioInput} />
+            <input
+              type="radio"
+              value="FOURTH_GRADE"
+              {...register('grade')}
+              className={S.radioInput}
+            />
             <span className={S.RadioText}>4학년</span>
           </label>
         </div>

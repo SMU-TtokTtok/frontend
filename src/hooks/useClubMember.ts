@@ -66,13 +66,13 @@ export const usePatchClubMember = (handleModalOpen: () => void, clubId: string) 
   return { handlePatchClubMember };
 };
 
-export const usePostClubMember = (onSuccess?: () => void) => {
+export const usePostClubMember = (clubId: string, onSuccess?: () => void) => {
   const queryClient = useQueryClient();
   const { clubMember } = clubMemberKey;
 
   const postClubMemberMutation = useMutation({
     mutationFn: ({ body, role }: { body: postClubMemberBody; role: string }) =>
-      postClubMember(body, role),
+      postClubMember(body, role, clubId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
       queryClient.invalidateQueries({ queryKey: ['gradeCount'] });

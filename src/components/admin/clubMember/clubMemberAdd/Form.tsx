@@ -9,10 +9,12 @@ import { usePostClubMember } from '@/hooks/useClubMember';
 import { ROUTES } from '@/common/constants/routes';
 import { useModal } from '@/hooks/useModal';
 import ConfirmModal from '@/common/components/confirmModal';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 export default function Form({ role }: { role: string }) {
   const router = useRouter();
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
+  const { profile } = useAuthStore();
   const {
     register,
     handleSubmit,
@@ -20,7 +22,7 @@ export default function Form({ role }: { role: string }) {
   } = useForm<ClubMemberAddData>({
     resolver: zodResolver(clubMemberAddSchema),
   });
-  const { handlePostClubMember } = usePostClubMember(() => {
+  const { handlePostClubMember } = usePostClubMember(profile!.clubId, () => {
     handleModalOpen();
     // router.push(ROUTES.ADMIN_CLUB_MEMBER);
   });
@@ -32,7 +34,7 @@ export default function Form({ role }: { role: string }) {
         studentNum: Number(data.studentId),
         major: data.major,
         email: data.email,
-        phone: data.phone,
+        phoneNumber: data.phone,
         grade: data.grade || '',
         gender: data.gender || '',
       },
