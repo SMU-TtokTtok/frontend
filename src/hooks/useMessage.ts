@@ -2,9 +2,9 @@ import { useMutation } from '@tanstack/react-query';
 import { postMessage } from '@/components/message/api/postMessage';
 import { postMessageBody } from '@/components/message/api/postMessage';
 
-export const usePostMessage = (handleModalOpen: () => void) => {
+export const usePostMessage = (clubId: string, handleModalOpen: () => void) => {
   const postClubMemberMutation = useMutation({
-    mutationFn: (body: postMessageBody) => postMessage(body),
+    mutationFn: (body: postMessageBody) => postMessage(body, clubId),
     onSuccess: () => {
       handleModalOpen();
     },

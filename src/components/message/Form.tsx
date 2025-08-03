@@ -7,10 +7,12 @@ import { usePostMessage } from '@/hooks/useMessage';
 import { useModal } from '@/hooks/useModal';
 import ConfirmModal from '@/common/components/confirmModal';
 import { ROUTES } from '@/common/constants/routes';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 export default function Form() {
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
-  const { handlePostMessage } = usePostMessage(handleModalOpen);
+  const { profile } = useAuthStore();
+  const { handlePostMessage } = usePostMessage(profile!.clubId, handleModalOpen);
   const {
     register,
     handleSubmit,
