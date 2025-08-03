@@ -23,6 +23,8 @@ function Modal({
     onClose,
   };
 
+  if (typeof window === 'undefined') return null;
+
   return createPortal(
     <ModalProvider value={modalProps}>
       {isOpen && <div className={S.modalBase}>{children}</div>}
