@@ -86,6 +86,11 @@ export default function Form({ kind }: { kind: string }) {
             {isLoading ? '결과 전송 중...' : '결과 전송하기'}
           </Button>
           <div className={S.note}>클릭 시, 각 지원자의 이메일로 송신됩니다.</div>
+          <div className={S.note}>
+            {' '}
+            1회 발송 시 최대 <span style={{ color: '#FF3B30' }}>100명</span>까지 수신자를 추가할 수
+            있습니다.
+          </div>
         </div>
       </form>
       <ConfirmModal
