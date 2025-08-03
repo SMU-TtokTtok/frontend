@@ -50,7 +50,7 @@ export const useRecruitmentToggle = (handleModalOpen: () => void) => {
   };
 };
 
-export const useAdminClubPatch = (handleModalOpen: () => void) => {
+export const useAdminClubPatch = (handleModalOpen: () => void, clubId: string) => {
   const queryClient = useQueryClient();
   const { adminClubInfo } = clubInfoKey;
 
@@ -59,7 +59,7 @@ export const useAdminClubPatch = (handleModalOpen: () => void) => {
       request: Partial<AdminClubIntro>;
       profileImageUrl: File | null;
     }) => {
-      const response = await patchClubInfo(body);
+      const response = await patchClubInfo(body, clubId);
       return response;
     },
     onSuccess: () => {

@@ -19,10 +19,14 @@ export interface PatchClubInfoBody {
   profileImageUrl: File | null;
 }
 
-export const patchClubInfo = async (body: PatchClubInfoBody) => {
-  const clubId = 1;
+export const patchClubInfo = async (body: PatchClubInfoBody, clubId: string) => {
   const formData = new FormData();
-  formData.append('request', JSON.stringify(body.request));
+  if (body.request && Object.keys(body.request).length > 0) {
+    formData.append(
+      'request',
+      new Blob([JSON.stringify(body.request)], { type: 'application/json' }),
+    );
+  }
   if (body.profileImageUrl) {
     formData.append('profileImageUrl', body.profileImageUrl);
   }
