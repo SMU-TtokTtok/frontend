@@ -76,7 +76,7 @@ function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassF
             <Button
               variant="secondary"
               className={S.baseButton['connectButton']}
-              onClick={() => handleConnectApplicants({ clubId: profile!.clubId })}
+              onClick={() => handleConnectApplicants({ evaluation, clubId: profile!.clubId })}
             >
               부원 연동하기
             </Button>
