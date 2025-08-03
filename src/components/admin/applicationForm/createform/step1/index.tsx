@@ -4,7 +4,7 @@ import * as S from '../createform.css';
 import Button from '@/common/ui/button';
 import QueryLink from '@/common/components/queryLink';
 import { useState } from 'react';
-import { removeFromSession, saveToSession } from '@/common/util/sessionStorageUtil';
+import { saveToSession } from '@/common/util/sessionStorageUtil';
 import SelectBoxGroup from './selectBoxGroup';
 
 function SelectTypeStep() {
@@ -13,8 +13,8 @@ function SelectTypeStep() {
   const handleSelectWithSession = (isInterview: boolean) => {
     setWithInterview(isInterview);
     saveToSession('hasInterview', isInterview);
-    removeFromSession('interviewEndDate');
-    removeFromSession('interviewStartDate');
+    saveToSession('interviewEndDate', null);
+    saveToSession('interviewStartDate', null);
   };
 
   return (

@@ -32,10 +32,10 @@ function InputDate({ isStartDate, type, handleRecruitData }: InputDateProps) {
 
     if (isStartDate) {
       handleSelectWithSession(date);
-      handleRecruitData?.('recruitStartDate', date.toISOString());
+      handleRecruitData?.('recruitStartDate', format(date, 'yyyy-MM-dd'));
     } else {
       handleSelectWithSession(date);
-      handleRecruitData?.('recruitEndDate', date.toISOString());
+      handleRecruitData?.('recruitEndDate', format(date, 'yyyy-MM-dd'));
     }
   };
 

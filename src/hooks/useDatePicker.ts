@@ -1,6 +1,7 @@
 'use client';
 
 import { saveToSession } from '@/common/util/sessionStorageUtil';
+import { format } from 'date-fns';
 import { useState } from 'react';
 
 type TargetField = 'start' | 'end' | null;
@@ -18,10 +19,10 @@ export function useDatePicker(type: 'recruit' | 'interview') {
 
     if (targetField === 'start') {
       setStartDate(date);
-      saveToSession(`${type}StartDate`, date.toISOString());
+      saveToSession(`${type}StartDate`, format(date, 'yyyy-MM-dd'));
     } else if (targetField === 'end') {
       setEndDate(date);
-      saveToSession(`${type}EndDate`, date.toISOString());
+      saveToSession(`${type}EndDate`, format(date, 'yyyy-MM-dd'));
     }
 
     closeCalendar();

@@ -14,12 +14,8 @@ export const useApplicationForm = () => {
     recruitEndDate: loadFromSession('recruitEndDate') ?? '',
     applicableGrades: loadFromSession('applicableGrades') ?? [],
     maxApplyCount: loadFromSession('maxApplyCount') ?? 0,
-    interviewStartDate: {
-      present: true,
-    },
-    interviewEndDate: {
-      present: true,
-    },
+    interviewStartDate: loadFromSession('interviewStartDate') ?? null,
+    interviewEndDate: loadFromSession('interviewEndDate') ?? null,
   });
 
   const [questionsData, setQeustionsData] = useState<QuestionStepForm>({
