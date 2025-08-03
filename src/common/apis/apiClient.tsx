@@ -26,6 +26,11 @@ export default class ApiClient {
     return this.handleResponse<T>(response);
   }
 
+  async getBlob(path: string): Promise<Blob> {
+    const response = await this.request('GET', path);
+    return response.blob();
+  }
+
   async post<T = any>(path: string, body: any): Promise<T> {
     const response = await this.request<T>('POST', path, body);
     return this.handleResponse<T>(response);
