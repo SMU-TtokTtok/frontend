@@ -124,7 +124,7 @@ const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
         // const response2 = await getImageUrl(response.imgKey);
 
         // 4. 임시 URL을 실제 URL로 교체
-        editor.chain().focus().setImage({ src: response.url }).run();
+        editor.chain().focus().setImage({ src: response.imgKey }).run();
 
         // 5. 메모리 누수 방지를 위한 임시 URL 정리
         URL.revokeObjectURL(placeholderUrl);

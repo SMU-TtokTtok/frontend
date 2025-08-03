@@ -20,6 +20,7 @@ export interface PatchClubInfoBody {
 }
 
 export const patchClubInfo = async (body: PatchClubInfoBody, clubId: string) => {
+  console.log(body);
   const formData = new FormData();
   if (body.request && Object.keys(body.request).length > 0) {
     formData.append(
