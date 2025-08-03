@@ -20,7 +20,7 @@ export const useConnectApplicant = ({
       putConnectApplicant(clubId, evaluation),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
-      openConfirmModalWithMessage('부원 연동이 완료되었습니다.');
+      openConfirmModalWithMessage('연동이 완료되었습니다.');
     },
   });
 
