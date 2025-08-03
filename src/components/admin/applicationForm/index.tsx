@@ -3,7 +3,7 @@ import { useAdminForm } from '@/hooks/useAdminForm';
 import * as S from './applicationForm.css';
 import EmptyPage from './emptyPage';
 import { useApplicationForm } from '@/hooks/useApplicationForm';
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import QuestionForm from './questionForm';
 import { useApplicationFormValidation } from '@/hooks/useApplicationFormVaildation';
 import QuestionNavigator from './questionNavigator';
@@ -14,9 +14,11 @@ import { useModal } from '@/hooks/useModal';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import LoadingSpinner from '@/common/ui/loading';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 function ApplicationFormPage() {
-  const { data } = useAdminForm(1);
+  const { profile } = useAuthStore((state) => state);
+  const { data, isLoading } = useAdminForm(profile?.clubId ?? '');
 
   const {
     questionsData,
@@ -63,10 +65,16 @@ function ApplicationFormPage() {
   const { barPosition } = useFollowSidebar({ initialPosition: 188 });
 
   useEffect(() => {
-    setQeustionsData(data);
-  }, []);
+    if (data) {
+      setQeustionsData(data);
+    }
+  }, [data, setQeustionsData]);
 
-  const isEmpty = !mergeFormData || !(Object.keys(data).length > 0);
+  const isEmpty = questionsData?.title === '';
+
+  if (isLoading) {
+    return <LoadingSpinner className={S.loading} />;
+  }
 
   if (isEmpty) {
     return <EmptyPage />;
@@ -76,24 +84,22 @@ function ApplicationFormPage() {
     <>
       <form className={S.formContainer} onSubmit={handleSubmit}>
         <h3 className={S.title}>📋 지원폼 관리</h3>
-        <Suspense fallback={<LoadingSpinner />}>
-          <QuestionForm
-            formData={questionsData}
-            errors={errors}
-            isSubmit={isSubmit}
-            handleQuestionTypeChange={handleQuestionTypeChange}
-            handleAddField={handleAddField}
-            handleUpdateField={handleUpdateField}
-            handleDeleteField={handleDeleteField}
-            handleEssentialChange={handleEssentialChange}
-            handleOptionChange={handleOptionChange}
-            handleOptionAdd={handleOptionAdd}
-            handleOptionDelete={handleOptionDelete}
-            handleChangeTitle={handleChangeTitle}
-            handleChangeSubTitle={handleChangeSubTitle}
-            scrollRefs={scrollRefs}
-          />
-        </Suspense>
+        <QuestionForm
+          formData={questionsData}
+          errors={errors}
+          isSubmit={isSubmit}
+          handleQuestionTypeChange={handleQuestionTypeChange}
+          handleAddField={handleAddField}
+          handleUpdateField={handleUpdateField}
+          handleDeleteField={handleDeleteField}
+          handleEssentialChange={handleEssentialChange}
+          handleOptionChange={handleOptionChange}
+          handleOptionAdd={handleOptionAdd}
+          handleOptionDelete={handleOptionDelete}
+          handleChangeTitle={handleChangeTitle}
+          handleChangeSubTitle={handleChangeSubTitle}
+          scrollRefs={scrollRefs}
+        />
         <div
           className={S.navigatorContainer}
           style={assignInlineVars({

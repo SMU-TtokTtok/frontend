@@ -8,8 +8,7 @@ export const useUpdateFormMutation = () => {
   const { adminFormInfo } = applicationFormKey;
   const updateFormMutation = useMutation({
     mutationFn: async (formData: QuestionStepForm) => {
-      // clubId로 대체 해야합니다 by 형준
-      const response = await patchApplicantForm(1, formData);
+      const response = await patchApplicantForm(formData.formId!, formData);
       return response;
     },
     onSuccess: () => {

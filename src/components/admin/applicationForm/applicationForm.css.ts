@@ -90,3 +90,8 @@ export const submitButton = style({
     },
   },
 });
+
+export const loading = style({
+  width: '100%',
+  height: '100%',
+});
