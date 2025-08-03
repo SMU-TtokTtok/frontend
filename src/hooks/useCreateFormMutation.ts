@@ -9,9 +9,8 @@ export const useCreateFormMutation = () => {
   const router = useRouter();
 
   const createFormMutation = useMutation({
-    mutationFn: async (formData: QuestionStepForm) => {
-      // clubId로 대체 해야합니다 by 형준
-      const response = await postApplicantForm(1, formData);
+    mutationFn: async ({ clubId, formData }: { clubId: string; formData: QuestionStepForm }) => {
+      const response = await postApplicantForm(clubId, formData);
       return response;
     },
     onSuccess: () => {
@@ -19,8 +18,8 @@ export const useCreateFormMutation = () => {
     },
   });
 
-  const handleCreateForm = (data: QuestionStepForm) => {
-    createFormMutation.mutate(data);
+  const handleCreateForm = (clubId: string, formData: QuestionStepForm) => {
+    createFormMutation.mutate({ clubId, formData });
   };
 
   return {
