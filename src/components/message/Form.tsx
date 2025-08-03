@@ -9,10 +9,10 @@ import ConfirmModal from '@/common/components/confirmModal';
 import { ROUTES } from '@/common/constants/routes';
 import { useAuthStore } from '@/common/store/adminAuthStore';
 
-export default function Form() {
+export default function Form({ kind }: { kind: string }) {
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
   const { profile } = useAuthStore();
-  const { handlePostMessage } = usePostMessage(profile!.clubId, handleModalOpen);
+  const { handlePostMessage } = usePostMessage(profile!.clubId, handleModalOpen, kind);
   const {
     register,
     handleSubmit,

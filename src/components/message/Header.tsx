@@ -17,7 +17,7 @@ export default function Header({ evaluation }: { evaluation: string }) {
         style={{ cursor: 'pointer' }}
       />
       <div className={S.titleText}>
-        {evaluation === 'applies' ? '서류' : '면접'} 전형 : 결과 내용 작성
+        {evaluation === 'interview' ? '면접' : '서류'} 전형 : 결과 내용 작성
       </div>
     </div>
   );
