@@ -9,13 +9,15 @@ import Lottie from 'lottie-react';
 import loading from '@/assets/loading.json';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
+import LoadingSpinner from '@/common/ui/loading';
 
 import AddButton from './ui/AddButton';
 
 export default function MemberList({ isEditing }: { isEditing: boolean }) {
-  const { clubMembers, fetchNextPage, hasNextPage, isFetchingNextPage } = useClubMemberInfinite({
-    enabled: true,
-  });
+  const { clubMembers, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useClubMemberInfinite({
+      enabled: true,
+    });
   const router = useRouter();
   // 무한스크롤을 위한 useInView 훅
   const { ref, inView } = useInView({
@@ -29,6 +31,8 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  if (isLoading) return <LoadingSpinner />;
 
   const isEmpty = clubMembers.length === 0;
   // const isEmpty = true;

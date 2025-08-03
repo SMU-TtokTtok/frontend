@@ -78,27 +78,25 @@ export const useSearchInfinite = ({ enabled, sort = 'latest', name }: UseInfinit
 };
 
 export const useClubMemberInfinite = ({ enabled }: UseInfiniteParams = {}) => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
-    ClubMember,
-    Error
-  >({
-    queryKey: [...clubMemberKey.clubMember],
-    queryFn: ({ pageParam }) => getClubMember({ page: pageParam as number }),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
-      // 다음 페이지가 있으면 다음 페이지 번호 반환, 없으면 undefined
-      if (lastPage.currentPage < lastPage.totalPage) {
-        return lastPage.currentPage + 1;
-      }
-      return undefined;
-    },
-    enabled,
-  });
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
+    useInfiniteQuery<ClubMember, Error>({
+      queryKey: [...clubMemberKey.clubMember],
+      queryFn: ({ pageParam }) => getClubMember({ page: pageParam as number }),
+      initialPageParam: 1,
+      getNextPageParam: (lastPage) => {
+        // 다음 페이지가 있으면 다음 페이지 번호 반환, 없으면 undefined
+        if (lastPage.currentPage < lastPage.totalPage) {
+          return lastPage.currentPage + 1;
+        }
+        return undefined;
+      },
+      enabled,
+    });
 
   const clubMembers = useMemo(() => {
     if (!data?.pages) return [];
     return data.pages.flatMap((page) => page.clubMembers || []);
   }, [data?.pages]);
 
-  return { clubMembers, fetchNextPage, hasNextPage, isFetchingNextPage, refetch };
+  return { clubMembers, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, refetch };
 };
