@@ -46,7 +46,7 @@ export default function RightSideBar(props: RightSideBarProps) {
             <div className={S.dateFlex}>
               <input
                 type="date"
-                value={applyStartDate}
+                value={applyStartDate || ''}
                 onChange={(e) => {
                   onChange({ applyStartDate: e.target.value });
                 }}
@@ -54,7 +54,7 @@ export default function RightSideBar(props: RightSideBarProps) {
               <span>~</span>
               <input
                 type="date"
-                value={applyDeadLine}
+                value={applyDeadLine || ''}
                 onChange={(e) => {
                   onChange({ applyDeadLine: e.target.value });
                 }}

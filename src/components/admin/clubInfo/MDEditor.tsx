@@ -10,6 +10,7 @@ import './mdEditor.custom.css';
 import { useEffect, useState, useRef } from 'react';
 import { postImage } from './api/postImage';
 // import { getImageUrl } from './api/getUrl';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 const icons = {
   h1: (
@@ -100,7 +101,7 @@ const icons = {
 
 const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-
+  const { profile } = useAuthStore();
   const handleImageClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -117,7 +118,7 @@ const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
         editor.chain().focus().setImage({ src: placeholderUrl }).run();
 
         // 2. 이미지 파일을 서버에 업로드
-        const response = await postImage(file);
+        const response = await postImage(file, profile!.clubId);
 
         // 3. 업로드된 이미지의 실제 URL 가져오기
         // const response2 = await getImageUrl(response.imgKey);

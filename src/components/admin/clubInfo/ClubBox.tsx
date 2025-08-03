@@ -15,6 +15,7 @@ import { useModal } from '@/hooks/useModal';
 import { getKoreanType } from '@/common/util/getKoreanType';
 import { getKoreanUniv } from '@/common/util/getKoreanUniv';
 import { getKoreanCategory } from '@/common/util/getKoreanCategory';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
@@ -25,6 +26,7 @@ interface ClubBoxProps extends AdminClubIntro {
 }
 
 export default function ClubBox(props: ClubBoxProps) {
+  const { profile } = useAuthStore();
   const {
     name,
     summary,
@@ -36,7 +38,7 @@ export default function ClubBox(props: ClubBoxProps) {
     clubUniv,
   } = props;
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
-  const { handleRecruitmentToggle } = useRecruitmentToggle(handleModalOpen);
+  const { handleRecruitmentToggle } = useRecruitmentToggle(handleModalOpen, profile!.clubId);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCloseRecruit = () => {

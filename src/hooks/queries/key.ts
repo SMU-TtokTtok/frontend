@@ -29,7 +29,7 @@ export const userKey = {
 
 export const clubInfoKey = {
   clubInfo: ['clubInfo'],
-  adminClubInfo: ['adminClubInfo'],
+  adminClubInfo: 'adminClubInfo',
 } as const;
 
 export const clubFormKey = {

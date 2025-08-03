@@ -17,11 +17,12 @@ import { useAuthStore } from '@/common/store/adminAuthStore';
 function AdminClubInfoPage() {
   const [isEditing, setIsEditing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { data } = useAdminClubInfo();
+  const { profile } = useAuthStore();
+
+  const { data } = useAdminClubInfo(profile!.clubId);
   const [clubInfo, setClubInfo] = useState<AdminClubIntro>(data);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
-  const { profile } = useAuthStore();
   const { handleClubInfoPatch } = useAdminClubPatch(handleModalOpen, profile!.clubId);
 
   const handleClubInfoChange = (updated: Partial<AdminClubIntro>) => {
