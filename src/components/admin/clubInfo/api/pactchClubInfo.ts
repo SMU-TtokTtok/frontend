@@ -29,10 +29,10 @@ export const patchClubInfo = async (body: PatchClubInfoBody, clubId: string) => 
     );
   }
   if (body.profileImageUrl) {
-    formData.append('profileImageUrl', body.profileImageUrl);
+    formData.append('profileImage', body.profileImageUrl);
   }
-  //추후에 id반영
-  const data = await adminClient.patch(`/clubs/${clubId}/content`, body);
+
+  const data = await adminClient.patch(`/clubs/${clubId}/content`, formData);
 
   return data;
 };
