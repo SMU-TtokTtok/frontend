@@ -78,12 +78,12 @@ function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassF
               className={S.baseButton['connectButton']}
               onClick={() => handleConnectApplicants({ evaluation, clubId: profile!.clubId })}
             >
-              부원 연동하기
+              {evaluation === 'DOCUMENT' ? '면접 명단연동' : '최종 부원연동'}
             </Button>
           </div>
 
           <div className={S.sendButtonWrapper}>
-            <Link href={ROUTES.ADMIN_APPLICATIONS_MESSAGE}>
+            <Link href={ROUTES.ADMIN_APPLICATIONS_MESSAGE(evaluation)}>
               <Button variant="primary" className={S.baseButton['sendButton']}>
                 결과 전송하기
               </Button>
