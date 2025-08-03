@@ -111,10 +111,8 @@ export default function ClubBox(props: ClubBoxProps) {
               className={S.clubNameInput}
               size={14}
             />
-          ) : name.trim() === '' ? (
-            '동아리명을 입력해주세요'
           ) : (
-            name
+            name || '동아리명을 입력해주세요'
           )}
         </div>
         <div className={S.numberFlex}>
@@ -131,10 +129,8 @@ export default function ClubBox(props: ClubBoxProps) {
               }}
               className={S.desTextInput}
             />
-          ) : summary.trim() === '' ? (
-            '한줄소개 가능한 동아리 소개를 입력해주세요'
           ) : (
-            summary
+            summary || '한줄소개 가능한 동아리 소개를 입력해주세요'
           )}
         </div>
         <div className={S.footerFlex}>
