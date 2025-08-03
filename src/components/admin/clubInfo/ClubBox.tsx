@@ -187,7 +187,7 @@ export default function ClubBox(props: ClubBoxProps) {
               </div>
             ) : (
               <Tag variant="default" className={S.selectedTypeText({ position: 'footer' })}>
-                {customCategory}
+                {customCategory.trim() === '' ? '없음' : customCategory}
               </Tag>
             )}
 

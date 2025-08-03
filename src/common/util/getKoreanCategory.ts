@@ -17,6 +17,6 @@ export function getKoreanCategory(type: string): string {
     case 'ETC':
       return '기타';
     default:
-      return '알 수 없음';
+      return '없음';
   }
 }

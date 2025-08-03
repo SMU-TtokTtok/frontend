@@ -11,6 +11,6 @@ export function getKoreanUniv(code: string): string {
     case 'ARTS':
       return '예술대';
     default:
-      return '알 수 없음';
+      return '없음';
   }
 }

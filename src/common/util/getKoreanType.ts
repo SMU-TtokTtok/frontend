@@ -7,6 +7,6 @@ export function getKoreanType(type: string): string {
     case 'DEPARTMENT':
       return '학과';
     default:
-      return '알 수 없음';
+      return '없음';
   }
 }
