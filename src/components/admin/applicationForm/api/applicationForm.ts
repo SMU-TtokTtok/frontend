@@ -9,7 +9,10 @@ export const getFormInfo = async (clubId: string) => {
 };
 
 export const patchApplicantForm = async (formId: string, formData: QuestionStepForm) => {
-  const data = await adminClient.patch<QuestionStepForm>(`/forms/${formId}`, formData);
+  const data = await adminClient.patch<QuestionStepForm>(
+    `${API.ADMIN.FORMS_UPDATE(formId)}`,
+    formData,
+  );
 
   return data;
 };
