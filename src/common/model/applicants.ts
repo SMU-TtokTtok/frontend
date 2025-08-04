@@ -10,6 +10,7 @@ export interface Applicant {
 }
 
 export interface ApplicantsInfo {
+  hasInterview: boolean;
   currentPage: number;
   totalPage: number;
   totalCount: number;
