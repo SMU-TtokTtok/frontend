@@ -52,14 +52,14 @@ export default function Page() {
   };
 
   const onSubmit = async (data: PasswordFormType) => {
-    console.log(data);
-    const email = `${data.studentId}@sangmyung.kr`;
-    const response = await postResetPassword({
-      email,
+    const body = {
+      email: `${data.studentId}@sangmyung.kr`,
       verificationCode: data.code,
       newPassword: data.password,
       newPasswordConfirm: data.passwordConfirm,
-    });
+    };
+    console.log(body);
+    const response = await postResetPassword(body);
     if (response.success) {
       alert(response.message);
       router.push('/login');
