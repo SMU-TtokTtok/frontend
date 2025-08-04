@@ -23,18 +23,21 @@ export default function Page() {
   });
 
   const onSubmit = async (data: LoginForm) => {
-    // 학번을 이메일로 변환
-    const loginData = {
-      email: `${data.studentId}@sangmyung.kr`,
-      password: data.password,
-      rememberMe: data.rememberMe,
-    };
-    const response = await postLogin(loginData);
-
-    if (response.success) {
-      router.push('/');
-    } else {
-      alert(response.message);
+    try {
+      // 학번을 이메일로 변환
+      const loginData = {
+        email: `${data.studentId}@sangmyung.kr`,
+        password: data.password,
+        rememberMe: data.rememberMe,
+      };
+      const response = await postLogin(loginData);
+      if (response.success) {
+        router.push('/');
+      }
+    } catch (error: any) {
+      if (error.status === 400) {
+        alert('학번과 비밀번호를 다시 확인해주시기 바랍니다');
+      }
     }
   };
 
