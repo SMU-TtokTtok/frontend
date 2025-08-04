@@ -27,6 +27,13 @@ export default function Page() {
 
   const handleSendEmail = async () => {
     const studentId = getValues('studentId');
+
+    // studentId가 9자리가 아니면 요청하지 않음
+    if (studentId.length !== 9) {
+      alert('학번은 9자리여야 합니다.');
+      return;
+    }
+
     const email = `${studentId}@sangmyung.kr`;
 
     const response = await postEmail({ email });
