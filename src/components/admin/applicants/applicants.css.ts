@@ -154,3 +154,11 @@ export const noResults = style({
   textAlign: 'center',
   marginTop: '2rem',
 });
+
+export const loading = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100vh',
+  width: '100vw',
+});

@@ -35,3 +35,11 @@ export const searchResultContainer = style({
   flexDirection: 'column',
   gap: '8px',
 });
+
+export const loading = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100vh',
+  width: '100vw',
+});
