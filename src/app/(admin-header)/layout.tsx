@@ -1,9 +1,8 @@
-import AdminHeader from '@/common/components/header/adminHeader';
-
+import AdminNav from '@/common/components/header/adminHeader/adminNav';
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <AdminHeader />
+      <AdminNav />
       {children}
     </>
   );

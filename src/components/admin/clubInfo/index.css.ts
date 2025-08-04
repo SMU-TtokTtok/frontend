@@ -78,3 +78,11 @@ export const editIcon = style({
   bottom: '-16px',
   right: '-16px',
 });
+
+export const loading = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100vh',
+  width: '100vw',
+});

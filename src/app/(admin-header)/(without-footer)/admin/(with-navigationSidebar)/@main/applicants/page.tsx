@@ -1,7 +1,7 @@
-import ApplicantsContentPage from '@/components/admin/applicants';
+import ApplicantsPage from '@/components/admin/applicants/page';
 
 function Applicants() {
-  return <ApplicantsContentPage />;
+  return <ApplicantsPage />;
 }
 
 export default Applicants;

@@ -14,7 +14,7 @@ import ConfirmModal from '@/common/components/confirmModal';
 import { useModal } from '@/hooks/useModal';
 import { useAuthStore } from '@/common/store/adminAuthStore';
 
-function AdminClubInfoPage() {
+function AdminClubInfo() {
   const [isEditing, setIsEditing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { profile } = useAuthStore();
@@ -125,4 +125,4 @@ function AdminClubInfoPage() {
   );
 }
 
-export default AdminClubInfoPage;
+export default AdminClubInfo;
