@@ -19,7 +19,7 @@ function PassFailList({
 
   return (
     <ul>
-      {applicants.slice(0, 3).map((applicant) => {
+      {applicants?.slice(0, 3).map((applicant) => {
         return (
           <PassFailItem
             key={applicant.id}

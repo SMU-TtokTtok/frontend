@@ -21,8 +21,8 @@ interface PassFailSidebarProps {
 }
 
 function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassFailSidebarProps) {
-  const evaluation = selectedOptions.evaluation;
-  const { passApplicants } = usePassList({ selectedOptions });
+  const { evaluation } = selectedOptions;
+  const { passApplicants, hasInterview } = usePassList({ selectedOptions });
   const { failApplicants } = useFailList({ selectedOptions });
   const [isPass, setIsPass] = useState<boolean | null>(null);
   const { handleConnectApplicants } = useConnectApplicant({
@@ -41,7 +41,6 @@ function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassF
     handleModalOpen: handleListModalOpen,
     handleModalClose: handleListModalClose,
   } = useModal();
-
   return (
     <>
       <div
@@ -78,7 +77,11 @@ function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassF
               className={S.baseButton['connectButton']}
               onClick={() => handleConnectApplicants({ evaluation, clubId: profile!.clubId })}
             >
-              {evaluation === 'DOCUMENT' ? '면접 명단연동' : '최종 부원연동'}
+              {evaluation === 'DOCUMENT'
+                ? hasInterview
+                  ? '면접 명단연동'
+                  : '최종 부원연동'
+                : '최종 부원연동'}
             </Button>
           </div>
 
