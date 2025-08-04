@@ -35,8 +35,8 @@ export default function Header({
   return (
     <div className={S.headerContainer}>
       <div className={S.title}>👥 부원 명단</div>
-      <div className={S.iconContainer} onClick={handleExcelDownload}>
-        <div className={S.excelContainer}>
+      <div className={S.iconContainer}>
+        <div className={S.excelContainer} onClick={handleExcelDownload}>
           <div className={S.excelText}>excel.xlsx</div>
           <Image src={downloadIcon} alt="excel" width={30} height={30} />
         </div>
