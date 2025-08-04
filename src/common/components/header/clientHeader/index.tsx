@@ -19,10 +19,13 @@ function ClientHeader() {
   const isVisible = useScrollObserver();
   const { clubs: searchList } = useSearchClubInfinite({ debouncedSearch });
   const [userName, setUserName] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
   useEffect(() => {
     const name = localStorage.getItem('name');
+    const email = localStorage.getItem('email');
     setUserName(name);
+    setUserEmail(email);
   }, []);
   return (
     <>
@@ -35,6 +38,7 @@ function ClientHeader() {
         handleKeyDown={handleKeyDown}
         searchList={searchList ?? []}
         userName={userName}
+        userEmail={userEmail}
       />
       <Mobile
         isVisible={isVisible}
@@ -45,6 +49,7 @@ function ClientHeader() {
         handleKeyDown={handleKeyDown}
         searchList={searchList ?? []}
         userName={userName}
+        userEmail={userEmail}
       />
     </>
   );
