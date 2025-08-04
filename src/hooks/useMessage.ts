@@ -14,5 +14,5 @@ export const usePostMessage = (clubId: string, handleModalOpen: () => void, kind
     postClubMemberMutation.mutate(body);
   };
 
-  return { handlePostMessage };
+  return { handlePostMessage, isLoading: postClubMemberMutation.isPending };
 };

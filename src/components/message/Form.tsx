@@ -12,7 +12,7 @@ import { useAuthStore } from '@/common/store/adminAuthStore';
 export default function Form({ kind }: { kind: string }) {
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
   const { profile } = useAuthStore();
-  const { handlePostMessage } = usePostMessage(profile!.clubId, handleModalOpen, kind);
+  const { handlePostMessage, isLoading } = usePostMessage(profile!.clubId, handleModalOpen, kind);
   const {
     register,
     handleSubmit,
@@ -77,10 +77,20 @@ export default function Form({ kind }: { kind: string }) {
           </div>
         </div>
         <div className={S.submitContainer}>
-          <Button variant="primary" className={S.button} disabled={!isFormValid} type="submit">
-            결과 전송하기
+          <Button
+            variant="primary"
+            className={S.button}
+            disabled={!isFormValid || isLoading}
+            type="submit"
+          >
+            {isLoading ? '결과 전송 중...' : '결과 전송하기'}
           </Button>
           <div className={S.note}>클릭 시, 각 지원자의 이메일로 송신됩니다.</div>
+          <div className={S.note}>
+            {' '}
+            1회 발송 시 최대 <span style={{ color: '#FF3B30' }}>100명</span>까지 수신자를 추가할 수
+            있습니다.
+          </div>
         </div>
       </form>
       <ConfirmModal

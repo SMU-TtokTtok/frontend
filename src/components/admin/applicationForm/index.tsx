@@ -70,7 +70,7 @@ function ApplicationFormPage() {
     }
   }, [data, setQeustionsData]);
 
-  const isEmpty = questionsData?.title === '';
+  const isEmpty = questionsData?.title === null;
 
   if (isLoading) {
     return <LoadingSpinner className={S.loading} />;
