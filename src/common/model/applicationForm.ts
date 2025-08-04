@@ -29,8 +29,8 @@ export interface PreviousStepForm {
   recruitEndDate: string;
   applicableGrades: currentGrade[];
   maxApplyCount: number;
-  interviewStartDate: { present: boolean };
-  interviewEndDate: { present: boolean };
+  interviewStartDate: string | null;
+  interviewEndDate: string | null;
 }
 
 export interface QuestionStepForm {

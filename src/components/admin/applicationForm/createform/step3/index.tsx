@@ -9,8 +9,10 @@ import Button from '@/common/ui/button';
 import { useCreateFormMutation } from '@/hooks/useCreateFormMutation';
 import { useApplicationFormValidation } from '@/hooks/useApplicationFormVaildation';
 import { useRef, useState } from 'react';
+import { useAuthStore } from '@/common/store/adminAuthStore';
 
 function FormQuestionStep() {
+  const { profile } = useAuthStore();
   const {
     questionsData,
     previousStepData,
@@ -45,7 +47,7 @@ function FormQuestionStep() {
     };
 
     if (result.success) {
-      handleCreateForm(mergedFormData);
+      handleCreateForm(profile!.clubId, mergedFormData);
     }
     if (errors) {
       console.error('Validation errors:', errors);

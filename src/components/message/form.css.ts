@@ -6,6 +6,7 @@ export const container = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '30px',
+  marginBottom: '200px',
 });
 
 export const messageContainer = style({

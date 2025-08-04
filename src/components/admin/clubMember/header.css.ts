@@ -13,6 +13,16 @@ export const iconContainer = style({
   alignItems: 'center',
   gap: '14px',
 });
+export const excelContainer = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+  cursor: 'pointer',
+});
+export const excelText = style({
+  fontSize: vars.fonts.body2,
+  color: '#ABABAB',
+});
 
 export const title = style({
   fontSize: vars.fonts.title2,

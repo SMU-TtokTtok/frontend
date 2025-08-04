@@ -78,6 +78,9 @@ export const usePostClubMember = (clubId: string, onSuccess?: () => void) => {
       queryClient.invalidateQueries({ queryKey: ['gradeCount'] });
       onSuccess?.(); // 성공 시 콜백 실행
     },
+    onError: (error) => {
+      alert('똑똑에 가입하지 않은 학번입니다.');
+    },
   });
 
   const handlePostClubMember = (body: postClubMemberBody, role: string) => {

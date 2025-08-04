@@ -25,5 +25,6 @@ export const API = {
     FORMS: (clubId: string) => `/forms/${clubId}`,
     FORMS_UPDATE: (formId: string) => `/forms/${formId}`,
     APPLICANTS_CONNECTION: (clubId: string) => `/applies/${clubId}/finalize`,
+    FORMS_CREATE: (clubId: string) => `/forms/clubs/${clubId}`,
   },
 };
