@@ -15,6 +15,7 @@ export default function Page() {
         title="즐겨찾기"
         selectedOptions={filter}
         useInfinite={useFavoritesInfinite}
+        isFavorite={true}
       />
     </div>
   );

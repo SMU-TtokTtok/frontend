@@ -70,6 +70,7 @@ export const imgStyle = style({
 
 export const imgContainer = style({
   position: 'relative',
+  width: '212px',
 });
 
 export const editIcon = style({

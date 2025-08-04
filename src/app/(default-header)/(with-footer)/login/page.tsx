@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import * as S from '../../../components/login/login.css';
+import * as S from '@/components/login/login.css';
 import Button from '@/common/ui/button/index';
 import { loginSchema, LoginForm } from '@/components/login/schema';
 import { ROUTES } from '@/common/constants/routes';
@@ -23,18 +23,21 @@ export default function Page() {
   });
 
   const onSubmit = async (data: LoginForm) => {
-    // 학번을 이메일로 변환
-    const loginData = {
-      email: `${data.studentId}@sangmyung.kr`,
-      password: data.password,
-      rememberMe: data.rememberMe,
-    };
-    const response = await postLogin(loginData);
-
-    if (response.success) {
-      router.push('/');
-    } else {
-      alert(response.message);
+    try {
+      // 학번을 이메일로 변환
+      const loginData = {
+        email: `${data.studentId}@sangmyung.kr`,
+        password: data.password,
+        rememberMe: data.rememberMe,
+      };
+      const response = await postLogin(loginData);
+      if (response.success) {
+        router.push('/');
+      }
+    } catch (error: any) {
+      if (error.status === 400) {
+        alert('학번과 비밀번호를 다시 확인해주시기 바랍니다');
+      }
     }
   };
 

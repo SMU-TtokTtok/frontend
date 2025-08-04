@@ -18,6 +18,7 @@ export const postResetPassword = async (body: {
   newPassword: string;
   newPasswordConfirm: string;
 }) => {
+  console.log(body);
   const data = await mainClient.post('/api/user/auth/reset-password', body);
 
   return data;

@@ -37,10 +37,10 @@ export default function SortButtonGroup({ title, filter, total }: SortButtonGrou
               최신등록순
             </Button>
           </QueryLink>
-          <QueryLink extraQuery={{ sort: 'member' }} preserveQuery={isSearch}>
+          <QueryLink extraQuery={{ sort: 'member_count' }} preserveQuery={isSearch}>
             <Button
-              variant={sort === 'member' ? 'secondary' : 'none'}
-              className={S.ButtonStyle({ selected: sort === 'member', position: 'middle' })}
+              variant={sort === 'member_count' ? 'secondary' : 'none'}
+              className={S.ButtonStyle({ selected: sort === 'member_count', position: 'middle' })}
             >
               멤버많은순
             </Button>

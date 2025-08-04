@@ -13,7 +13,7 @@ export async function fetchSearchClubs({
   name?: string;
 }): Promise<Clubs> {
   // console.log(name, size, sort);
-  const params = new URLSearchParams({ sort, name: name || '', size: String(size) });
+  const params = new URLSearchParams({ sort, keyword: name || '', size: String(size) });
   // console.log(params.toString());
 
   if (typeof cursor === 'string') params.append('cursor', cursor);
