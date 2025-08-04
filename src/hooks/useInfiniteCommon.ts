@@ -13,7 +13,7 @@ interface UseInfiniteParams {
   enabled?: boolean;
   sort?: string;
   name?: string;
-  clubId: string;
+  clubId?: string;
 }
 
 export const useFavoritesInfinite = ({ enabled, sort = 'latest' }: UseInfiniteParams = {}) => {

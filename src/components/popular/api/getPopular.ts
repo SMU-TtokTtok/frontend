@@ -14,7 +14,7 @@ export async function fetchPopularClubs({
   if (typeof cursor === 'string') params.append('cursor', cursor);
 
   //추후 url 변경 필요 by 현우
-  const res = await mainClient.get(`/api/favorites?${params.toString()}`);
+  const res = await mainClient.get(`/api/clubs/popular?${params.toString()}`);
 
   return res;
 }
