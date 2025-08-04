@@ -8,5 +8,5 @@ export interface Clubs {
 }
 
 export interface ClubsInfiniteWithTotal extends Clubs {
-  total: number;
+  totalCount: number;
 }

@@ -10,6 +10,7 @@ import animationData from '@/assets/loading.json';
 import * as F from './favorites.css';
 import Empty from '@/common/components/empty';
 import { Clubs, ClubsInfiniteWithTotal } from '@/common/model/clubInfinite';
+import { ClubItemInfo } from '@/common/model/club';
 import type { InfiniteData } from '@tanstack/react-query';
 import LoadingSpinner from '@/common/ui/loading';
 
@@ -20,10 +21,12 @@ interface InfiniteClubListProps {
     hasNextPage: boolean;
     isFetchingNextPage: boolean;
     refetch: () => void;
+    isLoading: boolean;
   };
   selectedOptions: SearchQueryReturn;
   title: string;
   handleTotal?: (data: number) => void;
+  isFavorite?: boolean;
 }
 
 function InfiniteClubList({
@@ -31,6 +34,7 @@ function InfiniteClubList({
   title,
   useInfinite,
   handleTotal,
+  isFavorite,
 }: InfiniteClubListProps) {
   const sort = selectedOptions.sort || 'latest';
   const name = selectedOptions.name || '';
@@ -40,7 +44,14 @@ function InfiniteClubList({
     name,
   });
 
-  const clubs = data ? data.pages.flatMap((page) => page.clubs) : [];
+  const clubs = data
+    ? data.pages.flatMap((page) => {
+        if (isFavorite && 'favoriteClubs' in page) {
+          return (page as { favoriteClubs: ClubItemInfo[] }).favoriteClubs;
+        }
+        return page.clubs;
+      })
+    : [];
   const { ref, inView } = useInView();
   // sort가 바뀌면 무한스크롤 새로 시작 (refetch)
   useEffect(() => {
