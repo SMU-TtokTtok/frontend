@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
-import { postMessage } from '@/components/message/api/postMessage';
-import { postMessageBody } from '@/components/message/api/postMessage';
+import { postMessage } from '@/components/admin/message/api/postMessage';
+import { postMessageBody } from '@/components/admin/message/api/postMessage';
 
 export const usePostMessage = (clubId: string, handleModalOpen: () => void, kind: string) => {
   const postClubMemberMutation = useMutation({
