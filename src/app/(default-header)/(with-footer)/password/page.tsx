@@ -58,7 +58,6 @@ export default function Page() {
       newPassword: data.password,
       newPasswordConfirm: data.passwordConfirm,
     };
-    console.log(body);
     const response = await postResetPassword(body);
     if (response.success) {
       alert(response.message);
