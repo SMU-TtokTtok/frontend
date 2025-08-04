@@ -18,7 +18,6 @@ export const useClubInfo = (clubId: string) => {
 
 export const useAdminClubInfo = (clubId: string) => {
   const { adminClubInfo } = clubInfoKey;
-
   const { data, isLoading, refetch } = useSuspenseQuery({
     queryKey: [adminClubInfo],
     queryFn: () => getAdminClubInfo(clubId),

@@ -57,7 +57,7 @@ function InfiniteClubList({
   useEffect(() => {
     if (handleTotal) {
       const firstPage = data?.pages[0];
-      // total이 있는 경우에만 handleTotal 호출
+      // totalCount가 있는 경우에만 handleTotal 호출
       if (firstPage && 'totalCount' in firstPage && typeof firstPage.totalCount === 'number') {
         handleTotal(firstPage.totalCount);
       }
