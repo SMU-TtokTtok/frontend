@@ -23,7 +23,7 @@ export const PassList = http.get(`${BASE_API}/api/admin${API.ADMIN.APPLICANTS_PA
 });
 
 export const FailList = http.get(`${BASE_API}/api/admin${API.ADMIN.APPLICANTS_FAIL}`, () => {
-  return HttpResponse.json([], { status: 200 });
+  return HttpResponse.json(applicantList, { status: 200 });
 });
 
 export const ApplicantSearch = http.get(
