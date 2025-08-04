@@ -8,6 +8,7 @@ import {
   postClubMember,
   postClubMemberBody,
 } from '@/components/admin/clubMember/api/postClubMember';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 export const useGradeCount = ({ clubId }: { clubId: string }) => {
   const { data, isLoading } = useSuspenseQuery({
@@ -78,8 +79,13 @@ export const usePostClubMember = (clubId: string, onSuccess?: () => void) => {
       queryClient.invalidateQueries({ queryKey: ['gradeCount'] });
       onSuccess?.(); // 성공 시 콜백 실행
     },
-    onError: (error) => {
-      alert('똑똑에 가입하지 않은 학번입니다.');
+    onError: (error: CustomHttpError) => {
+      if (error.status === 404) {
+        alert('똑똑에 가입하지 않은 학번입니다.');
+      }
+      if (error.status === 409) {
+        alert('이미 추가한 학번입니다.');
+      }
     },
   });
 
