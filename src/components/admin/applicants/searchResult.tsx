@@ -23,7 +23,7 @@ function SearchResult({
     debouncedSearch,
     evaluation: selectedOptions.evaluation,
   });
-  const { handleFavoriteStatus } = usePatchApplicantStatus({
+  const { handleApplicantStatus } = usePatchApplicantStatus({
     openConfirmModalWithMessage,
   });
 
@@ -35,7 +35,7 @@ function SearchResult({
             key={applicant.id}
             selectedOptions={selectedOptions}
             applicant={applicant}
-            handleFavoriteStatus={handleFavoriteStatus}
+            handleApplicantStatus={handleApplicantStatus}
             handleSelectApplicant={() => handleSelectApplicant(applicant.id)}
           />
         );

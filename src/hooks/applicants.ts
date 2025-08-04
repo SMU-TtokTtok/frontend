@@ -8,6 +8,7 @@ import {
   Evaluation,
 } from '@/components/admin/applicants/api/applicants';
 import { ApplicantsInfo } from '@/common/model/applicants';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 interface UseApplicantListParams {
   selectedOptions: ApplicantListParams;
@@ -36,8 +37,16 @@ export const useApplicantList = ({ selectedOptions, enabled }: UseApplicantListP
       enabled,
     });
   const applicants = data ? data.pages.flatMap((page) => page.applicants) : [];
-
-  return { applicants, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading };
+  const hasInterview = data?.pages[0].hasInterview ?? false;
+  return {
+    applicants,
+    hasInterview,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    refetch,
+    isLoading,
+  };
 };
 
 interface usePatchApplicantParams {
@@ -52,23 +61,35 @@ export const usePatchApplicantStatus = ({
   openConfirmModalWithMessage: (message: string) => void;
 }) => {
   const queryClient = useQueryClient();
-  const { applicantList, passList, failList } = applicantKey;
+  const { applicantList, passList, failList, searchApplicant } = applicantKey;
 
   const favoriteMutation = useMutation({
     mutationFn: ({ applicantId, status, evaluation }: usePatchApplicantParams) =>
       patchApplicantStatus({ applicantId, status, evaluation }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [applicantList, passList, failList] });
+      queryClient.invalidateQueries({ queryKey: [failList] });
+      queryClient.invalidateQueries({ queryKey: [passList] });
+      queryClient.invalidateQueries({ queryKey: [applicantList] });
+      queryClient.invalidateQueries({ queryKey: [searchApplicant] });
       openConfirmModalWithMessage('지원자의 상태가 변경되었습니다.');
+    },
+    onError: (error) => {
+      const customError = error as CustomHttpError;
+      if (customError.status === 404) {
+        openConfirmModalWithMessage('지원자를 찾을 수 없습니다.');
+      }
+      if (customError.status === 400) {
+        openConfirmModalWithMessage(`이 지원자는 이미 연동된 지원자여서 상태를 바꿀 수 없어요.`);
+      }
     },
   });
 
-  const handleFavoriteStatus = ({ applicantId, status, evaluation }: usePatchApplicantParams) => {
+  const handleApplicantStatus = ({ applicantId, status, evaluation }: usePatchApplicantParams) => {
     favoriteMutation.mutate({ applicantId, status, evaluation });
   };
 
   return {
-    handleFavoriteStatus,
+    handleApplicantStatus,
   };
 };
 

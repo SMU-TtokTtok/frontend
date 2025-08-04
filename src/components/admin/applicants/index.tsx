@@ -19,6 +19,7 @@ function ApplicantsContentPage() {
   const [search, setSearch] = useState('');
   const [selectedApplicantId, setSelectedApplicantId] = useState<string>('0');
   const [confirmMessage, setConfirmMessage] = useState<string>(MESSAGE.applicantsStatus.confirm);
+  
   const {
     isOpen: isConfirmModalOpen,
     handleModalOpen: handleConfirmModalOpen,

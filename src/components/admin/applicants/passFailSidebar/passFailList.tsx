@@ -15,16 +15,16 @@ function PassFailList({
   openConfirmModalWithMessage,
   selectedOptions,
 }: ApplicantListProps) {
-  const { handleFavoriteStatus } = usePatchApplicantStatus({ openConfirmModalWithMessage });
+  const { handleApplicantStatus } = usePatchApplicantStatus({ openConfirmModalWithMessage });
 
   return (
     <ul>
-      {applicants.slice(0, 3).map((applicant) => {
+      {applicants?.slice(0, 3).map((applicant) => {
         return (
           <PassFailItem
             key={applicant.id}
             applicant={applicant}
-            handleFavoriteStatus={handleFavoriteStatus}
+            handleApplicantStatus={handleApplicantStatus}
             selectedOptions={selectedOptions}
           />
         );

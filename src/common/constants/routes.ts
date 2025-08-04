@@ -16,5 +16,6 @@ export const ROUTES = {
   ADMIN_CLUB_MEMBER_ADD: '/admin/clubMember/add',
   ADMIN_APPLICATIONS_FORM: '/admin/applicationsForm',
   ADMIN_APPLICATIONS_CREATE: '/admin/createForm',
-  ADMIN_APPLICATIONS_MESSAGE: '/admin/applicants/message',
+  ADMIN_APPLICATIONS_MESSAGE: (evaluation: string) =>
+    `/admin/applicants/message?evaluation=${evaluation}`,
 };

@@ -33,7 +33,16 @@ export const usePassList = ({ selectedOptions, enabled }: UseApplicantListParams
       enabled,
     });
   const passApplicants = data ? data.pages.flatMap((page) => page.applicants) : [];
-  return { passApplicants, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, refetch };
+  const hasInterview = data?.pages[0]?.hasInterview ?? false;
+  return {
+    passApplicants,
+    hasInterview,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    refetch,
+  };
 };
 
 export const useFailList = ({ selectedOptions, enabled }: UseApplicantListParams) => {

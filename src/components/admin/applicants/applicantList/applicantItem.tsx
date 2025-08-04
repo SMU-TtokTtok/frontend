@@ -15,7 +15,7 @@ import { ApplicantListParams, Evaluation } from '../api/applicants';
 interface ApplicantProps {
   applicant: Applicant;
   selectedOptions: ApplicantListParams;
-  handleFavoriteStatus: ({
+  handleApplicantStatus: ({
     applicantId,
     status,
     evaluation,
@@ -33,7 +33,7 @@ const options = [
 ];
 function ApplicantItem({
   applicant,
-  handleFavoriteStatus,
+  handleApplicantStatus,
   handleSelectApplicant,
   selectedOptions,
 }: ApplicantProps) {
@@ -81,7 +81,7 @@ function ApplicantItem({
             className={S.dropDownItem}
             onClick={(e) => {
               e.stopPropagation();
-              handleFavoriteStatus({
+              handleApplicantStatus({
                 applicantId: applicant.id,
                 status: status.value,
                 evaluation: selectedOptions.evaluation,
