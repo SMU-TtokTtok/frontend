@@ -44,6 +44,7 @@ function ClientHeader() {
         handleNavigate={handleNavigate}
         handleKeyDown={handleKeyDown}
         searchList={searchList ?? []}
+        userName={userName}
       />
     </>
   );
