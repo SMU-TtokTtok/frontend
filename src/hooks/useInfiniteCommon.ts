@@ -17,65 +17,59 @@ interface UseInfiniteParams {
 }
 
 export const useFavoritesInfinite = ({ enabled, sort = 'latest' }: UseInfiniteParams = {}) => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
-    Clubs,
-    Error
-  >({
-    queryKey: [...userKey.favoritesClubList, sort],
-    queryFn: ({ pageParam }) =>
-      fetchFavoritesClubs({ sort, size: 20, cursor: pageParam as string }),
-    initialPageParam: undefined, // 첫 요청은 cursor 없이
-    getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
-    enabled,
-  });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } =
+    useInfiniteQuery<Clubs, Error>({
+      queryKey: [...userKey.favoritesClubList, sort],
+      queryFn: ({ pageParam }) =>
+        fetchFavoritesClubs({ sort, size: 20, cursor: pageParam as string }),
+      initialPageParam: undefined, // 첫 요청은 cursor 없이
+      getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
+      enabled,
+    });
 
-  return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data };
+  return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data, isLoading };
 };
 
 export const useAppliedInfinite = ({ enabled, sort = 'latest' }: UseInfiniteParams = {}) => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
-    Clubs,
-    Error
-  >({
-    queryKey: [...userKey.appliedClubList, sort],
-    queryFn: ({ pageParam }) => fetchAppliedClubs({ sort, size: 20, cursor: pageParam as string }),
-    initialPageParam: undefined, // 첫 요청은 cursor 없이
-    getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
-    enabled,
-  });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } =
+    useInfiniteQuery<Clubs, Error>({
+      queryKey: [...userKey.appliedClubList, sort],
+      queryFn: ({ pageParam }) =>
+        fetchAppliedClubs({ sort, size: 20, cursor: pageParam as string }),
+      initialPageParam: undefined, // 첫 요청은 cursor 없이
+      getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
+      enabled,
+    });
 
-  return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data };
+  return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data, isLoading };
 };
 
 export const usePopularInfinite = ({ enabled, sort = 'latest' }: UseInfiniteParams = {}) => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
-    Clubs,
-    Error
-  >({
-    queryKey: [...userKey.popularClubList, sort],
-    queryFn: ({ pageParam }) => fetchPopularClubs({ sort, size: 20, cursor: pageParam as string }),
-    initialPageParam: undefined, // 첫 요청은 cursor 없이
-    getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
-    enabled,
-  });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } =
+    useInfiniteQuery<Clubs, Error>({
+      queryKey: [...userKey.popularClubList, sort],
+      queryFn: ({ pageParam }) =>
+        fetchPopularClubs({ sort, size: 20, cursor: pageParam as string }),
+      initialPageParam: undefined, // 첫 요청은 cursor 없이
+      getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
+      enabled,
+    });
 
-  return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data };
+  return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data, isLoading };
 };
 
 export const useSearchInfinite = ({ enabled, sort = 'latest', name }: UseInfiniteParams = {}) => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery<
-    Clubs,
-    Error
-  >({
-    queryKey: [...userKey.searchClubList, sort, name],
-    queryFn: ({ pageParam }) =>
-      fetchSearchClubs({ name, sort, size: 20, cursor: pageParam as string }),
-    initialPageParam: undefined, // 첫 요청은 cursor 없이
-    getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
-    enabled,
-  });
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } =
+    useInfiniteQuery<Clubs, Error>({
+      queryKey: [...userKey.searchClubList, sort, name],
+      queryFn: ({ pageParam }) =>
+        fetchSearchClubs({ name, sort, size: 20, cursor: pageParam as string }),
+      initialPageParam: undefined, // 첫 요청은 cursor 없이
+      getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
+      enabled,
+    });
 
-  return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data };
+  return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data, isLoading };
 };
 
 export const useClubMemberInfinite = ({ enabled, clubId }: UseInfiniteParams) => {

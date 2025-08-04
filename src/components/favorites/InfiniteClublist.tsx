@@ -34,7 +34,7 @@ function InfiniteClubList({
 }: InfiniteClubListProps) {
   const sort = selectedOptions.sort || 'latest';
   const name = selectedOptions.name || '';
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfinite({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } = useInfinite({
     enabled: true,
     sort,
     name,
@@ -64,7 +64,7 @@ function InfiniteClubList({
     }
   }, [handleTotal, data]);
 
-  if (data === undefined) return <LoadingSpinner />;
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
