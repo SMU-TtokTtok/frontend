@@ -52,23 +52,26 @@ export const usePatchApplicantStatus = ({
   openConfirmModalWithMessage: (message: string) => void;
 }) => {
   const queryClient = useQueryClient();
-  const { applicantList, passList, failList } = applicantKey;
+  const { applicantList, passList, failList, searchApplicant } = applicantKey;
 
   const favoriteMutation = useMutation({
     mutationFn: ({ applicantId, status, evaluation }: usePatchApplicantParams) =>
       patchApplicantStatus({ applicantId, status, evaluation }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [applicantList, passList, failList] });
+      queryClient.invalidateQueries({ queryKey: [failList] });
+      queryClient.invalidateQueries({ queryKey: [passList] });
+      queryClient.invalidateQueries({ queryKey: [applicantList] });
+      queryClient.invalidateQueries({ queryKey: [searchApplicant] });
       openConfirmModalWithMessage('지원자의 상태가 변경되었습니다.');
     },
   });
 
-  const handleFavoriteStatus = ({ applicantId, status, evaluation }: usePatchApplicantParams) => {
+  const handleApplicantStatus = ({ applicantId, status, evaluation }: usePatchApplicantParams) => {
     favoriteMutation.mutate({ applicantId, status, evaluation });
   };
 
   return {
-    handleFavoriteStatus,
+    handleApplicantStatus,
   };
 };
 

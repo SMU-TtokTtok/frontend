@@ -11,7 +11,7 @@ interface ApplicantProps {
   disableCursor?: boolean;
   applicant: Applicant;
   selectedOptions?: ApplicantListParams;
-  handleFavoriteStatus?: ({
+  handleApplicantStatus: ({
     applicantId,
     status,
     evaluation,
@@ -23,18 +23,18 @@ interface ApplicantProps {
 }
 
 const options = [
-  { value: 'pass', label: '합격' },
-  { value: 'fail', label: '불합격' },
-  { value: 'evaluating', label: '평가중' },
+  { value: 'PASS', label: '합격' },
+  { value: 'FAIL', label: '불합격' },
+  { value: 'EVALUATING', label: '평가중' },
 ];
 
 function PassFailItem({
   applicant,
-  handleFavoriteStatus,
+  handleApplicantStatus,
   disableCursor,
   selectedOptions,
 }: ApplicantProps) {
-  const isHandleFavoriteStatus = !!handleFavoriteStatus;
+  const isHandleApplicantStatus = !!handleApplicantStatus;
   const wrapper = `${S.ItemWrapper} ${disableCursor ? 'disableCursor' : ''}`;
   return (
     <li className={wrapper}>
@@ -46,14 +46,14 @@ function PassFailItem({
         <span className={S.verticalLine} />
         <span className={S.department}>{applicant.major}</span>
       </div>
-      {isHandleFavoriteStatus && (
+      {isHandleApplicantStatus && (
         <DropDown toggleButton={<Image src={moreVert} alt="more options" />}>
           {options.map((status) => (
             <li
               key={status.value}
               className={S.dropDownItem}
               onClick={() =>
-                handleFavoriteStatus?.({
+                handleApplicantStatus({
                   applicantId: applicant.id,
                   status: status.value,
                   evaluation: selectedOptions!.evaluation,

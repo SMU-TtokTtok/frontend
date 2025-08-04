@@ -22,7 +22,7 @@ function ApplicantList({
   const { applicants, hasNextPage, fetchNextPage, isFetchingNextPage } = useApplicantList({
     selectedOptions,
   });
-  const { handleFavoriteStatus } = usePatchApplicantStatus({
+  const { handleApplicantStatus } = usePatchApplicantStatus({
     openConfirmModalWithMessage,
   });
   const { ref, inView } = useInView();
@@ -46,7 +46,7 @@ function ApplicantList({
                 key={applicant.id}
                 applicant={applicant}
                 selectedOptions={selectedOptions}
-                handleFavoriteStatus={handleFavoriteStatus}
+                handleApplicantStatus={handleApplicantStatus}
                 handleSelectApplicant={handleSelectApplicant}
               />
             );
