@@ -35,7 +35,7 @@ export const BoxContainer = style({
 });
 
 export const TitleText = style({
-  fontSize: vars.fonts.title1,
+  fontSize: '29px',
   fontWeight: '600',
 
   '@media': {
@@ -88,7 +88,7 @@ export const LabelDetailBox = style({
 });
 
 export const LabelDetailText = style({
-  fontSize: vars.fonts.body1,
+  fontSize: '18px',
   fontWeight: '600',
 
   '@media': {
@@ -141,7 +141,7 @@ export const Input = style({
   backgroundColor: '#F8F8F9',
   borderRadius: '6px',
   padding: '12px 16px',
-  fontSize: vars.fonts.body1,
+  fontSize: '16px',
   flex: ' 1 1 0 ',
   height: '48px',
   width: '100%', // !!

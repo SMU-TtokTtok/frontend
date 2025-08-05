@@ -32,7 +32,6 @@ export default function Page() {
   };
 
   const onSubmit = async (data: LoginForm) => {
-    console.log(data);
     try {
       // 학번을 이메일로 변환
       const loginData = {

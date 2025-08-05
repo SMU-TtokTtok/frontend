@@ -169,7 +169,9 @@ export default function Page() {
 
         {/* 이름 */}
         <div className={S.LabelBoxContainer} style={{ gap: '166px' }}>
-          <div className={S.LabelText}>이름</div>
+          <div className={S.LabelText} style={{ alignSelf: 'center' }}>
+            이름
+          </div>
           <div className={S.FlexBox}>
             <div className={S.FlexBox2}>
               <input
