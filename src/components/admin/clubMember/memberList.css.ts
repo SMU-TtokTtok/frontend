@@ -15,7 +15,7 @@ export const divider = style({
   height: '1px',
   backgroundColor: '#D2D4D8',
   marginTop: '16px',
-  marginBottom: '16px',
+  marginBottom: '8px',
   width: '100%',
 });
 

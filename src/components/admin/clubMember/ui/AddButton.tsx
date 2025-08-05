@@ -10,7 +10,11 @@ interface AddButtonProps {
 
 export default function AddButton({ role, onClick }: AddButtonProps) {
   return (
-    <Button variant="lightGray" className={S.button} onClick={onClick}>
+    <Button
+      variant="lightGray"
+      className={`${S.button} ${S.addMemberButton({ marginTop: role === '부원' })}`}
+      onClick={onClick}
+    >
       <Image src={add_circle_gray} alt="add_circle" width={24} height={24} />
       <span className={S.text}>{role} 추가</span>
     </Button>
