@@ -16,3 +16,8 @@ export const postLogout = async (email: string) => {
 
   return data;
 };
+
+export const postRefresh = async () => {
+  const data = await mainClient.post(`/api/user/auth/re-issue`, null);
+  return data;
+};
