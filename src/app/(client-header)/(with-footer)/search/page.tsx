@@ -4,9 +4,17 @@ import InfiniteClubList from '@/components/favorites/InfiniteClublist';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import SortButtonGroup from '@/components/favorites/SortButtonGroup';
 import { useSearchInfinite } from '@/hooks/useInfiniteCommon';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 
 export default function Page() {
+  return (
+    <Suspense>
+      <SearchPage />
+    </Suspense>
+  );
+}
+
+function SearchPage() {
   const { filter } = useSearchQuery();
   const [total, setTotal] = useState<number | null>(0);
 

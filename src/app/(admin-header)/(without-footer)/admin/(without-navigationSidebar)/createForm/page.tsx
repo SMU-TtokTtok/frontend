@@ -1,10 +1,12 @@
+'use client';
 import CreateFormPage from '@/components/admin/applicationForm/createform';
+import { Suspense } from 'react';
 
 function Page() {
   return (
-    <div>
+    <Suspense>
       <CreateFormPage />
-    </div>
+    </Suspense>
   );
 }
 
