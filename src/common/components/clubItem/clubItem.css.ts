@@ -10,7 +10,6 @@ export const container = style({
   minWidth: '16.666rem',
   maxWidth: '41rem',
   width: '100%',
-  height: '147px',
   backgroundColor: vars.colors.surface.bright,
   padding: '16px',
   cursor: 'pointer',
