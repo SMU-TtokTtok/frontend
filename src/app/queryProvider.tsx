@@ -5,6 +5,7 @@ import { HTTP_STATUS } from '@/common/constants/httpStatus';
 import { ROUTES } from '@/common/constants/routes';
 import { isAdminPath } from '@/common/util/isAdminPath';
 import { postAdminRefresh } from '@/components/admin/login/api/login';
+import { postRefresh } from '@/components/login/api';
 import {
   defaultShouldDehydrateQuery,
   isServer,
@@ -67,6 +68,8 @@ async function handleMutationError(
     try {
       if (isAdmin) {
         await postAdminRefresh();
+      } else {
+        await postRefresh();
       }
       await mutation.execute(variables);
     } catch (error) {
@@ -107,6 +110,8 @@ async function handleQueryError(error: Error, query: Query<unknown, unknown, unk
     try {
       if (isAdmin) {
         await postAdminRefresh();
+      } else {
+        await postRefresh();
       }
       await query.fetch();
     } catch (error) {
