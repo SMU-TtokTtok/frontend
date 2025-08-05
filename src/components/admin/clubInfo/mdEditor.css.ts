@@ -5,7 +5,9 @@ export const container = style({
   width: '100%',
 });
 
-export const buttonContainer = style({});
+export const buttonContainer = style({
+  display: 'none',
+});
 
 export const buttonIntro = style({
   width: '50%',
