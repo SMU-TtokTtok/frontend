@@ -22,7 +22,7 @@ export default class ApiClient {
   }
 
   async get<T = any>(path: string): Promise<T> {
-    const response = await this.request<T>('GET', path);
+    const response = await this.request('GET', path);
     return this.handleResponse<T>(response);
   }
 
@@ -32,26 +32,26 @@ export default class ApiClient {
   }
 
   async post<T = any>(path: string, body: any): Promise<T> {
-    const response = await this.request<T>('POST', path, body);
+    const response = await this.request('POST', path, body);
     return this.handleResponse<T>(response);
   }
 
   async patch<T = any>(path: string, body: any): Promise<T> {
-    const response = await this.request<T>('PATCH', path, body);
+    const response = await this.request('PATCH', path, body);
     return this.handleResponse<T>(response);
   }
 
   async put<T = any>(path: string, body: any): Promise<T> {
-    const response = await this.request<T>('PUT', path, body);
+    const response = await this.request('PUT', path, body);
     return this.handleResponse<T>(response);
   }
 
   async delete<T = any>(path: string): Promise<T> {
-    const response = await this.request<T>('DELETE', path);
+    const response = await this.request('DELETE', path);
     return this.handleResponse<T>(response);
   }
 
-  private async request<T>(method: HTTPMethod, path: string, body?: any): Promise<Response> {
+  private async request(method: HTTPMethod, path: string, body?: any): Promise<Response> {
     try {
       const url = `${this.baseUrl}${path}`;
 
