@@ -84,8 +84,8 @@ function InfiniteClubList({
       ) : (
         <div className={S.container}>
           <ul className={S.innerWrapper}>
-            {clubs.map((club) => (
-              <ClubItem key={club.id} className={S.cardStyle} clubData={club} />
+            {clubs.map((club, index) => (
+              <ClubItem key={index} className={S.cardStyle} clubData={club} />
             ))}
           </ul>
         </div>
