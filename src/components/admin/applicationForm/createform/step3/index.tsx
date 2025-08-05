@@ -40,7 +40,6 @@ function FormQuestionStep() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmit(true);
-
     const mergedFormData = {
       ...previousStepData,
       ...questionsData,

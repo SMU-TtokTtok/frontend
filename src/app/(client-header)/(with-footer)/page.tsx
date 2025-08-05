@@ -7,7 +7,15 @@ import * as S from '@/components/home/popularClubList/popularClubList.css';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import { Suspense } from 'react';
 
-export default function Home() {
+export default function Page() {
+  return (
+    <Suspense>
+      <HomePage />
+    </Suspense>
+  );
+}
+
+function HomePage() {
   const { filter } = useSearchQuery();
   return (
     <div>

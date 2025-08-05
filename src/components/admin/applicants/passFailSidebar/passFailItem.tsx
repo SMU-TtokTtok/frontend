@@ -11,7 +11,7 @@ interface ApplicantProps {
   disableCursor?: boolean;
   applicant: Applicant;
   selectedOptions?: ApplicantListParams;
-  handleApplicantStatus: ({
+  handleApplicantStatus?: ({
     applicantId,
     status,
     evaluation,

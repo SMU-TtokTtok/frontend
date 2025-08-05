@@ -10,12 +10,12 @@ interface ClubMember {
 }
 
 const GRADES = ['FIRST_GRADE', 'SECOND_GRADE', 'THIRD_GRADE', 'FOURTH_GRADE'] as const;
-export const ROLES = {
+/*export const ROLES = {
   PRESIDENT: '회장',
   VICE_PRESIDENT: '부회장',
   EXECUTIVE: '임원진',
   MEMBER: '부원',
-} as const;
+} as const;*/
 
 const MOCK_MEMBERS: ClubMember[] = Array.from({ length: 37 }).map((_, i) => ({
   memberId: `${i + 1}`,

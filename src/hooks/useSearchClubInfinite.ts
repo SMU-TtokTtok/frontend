@@ -10,7 +10,7 @@ interface useSearchClubParams {
   enabled?: boolean;
 }
 
-export const useSearchClubInfinite = ({ debouncedSearch, sort, enabled }: useSearchClubParams) => {
+export const useSearchClubInfinite = ({ debouncedSearch, sort }: useSearchClubParams) => {
   const { searchList } = clubKey;
 
   const isSearchEnabled = !!debouncedSearch;

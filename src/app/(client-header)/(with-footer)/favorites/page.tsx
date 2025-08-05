@@ -4,8 +4,16 @@ import InfiniteClubList from '@/components/favorites/InfiniteClublist';
 import { useSearchQuery } from '@/hooks/useSearchQuery';
 import SortButtonGroup from '@/components/favorites/SortButtonGroup';
 import { useFavoritesInfinite } from '@/hooks/useInfiniteCommon';
+import { Suspense } from 'react';
 
 export default function Page() {
+  return (
+    <Suspense>
+      <FavoritesPage />
+    </Suspense>
+  );
+}
+function FavoritesPage() {
   const { filter } = useSearchQuery();
 
   return (
