@@ -7,8 +7,8 @@ import Form from './Form';
 
 function Message() {
   const searchParams = useSearchParams();
-  const evaluation = searchParams.get('evaluation') || 'applies';
-
+  const evaluation = searchParams.get('evaluation') || 'DOCUMENT';
+  console.log(evaluation);
   return (
     <div className={S.wrapper}>
       <Header evaluation={evaluation} />
