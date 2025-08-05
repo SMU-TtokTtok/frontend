@@ -2,6 +2,7 @@ import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { clubFormKey } from './queries/key';
 import { gethFormInfo } from '@/components/apply/api/getFormInfo';
 import { postFormInfo } from '@/components/apply/api/postFormInfo';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 export const useClubInfo = (clubId: string) => {
   const { clubForm } = clubFormKey;
@@ -20,8 +21,10 @@ export const usePostForm = (handleEditModalOpen: () => void) => {
     onSuccess: () => {
       handleEditModalOpen();
     },
-    onError: () => {
-      alert('제출 실패');
+    onError: (error: CustomHttpError) => {
+      if (error.status === 409) {
+        alert('이미 제출하였습니다');
+      }
     },
   });
 
