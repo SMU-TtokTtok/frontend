@@ -21,6 +21,8 @@ interface MobileProps<T> {
   handleNavigate: () => void;
   handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   searchList: T[];
+  userName: string | null;
+  userEmail: string | null;
 }
 
 function Mobile<T extends { id: string; name: string; clubType: string }>({
@@ -31,6 +33,8 @@ function Mobile<T extends { id: string; name: string; clubType: string }>({
   handleNavigate,
   handleKeyDown,
   searchList,
+  userName,
+  userEmail,
 }: MobileProps<T>) {
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
@@ -77,7 +81,13 @@ function Mobile<T extends { id: string; name: string; clubType: string }>({
           </div>
         )}
         <Image src={hamburger} alt="Menu" onClick={handleToggleSideMenu} />
-        {isSideMenuOpen && <MobileSideMenu setIsSideMenuOpen={setIsSideMenuOpen} />}
+        {isSideMenuOpen && (
+          <MobileSideMenu
+            setIsSideMenuOpen={setIsSideMenuOpen}
+            userName={userName}
+            userEmail={userEmail}
+          />
+        )}
       </div>
     </Header>
   );

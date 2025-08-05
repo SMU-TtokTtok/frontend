@@ -154,3 +154,39 @@ export const name = style({
   color: vars.colors.primary.default,
   fontWeight: 500,
 });
+
+export const ButtonStyle2 = style({
+  fontSize: vars.fonts.body2,
+  fontWeight: 500,
+  marginRight: '30px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginRight: '20px',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      marginRight: '10px',
+    },
+  },
+});
+
+export const PersonWrapper = style({
+  display: 'flex',
+  alignItems: 'center',
+  marginRight: '30px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginRight: '20px',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      display: '10px',
+    },
+  },
+});
+
+export const Nametext = style({
+  fontSize: vars.fonts.body2,
+  fontWeight: 700,
+  color: 'white',
+});

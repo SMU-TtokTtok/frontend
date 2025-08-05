@@ -5,6 +5,7 @@ import { useSearchClubInfinite } from '@/hooks/useSearchClubInfinite';
 import { useCombobox } from '@/hooks/useComboBox';
 import Desktop from './desktop';
 import Mobile from './mobile';
+import { useEffect, useState } from 'react';
 
 function ClientHeader() {
   const {
@@ -17,7 +18,15 @@ function ClientHeader() {
   } = useCombobox();
   const isVisible = useScrollObserver();
   const { clubs: searchList } = useSearchClubInfinite({ debouncedSearch });
+  const [userName, setUserName] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
 
+  useEffect(() => {
+    const name = localStorage.getItem('name');
+    const email = localStorage.getItem('email');
+    setUserName(name);
+    setUserEmail(email);
+  }, []);
   return (
     <>
       <Desktop
@@ -28,6 +37,8 @@ function ClientHeader() {
         handleNavigate={handleNavigate}
         handleKeyDown={handleKeyDown}
         searchList={searchList ?? []}
+        userName={userName}
+        userEmail={userEmail}
       />
       <Mobile
         isVisible={isVisible}
@@ -37,6 +48,8 @@ function ClientHeader() {
         handleNavigate={handleNavigate}
         handleKeyDown={handleKeyDown}
         searchList={searchList ?? []}
+        userName={userName}
+        userEmail={userEmail}
       />
     </>
   );

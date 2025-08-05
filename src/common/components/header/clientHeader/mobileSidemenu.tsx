@@ -5,11 +5,14 @@ import arrowNav from '@/assets/arrow_nav.svg';
 import person from '@/assets/person.svg';
 import { ROUTES } from '@/common/constants/routes';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { postLogout } from '@/components/login/api';
 interface MobileSideMenuProps {
   setIsSideMenuOpen: (isOpen: boolean) => void;
+  userName: string | null;
+  userEmail: string | null;
 }
 
-function MobileSideMenu({ setIsSideMenuOpen }: MobileSideMenuProps) {
+function MobileSideMenu({ setIsSideMenuOpen, userName, userEmail }: MobileSideMenuProps) {
   const handleClose = () => {
     setIsSideMenuOpen(false);
   };
@@ -23,18 +26,47 @@ function MobileSideMenu({ setIsSideMenuOpen }: MobileSideMenuProps) {
         <label className={S.label}>내 정보</label>
         <div className={S.myInfo}>
           <Image src={person} alt="내 정보" />
-          <p className={S.name}>
-            <strong>로그인</strong>이 필요해요
-          </p>
+          {userName ? (
+            <p className={S.name}>
+              <strong>{userName}</strong>님
+            </p>
+          ) : (
+            <p className={S.name}>
+              <strong>로그인</strong>이 필요해요
+            </p>
+          )}
         </div>
-        <Link href={ROUTES.LOGIN} className={S.MenuItem}>
-          <span>로그인</span>
-          <Image src={arrowNav} alt="이동하기" />
-        </Link>
-        <Link href={ROUTES.SIGNUP} className={S.MenuItem}>
-          <span>회원가입</span>
-          <Image src={arrowNav} alt="이동하기" />
-        </Link>
+        {userName ? (
+          <>
+            <Link href={ROUTES.LOGIN} className={S.MenuItem} onClick={() => postLogout(userEmail!)}>
+              <span>로그아웃</span>
+              <Image src={arrowNav} alt="이동하기" />
+            </Link>
+            <Link href={ROUTES.APPLIED} className={S.MenuItem}>
+              <span>내 지원내역</span>
+              <Image src={arrowNav} alt="이동하기" />
+            </Link>
+            <Link href={ROUTES.FAVORITES} className={S.MenuItem}>
+              <span>즐겨찾기</span>
+              <Image src={arrowNav} alt="이동하기" />
+            </Link>
+            <Link href={ROUTES.POPULAR} className={S.MenuItem}>
+              <span>인기 동아리</span>
+              <Image src={arrowNav} alt="이동하기" />
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link href={ROUTES.LOGIN} className={S.MenuItem}>
+              <span>로그인</span>
+              <Image src={arrowNav} alt="이동하기" />
+            </Link>
+            <Link href={ROUTES.SIGNUP} className={S.MenuItem}>
+              <span>회원가입</span>
+              <Image src={arrowNav} alt="이동하기" />
+            </Link>
+          </>
+        )}
       </div>
     </>
   );
