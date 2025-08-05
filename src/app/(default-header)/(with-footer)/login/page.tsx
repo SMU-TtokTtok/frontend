@@ -8,6 +8,7 @@ import Button from '@/common/ui/button/index';
 import { loginSchema, LoginForm } from '@/components/login/schema';
 import { ROUTES } from '@/common/constants/routes';
 import { postLogin } from '@/components/login/api';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 export default function Page() {
   const router = useRouter();
@@ -34,8 +35,9 @@ export default function Page() {
       if (response.success) {
         router.push('/');
       }
-    } catch (error: any) {
-      if (error.status === 400) {
+    } catch (error) {
+      const errorResponse = error instanceof CustomHttpError;
+      if (errorResponse && error.status === 400) {
         alert('학번과 비밀번호를 다시 확인해주시기 바랍니다');
       }
     }
