@@ -1,0 +1,47 @@
+{
+  "formId": "2",
+  "title": "멋쟁이 사자처럼 지원서",
+  "subTitle": "아래 문항들을 모두 작성해주세요.",
+  "questions": [
+    {
+      "questionId": "1",
+      "title": "성함을 입력해주세요.",
+      "subTitle": "본명을 기입해주세요.",
+      "questionType": "SHORT_ANSWER",
+      "isEssential": true,
+      "content": null
+    },
+    {
+      "questionId": "2",
+      "title": "자기소개를 작성해주세요.",
+      "subTitle": "경험, 장점, 관심사를 중심으로 작성해주세요.",
+      "questionType": "LONG_ANSWER",
+      "isEssential": true,
+      "content": null
+    },
+    {
+      "questionId": "3",
+      "title": "지원하게 된 동기를 선택해주세요.",
+      "subTitle": "",
+      "questionType": "CHECKBOX",
+      "isEssential": true,
+      "content": ["관심 있는 분야라서", "지인의 추천", "학점과 관련", "기타"]
+    },
+    {
+      "questionId": "4",
+      "title": "성별을 선택해주세요.",
+      "subTitle": "",
+      "questionType": "RADIO",
+      "isEssential": true,
+      "content": ["남성", "여성", "기타", "응답하지 않음"]
+    },
+    {
+      "questionId": "5",
+      "title": "이력서를 업로드해주세요.",
+      "subTitle": "PDF 형식 권장",
+      "questionType": "FILE",
+      "isEssential": true,
+      "content": null
+    }
+  ]
+}

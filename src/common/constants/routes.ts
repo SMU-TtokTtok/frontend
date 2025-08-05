@@ -1,0 +1,21 @@
+export const ROUTES = {
+  HOME: '/',
+  LOGIN: '/login',
+  SIGNUP: '/signup',
+  PASSWORD: '/password',
+  POPULAR: '/popular',
+  FAVORITES: '/favorites',
+  APPLIED: '/applied',
+  SEARCH: (name: string) => `/search?name=${name}`,
+  CLUB_INFO: (clubId: string) => `/club/${clubId}`,
+  APPLIY_FORM: (clubId: string) => `/club/${clubId}/apply`,
+  ADMIN: '/admin',
+  ADMIN_LOGIN: '/admin/login',
+  ADMIN_APPLICATIONS: '/admin/applicants?evaluation=DOCUMENT&sort=GRADE',
+  ADMIN_CLUB_MEMBER: '/admin/clubMember',
+  ADMIN_CLUB_MEMBER_ADD: '/admin/clubMember/add',
+  ADMIN_APPLICATIONS_FORM: '/admin/applicationsForm',
+  ADMIN_APPLICATIONS_CREATE: '/admin/createForm',
+  ADMIN_APPLICATIONS_MESSAGE: (evaluation: string) =>
+    `/admin/applicants/message?evaluation=${evaluation}`,
+};

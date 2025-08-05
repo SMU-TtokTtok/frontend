@@ -1,0 +1,40 @@
+{
+  "hasInterview": false,
+  "currentPage": 1,
+  "totalPage": 1,
+  "totalCount": 4,
+  "applicants": [
+    {
+      "id": "applicant-007",
+      "grade": "FIRST_GRADE",
+      "name": "송지훈",
+      "major": "컴퓨터공학과",
+      "status": "FAIL",
+      "interviewDate": null
+    },
+    {
+      "id": "applicant-006",
+      "grade": "FOURTH_GRADE",
+      "name": "김태준",
+      "major": "전자공학과",
+      "status": "FAIL",
+      "interviewDate": null
+    },
+    {
+      "id": "applicant-005",
+      "grade": "SECOND_GRADE",
+      "name": "정민호",
+      "major": "기계공학과",
+      "status": "FAIL",
+      "interviewDate": null
+    },
+    {
+      "id": "applicant-004",
+      "grade": "THIRD_GRADE",
+      "name": "최대현",
+      "major": "체육학과",
+      "status": "EVALUATING",
+      "interviewDate": null
+    }
+  ]
+}

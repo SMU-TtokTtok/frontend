@@ -1,0 +1,16 @@
+{
+  "name": "코딩클럽",
+  "clubType": "CENTRAL",
+  "clubCategory": "VOLUNTEER",
+  "customCategory": "IT",
+  "recruiting": true,
+  "summary": "함께 공부하고 성장하는 개발자 커뮤니티입니다.",
+  "profileImageUrl": "",
+  "clubMemberCount": 25,
+  "applyStartDate": "2025-03-01T14:43:20.180Z",
+  "applyDeadLine": "2025-03-10T14:43:20.180Z",
+  "grades": ["FIRST_GRADE", "SECOND_GRADE", "THIRD_GRADE", "FOURTH_GRADE"],
+  "maxApplyCount": 10,
+  "content": "<h1>코딩클럽</h1><p>함께 공부하고 성장하는 개발자 커뮤니티입니다.</p>",
+  "bookmarked": true
+}

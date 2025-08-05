@@ -1,0 +1,16 @@
+{
+  "name": "",
+  "clubType": "",
+  "clubCategory": "",
+  "customCategory": "",
+  "recruiting": true,
+  "summary": "",
+  "profileImageUrl": "",
+  "clubMemberCount": 25,
+  "applyStartDate": "2025-03-01",
+  "applyDeadLine": "2025-03-10",
+  "grades": ["FIRST_GRADE", "SECOND_GRADE", "THIRD_GRADE", "FOURTH_GRADE"],
+  "maxApplyCount": 10,
+  "content": "<h1>코딩클럽</h1><p>함께 공부하고 성장하는 개발자 커뮤니티입니다.</p>",
+  "clubUniv": "ENGINEERING"
+}
