@@ -24,7 +24,6 @@ export const patchFavorite = http.patch(`${BASEAPI}/favorite/:id`, () => {
 export const getSearchList = http.get(`${BASEAPI}${API.USER.SEARCH}`, ({ request }) => {
   const url = new URL(request.url);
   const name = url.searchParams.get('name') || '';
-  const sort = url.searchParams.get('sort') || 'latest';
 
   const filteredClubs = clubList.clubs.filter((club) =>
     club.name.toLowerCase().includes(name.toLowerCase()),

@@ -9,8 +9,7 @@ export const AdminLogin = http.post(`${API}/api/admin/auth/login`, async ({ requ
   return HttpResponse.json({ message: '로그인 실패' }, { status: 401 });
 });
 
-export const AdminLogout = http.post(`${API}/api/admin/auth/logout`, async ({ request }) => {
-  const { login, password } = (await request.json()) as { login: string; password: string };
+export const AdminLogout = http.post(`${API}/api/admin/auth/logout`, async () => {
   return HttpResponse.json({ message: '로그아웃 성공' }, { status: 200 });
 });
 
