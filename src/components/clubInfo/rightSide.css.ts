@@ -13,6 +13,7 @@ export const container = style({
   // right: '100px',
   transition: 'top 0.7s ease-out',
   top: sidebarTop, // 동적 값이 들어갈 자리
+  alignSelf: 'flex-start',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
