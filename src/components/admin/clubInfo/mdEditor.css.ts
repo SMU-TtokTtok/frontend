@@ -22,9 +22,9 @@ export const buttonNotice = style({
   width: '50%',
   textAlign: 'center',
   padding: '22px 0',
-  backgroundColor: '#EEEEF0',
+  backgroundColor: '#EEEEF0 !important',
   borderRadius: '6px 6px 0px 0px',
-  color: '#55637D',
+  color: '#55637D !important',
   fontSize: vars.fonts.body2,
   // fontWeight: '700',
 });
