@@ -17,13 +17,22 @@ export default function Page() {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
+    setValue,
     // setError,
   } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
     mode: 'onSubmit',
   });
 
+  const rememberMe = watch('rememberMe');
+
+  const handleCheckboxToggle = () => {
+    setValue('rememberMe', !rememberMe);
+  };
+
   const onSubmit = async (data: LoginForm) => {
+    console.log(data);
     try {
       // 학번을 이메일로 변환
       const loginData = {
@@ -67,8 +76,8 @@ export default function Page() {
         {errors.password && <p className={S.ErrorText}>{errors.password.message}</p>}
 
         <div className={S.AuthFooter}>
-          <div className={S.CheckboxContainer}>
-            <input type="checkbox" {...register('rememberMe')} />
+          <div className={S.CheckboxContainer} onClick={handleCheckboxToggle}>
+            <input type="checkbox" {...register('rememberMe')} checked={rememberMe} />
             <div className={S.CheckboxText}>로그인 상태 유지</div>
           </div>
           <div className={S.AuthFooterTextContainer}>
