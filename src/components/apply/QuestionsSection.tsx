@@ -12,7 +12,6 @@ interface QuestionsSectionProps {
 export default function QuestionsSection({ questions, register, errors }: QuestionsSectionProps) {
   const renderQuestion = (question: Question, index: number) => {
     const error = errors.questions?.[index] as { message: string } | undefined;
-
     switch (question.questionType) {
       case 'CHECKBOX':
         return (
@@ -32,15 +31,29 @@ export default function QuestionsSection({ questions, register, errors }: Questi
                   <input
                     type="checkbox"
                     value={option}
-                    {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                      required: question.isEssential,
-                    })}
+                    {...register(`questions.${index}.value.${optionIndex}` as keyof ApplyFormData)}
                     className={S.checkboxInput}
                   />
                   <span className={S.checkboxLabel}>{option}</span>
                 </label>
               ))}
             </div>
+            {question.isEssential && (
+              <input
+                type="hidden"
+                {...register(`questions.${index}.value` as keyof ApplyFormData, {
+                  validate: () => {
+                    const checkboxes = document.querySelectorAll(
+                      `input[name^="questions.${index}.value."]:checked`,
+                    );
+                    if (checkboxes.length === 0) {
+                      return '하나 이상 선택해주세요.';
+                    }
+                    return true;
+                  },
+                })}
+              />
+            )}
             {error && <span className={S.errorMessage}>{error.message}</span>}
           </div>
         );
@@ -64,9 +77,10 @@ export default function QuestionsSection({ questions, register, errors }: Questi
                     type="radio"
                     value={option}
                     {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                      required: question.isEssential,
+                      // required: question.isEssential,
                     })}
                     className={S.radioInput}
+                    required={question.isEssential}
                   />
                   <span className={S.radioLabel}>{option}</span>
                 </label>
@@ -93,8 +107,9 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               className={S.shortAnswerInput}
               placeholder="답변을 입력해주세요"
               {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                required: question.isEssential ? '입력해주세요.' : false,
+                // required: question.isEssential ? '입력해주세요.' : false,
               })}
+              required={question.isEssential}
             />
             {error && <span className={S.errorMessage}>{error.message}</span>}
           </div>
@@ -117,8 +132,9 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               placeholder="답변을 입력해주세요"
               rows={5}
               {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                required: question.isEssential,
+                // required: question.isEssential,
               })}
+              required={question.isEssential}
             />
             {error && <span className={S.errorMessage}>{error.message}</span>}
           </div>
@@ -140,8 +156,9 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               type="file"
               className={S.fileInput}
               {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                required: question.isEssential,
+                // required: question.isEssential,
               })}
+              required={question.isEssential}
             />
             {error && <span className={S.errorMessage}>{error.message}</span>}
           </div>
