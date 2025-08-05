@@ -51,22 +51,6 @@ export default function Form({ clubId }: { clubId: string }) {
   const onSubmit = (data: ApplyFormData) => {
     console.log(data);
 
-    // 체크박스 필수 validation
-    if (clubData?.questions) {
-      for (let i = 0; i < clubData.questions.length; i++) {
-        const question = clubData.questions[i];
-        if (question.questionType === 'CHECKBOX' && question.isEssential) {
-          const checkboxes = document.querySelectorAll(
-            `input[name^="questions.${i}.value."]:checked`,
-          );
-          if (checkboxes.length === 0) {
-            alert(`"${question.title}" 질문에서 하나 이상 선택해주세요.`);
-            return;
-          }
-        }
-      }
-    }
-
     const formData = new FormData();
 
     const questionIds: string[] = [];

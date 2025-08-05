@@ -33,27 +33,26 @@ export default function QuestionsSection({ questions, register, errors }: Questi
                     value={option}
                     {...register(`questions.${index}.value.${optionIndex}` as keyof ApplyFormData)}
                     className={S.checkboxInput}
+                    required={question.isEssential && optionIndex === 0}
+                    onChange={() => {
+                      // 첫 번째 체크박스의 required 상태를 업데이트
+                      if (question.isEssential) {
+                        const checkboxes = document.querySelectorAll(
+                          `input[name^="questions.${index}.value."]:checked`,
+                        );
+                        const firstCheckbox = document.querySelector(
+                          `input[name="questions.${index}.value.0"]`,
+                        ) as HTMLInputElement;
+                        if (firstCheckbox) {
+                          firstCheckbox.required = checkboxes.length === 0;
+                        }
+                      }
+                    }}
                   />
                   <span className={S.checkboxLabel}>{option}</span>
                 </label>
               ))}
             </div>
-            {question.isEssential && (
-              <input
-                type="hidden"
-                {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                  validate: () => {
-                    const checkboxes = document.querySelectorAll(
-                      `input[name^="questions.${index}.value."]:checked`,
-                    );
-                    if (checkboxes.length === 0) {
-                      return '하나 이상 선택해주세요.';
-                    }
-                    return true;
-                  },
-                })}
-              />
-            )}
             {error && <span className={S.errorMessage}>{error.message}</span>}
           </div>
         );

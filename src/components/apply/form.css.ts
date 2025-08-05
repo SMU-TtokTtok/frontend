@@ -471,3 +471,10 @@ export const checkboxInput = style({
   width: '20px',
   height: '20px',
 });
+
+export const hiddenCheckbox = style({
+  position: 'absolute',
+  left: '-9999px',
+  opacity: 0,
+  pointerEvents: 'none',
+});
