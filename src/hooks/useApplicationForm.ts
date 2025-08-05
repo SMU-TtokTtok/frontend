@@ -8,7 +8,7 @@ import { loadFromSession } from '@/common/util/sessionStorageUtil';
 import { useState } from 'react';
 
 export const useApplicationForm = () => {
-  const [previousStepData, setPreviousStepData] = useState<PreviousStepForm>({
+  const previousStepData: PreviousStepForm = {
     hasInterview: loadFromSession('hasInterview') ?? false,
     recruitStartDate: loadFromSession('recruitStartDate') ?? '',
     recruitEndDate: loadFromSession('recruitEndDate') ?? '',
@@ -16,7 +16,7 @@ export const useApplicationForm = () => {
     maxApplyCount: loadFromSession('maxApplyCount') ?? 0,
     interviewStartDate: loadFromSession('interviewStartDate') ?? null,
     interviewEndDate: loadFromSession('interviewEndDate') ?? null,
-  });
+  };
 
   const [questionsData, setQeustionsData] = useState<QuestionStepForm>({
     title: '',
