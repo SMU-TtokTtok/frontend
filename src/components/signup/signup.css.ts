@@ -150,6 +150,10 @@ export const Input = style({
     '&::placeholder': {
       color: '#E0E1E3',
     },
+    '&:disabled': {
+      opacity: 0.5,
+      cursor: 'not-allowed',
+    },
   },
 
   '@media': {
