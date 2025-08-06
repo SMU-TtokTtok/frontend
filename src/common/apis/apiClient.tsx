@@ -79,6 +79,9 @@ export default class ApiClient {
 
       return response;
     } catch (error) {
+      if (error instanceof CustomHttpError) {
+        throw error;
+      }
       throw new CustomHttpError(`API 요청 실패: ${error}`, (error as CustomHttpError).status);
     }
   }

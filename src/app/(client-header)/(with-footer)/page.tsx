@@ -1,5 +1,6 @@
 'use client';
 import LoadingSpinner from '@/common/ui/loading';
+import QueryErrorBoundary from '@/components/error/queryErrorBoundary';
 import ClubList from '@/components/home/clubList';
 import Filter from '@/components/home/filter';
 import PopularClubList from '@/components/home/popularClubList/index';
@@ -21,12 +22,16 @@ function HomePage() {
     <div>
       <div className={S.Container}>
         <div className={S.InnerWrapper}>
-          <PopularClubList />
+          <QueryErrorBoundary>
+            <PopularClubList />
+          </QueryErrorBoundary>
         </div>
       </div>
       <Filter selectedOptions={filter} />
       <Suspense fallback={<LoadingSpinner />}>
-        <ClubList selectedOptions={filter} />
+        <QueryErrorBoundary>
+          <ClubList selectedOptions={filter} />
+        </QueryErrorBoundary>
       </Suspense>
     </div>
   );

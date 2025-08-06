@@ -14,12 +14,13 @@ import ConfirmModal from '@/common/components/confirmModal';
 import { MESSAGE } from '@/common/constants/message';
 import ApplicantDetailModal from './applicantDetailModal';
 import LoadingSpinner from '@/common/ui/loading';
+import QueryErrorBoundary from '@/components/error/queryErrorBoundary';
 function ApplicantsContentPage() {
   const searchParams = useSearchParams();
   const [search, setSearch] = useState('');
   const [selectedApplicantId, setSelectedApplicantId] = useState<string>('0');
   const [confirmMessage, setConfirmMessage] = useState<string>(MESSAGE.applicantsStatus.confirm);
-  
+
   const {
     isOpen: isConfirmModalOpen,
     handleModalOpen: handleConfirmModalOpen,
@@ -57,31 +58,37 @@ function ApplicantsContentPage() {
       <div className={S.container}>
         <div className={S.wrapper}>
           <h3 className={S.title}>✏️ 지원자 관리</h3>
-          <PassFailSidebar
-            selectedOptions={selectedOptions}
-            openConfirmModalWithMessage={openConfirmModalWithMessage}
-          />
+          <QueryErrorBoundary>
+            <PassFailSidebar
+              selectedOptions={selectedOptions}
+              openConfirmModalWithMessage={openConfirmModalWithMessage}
+            />
+          </QueryErrorBoundary>
           <SearchBarArea search={search} handleSearchChange={handleSearchChange} />
           <EvaluationTabs selectedOptions={selectedOptions} />
           <div className={S.PanelContainer}>
             <ApplicantFilterBar selectedOptions={selectedOptions} />
             {search && (
               <Suspense fallback={<LoadingSpinner />}>
-                <SearchResult
-                  search={search}
-                  selectedOptions={selectedOptions}
-                  openConfirmModalWithMessage={openConfirmModalWithMessage}
-                  handleSelectApplicant={handleSelectApplicant}
-                />
+                <QueryErrorBoundary>
+                  <SearchResult
+                    search={search}
+                    selectedOptions={selectedOptions}
+                    openConfirmModalWithMessage={openConfirmModalWithMessage}
+                    handleSelectApplicant={handleSelectApplicant}
+                  />
+                </QueryErrorBoundary>
               </Suspense>
             )}
             {!search && (
               <Suspense fallback={<LoadingSpinner />}>
-                <ApplicantList
-                  selectedOptions={selectedOptions}
-                  openConfirmModalWithMessage={openConfirmModalWithMessage}
-                  handleSelectApplicant={handleSelectApplicant}
-                />
+                <QueryErrorBoundary>
+                  <ApplicantList
+                    selectedOptions={selectedOptions}
+                    openConfirmModalWithMessage={openConfirmModalWithMessage}
+                    handleSelectApplicant={handleSelectApplicant}
+                  />
+                </QueryErrorBoundary>
               </Suspense>
             )}
             <div />

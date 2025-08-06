@@ -15,6 +15,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import LoadingSpinner from '@/common/ui/loading';
 import { useAuthStore } from '@/common/store/adminAuthStore';
+import QueryErrorBoundary from '@/components/error/queryErrorBoundary';
 
 function ApplicationFormPage() {
   const { profile } = useAuthStore((state) => state);
@@ -84,22 +85,24 @@ function ApplicationFormPage() {
     <>
       <form className={S.formContainer} onSubmit={handleSubmit}>
         <h3 className={S.title}>📋 지원폼 관리</h3>
-        <QuestionForm
-          formData={questionsData}
-          errors={errors}
-          isSubmit={isSubmit}
-          handleQuestionTypeChange={handleQuestionTypeChange}
-          handleAddField={handleAddField}
-          handleUpdateField={handleUpdateField}
-          handleDeleteField={handleDeleteField}
-          handleEssentialChange={handleEssentialChange}
-          handleOptionChange={handleOptionChange}
-          handleOptionAdd={handleOptionAdd}
-          handleOptionDelete={handleOptionDelete}
-          handleChangeTitle={handleChangeTitle}
-          handleChangeSubTitle={handleChangeSubTitle}
-          scrollRefs={scrollRefs}
-        />
+        <QueryErrorBoundary>
+          <QuestionForm
+            formData={questionsData}
+            errors={errors}
+            isSubmit={isSubmit}
+            handleQuestionTypeChange={handleQuestionTypeChange}
+            handleAddField={handleAddField}
+            handleUpdateField={handleUpdateField}
+            handleDeleteField={handleDeleteField}
+            handleEssentialChange={handleEssentialChange}
+            handleOptionChange={handleOptionChange}
+            handleOptionAdd={handleOptionAdd}
+            handleOptionDelete={handleOptionDelete}
+            handleChangeTitle={handleChangeTitle}
+            handleChangeSubTitle={handleChangeSubTitle}
+            scrollRefs={scrollRefs}
+          />
+        </QueryErrorBoundary>
         <div
           className={S.navigatorContainer}
           style={assignInlineVars({
