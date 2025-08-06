@@ -16,7 +16,7 @@ export const usePassList = ({ selectedOptions, enabled }: UseApplicantListParams
   const { passList } = applicantKey;
   const { evaluation } = selectedOptions;
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading, error } =
     useInfiniteQuery<ApplicantsInfo, Error>({
       queryKey: [passList, selectedOptions],
       queryFn: ({ pageParam }) =>
@@ -30,6 +30,7 @@ export const usePassList = ({ selectedOptions, enabled }: UseApplicantListParams
         const isLastPage = lastPage.totalPage === lastPage.currentPage;
         return isLastPage ? null : lastPage.currentPage + 1;
       },
+      retry: false,
       enabled,
     });
   const passApplicants = data ? data.pages.flatMap((page) => page.applicants) : [];
@@ -42,6 +43,7 @@ export const usePassList = ({ selectedOptions, enabled }: UseApplicantListParams
     hasNextPage,
     isFetchingNextPage,
     refetch,
+    error,
   };
 };
 
@@ -63,6 +65,7 @@ export const useFailList = ({ selectedOptions, enabled }: UseApplicantListParams
         const isLastPage = lastPage.totalPage === lastPage.currentPage;
         return isLastPage ? null : lastPage.currentPage + 1;
       },
+      retry: false,
       enabled,
     });
 
