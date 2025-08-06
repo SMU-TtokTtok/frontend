@@ -20,6 +20,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               <div className={S.FormContentTitle}>
                 {question.title}
                 {question.isEssential && <span className={S.FormContentTitleEssential}>*</span>}
+                <span> (중복 가능)</span>
               </div>
               {question.subTitle && (
                 <div className={S.FormContentSubTitle}>{question.subTitle}</div>

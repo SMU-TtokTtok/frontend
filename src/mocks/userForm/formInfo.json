@@ -24,7 +24,7 @@
       "title": "지원하게 된 동기를 선택해주세요.",
       "subTitle": "",
       "questionType": "CHECKBOX",
-      "isEssential": false,
+      "isEssential": true,
       "content": ["관심 있는 분야라서", "지인의 추천", "학점과 관련", "기타"]
     },
     {
