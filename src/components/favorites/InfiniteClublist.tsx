@@ -27,6 +27,7 @@ interface InfiniteClubListProps {
   title: string;
   handleTotal?: (data: number) => void;
   isFavorite?: boolean;
+  handleModalOpen: () => void;
 }
 
 function InfiniteClubList({
@@ -35,6 +36,7 @@ function InfiniteClubList({
   useInfinite,
   handleTotal,
   isFavorite,
+  handleModalOpen,
 }: InfiniteClubListProps) {
   const sort = selectedOptions.sort || 'latest';
   const name = selectedOptions.name || '';
@@ -85,7 +87,12 @@ function InfiniteClubList({
         <div className={S.container}>
           <ul className={S.innerWrapper}>
             {clubs.map((club, index) => (
-              <ClubItem key={index} className={S.cardStyle} clubData={club} />
+              <ClubItem
+                key={index}
+                className={S.cardStyle}
+                clubData={club}
+                handleModalOpen={handleModalOpen}
+              />
             ))}
           </ul>
         </div>
