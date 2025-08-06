@@ -8,11 +8,14 @@ import { useModal } from '@/hooks/useModal';
 import ConfirmModal from '@/common/components/confirmModal';
 import { ROUTES } from '@/common/constants/routes';
 import { useAuthStore } from '@/common/store/adminAuthStore';
+import { useFollowSidebar } from '@/hooks/useFollowSidebar';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
 
 export default function Form({ kind }: { kind: string }) {
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
   const { profile } = useAuthStore();
   const { handlePostMessage, isLoading } = usePostMessage(profile!.clubId, handleModalOpen, kind);
+  const { barPosition } = useFollowSidebar({ initialPosition: 426 });
   const {
     register,
     handleSubmit,
@@ -76,7 +79,12 @@ export default function Form({ kind }: { kind: string }) {
             {errors.failMessage && <p className={S.errorText}>{errors.failMessage.message}</p>}
           </div>
         </div>
-        <div className={S.submitContainer}>
+        <div
+          className={S.submitContainer}
+          style={assignInlineVars({
+            [S.sidebarTop]: `${barPosition}px`,
+          })}
+        >
           <Button
             variant="primary"
             className={S.button}

@@ -257,9 +257,9 @@ export default function MDEditor({
         <Button variant="secondary" className={S.buttonIntro}>
           소개
         </Button>
-        <Button variant="secondary" className={S.buttonNotice}>
+        {/* <Button variant="secondary" className={S.buttonNotice}>
           게시판
-        </Button>
+        </Button> */}
       </div>
       {isEditing ? (
         <>

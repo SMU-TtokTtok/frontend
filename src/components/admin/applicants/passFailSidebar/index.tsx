@@ -18,9 +18,14 @@ import { useAuthStore } from '@/common/store/adminAuthStore';
 interface PassFailSidebarProps {
   selectedOptions: ApplicantListParams;
   openConfirmModalWithMessage: (message: string) => void;
+  isMessage?: boolean;
 }
 
-function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassFailSidebarProps) {
+function PassFailSidebar({
+  selectedOptions,
+  openConfirmModalWithMessage,
+  isMessage = false,
+}: PassFailSidebarProps) {
   const { evaluation } = selectedOptions;
   const { passApplicants, hasInterview } = usePassList({ selectedOptions });
   const { failApplicants } = useFailList({ selectedOptions });
@@ -34,7 +39,7 @@ function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassF
     setIsPass(isPass);
   };
 
-  const { barPosition } = useFollowSidebar({ initialPosition: 55 });
+  const { barPosition } = useFollowSidebar({ initialPosition: isMessage ? 161 : 55 });
 
   const {
     isOpen: isListModalOpen,
@@ -45,7 +50,7 @@ function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassF
   return (
     <>
       <div
-        className={S.rightSidebar}
+        className={isMessage ? S.rightSidebar2 : S.rightSidebar}
         style={assignInlineVars({
           [S.sidebarTop]: `${barPosition}px`,
         })}
@@ -70,32 +75,32 @@ function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassF
             applicants={failApplicants}
           />
         </div>
-
-        <div className={S.buttonWrapper}>
-          <div className={S.connectButtonWrapper}>
-            <Button
-              variant="secondary"
-              className={S.baseButton['connectButton']}
-              onClick={() => handleConnectApplicants({ evaluation, clubId: profile!.clubId })}
-            >
-              {evaluation === 'DOCUMENT'
-                ? hasInterview
-                  ? '면접 명단연동'
-                  : '최종 부원연동'
-                : '최종 부원연동'}
-            </Button>
-          </div>
-
-          <div className={S.sendButtonWrapper}>
-            <Link href={ROUTES.ADMIN_APPLICATIONS_MESSAGE(evaluation)}>
-              <Button variant="primary" className={S.baseButton['sendButton']}>
-                결과 전송하기
+        {!isMessage && (
+          <div className={S.buttonWrapper}>
+            <div className={S.connectButtonWrapper}>
+              <Button
+                variant="secondary"
+                className={S.baseButton['connectButton']}
+                onClick={() => handleConnectApplicants({ evaluation, clubId: profile!.clubId })}
+              >
+                {evaluation === 'DOCUMENT'
+                  ? hasInterview
+                    ? '면접 명단연동'
+                    : '최종 부원연동'
+                  : '최종 부원연동'}
               </Button>
-            </Link>
+            </div>
+            <div className={S.sendButtonWrapper}>
+              <Link href={ROUTES.ADMIN_APPLICATIONS_MESSAGE(evaluation)}>
+                <Button variant="primary" className={S.baseButton['sendButton']}>
+                  결과 전송하기
+                </Button>
+              </Link>
 
-            <small className={S.buttonDescription}>클릭 시, 메시지 작성란으로 이동합니다.</small>
+              <small className={S.buttonDescription}>클릭 시, 메시지 작성란으로 이동합니다.</small>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <PassFailListModal
         isPass={isPass}
