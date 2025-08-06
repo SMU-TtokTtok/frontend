@@ -15,9 +15,9 @@ const ClubIntro = ({ introduction }: ClubIntroProps) => {
         <Button variant="secondary" className={S.headerItem1}>
           소개
         </Button>
-        <Button variant="secondary" className={S.headerItem2}>
+        {/* <Button variant="secondary" className={S.headerItem2}>
           게시판
-        </Button>
+        </Button> */}
       </div>
 
       <div className="content-container" dangerouslySetInnerHTML={{ __html: introduction }} />
