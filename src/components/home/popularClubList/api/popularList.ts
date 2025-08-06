@@ -8,8 +8,8 @@ export const getPopularList = async () => {
   return data;
 };
 
-export const patchFavorite = async (clubId: string) => {
-  const data = await mainClient.patch(`/favorite/${clubId}`, {});
+export const postFavorite = async (clubId: string) => {
+  const data = await mainClient.post(`${API.USER.FAVORITES_TOGGLE(clubId)}`, {});
 
   return data;
 };
