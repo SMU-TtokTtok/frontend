@@ -5,6 +5,8 @@ import { useSearchQuery } from '@/hooks/useSearchQuery';
 import SortButtonGroup from '@/components/favorites/SortButtonGroup';
 import { useSearchInfinite } from '@/hooks/useInfiniteCommon';
 import { Suspense, useState } from 'react';
+import { useModal } from '@/hooks/useModal';
+import ConfirmModal from '@/common/components/confirmModal';
 
 export default function Page() {
   return (
@@ -17,7 +19,7 @@ export default function Page() {
 function SearchPage() {
   const { filter } = useSearchQuery();
   const [total, setTotal] = useState<number | null>(0);
-
+  const { isOpen, handleModalOpen, handleModalClose } = useModal();
   const handleTotal = (data: number) => {
     setTotal(data);
   };
@@ -30,7 +32,11 @@ function SearchPage() {
         selectedOptions={filter}
         useInfinite={useSearchInfinite}
         handleTotal={handleTotal}
+        handleModalOpen={handleModalOpen}
       />
+      <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
+        즐겨찾기 변경에 성공했어요!
+      </ConfirmModal>
     </div>
   );
 }
