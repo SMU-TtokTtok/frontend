@@ -7,6 +7,7 @@ export const container = style({
   flexDirection: 'column',
   gap: '30px',
   marginBottom: '200px',
+  position: 'relative',
 });
 
 export const messageContainer = style({
@@ -71,12 +72,8 @@ export const submitContainer = style({
   gap: '10px',
   width: '330px',
   alignSelf: 'flex-end',
-
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
-      width: '236px',
-    },
-  },
+  top: '-132px',
+  position: 'absolute',
 });
 
 export const button = style({

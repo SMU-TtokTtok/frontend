@@ -67,10 +67,10 @@ export default function Page() {
         {errors.password && <p className={S.ErrorText}>{errors.password.message}</p>}
 
         <div className={S.AuthFooter}>
-          <div className={S.CheckboxContainer}>
+          <label className={S.CheckboxContainer}>
             <input type="checkbox" {...register('rememberMe')} />
             <div className={S.CheckboxText}>로그인 상태 유지</div>
-          </div>
+          </label>
           <div className={S.AuthFooterTextContainer}>
             <div className={S.AuthFooterText} onClick={() => router.push(ROUTES.PASSWORD)}>
               비밀번호 재설정

@@ -12,7 +12,6 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: string }) => {
   const { applyStartDate, applyDeadLine, grades, maxApplyCount, recruiting } = clubIntro;
   const router = useRouter();
-
   // 커스텀 훅 사용
   const { barPosition } = useFollowSidebar({ initialPosition: 124 });
 
