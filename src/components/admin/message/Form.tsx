@@ -15,7 +15,7 @@ export default function Form({ kind }: { kind: string }) {
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
   const { profile } = useAuthStore();
   const { handlePostMessage, isLoading } = usePostMessage(profile!.clubId, handleModalOpen, kind);
-  const { barPosition } = useFollowSidebar({ initialPosition: 320 });
+  const { barPosition } = useFollowSidebar({ initialPosition: 426 });
   const {
     register,
     handleSubmit,

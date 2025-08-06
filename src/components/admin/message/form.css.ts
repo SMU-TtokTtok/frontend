@@ -75,7 +75,7 @@ export const submitContainer = style({
   width: '330px',
   alignSelf: 'flex-end',
   top: sidebarTop,
-  right: '-358px',
+  right: '-350px',
   position: 'absolute',
   transition: 'top 0.7s ease-out',
   '@media': {
