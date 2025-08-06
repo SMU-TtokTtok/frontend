@@ -17,19 +17,11 @@ export default function Page() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
-    setValue,
     // setError,
   } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
     mode: 'onSubmit',
   });
-
-  const rememberMe = watch('rememberMe');
-
-  const handleCheckboxToggle = () => {
-    setValue('rememberMe', !rememberMe);
-  };
 
   const onSubmit = async (data: LoginForm) => {
     try {
@@ -75,10 +67,10 @@ export default function Page() {
         {errors.password && <p className={S.ErrorText}>{errors.password.message}</p>}
 
         <div className={S.AuthFooter}>
-          <div className={S.CheckboxContainer} onClick={handleCheckboxToggle}>
-            <input type="checkbox" {...register('rememberMe')} checked={rememberMe} />
+          <label className={S.CheckboxContainer}>
+            <input type="checkbox" {...register('rememberMe')} />
             <div className={S.CheckboxText}>로그인 상태 유지</div>
-          </div>
+          </label>
           <div className={S.AuthFooterTextContainer}>
             <div className={S.AuthFooterText} onClick={() => router.push(ROUTES.PASSWORD)}>
               비밀번호 재설정
