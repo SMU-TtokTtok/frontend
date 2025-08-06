@@ -14,7 +14,9 @@ export const useLoginMutation = () => {
       const response = await postLogin({ login, password });
       return response;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      localStorage.setItem('admin_access_token', data.accessToken || '');
+      localStorage.setItem('admin_refresh_token', data.refreshToken || '');
       router.push(ROUTES.ADMIN_APPLICATIONS);
     },
   });
@@ -40,6 +42,8 @@ export const useLogoutMutation = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: adminProfile });
+      localStorage.removeItem('admin_access_token');
+      localStorage.removeItem('admin_refresh_token');
       router.push(ROUTES.ADMIN_LOGIN);
     },
     onError: (error) => {
