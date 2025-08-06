@@ -29,6 +29,7 @@ export const Container = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       width: '100%',
+      marginTop: '16px',
     },
   },
 });
@@ -154,6 +155,10 @@ export const Input = style({
   selectors: {
     '&::placeholder': {
       color: '#D2D4D8',
+    },
+    '&:disabled': {
+      opacity: 0.5,
+      cursor: 'not-allowed',
     },
   },
 

@@ -1,20 +1,28 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { patchFavorite } from '@/components/home/popularClubList/api/popularList';
-import { clubKey } from '@/hooks/queries/key';
-import { useModal } from './useModal';
+import { postFavorite } from '@/components/home/popularClubList/api/popularList';
+import { clubInfoKey, clubKey, userKey } from '@/hooks/queries/key';
+
 interface usePatchFavoriteParams {
   clubId: string;
 }
-export const usePatchFavorite = () => {
+export const usePostFavorite = (handleModalOpen: () => void) => {
   const queryClient = useQueryClient();
-  const { popularClubList } = clubKey;
-  const { handleModalOpen } = useModal();
+  const { popularClubList, allClubList } = clubKey;
+  const { favoritesClubList, appliedClubList, searchClubList } = userKey;
+  const { clubInfo } = clubInfoKey;
 
   const favoriteMutation = useMutation({
-    mutationFn: ({ clubId }: usePatchFavoriteParams) => patchFavorite(clubId),
+    mutationFn: ({ clubId }: usePatchFavoriteParams) => postFavorite(clubId),
     onSuccess: () => {
       handleModalOpen();
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === allClubList,
+      });
       queryClient.invalidateQueries({ queryKey: popularClubList });
+      queryClient.invalidateQueries({ queryKey: favoritesClubList });
+      queryClient.invalidateQueries({ queryKey: appliedClubList });
+      queryClient.invalidateQueries({ queryKey: searchClubList });
+      queryClient.invalidateQueries({ queryKey: clubInfo });
     },
   });
 

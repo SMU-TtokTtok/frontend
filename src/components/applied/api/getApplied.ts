@@ -14,7 +14,7 @@ export async function fetchAppliedClubs({
   if (typeof cursor === 'string') params.append('cursor', cursor);
 
   //추후에 url수정 by현우
-  const res = await mainClient.get(`/api/favorites?${params.toString()}`);
+  const res = await mainClient.get(`/api/user/applies/history?${params.toString()}`);
 
   return res;
 }

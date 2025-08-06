@@ -223,3 +223,16 @@ export const footerNextStep = style({
   fontSize: vars.fonts.body1,
   fontWeight: 500,
 });
+
+export const fileDownload = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '4px',
+  cursor: 'pointer',
+});
+export const fileDownloadText = style({
+  color: vars.colors.primary.default,
+  fontSize: vars.fonts.body2,
+  fontWeight: 500,
+});

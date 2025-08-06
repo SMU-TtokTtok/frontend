@@ -119,8 +119,8 @@ function UserInfo({ data }: UserInfoProps) {
             </div>
           </div>
 
-          {data.answers.map((answer, index) => (
-            <AnswerFactory key={index} answer={answer} />
+          {data.answers?.map((answer, index) => (
+            <AnswerFactory key={index} answer={answer} applicantName={data.name} />
           ))}
         </div>
       )}

@@ -39,6 +39,14 @@
       "isEssential": false,
       "content": ["React", "Next", "Vue"],
       "value": "React"
+    },
+    {
+      "title": "이력서를 업로드해주세요.",
+      "subTitle": "PDF 형식 권장",
+      "questionType": "FILE",
+      "isEssential": true,
+      "content": null,
+      "value": "https://www.propopol-api.site//applicant/honggildong@example.com/2c9085c0b-567c-4c7f-ac89-40ab9db6016f_RUST.png"
     }
   ],
   "memos": []

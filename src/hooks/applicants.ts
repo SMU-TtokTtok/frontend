@@ -34,6 +34,7 @@ export const useApplicantList = ({ selectedOptions, enabled }: UseApplicantListP
         const isLastPage = lastPage.totalPage === lastPage.currentPage;
         return isLastPage ? null : lastPage.currentPage + 1;
       },
+      retry: false,
       enabled,
     });
   const applicants = data ? data.pages.flatMap((page) => page.applicants) : [];

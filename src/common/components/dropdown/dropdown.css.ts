@@ -24,4 +24,5 @@ export const panel = style({
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   borderRadius: '8px',
   zIndex: 100,
+  overflow: 'hidden',
 });

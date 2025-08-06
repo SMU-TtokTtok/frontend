@@ -66,9 +66,9 @@ export const FILTER_CONFIG = {
     { value: 'DEPARTMENT', label: '과동아리' },
   ],
   sort: [
-    { value: 'latest', label: '최신등록 순' },
-    { value: 'popular', label: '인기도 순' },
-    { value: 'member_count', label: '멤버많은 수' },
+    { value: 'latest', label: '최신등록순' },
+    { value: 'popular', label: '인기도순' },
+    { value: 'member_count', label: '멤버많은수' },
   ],
   grades: [
     { value: 'FIRST_GRADE', label: '1학년' },

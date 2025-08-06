@@ -9,12 +9,14 @@ import RightSide from '@/components/clubInfo/RightSide';
 import { useParams } from 'next/navigation';
 import { useClubInfo } from '@/hooks/useClubInfo';
 import LoadingSpinner from '@/common/ui/loading';
+import { useModal } from '@/hooks/useModal';
+import ConfirmModal from '@/common/components/confirmModal';
 
 export default function ClubInfoPage() {
   const { clubId } = useParams();
   const { data } = useClubInfo(clubId as string);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
-
+  const { isOpen, handleModalClose, handleModalOpen } = useModal();
   useEffect(() => {
     const checkScreenSize = () => {
       setIsLargeScreen(window.innerWidth >= 1440);
@@ -26,19 +28,28 @@ export default function ClubInfoPage() {
   }, []);
 
   return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <div className={S.wrapper}>
-        <div className={S.container}>
-          <div className={S.leftcontainer}>
-            <BackButton />
-            <ClubProfile clubIntro={data} clubId={clubId as string} />
-            {!isLargeScreen && <RightSide clubIntro={data} clubId={clubId as string} />}
-            <ClubIntroduce introduction={data.content} />
-          </div>
+    <>
+      <Suspense fallback={<LoadingSpinner />}>
+        <div className={S.wrapper}>
+          <div className={S.container}>
+            <div className={S.leftcontainer}>
+              <BackButton />
+              <ClubProfile
+                clubIntro={data}
+                clubId={clubId as string}
+                handleModalOpen={handleModalOpen}
+              />
+              {!isLargeScreen && <RightSide clubIntro={data} clubId={clubId as string} />}
+              <ClubIntroduce introduction={data.content} />
+            </div>
 
-          {isLargeScreen && <RightSide clubIntro={data} clubId={clubId as string} />}
+            {isLargeScreen && <RightSide clubIntro={data} clubId={clubId as string} />}
+          </div>
         </div>
-      </div>
-    </Suspense>
+      </Suspense>
+      <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
+        즐겨찾기 변경에 성공했어요!
+      </ConfirmModal>
+    </>
   );
 }

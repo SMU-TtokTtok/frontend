@@ -14,7 +14,7 @@ export const AdminLogout = http.post(`${API}/api/admin/auth/logout`, async () =>
 });
 
 export const AdminRefresh = http.post(`${API}/api/admin/auth/re-issue`, async () => {
-  return HttpResponse.json({ accessToken: 'new_access_token' }, { status: 200 });
+  return HttpResponse.json({ accessToken: 'new_access_token' }, { status: 401 });
 });
 
 export const AdminProfile = http.get(`${API}/api/admin/auth/info`, async () => {

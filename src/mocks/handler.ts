@@ -30,8 +30,10 @@ import {
   deleteClubMember,
   patchClubMember,
   postClubMember,
+  getClubMember,
 } from './clubMember';
 import { postMessage } from './message';
+import { favortesClubs, appliedClubs, searchClubs, popularTotalClubs } from './userClubs';
 
 export const handlers = [
   popularClubs,
@@ -76,4 +78,9 @@ export const handlers = [
   getImage,
   postUserForm,
   postMessage,
+  favortesClubs,
+  appliedClubs,
+  searchClubs,
+  popularTotalClubs,
+  getClubMember,
 ];

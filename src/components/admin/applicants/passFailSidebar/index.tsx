@@ -41,6 +41,7 @@ function PassFailSidebar({ selectedOptions, openConfirmModalWithMessage }: PassF
     handleModalOpen: handleListModalOpen,
     handleModalClose: handleListModalClose,
   } = useModal();
+
   return (
     <>
       <div

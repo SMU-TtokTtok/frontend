@@ -8,17 +8,15 @@ import { adminProfileKey } from './queries/key';
 
 export const useLoginMutation = () => {
   const router = useRouter();
-  const queryClient = useQueryClient();
-
-  const { adminProfile } = adminProfileKey;
 
   const loginMutation = useMutation({
     mutationFn: async ({ login, password }: AdminLoginForm) => {
       const response = await postLogin({ login, password });
       return response;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [adminProfile] });
+    onSuccess: (data) => {
+      localStorage.setItem('admin_access_token', data.accessToken || '');
+      localStorage.setItem('admin_refresh_token', data.refreshToken || '');
       router.push(ROUTES.ADMIN_APPLICATIONS);
     },
   });
@@ -44,6 +42,8 @@ export const useLogoutMutation = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: adminProfile });
+      localStorage.removeItem('admin_access_token');
+      localStorage.removeItem('admin_refresh_token');
       router.push(ROUTES.ADMIN_LOGIN);
     },
     onError: (error) => {

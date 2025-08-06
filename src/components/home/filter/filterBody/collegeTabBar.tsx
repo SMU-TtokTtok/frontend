@@ -13,6 +13,7 @@ function CollegeTabBar({ selectedOptions }: FilterProps) {
           <Button
             key={option.value}
             variant="none"
+            disabled={selectedOptions.type !== 'DEPARTMENT'}
             className={S.ButtonStyle({
               style: 'body',
               isSelected: selectedOptions.clubUniv === option.value,

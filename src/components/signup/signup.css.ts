@@ -35,7 +35,7 @@ export const BoxContainer = style({
 });
 
 export const TitleText = style({
-  fontSize: vars.fonts.title1,
+  fontSize: '29px',
   fontWeight: '600',
 
   '@media': {
@@ -88,7 +88,7 @@ export const LabelDetailBox = style({
 });
 
 export const LabelDetailText = style({
-  fontSize: vars.fonts.body1,
+  fontSize: '18px',
   fontWeight: '600',
 
   '@media': {
@@ -141,7 +141,7 @@ export const Input = style({
   backgroundColor: '#F8F8F9',
   borderRadius: '6px',
   padding: '12px 16px',
-  fontSize: vars.fonts.body1,
+  fontSize: '16px',
   flex: ' 1 1 0 ',
   height: '48px',
   width: '100%', // !!
@@ -149,6 +149,10 @@ export const Input = style({
   selectors: {
     '&::placeholder': {
       color: '#E0E1E3',
+    },
+    '&:disabled': {
+      opacity: 0.5,
+      cursor: 'not-allowed',
     },
   },
 
@@ -182,6 +186,7 @@ export const FlexPolicy = style({
   flexDirection: 'column',
   gap: '10px',
   flex: '1 0 0',
+  alignItems: 'flex-start',
 });
 
 export const PolicyBox = style({
@@ -193,11 +198,13 @@ export const PolicyBox = style({
   whiteSpace: 'pre-line',
   height: '220px',
   overflowY: 'auto',
+  width: '100%',
 });
 
 export const FlexAgree = style({
   display: 'flex',
   gap: '8px',
+  cursor: 'pointer',
 });
 
 export const AgreeText = style({

@@ -16,9 +16,11 @@ export class CustomHttpError extends Error {
 
 export default class ApiClient {
   private baseUrl: string;
+  private tokenKey: string;
 
-  constructor(baseUrl: string) {
+  constructor(baseUrl: string, tokenKey: string) {
     this.baseUrl = baseUrl;
+    this.tokenKey = tokenKey;
   }
 
   async get<T = any>(path: string): Promise<T> {
@@ -62,6 +64,12 @@ export default class ApiClient {
         : {
             'Content-Type': 'application/json',
           };
+      if (typeof window !== 'undefined') {
+        const accessToken = localStorage.getItem(this.tokenKey);
+        if (accessToken) {
+          headers['Authorization'] = `Bearer ${accessToken}`;
+        }
+      }
 
       const response = await fetch(url, {
         method,
@@ -79,6 +87,9 @@ export default class ApiClient {
 
       return response;
     } catch (error) {
+      if (error instanceof CustomHttpError) {
+        throw error;
+      }
       throw new CustomHttpError(`API 요청 실패: ${error}`, (error as CustomHttpError).status);
     }
   }

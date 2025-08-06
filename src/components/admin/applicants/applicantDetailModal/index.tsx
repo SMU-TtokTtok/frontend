@@ -7,6 +7,7 @@ import * as S from './applicantDetailModal.css';
 import close_white from '@/assets/cancel_white.svg';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import ApplicantDetail from './applicantDetail';
+import QueryErrorBoundary from '@/components/error/queryErrorBoundary';
 
 interface ApplicantDetailModalProps {
   applicantId: string;
@@ -29,7 +30,9 @@ function ApplicantDetailModal({
           img={<Image src={close_white} alt="닫기" className={S.closeButton} />}
           className={S.header}
         />
-        <ApplicantDetail applicantId={applicantId} />
+        <QueryErrorBoundary>
+          <ApplicantDetail applicantId={applicantId} />
+        </QueryErrorBoundary>
       </Modal.Content>
     </Modal>
   );

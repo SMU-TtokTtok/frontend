@@ -5,7 +5,7 @@ import person from '@/assets/person.svg';
 import Tag from '@/common/ui/tag/index';
 import star from '@/assets/star.svg';
 import star_active from '@/assets/star_active.svg';
-import { usePatchFavorite } from '@/hooks/useFavoriteMutation';
+import { usePostFavorite } from '@/hooks/useFavoriteMutation';
 import { getKoreanType } from '@/common/util/getKoreanType';
 import { getKoreanCategory } from '@/common/util/getKoreanCategory';
 import clubImg from '@/assets/clubImg.svg';
@@ -13,9 +13,11 @@ import clubImg from '@/assets/clubImg.svg';
 export default function ClubProfile({
   clubIntro,
   clubId,
+  handleModalOpen,
 }: {
   clubIntro: UserClubIntro;
   clubId: string;
+  handleModalOpen: () => void;
 }) {
   const {
     name,
@@ -28,7 +30,7 @@ export default function ClubProfile({
     clubMemberCount,
     bookmarked,
   } = clubIntro;
-  const { handleFavoriteStatus } = usePatchFavorite();
+  const { handleFavoriteStatus } = usePostFavorite(handleModalOpen);
 
   return (
     <div className={S.clubProfile}>

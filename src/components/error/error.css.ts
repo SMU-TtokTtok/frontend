@@ -2,7 +2,8 @@ import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const container = style({
-  height: '100vh',
+  height: '100%',
+  width: '100%',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
