@@ -26,7 +26,11 @@ function DropDown({ children, toggleButton, panelClassName, isOpen = false }: Pr
       >
         {toggleButton}
       </div>
-      {open && <ul className={`${S.panel} ${panelClassName}`}>{children}</ul>}
+      {open && (
+        <ul className={`${S.panel} ${panelClassName}`} onClick={handleClose}>
+          {children}
+        </ul>
+      )}
     </div>
   );
 }
