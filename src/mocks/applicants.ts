@@ -10,11 +10,11 @@ export const Applicants = http.get(`${BASE_API}/api/admin${API.ADMIN.APPLICANTS}
 });
 
 export const PatchApplicantStatus = http.patch(
-  `${BASE_API}${API.ADMIN.APPLICANTS_STATUS(':applicantId')}`,
+  `${BASE_API}/api/admin${API.ADMIN.APPLICANTS_STATUS(':applicantId')}`,
   ({ params }) => {
     const { applicantId } = params;
     const status = 'EVALUATING';
-    return HttpResponse.json({ id: applicantId, status }, { status: 200 });
+    return HttpResponse.json({ id: applicantId, status }, { status: 500 });
   },
 );
 
@@ -36,7 +36,7 @@ export const ApplicantSearch = http.get(
       applicant.name.includes(rawSearch),
     );
 
-    return HttpResponse.json(filteredApplicants, { status: 200 });
+    return HttpResponse.json(filteredApplicants, { status: 400 });
   },
 );
 
@@ -52,7 +52,7 @@ export const ApplicantInfo = http.get(
       return HttpResponse.json({ message: 'Applicant not found' }, { status: 404 });
     }
 
-    return HttpResponse.json(applicantInfo, { status: 200 });
+    return HttpResponse.json(applicantInfo, { status: 400 });
   },
 );
 const mockMemos: { id: string; applicantId: string; content: string }[] = [];

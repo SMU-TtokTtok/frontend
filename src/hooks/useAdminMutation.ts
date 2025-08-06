@@ -8,9 +8,6 @@ import { adminProfileKey } from './queries/key';
 
 export const useLoginMutation = () => {
   const router = useRouter();
-  const queryClient = useQueryClient();
-
-  const { adminProfile } = adminProfileKey;
 
   const loginMutation = useMutation({
     mutationFn: async ({ login, password }: AdminLoginForm) => {
@@ -18,7 +15,6 @@ export const useLoginMutation = () => {
       return response;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [adminProfile] });
       router.push(ROUTES.ADMIN_APPLICATIONS);
     },
   });

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { startTransition, useEffect } from 'react';
 import * as S from './error.css';
 import Image from 'next/image';
 import errorIcon from '@/assets/error.svg';
@@ -6,9 +6,10 @@ import { useRouter } from 'next/navigation';
 import Button from '@/common/ui/button';
 interface ErrorPageProps {
   error?: Error;
-  reset: () => void;
+  reset?: () => void;
+  className?: string;
 }
-function UnExpectedErrorPage({ error, reset }: ErrorPageProps) {
+function UnExpectedErrorPage({ error, reset, className }: ErrorPageProps) {
   const router = useRouter();
 
   useEffect(() => {
@@ -19,12 +20,15 @@ function UnExpectedErrorPage({ error, reset }: ErrorPageProps) {
   }, [error]);
 
   const handleReload = () => {
-    router.refresh();
-    reset();
+    startTransition(() => {
+      router.refresh();
+      reset?.();
+    });
   };
+  const containerClass = `${className ? className : S.container}`;
 
   return (
-    <div className={S.container}>
+    <div className={containerClass}>
       <Image src={errorIcon} alt="에러 아이콘" className={S.icon} />
       <div className={S.title}>문제가 발생했습니다</div>
       <div className={S.message}>
