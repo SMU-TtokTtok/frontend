@@ -1,0 +1,42 @@
+{
+  "currentPage": 1,
+  "totalPage": 1,
+  "totalCount": 4,
+  "clubMembers": [
+    {
+      "memberId": "member-001",
+      "name": "홍길동",
+      "grade": "FIRST_GRADE",
+      "major": "컴퓨터공학과",
+      "role": "PRESIDENT"
+    },
+    {
+      "memberId": "member-002",
+      "name": "김길동",
+      "grade": "SECOND_GRADE",
+      "major": "컴퓨터공학과",
+      "role": "VICE_PRESIDENT"
+    },
+    {
+      "memberId": "member-003",
+      "name": "이길동",
+      "grade": "THIRD_GRADE",
+      "major": "컴퓨터공학과",
+      "role": "EXECUTIVE"
+    },
+    {
+      "memberId": "member-004",
+      "name": "박길동",
+      "grade": "FOURTH_GRADE",
+      "major": "컴퓨터공학과",
+      "role": "MEMBER"
+    },
+    {
+      "memberId": "member-005",
+      "name": "최길동",
+      "grade": "FOURTH_GRADE",
+      "major": "컴퓨터공학과",
+      "role": "MEMBER"
+    }
+  ]
+}
