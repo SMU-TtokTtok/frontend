@@ -61,8 +61,9 @@ export default function Form({ clubId }: { clubId: string }) {
 
         // 답변 타입에 따라 value 처리
         if (Array.isArray(question.value)) {
-          // 체크박스의 경우 배열을 그대로 사용
-          value = question.value;
+          // 체크박스의 경우: false가 아닌 값들만 필터링
+          const selectedValues = question.value.filter((val: string | boolean) => val !== false);
+          value = selectedValues.length > 0 ? selectedValues : null;
         } else if (question.value instanceof FileList) {
           // FileList의 경우 첫 번째 파일을 사용
           if (question.value.length === 0) {
@@ -73,8 +74,8 @@ export default function Form({ clubId }: { clubId: string }) {
             formData.append('files', question.value[0]);
           }
         } else {
-          // 문자열 답변의 경우 그대로 사용
-          value = question.value || '';
+          // 문자열 답변의 경우 빈 문자열이면 null, 아니면 그대로 사용
+          value = question.value && question.value.trim() !== '' ? question.value : null;
         }
 
         return {
@@ -106,7 +107,7 @@ export default function Form({ clubId }: { clubId: string }) {
         new Blob([JSON.stringify(questionIds)], { type: 'application/json' }),
       );
     }
-    // console.log(requestData);
+    console.log(requestData);
     // console.log(questionIds);
     // for (const [key, value] of formData) {
     //   console.log(key, value);
