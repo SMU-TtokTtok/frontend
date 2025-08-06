@@ -6,37 +6,56 @@ import emptyStar from '@/assets/star.svg';
 import ActiveStar from '@/assets/star_active.svg';
 import person from '@/assets/person.svg';
 import RecruitStatus from './recruitStatus';
-import { usePatchFavorite } from '@/hooks/useFavoriteMutation';
+import { usePostFavorite } from '@/hooks/useFavoriteMutation';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
 import Tag from '@/common/ui/tag';
 import { FILTER_CONFIG } from '@/common/constants';
+import { useEffect, useState } from 'react';
 interface ClubItemProps {
   clubData: ClubItemInfo;
   className?: string;
+  handleModalOpen: () => void;
 }
 
-function ClubItem({ clubData, className }: ClubItemProps) {
-  const { handleFavoriteStatus } = usePatchFavorite();
+function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
+  const { handleFavoriteStatus } = usePostFavorite(handleModalOpen);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(clubData.bookmarked);
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    setIsBookmarked(clubData.bookmarked);
+    setMounted(true);
+  }, [clubData.bookmarked]);
+
+  if (!mounted) return null;
+
   const handleClubDetail = () => {
     router.push(ROUTES.CLUB_INFO(clubData.id));
   };
+
+  const toggleBookmark = () => {
+    setIsBookmarked((prev) => !prev);
+    handleFavoriteStatus({ clubId: clubData.id });
+  };
+
   const clubType = FILTER_CONFIG.type.find((value) => clubData.clubType === value.value)?.label;
   const clubCategory = FILTER_CONFIG.category.find(
     (value) => clubData.clubCategory === value.value,
   )?.label;
+
   return (
     <li className={`${S.container} ${className}`} onClick={handleClubDetail}>
       <div className={S.headerWrapper}>
         <p className={S.separation}>{clubType}</p>
         <Image
-          src={clubData.bookmarked ? ActiveStar : emptyStar}
+          src={isBookmarked ? ActiveStar : emptyStar}
           className={S.star}
           alt="즐겨찾기"
           onClick={(e) => {
             e.stopPropagation();
-            handleFavoriteStatus({ clubId: clubData.id });
+            toggleBookmark();
           }}
         />
       </div>
