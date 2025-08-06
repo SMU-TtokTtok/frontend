@@ -20,7 +20,6 @@ export interface PatchClubInfoBody {
 }
 
 export const patchClubInfo = async (body: PatchClubInfoBody, clubId: string) => {
-  console.log(body);
   const formData = new FormData();
   let hasData = false;
 
