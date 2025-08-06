@@ -9,6 +9,7 @@ import { POLICY } from '@/common/constants/policy';
 import { signupSchema, SignupForm } from '@/components/signup/schema';
 import SignupComplete from '@/components/signup/SignupComplete';
 import { postEmail, postCode, postSignup } from '@/components/signup/api';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 export default function Page() {
   const [isComplete, setIsComplete] = useState(false);
@@ -58,19 +59,25 @@ export default function Page() {
   };
 
   const onSubmit = async (data: SignupForm) => {
-    const response = await postSignup({
-      email: `${data.studentId}@sangmyung.kr`,
-      verificationCode: data.code,
-      password: data.password,
-      passwordConfirm: data.confirmPassword,
-      name: data.name,
-      termsAgreed: data.agree,
-    });
-    if (response.success) {
-      setUserName(data.name);
-      setIsComplete(true);
-    } else {
-      alert(response.message);
+    try {
+      const response = await postSignup({
+        email: `${data.studentId}@sangmyung.kr`,
+        verificationCode: data.code,
+        password: data.password,
+        passwordConfirm: data.confirmPassword,
+        name: data.name,
+        termsAgreed: data.agree,
+      });
+      if (response.success) {
+        setUserName(data.name);
+        setIsComplete(true);
+      }
+    } catch (error: unknown) {
+      if (error instanceof CustomHttpError && error.status === 400) {
+        alert('이미 존재하는 사용자입니다');
+      } else {
+        alert('회원가입 중 오류가 발생했습니다');
+      }
     }
   };
 

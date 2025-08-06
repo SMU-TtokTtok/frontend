@@ -9,6 +9,7 @@ import { passwordSchema, PasswordFormType } from '@/components/password/schema';
 import { postEmail, postCode, postResetPassword } from '@/components/password/api/postEmail';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 export default function Page() {
   const router = useRouter();
@@ -52,18 +53,24 @@ export default function Page() {
   };
 
   const onSubmit = async (data: PasswordFormType) => {
-    const body = {
-      email: `${data.studentId}@sangmyung.kr`,
-      verificationCode: data.code,
-      newPassword: data.password,
-      newPasswordConfirm: data.passwordConfirm,
-    };
-    const response = await postResetPassword(body);
-    if (response.success) {
-      alert(response.message);
-      router.push('/login');
-    } else {
-      alert(response.message);
+    try {
+      const body = {
+        email: `${data.studentId}@sangmyung.kr`,
+        verificationCode: data.code,
+        newPassword: data.password,
+        newPasswordConfirm: data.passwordConfirm,
+      };
+      const response = await postResetPassword(body);
+      if (response.success) {
+        alert(response.message);
+        router.push('/login');
+      }
+    } catch (error: unknown) {
+      if (error instanceof CustomHttpError && error.status === 404) {
+        alert('존재하지않는 사용자입니다');
+      } else {
+        alert('비밀번호 재설정 중 오류가 발생했습니다');
+      }
     }
   };
 

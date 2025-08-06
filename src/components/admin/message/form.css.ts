@@ -1,5 +1,8 @@
-import { style } from '@vanilla-extract/css';
+import { style, createVar } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants';
+
+export const sidebarTop = createVar();
 
 export const container = style({
   display: 'flex',
@@ -7,6 +10,12 @@ export const container = style({
   gap: '30px',
   marginBottom: '200px',
   position: 'relative',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      marginTop: '50px',
+    },
+  },
 });
 
 export const messageContainer = style({
@@ -71,8 +80,18 @@ export const submitContainer = style({
   gap: '10px',
   width: '330px',
   alignSelf: 'flex-end',
-  top: '-132px',
+  top: sidebarTop,
+  right: '-350px',
   position: 'absolute',
+  transition: 'top 0.7s ease-out',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      width: '236px',
+      right: 0,
+      top: '-400px',
+      transition: 'none',
+    },
+  },
 });
 
 export const button = style({

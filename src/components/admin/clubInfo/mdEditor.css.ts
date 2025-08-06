@@ -6,11 +6,12 @@ export const container = style({
 });
 
 export const buttonContainer = style({
-  display: 'none',
+  // display: 'none',
+  display: 'flex',
 });
 
 export const buttonIntro = style({
-  width: '50%',
+  width: '100%',
   textAlign: 'center',
   padding: '22px 0',
   backgroundColor: '#CAE0FF',

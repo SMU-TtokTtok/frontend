@@ -35,10 +35,13 @@ export default function Page() {
       if (response.success) {
         router.push('/');
       }
-    } catch (error) {
-      const errorResponse = error instanceof CustomHttpError;
-      if (errorResponse && error.status === 400) {
-        alert('학번과 비밀번호를 다시 확인해주시기 바랍니다');
+    } catch (error: unknown) {
+      if (error instanceof CustomHttpError && error.status === 400) {
+        alert('아이디 비번을 다시 확인해주시기 바랍니다');
+      } else if (error instanceof CustomHttpError && error.status === 404) {
+        alert('존재하지않는 사용자입니다');
+      } else {
+        alert('오류가 발생하였습니다');
       }
     }
   };

@@ -8,7 +8,8 @@ export const container = style({
 });
 
 export const headerContainer = style({
-  display: 'none',
+  // display: 'none',
+  display: 'flex',
 });
 
 export const headerItem1 = style({

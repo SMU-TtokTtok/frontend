@@ -20,6 +20,22 @@ export const rightSidebar = style({
   },
 });
 
+export const rightSidebar2 = style({
+  position: 'absolute',
+  right: '30px',
+
+  top: sidebarTop,
+  transition: 'top 0.7s ease-out',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      position: 'static',
+      width: '100%',
+      marginTop: '63px',
+    },
+  },
+});
+
 export const panel = style({
   width: '330px',
   height: 'auto',
