@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../common/styles/reset.css.ts';
-//import { MSWProvider } from '@/mocks/mswProvider';
+// import { MSWProvider } from '@/mocks/mswProvider';
 import QueryProvider from './queryProvider';
 
 export const metadata: Metadata = {

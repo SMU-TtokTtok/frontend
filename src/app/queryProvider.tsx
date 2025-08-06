@@ -21,6 +21,7 @@ function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
+        throwOnError: true,
         staleTime: 60 * 1000,
         retry: 1,
       },
@@ -53,15 +54,13 @@ async function handleMutationError(
   mutation: Mutation<unknown, unknown, unknown>,
 ) {
   const err = error as CustomHttpError;
-
+  if (retriedMutations.has(mutation)) {
+    return;
+  }
   if (
     err instanceof CustomHttpError &&
     (err.status === HTTP_STATUS.UNAUTHORIZED || err.status === HTTP_STATUS.FORBIDDEN)
   ) {
-    if (retriedMutations.has(mutation)) {
-      return;
-    }
-
     retriedMutations.add(mutation);
 
     const isAdmin = isAdminPath();
@@ -85,7 +84,6 @@ async function handleMutationError(
       }
       return;
     }
-    return;
   }
   if (err instanceof CustomHttpError && typeof window !== 'undefined') {
     alert('알 수 없는 에러가 발생했습니다. 다시 시도해주세요.');
@@ -96,14 +94,13 @@ async function handleMutationError(
 const retriedQueries = new WeakSet<Query<unknown, unknown, unknown>>();
 async function handleQueryError(error: Error, query: Query<unknown, unknown, unknown>) {
   const err = error as CustomHttpError;
-
+  if (retriedQueries.has(query)) {
+    return;
+  }
   if (
     err instanceof CustomHttpError &&
     (err.status === HTTP_STATUS.UNAUTHORIZED || err.status === HTTP_STATUS.FORBIDDEN)
   ) {
-    if (retriedQueries.has(query)) {
-      return;
-    }
     retriedQueries.add(query);
     const isAdmin = isAdminPath();
 
@@ -116,15 +113,20 @@ async function handleQueryError(error: Error, query: Query<unknown, unknown, unk
       await query.fetch();
     } catch (error) {
       if (typeof window !== 'undefined') {
-        console.error('토큰 재발급 실패:', error);
+        alert('세션이 만료되었습니다. 다시 로그인해주세요.');
+
+        if (isAdmin) {
+          window.location.href = ROUTES.ADMIN_LOGIN;
+        } else {
+          window.location.href = ROUTES.LOGIN;
+        }
       }
-      return;
+      throw error;
     }
-    return;
   }
   if (err instanceof CustomHttpError && typeof window !== 'undefined') {
     alert('알 수 없는 에러가 발생했습니다. 다시 시도해주세요.');
-    return;
+    throw err;
   }
 }
 
