@@ -10,6 +10,12 @@ export const container = style({
   gap: '30px',
   marginBottom: '200px',
   position: 'relative',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      marginTop: '50px',
+    },
+  },
 });
 
 export const messageContainer = style({
@@ -82,7 +88,7 @@ export const submitContainer = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       width: '236px',
       right: 0,
-      top: '-432px',
+      top: '-400px',
       transition: 'none',
     },
   },

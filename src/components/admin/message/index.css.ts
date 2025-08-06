@@ -13,6 +13,7 @@ export const wrapper = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       paddingLeft: '250px',
       paddingRight: '20px',
+      gap: 0,
     },
   },
 });
