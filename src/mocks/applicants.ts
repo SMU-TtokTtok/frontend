@@ -52,7 +52,7 @@ export const ApplicantInfo = http.get(
       return HttpResponse.json({ message: 'Applicant not found' }, { status: 404 });
     }
 
-    return HttpResponse.json(applicantInfo, { status: 400 });
+    return HttpResponse.json(applicantInfo, { status: 200 });
   },
 );
 const mockMemos: { id: string; applicantId: string; content: string }[] = [];
