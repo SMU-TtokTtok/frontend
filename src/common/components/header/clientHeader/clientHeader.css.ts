@@ -11,7 +11,7 @@ export const DesktopInnerWrapper = style({
   maxWidth: '1392px',
   position: 'relative',
   '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       display: 'none',
     },
   },
@@ -64,7 +64,7 @@ export const MobileInnerWrapper = style({
   maxWidth: '1024px',
 
   '@media': {
-    [`screen and (min-width: ${BREAKPOINTS.tablet}px)`]: {
+    [`screen and (min-width: ${BREAKPOINTS.desktop}px)`]: {
       display: 'none',
     },
   },
