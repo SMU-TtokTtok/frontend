@@ -1,16 +1,16 @@
 {
-  "name": "",
-  "clubType": "",
-  "clubCategory": "",
+  "name": "동아리 이름",
+  "clubType": null,
+  "clubCategory": null,
   "customCategory": "",
-  "recruiting": true,
-  "summary": "",
-  "profileImageUrl": "",
-  "clubMemberCount": 25,
+  "recruiting": false,
+  "summary": "동아리 한줄 소개를 적어주세요",
+  "profileImageUrl": null,
+  "clubMemberCount": 0,
   "applyStartDate": null,
-  "applyDeadLine": "2025-03-10",
-  "grades": ["FIRST_GRADE", "SECOND_GRADE", "THIRD_GRADE", "FOURTH_GRADE"],
+  "applyDeadLine": null,
+  "grades": [],
   "maxApplyCount": 0,
-  "content": "<h1>코딩클럽</h1><p>함께 공부하고 성장하는 개발자 커뮤니티입니다.</p>",
-  "clubUniv": "ENGINEERING"
+  "content": "동아리 소개를 적어주세요",
+  "clubUniv": "null"
 }
