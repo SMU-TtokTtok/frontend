@@ -119,6 +119,18 @@ export const getApplicantInfo = async (applicantId: string) => {
   return data;
 };
 
+export const getApplicantFile = async (filePath: string) => {
+  const response = await fetch(filePath).then((res) => {
+    if (!res.ok) {
+      throw new Error('파일 다운로드에 실패했습니다.');
+    }
+    return res;
+  });
+
+  const blob = await response.blob();
+  return blob;
+};
+
 export const postMemo = async (applicantId: string, content: string) => {
   const data = await adminClient.post(`${API.ADMIN.APPLICANTS_MEMO_CREATE(applicantId)}`, {
     content,

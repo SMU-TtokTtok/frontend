@@ -3,11 +3,13 @@ import AnswerInput from './answerInput';
 import AnswerTextarea from './answerTextarea';
 import AnswerRadio from './answerRadio';
 import AnswerCheckbox from './answerCheckbox';
+import AnswerFile from './answerFile';
 
 interface AnswerFactoryProps {
   answer: Answer;
+  applicantName: string;
 }
-function AnswerFactory({ answer }: AnswerFactoryProps) {
+function AnswerFactory({ answer, applicantName }: AnswerFactoryProps) {
   switch (answer.questionType) {
     case 'SHORT_ANSWER':
       return <AnswerInput answer={answer} />;
@@ -18,17 +20,7 @@ function AnswerFactory({ answer }: AnswerFactoryProps) {
     case 'CHECKBOX':
       return <AnswerCheckbox answer={answer} />;
     case 'FILE':
-      return (
-        <div>
-          {answer.content.map((file, index) => (
-            <div key={index}>
-              <a href={file} target="_blank" rel="noopener noreferrer">
-                {file}
-              </a>
-            </div>
-          ))}
-        </div>
-      );
+      return <AnswerFile answer={answer} applicantName={applicantName} />;
   }
 }
 
