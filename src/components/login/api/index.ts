@@ -1,23 +1,58 @@
 import { mainClient } from '@/common/apis/ttockTtockClient';
 
 export const postLogin = async (body: { email: string; password: string }) => {
-  const data = await mainClient.post('/api/user/auth/login', body);
-  localStorage.setItem('name', data.data.user.name);
-  localStorage.setItem('email', data.data.user.email);
-  return data;
+  try {
+    const data = await mainClient.post('/api/user/auth/login', body);
+
+    localStorage.setItem('name', data.data.user.name);
+    localStorage.setItem('email', data.data.user.email);
+    localStorage.setItem('user_access_token', data.data.accessToken);
+    localStorage.setItem('user_refresh_token', data.data.refreshToken);
+
+    return data;
+  } catch (error) {
+    console.error('로그인 요청 실패:', error);
+    throw new Error('로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
+  }
 };
 
 export const postLogout = async (email: string) => {
-  const data = await mainClient.post(`/api/user/auth/logout?useremail=${email}`, null);
-  localStorage.removeItem('name');
-  localStorage.removeItem('email');
+  try {
+    const data = await mainClient.post(`/api/user/auth/logout?useremail=${email}`, null);
 
-  window.location.href = '/login';
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
+    localStorage.removeItem('user_access_token');
+    localStorage.removeItem('user_refresh_token');
 
-  return data;
+    window.location.href = '/login';
+
+    return data;
+  } catch (error) {
+    console.error('로그아웃 요청 실패:', error);
+    throw new Error('로그아웃 중 문제가 발생했습니다.');
+  }
 };
 
 export const postRefresh = async () => {
-  const data = await mainClient.post(`/api/user/auth/re-issue`, null);
-  return data;
+  try {
+    const refreshToken = localStorage.getItem('user_refresh_token');
+    if (!refreshToken) {
+      throw new Error('리프레시 토큰이 존재하지 않습니다.');
+    }
+
+    const response = await fetch('/api/user/auth/re-issue', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    });
+
+    const data = await response.json();
+    localStorage.setItem('user_access_token', data.data.accessToken);
+    return data;
+  } catch (error) {
+    console.error('토큰 재발급 실패:', error);
+    throw new Error('세션이 만료되었습니다. 다시 로그인해주세요.');
+  }
 };

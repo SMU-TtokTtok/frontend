@@ -64,9 +64,11 @@ export default class ApiClient {
         : {
             'Content-Type': 'application/json',
           };
-      const accessToken = localStorage.getItem(this.tokenKey);
-      if (accessToken) {
-        headers['Authorization'] = `Bearer ${accessToken}`;
+      if (typeof window !== 'undefined') {
+        const accessToken = localStorage.getItem(this.tokenKey);
+        if (accessToken) {
+          headers['Authorization'] = `Bearer ${accessToken}`;
+        }
       }
 
       const response = await fetch(url, {
