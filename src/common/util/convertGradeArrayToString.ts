@@ -9,5 +9,6 @@ export function convertGradeArrayToString(grades: string[]): string {
   };
 
   const convertedGrades = grades.map((grade) => gradeMap[grade]).filter(Boolean);
-  return convertedGrades.join(', ') + '학년';
+  const sortedGrades = convertedGrades.sort((a, b) => parseInt(a) - parseInt(b));
+  return sortedGrades.join(', ') + '학년';
 }

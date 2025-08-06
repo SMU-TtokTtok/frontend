@@ -2,6 +2,7 @@
 
 import * as S from './clubIntro.css';
 import Button from '@/common/ui/button/index';
+import './editor.css';
 
 interface ClubIntroProps {
   introduction: string;
@@ -19,7 +20,7 @@ const ClubIntro = ({ introduction }: ClubIntroProps) => {
         </Button>
       </div>
 
-      <div className={S.contentContainer} dangerouslySetInnerHTML={{ __html: introduction }} />
+      <div className="content-container" dangerouslySetInnerHTML={{ __html: introduction }} />
     </div>
   );
 };

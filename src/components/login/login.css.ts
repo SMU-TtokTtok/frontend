@@ -156,6 +156,7 @@ export const CheckboxContainer = style({
   display: 'flex',
   gap: '4px',
   alignItems: 'center',
+  cursor: 'pointer',
 });
 
 export const CheckboxText = style({

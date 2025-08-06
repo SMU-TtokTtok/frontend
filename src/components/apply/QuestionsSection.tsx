@@ -12,7 +12,6 @@ interface QuestionsSectionProps {
 export default function QuestionsSection({ questions, register, errors }: QuestionsSectionProps) {
   const renderQuestion = (question: Question, index: number) => {
     const error = errors.questions?.[index] as { message: string } | undefined;
-
     switch (question.questionType) {
       case 'CHECKBOX':
         return (
@@ -21,6 +20,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               <div className={S.FormContentTitle}>
                 {question.title}
                 {question.isEssential && <span className={S.FormContentTitleEssential}>*</span>}
+                <span> (중복 가능)</span>
               </div>
               {question.subTitle && (
                 <div className={S.FormContentSubTitle}>{question.subTitle}</div>
@@ -32,10 +32,23 @@ export default function QuestionsSection({ questions, register, errors }: Questi
                   <input
                     type="checkbox"
                     value={option}
-                    {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                      required: question.isEssential,
-                    })}
+                    {...register(`questions.${index}.value.${optionIndex}` as keyof ApplyFormData)}
                     className={S.checkboxInput}
+                    required={question.isEssential && optionIndex === 0}
+                    onChange={() => {
+                      // 첫 번째 체크박스의 required 상태를 업데이트
+                      if (question.isEssential) {
+                        const checkboxes = document.querySelectorAll(
+                          `input[name^="questions.${index}.value."]:checked`,
+                        );
+                        const firstCheckbox = document.querySelector(
+                          `input[name="questions.${index}.value.0"]`,
+                        ) as HTMLInputElement;
+                        if (firstCheckbox) {
+                          firstCheckbox.required = checkboxes.length === 0;
+                        }
+                      }
+                    }}
                   />
                   <span className={S.checkboxLabel}>{option}</span>
                 </label>
@@ -64,9 +77,10 @@ export default function QuestionsSection({ questions, register, errors }: Questi
                     type="radio"
                     value={option}
                     {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                      required: question.isEssential,
+                      // required: question.isEssential,
                     })}
                     className={S.radioInput}
+                    required={question.isEssential}
                   />
                   <span className={S.radioLabel}>{option}</span>
                 </label>
@@ -93,8 +107,9 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               className={S.shortAnswerInput}
               placeholder="답변을 입력해주세요"
               {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                required: question.isEssential ? '입력해주세요.' : false,
+                // required: question.isEssential ? '입력해주세요.' : false,
               })}
+              required={question.isEssential}
             />
             {error && <span className={S.errorMessage}>{error.message}</span>}
           </div>
@@ -117,8 +132,9 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               placeholder="답변을 입력해주세요"
               rows={5}
               {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                required: question.isEssential,
+                // required: question.isEssential,
               })}
+              required={question.isEssential}
             />
             {error && <span className={S.errorMessage}>{error.message}</span>}
           </div>
@@ -140,8 +156,9 @@ export default function QuestionsSection({ questions, register, errors }: Questi
               type="file"
               className={S.fileInput}
               {...register(`questions.${index}.value` as keyof ApplyFormData, {
-                required: question.isEssential,
+                // required: question.isEssential,
               })}
+              required={question.isEssential}
             />
             {error && <span className={S.errorMessage}>{error.message}</span>}
           </div>

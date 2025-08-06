@@ -20,7 +20,7 @@ export default function Form({ kind }: { kind: string }) {
     watch,
   } = useForm<MessageForm>({
     resolver: zodResolver(messageSchema),
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
 
   const watchedValues = watch();
