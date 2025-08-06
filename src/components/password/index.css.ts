@@ -29,6 +29,7 @@ export const Container = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       width: '100%',
+      marginTop: '16px',
     },
   },
 });
