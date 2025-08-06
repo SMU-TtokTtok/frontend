@@ -182,6 +182,7 @@ export const FlexPolicy = style({
   flexDirection: 'column',
   gap: '10px',
   flex: '1 0 0',
+  alignItems: 'flex-start',
 });
 
 export const PolicyBox = style({
@@ -193,11 +194,13 @@ export const PolicyBox = style({
   whiteSpace: 'pre-line',
   height: '220px',
   overflowY: 'auto',
+  width: '100%',
 });
 
 export const FlexAgree = style({
   display: 'flex',
   gap: '8px',
+  cursor: 'pointer',
 });
 
 export const AgreeText = style({

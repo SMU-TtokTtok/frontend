@@ -190,10 +190,10 @@ export default function Page() {
           <div className={S.LabelText}>약관 동의란</div>
           <div className={S.FlexPolicy}>
             <div className={S.PolicyBox}>{POLICY}</div>
-            <div className={S.FlexAgree}>
+            <label className={S.FlexAgree}>
               <input type="checkbox" {...register('agree')} />
               <div className={S.AgreeText}>약관 동의란에 대해 동의합니다.</div>
-            </div>
+            </label>
             {errors.agree && <p className={S.ErrorText}>{errors.agree.message}</p>}
           </div>
         </div>
