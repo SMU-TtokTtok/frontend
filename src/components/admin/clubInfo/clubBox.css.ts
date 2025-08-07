@@ -100,6 +100,7 @@ export const dropDownStyle2 = style({
   color: '#55637D',
   // minWidth: '80px',
   // width: '80px',
+  fontSize: vars.fonts.body3,
 });
 
 export const dropDownStyle2Wide = style({
@@ -411,7 +412,7 @@ export const detailInput = style({
   // width: 'auto',
   minWidth: '0px',
   color: '#55637D',
-  fontSize: vars.fonts.body2,
+  fontSize: '14x',
   fontWeight: 600,
   lineHeight: '150%',
 });
