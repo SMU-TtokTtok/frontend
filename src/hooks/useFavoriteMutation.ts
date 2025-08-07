@@ -13,7 +13,7 @@ export const usePostFavorite = (handleModalOpen: () => void) => {
 
   const favoriteMutation = useMutation({
     mutationFn: ({ clubId }: usePatchFavoriteParams) => postFavorite(clubId),
-    onSuccess: () => {
+    onSuccess: (_, { clubId }) => {
       handleModalOpen();
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey[0] === allClubList,
@@ -22,7 +22,7 @@ export const usePostFavorite = (handleModalOpen: () => void) => {
       queryClient.invalidateQueries({ queryKey: favoritesClubList });
       queryClient.invalidateQueries({ queryKey: appliedClubList });
       queryClient.invalidateQueries({ queryKey: searchClubList });
-      queryClient.invalidateQueries({ queryKey: clubInfo });
+      queryClient.invalidateQueries({ queryKey: [clubInfo, clubId] });
     },
   });
 
