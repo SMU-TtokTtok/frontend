@@ -14,7 +14,7 @@ export const buttonIntro = style({
   width: '100%',
   textAlign: 'center',
   padding: '22px 0',
-  backgroundColor: '#CAE0FF',
+  backgroundColor: '#CAE0FF !important',
   borderRadius: '6px 6px 0px 0px',
   color: '#0052EC',
   fontSize: vars.fonts.body2,
