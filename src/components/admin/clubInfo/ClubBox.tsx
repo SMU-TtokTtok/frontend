@@ -208,7 +208,7 @@ export default function ClubBox(props: ClubBoxProps) {
         </div>
       </div>
       <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
-        {recruiting ? '지원마감이 완료되었습니다' : '모집이 시작되었습니다'}
+        {recruiting ? '모집이 시작되었습니다' : '지원마감이 완료되었습니다'}
       </ConfirmModal>
     </>
   );

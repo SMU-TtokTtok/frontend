@@ -11,8 +11,9 @@ import {
 import { CustomHttpError } from '@/common/apis/apiClient';
 
 export const useGradeCount = ({ clubId }: { clubId: string }) => {
+  const { gradeCount } = clubMemberKey;
   const { data, isLoading } = useSuspenseQuery({
-    queryKey: ['gradeCount', clubId],
+    queryKey: [gradeCount],
     queryFn: () => getGradeCount(clubId),
   });
   return { data, isLoading };
@@ -28,13 +29,13 @@ export const useSearchClubMember = ({ search, clubId }: { search: string; clubId
 
 export const useDeleteClubMember = (handleModalOpen: () => void, clubId: string) => {
   const queryClient = useQueryClient();
-  const { clubMember } = clubMemberKey;
+  const { clubMember, gradeCount } = clubMemberKey;
 
   const deleteClubMemberMutation = useMutation({
     mutationFn: (memberId: string) => deleteClubMember(memberId, clubId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
-      queryClient.invalidateQueries({ queryKey: ['gradeCount'] });
+      queryClient.invalidateQueries({ queryKey: [gradeCount] });
       handleModalOpen();
     },
     onError: (error: CustomHttpError) => {
@@ -81,14 +82,14 @@ export const usePatchClubMember = (handleModalOpen: () => void, clubId: string) 
 
 export const usePostClubMember = (clubId: string, onSuccess?: () => void) => {
   const queryClient = useQueryClient();
-  const { clubMember } = clubMemberKey;
+  const { clubMember, gradeCount } = clubMemberKey;
 
   const postClubMemberMutation = useMutation({
     mutationFn: ({ body, role }: { body: postClubMemberBody; role: string }) =>
       postClubMember(body, role, clubId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [clubMember] });
-      queryClient.invalidateQueries({ queryKey: ['gradeCount'] });
+      queryClient.invalidateQueries({ queryKey: [gradeCount] });
       onSuccess?.(); // 성공 시 콜백 실행
     },
     onError: (error: CustomHttpError) => {

@@ -171,7 +171,7 @@ export default function Form({ clubId }: { clubId: string }) {
       <ConfirmModal
         isOpen={isEditModalOpen}
         onClose={handleEditModalClose}
-        redirectTo={ROUTES.CLUB_INFO(clubId)}
+        redirectTo={ROUTES.APPLIED}
       >
         지원이 완료되었습니다
       </ConfirmModal>

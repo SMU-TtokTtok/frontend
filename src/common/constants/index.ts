@@ -7,6 +7,7 @@ import clubinfo from '@/assets/fact_check.svg';
 import clubinfo_selected from '@/assets/fact_check_selected.svg';
 import clubMember from '@/assets/group.svg';
 import clubMember_selectd from '@/assets/group_selected.svg';
+export const BASE_FRONT_URL = 'https://www.ddock-ddock-smu.com';
 
 export const FOOTER = {
   serviceName: '똑똑',
