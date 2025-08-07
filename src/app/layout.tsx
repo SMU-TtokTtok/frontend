@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 import '../common/styles/reset.css.ts';
 //import { MSWProvider } from '@/mocks/mswProvider';
 import QueryProvider from './queryProvider';
-import GoogleAnalytics from '@/components/googleAnalytics.jsx';
+import GoogleAnalytics from '@/components/googleAnalytics';
 
 export const metadata: Metadata = {
   title: '똑똑 - 상명대학교 동아리 리쿠르팅 서비스',
