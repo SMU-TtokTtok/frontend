@@ -10,7 +10,7 @@ export const useClubInfo = (clubId: string) => {
   const { clubInfo } = clubInfoKey;
 
   const { data, isLoading } = useSuspenseQuery({
-    queryKey: [clubInfo, clubId],
+    queryKey: clubInfo,
     queryFn: () => getClubInfo(clubId),
   });
   return { data, isLoading };
@@ -19,7 +19,7 @@ export const useClubInfo = (clubId: string) => {
 export const useAdminClubInfo = (clubId: string) => {
   const { adminClubInfo } = clubInfoKey;
   const { data, isLoading, refetch } = useSuspenseQuery({
-    queryKey: [adminClubInfo],
+    queryKey: adminClubInfo,
     queryFn: () => getAdminClubInfo(clubId),
   });
   return { data, isLoading, refetch };
@@ -35,7 +35,7 @@ export const useRecruitmentToggle = (handleModalOpen: () => void, clubId: string
       return response;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [adminClubInfo] });
+      queryClient.invalidateQueries({ queryKey: adminClubInfo });
       handleModalOpen();
     },
   });
@@ -62,7 +62,7 @@ export const useAdminClubPatch = (handleModalOpen: () => void, clubId: string) =
       return response;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [adminClubInfo] });
+      queryClient.invalidateQueries({ queryKey: adminClubInfo });
       handleModalOpen();
     },
   });
