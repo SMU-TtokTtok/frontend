@@ -17,7 +17,7 @@ export const postLogin = async (body: { email: string; password: string }) => {
 
 export const postLogout = async () => {
   try {
-    const data = await mainClient.post(`/api/user/auth/logout}`, null);
+    const data = await mainClient.post(`/api/user/auth/logout`, null);
 
     localStorage.removeItem('name');
     localStorage.removeItem('user_access_token');
