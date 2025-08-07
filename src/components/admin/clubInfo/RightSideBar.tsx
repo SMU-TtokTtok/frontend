@@ -50,6 +50,7 @@ export default function RightSideBar(props: RightSideBarProps) {
                 onChange={(e) => {
                   onChange({ applyStartDate: e.target.value });
                 }}
+                className={S.dateInput}
               />
               <span>~</span>
               <input
@@ -58,6 +59,7 @@ export default function RightSideBar(props: RightSideBarProps) {
                 onChange={(e) => {
                   onChange({ applyDeadLine: e.target.value });
                 }}
+                className={S.dateInput}
               />
             </div>
           ) : (

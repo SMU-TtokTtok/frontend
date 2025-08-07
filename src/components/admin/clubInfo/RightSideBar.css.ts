@@ -28,7 +28,7 @@ export const contentBox = style({
   marginBottom: '20px',
   display: 'flex',
   flexDirection: 'column',
-  gap: '10px',
+  gap: '14px',
 });
 
 export const flexRow = style({
@@ -52,7 +52,7 @@ export const modifyButton = style({
   textAlign: 'center',
   padding: '16px 0',
   borderRadius: '6px',
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   fontWeight: '600',
 
   '@media': {
@@ -79,6 +79,7 @@ export const numberInput = style({
   font: '-webkit-small-control',
   width: '60px',
   borderRadius: '4px',
+  fontSize: '16px',
 });
 export const dateFlex = style({
   display: 'flex',
@@ -100,4 +101,8 @@ export const buttonFlex = style({
 export const button = style({
   padding: '4px 6px',
   borderRadius: '4px',
+});
+
+export const dateInput = style({
+  fontSize: '18px',
 });

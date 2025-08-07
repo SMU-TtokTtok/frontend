@@ -37,7 +37,7 @@ export const numberText = style({
 });
 export const desText = recipe({
   base: {
-    fontSize: vars.fonts.body1,
+    fontSize: '16px',
     color: '#878787',
 
     overflow: 'hidden',
@@ -301,7 +301,7 @@ export const clubNameInput = style({
 });
 
 export const desTextInput = style({
-  fontSize: vars.fonts.body1,
+  fontSize: '16px',
   fontWeight: 400,
   fontFamily: 'Pretendard Variable',
   color: 'inherit',
