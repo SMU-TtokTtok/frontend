@@ -39,6 +39,12 @@ export const flexRow = style({
 export const grayText = style({
   color: '#818181',
   fontSize: vars.fonts.body3,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      alignSelf: 'center',
+    },
+  },
 });
 
 export const blackText = style({

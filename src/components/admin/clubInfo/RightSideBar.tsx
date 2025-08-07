@@ -69,7 +69,9 @@ export default function RightSideBar(props: RightSideBarProps) {
           )}
         </div>
         <div className={S.flexRow}>
-          <div className={S.grayText}>모집대상</div>
+          <div className={S.grayText} style={{ alignSelf: 'center' }}>
+            모집대상
+          </div>
 
           {isEditing ? (
             <div className={S.buttonFlex}>
@@ -97,7 +99,9 @@ export default function RightSideBar(props: RightSideBarProps) {
           )}
         </div>
         <div className={S.flexRow}>
-          <div className={S.grayText}>모집인원</div>
+          <div className={S.grayText} style={{ alignSelf: 'center' }}>
+            모집인원
+          </div>
           {isEditing ? (
             <input
               value={maxApplyCount}
