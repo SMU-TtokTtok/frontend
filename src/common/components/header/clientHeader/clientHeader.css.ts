@@ -7,7 +7,7 @@ export const Logo = style({
   height: '36px',
 });
 export const DesktopInnerWrapper = style({
-  padding: '10px 0px',
+  padding: '10px 20px',
   maxWidth: '1392px',
   position: 'relative',
   '@media': {
