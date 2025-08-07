@@ -19,16 +19,10 @@ export const postLogout = async () => {
   try {
     const data = await mainClient.post(`/api/user/auth/logout`, null);
 
-    localStorage.removeItem('name');
-    localStorage.removeItem('user_access_token');
-    localStorage.removeItem('user_refresh_token');
-
-    window.location.href = '/login';
-
     return data;
   } catch (error) {
     console.error('로그아웃 요청 실패:', error);
-    throw new Error('로그아웃 중 문제가 발생했습니다.');
+    throw error;
   }
 };
 
@@ -39,7 +33,7 @@ export const postRefresh = async () => {
       throw new Error('리프레시 토큰이 존재하지 않습니다.');
     }
 
-    const response = await fetch('/api/user/auth/re-issue', {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/auth/re-issue`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${refreshToken}`,

@@ -6,7 +6,12 @@ export const useLogoutMutation = () => {
     mutationFn: async () => {
       await postLogout();
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      localStorage.removeItem('name');
+      localStorage.removeItem('user_access_token');
+      localStorage.removeItem('user_refresh_token');
+      window.location.href = '/login';
+    },
     onError: () => {
       alert('로그아웃 중 오류가 발생했습니다.');
     },
