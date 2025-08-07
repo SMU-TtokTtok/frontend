@@ -3,6 +3,8 @@ import { clubFormKey } from './queries/key';
 import { gethFormInfo } from '@/components/apply/api/getFormInfo';
 import { postFormInfo } from '@/components/apply/api/postFormInfo';
 import { CustomHttpError } from '@/common/apis/apiClient';
+import { userKey } from './queries/key';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const useClubInfo = (clubId: string) => {
   const { clubForm } = clubFormKey;
@@ -15,11 +17,15 @@ export const useClubInfo = (clubId: string) => {
 };
 
 export const usePostForm = (handleEditModalOpen: () => void) => {
+  const queryClient = useQueryClient();
+  const { appliedClubList } = userKey;
+
   const postFormMutation = useMutation({
     mutationFn: ({ body, clubId }: { body: FormData; clubId: string }) =>
       postFormInfo(body, clubId),
     onSuccess: () => {
       handleEditModalOpen();
+      queryClient.invalidateQueries({ queryKey: appliedClubList });
     },
     onError: (error: CustomHttpError) => {
       if (error.status === 409) {
