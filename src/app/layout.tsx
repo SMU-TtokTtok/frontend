@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import '../common/styles/reset.css.ts';
 // import { MSWProvider } from '@/mocks/mswProvider';
 import QueryProvider from './queryProvider';
+import GoogleAnalytics from '@/components/googleAnalytics';
 
 export const metadata: Metadata = {
   title: '똑똑 - 상명대학교 동아리 리쿠르팅 서비스',
@@ -16,8 +17,8 @@ export const metadata: Metadata = {
       {
         url: 'https://www.ddock-ddock-smu.com/mainlogo.png',
         alt: '똑똑 - 상명대학교 동아리 리쿠르팅 서비스',
-        width: 1200,
-        height: 630,
+        width: 600,
+        height: 330,
       },
     ],
   },
@@ -34,6 +35,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS;
   return (
     <html lang="en" className={`${pretendard.variable}`}>
       <head>
@@ -46,7 +48,11 @@ export default function RootLayout({
         {/* <MSWProvider>
           <QueryProvider>{children}</QueryProvider>
         </MSWProvider> */}
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          {children}
+          {gaId && <GoogleAnalytics gaId={gaId} />}
+        </QueryProvider>
+        
       </body>
     </html>
   );

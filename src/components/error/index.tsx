@@ -1,5 +1,6 @@
 import React, { startTransition, useEffect } from 'react';
 import * as S from './error.css';
+import * as Sentry from '@sentry/nextjs';
 import Image from 'next/image';
 import errorIcon from '@/assets/error.svg';
 import { useRouter } from 'next/navigation';
@@ -14,8 +15,7 @@ function UnExpectedErrorPage({ error, reset, className }: ErrorPageProps) {
 
   useEffect(() => {
     if (error) {
-      console.error('Error발생', error);
-      //배포후 에러 로깅을 연동할게요 by 형준
+      Sentry.captureException(error);
     }
   }, [error]);
 

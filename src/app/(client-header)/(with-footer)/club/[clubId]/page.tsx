@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       images: [
         {
           url: `https://www.ddock-ddock-smu.com/mainlogo.png`,
-          width: 1200,
-          height: 630,
+          width: 600,
+          height: 330,
           alt: `${club.name} 대표 이미지`,
         },
       ],
