@@ -80,6 +80,7 @@ async function handleMutationError(
           window.location.href = ROUTES.ADMIN_LOGIN;
         } else {
           window.location.href = ROUTES.LOGIN;
+          localStorage.removeItem('name');
         }
       }
       return;
