@@ -1,3 +1,4 @@
+import { withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
 
@@ -9,4 +10,15 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withVanillaExtract(nextConfig);
+export default withSentryConfig(withVanillaExtract(nextConfig), {
+  org: 'sangmyung-univ-xe',
+  project: 'javascript-nextjs',
+
+  silent: true,
+
+  widenClientFileUpload: true,
+
+  disableLogger: true,
+
+  automaticVercelMonitors: true,
+});
