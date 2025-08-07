@@ -6,6 +6,7 @@ import {
 } from '@/common/model/applicationForm';
 import { loadFromSession } from '@/common/util/sessionStorageUtil';
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export const useApplicationForm = () => {
   const previousStepData: PreviousStepForm = {
@@ -51,6 +52,7 @@ export const useApplicationForm = () => {
     }
 
     const newBaseField = {
+      questionId: uuidv4(),
       title: '',
       subTitle: '',
       questionType: 'SHORT_ANSWER' as QuestionType,
