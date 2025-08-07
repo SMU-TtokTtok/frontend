@@ -1,6 +1,6 @@
 import { Component, createElement, ReactNode } from 'react';
 import { ErrorBoundaryContext } from '@/common/store/errorContext';
-
+import * as Sentry from '@sentry/nextjs';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface ErrorBoundaryProps {
@@ -31,8 +31,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error: Error, errorInfo: any) {
-    console.error('error', error, errorInfo);
+  componentDidCatch(error: Error) {
+    Sentry.captureException(error);
   }
 
   resetErrorBoundary() {
