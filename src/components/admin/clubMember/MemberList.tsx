@@ -12,6 +12,7 @@ import { ROUTES } from '@/common/constants/routes';
 import LoadingSpinner from '@/common/ui/loading';
 import { useAuthStore } from '@/common/store/adminAuthStore';
 import AddButton from './ui/AddButton';
+import Empty from '@/common/components/empty';
 
 export default function MemberList({ isEditing }: { isEditing: boolean }) {
   const { profile } = useAuthStore();
@@ -36,16 +37,16 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
   if (isLoading) return <LoadingSpinner />;
 
   const isEmpty = clubMembers.length === 0;
-  // const isEmpty = true;
-
   return (
     <>
-      {isEmpty && (
+      {isEmpty && !isEditing && <Empty className={S.emptyText}>등록된 부원이 없습니다</Empty>}
+      {isEmpty && isEditing && (
         <div className={S.emptyContainer}>
           <AddButton
             role="임원진"
             onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=EXECUTIVE')}
           />
+          <div className={S.divider} />
           <AddButton
             role="부원"
             onClick={() => router.push(ROUTES.ADMIN_CLUB_MEMBER_ADD + '?role=MEMBER')}
