@@ -322,7 +322,6 @@ export const selectedTypeText = recipe({
   base: {
     fontSize: vars.fonts.body3,
     fontWeight: 500,
-    color: '#222',
     display: 'inline-block',
     lineHeight: '150%',
   },
