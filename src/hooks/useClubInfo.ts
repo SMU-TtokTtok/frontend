@@ -10,7 +10,7 @@ export const useClubInfo = (clubId: string) => {
   const { clubInfo } = clubInfoKey;
 
   const { data, isLoading } = useSuspenseQuery({
-    queryKey: clubInfo,
+    queryKey: [clubInfo, clubId],
     queryFn: () => getClubInfo(clubId),
   });
   return { data, isLoading };
