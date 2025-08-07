@@ -57,6 +57,7 @@ export const buttonWrapper = style({
   display: 'flex',
   flexDirection: 'column',
   marginTop: '28px',
+
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       position: 'absolute',
@@ -67,6 +68,7 @@ export const buttonWrapper = style({
       flexDirection: 'row',
       justifyContent: 'start',
       width: '100%',
+      gap: '12px',
     },
   },
 });

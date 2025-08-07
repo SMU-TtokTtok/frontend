@@ -6,8 +6,9 @@ export const Logo = style({
   height: '36px',
 });
 export const InnerWrapper = style({
-  padding: '1.111rem 0',
+  padding: '0 1.111rem ',
   maxWidth: '1392px',
+  height: '60px',
 });
 
 export const ButtonStyle = style({

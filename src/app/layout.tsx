@@ -22,6 +22,9 @@ export const metadata: Metadata = {
       },
     ],
   },
+  icons: {
+    icon: '/mainlogo_blue.svg',
+  },
 };
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
