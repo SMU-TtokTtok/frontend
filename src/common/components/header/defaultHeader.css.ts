@@ -6,7 +6,7 @@ export const Logo = style({
   height: '36px',
 });
 export const InnerWrapper = style({
-  padding: '1.111rem 0',
+  padding: '10px 0',
   maxWidth: '1392px',
 });
 

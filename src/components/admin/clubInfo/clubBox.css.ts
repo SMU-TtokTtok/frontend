@@ -106,7 +106,7 @@ export const dropDownStyle2 = style({
 export const dropDownStyle2Wide = style({
   padding: '6px 0 6px 8px',
   borderRadius: '4px',
-  backgroundColor: '#E7E8EA',
+  backgroundColor: '#F8F8F9',
   color: '#55637D',
 
   width: '115px',
