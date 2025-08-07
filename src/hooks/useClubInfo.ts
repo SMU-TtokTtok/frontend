@@ -5,6 +5,7 @@ import { getAdminClubInfo } from '@/components/admin/clubInfo/api/getClubInfo';
 import { patchIsRecruting } from '@/components/admin/clubInfo/api/patchIsRecruting';
 import { patchClubInfo } from '@/components/admin/clubInfo/api/pactchClubInfo';
 import { AdminClubIntro } from '@/common/model/clubIntro';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 export const useClubInfo = (clubId: string) => {
   const { clubInfo } = clubInfoKey;
@@ -38,6 +39,13 @@ export const useRecruitmentToggle = (handleModalOpen: () => void, clubId: string
       queryClient.invalidateQueries({ queryKey: adminClubInfo });
       handleModalOpen();
     },
+    onError: (error: CustomHttpError) => {
+      if (error.status === 404) {
+        alert('지원 폼 제작이 완료되지 않았습니다');
+      } else {
+        alert('모집 상태 변경에 실패했습니다');
+      }
+    },
   });
 
   const handleRecruitmentToggle = () => {
@@ -64,6 +72,9 @@ export const useAdminClubPatch = (handleModalOpen: () => void, clubId: string) =
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: adminClubInfo });
       handleModalOpen();
+    },
+    onError: () => {
+      alert('동아리 정보 수정에 실패했습니다');
     },
   });
 
