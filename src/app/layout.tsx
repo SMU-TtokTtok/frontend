@@ -7,8 +7,19 @@ import QueryProvider from './queryProvider';
 export const metadata: Metadata = {
   title: '똑똑 - 상명대학교 동아리 리쿠르팅 서비스',
   description: '상명대학교 학생들을 위한 동아리 리쿠르팅 서비스입니다.',
-  icons: {
-    icon: '/mainlogo_blue.svg',
+  keywords: '똑똑, 상명대학교, 동아리',
+  openGraph: {
+    title: '똑똑 - 상명대학교 동아리 리쿠르팅 서비스',
+    description: '불편했던 동아리 리쿠르팅을 똑똑하게 해결해보세요.',
+    url: 'https://www.ddock-ddock-smu.com',
+    images: [
+      {
+        url: 'https://www.ddock-ddock-smu.com/mainlogo.png',
+        alt: '똑똑 - 상명대학교 동아리 리쿠르팅 서비스',
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 };
 const pretendard = localFont({
