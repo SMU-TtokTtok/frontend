@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../common/styles/reset.css.ts';
-import { MSWProvider } from '@/mocks/mswProvider';
+// import { MSWProvider } from '@/mocks/mswProvider';
 import QueryProvider from './queryProvider';
 
 export const metadata: Metadata = {
@@ -43,10 +43,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <MSWProvider>
+        {/* <MSWProvider>
           <QueryProvider>{children}</QueryProvider>
-        </MSWProvider>
-        {/* <QueryProvider>{children}</QueryProvider> */}
+        </MSWProvider> */}
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );
