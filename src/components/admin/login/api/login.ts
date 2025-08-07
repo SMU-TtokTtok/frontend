@@ -16,7 +16,7 @@ export const postAdminRefresh = async () => {
     throw new Error('리프레시 토큰이 존재하지 않습니다.');
   }
 
-  const response = await fetch(`${API.ADMIN.RE_ISSUE}`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${API.ADMIN.RE_ISSUE}`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${refreshToken}`,

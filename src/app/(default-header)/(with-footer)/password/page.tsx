@@ -26,29 +26,39 @@ export default function Page() {
   const [isVerified, setIsVerified] = useState(false);
 
   const handleSendVerificationCode = async () => {
-    const studentId = getValues('studentId');
-    const email = `${studentId}@sangmyung.kr`;
-    const response = await postEmail({ email });
+    try {
+      const studentId = getValues('studentId');
+      const email = `${studentId}@sangmyung.kr`;
+      const response = await postEmail({ email });
 
-    if (response.success) {
-      alert(response.message);
-    } else {
-      alert(response.message);
+      if (response.success) {
+        alert(response.message);
+      } else {
+        alert(response.message);
+      }
+    } catch (error) {
+      console.error('인증 코드 전송 중 오류 발생:', error);
+      alert('인증 코드 전송 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
   const handleVerifyCode = async () => {
-    const studentId = getValues('studentId');
-    const email = `${studentId}@sangmyung.kr`;
-    const code = getValues('code');
-    const response = await postCode({ email, code });
+    try {
+      const studentId = getValues('studentId');
+      const email = `${studentId}@sangmyung.kr`;
+      const code = getValues('code');
+      const response = await postCode({ email, code });
 
-    if (response.success) {
-      alert(response.message);
-      setIsVerified(true); // 인증 성공!
-    } else {
-      alert(response.message);
-      setIsVerified(false);
+      if (response.success) {
+        alert(response.message);
+        setIsVerified(true); // 인증 성공!
+      } else {
+        alert(response.message);
+        setIsVerified(false);
+      }
+    } catch (error) {
+      console.error('인증 코드 확인 중 오류 발생:', error);
+      alert('인증 코드 확인 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
