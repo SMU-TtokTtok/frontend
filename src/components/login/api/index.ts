@@ -5,7 +5,6 @@ export const postLogin = async (body: { email: string; password: string }) => {
     const data = await mainClient.post('/api/user/auth/login', body);
 
     localStorage.setItem('name', data.data.user.name);
-    localStorage.setItem('email', data.data.user.email);
     localStorage.setItem('user_access_token', data.data.accessToken);
     localStorage.setItem('user_refresh_token', data.data.refreshToken);
 
@@ -16,12 +15,11 @@ export const postLogin = async (body: { email: string; password: string }) => {
   }
 };
 
-export const postLogout = async (email: string) => {
+export const postLogout = async () => {
   try {
-    const data = await mainClient.post(`/api/user/auth/logout?useremail=${email}`, null);
+    const data = await mainClient.post(`/api/user/auth/logout}`, null);
 
     localStorage.removeItem('name');
-    localStorage.removeItem('email');
     localStorage.removeItem('user_access_token');
     localStorage.removeItem('user_refresh_token');
 
