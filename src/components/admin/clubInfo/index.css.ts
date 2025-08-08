@@ -77,6 +77,7 @@ export const editIcon = style({
   position: 'absolute',
   bottom: '-16px',
   right: '-16px',
+  cursor: 'pointer',
 });
 
 export const loading = style({

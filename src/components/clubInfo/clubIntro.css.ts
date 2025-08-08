@@ -10,6 +10,10 @@ export const container = style({
 export const headerContainer = style({
   // display: 'none',
   display: 'flex',
+  ':hover': {
+    opacity: '1 !important',
+    cursor: 'auto !important',
+  },
 });
 
 export const headerItem1 = style({
@@ -28,6 +32,10 @@ export const headerItem1 = style({
       fontSize: vars.fonts.m_body1,
       padding: '16px 0',
     },
+  },
+  ':hover': {
+    opacity: '1 !important',
+    cursor: 'auto !important',
   },
 });
 

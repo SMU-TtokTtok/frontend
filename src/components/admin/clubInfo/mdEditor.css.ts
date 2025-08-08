@@ -19,6 +19,10 @@ export const buttonIntro = style({
   color: '#0052EC',
   fontSize: vars.fonts.body2,
   fontWeight: '700',
+  ':hover': {
+    opacity: '1 !important',
+    cursor: 'auto !important',
+  },
 });
 
 export const buttonNotice = style({

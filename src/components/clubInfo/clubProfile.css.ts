@@ -129,6 +129,13 @@ export const star = style({
   top: '22px',
   right: '30px',
   cursor: 'pointer',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '25px',
+      height: '25px',
+    },
+  },
 });
 
 export const tagFont = style({

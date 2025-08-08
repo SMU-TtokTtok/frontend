@@ -50,6 +50,7 @@ export default function RightSideBar(props: RightSideBarProps) {
                 onChange={(e) => {
                   onChange({ applyStartDate: e.target.value });
                 }}
+                className={S.dateInput}
               />
               <span>~</span>
               <input
@@ -58,6 +59,7 @@ export default function RightSideBar(props: RightSideBarProps) {
                 onChange={(e) => {
                   onChange({ applyDeadLine: e.target.value });
                 }}
+                className={S.dateInput}
               />
             </div>
           ) : (
@@ -67,7 +69,9 @@ export default function RightSideBar(props: RightSideBarProps) {
           )}
         </div>
         <div className={S.flexRow}>
-          <div className={S.grayText}>모집대상</div>
+          <div className={S.grayText} style={{ alignSelf: 'center' }}>
+            모집대상
+          </div>
 
           {isEditing ? (
             <div className={S.buttonFlex}>
@@ -95,7 +99,9 @@ export default function RightSideBar(props: RightSideBarProps) {
           )}
         </div>
         <div className={S.flexRow}>
-          <div className={S.grayText}>모집인원</div>
+          <div className={S.grayText} style={{ alignSelf: 'center' }}>
+            모집인원
+          </div>
           {isEditing ? (
             <input
               value={maxApplyCount}
