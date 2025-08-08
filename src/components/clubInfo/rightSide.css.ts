@@ -102,4 +102,10 @@ export const notRecruiting = style({
   fontWeight: 500,
   fontSize: vars.fonts.body1,
   color: '#55637D',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: '14px',
+    },
+  },
 });

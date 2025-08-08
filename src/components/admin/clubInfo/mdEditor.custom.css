@@ -46,11 +46,30 @@
   transition: background 0.2s;
   box-shadow: none;
 }
+.toolbar-btn-body {
+  width: 36px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #292e39;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: none;
+}
 .toolbar-btn:last-child {
   margin-right: 0;
 }
 .toolbar-btn:hover,
-.toolbar-btn-title:hover {
+.toolbar-btn-title:hover,
+.toolbar-btn-body:hover {
   background: #cae0ff;
 }
 .custom-tiptap-editor {
@@ -86,7 +105,7 @@
 }
 .custom-tiptap-editor h4 {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 150%;
 }
 .custom-tiptap-editor p {

@@ -27,34 +27,44 @@ export default function Page() {
   });
 
   const handleSendEmail = async () => {
-    const studentId = getValues('studentId');
+    try {
+      const studentId = getValues('studentId');
 
-    // studentId가 9자리가 아니면 요청하지 않음
-    if (studentId.length !== 9) {
-      alert('학번은 9자리여야 합니다.');
-      return;
-    }
+      // studentId가 9자리가 아니면 요청하지 않음
+      if (studentId.length !== 9) {
+        alert('학번은 9자리여야 합니다.');
+        return;
+      }
 
-    const email = `${studentId}@sangmyung.kr`;
+      const email = `${studentId}@sangmyung.kr`;
 
-    const response = await postEmail({ email });
-    if (response.success) {
-      alert(response.message);
-    } else {
-      alert(response.message);
+      const response = await postEmail({ email });
+      if (response.success) {
+        alert(response.message);
+      } else {
+        alert(response.message);
+      }
+    } catch (error) {
+      console.error('이메일 전송 중 오류 발생:', error);
+      alert('이메일 전송 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
   const handleSendCode = async () => {
-    const studentId = getValues('studentId');
-    const email = `${studentId}@sangmyung.kr`;
-    const code = getValues('code');
-    const response = await postCode({ email, code });
-    if (response.success) {
-      alert(response.message);
-      setIsVerified(true);
-    } else {
-      alert(response.message);
+    try {
+      const studentId = getValues('studentId');
+      const email = `${studentId}@sangmyung.kr`;
+      const code = getValues('code');
+      const response = await postCode({ email, code });
+      if (response.success) {
+        alert(response.message);
+        setIsVerified(true);
+      } else {
+        alert(response.message);
+      }
+    } catch (error) {
+      console.error('인증 코드 확인 중 오류 발생:', error);
+      alert('인증 코드 확인 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
