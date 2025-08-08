@@ -49,5 +49,14 @@
       "value": "https://www.propopol-api.site//applicant/honggildong@example.com/2c9085c0b-567c-4c7f-ac89-40ab9db6016f_RUST.png"
     }
   ],
-  "memos": []
+  "memos": [
+    {
+      "id": "1",
+      "content": "string"
+    },
+    {
+      "id": "2",
+      "content": "string"
+    }
+  ]
 }

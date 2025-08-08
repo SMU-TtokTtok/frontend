@@ -4,7 +4,6 @@ import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
   width: '100%',
-  padding: '4.5rem 0',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -16,11 +15,11 @@ export const innerWrapper = style({
   alignItems: 'start',
   width: '100%',
   maxWidth: '1392px',
-
+  padding: '4.5rem 20px',
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
-      maxWidth: '922px',
       width: '100%',
+      padding: '2.5rem 20px',
     },
   },
 });

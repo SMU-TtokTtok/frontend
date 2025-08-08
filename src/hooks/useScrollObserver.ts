@@ -9,7 +9,7 @@ export const useScrollObserver = () => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
 
-      if (Math.abs(currentScroll - lastScrollTop.current) < 10) return;
+      if (Math.abs(currentScroll - lastScrollTop.current) < 20) return;
 
       if (currentScroll > lastScrollTop.current) {
         setIsVisible(false);

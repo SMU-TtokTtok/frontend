@@ -9,21 +9,21 @@ import React from 'react';
 import { FilterHeaderProps, getSelectedLabel } from './filterHeader';
 
 const dropdownFilters = [
-  { label: '분야', key: 'category' },
-  { label: '모집여부', key: 'recruiting' },
+  { defaultLabel: '분야', key: 'category' },
+  { defaultLabel: '모집여부', key: 'recruiting' },
 ] as const;
 
 function DropDownTabBar({ selectedOptions }: FilterHeaderProps) {
   return (
     <div className={S.headerLeftSide}>
-      {dropdownFilters.map(({ key }) => {
+      {dropdownFilters.map(({ key, defaultLabel }) => {
         return (
           <DropDown
             key={key}
             panelClassName={S.panelPosition}
             toggleButton={
               <Button variant="none" className={S.headerLeftSideButton({ style: key })}>
-                {getSelectedLabel(key, selectedOptions)}
+                {getSelectedLabel(key, defaultLabel, selectedOptions)}
                 <Image src={Arrow} alt="화살표" className={S.DownArrow} />
               </Button>
             }
