@@ -50,7 +50,7 @@ export const InputCombobox = style({
   marginRight: '24px',
 
   '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       width: '100%',
       marginRight: '0px',
     },
