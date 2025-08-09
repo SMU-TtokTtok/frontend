@@ -7,11 +7,11 @@ export const Logo = style({
   height: '36px',
 });
 export const DesktopInnerWrapper = style({
-  padding: '10px 0px',
+  padding: '10px 20px',
   maxWidth: '1392px',
   position: 'relative',
   '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       display: 'none',
     },
   },
@@ -50,7 +50,7 @@ export const InputCombobox = style({
   marginRight: '24px',
 
   '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       width: '100%',
       marginRight: '0px',
     },

@@ -2,7 +2,7 @@ import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const applicantItemWrapper = style({
-  padding: ' 16px 1.111rem',
+  padding: ' 10px 20px',
   backgroundColor: vars.colors.surface.default,
   marginBottom: '0.556rem',
   display: 'flex',
@@ -30,7 +30,7 @@ export const applicantGrade = style({
 });
 
 export const applicantName = style({
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.body2,
   fontWeight: 600,
   color: vars.colors.surface.on_surf,
 });
@@ -42,7 +42,7 @@ export const verticalLine = style({
 });
 
 export const applicantDepartment = style({
-  fontSize: vars.fonts.body2,
+  fontSize: vars.fonts.body3,
   fontWeight: 400,
   color: vars.colors.surface.outline,
 });

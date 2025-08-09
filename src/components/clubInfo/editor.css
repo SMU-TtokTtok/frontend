@@ -42,7 +42,7 @@
 
 .content-container h4 {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 150%;
 
   @media (max-width: 1024px) {

@@ -8,7 +8,8 @@ import * as S from './clientHeader.css';
 import InputCombobox from '../../inputCombobox';
 import SearchIcon from '@/assets/search.svg';
 import person_white from '@/assets/person_white.svg';
-import { postLogout } from '@/components/login/api';
+import { useLogoutMutation } from '@/hooks/useUserMutaion';
+
 interface DesktopProps<T> {
   isVisible: boolean;
   isComboBoxOpen: boolean;
@@ -18,7 +19,6 @@ interface DesktopProps<T> {
   handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   searchList: T[];
   userName: string | null;
-  userEmail: string | null;
 }
 
 function Desktop<T extends { id: string; name: string; clubType: string }>({
@@ -30,8 +30,8 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
   handleKeyDown,
   searchList,
   userName,
-  userEmail,
 }: DesktopProps<T>) {
+  const { handleLogout } = useLogoutMutation();
   return (
     <Header isVisible={isVisible} className={S.DesktopInnerWrapper}>
       <Link href={ROUTES.HOME}>
@@ -62,11 +62,7 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
                 즐겨찾기
               </Button>
             </Link>
-            <Button
-              className={S.ButtonStyle2}
-              variant="primary"
-              onClick={() => postLogout(userEmail!)}
-            >
+            <Button className={S.ButtonStyle2} variant="primary" onClick={handleLogout}>
               로그아웃
             </Button>
             <div className={S.PersonWrapper}>

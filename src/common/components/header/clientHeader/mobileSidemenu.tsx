@@ -5,14 +5,14 @@ import arrowNav from '@/assets/arrow_nav.svg';
 import person from '@/assets/person.svg';
 import { ROUTES } from '@/common/constants/routes';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
-import { postLogout } from '@/components/login/api';
+import { useLogoutMutation } from '@/hooks/useUserMutaion';
 interface MobileSideMenuProps {
   setIsSideMenuOpen: (isOpen: boolean) => void;
   userName: string | null;
-  userEmail: string | null;
 }
 
-function MobileSideMenu({ setIsSideMenuOpen, userName, userEmail }: MobileSideMenuProps) {
+function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
+  const { handleLogout } = useLogoutMutation();
   const handleClose = () => {
     setIsSideMenuOpen(false);
   };
@@ -38,7 +38,7 @@ function MobileSideMenu({ setIsSideMenuOpen, userName, userEmail }: MobileSideMe
         </div>
         {userName ? (
           <>
-            <Link href={ROUTES.LOGIN} className={S.MenuItem} onClick={() => postLogout(userEmail!)}>
+            <Link href={ROUTES.LOGIN} className={S.MenuItem} onClick={handleLogout}>
               <span>로그아웃</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>

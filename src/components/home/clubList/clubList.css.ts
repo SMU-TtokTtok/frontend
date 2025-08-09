@@ -19,7 +19,7 @@ export const innerWrapper = style({
   maxWidth: '1392px',
   marginTop: '0.722rem',
   marginBottom: '8.222rem',
-  gap: '1.2rem',
+  gap: '12px',
 
   gridTemplateColumns: 'repeat(4, 1fr)',
 
@@ -32,6 +32,7 @@ export const innerWrapper = style({
     },
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       gridTemplateColumns: '1fr',
+      gap: '14px',
     },
   },
 });

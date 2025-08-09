@@ -20,7 +20,6 @@ export const imageStyle = style({
       position: 'absolute',
       top: '22px',
       left: '18px',
-      zIndex: 1,
     },
   },
 });
@@ -30,10 +29,7 @@ export const RightFlex = style({
   backgroundColor: 'white',
   borderRadius: '8px',
   padding: '22px',
-  position: 'relative',
-
-  minWidth: 0, // !
-
+  minWidth: 0,
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       padding: '18px 16px',
@@ -129,6 +125,13 @@ export const star = style({
   top: '22px',
   right: '30px',
   cursor: 'pointer',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '25px',
+      height: '25px',
+    },
+  },
 });
 
 export const tagFont = style({

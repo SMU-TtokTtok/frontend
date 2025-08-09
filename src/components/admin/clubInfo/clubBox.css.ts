@@ -37,7 +37,7 @@ export const numberText = style({
 });
 export const desText = recipe({
   base: {
-    fontSize: vars.fonts.body1,
+    fontSize: '16px',
     color: '#878787',
 
     overflow: 'hidden',
@@ -100,12 +100,13 @@ export const dropDownStyle2 = style({
   color: '#55637D',
   // minWidth: '80px',
   // width: '80px',
+  fontSize: vars.fonts.body3,
 });
 
 export const dropDownStyle2Wide = style({
   padding: '6px 0 6px 8px',
   borderRadius: '4px',
-  backgroundColor: '#E7E8EA',
+  backgroundColor: '#F8F8F9',
   color: '#55637D',
 
   width: '115px',
@@ -301,7 +302,7 @@ export const clubNameInput = style({
 });
 
 export const desTextInput = style({
-  fontSize: vars.fonts.body1,
+  fontSize: '16px',
   fontWeight: 400,
   fontFamily: 'Pretendard Variable',
   color: 'inherit',
@@ -321,7 +322,6 @@ export const selectedTypeText = recipe({
   base: {
     fontSize: vars.fonts.body3,
     fontWeight: 500,
-    color: '#222',
     display: 'inline-block',
     lineHeight: '150%',
   },
@@ -411,7 +411,7 @@ export const detailInput = style({
   // width: 'auto',
   minWidth: '0px',
   color: '#55637D',
-  fontSize: vars.fonts.body2,
+  fontSize: '14x',
   fontWeight: 600,
   lineHeight: '150%',
 });

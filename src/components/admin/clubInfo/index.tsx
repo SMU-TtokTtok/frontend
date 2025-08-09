@@ -65,16 +65,18 @@ function AdminClubInfo() {
         <div className={S.wrapper}>
           <div className={S.title}>📑 동아리 정보 관리</div>
           <div className={S.flexRow}>
-            <div className={S.imgContainer}>
+            <div
+              className={S.imgContainer}
+              onClick={() => {
+                if (isEditing && fileInputRef.current) fileInputRef.current.click();
+              }}
+            >
               <Image
                 src={clubInfo.profileImageUrl || clubImg}
                 alt="동아리 사진"
                 width={212}
                 height={224}
                 className={`${S.imgStyle} ${isEditing ? 'editing' : ''}`}
-                onClick={() => {
-                  if (isEditing && fileInputRef.current) fileInputRef.current.click();
-                }}
               />
               {isEditing && (
                 <Image src={EditIcon} alt="edit" width={48} height={48} className={S.editIcon} />
