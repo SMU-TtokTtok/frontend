@@ -14,7 +14,6 @@ interface MemoProps {
 function Memo({ data, applicantId }: MemoProps) {
   const [memos, setMemos] = useState<IMemo[]>(data.memos || []);
   const { deleteMemo, patchMemo, postMemo } = useMemoMutations();
-  // 쿼리 낙관적 업데이트로 변경예정 by 형준
   const handleAddMemo = () => {
     const newMemo = {
       content: '메모를 입력해주세요',
@@ -23,7 +22,7 @@ function Memo({ data, applicantId }: MemoProps) {
       { applicantId, content: newMemo.content },
       {
         onSuccess: (response) => {
-          setMemos((prev) => [...prev, { ...newMemo, id: String(response.id) }]);
+          setMemos((prev) => [...prev, { ...newMemo, id: String(response.memoId) }]);
         },
       },
     );

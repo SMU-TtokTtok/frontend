@@ -11,7 +11,7 @@ export const DesktopInnerWrapper = style({
   maxWidth: '1392px',
   position: 'relative',
   '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       display: 'none',
     },
   },
