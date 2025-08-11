@@ -120,6 +120,7 @@ async function handleQueryError(error: Error, query: Query<unknown, unknown, unk
           window.location.href = ROUTES.ADMIN_LOGIN;
         } else {
           window.location.href = ROUTES.LOGIN;
+          localStorage.removeItem('name');
         }
       }
       throw error;
