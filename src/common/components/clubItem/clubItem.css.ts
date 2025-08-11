@@ -70,7 +70,7 @@ export const name = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       fontSize: vars.fonts.m_title3,
-      marginBottom: '4px',
+      marginBottom: '0px',
     },
   },
 });
