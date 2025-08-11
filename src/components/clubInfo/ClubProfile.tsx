@@ -30,7 +30,7 @@ export default function ClubProfile({
     clubMemberCount,
     bookmarked,
   } = clubIntro;
-  const { handleFavoriteStatus } = usePostFavorite(handleModalOpen);
+  const { handlePostFavorite } = usePostFavorite(handleModalOpen);
 
   return (
     <div className={S.clubProfile}>
@@ -73,7 +73,7 @@ export default function ClubProfile({
           className={S.star}
           onClick={(e) => {
             e.stopPropagation();
-            handleFavoriteStatus({ clubId: clubId });
+            handlePostFavorite({ clubId: clubId });
           }}
         />
       </div>

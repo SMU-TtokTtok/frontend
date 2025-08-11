@@ -19,7 +19,7 @@ interface ClubItemProps {
 }
 
 function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
-  const { handleFavoriteStatus } = usePostFavorite(handleModalOpen);
+  const { handlePostFavorite } = usePostFavorite(handleModalOpen);
   const [isBookmarked, setIsBookmarked] = useState<boolean>(clubData.bookmarked);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
@@ -36,8 +36,14 @@ function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
   };
 
   const toggleBookmark = () => {
-    setIsBookmarked((prev) => !prev);
-    handleFavoriteStatus({ clubId: clubData.id });
+    handlePostFavorite(
+      { clubId: clubData.id },
+      {
+        onSuccess: () => {
+          setIsBookmarked((prev) => !prev);
+        },
+      },
+    );
   };
 
   const clubType = FILTER_CONFIG.type.find((value) => clubData.clubType === value.value)?.label;

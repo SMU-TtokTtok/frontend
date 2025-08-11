@@ -13,6 +13,7 @@ export const container = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       padding: '0 20px 72px 20px',
+      marginBottom: 0,
     },
   },
 });
@@ -27,6 +28,7 @@ export const innerWrapper = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       padding: '14px',
+      marginTop: '19.5px',
     },
   },
 });
@@ -56,6 +58,7 @@ export const headerRightSide = style({
       position: 'absolute',
       bottom: '0',
       right: '20px',
+      gap: '6px',
       backgroundColor: vars.colors.surface.variant,
     },
   },
@@ -116,6 +119,65 @@ export const selectionGroup = style({
   },
 });
 
+export const headerRightSideButton = recipe({
+  base: {
+    padding: '0.556rem 0.889rem',
+    borderRadius: '0.22rem',
+    fontSize: vars.fonts.body2,
+    fontWeight: '400',
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+        fontSize: vars.fonts.m_body2,
+        padding: '0px',
+      },
+    },
+  },
+  variants: {
+    isSelected: {
+      true: {
+        backgroundColor: vars.colors.primary.base,
+        color: vars.colors.primary.default,
+        fontWeight: 500,
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+            fontSize: vars.fonts.m_body1,
+            textDecoration: 'underline',
+            color: vars.colors.surface.outline,
+            backgroundColor: vars.colors.surface.variant,
+            padding: '0px',
+          },
+        },
+      },
+      false: {
+        backgroundColor: vars.colors.surface.default,
+        color: vars.colors.surface.outline,
+        fontWeight: 400,
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+            fontSize: vars.fonts.m_body1,
+            padding: '0px',
+            color: vars.colors.surface.outline_var,
+            backgroundColor: vars.colors.surface.variant,
+          },
+        },
+      },
+    },
+  },
+});
+
+export const verticalLine = style({
+  display: 'none',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      display: 'block',
+      width: '2px',
+      height: '17px',
+      backgroundColor: vars.colors.surface.outline_var,
+      marginLeft: '6px',
+    },
+  },
+});
+
 export const ButtonStyle = recipe({
   base: {
     padding: '0.556rem 0.889rem',
@@ -129,6 +191,15 @@ export const ButtonStyle = recipe({
   variants: {
     style: {
       body: {
+        fontSize: vars.fonts.body1,
+        fontWeight: '500',
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+            fontSize: vars.fonts.m_body1,
+          },
+        },
+      },
+      college: {
         fontSize: vars.fonts.body1,
         fontWeight: '500',
         '@media': {
@@ -175,6 +246,11 @@ export const ButtonStyle = recipe({
         backgroundColor: vars.colors.surface.default,
         color: vars.colors.surface.outline,
         fontWeight: 400,
+      },
+    },
+    isDisabled: {
+      true: {
+        color: vars.colors.surface.cont_3,
       },
     },
   },

@@ -8,7 +8,7 @@ export const withFooterContent = style({
   minHeight: '90vh',
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
-      paddingTop: '60px',
+      paddingTop: '52px',
     },
   },
 });

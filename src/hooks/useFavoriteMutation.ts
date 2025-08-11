@@ -18,7 +18,7 @@ export const usePostFavorite = (handleModalOpen: () => void) => {
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey[0] === allClubList,
       });
-      queryClient.invalidateQueries({ queryKey: popularClubList });
+      queryClient.invalidateQueries({ queryKey: [popularClubList] });
       queryClient.invalidateQueries({ queryKey: favoritesClubList });
       queryClient.invalidateQueries({ queryKey: appliedClubList });
       queryClient.invalidateQueries({ queryKey: searchClubList });
@@ -26,11 +26,7 @@ export const usePostFavorite = (handleModalOpen: () => void) => {
     },
   });
 
-  const handleFavoriteStatus = ({ clubId }: usePatchFavoriteParams) => {
-    favoriteMutation.mutate({ clubId });
-  };
-
   return {
-    handleFavoriteStatus,
+    handlePostFavorite: favoriteMutation.mutate,
   };
 };
