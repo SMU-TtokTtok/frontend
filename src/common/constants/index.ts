@@ -78,7 +78,7 @@ export const FILTER_CONFIG = {
     { value: 'FOURTH_GRADE', label: '4학년' },
   ],
   clubUniv: [
-    { value: 'GLOBAL_AREA', label: '글로벌융합대' },
+    { value: 'GLOBAL_AREA', label: '글로벌인문대' },
     { value: 'DESIGN', label: '디자인대' },
     { value: 'ENGINEERING', label: '공대' },
     { value: 'CONVERGENCE_TECHNOLOGY', label: '융합기술대' },

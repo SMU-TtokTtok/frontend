@@ -136,6 +136,7 @@ export const adminLoginButton = style({
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       marginTop: '54px',
       padding: '16px 0',
+      fontSize: vars.fonts.m_body1,
     },
   },
 });

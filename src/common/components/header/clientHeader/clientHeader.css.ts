@@ -5,6 +5,12 @@ import { fadeInRight } from '@/common/styles/animation.css';
 export const Logo = style({
   width: '50px',
   height: '36px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      width: '39px',
+      height: '28px',
+    },
+  },
 });
 export const DesktopInnerWrapper = style({
   padding: '10px 20px',
@@ -82,7 +88,7 @@ export const ComboBoxContainer = style({
   position: 'absolute',
   width: '100%',
   left: '0',
-  top: '60px',
+  top: '52px',
   height: '85px',
   backgroundColor: vars.colors.surface.bright,
   display: 'flex',

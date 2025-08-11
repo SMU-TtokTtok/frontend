@@ -49,6 +49,12 @@ export const person = style({
   display: 'block',
   width: '1.17rem',
   height: '1.17rem',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      width: '19px',
+      height: '19px',
+    },
+  },
 });
 
 export const name = style({
@@ -64,6 +70,7 @@ export const name = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       fontSize: vars.fonts.m_title3,
+      marginBottom: '4px',
     },
   },
 });
@@ -71,7 +78,7 @@ export const membersWrapper = style({
   display: 'flex',
   justifyContent: 'start',
   alignItems: 'center',
-  marginBottom: '15px',
+  marginBottom: '16px',
 });
 export const members = style({
   fontSize: vars.fonts.body2,
@@ -79,7 +86,7 @@ export const members = style({
   color: vars.colors.surface.outline,
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
-      fontSize: vars.fonts.m_body2,
+      fontSize: vars.fonts.m_body1,
     },
   },
 });
