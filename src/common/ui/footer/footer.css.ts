@@ -28,9 +28,20 @@ export const content = style({
   fontWeight: 400,
   color: vars.colors.surface.on_surf_var,
   lineHeight: '1.5',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.body2,
+    },
+  },
 });
 export const logo = style({
   width: '56px',
   height: '41px',
   marginBottom: '8px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      width: '39px',
+      height: '28px',
+    },
+  },
 });
