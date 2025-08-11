@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     url: 'https://www.ddock-ddock-smu.com',
     images: [
       {
-        url: 'https://www.ddock-ddock-smu.com/mainlogo.png',
+        url: 'https://www.ddock-ddock-smu.com/mainLogo.png',
         alt: '똑똑 - 상명대학교 동아리 리쿠르팅 서비스',
         width: 1200,
         height: 630,
