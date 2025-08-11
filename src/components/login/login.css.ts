@@ -102,7 +102,7 @@ export const AuthFooterTextContainer = style({
 
 export const AuthFooterText = style({
   color: '#55637D',
-  fontSize: vars.fonts.body3,
+  fontSize: '12px',
 });
 
 export const Button = style({
@@ -144,7 +144,7 @@ export const userInput = style({
   padding: '12px 16px',
   borderRadius: '6px',
   backgroundColor: '#F8F8F9',
-  fontSize: vars.fonts.body2,
+  fontSize: '14px',
   selectors: {
     '&::placeholder': {
       color: '#D2D4D8',
@@ -160,7 +160,7 @@ export const CheckboxContainer = style({
 });
 
 export const CheckboxText = style({
-  fontSize: vars.fonts.body3,
+  fontSize: '12px',
   color: '#55637D',
 
   '@media': {
