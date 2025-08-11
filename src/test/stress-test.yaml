@@ -1,0 +1,12 @@
+config:
+  target: 'http://localhost:3000'
+  phases:
+    - duration: 60
+      arrivalRate: 20
+      name: 'Stress Test Phase 1'
+
+scenarios:
+  - name: 'home stress test'
+    flow:
+      - get:
+          url: '/'
