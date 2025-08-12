@@ -130,3 +130,18 @@ export const cardStyle = style({
     },
   },
 });
+
+export const empty = style({
+  padding: '40px 0',
+  fontSize: vars.fonts.title3,
+  fontWeight: 500,
+  color: vars.colors.surface.outline,
+});
+
+export const emptyWrapper = style({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  textAlign: 'center',
+});
