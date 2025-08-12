@@ -6,7 +6,12 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['encrypted-tbn0.gstatic.com', 'example.com', 'www.propopol-api.site'],
+    domains: [
+      'encrypted-tbn0.gstatic.com',
+      'example.com',
+      'www.propopol-api.site',
+      'www.ddock-ddock-smu.com',
+    ],
   },
 };
 
