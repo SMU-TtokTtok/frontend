@@ -30,7 +30,7 @@ export const usePostForm = (handleEditModalOpen: () => void) => {
     onError: (error: CustomHttpError) => {
       if (error.status === 409) {
         alert('이미 제출하였습니다');
-      } else {
+      } else if (error.status !== 401) {
         alert('제출에 실패했습니다');
       }
     },
