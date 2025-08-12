@@ -39,8 +39,9 @@ export const useDeleteClubMember = (handleModalOpen: () => void, clubId: string)
       queryClient.invalidateQueries({ queryKey: [gradeCount] });
       handleModalOpen();
     },
-    onError: (error: CustomHttpError) => {
-      if (error) {
+    onError: (error) => {
+      const customError = error as CustomHttpError;
+      if (customError.status !== 401) {
         alert('삭제 중 오류가 발생했습니다.');
       }
     },
@@ -68,7 +69,7 @@ export const usePatchClubMember = (handleModalOpen: () => void, clubId: string) 
     onError: (error: CustomHttpError) => {
       if (error.status === 409) {
         alert('회장과 부회장은 1명만 존재할 수 있습니다.');
-      } else {
+      } else if (error.status !== 401) {
         alert('권한 변경 중 오류가 발생했습니다.');
       }
     },
@@ -96,10 +97,9 @@ export const usePostClubMember = (clubId: string, onSuccess?: () => void) => {
     onError: (error: CustomHttpError) => {
       if (error.status === 404) {
         alert('똑똑에 가입하지 않은 학번입니다.');
-      }
-      if (error.status === 409) {
+      } else if (error.status === 409) {
         alert('이미 추가한 학번입니다.');
-      } else {
+      } else if (error.status !== 401) {
         alert('추가 중 오류가 발생했습니다.');
       }
     },
