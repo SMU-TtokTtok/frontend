@@ -14,7 +14,7 @@ function AnswerTextarea({ answer }: AnswerTextareaProps) {
       <h3 className={S.subTitle}>{answer.subTitle}</h3>
       <textarea
         className={S.AnswerTextarea}
-        value={answer.value}
+        value={answer.value ?? '작성한 답변이 없습니다.'}
         readOnly
         rows={4}
         style={{ resize: 'none', width: '100%' }}

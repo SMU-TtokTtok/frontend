@@ -8,6 +8,8 @@ interface AnswerRadioProps {
 }
 
 function AnswerRadio({ answer }: AnswerRadioProps) {
+  const isValueExist = answer.value === null;
+
   return (
     <div className={S.answer}>
       <label className={S.label}>
@@ -21,7 +23,7 @@ function AnswerRadio({ answer }: AnswerRadioProps) {
             type="radio"
             name={answer.title}
             value={option}
-            defaultChecked={answer.value === option}
+            defaultChecked={isValueExist ? false : answer.value === option}
             label={option}
             className={S.answerCheckbox}
             img={check}
