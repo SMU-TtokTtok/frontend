@@ -29,10 +29,12 @@ function AnswerFile({ answer, applicantName }: AnswerFileProps) {
         {answer.isEssential && <span className={S.essential}>*</span>}
       </label>
       <h3 className={S.subTitle}>{answer.subTitle}</h3>
-      <div className={S.fileDownload} onClick={() => triggerFileDownload(answer.value)}>
-        <Image src={FileDown} alt="파일 다운" />
-        <p className={S.fileDownloadText}>파일 다운</p>
-      </div>
+      {answer.value && (
+        <div className={S.fileDownload} onClick={() => triggerFileDownload(answer.value)}>
+          <Image src={FileDown} alt="파일 다운" />
+          <p className={S.fileDownloadText}>파일 다운</p>
+        </div>
+      )}
     </div>
   );
 }
