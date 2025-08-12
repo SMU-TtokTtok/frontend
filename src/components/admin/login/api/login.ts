@@ -16,12 +16,15 @@ export const postAdminRefresh = async () => {
     throw new Error('리프레시 토큰이 존재하지 않습니다.');
   }
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${API.ADMIN.RE_ISSUE}`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${refreshToken}`,
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/admin${API.ADMIN.RE_ISSUE}`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
     },
-  });
+  );
 
   if (!response.ok) {
     throw new Error('토큰 재발급 실패');
