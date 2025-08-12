@@ -25,12 +25,12 @@ export default forwardRef<
       {comboBoxList.length > 0 && (
         <ul>
           {comboBoxList.map((item) => (
-            <Link href={ROUTES.CLUB_INFO(item.id)} key={item.id}>
-              <li key={item.id} className={S.comboBoxOption} onClick={handleClose}>
+            <li key={item.id} onClick={handleClose}>
+              <Link href={ROUTES.CLUB_INFO(item.id)} key={item.id} className={S.comboBoxOption}>
                 <p>{item.name}</p>
                 <span className={S.category}>{convertToKor(item.clubType)}</span>
-              </li>
-            </Link>
+              </Link>
+            </li>
           ))}
         </ul>
       )}
