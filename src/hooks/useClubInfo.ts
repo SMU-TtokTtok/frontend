@@ -1,4 +1,4 @@
-import { useSuspenseQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useSuspenseQuery, useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import { clubInfoKey } from './queries/key';
 import { getClubInfo } from '@/components/clubInfo/api/getClubInfo';
 import { getAdminClubInfo } from '@/components/admin/clubInfo/api/getClubInfo';
@@ -19,9 +19,10 @@ export const useClubInfo = (clubId: string) => {
 
 export const useAdminClubInfo = (clubId: string) => {
   const { adminClubInfo } = clubInfoKey;
-  const { data, isLoading, refetch } = useSuspenseQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: adminClubInfo,
     queryFn: () => getAdminClubInfo(clubId),
+    enabled: !!clubId,
   });
   return { data, isLoading, refetch };
 };

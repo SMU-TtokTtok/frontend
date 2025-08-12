@@ -5,9 +5,14 @@ import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import { useAuthStore } from '@/common/store/adminAuthStore';
 
 export default function RightSide() {
-  const { profile } = useAuthStore();
-  const { data } = useGradeCount({ clubId: profile!.clubId });
+  const { profile } = useAuthStore((state) => state);
+  const { data, isLoading } = useGradeCount({ clubId: profile?.clubId ?? '' });
   const { barPosition } = useFollowSidebar({ initialPosition: 216 });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div
       className={S.container}
