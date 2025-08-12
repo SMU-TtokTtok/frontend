@@ -11,6 +11,16 @@ export const container = style({
   gap: '2rem',
 });
 
+export const pageContainer = style({
+  height: '100vh',
+  width: '100vw',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '2rem',
+});
+
 export const icon = style({
   width: 80,
   height: 80,
