@@ -18,8 +18,8 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
   const { profile } = useAuthStore();
   const { clubMembers, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useClubMemberInfinite({
-      enabled: true,
-      clubId: profile!.clubId,
+      enabled: !!profile?.clubId,
+      clubId: profile?.clubId,
     });
   const router = useRouter();
   // 무한스크롤을 위한 useInView 훅
