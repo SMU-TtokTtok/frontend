@@ -122,10 +122,6 @@ async function handleQueryError(error: Error, query: Query<unknown, unknown, unk
       throw error;
     }
   }
-  if (err instanceof CustomHttpError && typeof window !== 'undefined') {
-    alert('알 수 없는 에러가 발생했습니다. 다시 시도해주세요.');
-    throw err;
-  }
 }
 
 export default function QueryProvider({ children }: { children: React.ReactNode }) {
