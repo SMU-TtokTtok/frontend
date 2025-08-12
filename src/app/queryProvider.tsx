@@ -86,10 +86,6 @@ async function handleMutationError(
       return;
     }
   }
-  if (err instanceof CustomHttpError && typeof window !== 'undefined') {
-    alert('알 수 없는 에러가 발생했습니다. 다시 시도해주세요.');
-    return;
-  }
 }
 
 const retriedQueries = new WeakSet<Query<unknown, unknown, unknown>>();
