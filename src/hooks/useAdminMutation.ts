@@ -17,7 +17,7 @@ export const useLoginMutation = () => {
     onSuccess: (data) => {
       localStorage.setItem('admin_access_token', data.accessToken || '');
       localStorage.setItem('admin_refresh_token', data.refreshToken || '');
-      router.push(ROUTES.ADMIN_APPLICATIONS);
+      router.push(ROUTES.ADMIN);
     },
   });
 
