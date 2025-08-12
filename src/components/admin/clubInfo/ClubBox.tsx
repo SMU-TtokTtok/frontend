@@ -38,7 +38,7 @@ export default function ClubBox(props: ClubBoxProps) {
     clubUniv,
   } = props;
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
-  const { handleRecruitmentToggle } = useRecruitmentToggle(handleModalOpen, profile!.clubId);
+  const { handleRecruitmentToggle } = useRecruitmentToggle(handleModalOpen, profile?.clubId ?? '');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCloseRecruit = () => {
