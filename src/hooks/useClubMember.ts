@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { getGradeCount } from '@/components/admin/clubMember/api/getGradeCount';
 import { getSearchMembers } from '@/components/admin/clubMember/api/getSearchMembers';
 import { clubMemberKey } from './queries/key';
@@ -12,9 +12,10 @@ import { CustomHttpError } from '@/common/apis/apiClient';
 
 export const useGradeCount = ({ clubId }: { clubId: string }) => {
   const { gradeCount } = clubMemberKey;
-  const { data, isLoading } = useSuspenseQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [gradeCount],
     queryFn: () => getGradeCount(clubId),
+    enabled: !!clubId,
   });
   return { data, isLoading };
 };

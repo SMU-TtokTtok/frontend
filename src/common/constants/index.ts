@@ -53,6 +53,7 @@ export const FILTER_CONFIG = {
     { value: 'ACADEMIC', label: '학술' },
     { value: 'VOLUNTEER', label: '봉사' },
     { value: 'RELIGION', label: '종교' },
+    { value: 'SOCIAL', label: '친목' },
     { value: 'ETC', label: '기타' },
   ],
   recruiting: [

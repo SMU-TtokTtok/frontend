@@ -13,17 +13,18 @@ import { useAdminClubInfo, useAdminClubPatch } from '@/hooks/useClubInfo';
 import ConfirmModal from '@/common/components/confirmModal';
 import { useModal } from '@/hooks/useModal';
 import { useAuthStore } from '@/common/store/adminAuthStore';
+import LoadingSpinner from '@/common/ui/loading';
 
 function AdminClubInfo() {
   const [isEditing, setIsEditing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { profile } = useAuthStore();
 
-  const { data } = useAdminClubInfo(profile!.clubId);
-  const [clubInfo, setClubInfo] = useState<AdminClubIntro>(data);
+  const { data, isLoading } = useAdminClubInfo(profile?.clubId ?? '');
+  const [clubInfo, setClubInfo] = useState<AdminClubIntro | null>(data || null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
-  const { handleClubInfoPatch } = useAdminClubPatch(handleModalOpen, profile!.clubId);
+  const { handleClubInfoPatch } = useAdminClubPatch(handleModalOpen, profile?.clubId ?? '');
 
   const handleClubInfoChange = (updated: Partial<AdminClubIntro>) => {
     setClubInfo((prev) => (prev ? { ...prev, ...updated } : prev));
@@ -59,6 +60,27 @@ function AdminClubInfo() {
     setSelectedFile(null);
   }, [data, isEditing]); // <- data 변경 감지
 
+  const emptyAdminClub: AdminClubIntro = {
+    name: '',
+    clubType: '',
+    clubCategory: '',
+    customCategory: '',
+    recruiting: false,
+    summary: '',
+    profileImageUrl: '',
+    clubMemberCount: 0,
+    applyStartDate: '',
+    applyDeadLine: '',
+    grades: [],
+    maxApplyCount: 0,
+    content: '',
+    clubUniv: '',
+  };
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <>
       <div className={S.container}>
@@ -72,7 +94,7 @@ function AdminClubInfo() {
               }}
             >
               <Image
-                src={clubInfo.profileImageUrl || clubImg}
+                src={clubInfo?.profileImageUrl || clubImg}
                 alt="동아리 사진"
                 width={212}
                 height={224}
@@ -99,10 +121,14 @@ function AdminClubInfo() {
               />
             )}
 
-            <ClubBox {...clubInfo} onChange={handleClubInfoChange} isEditing={isEditing} />
+            <ClubBox
+              {...(clubInfo ?? emptyAdminClub)}
+              onChange={handleClubInfoChange}
+              isEditing={isEditing}
+            />
           </div>
           <RightSideBar
-            {...clubInfo}
+            {...(clubInfo ?? emptyAdminClub)}
             onEditClick={() => setIsEditing(true)}
             isEditing={isEditing}
             handleSave={handleSave}
@@ -115,7 +141,7 @@ function AdminClubInfo() {
           />
           <MDEditor
             isEditing={isEditing}
-            introduction={clubInfo.content}
+            introduction={clubInfo?.content ?? ''}
             onChange={(content) => handleClubInfoChange({ content })}
           />
         </div>
