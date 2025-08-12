@@ -5,6 +5,7 @@ import { ROUTES } from '@/common/constants/routes';
 import { AdminLoginForm } from '@/components/admin/login';
 import { postLogout } from '@/common/components/header/api/logout';
 import { adminProfileKey } from './queries/key';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 export const useLoginMutation = () => {
   const router = useRouter();
@@ -18,6 +19,12 @@ export const useLoginMutation = () => {
       localStorage.setItem('admin_access_token', data.accessToken || '');
       localStorage.setItem('admin_refresh_token', data.refreshToken || '');
       router.push(ROUTES.ADMIN);
+    },
+    onError: (error) => {
+      const customError = error as CustomHttpError;
+      if (customError.status !== 401) {
+        alert('로그인 중 오류가 발생했습니다.');
+      }
     },
   });
 
@@ -47,8 +54,10 @@ export const useLogoutMutation = () => {
       router.push(ROUTES.ADMIN_LOGIN);
     },
     onError: (error) => {
-      alert('로그아웃 중 오류가 발생했습니다.');
-      console.error('Logout error:', error);
+      const customError = error as CustomHttpError;
+      if (customError.status !== 401) {
+        alert('로그아웃 중 오류가 발생했습니다.');
+      }
     },
   });
 

@@ -1,6 +1,7 @@
 import { Evaluation, putConnectApplicant } from '@/components/admin/applicants/api/applicants';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { applicantKey, clubMemberKey } from './queries/key';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 interface useConnectApplicantParams {
   clubId: string;
@@ -26,6 +27,12 @@ export const useConnectApplicant = ({
       queryClient.invalidateQueries({ queryKey: [failList] });
       queryClient.invalidateQueries({ queryKey: [searchApplicant] });
       openConfirmModalWithMessage('연동이 완료되었습니다.');
+    },
+    onError: (error) => {
+      const customError = error as CustomHttpError;
+      if (customError.status !== 401) {
+        alert('연동에 실패했습니다.');
+      }
     },
   });
 

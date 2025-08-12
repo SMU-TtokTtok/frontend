@@ -13,7 +13,12 @@ function AnswerInput({ answer }: AnswerInputProps) {
         {answer.isEssential && <span className={S.essential}>*</span>}
       </label>
       <h3 className={S.subTitle}>{answer.subTitle}</h3>
-      <Input variant="secondary" readOnly className={S.AnswerInput} value={answer.value} />
+      <Input
+        variant="secondary"
+        readOnly
+        className={S.AnswerInput}
+        value={answer.value ?? '작성한 답변이 없습니다.'}
+      />
     </div>
   );
 }

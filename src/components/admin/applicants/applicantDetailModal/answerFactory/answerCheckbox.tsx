@@ -7,6 +7,7 @@ interface AnswerCheckboxProps {
 }
 
 function AnswerCheckbox({ answer }: AnswerCheckboxProps) {
+  const isValueExist = answer.value === null;
   return (
     <div className={S.answer}>
       <label className={S.label}>
@@ -20,7 +21,7 @@ function AnswerCheckbox({ answer }: AnswerCheckboxProps) {
             type="checkbox"
             name={answer.title}
             value={option}
-            defaultChecked={answer.value.includes(option)}
+            defaultChecked={isValueExist ? false : answer.value.includes(option)}
             label={option}
             className={S.answerCheckbox}
             img={check}
