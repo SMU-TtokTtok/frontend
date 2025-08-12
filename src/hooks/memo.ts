@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { applicantKey } from './queries/key';
 import { deleteMemo, patchMemo, postMemo } from '@/components/admin/applicants/api/applicants';
 import { ApplicantDetailInfo } from '@/common/model/applicants';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 interface UsePostMemoParams {
   applicantId: string;
@@ -33,7 +34,10 @@ export const usePostMemo = () => {
       if (context?.previousData) {
         queryClient.setQueryData([applicantInfo], context.previousData);
       }
-      alert('메모 추가 중 오류가 발생했습니다.');
+      const customError = err as CustomHttpError;
+      if (customError.status !== 401) {
+        alert('메모 추가 중 오류가 발생했습니다.');
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [applicantInfo] });
@@ -73,7 +77,10 @@ export const useDeleteMemo = () => {
       if (context?.previousData) {
         queryClient.setQueryData([applicantInfo], context.previousData);
       }
-      alert('메모 삭제 중 오류가 발생했습니다.');
+      const customError = err as CustomHttpError;
+      if (customError.status !== 401) {
+        alert('메모 삭제 중 오류가 발생했습니다.');
+      }
     },
 
     onSuccess: () => {
@@ -118,7 +125,10 @@ export const usePatchMemo = () => {
       if (context?.previousData) {
         queryClient.setQueryData([applicantInfo], context.previousData);
       }
-      alert('메모 수정 중 오류가 발생했습니다.');
+      const customError = err as CustomHttpError;
+      if (customError.status !== 401) {
+        alert('메모 수정 중 오류가 발생했습니다.');
+      }
     },
 
     onSuccess: () => {

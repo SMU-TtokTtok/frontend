@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { postLogout } from '@/components/login/api';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 export const useLogoutMutation = () => {
   const logoutMutation = useMutation({
@@ -12,8 +13,11 @@ export const useLogoutMutation = () => {
       localStorage.removeItem('user_refresh_token');
       window.location.href = '/login';
     },
-    onError: () => {
-      alert('로그아웃 중 오류가 발생했습니다.');
+    onError: (error) => {
+      const customError = error as CustomHttpError;
+      if (customError.status !== 401) {
+        alert('로그아웃 중 오류가 발생했습니다.');
+      }
     },
   });
 

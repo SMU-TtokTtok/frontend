@@ -82,6 +82,9 @@ export const usePatchApplicantStatus = ({
       if (customError.status === 400) {
         openConfirmModalWithMessage(`이 지원자는 이미 연동된 지원자여서 상태를 바꿀 수 없어요.`);
       }
+      if (customError.status !== 401) {
+        openConfirmModalWithMessage('상태 변경 중 오류가 발생했습니다.');
+      }
     },
   });
 

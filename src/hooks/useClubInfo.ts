@@ -43,7 +43,7 @@ export const useRecruitmentToggle = (handleModalOpen: () => void, clubId: string
     onError: (error: CustomHttpError) => {
       if (error.status === 404) {
         alert('지원 폼 제작이 완료되지 않았습니다');
-      } else {
+      } else if (error.status !== 401) {
         alert('모집 상태 변경에 실패했습니다');
       }
     },
@@ -74,8 +74,11 @@ export const useAdminClubPatch = (handleModalOpen: () => void, clubId: string) =
       queryClient.invalidateQueries({ queryKey: adminClubInfo });
       handleModalOpen();
     },
-    onError: () => {
-      alert('동아리 정보 수정에 실패했습니다');
+    onError: (error) => {
+      const customError = error as CustomHttpError;
+      if (customError.status !== 401) {
+        alert('동아리 정보 수정에 실패했습니다');
+      }
     },
   });
 
