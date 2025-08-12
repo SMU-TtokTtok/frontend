@@ -3,6 +3,7 @@ import { useGradeCount } from '@/hooks/useClubMember';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import { useAuthStore } from '@/common/store/adminAuthStore';
+import LoadingSpinner from '@/common/ui/loading';
 
 export default function RightSide() {
   const { profile } = useAuthStore((state) => state);
@@ -10,7 +11,7 @@ export default function RightSide() {
   const { barPosition } = useFollowSidebar({ initialPosition: 216 });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   return (
