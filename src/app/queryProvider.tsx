@@ -108,8 +108,11 @@ async function handleQueryError(error: Error, query: Query<unknown, unknown, unk
         await postRefresh();
       }
       await query.fetch();
+      retriedQueries.delete(query);
     } catch (error) {
+      retriedQueries.delete(query);
       if (typeof window !== 'undefined') {
+        console.error('토큰 재발급 실패:', error);
         alert('세션이 만료되었습니다. 다시 로그인해주세요.');
 
         if (isAdmin) {
@@ -119,7 +122,7 @@ async function handleQueryError(error: Error, query: Query<unknown, unknown, unk
           localStorage.removeItem('name');
         }
       }
-      throw error;
+      return;
     }
   }
 }
