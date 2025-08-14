@@ -88,7 +88,7 @@ export default function Form({ clubId }: { clubId: string }) {
       name: data.name,
       age: Number(data.age),
       major: data.major,
-      email: data.email,
+      email: `${data.emailPrefix}@${data.emailDomain}`,
       phone: data.phone,
       studentStatus: data.studentStatus,
       grade: data.grade,
