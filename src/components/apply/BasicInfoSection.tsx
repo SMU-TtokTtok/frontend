@@ -69,16 +69,32 @@ export default function BasicInfoSection({ register, errors }: BasicInfoSectionP
           <div className={S.FormContentTitle}>
             이메일<span className={S.FormContentTitleEssential}>*</span>
           </div>
-          <input
-            size={1}
-            type="text"
-            className={S.FormInput}
-            placeholder="example@gmail.com"
-            {...register('email')}
-          />
-          {errors.email && (
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <input
+              size={1}
+              type="text"
+              className={S.FormInput}
+              placeholder="example"
+              style={{ flex: 1 }}
+              {...register('emailPrefix')}
+            />
+            <span style={{ alignSelf: 'center', color: '#666' }}>@</span>
+            <select
+              className={S.FormInput}
+              style={{ minWidth: '120px' }}
+              {...register('emailDomain')}
+            >
+              <option value="gmail.com">gmail.com</option>
+              <option value="naver.com">naver.com</option>
+              <option value="nate.com">nate.com</option>
+              <option value="daum.net">daum.net</option>
+              <option value="kakao.com">kakao.com</option>
+              <option value="hanmail.net">hanmail.net</option>
+            </select>
+          </div>
+          {(errors.emailPrefix || errors.emailDomain) && (
             <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
-              {errors.email.message}
+              {errors.emailPrefix?.message || errors.emailDomain?.message}
             </div>
           )}
         </div>
