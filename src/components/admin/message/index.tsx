@@ -28,14 +28,16 @@ function Message() {
   };
   return (
     <>
-      <div className={S.wrapper}>
-        <Header evaluation={evaluation} />
-        <PassFailSidebar
-          selectedOptions={{ evaluation: evaluation as Evaluation }}
-          openConfirmModalWithMessage={openConfirmModalWithMessage}
-          isMessage={true}
-        />
-        <Form kind={evaluation} />
+      <div className={S.container}>
+        <div className={S.wrapper}>
+          <Header evaluation={evaluation} />
+          <PassFailSidebar
+            selectedOptions={{ evaluation: evaluation as Evaluation }}
+            openConfirmModalWithMessage={openConfirmModalWithMessage}
+            isMessage={true}
+          />
+          <Form kind={evaluation} />
+        </div>
       </div>
       <ConfirmModal isOpen={isConfirmModalOpen} onClose={handleConfirmModalClose}>
         {confirmMessage}
