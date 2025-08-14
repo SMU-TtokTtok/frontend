@@ -39,7 +39,7 @@ function PassFailSidebar({
     setIsPass(isPass);
   };
 
-  const { barPosition } = useFollowSidebar({ initialPosition: isMessage ? 161 : 55 });
+  const { barPosition } = useFollowSidebar({ initialPosition: 55 });
 
   const {
     isOpen: isListModalOpen,
@@ -81,7 +81,9 @@ function PassFailSidebar({
               <Button
                 variant="secondary"
                 className={S.baseButton['connectButton']}
-                onClick={() => handleConnectApplicants({ evaluation, clubId: profile!.clubId })}
+                onClick={() =>
+                  handleConnectApplicants({ evaluation, clubId: profile?.clubId ?? '' })
+                }
               >
                 {evaluation === 'DOCUMENT'
                   ? hasInterview
