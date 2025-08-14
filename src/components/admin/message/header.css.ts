@@ -5,6 +5,7 @@ export const container = style({
   alignItems: 'center',
   gap: '8px',
   marginTop: '50px',
+  marginBottom: '40px',
 });
 
 export const titleText = style({
