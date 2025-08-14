@@ -25,21 +25,29 @@ export default function RightSide() {
         <div className={S.GradeText}>총 인원</div>
         <div className={S.NumberText}>{data?.totalCount || 0}명</div>
       </div>
-      <div className={S.ItemFlex}>
-        <div className={S.GradeText}>ㄴ1학년</div>
-        <div className={S.NumberText}>총 {data?.firstGradeCount || 0}명</div>
-      </div>
-      <div className={S.ItemFlex}>
-        <div className={S.GradeText}>ㄴ2학년</div>
-        <div className={S.NumberText}>총 {data?.secondGradeCount || 0}명</div>
-      </div>
-      <div className={S.ItemFlex}>
-        <div className={S.GradeText}>ㄴ3학년</div>
-        <div className={S.NumberText}>총 {data?.thirdGradeCount || 0}명</div>
-      </div>
-      <div className={S.ItemFlex}>
-        <div className={S.GradeText}>ㄴ4학년</div>
-        <div className={S.NumberText}>총 {data?.fourthGradeCount || 0}명</div>
+
+      <div className={S.GradeContainer}>
+        <div className={S.ItemFlex}>
+          <div className={S.GradeText}>ㄴ1학년</div>
+          <div className={S.NumberText}>총 {data?.firstGradeCount || 0}명</div>
+        </div>
+        <div className={S.Bar}>ㅣ</div>
+        <div className={S.ItemFlex}>
+          <div className={S.GradeText}>ㄴ2학년</div>
+          <div className={S.NumberText}>총 {data?.secondGradeCount || 0}명</div>
+        </div>
+        <div className={S.Bar}>ㅣ</div>
+
+        <div className={S.ItemFlex}>
+          <div className={S.GradeText}>ㄴ3학년</div>
+          <div className={S.NumberText}>총 {data?.thirdGradeCount || 0}명</div>
+        </div>
+        <div className={S.Bar}>ㅣ</div>
+
+        <div className={S.ItemFlex}>
+          <div className={S.GradeText}>ㄴ4학년</div>
+          <div className={S.NumberText}>총 {data?.fourthGradeCount || 0}명</div>
+        </div>
       </div>
     </div>
   );

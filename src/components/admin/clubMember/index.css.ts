@@ -44,3 +44,24 @@ export const loading = style({
   width: '100vw',
 });
 
+export const searchWrapper = style({
+  marginTop: '3.111rem',
+  width: '100%',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      marginTop: '60px',
+    },
+  },
+});
+export const searchInput = style({
+  width: '100%',
+  padding: '16px 22px',
+});
+
+export const iconStyle = style({
+  width: '31px',
+  height: '31px',
+  right: '7px',
+  cursor: 'pointer',
+});

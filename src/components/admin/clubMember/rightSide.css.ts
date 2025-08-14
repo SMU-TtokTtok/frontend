@@ -19,14 +19,17 @@ export const container = style({
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
-      display: 'none',
+      // display: 'none',
+      position: 'static',
+      width: '100%',
+      marginTop: '20px',
     },
   },
 });
 
 export const ItemFlex = style({
   display: 'flex',
-  gap: '32px',
+  gap: '30px',
   alignItems: 'center',
 });
 
@@ -39,4 +42,30 @@ export const NumberText = style({
   fontSize: vars.fonts.body1,
   color: '#030304',
   fontWeight: 500,
+});
+
+export const GradeContainer = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '8px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+  },
+});
+
+export const Bar = style({
+  display: 'none',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
+      fontSize: '18px',
+      color: '#D2D4D8',
+      fontWeight: 300,
+      display: 'block',
+    },
+  },
 });

@@ -1,5 +1,6 @@
 import SearchBar from '@/common/ui/searchBar';
-import * as S from '../applicants/applicants.css';
+import * as S from './index.css';
+
 import SearchIcon from '@/assets/search.svg';
 interface SearchBarAreaProps {
   search: string;
