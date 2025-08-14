@@ -1,13 +1,12 @@
 import { style } from '@vanilla-extract/css';
 import { BREAKPOINTS } from '@/common/constants';
 
-export const wrapper = style({
+export const container = style({
   paddingLeft: '280px',
   paddingRight: '378px',
   display: 'flex',
   flexDirection: 'column',
   gap: '80px',
-  position: 'relative',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
@@ -16,4 +15,9 @@ export const wrapper = style({
       gap: 0,
     },
   },
+});
+
+export const wrapper = style({
+  position: 'relative',
+  width: '100%',
 });

@@ -22,7 +22,7 @@ export const rightSidebar = style({
 
 export const rightSidebar2 = style({
   position: 'absolute',
-  right: '30px',
+  right: '-350px',
 
   top: sidebarTop,
   transition: 'top 0.7s ease-out',
@@ -145,6 +145,7 @@ export const plus = style({
 
 export const listContainer = style({
   width: '100%',
+  minHeight: '170px', //추가
 });
 
 export const ItemWrapper = style({
