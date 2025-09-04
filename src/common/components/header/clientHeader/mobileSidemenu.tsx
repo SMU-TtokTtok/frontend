@@ -21,8 +21,6 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
     <>
       <div className={S.MobileBackdrop} />
       <div className={S.SideMenu} ref={ref}>
-        {/*로그인 로직 나오면 분기 처리 할게요 by 형준*/}
-
         <label className={S.label}>내 정보</label>
         <div className={S.myInfo}>
           <Image src={person} alt="내 정보" />
