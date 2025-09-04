@@ -122,6 +122,11 @@ export const SideMenu = style({
   alignItems: 'start',
   padding: '18px 12px',
   animation: `${fadeInRight} 0.3s ease-in-out`,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      top: '52px',
+    },
+  },
 });
 
 export const MenuItem = style({

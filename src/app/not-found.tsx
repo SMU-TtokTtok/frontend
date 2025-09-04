@@ -18,7 +18,11 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-      <Footer serviceName={FOOTER.serviceName} informationUrl={FOOTER.informationUrl} />
+      <Footer
+        serviceName={FOOTER.serviceName}
+        informationUrl={FOOTER.informationUrl}
+        feedbackUrl={FOOTER.feedbackUrl}
+      />
     </>
   );
 }

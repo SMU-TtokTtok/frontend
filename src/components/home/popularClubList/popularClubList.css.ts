@@ -136,6 +136,11 @@ export const empty = style({
   fontSize: vars.fonts.title3,
   fontWeight: 500,
   color: vars.colors.surface.outline,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_title3,
+    },
+  },
 });
 
 export const emptyWrapper = style({

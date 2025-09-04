@@ -6,7 +6,11 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className={S.withFooterContent}>{children}</div>
-      <Footer serviceName={FOOTER.serviceName} informationUrl={FOOTER.informationUrl} />
+      <Footer
+        serviceName={FOOTER.serviceName}
+        informationUrl={FOOTER.informationUrl}
+        feedbackUrl={FOOTER.feedbackUrl}
+      />
     </>
   );
 }

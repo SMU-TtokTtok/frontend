@@ -45,3 +45,11 @@ export const logo = style({
     },
   },
 });
+
+export const rowsort = style({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'start',
+  alignItems: 'center',
+  gap: '32px',
+});
