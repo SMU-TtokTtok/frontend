@@ -213,6 +213,7 @@ export default function MDEditor({
   onChange?: (introduction: string) => void;
 }) {
   const [htmlContent, setHtmlContent] = useState(introduction);
+  const [isEditorInitialized, setIsEditorInitialized] = useState(false);
 
   const editor = useEditor({
     extensions: [StarterKit, Image],
@@ -226,30 +227,40 @@ export default function MDEditor({
     immediatelyRender: false,
   });
 
+  // 에디터 초기화
   useEffect(() => {
-    setHtmlContent(introduction);
-    if (editor) {
+    if (editor && !isEditorInitialized) {
       editor.commands.setContent(introduction);
+      setHtmlContent(introduction);
+      setIsEditorInitialized(true);
     }
-  }, [introduction, editor]);
+  }, [editor, introduction, isEditorInitialized]);
 
+  // 편집 모드가 아닐 때만 외부에서 전달된 내용으로 업데이트
   useEffect(() => {
-    if (isEditing && editor) {
-      editor.commands.setContent(htmlContent);
+    if (editor && !isEditing && isEditorInitialized) {
+      const currentContent = editor.getHTML();
+      if (currentContent !== introduction) {
+        editor.commands.setContent(introduction);
+        setHtmlContent(introduction);
+      }
     }
-  }, [isEditing, editor, htmlContent]);
+  }, [introduction, editor, isEditing, isEditorInitialized]);
 
+  // 에디터 내용 변경 시 onChange 호출 (편집 중일 때만)
   useEffect(() => {
-    if (onChange && editor) {
+    if (onChange && editor && isEditing) {
       const updateHandler = () => {
-        onChange(editor.getHTML());
+        const newContent = editor.getHTML();
+        setHtmlContent(newContent);
+        onChange(newContent);
       };
       editor.on('update', updateHandler);
       return () => {
         editor.off('update', updateHandler);
       };
     }
-  }, [onChange, editor]);
+  }, [onChange, editor, isEditing]);
 
   return (
     <div className={S.container}>
