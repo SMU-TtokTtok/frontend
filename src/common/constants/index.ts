@@ -13,6 +13,8 @@ export const FOOTER = {
   serviceName: '똑똑',
   informationUrl:
     'https://buttoned-hoof-999.notion.site/213243ce95268015a2a2e6faa07e8b95?source=copy_link',
+  feedbackUrl:
+    'https://docs.google.com/forms/d/e/1FAIpQLSdBUL6ckgf38pAz7TOHlXF-EdZbyQJVhPpuPFgLfu21OZ8TvA/viewform?usp=header',
 } as const;
 
 export const BREAKPOINTS = {
