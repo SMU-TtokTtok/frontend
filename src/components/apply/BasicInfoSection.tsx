@@ -63,7 +63,6 @@ export default function BasicInfoSection({ register, errors }: BasicInfoSectionP
           )}
         </div>
       </div>
-
       <div className={S.FormContentFlex}>
         <div className={S.FormContentContainer}>
           <div className={S.FormContentTitle}>
@@ -116,7 +115,6 @@ export default function BasicInfoSection({ register, errors }: BasicInfoSectionP
           )}
         </div>
       </div>
-
       <div className={S.FormContentContainer}>
         <div className={S.FormContentTitle}>
           재학여부<span className={S.FormContentTitleEssential}>*</span>
