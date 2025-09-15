@@ -45,23 +45,23 @@ export default function BasicInfoSection({ register, errors }: BasicInfoSectionP
             </div>
           )}
         </div>
-      </div>
-      <div className={S.FormContentContainer}>
-        <div className={S.FormContentTitle}>
-          학과<span className={S.FormContentTitleEssential}>*</span>
-        </div>
-        <input
-          size={1}
-          type="text"
-          className={S.FormInput}
-          placeholder="학과를 입력해주세요."
-          {...register('major')}
-        />
-        {errors.major && (
-          <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
-            {errors.major.message}
+        <div className={S.FormContentContainer}>
+          <div className={S.FormContentTitle}>
+            학과<span className={S.FormContentTitleEssential}>*</span>
           </div>
-        )}
+          <input
+            size={1}
+            type="text"
+            className={S.FormInput}
+            placeholder="학과를 입력해주세요."
+            {...register('major')}
+          />
+          {errors.major && (
+            <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
+              {errors.major.message}
+            </div>
+          )}
+        </div>
       </div>
       <div className={S.FormContentFlex}>
         <div className={S.FormContentContainer}>
@@ -97,23 +97,23 @@ export default function BasicInfoSection({ register, errors }: BasicInfoSectionP
             </div>
           )}
         </div>
-      </div>
-      <div className={S.FormContentContainer}>
-        <div className={S.FormContentTitle}>
-          전화번호<span className={S.FormContentTitleEssential}>*</span>
-        </div>
-        <input
-          size={1}
-          type="text"
-          className={S.FormInput}
-          placeholder="010-0000-0000"
-          {...register('phone')}
-        />
-        {errors.phone && (
-          <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
-            {errors.phone.message}
+        <div className={S.FormContentContainer}>
+          <div className={S.FormContentTitle}>
+            전화번호<span className={S.FormContentTitleEssential}>*</span>
           </div>
-        )}
+          <input
+            size={1}
+            type="text"
+            className={S.FormInput}
+            placeholder="010-0000-0000"
+            {...register('phone')}
+          />
+          {errors.phone && (
+            <div style={{ color: 'red', fontSize: '12px', marginTop: '4px' }}>
+              {errors.phone.message}
+            </div>
+          )}
+        </div>
       </div>
       <div className={S.FormContentContainer}>
         <div className={S.FormContentTitle}>
