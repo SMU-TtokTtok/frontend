@@ -51,6 +51,15 @@ export const tagStyle = styleVariants({
     fontWeight: '600',
     border: `1px solid ${vars.colors.surface.cont_3}`,
   },
+
+  //마감 임박
+  red: {
+    backgroundColor: '#FFEFEF',
+    color: '#E20029',
+    fontWeight: '600',
+    border: `1px solid #FFD6D3`,
+    textOverflow: 'clip !important',
+  },
 } as const);
 
 export type TagVariant = keyof typeof tagStyle;
