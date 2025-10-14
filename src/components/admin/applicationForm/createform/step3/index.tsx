@@ -45,7 +45,6 @@ function FormQuestionStep() {
       questions: newOrder,
     }));
   };
-  console.log(questionsData);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
