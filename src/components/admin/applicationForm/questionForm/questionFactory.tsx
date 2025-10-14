@@ -107,6 +107,7 @@ function FormFieldFactory({
           field={field}
           errors={errors}
           isSubmit={isSubmit}
+          scrollRefs={scrollRefs}
           handleQuestionTypeChange={handleQuestionTypeChange}
           handleUpdateField={handleUpdateField}
           handleDeleteField={handleDeleteField}

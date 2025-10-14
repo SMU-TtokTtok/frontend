@@ -1,10 +1,13 @@
 import Image from 'next/image';
+import { DndContext, closestCenter, DragEndEvent } from '@dnd-kit/core';
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import * as S from './questionFrom.css';
 import AddFeild from '@/assets/add_circle.svg';
 import FormFieldFactory from './questionFactory';
 import ApplicantInfoField from './applicantInfoField/applicantInfoField';
 import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import { ZodFormattedError } from 'zod';
+import SortableFieldWrapper from './sortableFieldWrapper';
 export const questionTypes = [
   { type: 'SHORT_ANSWER', label: '단답형' },
   { type: 'LONG_ANSWER', label: '서술형' },
@@ -27,6 +30,7 @@ interface QuestionFormProps {
   handleOptionChange: (fieldId: number, optionIndex: number, value: string) => void;
   handleOptionAdd: (fieldId: number) => void;
   handleOptionDelete: (fieldId: number, optionIndex: number) => void;
+  handleReorderQuestions: (newOrder: ApplyFormField[]) => void;
   scrollRefs: React.RefObject<HTMLDivElement[]>;
 }
 
@@ -44,8 +48,19 @@ function QuestionForm({
   handleOptionChange,
   handleOptionAdd,
   handleOptionDelete,
+  handleReorderQuestions,
   scrollRefs,
 }: QuestionFormProps) {
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (!over || active.id === over.id) return;
+
+    const oldIndex = formData.questions.findIndex((_, idx) => idx === Number(active.id));
+    const newIndex = formData.questions.findIndex((_, idx) => idx === Number(over.id));
+
+    const newQuestions = arrayMove(formData.questions, oldIndex, newIndex);
+    handleReorderQuestions(newQuestions);
+  };
   return (
     <div className={S.container}>
       <div className={S.header}>
@@ -69,23 +84,33 @@ function QuestionForm({
         />
       </div>
       <ApplicantInfoField />
-      {formData?.questions?.map((field, index) => (
-        <FormFieldFactory
-          key={index}
-          fieldId={index}
-          scrollRefs={scrollRefs}
-          field={field}
-          errors={errors}
-          isSubmit={isSubmit}
-          handleUpdateField={handleUpdateField}
-          handleDeleteField={handleDeleteField}
-          handleEssentialChange={handleEssentialChange}
-          handleOptionChange={handleOptionChange}
-          handleOptionAdd={handleOptionAdd}
-          handleOptionDelete={handleOptionDelete}
-          handleQuestionTypeChange={(type) => handleQuestionTypeChange(type, index)}
-        />
-      ))}
+      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext
+          items={formData.questions.map((_, index) => index.toString())}
+          strategy={verticalListSortingStrategy}
+        >
+          {formData?.questions?.map((field, index) => (
+            <SortableFieldWrapper key={index} id={index.toString()}>
+              <FormFieldFactory
+                key={index}
+                fieldId={index}
+                scrollRefs={scrollRefs}
+                field={field}
+                errors={errors}
+                isSubmit={isSubmit}
+                handleUpdateField={handleUpdateField}
+                handleDeleteField={handleDeleteField}
+                handleEssentialChange={handleEssentialChange}
+                handleOptionChange={handleOptionChange}
+                handleOptionAdd={handleOptionAdd}
+                handleOptionDelete={handleOptionDelete}
+                handleQuestionTypeChange={(type) => handleQuestionTypeChange(type, index)}
+              />
+            </SortableFieldWrapper>
+          ))}
+        </SortableContext>
+      </DndContext>
+
       <div className={S.addFieldButton}>
         <Image
           src={AddFeild}

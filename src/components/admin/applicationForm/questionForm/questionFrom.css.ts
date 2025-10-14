@@ -98,7 +98,7 @@ export const errorMessage = style({
 export const formFeildBlock = style({
   width: '100%',
   backgroundColor: vars.colors.surface.default,
-  padding: '22px',
+  padding: '0px 22px 22px 22px',
   marginBottom: '18px',
 });
 
@@ -343,4 +343,15 @@ export const checkbox = style({
 export const radio = style({
   width: '20px',
   height: '20px',
+});
+export const dragWrapper = style({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  cursor: 'grab',
+});
+export const dragHandle = style({
+  width: '40px',
+  height: '40px',
+  transform: 'rotate(90deg)',
 });

@@ -84,6 +84,12 @@ export const MobileSearchIcon = style({
   color: vars.colors.surface.on_surf,
 });
 
+export const MobileHamburgerIcon = style({
+  width: '31px',
+  height: '31px',
+  cursor: 'pointer',
+});
+
 export const ComboBoxContainer = style({
   position: 'absolute',
   width: '100%',
