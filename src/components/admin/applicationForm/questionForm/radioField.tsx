@@ -44,7 +44,6 @@ function RadioField({
 }: InputFieldProps) {
   return (
     <div
-      className={S.formFeildBlock}
       ref={(el) => {
         if (el) scrollRefs.current[fieldId] = el as HTMLDivElement;
       }}
