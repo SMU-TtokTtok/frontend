@@ -129,3 +129,22 @@
   height: auto;
   display: block;
 }
+
+.custom-tiptap-editor a {
+  color: #0000ee;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.custom-tiptap-editor a:visited {
+  color: #551a8b;
+}
+
+.custom-tiptap-editor a:hover {
+  color: #0000ee;
+  text-decoration: underline;
+}
+
+.custom-tiptap-editor a:active {
+  color: #ee0000;
+}

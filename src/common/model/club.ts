@@ -9,4 +9,5 @@ export interface ClubItemInfo {
   clubMemberCount: number;
   recruiting: boolean;
   bookmarked: boolean;
+  isDeadlineImminent: boolean;
 }

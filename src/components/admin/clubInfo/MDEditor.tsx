@@ -5,6 +5,7 @@ import Button from '@/common/ui/button/index';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
+import Link from '@tiptap/extension-link';
 import type { Editor } from '@tiptap/react';
 import './mdEditor.custom.css';
 import { useEffect, useState, useRef } from 'react';
@@ -97,6 +98,24 @@ const icons = {
       </g>
     </svg>
   ),
+  hyperlink: (
+    <svg width="30" height="30" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <g>
+          <path
+            d="M35.521,41.288c-3.422,0-6.64-1.333-9.06-3.753c-1.106-1.106-1.106-2.9,0-4.006    c1.106-1.106,2.9-1.106,4.006,0c1.35,1.35,3.145,2.093,5.054,2.093c1.909,0,3.704-0.743,5.054-2.094l7.538-7.538    c2.787-2.787,2.787-7.321,0-10.108c-2.787-2.787-7.321-2.787-10.108,0l-3.227,3.227c-1.106,1.106-2.9,1.106-4.006,0    c-1.106-1.106-1.106-2.9,0-4.006L34,11.877c4.996-4.996,13.124-4.995,18.12,0c4.996,4.996,4.996,13.124,0,18.12l-7.538,7.538    C42.161,39.955,38.944,41.288,35.521,41.288z"
+            fill="#5A6379"
+          />
+        </g>
+        <g>
+          <path
+            d="M20.94,55.869c-3.422,0-6.64-1.333-9.06-3.753c-4.996-4.996-4.996-13.124,0-18.12l7.538-7.538    c4.996-4.995,13.124-4.995,18.12,0c1.106,1.106,1.106,2.9,0,4.006c-1.106,1.106-2.9,1.106-4.006,0    c-2.787-2.787-7.321-2.787-10.108,0l-7.538,7.538c-2.787,2.787-2.787,7.321,0,10.108c1.35,1.35,3.145,2.094,5.054,2.094    c1.909,0,3.704-0.743,5.054-2.093l3.227-3.227c1.106-1.106,2.9-1.106,4.006,0c1.106,1.106,1.106,2.9,0,4.006L30,52.117    C27.58,54.536,24.363,55.869,20.94,55.869z"
+            fill="#5A6379"
+          />
+        </g>
+      </g>
+    </svg>
+  ),
 };
 
 const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
@@ -135,6 +154,28 @@ const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
         // 로딩 상태 해제 등의 정리 작업
       }
     }
+  };
+
+  const handleLinkClick = () => {
+    if (!editor) return;
+
+    // 이미 링크가 있는지 확인
+    const previousUrl = editor.getAttributes('link').href;
+
+    // URL 입력 받기
+    const url = window.prompt('링크 URL을 입력하세요:', previousUrl || 'https://');
+
+    // 취소하면 아무것도 하지 않음
+    if (url === null) return;
+
+    // 빈 문자열이면 링크 제거
+    if (url === '') {
+      editor.chain().focus().unsetLink().run();
+      return;
+    }
+
+    // 링크 설정
+    editor.chain().focus().setLink({ href: url, target: '_blank' }).run();
   };
 
   if (!editor) return null;
@@ -192,6 +233,9 @@ const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
       <button onClick={handleImageClick} className="toolbar-btn" title="이미지" type="button">
         {icons.image}
       </button>
+      <button onClick={handleLinkClick} className="toolbar-btn" title="링크" type="button">
+        {icons.hyperlink}
+      </button>
       <input
         type="file"
         accept="image/*"
@@ -216,7 +260,17 @@ export default function MDEditor({
   const [isEditorInitialized, setIsEditorInitialized] = useState(false);
 
   const editor = useEditor({
-    extensions: [StarterKit, Image],
+    extensions: [
+      StarterKit,
+      Image,
+      Link.configure({
+        openOnClick: true, // 수정 모드에서도 링크 클릭 가능
+        HTMLAttributes: {
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        },
+      }),
+    ],
     content: introduction,
     editorProps: {
       attributes: {

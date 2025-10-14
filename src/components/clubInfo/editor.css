@@ -75,3 +75,22 @@
   height: auto;
   display: block;
 }
+
+.content-container a {
+  color: #0000ee;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.content-container a:visited {
+  color: #551a8b;
+}
+
+.content-container a:hover {
+  color: #0000ee;
+  text-decoration: underline;
+}
+
+.content-container a:active {
+  color: #ee0000;
+}
