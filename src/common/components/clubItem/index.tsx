@@ -66,7 +66,14 @@ function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
         />
       </div>
       <div className={S.content}>
-        <p className={S.name}>{clubData.name}</p>
+        <div className={S.nameWrapper}>
+          <p className={S.name}>{clubData.name}</p>
+          {clubData.isDeadlineImminent && (
+            <Tag className={S.tagStyle} variant="red">
+              마감임박
+            </Tag>
+          )}
+        </div>
         <div className={S.membersWrapper}>
           <Image src={person} className={S.person} alt="멤버 수" />
           <p className={S.members}>{clubData.clubMemberCount}</p>
@@ -76,7 +83,7 @@ function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
         <Tag key={clubData.clubCategory} className={S.tagStyle} variant="default">
           {clubCategory}
         </Tag>
-        {clubData.customCategory && (
+        {clubData.customCategory && clubData.customCategory !== '커스텀 카테고리' && (
           <Tag key={clubData.customCategory} className={S.tagStyle} variant="default">
             {clubData.customCategory}
           </Tag>

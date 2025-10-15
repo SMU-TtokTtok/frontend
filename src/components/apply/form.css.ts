@@ -190,6 +190,13 @@ export const FormBasicContainer = style({
 export const FormContentFlex = style({
   display: 'flex',
   gap: '12px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      flexDirection: 'column',
+      gap: '20px',
+    },
+  },
 });
 
 export const FormContentContainer = style({

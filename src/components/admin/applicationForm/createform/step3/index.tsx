@@ -10,12 +10,14 @@ import { useCreateFormMutation } from '@/hooks/useCreateFormMutation';
 import { useApplicationFormValidation } from '@/hooks/useApplicationFormVaildation';
 import { useRef, useState } from 'react';
 import { useAuthStore } from '@/common/store/adminAuthStore';
+import { ApplyFormField } from '@/common/model/applicationForm';
 
 function FormQuestionStep() {
   const { profile } = useAuthStore();
   const {
     questionsData,
     previousStepData,
+    setQeustionsData,
     handleQuestionTypeChange,
     handleAddField,
     handleUpdateField,
@@ -35,6 +37,13 @@ function FormQuestionStep() {
   const handleScrollTo = (index: number) => {
     const target = scrollRefs.current[index];
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleReorderQuestions = (newOrder: ApplyFormField[]) => {
+    setQeustionsData((prev) => ({
+      ...prev,
+      questions: newOrder,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,6 +81,7 @@ function FormQuestionStep() {
           handleOptionDelete={handleOptionDelete}
           handleChangeTitle={handleChangeTitle}
           handleChangeSubTitle={handleChangeSubTitle}
+          handleReorderQuestions={handleReorderQuestions}
         />
         <div className={S.navigatorContainer}>
           <QuestionNavigator fields={questionsData.questions} handleScrollTo={handleScrollTo} />

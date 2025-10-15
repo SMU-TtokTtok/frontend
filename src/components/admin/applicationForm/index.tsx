@@ -16,6 +16,7 @@ import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import LoadingSpinner from '@/common/ui/loading';
 import { useAuthStore } from '@/common/store/adminAuthStore';
 import QueryErrorBoundary from '@/components/error/queryErrorBoundary';
+import { ApplyFormField } from '@/common/model/applicationForm';
 
 function ApplicationFormPage() {
   const { profile } = useAuthStore((state) => state);
@@ -62,6 +63,12 @@ function ApplicationFormPage() {
       console.error('Validation errors:', errors);
     }
   };
+  const handleReorderQuestions = (newOrder: ApplyFormField[]) => {
+    setQeustionsData((prev) => ({
+      ...prev,
+      questions: newOrder,
+    }));
+  };
 
   const { barPosition } = useFollowSidebar({ initialPosition: 188 });
 
@@ -100,6 +107,7 @@ function ApplicationFormPage() {
             handleOptionDelete={handleOptionDelete}
             handleChangeTitle={handleChangeTitle}
             handleChangeSubTitle={handleChangeSubTitle}
+            handleReorderQuestions={handleReorderQuestions}
             scrollRefs={scrollRefs}
           />
         </QueryErrorBoundary>

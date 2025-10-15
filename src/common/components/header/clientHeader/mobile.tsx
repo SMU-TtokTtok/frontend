@@ -78,7 +78,12 @@ function Mobile<T extends { id: string; name: string; clubType: string }>({
             />
           </div>
         )}
-        <Image src={hamburger} alt="Menu" onClick={handleToggleSideMenu} />
+        <Image
+          src={hamburger}
+          className={S.MobileHamburgerIcon}
+          alt="Menu"
+          onClick={handleToggleSideMenu}
+        />
         {isSideMenuOpen && (
           <MobileSideMenu setIsSideMenuOpen={setIsSideMenuOpen} userName={userName} />
         )}

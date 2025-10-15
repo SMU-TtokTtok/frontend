@@ -15,6 +15,7 @@ interface InputFieldProps {
   field: ApplyFormField;
   errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
+  scrollRefs: React.RefObject<HTMLDivElement[]>;
   handleQuestionTypeChange: (type: QuestionType) => void;
   handleUpdateField: (fieldId: number, data: ApplyFormField) => void;
   handleDeleteField: (fieldId: number) => void;
@@ -26,13 +27,18 @@ function FileField({
   field,
   errors,
   isSubmit,
+  scrollRefs,
   handleQuestionTypeChange,
   handleUpdateField,
   handleDeleteField,
   handleEssentialChange,
 }: InputFieldProps) {
   return (
-    <div className={S.formFeildBlock}>
+    <div
+      ref={(el) => {
+        if (el) scrollRefs.current[fieldId] = el as HTMLDivElement;
+      }}
+    >
       <div className={S.fieldToolBar}>
         <DropDown
           toggleButton={

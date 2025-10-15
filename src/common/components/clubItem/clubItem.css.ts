@@ -18,6 +18,7 @@ export const container = style({
 
 export const content = style({
   padding: ' 0px 4px',
+  maxWidth: '100%',
 });
 export const separation = style({
   fontSize: vars.fonts.body2,
@@ -61,7 +62,6 @@ export const name = style({
   fontSize: vars.fonts.title4,
   fontWeight: '600',
   color: vars.colors.surface.on_surf,
-  marginBottom: '5px',
   display: 'inline-block',
   maxWidth: '280px',
   whiteSpace: 'nowrap',
@@ -70,7 +70,6 @@ export const name = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       fontSize: vars.fonts.m_title3,
-      marginBottom: '0px',
     },
   },
 });
@@ -111,4 +110,23 @@ export const verticalLine = style({
   width: '1px',
   height: '1.333rem',
   backgroundColor: vars.colors.surface.cont_2,
+});
+
+export const nameWrapper = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '6px',
+  marginBottom: '5px',
+  maxWidth: '100%',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      marginBottom: '0px',
+    },
+  },
+});
+
+export const deadlineImminent = style({
+  fontSize: vars.fonts.body3,
+  fontWeight: '500',
+  color: vars.colors.surface.outline,
 });
