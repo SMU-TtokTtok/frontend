@@ -83,7 +83,7 @@ function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
         <Tag key={clubData.clubCategory} className={S.tagStyle} variant="default">
           {clubCategory}
         </Tag>
-        {clubData.customCategory && (
+        {clubData.customCategory && clubData.customCategory !== '커스텀 카테고리' && (
           <Tag key={clubData.customCategory} className={S.tagStyle} variant="default">
             {clubData.customCategory}
           </Tag>
