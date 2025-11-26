@@ -48,6 +48,10 @@ export const formContainer = style({
       paddingLeft: '246px',
       paddingRight: '100px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      paddingLeft: '20px',
+      paddingRight: '20px',
+    },
   },
 });
 
