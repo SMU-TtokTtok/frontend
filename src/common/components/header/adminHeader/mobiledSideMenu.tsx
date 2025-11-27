@@ -6,6 +6,7 @@ import * as S from './adminHeader.css';
 import { ROUTES } from '@/common/constants/routes';
 import arrowNav from '@/assets/arrow_nav.svg';
 import { AdminProfile } from '@/common/model/adminProfile';
+import { useRouter } from 'next/navigation';
 
 interface MobileSideMenuProps {
   handleLogoutClick: () => void;
@@ -14,6 +15,11 @@ interface MobileSideMenuProps {
 }
 
 function MobiledSideMenu({ handleLogoutClick, mobileRef, profile }: MobileSideMenuProps) {
+  const navigate = useRouter();
+  const handleLogout = () => {
+    handleLogoutClick();
+    navigate.push(ROUTES.ADMIN_LOGIN);
+  };
   return (
     <>
       <div className={S.MobileBackdrop} />
@@ -24,11 +30,11 @@ function MobiledSideMenu({ handleLogoutClick, mobileRef, profile }: MobileSideMe
           <p className={S.RightAreaText}>{profile?.clubName ?? '동아리명'}</p>
         </div>
 
-        <Link href={ROUTES.ADMIN} className={S.MenuItem} onClick={handleLogoutClick}>
+        <div className={S.MenuItem} onClick={handleLogout}>
           <span>로그아웃</span>
           <Image src={arrowNav} alt="이동하기" />
-        </Link>
-        <Link href={ADMIN_SIDEBAR_ITEMS[0].href} className={S.MenuItem} onClick={handleLogoutClick}>
+        </div>
+        <Link href={ADMIN_SIDEBAR_ITEMS[0].href} className={S.MenuItem}>
           <span>{ADMIN_SIDEBAR_ITEMS[0].label}</span>
           <Image src={arrowNav} alt="이동하기" />
         </Link>

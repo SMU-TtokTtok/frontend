@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { usePreventScroll } from '@/hooks/usepreventScroll';
-import MobiledSideMenu from './mobildSideMenu';
+import MobiledSideMenu from './mobiledSideMenu';
 
 interface MobileProps {
   isVisible: boolean;
