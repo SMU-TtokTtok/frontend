@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '../common/styles/reset.css.ts';
-//import { MSWProvider } from '@/mocks/mswProvider';
+import { MSWProvider } from '@/mocks/mswProvider';
 import QueryProvider from './queryProvider';
 import GoogleAnalytics from '@/components/googleAnalytics';
 
@@ -51,13 +51,13 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {/* <MSWProvider>
+        <MSWProvider>
           <QueryProvider>{children}</QueryProvider>
-        </MSWProvider> */}
-        <QueryProvider>
+        </MSWProvider>
+        {/* <QueryProvider>
           {children}
           {gaId && <GoogleAnalytics gaId={gaId} />}
-        </QueryProvider>
+        </QueryProvider> */}
       </body>
     </html>
   );

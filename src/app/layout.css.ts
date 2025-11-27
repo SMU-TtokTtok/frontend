@@ -17,6 +17,11 @@ export const withoutFooterContent = style({
   paddingTop: '4.222rem',
   backgroundColor: vars.colors.surface.variant,
   minHeight: '100vh',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      paddingTop: '52px',
+    },
+  },
 });
 
 export const rawSort = style({

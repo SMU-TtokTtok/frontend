@@ -50,7 +50,7 @@ function PassFailSidebar({
   return (
     <>
       <div
-        className={isMessage ? S.rightSidebar2 : S.rightSidebar}
+        className={isMessage ? S.rightSidebarWithMessage : S.rightSidebar}
         style={assignInlineVars({
           [S.sidebarTop]: `${barPosition}px`,
         })}
