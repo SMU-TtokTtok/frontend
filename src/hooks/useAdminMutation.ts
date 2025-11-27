@@ -51,7 +51,7 @@ export const useLogoutMutation = () => {
       queryClient.invalidateQueries({ queryKey: adminProfile });
       localStorage.removeItem('admin_access_token');
       localStorage.removeItem('admin_refresh_token');
-      router.push(ROUTES.ADMIN_LOGIN);
+      router.replace(ROUTES.ADMIN_LOGIN);
     },
     onError: (error) => {
       const customError = error as CustomHttpError;

@@ -10,8 +10,8 @@ import SearchIcon from '@/assets/search.svg';
 import SearchWhite from '@/assets/search_white.svg';
 import hamburger from '@/assets/hambuger.svg';
 import Cancel from '@/assets/searchClose.svg';
-import { usePreventScroll } from '@/hooks/usepreventScroll';
 import MobileSideMenu from './mobileSidemenu';
+import { usePreventScroll } from '@/hooks/usepreventScroll';
 
 interface MobileProps<T> {
   isVisible: boolean;

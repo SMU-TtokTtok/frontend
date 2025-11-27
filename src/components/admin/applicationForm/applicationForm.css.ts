@@ -9,6 +9,10 @@ export const emptyContainer = style({
       paddingLeft: '246px',
       paddingRight: '20px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      paddingLeft: '20px',
+      paddingRight: '20px',
+    },
   },
 });
 
@@ -47,6 +51,10 @@ export const formContainer = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       paddingLeft: '246px',
       paddingRight: '100px',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      paddingLeft: '20px',
+      paddingRight: '20px',
     },
   },
 });

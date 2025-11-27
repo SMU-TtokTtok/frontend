@@ -19,6 +19,9 @@ export const sidebarContainer = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       width: '206px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      display: 'none',
+    },
   },
 });
 
