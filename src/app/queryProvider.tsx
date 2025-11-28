@@ -2,6 +2,7 @@
 
 import { CustomHttpError } from '@/common/apis/apiClient';
 import { HTTP_STATUS } from '@/common/constants/httpStatus';
+import { MESSAGE } from '@/common/constants/message';
 import { ROUTES } from '@/common/constants/routes';
 import { isAdminPath } from '@/common/util/isAdminPath';
 import { postAdminRefresh } from '@/components/admin/login/api/login';
@@ -73,14 +74,24 @@ async function handleMutationError(
       await mutation.execute(variables);
     } catch (error) {
       if (typeof window !== 'undefined') {
-        alert('세션이 만료되었습니다. 다시 로그인해주세요.');
+        // refresh token 존재 여부로 로그인 상태 확인
+        const refreshToken = isAdmin
+          ? localStorage.getItem('admin_refresh_token')
+          : localStorage.getItem('user_refresh_token');
+
+        const alertMessage = refreshToken
+          ? MESSAGE.auth.sessionExpired
+          : MESSAGE.auth.loginRequired;
+
+        alert(alertMessage);
         console.error('토큰 재발급 실패:', error);
 
         if (isAdmin) {
           window.location.href = ROUTES.ADMIN_LOGIN;
+          localStorage.clear();
         } else {
           window.location.href = ROUTES.LOGIN;
-          localStorage.removeItem('name');
+          localStorage.clear();
         }
       }
       return;
@@ -112,14 +123,24 @@ async function handleQueryError(error: Error, query: Query<unknown, unknown, unk
     } catch (error) {
       retriedQueries.delete(query);
       if (typeof window !== 'undefined') {
+        // refresh token 존재 여부로 로그인 상태 확인
+        const refreshToken = isAdmin
+          ? localStorage.getItem('admin_refresh_token')
+          : localStorage.getItem('user_refresh_token');
+
+        const alertMessage = refreshToken
+          ? MESSAGE.auth.sessionExpired
+          : MESSAGE.auth.loginRequired;
+
         console.error('토큰 재발급 실패:', error);
-        alert('세션이 만료되었습니다. 다시 로그인해주세요.');
+        alert(alertMessage);
 
         if (isAdmin) {
           window.location.href = ROUTES.ADMIN_LOGIN;
+          localStorage.clear();
         } else {
           window.location.href = ROUTES.LOGIN;
-          localStorage.removeItem('name');
+          localStorage.clear();
         }
       }
       return;
