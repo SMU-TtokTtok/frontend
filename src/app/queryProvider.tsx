@@ -50,6 +50,33 @@ export function getQueryClient() {
 // alert 중복 방지를 위한 전역 플래그
 let isShowingAuthAlert = false;
 
+function handleAuthError(error: unknown) {
+  if (typeof window === 'undefined' || isShowingAuthAlert) {
+    return;
+  }
+
+  isShowingAuthAlert = true;
+
+  const isAdmin = isAdminPath();
+  // refresh token 존재 여부로 로그인 상태 확인
+  const refreshToken = isAdmin
+    ? localStorage.getItem('admin_refresh_token')
+    : localStorage.getItem('user_refresh_token');
+
+  const alertMessage = refreshToken ? MESSAGE.auth.sessionExpired : MESSAGE.auth.loginRequired;
+
+  alert(alertMessage);
+  console.error('토큰 재발급 실패:', error);
+
+  if (isAdmin) {
+    window.location.href = ROUTES.ADMIN_LOGIN;
+    localStorage.clear();
+  } else {
+    window.location.href = ROUTES.LOGIN;
+    localStorage.clear();
+  }
+}
+
 const retriedMutations = new WeakSet<Mutation<unknown, unknown, unknown>>();
 async function handleMutationError(
   error: Error,
@@ -76,29 +103,7 @@ async function handleMutationError(
       }
       await mutation.execute(variables);
     } catch (error) {
-      if (typeof window !== 'undefined' && !isShowingAuthAlert) {
-        isShowingAuthAlert = true;
-
-        // refresh token 존재 여부로 로그인 상태 확인
-        const refreshToken = isAdmin
-          ? localStorage.getItem('admin_refresh_token')
-          : localStorage.getItem('user_refresh_token');
-
-        const alertMessage = refreshToken
-          ? MESSAGE.auth.sessionExpired
-          : MESSAGE.auth.loginRequired;
-
-        alert(alertMessage);
-        console.error('토큰 재발급 실패:', error);
-
-        if (isAdmin) {
-          window.location.href = ROUTES.ADMIN_LOGIN;
-          localStorage.clear();
-        } else {
-          window.location.href = ROUTES.LOGIN;
-          localStorage.clear();
-        }
-      }
+      handleAuthError(error);
       return;
     }
   }
@@ -127,29 +132,7 @@ async function handleQueryError(error: Error, query: Query<unknown, unknown, unk
       retriedQueries.delete(query);
     } catch (error) {
       retriedQueries.delete(query);
-      if (typeof window !== 'undefined' && !isShowingAuthAlert) {
-        isShowingAuthAlert = true;
-
-        // refresh token 존재 여부로 로그인 상태 확인
-        const refreshToken = isAdmin
-          ? localStorage.getItem('admin_refresh_token')
-          : localStorage.getItem('user_refresh_token');
-
-        const alertMessage = refreshToken
-          ? MESSAGE.auth.sessionExpired
-          : MESSAGE.auth.loginRequired;
-
-        console.error('토큰 재발급 실패:', error);
-        alert(alertMessage);
-
-        if (isAdmin) {
-          window.location.href = ROUTES.ADMIN_LOGIN;
-          localStorage.clear();
-        } else {
-          window.location.href = ROUTES.LOGIN;
-          localStorage.clear();
-        }
-      }
+      handleAuthError(error);
       return;
     }
   }
