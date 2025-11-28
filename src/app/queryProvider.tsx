@@ -75,6 +75,10 @@ function handleAuthError(error: unknown) {
     window.location.href = ROUTES.LOGIN;
     localStorage.clear();
   }
+  // 리다이렉트 후 플래그 리셋=>(안정 장치)
+  setTimeout(() => {
+    isShowingAuthAlert = false;
+  }, 100);
 }
 
 const retriedMutations = new WeakSet<Mutation<unknown, unknown, unknown>>();
