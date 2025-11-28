@@ -47,6 +47,9 @@ export function getQueryClient() {
   }
 }
 
+// alert 중복 방지를 위한 전역 플래그
+let isShowingAuthAlert = false;
+
 const retriedMutations = new WeakSet<Mutation<unknown, unknown, unknown>>();
 async function handleMutationError(
   error: Error,
@@ -73,7 +76,9 @@ async function handleMutationError(
       }
       await mutation.execute(variables);
     } catch (error) {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined' && !isShowingAuthAlert) {
+        isShowingAuthAlert = true;
+
         // refresh token 존재 여부로 로그인 상태 확인
         const refreshToken = isAdmin
           ? localStorage.getItem('admin_refresh_token')
@@ -122,7 +127,9 @@ async function handleQueryError(error: Error, query: Query<unknown, unknown, unk
       retriedQueries.delete(query);
     } catch (error) {
       retriedQueries.delete(query);
-      if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined' && !isShowingAuthAlert) {
+        isShowingAuthAlert = true;
+
         // refresh token 존재 여부로 로그인 상태 확인
         const refreshToken = isAdmin
           ? localStorage.getItem('admin_refresh_token')
