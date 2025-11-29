@@ -42,6 +42,9 @@ export const grayText = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       alignSelf: 'center',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      flexShrink: 0,
+    },
   },
 });
 
@@ -96,6 +99,9 @@ export const dateFlex = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       flexDirection: 'row',
       gap: '10px',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      flexWrap: 'wrap',
     },
   },
 });

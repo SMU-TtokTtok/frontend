@@ -92,8 +92,8 @@ export const imgContainer = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       position: 'absolute',
-      top: '0',
-      left: '0',
+      top: '28px',
+      left: '18px',
       width: '58px',
       height: '58px',
     },

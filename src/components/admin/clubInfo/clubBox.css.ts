@@ -78,6 +78,13 @@ export const desText = recipe({
 export const footerFlex = style({
   display: 'flex',
   justifyContent: 'space-between',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      flexDirection: 'column',
+      gap: '14px',
+    },
+  },
 });
 export const dropDownFlex = style({
   display: 'flex',
