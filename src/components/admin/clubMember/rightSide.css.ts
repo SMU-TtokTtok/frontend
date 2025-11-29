@@ -54,6 +54,11 @@ export const GradeContainer = style({
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 1fr)',
+      gap: '8px',
+    },
   },
 });
 
@@ -66,6 +71,9 @@ export const Bar = style({
       color: '#D2D4D8',
       fontWeight: 300,
       display: 'block',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      display: 'none',
     },
   },
 });
