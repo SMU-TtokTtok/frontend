@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 import { recipe } from '@vanilla-extract/recipes';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
   flex: '1 0 0',
@@ -17,17 +18,35 @@ export const headerflex = style({
   // justifyContent: 'space-between',
   marginBottom: '8px',
   gap: '8px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginLeft: '72px',
+    },
+  },
 });
 
 export const clubName = style({
   fontSize: vars.fonts.title3,
   marginBottom: '6px',
   fontWeight: '600',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginLeft: '72px',
+    },
+  },
 });
 
 export const numberFlex = style({
   display: 'flex',
   marginBottom: '14px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginLeft: '72px',
+    },
+  },
 });
 
 export const numberText = style({

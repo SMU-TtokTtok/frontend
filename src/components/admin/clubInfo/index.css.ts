@@ -48,6 +48,11 @@ export const flexRow = style({
   display: 'flex',
   marginBottom: '28px',
   // alignItems: 'center',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      position: 'relative',
+    },
+  },
 });
 
 export const card = style({
@@ -70,11 +75,29 @@ export const imgStyle = style({
       cursor: 'pointer',
     },
   },
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '100%',
+      height: '100%',
+      borderRadius: '100px',
+    },
+  },
 });
 
 export const imgContainer = style({
   position: 'relative',
   width: '212px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: '58px',
+      height: '58px',
+    },
+  },
 });
 
 export const editIcon = style({
