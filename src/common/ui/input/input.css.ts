@@ -1,3 +1,4 @@
+import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
 import { style, styleVariants } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
@@ -6,6 +7,11 @@ export const baseinputStyle = recipe({
   base: {
     borderRadius: 6,
     fontSize: vars.fonts.body2,
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+        fontSize: vars.fonts.m_body1,
+      },
+    },
   },
   variants: {
     isError: {

@@ -6,6 +6,13 @@ import { style } from '@vanilla-extract/css';
 export const Logo = style({
   width: '50px',
   height: '36px',
+  cursor: 'pointer',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      width: '40px',
+      height: '28px',
+    },
+  },
 });
 
 export const AdminMessage = style({
@@ -100,20 +107,20 @@ export const MenuItem = style({
 export const RightArea = style({
   backgroundColor: vars.colors.primary.base,
   borderRadius: '8px',
-  padding: '8px 12px',
+  padding: '8px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'start',
 });
 export const RightAreaIcon = style({
-  width: '29px',
-  height: '29px',
+  width: '20px',
+  height: '20px',
   backgroundColor: '#A5BDF5',
   borderRadius: '50%',
 });
 
 export const RightAreaText = style({
-  fontSize: vars.fonts.body1,
+  fontSize: vars.fonts.m_title4,
   color: vars.colors.primary.default,
   fontWeight: 600,
   marginLeft: '8px',

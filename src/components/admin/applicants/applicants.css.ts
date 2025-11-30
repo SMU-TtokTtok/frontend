@@ -32,6 +32,12 @@ export const title = style({
   fontWeight: 700,
   color: vars.colors.surface.on_surf,
   marginTop: '40px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_title2,
+      marginTop: '30px',
+    },
+  },
 });
 
 export const searchTitle = style({
@@ -54,6 +60,12 @@ export const searchWrapper = style({
 export const searchInput = style({
   width: '100%',
   padding: '16px 22px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      padding: '12px',
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const iconStyle = style({
@@ -69,6 +81,11 @@ export const evaluationTabs = style({
   display: 'flex',
   justifyContent: 'start',
   alignItems: 'center',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      marginTop: '16px',
+    },
+  },
 });
 
 export const evaluationButtonWrapper = style({
@@ -82,6 +99,12 @@ export const evaluationButton = recipe({
     fontSize: vars.fonts.body1,
     borderTopLeftRadius: '0.333rem',
     borderTopRightRadius: '0.333rem',
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+        fontSize: vars.fonts.m_body1,
+        padding: '16px',
+      },
+    },
   },
   variants: {
     isSelected: {
@@ -123,6 +146,11 @@ export const filterButton = recipe({
     borderRadius: '0.333rem',
     fontWeight: 400,
     marginRight: '0.22rem',
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+        fontSize: vars.fonts.m_body1,
+      },
+    },
   },
   variants: {
     isSelected: {
@@ -144,6 +172,11 @@ export const checkbox = style({
   width: '1rem',
   height: '1rem',
   border: `1px solid ${vars.colors.surface.outline_var}`,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body2,
+    },
+  },
 });
 
 export const checkImg = style({

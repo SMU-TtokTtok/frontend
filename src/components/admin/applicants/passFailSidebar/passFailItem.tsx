@@ -47,23 +47,25 @@ function PassFailItem({
         <span className={S.department}>{applicant.major}</span>
       </div>
       {isHandleApplicantStatus && (
-        <DropDown toggleButton={<Image src={moreVert} alt="more options" />}>
-          {options.map((status) => (
-            <li
-              key={status.value}
-              className={S.dropDownItem}
-              onClick={() =>
-                handleApplicantStatus({
-                  applicantId: applicant.id,
-                  status: status.value,
-                  evaluation: selectedOptions!.evaluation,
-                })
-              }
-            >
-              {status.label}
-            </li>
-          ))}
-        </DropDown>
+        <div className={S.dropDownWrapper}>
+          <DropDown toggleButton={<Image src={moreVert} alt="more options" />}>
+            {options.map((status) => (
+              <li
+                key={status.value}
+                className={S.dropDownItem}
+                onClick={() =>
+                  handleApplicantStatus({
+                    applicantId: applicant.id,
+                    status: status.value,
+                    evaluation: selectedOptions!.evaluation,
+                  })
+                }
+              >
+                {status.label}
+              </li>
+            ))}
+          </DropDown>
+        </div>
       )}
     </li>
   );
