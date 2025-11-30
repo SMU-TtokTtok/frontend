@@ -27,6 +27,12 @@ export const contentBox = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '14px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '18px 16px',
+    },
+  },
 });
 
 export const flexRow = style({
@@ -44,6 +50,7 @@ export const grayText = style({
     },
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       flexShrink: 0,
+      fontSize: vars.fonts.m_body2,
     },
   },
 });
@@ -52,6 +59,12 @@ export const blackText = style({
   color: '#030304',
   fontSize: vars.fonts.body1,
   fontWeight: 500,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const modifyButton = style({

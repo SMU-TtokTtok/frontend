@@ -41,6 +41,14 @@ export const title = style({
   fontWeight: '700',
   marginTop: '50px',
   marginBottom: '20px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_title3,
+      marginTop: '30px',
+      marginBottom: '16px',
+    },
+  },
 });
 
 export const flexRow = style({
@@ -51,6 +59,7 @@ export const flexRow = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       position: 'relative',
+      marginBottom: '16px',
     },
   },
 });
