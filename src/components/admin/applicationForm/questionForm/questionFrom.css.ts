@@ -1,3 +1,4 @@
+import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
@@ -24,6 +25,12 @@ export const header = style({
   padding: '24px 30px',
   borderRadius: '6px',
   marginBottom: '18px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      padding: '16px 20px',
+      marginBottom: '16px',
+    },
+  },
 });
 
 export const title = style({
@@ -42,6 +49,11 @@ export const title = style({
     },
     '&::placeholder': {
       color: vars.colors.primary.on_cont,
+    },
+  },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_title3,
     },
   },
 });
@@ -86,6 +98,11 @@ export const description = style({
       color: vars.colors.primary.on_cont,
     },
   },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const errorMessage = style({
@@ -100,6 +117,11 @@ export const formFeildBlock = style({
   backgroundColor: vars.colors.surface.default,
   padding: '0px 22px 22px 22px',
   marginBottom: '18px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      padding: '0px 14px 14px 14px',
+    },
+  },
 });
 
 export const fieldToolBar = style({
@@ -107,6 +129,11 @@ export const fieldToolBar = style({
   justifyContent: 'space-between',
   alignItems: 'center',
   marginBottom: '16px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      marginBottom: '12px',
+    },
+  },
 });
 
 export const dropDownButton = style({
@@ -118,12 +145,24 @@ export const dropDownButton = style({
   width: '97.31px',
   fontSize: vars.fonts.body2,
   padding: '9px 6px 9px 12px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      width: '91px',
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const dropDownList = style({
   width: '97.31px',
   backgroundColor: '#F1F2F3',
   borderRadius: '6px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      width: '91px',
+    },
+  },
 });
 
 export const dropDownListItem = style({
@@ -141,6 +180,12 @@ export const dropDownListItem = style({
   borderBottom: `1px solid ${vars.colors.surface.cont_2}`,
   ':last-child': {
     borderBottom: 'none',
+  },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      padding: '10px 12px',
+      fontSize: vars.fonts.m_body1,
+    },
   },
 });
 
@@ -161,10 +206,21 @@ export const horizonLine = style({
   height: '29px',
   backgroundColor: vars.colors.surface.cont_5_var,
   margin: '0 16px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      margin: '0 8px',
+    },
+  },
 });
 
 export const deleteButton = style({
   cursor: 'pointer',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      width: '24px',
+      height: '24px',
+    },
+  },
 });
 
 export const questionTitle = style({
@@ -181,6 +237,11 @@ export const questionTitle = style({
     },
     '&:focus': {
       backgroundColor: vars.colors.surface.cont_1_var,
+    },
+  },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_body1,
     },
   },
 });
@@ -204,6 +265,11 @@ export const questionDescription = style({
       backgroundColor: vars.colors.surface.cont_1_var,
     },
   },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_body2,
+    },
+  },
 });
 export const checkImg = style({
   width: '22px',
@@ -216,6 +282,12 @@ export const previewFeild = style({
   fontSize: vars.fonts.body2,
   padding: '12px 16px',
   width: '100%',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      padding: '10px 12px',
+    },
+  },
 });
 
 export const fieldAddButton = style({
@@ -227,6 +299,11 @@ export const fieldRadioOptions = style({
   flexDirection: 'column',
   gap: '8px',
   marginTop: '8px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      gap: '6px',
+    },
+  },
 });
 
 export const radioOption = style({
@@ -253,6 +330,11 @@ export const radioOptionInput = style({
       backgroundColor: vars.colors.surface.cont_1_var,
     },
   },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const addOptionButton = style({
@@ -272,6 +354,12 @@ export const addFieldButton = style({
 export const deleteOptionButton = style({
   marginLeft: '8px',
   cursor: 'pointer',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      width: '20px',
+      height: '20px',
+    },
+  },
 });
 
 // 기본 인적사항
@@ -284,6 +372,11 @@ export const applicantInfoField = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '16px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      padding: '16px 14px',
+    },
+  },
 });
 
 export const applicantInfoInput = style({
@@ -298,12 +391,22 @@ export const applicantInfoInput = style({
       color: vars.colors.surface.cont_5,
     },
   },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      padding: '10px 12px',
+    },
+  },
 });
 export const applicantInfoLabel = style({
   fontSize: vars.fonts.body1,
   color: vars.colors.surface.on_surf,
   fontWeight: 600,
   marginBottom: '8px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_title4,
+    },
+  },
 });
 
 export const applicantInfoBlock = style({
@@ -312,12 +415,18 @@ export const applicantInfoBlock = style({
   gap: '8px',
   width: '100%',
 });
-export const rawsort = style({
+export const infoFieldrawsort = style({
   display: 'flex',
-  justifyContent: 'space-between',
   alignItems: 'center',
   gap: '20px',
   marginBottom: '40px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      marginBottom: '20px',
+      gap: '12px',
+    },
+  },
 });
 
 export const columnSort = style({
@@ -338,11 +447,23 @@ export const applicantInfoRadio = style({
 export const checkbox = style({
   width: '20px',
   height: '20px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      width: '18px',
+      height: '18px',
+    },
+  },
 });
 
 export const radio = style({
   width: '20px',
   height: '20px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      width: '18px',
+      height: '18px',
+    },
+  },
 });
 export const dragWrapper = style({
   display: 'flex',
@@ -354,4 +475,10 @@ export const dragHandle = style({
   width: '40px',
   height: '40px',
   transform: 'rotate(90deg)',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      width: '30px',
+      height: '30px',
+    },
+  },
 });
