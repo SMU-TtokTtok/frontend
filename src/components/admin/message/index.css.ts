@@ -14,6 +14,10 @@ export const container = style({
       paddingRight: '20px',
       gap: 0,
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      paddingLeft: '20px',
+      paddingRight: '20px',
+    },
   },
 });
 
