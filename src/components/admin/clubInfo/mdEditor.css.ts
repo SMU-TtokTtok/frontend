@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
   width: '100%',
@@ -22,6 +23,13 @@ export const buttonIntro = style({
   ':hover': {
     opacity: '1 !important',
     cursor: 'auto !important',
+  },
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      padding: '16px 0',
+    },
   },
 });
 

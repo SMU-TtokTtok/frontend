@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const memberItemList = style({
   display: 'flex',
@@ -43,4 +44,10 @@ export const emptyText = style({
   justifyContent: 'center',
   alignItems: 'center',
   height: '190px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });

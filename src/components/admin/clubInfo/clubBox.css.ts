@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 import { recipe } from '@vanilla-extract/recipes';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
   flex: '1 0 0',
@@ -10,6 +11,12 @@ export const container = style({
   // marginBottom: '28px',
 
   minWidth: 0,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '18px 16px',
+    },
+  },
 });
 
 export const headerflex = style({
@@ -17,23 +24,53 @@ export const headerflex = style({
   // justifyContent: 'space-between',
   marginBottom: '8px',
   gap: '8px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginLeft: '72px',
+      marginBottom: '6px',
+    },
+  },
 });
 
 export const clubName = style({
   fontSize: vars.fonts.title3,
   marginBottom: '6px',
   fontWeight: '600',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginLeft: '72px',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      marginBottom: '2px',
+      fontSize: vars.fonts.m_title3,
+    },
+  },
 });
 
 export const numberFlex = style({
   display: 'flex',
   marginBottom: '14px',
+  alignItems: 'center',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginLeft: '72px',
+    },
+  },
 });
 
 export const numberText = style({
   fontSize: vars.fonts.body1,
   color: '#878787;',
   fontWeight: '500',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 export const desText = recipe({
   base: {
@@ -43,6 +80,12 @@ export const desText = recipe({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
+
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+        fontSize: vars.fonts.m_body1,
+      },
+    },
   },
   variants: {
     isEditing: {
@@ -51,6 +94,12 @@ export const desText = recipe({
       },
       false: {
         marginBottom: '21px',
+
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+            marginBottom: '14px',
+          },
+        },
       },
     },
   },
@@ -59,6 +108,13 @@ export const desText = recipe({
 export const footerFlex = style({
   display: 'flex',
   justifyContent: 'space-between',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      flexDirection: 'column',
+      gap: '14px',
+    },
+  },
 });
 export const dropDownFlex = style({
   display: 'flex',
@@ -71,6 +127,12 @@ export const finishedButton = style({
   fontSize: vars.fonts.body2,
   fontWeight: '600',
   borderRadius: '6px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.body1,
+    },
+  },
 });
 
 export const dropDownStyle = style({
@@ -101,6 +163,12 @@ export const dropDownStyle2 = style({
   // minWidth: '80px',
   // width: '80px',
   fontSize: vars.fonts.body3,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      // fontSize: vars.fonts.m_body3,
+    },
+  },
 });
 
 export const dropDownStyle2Wide = style({
@@ -299,6 +367,12 @@ export const clubNameInput = style({
   outline: 'none',
   padding: '4px',
   borderRadius: '4px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_title3,
+    },
+  },
 });
 
 export const desTextInput = style({
@@ -312,6 +386,12 @@ export const desTextInput = style({
   padding: '4px',
   width: '100%',
   borderRadius: '4px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const underlineInput = style({
@@ -330,10 +410,20 @@ export const selectedTypeText = recipe({
       header: {
         padding: '4px 8px',
         borderRadius: '4px',
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+            fontSize: vars.fonts.m_body1,
+          },
+        },
       },
       footer: {
         padding: '4px 12px',
         borderRadius: '100px',
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+            fontSize: vars.fonts.m_body2,
+          },
+        },
       },
     },
   },
@@ -414,4 +504,17 @@ export const detailInput = style({
   fontSize: '14x',
   fontWeight: 600,
   lineHeight: '150%',
+});
+
+export const divider = style({
+  display: 'none',
+  height: '1px',
+  backgroundColor: '#EDEEF1',
+  marginBottom: '14px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      display: 'block',
+    },
+  },
 });

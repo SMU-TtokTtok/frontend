@@ -41,6 +41,14 @@ export const title = style({
   fontWeight: '700',
   marginTop: '50px',
   marginBottom: '20px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_title3,
+      marginTop: '30px',
+      marginBottom: '16px',
+    },
+  },
 });
 
 export const flexRow = style({
@@ -48,6 +56,12 @@ export const flexRow = style({
   display: 'flex',
   marginBottom: '28px',
   // alignItems: 'center',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      position: 'relative',
+      marginBottom: '16px',
+    },
+  },
 });
 
 export const card = style({
@@ -70,11 +84,29 @@ export const imgStyle = style({
       cursor: 'pointer',
     },
   },
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '100%',
+      height: '100%',
+      borderRadius: '100px',
+    },
+  },
 });
 
 export const imgContainer = style({
   position: 'relative',
   width: '212px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      position: 'absolute',
+      top: '28px',
+      left: '18px',
+      width: '58px',
+      height: '58px',
+    },
+  },
 });
 
 export const editIcon = style({
@@ -82,6 +114,15 @@ export const editIcon = style({
   bottom: '-16px',
   right: '-16px',
   cursor: 'pointer',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '24px',
+      height: '24px',
+      bottom: '-6px',
+      right: '-6px',
+    },
+  },
 });
 
 export const loading = style({

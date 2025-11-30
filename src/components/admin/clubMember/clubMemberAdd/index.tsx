@@ -12,11 +12,13 @@ export default function ClubMemberAddPage() {
 
   return (
     <div className={S.wrapper}>
+      <Header role={role || ''}></Header>
+
+      <RightSide />
+
       <div className={S.container}>
-        <Header role={role || ''}></Header>
         <Form role={role || ''}></Form>
       </div>
-      <RightSide />
     </div>
   );
 }

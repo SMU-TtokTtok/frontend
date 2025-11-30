@@ -10,6 +10,10 @@ export const wrapper = style({
       paddingLeft: '246px',
       paddingRight: '20px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      paddingLeft: '20px',
+      paddingRight: '20px',
+    },
   },
 });
 
