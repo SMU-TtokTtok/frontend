@@ -103,7 +103,13 @@ export const numberInput = style({
   font: '-webkit-small-control',
   width: '60px',
   borderRadius: '4px',
-  fontSize: '16px',
+  fontSize: vars.fonts.body1,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 export const dateFlex = style({
   display: 'flex',
@@ -131,5 +137,11 @@ export const button = style({
 });
 
 export const dateInput = style({
-  fontSize: '18px',
+  fontSize: vars.fonts.body1,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });

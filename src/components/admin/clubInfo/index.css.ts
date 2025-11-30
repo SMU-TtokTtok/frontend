@@ -114,6 +114,15 @@ export const editIcon = style({
   bottom: '-16px',
   right: '-16px',
   cursor: 'pointer',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '24px',
+      height: '24px',
+      bottom: '-6px',
+      right: '-6px',
+    },
+  },
 });
 
 export const loading = style({

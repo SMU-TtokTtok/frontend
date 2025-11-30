@@ -94,6 +94,12 @@ export const desText = recipe({
       },
       false: {
         marginBottom: '21px',
+
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+            marginBottom: '14px',
+          },
+        },
       },
     },
   },
@@ -157,6 +163,12 @@ export const dropDownStyle2 = style({
   // minWidth: '80px',
   // width: '80px',
   fontSize: vars.fonts.body3,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      // fontSize: vars.fonts.m_body3,
+    },
+  },
 });
 
 export const dropDownStyle2Wide = style({
@@ -355,6 +367,12 @@ export const clubNameInput = style({
   outline: 'none',
   padding: '4px',
   borderRadius: '4px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_title3,
+    },
+  },
 });
 
 export const desTextInput = style({
@@ -368,6 +386,12 @@ export const desTextInput = style({
   padding: '4px',
   width: '100%',
   borderRadius: '4px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const underlineInput = style({
