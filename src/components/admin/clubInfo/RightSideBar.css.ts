@@ -90,6 +90,7 @@ export const modifyButton = style({
     },
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       width: '100%',
+      fontSize: vars.fonts.m_body1,
     },
   },
 });

@@ -89,31 +89,56 @@
   min-height: 300px;
   border-radius: 0 0 8px 8px;
   padding: 24px 30px 24px 30px;
+
+  @media (max-width: 1024px) {
+    padding: 18px 16px;
+  }
 }
+
 .custom-tiptap-editor h1 {
   font-size: 26px;
   font-weight: 600;
   line-height: 130%;
+
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
 }
 .custom-tiptap-editor h2 {
   font-size: 23px;
   font-weight: 600;
   line-height: 130%;
+
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
 }
 .custom-tiptap-editor h3 {
   font-size: 20px;
   font-weight: 600;
   line-height: 140%;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
 }
 .custom-tiptap-editor h4 {
   font-size: 16px;
   font-weight: 400;
   line-height: 150%;
+
+  @media (max-width: 1024px) {
+    font-size: 14px;
+  }
 }
 .custom-tiptap-editor p {
   font-size: 16px;
   font-weight: 400;
   line-height: 150%;
+
+  @media (max-width: 1024px) {
+    font-size: 14px;
+  }
 }
 
 .custom-tiptap-editor p:empty:before {
