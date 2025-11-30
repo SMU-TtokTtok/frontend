@@ -32,6 +32,13 @@ export const memberPanel = style({
   borderRadius: '8px',
   marginTop: '20px',
   marginBottom: '200px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '14px',
+      marginTop: '16px',
+    },
+  },
 });
 
 export const searchResultContainer = style({
@@ -56,11 +63,23 @@ export const searchWrapper = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       marginTop: '60px',
     },
+
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginTop: '30px',
+    },
   },
 });
 export const searchInput = style({
   width: '100%',
   padding: '16px 22px',
+  fontSize: vars.fonts.body2,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '12px',
+      fontSize: `${vars.fonts.m_body2} !important`,
+    },
+  },
 });
 
 export const iconStyle = style({
@@ -68,4 +87,14 @@ export const iconStyle = style({
   height: '31px',
   right: '7px',
   cursor: 'pointer',
+});
+
+export const SearchEmptyText = style({
+  fontSize: vars.fonts.body2,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: `${vars.fonts.m_body2}`,
+    },
+  },
 });
