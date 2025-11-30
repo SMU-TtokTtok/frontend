@@ -17,6 +17,7 @@ export const container = style({
     },
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       gap: '16px',
+      marginTop: '30px',
     },
   },
 });
@@ -124,6 +125,11 @@ export const submitContainer = style({
       top: '-400px',
       transition: 'none',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      top: '504px',
+      width: '100%',
+      gap: '6px',
+    },
   },
 });
 
@@ -140,6 +146,12 @@ export const note = style({
   fontWeight: 500,
   color: '#C3C3C3',
   textAlign: 'center',
+
+  [`@media`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body3,
+    },
+  },
 });
 
 export const errorText = style({
