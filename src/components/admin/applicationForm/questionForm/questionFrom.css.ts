@@ -13,6 +13,12 @@ export const container = style({
   padding: '16px',
   marginTop: '21px',
   width: '100%',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      backgroundColor: '#f5f5f6',
+      padding: '0',
+    },
+  },
 });
 
 export const header = style({
@@ -120,6 +126,7 @@ export const formFeildBlock = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       padding: '0px 14px 14px 14px',
+      backgroundColor: '#ffffff',
     },
   },
 });
@@ -375,6 +382,7 @@ export const applicantInfoField = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       padding: '16px 14px',
+      backgroundColor: '#ffffff',
     },
   },
 });
@@ -394,6 +402,7 @@ export const applicantInfoInput = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       padding: '10px 12px',
+      backgroundColor: '#F8F8F9 !important',
     },
   },
 });
