@@ -1,3 +1,4 @@
+import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
@@ -10,12 +11,28 @@ export const memoContainer = style({
   width: '300px',
   height: '75vh',
   overflowY: 'auto',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      position: 'relative',
+      width: '100%',
+      height: 'auto',
+      overflowY: 'visible',
+      marginTop: '20px',
+      marginLeft: '20px',
+      padding: '14px 12px',
+    },
+  },
 });
 
 export const memoLabel = style({
   fontSize: vars.fonts.title4,
   fontWeight: '600',
   color: vars.colors.surface.on_surf,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_title4,
+    },
+  },
 });
 
 export const memoAddImg = style({
@@ -62,6 +79,11 @@ export const memoItemTextarea = style({
     },
     '&:focus': {
       backgroundColor: vars.colors.surface.cont_1_var,
+    },
+  },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_body1,
     },
   },
 });
