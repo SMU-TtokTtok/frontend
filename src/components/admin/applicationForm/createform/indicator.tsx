@@ -19,11 +19,14 @@ function Indicator({ step }: IndicatorProps) {
     <ul className={S.indicatorContainer}>
       {formSteps.map(({ step, label }, index) => (
         <div key={step} className={S.indicatorContainer}>
-          <li className={step === currentStep ? S.stepActive : S.step}>
-            {step}.&nbsp; <span className={step === currentStep ? S.indicator : ''}>{label}</span>
+          <li className={S.step({ isActive: step === currentStep })}>
+            <span className={S.stepNumber({ isActive: step === currentStep })}>{step}</span>
+            <span className={S.indicator({ isActive: step === currentStep })}>{label}</span>
             &nbsp;
           </li>
-          {index < formSteps.length - 1 && <Image src={arrow} alt="Arrow" />}
+          {index < formSteps.length - 1 && (
+            <Image src={arrow} className={S.IndicatorArrow} alt="Arrow" />
+          )}
         </div>
       ))}
     </ul>
