@@ -48,12 +48,12 @@ export const stepNumber = recipe({
     justifyContent: 'center',
     alignItems: 'center',
     width: '22px',
-    height: '23px',
+    height: '22px',
     fontSize: vars.fonts.body3,
     '@media': {
       [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
         width: '20px',
-        height: '21px',
+        height: '20px',
         fontSize: vars.fonts.m_body3,
       },
     },
