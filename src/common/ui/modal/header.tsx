@@ -1,10 +1,11 @@
-import { PropsWithChildren, ReactNode, useContext } from 'react';
+import React, { PropsWithChildren, ReactNode, useContext } from 'react';
 import * as S from './modal.css';
 import Image from 'next/image';
 import cancel from '@/assets/cancel.svg';
 import { ModalContext } from '@/common/store/modalContext';
 interface HeaderProps {
   title?: string;
+  label?: string | ReactNode;
   className?: string;
   labelClassName?: string;
   img?: ReactNode;
@@ -14,6 +15,7 @@ function Header({
   labelClassName,
   img,
   title,
+  label,
   children,
   ...props
 }: PropsWithChildren<HeaderProps>) {
@@ -23,6 +25,7 @@ function Header({
   return (
     <header className={classNames} {...props}>
       {title && <label className={labelClassNames}>{title}</label>}
+      {label && <label className={labelClassNames}>{label}</label>}
       {children}
       <div onClick={onClose}>
         {img ? img : <Image src={cancel} alt="모달 닫기 아이콘" className={S.closeButtonStyle} />}
