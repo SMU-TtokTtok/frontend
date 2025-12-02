@@ -16,7 +16,12 @@ export const container = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       paddingLeft: '314px',
-      paddingRight: '100px',
+      paddingRight: '80px',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      paddingLeft: '20px',
+      paddingRight: '20px',
+      marginTop: '30px',
     },
   },
 });
@@ -47,6 +52,11 @@ export const submitButton = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       width: '224px',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      width: '100%',
+      marginBottom: '40px',
+      fontSize: vars.fonts.m_body1,
     },
   },
 });
