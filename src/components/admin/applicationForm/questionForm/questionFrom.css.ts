@@ -17,7 +17,6 @@ export const container = style({
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       backgroundColor: '#f5f5f6',
       padding: '0',
-      //paddingTop: '80px',
     },
   },
 });
