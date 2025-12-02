@@ -243,6 +243,14 @@ export const grade = style({
   },
 });
 
+export const title = style({
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_title4 + ' !important',
+    },
+  },
+});
+
 export const name = style({
   fontSize: vars.fonts.body3,
   fontWeight: 600,
@@ -317,6 +325,11 @@ export const dropDownItem = style({
 export const passFailListModal = style({
   padding: '18px 26px 30px 26px',
   width: '600px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      padding: '14px 16px',
+    },
+  },
 });
 
 export const modalBody = style({

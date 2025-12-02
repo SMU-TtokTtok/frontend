@@ -32,7 +32,7 @@ function PassFailListModal({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <Modal.Content ref={ref} className={S.passFailListModal}>
-        <Modal.Header title={title} />
+        <Modal.Header title={title} labelClassName={S.title} />
         <Modal.Body className={S.modalBody}>
           {isEmpty && (
             <Empty className={S.empty['modal']}>
