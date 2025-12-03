@@ -36,7 +36,7 @@ function RecruitConditionStep() {
       <div className={S.recruitConditionBox}>
         <h3 className={S.TitleInBox}>2. 모집 기간 및 대상 설정</h3>
         <p className={S.descriptionInBox}>
-          이번 부원 모집에서 모집할 대상과 모집기간을 설정해주세요
+          이번 부원 모집에서 모집할 대상과 <span>모집기간을 설정해주세요</span>
         </p>
         <RecruitDate handleRecruitData={handleRecruitData} />
 
@@ -46,12 +46,14 @@ function RecruitConditionStep() {
           {withInterview && <InterviewDate handleRecruitData={handleRecruitData} />}
         </div>
 
-        <div className={S.nextStepButtonWrapper({ step: 2, isInterview: withInterview })}>
-          <QueryLink extraQuery={{ step: 3 }}>
-            <Button variant={'primary'} disabled={!isValid} className={S.nextStepButton}>
-              다음으로
-            </Button>
-          </QueryLink>
+        <div className={S.nextStepButtonContainer({ step: 2, isInterview: withInterview })}>
+          <div className={S.buttonWrapper}>
+            <QueryLink extraQuery={{ step: 3 }}>
+              <Button variant={'primary'} disabled={!isValid} className={S.nextStepButton}>
+                다음으로
+              </Button>
+            </QueryLink>
+          </div>
         </div>
       </div>
     </div>

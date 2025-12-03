@@ -9,6 +9,11 @@ export const container = style({
   width: '100%',
   height: 'auto',
   position: 'relative',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      padding: '16px 12px',
+    },
+  },
 });
 
 export const interviewContainer = style({
@@ -22,6 +27,11 @@ export const interviewContainer = style({
       position: 'absolute',
       top: '157px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      position: 'absolute',
+      top: '237px',
+      padding: '16px 12px',
+    },
   },
 });
 
@@ -29,6 +39,11 @@ export const label = style({
   fontSize: vars.fonts.title4,
   fontWeight: 600,
   color: vars.colors.surface.on_surf,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_title4,
+    },
+  },
 });
 
 export const required = style({
@@ -41,6 +56,11 @@ export const datePickerContainer = style({
   alignItems: 'center',
   marginTop: '12px',
   width: '100%',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      flexDirection: 'column',
+    },
+  },
 });
 
 export const datePickerInput = style({
@@ -57,6 +77,14 @@ export const datePickerInput = style({
   selectors: {
     '&::placeholder': {
       color: vars.colors.surface.cont_5,
+    },
+  },
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      padding: '10px 12px',
+      fontSize: vars.fonts.m_body1,
+      height: 'auto',
     },
   },
 });
@@ -79,6 +107,12 @@ export const gradeButton = recipe({
     color: vars.colors.surface.outline,
     backgroundColor: vars.colors.surface.bright,
     borderRadius: '6px',
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+        padding: '12px 0',
+        fontSize: vars.fonts.m_body1,
+      },
+    },
   },
   variants: {
     active: {
@@ -101,6 +135,12 @@ export const recruitMember = style({
       color: vars.colors.surface.cont_5,
     },
   },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      padding: '10px 12px',
+    },
+  },
 });
 
 export const DateContainer = style({
@@ -108,13 +148,20 @@ export const DateContainer = style({
   justifyContent: 'start',
   alignItems: 'center',
   marginTop: '12px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      flexDirection: 'column',
+    },
+  },
 });
 
 export const calendarContainer = style({
   position: 'absolute',
   zIndex: 2,
-  bottom: '-300px',
+  bottom: '-305px',
+  right: '0',
   backgroundColor: vars.colors.white,
+  boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.1)',
 });
 
 export const inputDateContainer = style({
@@ -122,6 +169,7 @@ export const inputDateContainer = style({
   display: 'flex',
   justifyContent: 'start',
   alignItems: 'center',
+  position: 'relative',
 });
 
 export const imgBox = style({
@@ -130,6 +178,12 @@ export const imgBox = style({
   borderTopRightRadius: '6px',
   borderBottomRightRadius: '6px',
   cursor: 'pointer',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      padding: '5px',
+    },
+  },
 });
 
 globalStyle('.custom-calendar .rdp-caption_label', {

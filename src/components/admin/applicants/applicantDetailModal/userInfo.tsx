@@ -16,7 +16,7 @@ function UserInfo({ data }: UserInfoProps) {
         <div className={S.userInfo}>
           <div className={S.basicInfo}>
             <div className={S.rowSort}>
-              <LabelWithText label={'이름'} text={data.name} />
+              <LabelWithText label={'이름'} text={data.name} className={S.hideOnMobile} />
               <LabelWithText label={'나이'} text={data.age} />
               <LabelWithText label={'학과'} text={data.major} />
             </div>
@@ -49,7 +49,7 @@ function UserInfo({ data }: UserInfoProps) {
                 />
               </div>
             </div>
-            <div className={S.columnSort}>
+            <div className={`${S.columnSort} ${S.hideOnMobile}`}>
               <label className={S.applicantInfoLabel}>
                 현재학년 <span className={S.essential}>*</span>
               </label>

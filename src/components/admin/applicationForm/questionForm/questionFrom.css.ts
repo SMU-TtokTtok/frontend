@@ -383,6 +383,7 @@ export const applicantInfoField = style({
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       padding: '16px 14px',
       backgroundColor: '#ffffff',
+      marginBottom: '80px',
     },
   },
 });
@@ -403,6 +404,7 @@ export const applicantInfoInput = style({
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       padding: '10px 12px',
       backgroundColor: '#F8F8F9 !important',
+      fontSize: vars.fonts.m_body1,
     },
   },
 });
