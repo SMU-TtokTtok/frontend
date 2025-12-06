@@ -1,5 +1,6 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+import { BREAKPOINTS } from '@/common/constants';
 
 export const container = style({
   display: 'flex',
@@ -9,6 +10,12 @@ export const container = style({
   borderRadius: '6px',
   backgroundColor: '#F8F8F9',
   flexGrow: 1,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '10px 12px',
+    },
+  },
 });
 
 export const withOutRoleContainer = style({
@@ -23,12 +30,24 @@ export const grade = style({
   fontSize: vars.fonts.body2,
   fontWeight: '500',
   border: 'none !important',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: `${vars.fonts.m_body2}`,
+    },
+  },
 });
 
 export const name = style({
   fontSize: vars.fonts.body2,
   fontWeight: '600',
   color: '#030304',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: `${vars.fonts.m_body2}`,
+    },
+  },
 });
 
 export const bar = style({
@@ -39,6 +58,12 @@ export const bar = style({
 export const major = style({
   color: '#55637D',
   fontSize: vars.fonts.body3,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: `${vars.fonts.m_body3}`,
+    },
+  },
 });
 
 export const role = style({
@@ -65,6 +90,13 @@ export const dropDownStyle = style({
   fontWeight: '600',
   lineHeight: '150%',
   borderRadius: '100px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '6px 12px 6px 12px',
+      fontSize: `${vars.fonts.m_body2}`,
+    },
+  },
 });
 
 export const panelContainer = style({
@@ -97,6 +129,13 @@ export const panelItem = style({
     '&:last-child': {
       borderBottomLeftRadius: '4px',
       borderBottomRightRadius: '4px',
+    },
+  },
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '6px 0',
+      fontSize: `${vars.fonts.m_body2}`,
     },
   },
 });

@@ -22,7 +22,7 @@ export default function SearchResult({ search, isEditing }: SearchResultProps) {
   return (
     <ul className={S.searchResultContainer}>
       {members.length === 0 ? (
-        <Empty>
+        <Empty className={S.SearchEmptyText}>
           검색하신 부원이 없어요! <br /> 부원 이름을 확인해주세요.
         </Empty>
       ) : (

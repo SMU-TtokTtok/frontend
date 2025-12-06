@@ -62,35 +62,33 @@ function FormQuestionStep() {
     }
   };
   return (
-    <>
+    <form className={S.container} onSubmit={(e) => handleSubmit(e)}>
+      <Indicator step={3} />
       <RecommendTemplate handleAddField={handleAddField} />
-      <form className={S.container} onSubmit={(e) => handleSubmit(e)}>
-        <Indicator step={3} />
-        <QuestionForm
-          formData={questionsData}
-          errors={errors}
-          isSubmit={isSubmit}
-          handleQuestionTypeChange={handleQuestionTypeChange}
-          handleAddField={handleAddField}
-          handleUpdateField={handleUpdateField}
-          scrollRefs={scrollRefs}
-          handleDeleteField={handleDeleteField}
-          handleEssentialChange={handleEssentialChange}
-          handleOptionChange={handleOptionChange}
-          handleOptionAdd={handleOptionAdd}
-          handleOptionDelete={handleOptionDelete}
-          handleChangeTitle={handleChangeTitle}
-          handleChangeSubTitle={handleChangeSubTitle}
-          handleReorderQuestions={handleReorderQuestions}
-        />
-        <div className={S.navigatorContainer}>
-          <QuestionNavigator fields={questionsData.questions} handleScrollTo={handleScrollTo} />
-          <Button type="submit" variant="primary" className={S.submitButton}>
-            제작 완료 및 업로드
-          </Button>
-        </div>
-      </form>
-    </>
+      <QuestionForm
+        formData={questionsData}
+        errors={errors}
+        isSubmit={isSubmit}
+        handleQuestionTypeChange={handleQuestionTypeChange}
+        handleAddField={handleAddField}
+        handleUpdateField={handleUpdateField}
+        scrollRefs={scrollRefs}
+        handleDeleteField={handleDeleteField}
+        handleEssentialChange={handleEssentialChange}
+        handleOptionChange={handleOptionChange}
+        handleOptionAdd={handleOptionAdd}
+        handleOptionDelete={handleOptionDelete}
+        handleChangeTitle={handleChangeTitle}
+        handleChangeSubTitle={handleChangeSubTitle}
+        handleReorderQuestions={handleReorderQuestions}
+      />
+      <div className={S.navigatorContainer}>
+        <QuestionNavigator fields={questionsData.questions} handleScrollTo={handleScrollTo} />
+        <Button type="submit" variant="primary" className={S.submitButton}>
+          제작 완료 및 업로드
+        </Button>
+      </div>
+    </form>
   );
 }
 

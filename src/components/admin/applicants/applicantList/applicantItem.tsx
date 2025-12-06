@@ -56,7 +56,7 @@ function ApplicantItem({
   return (
     <li className={S.applicantItemWrapper} onClick={() => handleSelectApplicant(applicant.id)}>
       <div className={S.profileSection}>
-        <Image src={menu} alt="menu" />
+        <Image src={menu} className={S.menuIcon} alt="menu" />
         <Tag variant={getGradeStyle(applicant.grade)} className={S.applicantGrade}>
           {getKoreanGrade(applicant.grade)}
         </Tag>

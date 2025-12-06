@@ -30,12 +30,18 @@ function SelectTypeStep() {
 
         <SelectBoxGroup withInterview={withInterview} handleSelect={handleSelectWithSession} />
       </div>
-      <div className={S.nextStepButtonWrapper({ step: 1 })}>
-        <QueryLink extraQuery={{ step: 2 }}>
-          <Button variant="primary" disabled={withInterview === null} className={S.nextStepButton}>
-            다음으로
-          </Button>
-        </QueryLink>
+      <div className={S.nextStepButtonContainer({ step: 1 })}>
+        <div className={S.buttonWrapper}>
+          <QueryLink extraQuery={{ step: 2 }}>
+            <Button
+              variant="primary"
+              disabled={withInterview === null}
+              className={S.nextStepButton}
+            >
+              다음으로
+            </Button>
+          </QueryLink>
+        </div>
       </div>
     </div>
   );

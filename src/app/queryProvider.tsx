@@ -2,6 +2,7 @@
 
 import { CustomHttpError } from '@/common/apis/apiClient';
 import { HTTP_STATUS } from '@/common/constants/httpStatus';
+import { MESSAGE } from '@/common/constants/message';
 import { ROUTES } from '@/common/constants/routes';
 import { isAdminPath } from '@/common/util/isAdminPath';
 import { postAdminRefresh } from '@/components/admin/login/api/login';
@@ -46,6 +47,36 @@ export function getQueryClient() {
   }
 }
 
+// alert 중복 방지를 위한 전역 플래그
+let isShowingAuthAlert = false;
+
+function handleAuthError(error: unknown) {
+  if (typeof window === 'undefined' || isShowingAuthAlert) {
+    return;
+  }
+
+  isShowingAuthAlert = true;
+
+  const isAdmin = isAdminPath();
+  // refresh token 존재 여부로 로그인 상태 확인
+  const refreshToken = isAdmin
+    ? localStorage.getItem('admin_refresh_token')
+    : localStorage.getItem('user_refresh_token');
+
+  const alertMessage = refreshToken ? MESSAGE.auth.sessionExpired : MESSAGE.auth.loginRequired;
+
+  alert(alertMessage);
+  console.error('토큰 재발급 실패:', error);
+
+  if (isAdmin) {
+    window.location.href = ROUTES.ADMIN_LOGIN;
+    localStorage.clear();
+  } else {
+    window.location.href = ROUTES.LOGIN;
+    localStorage.clear();
+  }
+}
+
 const retriedMutations = new WeakSet<Mutation<unknown, unknown, unknown>>();
 async function handleMutationError(
   error: Error,
@@ -72,17 +103,7 @@ async function handleMutationError(
       }
       await mutation.execute(variables);
     } catch (error) {
-      if (typeof window !== 'undefined') {
-        alert('세션이 만료되었습니다. 다시 로그인해주세요.');
-        console.error('토큰 재발급 실패:', error);
-
-        if (isAdmin) {
-          window.location.href = ROUTES.ADMIN_LOGIN;
-        } else {
-          window.location.href = ROUTES.LOGIN;
-          localStorage.removeItem('name');
-        }
-      }
+      handleAuthError(error);
       return;
     }
   }
@@ -111,17 +132,7 @@ async function handleQueryError(error: Error, query: Query<unknown, unknown, unk
       retriedQueries.delete(query);
     } catch (error) {
       retriedQueries.delete(query);
-      if (typeof window !== 'undefined') {
-        console.error('토큰 재발급 실패:', error);
-        alert('세션이 만료되었습니다. 다시 로그인해주세요.');
-
-        if (isAdmin) {
-          window.location.href = ROUTES.ADMIN_LOGIN;
-        } else {
-          window.location.href = ROUTES.LOGIN;
-          localStorage.removeItem('name');
-        }
-      }
+      handleAuthError(error);
       return;
     }
   }

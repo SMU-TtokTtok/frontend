@@ -27,6 +27,12 @@ export const contentBox = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '14px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '18px 16px',
+    },
+  },
 });
 
 export const flexRow = style({
@@ -42,6 +48,10 @@ export const grayText = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       alignSelf: 'center',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      flexShrink: 0,
+      fontSize: vars.fonts.m_body2,
+    },
   },
 });
 
@@ -49,6 +59,12 @@ export const blackText = style({
   color: '#030304',
   fontSize: vars.fonts.body1,
   fontWeight: 500,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const modifyButton = style({
@@ -72,6 +88,10 @@ export const modifyButton = style({
         },
       },
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      width: '100%',
+      fontSize: vars.fonts.m_body1,
+    },
   },
 });
 
@@ -83,7 +103,13 @@ export const numberInput = style({
   font: '-webkit-small-control',
   width: '60px',
   borderRadius: '4px',
-  fontSize: '16px',
+  fontSize: vars.fonts.body1,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 export const dateFlex = style({
   display: 'flex',
@@ -93,6 +119,9 @@ export const dateFlex = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       flexDirection: 'row',
       gap: '10px',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      flexWrap: 'wrap',
     },
   },
 });
@@ -108,5 +137,11 @@ export const button = style({
 });
 
 export const dateInput = style({
-  fontSize: '18px',
+  fontSize: vars.fonts.body1,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });

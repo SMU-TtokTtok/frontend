@@ -15,6 +15,10 @@ export const container = style({
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       marginTop: '50px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      gap: '16px',
+      marginTop: '30px',
+    },
   },
 });
 
@@ -25,12 +29,24 @@ export const messageContainer = style({
   padding: '26px 24px',
   backgroundColor: 'white',
   borderRadius: '8px',
+
+  [`@media`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '16px',
+    },
+  },
 });
 
 export const sectionTitle = style({
-  fontSize: '18px',
+  fontSize: vars.fonts.title4,
   fontWeight: 600,
   color: '#030304',
+
+  [`@media`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_title4,
+    },
+  },
 });
 
 export const mainContainer = style({
@@ -40,6 +56,12 @@ export const mainContainer = style({
   padding: '18px 20px',
   backgroundColor: '#F8F8F9',
   borderRadius: '4px',
+
+  [`@media`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      padding: '14px 16px',
+    },
+  },
 });
 
 export const divider = style({
@@ -59,6 +81,12 @@ export const input = style({
       color: '#A3A3A3',
     },
   },
+
+  [`@media`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_title4,
+    },
+  },
 });
 
 export const textarea = style({
@@ -70,6 +98,12 @@ export const textarea = style({
   selectors: {
     '&::placeholder': {
       color: '#CCCED2',
+    },
+  },
+
+  [`@media`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body2,
     },
   },
 });
@@ -91,6 +125,11 @@ export const submitContainer = style({
       top: '-400px',
       transition: 'none',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      top: '504px',
+      width: '100%',
+      gap: '6px',
+    },
   },
 });
 
@@ -107,6 +146,12 @@ export const note = style({
   fontWeight: 500,
   color: '#C3C3C3',
   textAlign: 'center',
+
+  [`@media`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body3,
+    },
+  },
 });
 
 export const errorText = style({

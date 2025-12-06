@@ -1,3 +1,4 @@
+import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
@@ -10,6 +11,11 @@ export const applicantItemWrapper = style({
   alignItems: 'center',
   cursor: 'pointer',
   borderRadius: '6px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      padding: '8px 10px',
+    },
+  },
 });
 
 export const profileSection = style({
@@ -27,12 +33,24 @@ export const applicantGrade = style({
   textAlign: 'center',
   border: 'none',
   borderRadius: '4px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body2,
+      height: '22px',
+      width: '39px',
+    },
+  },
 });
 
 export const applicantName = style({
   fontSize: vars.fonts.body2,
   fontWeight: 600,
   color: vars.colors.surface.on_surf,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const verticalLine = style({
@@ -45,6 +63,11 @@ export const applicantDepartment = style({
   fontSize: vars.fonts.body3,
   fontWeight: 400,
   color: vars.colors.surface.outline,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body2,
+    },
+  },
 });
 
 export const applicantStatus = style({
@@ -58,6 +81,13 @@ export const dropDownButtonStyle = style({
   fontSize: vars.fonts.body2,
   width: '92px',
   borderRadius: '100px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      padding: '4px 6px 4px 10px',
+      fontSize: vars.fonts.m_body2,
+      width: '80px',
+    },
+  },
 });
 
 export const dropDownItem = style({
@@ -74,6 +104,13 @@ export const dropDownItem = style({
       color: vars.colors.primary.default,
     },
   },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body2,
+      padding: '8px 16px',
+      width: '80px',
+    },
+  },
 });
 
 export const empty = style({
@@ -85,4 +122,14 @@ export const empty = style({
   justifyContent: 'center',
   alignItems: 'center',
   height: '190px',
+});
+
+export const menuIcon = style({
+  width: '24px',
+  height: '24px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      display: 'none',
+    },
+  },
 });

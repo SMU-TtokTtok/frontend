@@ -23,6 +23,12 @@ export const container = style({
       position: 'static',
       width: '100%',
       marginTop: '20px',
+      gap: '16px',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginTop: '16px',
+      padding: '20px 24px',
+      gap: '12px',
     },
   },
 });
@@ -36,12 +42,24 @@ export const ItemFlex = style({
 export const GradeText = style({
   fontSize: vars.fonts.body3,
   color: '#818181',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body3,
+    },
+  },
 });
 
 export const NumberText = style({
   fontSize: vars.fonts.body1,
   color: '#030304',
   fontWeight: 500,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const GradeContainer = style({
@@ -54,6 +72,11 @@ export const GradeContainer = style({
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      display: 'grid',
+      gridTemplateColumns: 'repeat(2, 1fr)',
+      gap: '8px',
+    },
   },
 });
 
@@ -65,6 +88,21 @@ export const Bar = style({
       fontSize: '18px',
       color: '#D2D4D8',
       fontWeight: 300,
+      display: 'block',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      display: 'none',
+    },
+  },
+});
+
+export const divider = style({
+  display: 'none',
+  height: '1px',
+  backgroundColor: '#EEEEF0',
+
+  [`@media`]: {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       display: 'block',
     },
   },

@@ -17,10 +17,13 @@ export const rightSidebar = style({
       width: '100%',
       marginTop: '63px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      marginTop: '30px',
+    },
   },
 });
 
-export const rightSidebar2 = style({
+export const rightSidebarWithMessage = style({
   position: 'absolute',
   right: '-350px',
 
@@ -50,6 +53,9 @@ export const panel = style({
       flexDirection: 'row',
       width: '100%',
     },
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      padding: '14px',
+    },
   },
 });
 
@@ -70,6 +76,17 @@ export const buttonWrapper = style({
       width: '100%',
       gap: '12px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      position: 'absolute',
+      top: '310px',
+      right: '0px',
+      marginTop: '0px',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'start',
+      width: '100%',
+      gap: '6px',
+    },
   },
 });
 
@@ -89,6 +106,10 @@ export const baseButton = styleVariants({
         width: '100%',
         maxWidth: '550px',
       },
+      [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+        fontSize: vars.fonts.m_body1,
+        height: '45px',
+      },
     },
   },
   connectButton: {
@@ -103,6 +124,10 @@ export const baseButton = styleVariants({
       [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
         width: '100%',
         maxWidth: '550px',
+      },
+      [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+        fontSize: vars.fonts.m_body1,
+        height: '45px',
       },
     },
   },
@@ -121,6 +146,11 @@ export const buttonDescription = style({
   color: vars.colors.surface.dim,
   marginTop: '10px',
   textAlign: 'center',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body2,
+    },
+  },
 });
 
 export const labelWrapper = style({
@@ -133,6 +163,12 @@ export const sideBarLabel = style({
   fontSize: vars.fonts.body1,
   fontWeight: 700,
   color: vars.colors.surface.on_surf,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      marginBottom: '4px',
+    },
+  },
 });
 
 export const plus = style({
@@ -141,11 +177,20 @@ export const plus = style({
   textDecoration: 'underline',
   color: vars.colors.surface.outline,
   cursor: 'pointer',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body2,
+      position: 'absolute',
+      right: '0px',
+      bottom: '0px',
+    },
+  },
 });
 
 export const listContainer = style({
   width: '100%',
   minHeight: '170px', //추가
+  position: 'relative',
 });
 
 export const ItemWrapper = style({
@@ -161,6 +206,15 @@ export const ItemWrapper = style({
   selectors: {
     '&.disableCursor': {
       cursor: 'default',
+    },
+  },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      selectors: {
+        '&:last-child': {
+          marginBottom: '26px',
+        },
+      },
     },
   },
 });
@@ -180,24 +234,63 @@ export const grade = style({
   textAlign: 'center',
   border: 'none',
   borderRadius: '4px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body2,
+      height: '22px',
+      width: '39px',
+    },
+  },
+});
+
+export const title = style({
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_title4 + ' !important',
+    },
+  },
 });
 
 export const name = style({
   fontSize: vars.fonts.body3,
   fontWeight: 600,
   color: vars.colors.surface.on_surf,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const verticalLine = style({
   width: '1px',
   height: '21px',
   backgroundColor: vars.colors.surface.outline_var,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      display: 'none',
+    },
+  },
+});
+
+export const dropDownWrapper = style({
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      display: 'none',
+    },
+  },
 });
 
 export const department = style({
   fontSize: vars.fonts.body3,
   fontWeight: 400,
   color: vars.colors.surface.outline,
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      display: 'none',
+    },
+  },
 });
 
 export const applicantStatus = style({
@@ -232,6 +325,11 @@ export const dropDownItem = style({
 export const passFailListModal = style({
   padding: '18px 26px 30px 26px',
   width: '600px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      padding: '14px 16px',
+    },
+  },
 });
 
 export const modalBody = style({

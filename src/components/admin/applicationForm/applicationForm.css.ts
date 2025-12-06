@@ -9,6 +9,10 @@ export const emptyContainer = style({
       paddingLeft: '246px',
       paddingRight: '20px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      paddingLeft: '20px',
+      paddingRight: '20px',
+    },
   },
 });
 
@@ -48,6 +52,11 @@ export const formContainer = style({
       paddingLeft: '246px',
       paddingRight: '100px',
     },
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      paddingLeft: '20px',
+      paddingRight: '20px',
+      paddingTop: '30px',
+    },
   },
 });
 
@@ -55,6 +64,11 @@ export const title = style({
   fontSize: vars.fonts.title2,
   fontWeight: 600,
   color: vars.colors.surface.on_surf,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_title2,
+    },
+  },
 });
 
 export const sidebarTop = createVar();
@@ -84,9 +98,14 @@ export const submitButton = style({
   position: 'relative',
   width: '100%',
   marginTop: '16px',
+  marginBottom: '40px',
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       width: '224px',
+    },
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      width: '100%',
     },
   },
 });

@@ -15,4 +15,8 @@ export const MESSAGE = {
     adminLogin: '올바른 아이디를 입력해주세요.',
     adminPassword: '올바른 비밀번호를 입력해주세요.',
   },
+  auth: {
+    sessionExpired: '세션이 만료되었습니다. 다시 로그인해주세요.',
+    loginRequired: '로그인이 필요합니다. 로그인해주세요.',
+  },
 };

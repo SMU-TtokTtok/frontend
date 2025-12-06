@@ -1,3 +1,4 @@
+import { BREAKPOINTS } from '@/common/constants';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 export const step4Container = style({
@@ -10,11 +11,17 @@ export const step4Container = style({
 });
 
 export const innerWrapper = style({
-  width: '920px',
+  maxWidth: '920px',
+  width: '100%',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'start',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      padding: '0px 20px',
+    },
+  },
 });
 
 export const content = style({
@@ -24,8 +31,14 @@ export const content = style({
   justifyContent: 'center',
   alignItems: 'center',
   marginTop: '20px',
-  padding: '120px 236px',
+  width: '100%',
+  padding: '120px 0px',
   borderRadius: '8px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      padding: '60px 0px',
+    },
+  },
 });
 
 export const title = style({
@@ -34,10 +47,23 @@ export const title = style({
   fontWeight: 600,
   textAlign: 'center',
   marginBottom: '20px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_title3,
+    },
+  },
 });
 
 export const button = style({
   fontSize: vars.fonts.body2,
   padding: '16px 173px',
   borderRadius: '6px',
+  maxWidth: '448px',
+  width: '100%',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      padding: '14px 93px',
+    },
+  },
 });

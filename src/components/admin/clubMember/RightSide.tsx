@@ -25,6 +25,8 @@ export default function RightSide() {
         <div className={S.GradeText}>총 인원</div>
         <div className={S.NumberText}>{data?.totalCount || 0}명</div>
       </div>
+      
+<div className={S.divider}></div>
 
       <div className={S.GradeContainer}>
         <div className={S.ItemFlex}>
