@@ -46,7 +46,7 @@
     "@vanilla-extract/next-plugin": "^2.4.11",
     "artillery": "^2.0.21",
     "eslint": "^9",
-    "eslint-config-next": "15.3.2",
+    "eslint-config-next": "^15.5.7",
     "msw": "^2.10.1",
     "typescript": "^5"
   },
