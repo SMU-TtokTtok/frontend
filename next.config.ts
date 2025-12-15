@@ -6,11 +6,24 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig: NextConfig = {
   images: {
-    domains: [
-      'encrypted-tbn0.gstatic.com',
-      'example.com',
-      'www.propopol-api.site',
-      'www.ddock-ddock-smu.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'example.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.propopol-api.site',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.ddock-ddock-smu.com',
+      },
     ],
   },
 };
