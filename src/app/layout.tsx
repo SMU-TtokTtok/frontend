@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     '똑똑은 상명대학교 동아리 리쿠르팅 서비스입니다. 중동, 연합, 단과대 동아리까지 상명대의 모든 동아리를 똑똑과 함께해보세요!',
   keywords: '똑똑, 상명대학교, 동아리',
+  manifest: '/manifest.json',
 
   openGraph: {
     siteName: '똑똑',
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/mainlogo_blue.svg',
+    apple: '/mainlogo_blue.svg',
   },
 };
 const pretendard = localFont({
@@ -49,6 +51,8 @@ export default function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#000000" />
       </head>
       <body>
         {/*<MSWProvider>
