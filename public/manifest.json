@@ -1,0 +1,17 @@
+{
+  "name": "똑똑 - 상명대학교 동아리 리쿠르팅 서비스",
+  "short_name": "똑똑",
+  "description": "똑똑은 상명대학교 동아리 리쿠르팅 서비스입니다. 중동, 연합, 단과대 동아리까지 상명대의 모든 동아리를 똑똑과 함께해보세요!",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/icons/favicon_512x512.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
