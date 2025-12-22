@@ -11,11 +11,11 @@ interface Props {
 
 function DropDown({ children, toggleButton, panelClassName, isOpen = false }: Props) {
   const [open, setOpen] = useState(isOpen);
-  const dropdownRef = useOutsideClick(() => handleClose());
 
   const handleClose = () => {
     setOpen(false);
   };
+  const dropdownRef = useOutsideClick(() => handleClose());
   return (
     <div className={S.container} ref={dropdownRef}>
       <div

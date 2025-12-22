@@ -19,7 +19,6 @@ function ConfirmModal({
 }: PropsWithChildren<ConfirmModalProps>) {
   usePreventScroll(isOpen);
   const router = useRouter();
-  const ref = useOutsideClick(() => handleClose());
 
   const handleClose = () => {
     onClose();
@@ -27,6 +26,7 @@ function ConfirmModal({
       router.push(redirectTo);
     }
   };
+  const ref = useOutsideClick(() => handleClose());
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

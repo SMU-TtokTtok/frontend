@@ -25,8 +25,11 @@ function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
   const router = useRouter();
 
   useEffect(() => {
-    setIsBookmarked(clubData.bookmarked);
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    setIsBookmarked(clubData.bookmarked);
   }, [clubData.bookmarked]);
 
   if (!mounted) return null;
