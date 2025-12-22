@@ -1,5 +1,5 @@
 import ClientHeader from '@/common/components/header/clientHeader';
-import 'ttockttock-design-system/styles';
+import '@ttockttock/ui/styles';
 
 function Layout({ children }: { children: React.ReactNode }) {
   return (
