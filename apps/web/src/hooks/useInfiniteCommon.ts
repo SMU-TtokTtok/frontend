@@ -87,11 +87,10 @@ export const useClubMemberInfinite = ({ enabled, clubId }: UseInfiniteParams) =>
       },
       enabled,
     });
-
+  const pages = data?.pages;
   const clubMembers = useMemo(() => {
-    if (!data?.pages) return [];
-    return data.pages.flatMap((page) => page.clubMembers || []);
-  }, [data?.pages]);
-
+    if (!pages) return [];
+    return pages.flatMap((page) => page.clubMembers || []);
+  }, [pages]);
   return { clubMembers, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, refetch };
 };
