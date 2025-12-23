@@ -1,0 +1,31 @@
+# Development files
+src/
+.storybook/
+public/
+
+# Config files
+*.config.*
+tsconfig*.json
+!tsconfig.lib.json
+.eslintrc*
+.prettierrc*
+
+# Stories and tests
+*.stories.*
+*.test.*
+*.spec.*
+
+# Build tools
+node_modules/
+.vscode/
+.idea/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+
+# Misc
+*.log
+.DS_Store
+.env*
+coverage/
