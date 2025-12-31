@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import { useEffect, useState } from 'react';
 
 interface BeforeInstallPromptEvent extends Event {
@@ -15,7 +16,6 @@ export const usePWAInstall = () => {
   const checkIfInstalled = (): boolean => {
     return (
       window.matchMedia('(display-mode: standalone)').matches ||
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window.navigator as any).standalone === true ||
       document.referrer.includes('android-app://')
     );
