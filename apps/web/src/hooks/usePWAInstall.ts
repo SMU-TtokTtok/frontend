@@ -102,19 +102,7 @@ export const usePWAInstall = () => {
   };
 
   const showInstallInstructions = () => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    let message = '';
-
-    if (/chrome/.test(userAgent) && !/edg/.test(userAgent)) {
-      message =
-        '주소창 오른쪽의 설치 아이콘(➕)을 클릭하거나,\n메뉴(⋮) > "앱 설치" 또는 "홈 화면에 추가"를 선택해주세요.';
-    } else if (/edg/.test(userAgent)) {
-      message =
-        '주소창 오른쪽의 앱 아이콘을 클릭하거나,\n메뉴(⋯) > "앱" > "이 사이트를 앱으로 설치"를 선택해주세요.';
-    } else {
-      message = '브라우저 메뉴에서 "앱 설치" 또는 "홈 화면에 추가"를 선택해주세요.';
-    }
-
+    const message = '브라우저 메뉴에서 "앱 설치" 또는 "홈 화면에 추가"를 선택해주세요.';
     alert(message);
   };
 
