@@ -13,7 +13,8 @@
     "start": {
       "cache": false,
       "persistent": true,
-      "dependsOn": ["build"]
+      "dependsOn": ["build"],
+      "filter": ["apps/*"]
     },
     "lint": {},
     "test": {}

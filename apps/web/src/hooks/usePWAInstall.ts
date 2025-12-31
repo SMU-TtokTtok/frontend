@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react';
 
 interface BeforeInstallPromptEvent extends Event {
@@ -16,6 +15,7 @@ export const usePWAInstall = () => {
   const checkIfInstalled = (): boolean => {
     return (
       window.matchMedia('(display-mode: standalone)').matches ||
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window.navigator as any).standalone === true ||
       document.referrer.includes('android-app://')
     );
@@ -107,10 +107,12 @@ export const usePWAInstall = () => {
     alert(message);
   };
 
-  // 설치 가능 여부:
-  // 1. 아직 설치되지 않았고
-  // 2. (beforeinstallprompt 이벤트가 있거나) Service Worker 또는 manifest가 있는 경우
-  const installable = !isInstalled && (!!deferredPrompt || hasServiceWorker || hasManifest);
+  // 실제로 네이티브 설치 프롬프트를 띄울 수 있는지 여부
+  const canPrompt = !isInstalled && !!deferredPrompt;
+  // 수동 설치 안내만 보여줄 수 있는지 여부
+  const canShowInstructions = !isInstalled && (hasServiceWorker || hasManifest);
+  // 설치 버튼을 표시할지 여부 (프롬프트 또는 안내 중 하나라도 가능하면 표시)
+  const installable = canPrompt || canShowInstructions;
 
-  return { installable, handleInstall };
+  return { installable, canPrompt, canShowInstructions, handleInstall };
 };
