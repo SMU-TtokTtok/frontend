@@ -6,6 +6,7 @@ import person from '@/assets/person.svg';
 import { ROUTES } from '@/common/constants/routes';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { useLogoutMutation } from '@/hooks/useUserMutaion';
+import { usePWAInstall } from '@/hooks/usePWAInstall'; // 훅 임포트
 interface MobileSideMenuProps {
   setIsSideMenuOpen: (isOpen: boolean) => void;
   userName: string | null;
@@ -13,6 +14,7 @@ interface MobileSideMenuProps {
 
 function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
   const { handleLogout } = useLogoutMutation();
+  const { installable, handleInstall } = usePWAInstall(); // 설치 기능 가져오기
   const handleClose = () => {
     setIsSideMenuOpen(false);
   };
@@ -52,6 +54,12 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
               <span>인기 동아리</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
+            {installable && (
+              <button onClick={handleInstall} className={S.MenuItem} type="button">
+                <span>앱 설치하기</span>
+                <Image src={arrowNav} alt="이동하기" />
+              </button>
+            )}
           </>
         ) : (
           <>
@@ -63,6 +71,12 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
               <span>회원가입</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
+            {installable && (
+              <button onClick={handleInstall} className={S.MenuItem} type="button">
+                <span>앱 설치하기</span>
+                <Image src={arrowNav} alt="이동하기" />
+              </button>
+            )}
           </>
         )}
       </div>
