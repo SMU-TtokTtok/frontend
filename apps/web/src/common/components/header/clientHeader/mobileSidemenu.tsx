@@ -54,10 +54,12 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
               <span>인기 동아리</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
-            <button onClick={handleInstall} className={S.MenuItem} type="button">
-              <span>앱 설치하기</span>
-              <Image src={arrowNav} alt="이동하기" />
-            </button>
+            {installable && (
+              <button onClick={handleInstall} className={S.MenuItem} type="button">
+                <span>앱 설치하기</span>
+                <Image src={arrowNav} alt="이동하기" />
+              </button>
+            )}
           </>
         ) : (
           <>
@@ -69,10 +71,12 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
               <span>회원가입</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
-            <button onClick={handleInstall} className={S.MenuItem} type="button">
-              <span>앱 설치하기</span>
-              <Image src={arrowNav} alt="이동하기" />
-            </button>
+            {installable && (
+              <button onClick={handleInstall} className={S.MenuItem} type="button">
+                <span>앱 설치하기</span>
+                <Image src={arrowNav} alt="이동하기" />
+              </button>
+            )}
           </>
         )}
       </div>

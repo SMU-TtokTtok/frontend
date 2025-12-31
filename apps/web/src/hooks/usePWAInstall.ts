@@ -11,81 +11,72 @@ export const usePWAInstall = () => {
   const [hasServiceWorker, setHasServiceWorker] = useState(false);
   const [hasManifest, setHasManifest] = useState(false);
 
+  // 설치 상태 확인
+  const checkIfInstalled = (): boolean => {
+    return (
+      window.matchMedia('(display-mode: standalone)').matches ||
+      (window.navigator as any).standalone === true ||
+      document.referrer.includes('android-app://')
+    );
+  };
+
+  // Manifest 확인
+  const checkManifest = (): boolean => {
+    const manifestLink = document.querySelector('link[rel="manifest"]');
+    return !!manifestLink;
+  };
+
+  // Service Worker 등록 상태 확인
+  const checkServiceWorker = async (): Promise<boolean> => {
+    if ('serviceWorker' in navigator) {
+      try {
+        const registration = await navigator.serviceWorker.getRegistration();
+        return !!registration;
+      } catch (error) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  };
+
+  // 설치 상태 확인 및 이벤트 리스너 등록
   useEffect(() => {
-    // 이미 설치되어 있는지 확인
-    const checkIfInstalled = () => {
-      const isStandalone =
-        window.matchMedia('(display-mode: standalone)').matches ||
-        (window.navigator as any).standalone === true ||
-        document.referrer.includes('android-app://');
-      setIsInstalled(isStandalone);
-    };
-
-    checkIfInstalled();
-
-    // Service Worker 등록 상태 확인
-    const checkServiceWorker = async () => {
-      if ('serviceWorker' in navigator) {
-        try {
-          const registration = await navigator.serviceWorker.getRegistration();
-          const hasSW = !!registration;
-          // console.log('🔍 Service Worker 체크:', hasSW ? '✅ 등록됨' : '❌ 등록 안됨');
-          if (registration) {
-            // console.log('   - Scope:', registration.scope);
-          }
-          setHasServiceWorker(hasSW);
-        } catch (error) {
-          // console.log('❌ Service Worker 체크 오류:', error);
-          setHasServiceWorker(false);
-        }
-      } else {
-        // console.log('❌ Service Worker를 지원하지 않는 브라우저');
-      }
-    };
-
-    // manifest.json 확인
-    const checkManifest = () => {
-      const manifestLink = document.querySelector('link[rel="manifest"]');
-      const hasMan = !!manifestLink;
-      // console.log('🔍 Manifest 체크:', hasMan ? '✅ 있음' : '❌ 없음');
-      if (manifestLink) {
-        // console.log('   - href:', manifestLink.getAttribute('href'));
-      }
-      setHasManifest(hasMan);
-    };
-
-    // 약간의 지연 후 체크 (DOM이 완전히 로드된 후)
-    const timer = setTimeout(() => {
-      checkServiceWorker();
-      checkManifest();
-    }, 100);
+    // 설치 상태 확인 및 상태 업데이트
+    setIsInstalled(checkIfInstalled());
 
     // beforeinstallprompt 이벤트 핸들러
     const handleBeforeInstallPrompt = (e: Event) => {
-      console.log('✅ beforeinstallprompt 이벤트 발생!');
-      // 기본 동작(브라우저 자동 설치 프롬프트)을 막고 이벤트를 저장
       e.preventDefault();
       const promptEvent = e as BeforeInstallPromptEvent;
       setDeferredPrompt(promptEvent);
     };
 
-    // 이벤트 리스너 등록
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-
-    // appinstalled 이벤트 리스너 (설치 완료 시)
+    // appinstalled 이벤트 핸들러
     const handleAppInstalled = () => {
-      console.log('✅ PWA가 설치되었습니다!');
       setDeferredPrompt(null);
       setIsInstalled(true);
     };
 
+    // 이벤트 리스너 등록
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     window.addEventListener('appinstalled', handleAppInstalled);
 
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
       window.removeEventListener('appinstalled', handleAppInstalled);
     };
+  }, []);
+
+  // Service Worker 및 Manifest 체크
+  useEffect(() => {
+    // Manifest 확인 및 상태 업데이트
+    setHasManifest(checkManifest());
+
+    // Service Worker 확인 및 상태 업데이트
+    checkServiceWorker().then((hasSW) => {
+      setHasServiceWorker(hasSW);
+    });
   }, []);
 
   const handleInstall = async () => {
@@ -96,18 +87,11 @@ export const usePWAInstall = () => {
         await deferredPrompt.prompt();
 
         // 사용자의 선택 결과를 기다림
-        const { outcome } = await deferredPrompt.userChoice;
-
-        if (outcome === 'accepted') {
-          console.log('✅ 사용자가 PWA 설치를 수락했습니다');
-        } else {
-          console.log('❌ 사용자가 PWA 설치를 거부했습니다');
-        }
+        await deferredPrompt.userChoice;
 
         // 이벤트는 한 번만 사용할 수 있으므로 null로 설정
         setDeferredPrompt(null);
       } catch (error) {
-        console.error('❌ PWA 설치 프롬프트 오류:', error);
         setDeferredPrompt(null);
         showInstallInstructions();
       }
@@ -138,17 +122,6 @@ export const usePWAInstall = () => {
   // 1. 아직 설치되지 않았고
   // 2. (beforeinstallprompt 이벤트가 있거나) Service Worker 또는 manifest가 있는 경우
   const installable = !isInstalled && (!!deferredPrompt || hasServiceWorker || hasManifest);
-
-  // 디버깅 로그
-  useEffect(() => {
-    console.log('🔍 PWA 설치 가능 여부 체크:', {
-      isInstalled,
-      deferredPrompt: !!deferredPrompt,
-      hasServiceWorker,
-      hasManifest,
-      installable,
-    });
-  }, [isInstalled, deferredPrompt, hasServiceWorker, hasManifest, installable]);
 
   return { installable, handleInstall };
 };
