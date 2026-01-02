@@ -4,10 +4,8 @@ import * as S from './memberList.css';
 
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import dynamic from 'next/dynamic';
+import Lottie from '@/common/ui/loading/lottie';
 import loading from '@/assets/loading.json';
-
-const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
 import LoadingSpinner from '@/common/ui/loading';
