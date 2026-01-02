@@ -5,8 +5,6 @@ import * as S from '@/components/home/clubList/clubList.css';
 import ClubItem from '@/common/components/clubItem';
 import { useEffect } from 'react';
 import { SearchQueryReturn } from '@/hooks/useSearchQuery';
-import Lottie from '@/common/ui/loading/lottie';
-import animationData from '@/assets/loading.json';
 import * as F from './favorites.css';
 import Empty from '@/common/components/empty';
 import { Clubs, ClubsInfiniteWithTotal } from '@/common/model/clubInfinite';
@@ -103,11 +101,7 @@ function InfiniteClubList({
 
       {isFetchingNextPage && (
         <div className={F.lottieContainer}>
-          <Lottie
-            animationData={animationData}
-            loop={true}
-            style={{ width: '100%', height: '100%' }}
-          />
+          <LoadingSpinner />
         </div>
       )}
     </>

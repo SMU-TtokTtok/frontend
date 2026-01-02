@@ -4,8 +4,6 @@ import * as S from './memberList.css';
 
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import Lottie from '@/common/ui/loading/lottie';
-import loading from '@/assets/loading.json';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
 import LoadingSpinner from '@/common/ui/loading';
@@ -102,11 +100,7 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
           <li ref={ref} style={{ height: '1px', visibility: 'hidden' }}></li>
           {isFetchingNextPage && (
             <div className={S.lottieContainer}>
-              <Lottie
-                animationData={loading}
-                loop={true}
-                style={{ width: '100%', height: '100%' }}
-              />
+              <LoadingSpinner />
             </div>
           )}
         </ul>
