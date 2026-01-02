@@ -5,8 +5,10 @@ import * as S from '@/components/home/clubList/clubList.css';
 import ClubItem from '@/common/components/clubItem';
 import { useEffect } from 'react';
 import { SearchQueryReturn } from '@/hooks/useSearchQuery';
-import Lottie from 'lottie-react';
+import dynamic from 'next/dynamic';
 import animationData from '@/assets/loading.json';
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 import * as F from './favorites.css';
 import Empty from '@/common/components/empty';
 import { Clubs, ClubsInfiniteWithTotal } from '@/common/model/clubInfinite';

@@ -1,12 +1,13 @@
 import { useClubMemberInfinite } from '@/hooks/useInfiniteCommon';
 import MemberItem from './MemberItem';
 import * as S from './memberList.css';
-// import Empty from '@/common/components/empty';
-// import { MESSAGE } from '@/common/constants/message';
+
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import Lottie from 'lottie-react';
+import dynamic from 'next/dynamic';
 import loading from '@/assets/loading.json';
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
 import LoadingSpinner from '@/common/ui/loading';

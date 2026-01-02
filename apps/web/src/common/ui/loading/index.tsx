@@ -1,6 +1,8 @@
-import Lottie from 'lottie-react';
+import dynamic from 'next/dynamic';
 import animationData from '@/assets/loading.json';
 import * as S from './loading.css';
+
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 interface LoadingSpinnerProps {
   className?: string;
 }
