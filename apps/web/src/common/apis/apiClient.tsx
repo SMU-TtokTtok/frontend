@@ -48,8 +48,8 @@ export default class ApiClient {
     return this.handleResponse<T>(response);
   }
 
-  async delete<T = any>(path: string): Promise<T> {
-    const response = await this.request('DELETE', path);
+  async delete<T = any>(path: string, body?: any): Promise<T> {
+    const response = await this.request('DELETE', path, body);
     return this.handleResponse<T>(response);
   }
 

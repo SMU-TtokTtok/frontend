@@ -8,6 +8,7 @@ import Button from '@/common/ui/button/index';
 import { loginSchema, LoginForm } from '@/components/login/schema';
 import { ROUTES } from '@/common/constants/routes';
 import { postLogin } from '@/components/login/api';
+import { initializeAndSendFCMToken } from '@/fcm/fcmToken';
 
 export default function Page() {
   const router = useRouter();
@@ -32,6 +33,11 @@ export default function Page() {
       };
       const response = await postLogin(loginData);
       if (response.success) {
+        // 로그인 성공 후 FCM 토큰 초기화 및 전달
+        // 백그라운드에서 처리되므로 await하지 않아도 됩니다
+        initializeAndSendFCMToken().catch((error) => {
+          console.error('FCM 토큰 초기화 실패:', error);
+        });
         router.push('/');
       }
     } catch (error: unknown) {

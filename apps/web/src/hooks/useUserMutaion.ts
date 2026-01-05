@@ -1,16 +1,19 @@
 import { useMutation } from '@tanstack/react-query';
 import { postLogout } from '@/components/login/api';
 import { CustomHttpError } from '@/common/apis/apiClient';
+import { clearFCMToken } from '@/fcm/fcmToken';
 
 export const useLogoutMutation = () => {
   const logoutMutation = useMutation({
     mutationFn: async () => {
+      await clearFCMToken();
       await postLogout();
     },
-    onSuccess: () => {
+    onSuccess: async () => {
       localStorage.removeItem('name');
       localStorage.removeItem('user_access_token');
       localStorage.removeItem('user_refresh_token');
+
       window.location.href = '/login';
     },
     onError: (error) => {
