@@ -55,9 +55,11 @@ export default function ClubProfile({
           <Tag variant="default" className={S.tagStyle + ' ' + S.tagFont}>
             {getKoreanCategory(clubCategory)}
           </Tag>
-          <Tag variant="default" className={S.tagStyle + ' ' + S.tagFont}>
-            {customCategory}
-          </Tag>
+          {customCategory && customCategory !== '커스텀 카테고리' && (
+            <Tag variant="default" className={S.tagStyle + ' ' + S.tagFont}>
+              {customCategory}
+            </Tag>
+          )}
           <Tag
             variant={recruiting ? 'secondary' : 'tertiary'}
             className={S.tagStyle + ' ' + S.tagFont}
