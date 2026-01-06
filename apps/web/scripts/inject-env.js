@@ -21,8 +21,10 @@ if (fs.existsSync(envPath)) {
   });
 }
 
+// 템플릿 파일에서 읽어서 실제 파일로 생성
+const templatePath = path.join(__dirname, '../public/firebase-messaging-sw.template.js');
 const swPath = path.join(__dirname, '../public/firebase-messaging-sw.js');
-let swContent = fs.readFileSync(swPath, 'utf8');
+let swContent = fs.readFileSync(templatePath, 'utf8');
 
 // 플레이스홀더를 환경 변수 값으로 교체
 // 환경 변수가 없으면 에러 발생 (보안을 위해 하드코딩된 값 사용 방지)

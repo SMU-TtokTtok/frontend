@@ -57,3 +57,6 @@ public/worker-*.js.map
 public/robots.txt
 public/sitemap.xml
 public/sitemap-*.xml
+
+# Firebase messaging service worker (generated from template)
+public/firebase-messaging-sw.js

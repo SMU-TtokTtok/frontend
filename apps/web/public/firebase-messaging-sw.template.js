@@ -4,13 +4,13 @@ importScripts('https://www.gstatic.com/firebasejs/11.1.0/firebase-app-compat.js'
 importScripts('https://www.gstatic.com/firebasejs/11.1.0/firebase-messaging-compat.js');
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDudrRTphoKafmOI6RuxiuUIl9PuJeMAs8',
-  authDomain: 'ttokttok-push.firebaseapp.com',
-  projectId: 'ttokttok-push',
-  storageBucket: 'ttokttok-push.firebasestorage.app',
-  messagingSenderId: '97485420032',
-  appId: '1:97485420032:web:20d9d96eca4c5bb0e0cae5',
-  measurementId: 'G-5GXCG3NJM9',
+  apiKey: '__NEXT_PUBLIC_FIREBASE_API_KEY__',
+  authDomain: '__NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN__',
+  projectId: '__NEXT_PUBLIC_FIREBASE_PROJECT_ID__',
+  storageBucket: '__NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET__',
+  messagingSenderId: '__NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID__',
+  appId: '__NEXT_PUBLIC_FIREBASE_APP_ID__',
+  measurementId: '__NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID__',
 };
 
 // Firebase 초기화
