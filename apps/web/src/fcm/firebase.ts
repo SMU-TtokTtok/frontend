@@ -47,7 +47,6 @@ async function registerServiceWorker(): Promise<ServiceWorkerRegistration | null
     const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js', {
       scope: '/',
     });
-    console.log('FCM Service Worker 등록 성공:', registration.scope);
     return registration;
   } catch (error) {
     console.error('FCM Service Worker 등록 실패:', error);
@@ -83,13 +82,7 @@ export async function requestFCMToken(): Promise<string | null> {
       serviceWorkerRegistration: registration,
     });
 
-    if (token) {
-      console.log('FCM 토큰:', token);
-      return token;
-    } else {
-      console.log('FCM 토큰을 받을 수 없습니다. 알림 권한이 필요합니다.');
-      return null;
-    }
+    return token || null;
   } catch (error) {
     console.error('FCM 토큰 요청 실패:', error);
     return null;
@@ -106,7 +99,6 @@ export function onForegroundMessage(callback: (payload: any) => void) {
   }
 
   onMessage(messaging, (payload) => {
-    console.log('포그라운드 메시지 수신:', payload);
     callback(payload);
   });
 }

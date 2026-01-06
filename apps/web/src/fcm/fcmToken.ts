@@ -12,7 +12,6 @@ export async function sendFCMTokenToBackend(token: string): Promise<void> {
       token: token,
       deviceType: 'WEB',
     });
-    console.log('FCM 토큰이 백엔드에 성공적으로 전달되었습니다.');
   } catch (error) {
     console.error('FCM 토큰 전달 실패:', error);
     throw error;
@@ -26,7 +25,6 @@ export async function initializeAndSendFCMToken(): Promise<string | null> {
   try {
     // 알림 권한 확인
     if (typeof window === 'undefined' || !('Notification' in window)) {
-      console.log('이 브라우저는 알림을 지원하지 않습니다.');
       return null;
     }
 
@@ -38,13 +36,11 @@ export async function initializeAndSendFCMToken(): Promise<string | null> {
     }
 
     if (permission !== 'granted') {
-      console.log('알림 권한이 거부되었습니다.');
       return null;
     }
 
     // Service Worker 등록 확인
     if (!('serviceWorker' in navigator)) {
-      console.log('이 브라우저는 Service Worker를 지원하지 않습니다.');
       return null;
     }
 
@@ -52,14 +48,12 @@ export async function initializeAndSendFCMToken(): Promise<string | null> {
     const token = await requestFCMToken();
 
     if (!token) {
-      console.log('FCM 토큰을 받을 수 없습니다.');
       return null;
     }
 
     // 로컬 스토리지에 저장된 토큰과 비교
     const storedToken = localStorage.getItem(FCM_TOKEN_STORAGE_KEY);
     if (storedToken === token) {
-      console.log('FCM 토큰이 변경되지 않았습니다.');
       return token;
     }
 
@@ -67,7 +61,6 @@ export async function initializeAndSendFCMToken(): Promise<string | null> {
     try {
       await sendFCMTokenToBackend(token);
       localStorage.setItem(FCM_TOKEN_STORAGE_KEY, token);
-      console.log('FCM 토큰이 성공적으로 초기화되고 전달되었습니다.');
     } catch (error) {
       console.error('FCM 토큰 전달 실패 (토큰은 받았지만 서버 전달 실패):', error);
       // 토큰은 받았으므로 반환
@@ -98,7 +91,6 @@ export async function deleteFCMTokenFromBackend(token: string): Promise<void> {
     await mainClient.delete('/api/users/fcm/token', {
       token: token,
     });
-    console.log('FCM 토큰이 백엔드에서 성공적으로 삭제되었습니다.');
   } catch (error) {
     console.error('FCM 토큰 삭제 실패:', error);
     // 삭제 실패해도 로컬 스토리지는 정리
