@@ -9,6 +9,12 @@ import { onForegroundMessage } from './firebase';
 const NOTIFICATION_ICON = '/icons/favicon_192x192.png';
 const NOTIFICATION_BADGE = '/icons/favicon_192x192.png';
 
+// NotificationOptions를 확장한 타입 (비표준 속성 포함)
+interface ExtendedNotificationOptions extends NotificationOptions {
+  image?: string;
+  vibrate?: number[];
+}
+
 /**
  * 포그라운드에서 알림 표시
  * Service Worker를 통해 알림을 표시하여 브라우저 알림으로 표시되도록 합니다.
@@ -76,7 +82,7 @@ async function showForegroundNotification(
       }
 
       // Service Worker를 통해 알림 표시
-      const notificationOptions: any = {
+      const notificationOptions: ExtendedNotificationOptions = {
         body: options.body || '',
         icon: options.icon || NOTIFICATION_ICON,
         badge: options.badge || NOTIFICATION_BADGE,
@@ -86,11 +92,12 @@ async function showForegroundNotification(
       };
 
       // 표준이 아니지만 일부 브라우저에서 지원하는 옵션들
-      if ((options as any).image) {
-        notificationOptions.image = (options as any).image;
+      const extendedOptions = options as ExtendedNotificationOptions;
+      if (extendedOptions.image) {
+        notificationOptions.image = extendedOptions.image;
       }
-      if ((options as any).vibrate) {
-        notificationOptions.vibrate = (options as any).vibrate;
+      if (extendedOptions.vibrate) {
+        notificationOptions.vibrate = extendedOptions.vibrate;
       }
       if (options.silent !== undefined) {
         notificationOptions.silent = options.silent;
@@ -201,7 +208,7 @@ export default function FCMProvider() {
         const url = payload.data?.url || payload.fcmOptions?.link || '/';
 
         // 포그라운드 알림 표시
-        const notificationOptions: NotificationOptions & { image?: string } = {
+        const notificationOptions: ExtendedNotificationOptions = {
           body: body,
           icon: NOTIFICATION_ICON,
           badge: NOTIFICATION_BADGE,
@@ -215,7 +222,7 @@ export default function FCMProvider() {
 
         // image는 표준이 아니지만 일부 브라우저에서 지원
         if (image) {
-          (notificationOptions as any).image = image;
+          notificationOptions.image = image;
         }
 
         showForegroundNotification(title, notificationOptions, () => {
