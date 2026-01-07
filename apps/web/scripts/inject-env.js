@@ -6,19 +6,26 @@ const path = require('path');
 const envPath = path.join(__dirname, '../.env');
 
 if (fs.existsSync(envPath)) {
-  const envFile = fs.readFileSync(envPath, 'utf8');
-  envFile.split('\n').forEach((line) => {
-    const trimmedLine = line.trim();
-    if (trimmedLine && !trimmedLine.startsWith('#')) {
-      const [key, ...valueParts] = trimmedLine.split('=');
-      if (key && valueParts.length > 0) {
-        const value = valueParts.join('=').trim();
-        // 따옴표 제거
-        const cleanValue = value.replace(/^["']|["']$/g, '');
-        process.env[key.trim()] = cleanValue;
+  try {
+    const envFile = fs.readFileSync(envPath, 'utf8');
+    envFile.split('\n').forEach((line) => {
+      const trimmedLine = line.trim();
+      if (trimmedLine && !trimmedLine.startsWith('#')) {
+        const [key, ...valueParts] = trimmedLine.split('=');
+        if (key && valueParts.length > 0) {
+          const value = valueParts.join('=').trim();
+          // 따옴표 제거
+          const cleanValue = value.replace(/^["']|["']$/g, '');
+          process.env[key.trim()] = cleanValue;
+        }
       }
-    }
-  });
+    });
+  } catch (error) {
+    // .env 파일을 읽을 수 없는 경우 (권한 문제 등)
+    // 이미 process.env에 환경 변수가 설정되어 있을 수 있으므로 계속 진행
+    console.warn(`⚠️  .env 파일을 읽을 수 없습니다: ${error.message}`);
+    console.warn('   환경 변수가 이미 설정되어 있는지 확인합니다.');
+  }
 }
 
 // 템플릿 파일에서 읽어서 실제 파일로 생성
