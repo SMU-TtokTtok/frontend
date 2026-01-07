@@ -1,12 +1,9 @@
 import { useClubMemberInfinite } from '@/hooks/useInfiniteCommon';
 import MemberItem from './MemberItem';
 import * as S from './memberList.css';
-// import Empty from '@/common/components/empty';
-// import { MESSAGE } from '@/common/constants/message';
+
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
-import Lottie from 'lottie-react';
-import loading from '@/assets/loading.json';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/common/constants/routes';
 import LoadingSpinner from '@/common/ui/loading';
@@ -103,11 +100,7 @@ export default function MemberList({ isEditing }: { isEditing: boolean }) {
           <li ref={ref} style={{ height: '1px', visibility: 'hidden' }}></li>
           {isFetchingNextPage && (
             <div className={S.lottieContainer}>
-              <Lottie
-                animationData={loading}
-                loop={true}
-                style={{ width: '100%', height: '100%' }}
-              />
+              <LoadingSpinner />
             </div>
           )}
         </ul>

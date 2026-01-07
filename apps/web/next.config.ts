@@ -1,10 +1,13 @@
 import { withSentryConfig } from '@sentry/nextjs';
 import type { NextConfig } from 'next';
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
+import withBundleAnalyzer from '@next/bundle-analyzer';
 import withPWA from 'next-pwa';
 
 const withVanillaExtract = createVanillaExtractPlugin();
-
+const withAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -36,7 +39,7 @@ const pwaConfig = withPWA({
   disable: process.env.NODE_ENV === 'development',
 });
 
-export default withSentryConfig(withVanillaExtract(pwaConfig(nextConfig)), {
+export default withSentryConfig(withAnalyzer(withVanillaExtract(pwaConfig(nextConfig))), {
   org: 'sangmyung-univ-xe',
   project: 'javascript-nextjs',
 
