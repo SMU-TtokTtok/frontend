@@ -1,6 +1,37 @@
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
 import { getMessaging, getToken, Messaging, onMessage, MessagePayload } from 'firebase/messaging';
 
+/**
+ * 필수 환경변수 검증
+ */
+function validateFirebaseConfig() {
+  const requiredEnvVars = [
+    'NEXT_PUBLIC_FIREBASE_API_KEY',
+    'NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN',
+    'NEXT_PUBLIC_FIREBASE_PROJECT_ID',
+    'NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET',
+    'NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID',
+    'NEXT_PUBLIC_FIREBASE_APP_ID',
+  ];
+
+  const missingVars = requiredEnvVars.filter((key) => !process.env[key]);
+
+  if (missingVars.length > 0) {
+    const errorMessage = `❌ 필수 Firebase 환경변수가 설정되지 않았습니다: ${missingVars.join(
+      ', ',
+    )}`;
+    console.error(errorMessage);
+
+    // 개발 환경에서는 에러를 던져서 빠르게 실패
+    if (process.env.NODE_ENV === 'development') {
+      throw new Error(errorMessage);
+    }
+  }
+}
+
+// 환경변수 검증
+validateFirebaseConfig();
+
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || '',
@@ -65,6 +96,14 @@ async function registerServiceWorker(): Promise<ServiceWorkerRegistration | null
 export async function requestFCMToken(): Promise<string | null> {
   if (!messaging) {
     console.error('Messaging이 초기화되지 않았습니다.');
+    return null;
+  }
+
+  // VAPID 키 확인
+  if (!VAPID_KEY) {
+    console.error(
+      '❌ NEXT_PUBLIC_VAPID_KEY 환경변수가 설정되지 않았습니다. FCM 토큰을 요청할 수 없습니다.',
+    );
     return null;
   }
 
