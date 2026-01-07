@@ -1,5 +1,5 @@
 import { initializeApp, getApps, FirebaseApp } from 'firebase/app';
-import { getMessaging, getToken, Messaging, onMessage } from 'firebase/messaging';
+import { getMessaging, getToken, Messaging, onMessage, MessagePayload } from 'firebase/messaging';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
@@ -92,7 +92,7 @@ export async function requestFCMToken(): Promise<string | null> {
 /**
  * 포그라운드에서 메시지 수신 처리
  */
-export function onForegroundMessage(callback: (payload: any) => void) {
+export function onForegroundMessage(callback: (payload: MessagePayload) => void) {
   if (!messaging) {
     console.error('Messaging이 초기화되지 않았습니다.');
     return;

@@ -237,25 +237,26 @@ export default function FCMProvider() {
 
     // 테스트용: 개발 환경에서만 전역 함수로 테스트 알림 추가
     if (process.env.NODE_ENV === 'development' && typeof window !== 'undefined') {
-      (window as any).testNotification = async () => {
-        const success = await showForegroundNotification('테스트 알림', {
-          body: '이것은 테스트 알림입니다. 알림이 보이나요?',
-          icon: NOTIFICATION_ICON,
-          badge: NOTIFICATION_BADGE,
-        });
+      (window as Window & { testNotification?: () => Promise<void> }).testNotification =
+        async () => {
+          const success = await showForegroundNotification('테스트 알림', {
+            body: '이것은 테스트 알림입니다. 알림이 보이나요?',
+            icon: NOTIFICATION_ICON,
+            badge: NOTIFICATION_BADGE,
+          });
 
-        if (!success) {
-          const permission = await Notification.requestPermission();
-          if (permission === 'granted') {
-            // 권한이 부여되면 다시 시도
-            await showForegroundNotification('테스트 알림', {
-              body: '권한이 부여되었습니다! 알림이 보이나요?',
-              icon: NOTIFICATION_ICON,
-              badge: NOTIFICATION_BADGE,
-            });
+          if (!success) {
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+              // 권한이 부여되면 다시 시도
+              await showForegroundNotification('테스트 알림', {
+                body: '권한이 부여되었습니다! 알림이 보이나요?',
+                icon: NOTIFICATION_ICON,
+                badge: NOTIFICATION_BADGE,
+              });
+            }
           }
-        }
-      };
+        };
     }
   }, []);
 
