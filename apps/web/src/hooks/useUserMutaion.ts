@@ -9,7 +9,7 @@ export const useLogoutMutation = () => {
       await clearFCMToken();
       await postLogout();
     },
-    onSuccess: async () => {
+    onSuccess: () => {
       localStorage.removeItem('name');
       localStorage.removeItem('user_access_token');
       localStorage.removeItem('user_refresh_token');

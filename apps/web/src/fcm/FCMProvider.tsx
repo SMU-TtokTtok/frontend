@@ -1,8 +1,13 @@
 'use client';
 
 import { useEffect } from 'react';
+import * as Sentry from '@sentry/nextjs';
 import { initializeAndSendFCMToken } from './fcmToken';
 import { onForegroundMessage } from './firebase';
+
+// 알림 아이콘 경로 상수
+const NOTIFICATION_ICON = '/icons/favicon_192x192.png';
+const NOTIFICATION_BADGE = '/icons/favicon_192x192.png';
 
 /**
  * 포그라운드에서 알림 표시
@@ -51,6 +56,7 @@ async function showForegroundNotification(
             }
           } catch (e) {
             console.warn('Service Worker 확인 중 오류:', e);
+            Sentry.captureException(e);
           }
         }
       }
@@ -72,8 +78,8 @@ async function showForegroundNotification(
       // Service Worker를 통해 알림 표시
       const notificationOptions: any = {
         body: options.body || '',
-        icon: options.icon || '/icons/favicon_192x192.png',
-        badge: options.badge || '/icons/favicon_192x192.png',
+        icon: options.icon || NOTIFICATION_ICON,
+        badge: options.badge || NOTIFICATION_BADGE,
         tag: options.tag || 'fcm-notification',
         requireInteraction: options.requireInteraction || false,
         data: options.data || {},
@@ -95,6 +101,7 @@ async function showForegroundNotification(
       return true;
     } catch (error) {
       console.error('❌ Service Worker 알림 표시 실패, 일반 Notification 시도:', error);
+      Sentry.captureException(error);
       return await showDirectNotification(title, options, onClick);
     }
   } else {
@@ -114,12 +121,13 @@ async function showDirectNotification(
   try {
     const notification = new Notification(title, {
       ...options,
-      icon: options.icon || '/icons/favicon_192x192.png',
-      badge: options.badge || '/icons/favicon_192x192.png',
+      icon: options.icon || NOTIFICATION_ICON,
+      badge: options.badge || NOTIFICATION_BADGE,
     });
 
     notification.onerror = (error) => {
       console.error('❌ 알림 오류:', error);
+      Sentry.captureException(error);
     };
 
     // 알림 클릭 이벤트 처리
@@ -141,6 +149,7 @@ async function showDirectNotification(
     return true;
   } catch (error) {
     console.error('❌ 직접 알림 표시 실패:', error);
+    Sentry.captureException(error);
     return false;
   }
 }
@@ -178,6 +187,7 @@ export default function FCMProvider() {
       // 로그인 상태인 경우 FCM 토큰 초기화
       initializeAndSendFCMToken().catch((error) => {
         console.error('❌ FCM 토큰 초기화 실패:', error);
+        Sentry.captureException(error);
       });
     }
 
@@ -193,8 +203,8 @@ export default function FCMProvider() {
         // 포그라운드 알림 표시
         const notificationOptions: NotificationOptions & { image?: string } = {
           body: body,
-          icon: '/icons/favicon_192x192.png',
-          badge: '/icons/favicon_192x192.png',
+          icon: NOTIFICATION_ICON,
+          badge: NOTIFICATION_BADGE,
           tag: payload.data?.tag || 'fcm-notification',
           requireInteraction: false,
           data: {
@@ -213,6 +223,7 @@ export default function FCMProvider() {
           handleNotificationClick(url);
         }).catch((error) => {
           console.error('❌ 알림 표시 중 오류:', error);
+          Sentry.captureException(error);
         });
       }
     });
@@ -222,8 +233,8 @@ export default function FCMProvider() {
       (window as any).testNotification = async () => {
         const success = await showForegroundNotification('테스트 알림', {
           body: '이것은 테스트 알림입니다. 알림이 보이나요?',
-          icon: '/icons/favicon_192x192.png',
-          badge: '/icons/favicon_192x192.png',
+          icon: NOTIFICATION_ICON,
+          badge: NOTIFICATION_BADGE,
         });
 
         if (!success) {
@@ -232,8 +243,8 @@ export default function FCMProvider() {
             // 권한이 부여되면 다시 시도
             await showForegroundNotification('테스트 알림', {
               body: '권한이 부여되었습니다! 알림이 보이나요?',
-              icon: '/icons/favicon_192x192.png',
-              badge: '/icons/favicon_192x192.png',
+              icon: NOTIFICATION_ICON,
+              badge: NOTIFICATION_BADGE,
             });
           }
         }
