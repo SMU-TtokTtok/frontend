@@ -25,8 +25,7 @@ export async function deleteFCMTokenFromBackend(token: string): Promise<void> {
     });
   } catch (error) {
     console.error('FCM 토큰 삭제 실패:', error);
-    // 삭제 실패해도 로컬 스토리지는 정리
+    // 에러를 호출자에게 전달 (로컬 스토리지 정리는 호출자의 책임)
     throw error;
   }
 }
-
