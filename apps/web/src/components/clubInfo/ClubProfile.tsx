@@ -31,6 +31,7 @@ export default function ClubProfile({
     bookmarked,
   } = clubIntro;
   const { handlePostFavorite } = usePostFavorite(handleModalOpen);
+  const tagStyle = `${S.tagStyle} ${S.tagFont}`;
 
   return (
     <div className={S.clubProfile}>
@@ -52,16 +53,15 @@ export default function ClubProfile({
         </div>
         <div className={S.description}>{summary}</div>
         <div className={S.tagFlex}>
-          <Tag variant="default" className={S.tagStyle + ' ' + S.tagFont}>
+          <Tag variant="default" className={tagStyle}>
             {getKoreanCategory(clubCategory)}
           </Tag>
-          <Tag variant="default" className={S.tagStyle + ' ' + S.tagFont}>
-            {customCategory}
-          </Tag>
-          <Tag
-            variant={recruiting ? 'secondary' : 'tertiary'}
-            className={S.tagStyle + ' ' + S.tagFont}
-          >
+          {customCategory && customCategory !== '커스텀 카테고리' && (
+            <Tag variant="default" className={tagStyle}>
+              {customCategory}
+            </Tag>
+          )}
+          <Tag variant={recruiting ? 'secondary' : 'tertiary'} className={tagStyle}>
             {recruiting ? '모집중' : '모집마감'}
           </Tag>
         </div>

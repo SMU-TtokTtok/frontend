@@ -4,6 +4,7 @@ import '../common/styles/reset.css.ts';
 //import { MSWProvider } from '@/mocks/mswProvider';
 import QueryProvider from './queryProvider';
 import GoogleAnalytics from '@/components/googleAnalytics';
+import FCMProvider from '@/fcm/FCMProvider';
 
 export const metadata: Metadata = {
   title: '똑똑',
@@ -61,6 +62,7 @@ export default function RootLayout({
         <QueryProvider>
           {children}
           {gaId && <GoogleAnalytics gaId={gaId} />}
+          <FCMProvider />
         </QueryProvider>
       </body>
     </html>

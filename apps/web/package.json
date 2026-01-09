@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/inject-env.js && next dev",
+    "build": "node scripts/inject-env.js && next build",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
@@ -27,6 +27,7 @@
     "@vanilla-extract/recipes": "^0.5.6",
     "@vanilla-extract/sprinkles": "^1.6.4",
     "date-fns": "^4.1.0",
+    "firebase": "^11.1.0",
     "lottie-web": "^5.13.0",
     "next": "^15.5.7",
     "next-pwa": "^5.6.0",
