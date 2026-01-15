@@ -52,37 +52,13 @@ export const type = style({
 export const name = style({
   fontSize: vars.fonts.title3,
   fontWeight: 600,
-  marginBottom: '6px',
+  marginBottom: '36px',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       marginLeft: '70px',
       fontSize: '18px',
-      marginBottom: '2px',
-    },
-  },
-});
-
-export const memberFlex = style({
-  display: 'flex',
-  alignItems: 'center',
-  marginBottom: '13px',
-
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      marginLeft: '70px',
-    },
-  },
-});
-
-export const member = style({
-  fontSize: vars.fonts.body1,
-  fontWeight: 500,
-  color: '#55637D',
-
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      fontSize: '14px',
+      marginBottom: '30px',
     },
   },
 });
@@ -128,8 +104,8 @@ export const star = style({
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      width: '25px',
-      height: '25px',
+      width: '20px',
+      height: '20px',
     },
   },
 });

@@ -4,7 +4,6 @@ import * as S from './clubItem.css';
 import Image from 'next/image';
 import emptyStar from '@/assets/star.svg';
 import ActiveStar from '@/assets/star_active.svg';
-import person from '@/assets/person.svg';
 import RecruitStatus from './recruitStatus';
 import { usePostFavorite } from '@/hooks/useFavoriteMutation';
 import { useRouter } from 'next/navigation';
@@ -76,10 +75,6 @@ function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
               마감임박
             </Tag>
           )}
-        </div>
-        <div className={S.membersWrapper}>
-          <Image src={person} className={S.person} alt="멤버 수" />
-          <p className={S.members}>{clubData.clubMemberCount}</p>
         </div>
       </div>
       <div className={S.categoryWrapper}>
