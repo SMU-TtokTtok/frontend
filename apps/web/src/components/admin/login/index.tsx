@@ -28,7 +28,11 @@ function LoginPage() {
 
   return (
     <div className={S.Container}>
-      <h3 className={S.LoginText}>관리자 로그인</h3>
+      <h3 className={S.LoginText}>동아리 운영진 로그인</h3>
+      <p className={S.LoginDescription}>
+        동아리 모집 및 관리를 위해 <br />
+        운영진 계정으로 로그인해 주세요.
+      </p>
       <form className={S.BoxContainer} onSubmit={handleSubmit(handleLogin)}>
         <label className={S.AuthText({ password: false })}>아이디</label>
 

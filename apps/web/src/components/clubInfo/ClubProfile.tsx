@@ -1,7 +1,6 @@
 import { UserClubIntro } from '@/common/model/clubIntro';
 import * as S from './clubProfile.css';
 import Image from 'next/image';
-import person from '@/assets/person.svg';
 import Tag from '@/common/ui/tag/index';
 import star from '@/assets/star.svg';
 import star_active from '@/assets/star_active.svg';
@@ -47,11 +46,10 @@ export default function ClubProfile({
           {getKoreanType(clubType)}
         </div>
         <div className={S.name}>{name}</div>
-        <div className={S.memberFlex}>
-          <Image src={person} alt="people" width={23} height={23} />
-          <div className={S.member}>{clubMemberCount}</div>
+
+        <div className={S.description}>
+          {summary === '동아리 한줄 소개를 적어주세요!!' ? '아직 동아리 소개가 없어요 🙂' : summary}
         </div>
-        <div className={S.description}>{summary}</div>
         <div className={S.tagFlex}>
           <Tag variant="default" className={tagStyle}>
             {getKoreanCategory(clubCategory)}
