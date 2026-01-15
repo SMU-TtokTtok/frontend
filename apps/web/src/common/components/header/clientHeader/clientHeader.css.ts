@@ -119,7 +119,7 @@ export const SideMenu = style({
   borderTopLeftRadius: '8px',
   borderBottomLeftRadius: '8px',
   right: '0',
-  width: '50%',
+  width: '55%',
   height: '100vh',
   backgroundColor: vars.colors.surface.bright,
   display: 'flex',
