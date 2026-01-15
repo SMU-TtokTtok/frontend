@@ -34,6 +34,7 @@ export const innerWrapper = style({
       gridTemplateColumns: '1fr',
       gap: '14px',
       marginTop: '8px',
+      marginBottom: '3.222rem',
     },
   },
 });
