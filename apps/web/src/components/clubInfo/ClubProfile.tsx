@@ -66,8 +66,8 @@ export default function ClubProfile({
         <Image
           src={bookmarked ? star_active : star}
           alt="star"
-          width={29}
-          height={29}
+          width={21}
+          height={19}
           className={S.star}
           onClick={(e) => {
             e.stopPropagation();
