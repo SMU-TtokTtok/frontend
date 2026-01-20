@@ -48,7 +48,9 @@ export default function ClubProfile({
         <div className={S.name}>{name}</div>
 
         <div className={S.description}>
-          {summary === '동아리 한줄 소개를 적어주세요!!' ? '아직 동아리 소개가 없어요 🙂' : summary}
+          {!summary || summary === '동아리 한줄 소개를 적어주세요!!'
+            ? '아직 동아리 소개가 없어요 🙂'
+            : summary}
         </div>
         <div className={S.tagFlex}>
           <Tag variant="default" className={tagStyle}>
