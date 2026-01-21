@@ -130,7 +130,7 @@ export const finishedButton = style({
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      fontSize: vars.fonts.body1,
+      fontSize: vars.fonts.m_body1,
     },
   },
 });
