@@ -69,6 +69,11 @@ export const categoryWrapper = style({
   alignItems: 'center',
   marginTop: '10px',
   gap: '8px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      marginTop: '16px',
+    },
+  },
 });
 export const tagStyle = style({
   borderRadius: '5.555rem',
