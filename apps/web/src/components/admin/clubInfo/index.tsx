@@ -48,7 +48,6 @@ function AdminClubInfo() {
 
   const handleSave = async () => {
     const changedFields = getChangedFields();
-    console.log(changedFields);
     handleClubInfoPatch(changedFields, selectedFile);
     setIsEditing(false);
   };
