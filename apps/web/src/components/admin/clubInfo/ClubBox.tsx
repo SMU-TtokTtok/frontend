@@ -117,10 +117,7 @@ export default function ClubBox(props: ClubBoxProps) {
             name || '동아리명을 입력해주세요'
           )}
         </div>
-        <div className={S.numberFlex}>
-          <Image src={person} alt="사람" width={21} height={21} />
-          <span className={S.numberText}>{clubMemberCount}</span>
-        </div>
+
         <div className={S.divider} />
         <div className={S.desText({ isEditing: props.isEditing })}>
           {props.isEditing ? (

@@ -48,7 +48,9 @@ export default function ClubProfile({
         <div className={S.name}>{name}</div>
 
         <div className={S.description}>
-          {summary === '동아리 한줄 소개를 적어주세요!!' ? '아직 동아리 소개가 없어요 🙂' : summary}
+          {!summary || summary === '동아리 한줄 소개를 적어주세요!!'
+            ? '아직 동아리 소개가 없어요 🙂'
+            : summary}
         </div>
         <div className={S.tagFlex}>
           <Tag variant="default" className={tagStyle}>
@@ -66,8 +68,8 @@ export default function ClubProfile({
         <Image
           src={bookmarked ? star_active : star}
           alt="star"
-          width={29}
-          height={29}
+          width={21}
+          height={19}
           className={S.star}
           onClick={(e) => {
             e.stopPropagation();

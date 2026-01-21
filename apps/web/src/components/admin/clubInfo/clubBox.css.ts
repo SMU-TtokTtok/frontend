@@ -43,35 +43,12 @@ export const clubName = style({
       marginLeft: '72px',
     },
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
-      marginBottom: '2px',
+      marginBottom: '14px',
       fontSize: vars.fonts.m_title3,
     },
   },
 });
 
-export const numberFlex = style({
-  display: 'flex',
-  marginBottom: '14px',
-  alignItems: 'center',
-
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      marginLeft: '72px',
-    },
-  },
-});
-
-export const numberText = style({
-  fontSize: vars.fonts.body1,
-  color: '#878787;',
-  fontWeight: '500',
-
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      fontSize: vars.fonts.m_body1,
-    },
-  },
-});
 export const desText = recipe({
   base: {
     fontSize: '16px',
@@ -113,6 +90,7 @@ export const footerFlex = style({
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       flexDirection: 'column',
       gap: '14px',
+      marginTop: '14px',
     },
   },
 });
@@ -515,6 +493,7 @@ export const divider = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       display: 'block',
+      marginTop: '14px',
     },
   },
 });
