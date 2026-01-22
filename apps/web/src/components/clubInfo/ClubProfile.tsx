@@ -34,7 +34,7 @@ export default function ClubProfile({
 
   return (
     <div className={S.clubProfile}>
-      <Image
+      <img
         src={profileImageUrl || clubImg}
         alt={name}
         width={212}
