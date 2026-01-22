@@ -1,60 +1,14 @@
 {
-  "name": "ttockttock",
-  "version": "0.1.0",
+  "name": "ttockttock-monorepo",
   "private": true,
+  "packageManager": "pnpm@10.26.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "postbuild": "next-sitemap",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@dnd-kit/core": "^6.3.1",
-    "@dnd-kit/sortable": "^10.0.0",
-    "@dnd-kit/utilities": "^3.2.2",
-    "@hookform/resolvers": "^5.1.1",
-    "@sentry/nextjs": "^10.2.0",
-    "@tanstack/react-query": "^5.80.6",
-    "@tiptap/extension-image": "^2.23.0",
-    "@tiptap/extension-link": "^2.23.0",
-    "@tiptap/react": "^2.23.0",
-    "@tiptap/starter-kit": "^2.23.0",
-    "@vanilla-extract/css": "^1.17.4",
-    "@vanilla-extract/dynamic": "^2.1.5",
-    "@vanilla-extract/recipes": "^0.5.6",
-    "@vanilla-extract/sprinkles": "^1.6.4",
-    "date-fns": "^4.1.0",
-    "lottie-react": "^2.4.1",
-    "next": "^15.5.7",
-    "next-pwa": "^5.6.0",
-    "next-sitemap": "^4.2.3",
-    "react": "^19.0.0",
-    "react-day-picker": "^9.7.0",
-    "react-dom": "^19.0.0",
-    "react-hook-form": "^7.58.1",
-    "react-intersection-observer": "^9.16.0",
-    "sanitize.css": "^13.0.0",
-    "ttockttock-design-system": "^0.1.9",
-    "zod": "^3.25.67",
-    "zustand": "^5.0.6"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "lint": "turbo run lint"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@svgr/webpack": "^8.1.0",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@vanilla-extract/next-plugin": "^2.4.11",
-    "artillery": "^2.0.21",
-    "eslint": "^9",
-    "eslint-config-next": "^15.5.7",
-    "msw": "^2.10.1",
-    "typescript": "^5"
-  },
-  "msw": {
-    "workerDirectory": [
-      "public"
-    ]
+    "turbo": "^2.6.3"
   }
 }
