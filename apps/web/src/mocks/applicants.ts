@@ -105,3 +105,18 @@ export const PutConnectApplicant = http.put(
     );
   },
 );
+
+export const PostFinishForm = http.post(
+  `${BASE_API}/api/admin${API.ADMIN.FORMS_FINISH(':formId')}`,
+  ({ params }) => {
+    const { formId } = params;
+    return HttpResponse.json(
+      {
+        success: true,
+        message: '지원자 평가가 종료되었습니다.',
+        formId,
+      },
+      { status: 200 },
+    );
+  },
+);

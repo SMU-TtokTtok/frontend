@@ -158,3 +158,8 @@ export const putConnectApplicant = async (clubId: string, evaluation: Evaluation
   );
   return data;
 };
+
+export const postFinishForm = async (formId: string) => {
+  const data = await adminClient.post(`${API.ADMIN.FORMS_FINISH(formId)}`, {});
+  return data;
+};

@@ -27,6 +27,10 @@ export const buttonStyle = styleVariants({
     backgroundColor: vars.colors.surface.variant,
     color: vars.colors.surface.outline,
   },
+  danger: {
+    backgroundColor: vars.colors.error.base,
+    color: '#BE3439',
+  },
   none: {},
 });
 
