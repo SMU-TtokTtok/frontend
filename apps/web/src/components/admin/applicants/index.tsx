@@ -11,6 +11,7 @@ import SearchResult from './searchResult';
 import { Evaluation, Sort } from './api/applicants';
 import { useModal } from '@/hooks/useModal';
 import ConfirmModal from '@/common/components/confirmModal';
+import ConfirmCancelModal from '@/common/components/confirmCancelModal';
 import { MESSAGE } from '@/common/constants/message';
 import ApplicantDetailModal from './applicantDetailModal';
 import LoadingSpinner from '@/common/ui/loading';
@@ -41,6 +42,12 @@ function ApplicantsContentPage() {
     handleModalClose: handleApplicantDetailModalClose,
   } = useModal();
 
+  const {
+    isOpen: isFinishFormModalOpen,
+    handleModalOpen: handleFinishFormModalOpen,
+    handleModalClose: handleFinishFormModalClose,
+  } = useModal();
+
   const openConfirmModalWithMessage = (message: string) => {
     setConfirmMessage(message);
     handleConfirmModalOpen();
@@ -57,19 +64,18 @@ function ApplicantsContentPage() {
 
   const handleFinishFormClick = () => {
     if (formData?.formId === undefined) {
-      alert('지원서 양식 정보를 불러올 수 없습니다.');
+      openConfirmModalWithMessage('지원서 양식 정보를 불러올 수 없습니다.');
       return;
     }
+    handleFinishFormModalOpen();
+  };
 
-    if (
-      window.confirm(
-        '지원자 평가를 완전히 종료하시겠습니까?\n이 작업은 되돌릴 수 없으며 모든 지원자 데이터와 지원폼이 삭제돼요.\n초기화 하기전 최종 부원을 연동해주세요!',
-      )
-    ) {
-      handleFinishForm(formData.formId, () => {
-        alert('지원자 평가가 종료되었습니다.');
-      });
-    }
+  const handleConfirmFinishForm = () => {
+    if (formData?.formId === undefined) return;
+
+    handleFinishForm(formData.formId, () => {
+      openConfirmModalWithMessage('지원자 평가가 종료되었습니다.');
+    });
   };
 
   const selectedOptions = {
@@ -137,6 +143,22 @@ function ApplicantsContentPage() {
         applicantId={selectedApplicantId}
         isOpen={isApplicantDetailModalOpen}
         onClose={handleApplicantDetailModalClose}
+      />
+      <ConfirmCancelModal
+        isOpen={isFinishFormModalOpen}
+        onClose={handleFinishFormModalClose}
+        onConfirm={handleConfirmFinishForm}
+        title="지원자 초기화"
+        message={
+          <>
+            ⚠️ 지원자 평가를 완전히 종료하시겠습니까?
+            <br />
+            <br />
+            이 작업은 되돌릴 수 없으며 모든 지원자 데이터와 지원폼이 삭제돼요.
+            <br />
+            초기화 하기전 최종 부원을 연동해주세요!
+          </>
+        }
       />
     </>
   );
