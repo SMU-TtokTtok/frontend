@@ -29,7 +29,11 @@ export const useFinishFormMutation = () => {
   });
 
   const handleFinishForm = (formId: string, onSuccess?: () => void) => {
-    finishFormMutation.mutate(formId);
+    finishFormMutation.mutate(formId, {
+      onSuccess: () => {
+        onSuccess?.();
+      },
+    });
   };
 
   return {
