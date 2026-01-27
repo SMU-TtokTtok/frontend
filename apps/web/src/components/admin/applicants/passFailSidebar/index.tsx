@@ -14,6 +14,7 @@ import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import { useConnectApplicant } from '@/hooks/useConnectAplicant';
 import { useAuthStore } from '@/common/store/adminAuthStore';
+import ConfirmCancelModal from '../../../../common/components/confirmCancelModal';
 
 interface PassFailSidebarProps {
   selectedOptions: ApplicantListParams;
@@ -46,6 +47,26 @@ function PassFailSidebar({
     handleModalOpen: handleListModalOpen,
     handleModalClose: handleListModalClose,
   } = useModal();
+
+  const {
+    isOpen: isConnectModalOpen,
+    handleModalOpen: handleConnectModalOpen,
+    handleModalClose: handleConnectModalClose,
+  } = useModal();
+
+  const handleConnectList = () => {
+    handleConnectApplicants({
+      evaluation,
+      clubId: profile?.clubId ?? '',
+    });
+  };
+
+  const connectTitle =
+    evaluation === 'DOCUMENT'
+      ? hasInterview
+        ? '면접 명단연동'
+        : '최종 부원연동'
+      : '최종 부원연동';
 
   return (
     <>
@@ -81,15 +102,9 @@ function PassFailSidebar({
               <Button
                 variant="secondary"
                 className={S.baseButton['connectButton']}
-                onClick={() =>
-                  handleConnectApplicants({ evaluation, clubId: profile?.clubId ?? '' })
-                }
+                onClick={handleConnectModalOpen}
               >
-                {evaluation === 'DOCUMENT'
-                  ? hasInterview
-                    ? '면접 명단연동'
-                    : '최종 부원연동'
-                  : '최종 부원연동'}
+                {connectTitle}
               </Button>
             </div>
             <div className={S.sendButtonWrapper}>
@@ -110,6 +125,19 @@ function PassFailSidebar({
         onClose={handleListModalClose}
         applicants={isPass ? passApplicants : failApplicants}
         evaluation={evaluation}
+      />
+      <ConfirmCancelModal
+        isOpen={isConnectModalOpen}
+        onClose={handleConnectModalClose}
+        onConfirm={handleConnectList}
+        title={connectTitle}
+        message={
+          <>
+            ⚠️ 한 번 실행하면 되돌릴 수 없어요.
+            <br />
+            계속 진행하시겠습니까?
+          </>
+        }
       />
     </>
   );
