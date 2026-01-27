@@ -18,6 +18,37 @@ export const container = style({
   },
 });
 
+export const headerWrapper = style({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  gap: '10px',
+  marginTop: '40px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      marginTop: '30px',
+    },
+  },
+});
+
+export const resetButton = style({
+  fontSize: vars.fonts.body2,
+  fontWeight: 600,
+  padding: '10px 20px',
+  display: 'flex',
+  alignItems: 'center',
+  borderRadius: '0.333rem',
+  border: `1px solid ${vars.colors.error.container}`,
+  gap: '6px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body2,
+      padding: '8px 16px',
+    },
+  },
+});
+
 export const wrapper = style({
   position: 'relative',
   width: '100%',
@@ -31,13 +62,6 @@ export const title = style({
   fontSize: vars.fonts.title2,
   fontWeight: 700,
   color: vars.colors.surface.on_surf,
-  marginTop: '40px',
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
-      fontSize: vars.fonts.m_title2,
-      marginTop: '30px',
-    },
-  },
 });
 
 export const searchTitle = style({

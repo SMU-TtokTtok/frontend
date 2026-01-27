@@ -1,5 +1,5 @@
 import { ROUTES } from '@/common/constants/routes';
-import Button from '@/common/ui/button';
+import { Button } from '@ttockttock/ui';
 import Header from '@/common/ui/header';
 import Image from 'next/image';
 import Link from 'next/link';

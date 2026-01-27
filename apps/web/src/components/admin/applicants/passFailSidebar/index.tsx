@@ -39,7 +39,7 @@ function PassFailSidebar({
     setIsPass(isPass);
   };
 
-  const { barPosition } = useFollowSidebar({ initialPosition: 55 });
+  const { barPosition } = useFollowSidebar({ initialPosition: 35 });
 
   const {
     isOpen: isListModalOpen,
