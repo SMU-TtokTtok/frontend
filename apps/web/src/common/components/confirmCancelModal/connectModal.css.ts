@@ -4,7 +4,8 @@ import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 
 export const modalContent = style({
-  width: '400px',
+  width: 'min(400px, 90vw)',
+  maxWidth: '100%',
   padding: '24px',
   display: 'flex',
   flexDirection: 'column',
