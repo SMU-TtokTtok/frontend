@@ -55,9 +55,13 @@ function PassFailSidebar({
   } = useModal();
 
   const handleConnectList = () => {
+    if (!profile?.clubId) {
+      openConfirmModalWithMessage('클럽 정보를 불러올 수 없습니다.');
+      return;
+    }
     handleConnectApplicants({
       evaluation,
-      clubId: profile?.clubId ?? '',
+      clubId: profile.clubId,
     });
   };
 
