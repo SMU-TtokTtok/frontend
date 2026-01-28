@@ -29,8 +29,10 @@ export const inputStyle = styleVariants({
     color: vars.colors.black,
     fontWeight: 500,
 
-    '$:placeholder': {
-      color: vars.colors.surface.outline_var,
+    selectors: {
+      '&::placeholder': {
+        color: vars.colors.surface.outline_var,
+      },
     },
   },
   //로그인, 회원가입 관련
@@ -39,8 +41,10 @@ export const inputStyle = styleVariants({
     color: vars.colors.black,
     fontWeight: 400,
 
-    '$:placeholder': {
-      color: vars.colors.surface.cont_5,
+    selectors: {
+      '&::placeholder': {
+        color: vars.colors.surface.cont_5,
+      },
     },
   },
   tertiary: {
@@ -48,8 +52,10 @@ export const inputStyle = styleVariants({
     color: vars.colors.black,
     fontWeight: 500,
 
-    '$:placeholder': {
-      color: vars.colors.surface.outline_var,
+    selectors: {
+      '&::placeholder': {
+        color: vars.colors.surface.outline_var,
+      },
     },
   },
 });

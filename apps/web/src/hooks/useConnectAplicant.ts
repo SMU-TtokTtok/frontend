@@ -6,6 +6,7 @@ import { CustomHttpError } from '@/common/apis/apiClient';
 interface useConnectApplicantParams {
   clubId: string;
   evaluation: Evaluation;
+  onSuccess?: () => void;
 }
 
 export const useConnectApplicant = ({
@@ -36,8 +37,19 @@ export const useConnectApplicant = ({
     },
   });
 
-  const handleConnectApplicants = ({ clubId, evaluation }: useConnectApplicantParams) => {
-    connectApplicantsMutations.mutate({ clubId, evaluation });
+  const handleConnectApplicants = ({
+    clubId,
+    evaluation,
+    onSuccess,
+  }: useConnectApplicantParams) => {
+    connectApplicantsMutations.mutate(
+      { clubId, evaluation },
+      {
+        onSuccess: () => {
+          onSuccess?.();
+        },
+      },
+    );
   };
 
   return {
