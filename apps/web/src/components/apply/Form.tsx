@@ -36,7 +36,6 @@ export default function Form({ clubId }: { clubId: string }) {
   } = useModal();
   const { data: clubData } = useClubInfo(clubId);
   const { data: tempData } = useGetTempData(clubData?.formId || '');
-  console.log(tempData);
   const { handlePostForm } = usePostForm(handleEditModalOpen);
   const { handlePostTempData } = usePostTempData(handleTempSaveModalOpen);
   const {
@@ -289,7 +288,6 @@ export default function Form({ clubId }: { clubId: string }) {
       gender: currentFormData.gender || null,
       answers: answers,
     };
-    console.log(requestData);
     formData.append(
       'request',
       new Blob([JSON.stringify(requestData)], { type: 'application/json' }),
