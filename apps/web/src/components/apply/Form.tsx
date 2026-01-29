@@ -62,6 +62,8 @@ export default function Form({ clubId }: { clubId: string }) {
   React.useEffect(() => {
     if (tempData?.hasTempData && tempData.data && clubData?.questions) {
       const data = tempData.data;
+      let isMounted = true;
+      const abortController = new AbortController();
 
       // 기본 정보 채우기
       if (data.name) setValue('name', data.name);
@@ -85,6 +87,8 @@ export default function Form({ clubId }: { clubId: string }) {
           const fileLoadPromises: Promise<void>[] = [];
 
           for (const answer of data.answers) {
+            if (!isMounted) break;
+            
             // questionId로 해당 질문의 인덱스 찾기
             const questionIndex = clubData.questions.findIndex(
               (q: Question) => q.questionId === answer.questionId,
@@ -97,6 +101,7 @@ export default function Form({ clubId }: { clubId: string }) {
               if (question.questionType === 'CHECKBOX' && Array.isArray(answer.value)) {
                 // 각 선택된 값을 해당 optionIndex에 매핑
                 answer.value.forEach((val: string) => {
+                  if (!isMounted) return;
                   const optionIndex = question.content?.findIndex((option: string) => option === val);
                   if (optionIndex !== undefined && optionIndex !== -1) {
                     setValue(`questions.${questionIndex}.value.${optionIndex}`, val, {
@@ -109,9 +114,12 @@ export default function Form({ clubId }: { clubId: string }) {
                 const url = answer.value;
                 if (url.startsWith('http://') || url.startsWith('https://')) {
                   const fileLoadPromise = (async () => {
+                    if (!isMounted) return;
                     try {
-                      const response = await fetch(url);
+                      const response = await fetch(url, { signal: abortController.signal });
+                      if (!isMounted) return;
                       const blob = await response.blob();
+                      if (!isMounted) return;
                       
                       // URL에서 파일명 추출 (쿼리 파라미터 제거)
                       let fileName = url.split('/').pop() || 'file';
@@ -137,11 +145,13 @@ export default function Form({ clubId }: { clubId: string }) {
                       dataTransfer.items.add(file);
                       const fileList = dataTransfer.files;
 
+                      if (!isMounted) return;
                       // react-hook-form에 설정
                       setValue(`questions.${questionIndex}.value`, fileList, { shouldValidate: false });
 
                       // DOM이 렌더링된 후 실제 input 요소에 파일 설정
                       setTimeout(() => {
+                        if (!isMounted) return;
                         const inputElement = document.querySelector(
                           `input[type="file"][name*="questions.${questionIndex}.value"]`,
                         ) as HTMLInputElement;
@@ -158,23 +168,34 @@ export default function Form({ clubId }: { clubId: string }) {
                         }
                       }, 100);
                     } catch (error) {
-                      console.error('파일 로드 실패:', error);
+                      if (error instanceof Error && error.name !== 'AbortError') {
+                        console.error('파일 로드 실패:', error);
+                      }
                     }
                   })();
                   fileLoadPromises.push(fileLoadPromise);
                 }
               } else {
                 // RADIO, SHORT_ANSWER, LONG_ANSWER의 경우
-                setValue(`questions.${questionIndex}.value`, answer.value, { shouldValidate: false });
+                if (isMounted) {
+                  setValue(`questions.${questionIndex}.value`, answer.value, { shouldValidate: false });
+                }
               }
             }
           }
 
           // 파일 로드 완료 대기
-          await Promise.all(fileLoadPromises);
+          if (isMounted) {
+            await Promise.all(fileLoadPromises);
+          }
         };
         loadAnswers();
       }
+
+      return () => {
+        isMounted = false;
+        abortController.abort();
+      };
     }
   }, [tempData, clubData?.questions, setValue]);
 
