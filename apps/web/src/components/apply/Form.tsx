@@ -158,8 +158,8 @@ export default function Form({ clubId }: { clubId: string }) {
 
                         if (inputElement) {
                           try {
-                            // @ts-ignore - 브라우저에 따라 가능할 수 있음
-                            inputElement.files = dataTransfer.files;
+                            // 브라우저에 따라 가능할 수 있음
+                            (inputElement as { files: FileList }).files = dataTransfer.files;
                             const changeEvent = new Event('change', { bubbles: true });
                             inputElement.dispatchEvent(changeEvent);
                           } catch (e) {
@@ -267,7 +267,7 @@ export default function Form({ clubId }: { clubId: string }) {
     const questionIds: string[] = [];
 
     const answers =
-      currentFormData.questions?.map((question: { questionId: string; value: any }) => {
+      currentFormData.questions?.map((question: { questionId: string; value: string | string[] | FileList | boolean | null | undefined }) => {
         let value;
 
         // 답변 타입에 따라 value 처리
