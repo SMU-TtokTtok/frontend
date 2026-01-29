@@ -29,11 +29,16 @@ export default function Form({ clubId }: { clubId: string }) {
     handleModalClose: handleEditModalClose,
     handleModalOpen: handleEditModalOpen,
   } = useModal();
+  const {
+    isOpen: isTempSaveModalOpen,
+    handleModalClose: handleTempSaveModalClose,
+    handleModalOpen: handleTempSaveModalOpen,
+  } = useModal();
   const { data: clubData } = useClubInfo(clubId);
   const { data: tempData } = useGetTempData(clubData?.formId || '');
   console.log(tempData);
   const { handlePostForm } = usePostForm(handleEditModalOpen);
-  const { handlePostTempData } = usePostTempData();
+  const { handlePostTempData } = usePostTempData(handleTempSaveModalOpen);
   const {
     register,
     handleSubmit,
@@ -375,6 +380,12 @@ export default function Form({ clubId }: { clubId: string }) {
         redirectTo={ROUTES.APPLIED}
       >
         지원이 완료되었습니다
+      </ConfirmModal>
+      <ConfirmModal
+        isOpen={isTempSaveModalOpen}
+        onClose={handleTempSaveModalClose}
+      >
+        임시저장이 완료되었습니다
       </ConfirmModal>
     </>
   );

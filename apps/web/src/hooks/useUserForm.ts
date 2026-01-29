@@ -58,7 +58,7 @@ export const usePostForm = (handleEditModalOpen: () => void) => {
   return { handlePostForm };
 };
 
-export const usePostTempData = () => {
+export const usePostTempData = (handleTempSaveModalOpen: () => void) => {
   const queryClient = useQueryClient();
   const { userTempData } = userTempDataKey;
 
@@ -66,7 +66,7 @@ export const usePostTempData = () => {
     mutationFn: ({ body, formId }: { body: FormData; formId: string }) =>
       postFormTempData(body, formId),
     onSuccess: (_data: unknown, variables: { body: FormData; formId: string }) => {
-      alert('임시저장이 완료되었습니다.');
+      handleTempSaveModalOpen();
       queryClient.invalidateQueries({ queryKey: [userTempData, variables.formId] });
     },
     onError: (error: CustomHttpError) => {
