@@ -40,3 +40,7 @@ export const clubMemberKey = {
   clubMember: 'clubMember',
   gradeCount: 'gradeCount',
 } as const;
+
+export const userTempDataKey = {
+  userTempData: ['userTempData'],
+} as const;
