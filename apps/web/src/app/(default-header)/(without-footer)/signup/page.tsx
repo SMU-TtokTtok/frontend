@@ -40,7 +40,9 @@ export default function Page() {
 
       const response = await postEmail({ email });
       if (response.success) {
-        alert(response.message);
+        alert(
+          `${response.message}\n\n인증코드는 샘물포털(https://portal.smu.ac.kr)에 접속하여 Office365를 클릭한 후 Outlook을 통해 확인하실 수 있습니다.`,
+        );
       } else {
         alert(response.message);
       }
