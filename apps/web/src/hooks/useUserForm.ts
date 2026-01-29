@@ -7,7 +7,7 @@ import { CustomHttpError } from '@/common/apis/apiClient';
 import { userKey } from './queries/key';
 import { userTempDataKey } from './queries/key';
 import { useQueryClient } from '@tanstack/react-query';
-import { gethFormData } from '@/components/apply/api/getFormData';
+import { getFormData } from '@/components/apply/api/getFormData';
 
 export const useClubInfo = (clubId: string) => {
   const { clubForm } = clubFormKey;
@@ -24,7 +24,7 @@ export const useGetTempData = (formId: string) => {
 
   const { data } = useSuspenseQuery({
     queryKey: [userTempData, formId],
-    queryFn: () => gethFormData(formId),
+    queryFn: () => getFormData(formId),
   });
   return { data };
 };

@@ -44,7 +44,7 @@ export default function Page() {
           `${response.message}\n\n인증코드는 샘물포털(https://portal.smu.ac.kr)에 접속하여 Office365를 클릭한 후 Outlook을 통해 확인하실 수 있습니다.\n\n샘물포털로 이동하시겠습니까?`,
         );
         if (shouldOpenPortal) {
-          window.open('https://portal.smu.ac.kr', '_blank');
+          window.open('https://portal.smu.ac.kr', '_blank', 'noopener,noreferrer');
         }
       } else {
         alert(response.message);
