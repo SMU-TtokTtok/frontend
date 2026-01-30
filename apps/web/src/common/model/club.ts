@@ -11,3 +11,5 @@ export interface ClubItemInfo {
   bookmarked: boolean;
   isDeadlineImminent: boolean;
 }
+
+export type clubUniv = 'GLOBAL_AREA' | 'DESIGN' | 'ENGINEERING' | 'CONVERGENCE_TECHNOLOGY' | 'ARTS';
