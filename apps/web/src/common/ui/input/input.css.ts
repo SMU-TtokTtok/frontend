@@ -59,4 +59,9 @@ export const errorMessage = style({
   fontSize: vars.fonts.body2,
   fontWeight: 500,
   marginTop: '0.6rem',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body2,
+    },
+  },
 });
