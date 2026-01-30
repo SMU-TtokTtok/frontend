@@ -12,4 +12,4 @@ export interface ClubItemInfo {
   isDeadlineImminent: boolean;
 }
 
-export type clubUniv = 'GLOBAL_AREA' | 'DESIGN' | 'ENGINEERING' | 'CONVERGENCE_TECHNOLOGY' | 'ARTS';
+export type ClubUniv = 'GLOBAL_AREA' | 'DESIGN' | 'ENGINEERING' | 'CONVERGENCE_TECHNOLOGY' | 'ARTS';
