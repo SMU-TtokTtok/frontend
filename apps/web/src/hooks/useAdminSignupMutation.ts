@@ -13,6 +13,7 @@ export const useAdminSignupMutation = () => {
       const response = await postAdminSignup(signupData);
       return response;
     },
+
     onError: (error) => {
       const customError = error as CustomHttpError;
       if (customError.status !== 401) {
@@ -21,8 +22,12 @@ export const useAdminSignupMutation = () => {
     },
   });
 
-  const handleSignup = (data: AdminSignupForm) => {
-    signupMutation.mutate(data);
+  const handleSignup = (data: AdminSignupForm, handleComplete: () => void) => {
+    signupMutation.mutate(data, {
+      onSuccess: () => {
+        handleComplete();
+      },
+    });
   };
 
   return {

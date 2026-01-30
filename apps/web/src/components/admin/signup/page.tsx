@@ -12,6 +12,7 @@ import { signupSchema } from './schema';
 import { FILTER_CONFIG } from '@/common/constants';
 import { useState } from 'react';
 import SignupCompletePage from './complete/page';
+import { sign } from 'crypto';
 
 export type AdminSignupForm = z.infer<typeof signupSchema>;
 
@@ -40,8 +41,9 @@ function SignupPage() {
       <form
         className={S.BoxContainer}
         onSubmit={handleSubmit((data) => {
-          handleSignup(data);
-          setIsComplete(true);
+          handleSignup(data, () => {
+            setIsComplete(true);
+          });
         })}
       >
         <label className={S.Label({ isFirst: true })}>아이디</label>
