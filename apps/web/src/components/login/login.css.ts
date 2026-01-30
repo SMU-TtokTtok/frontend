@@ -102,6 +102,20 @@ export const AuthFooter = style({
   },
 });
 
+export const AdminSignUp = style({
+  color: vars.colors.surface.outline,
+  fontSize: vars.fonts.body3,
+  cursor: 'pointer',
+  display: 'flex',
+  justifyContent: 'flex-end',
+  marginTop: '12px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body3,
+    },
+  },
+});
+
 export const AuthFooterTextContainer = style({
   display: 'flex',
   gap: '10px',

@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import * as S from '@/components/signup/signupComplete.css';
 import Button from '@/common/ui/button';
+import { useConfetti } from '@/hooks/useConfetti';
 
 interface SignupCompleteProps {
   userName: string;
@@ -10,7 +11,7 @@ interface SignupCompleteProps {
 
 export default function SignupComplete({ userName }: SignupCompleteProps) {
   const router = useRouter();
-
+  useConfetti();
   return (
     <div className={S.CompleteBox}>
       <div className={S.CompleteTitle}>회원가입 완료!</div>
