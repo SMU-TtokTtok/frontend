@@ -10,6 +10,7 @@ export const API = {
   },
   ADMIN: {
     LOGIN: '/auth/login',
+    SIGNUP: '/auth/join',
     LOGOUT: '/auth/logout',
     RE_ISSUE: '/auth/re-issue',
     APPLICANTS: '/applies',
