@@ -92,23 +92,13 @@ function AdminClubInfo() {
                 if (isEditing && fileInputRef.current) fileInputRef.current.click();
               }}
             >
-              {clubInfo?.profileImageUrl ? (
-                <img
-                  src={clubInfo.profileImageUrl}
-                  alt="동아리 사진"
-                  width={212}
-                  height={224}
-                  className={`${S.imgStyle} ${isEditing ? 'editing' : ''}`}
-                />
-              ) : (
-                <Image
-                  src={clubImg}
-                  alt="동아리 사진"
-                  width={212}
-                  height={224}
-                  className={`${S.imgStyle} ${isEditing ? 'editing' : ''}`}
-                />
-              )}
+               <Image
+                src={clubInfo?.profileImageUrl || clubImg}
+                alt="동아리 사진"
+                width={212}
+                height={224}
+                className={`${S.imgStyle} ${isEditing ? 'editing' : ''}`}
+              />
               {isEditing && (
                 <Image src={EditIcon} alt="edit" width={48} height={48} className={S.editIcon} />
               )}

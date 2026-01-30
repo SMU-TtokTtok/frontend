@@ -34,11 +34,13 @@ export default function ClubProfile({
 
   return (
     <div className={S.clubProfile}>
-      {profileImageUrl ? (
-        <img src={profileImageUrl} alt={name} width={212} height={206} className={S.imageStyle} />
-      ) : (
-        <Image src={clubImg} alt={name} width={212} height={206} className={S.imageStyle} />
-      )}
+        <Image
+        src={profileImageUrl || clubImg}
+        alt={name}
+        width={212}
+        height={206}
+        className={S.imageStyle}
+      />
       <div className={S.RightFlex}>
         <div className={S.type} style={{ marginBottom: '2px' }}>
           {getKoreanType(clubType)}
