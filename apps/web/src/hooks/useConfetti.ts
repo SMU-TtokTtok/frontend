@@ -17,5 +17,8 @@ export const useConfetti = () => {
       ],
       confettiNumber: 300,
     });
+    return () => {
+      jsConfetti.clearCanvas();
+    };
   }, []);
 };
