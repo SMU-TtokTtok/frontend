@@ -10,9 +10,10 @@ import {
   PatchMemo,
   PostMemo,
   PutConnectApplicant,
+  PostFinishForm,
 } from './applicants';
 import { Clubs, getSearchList, patchFavorite, popularClubs } from './clubList';
-import { AdminLogin, AdminLogout, AdminProfile, AdminRefresh } from './auth';
+import { AdminLogin, AdminLogout, AdminProfile, AdminRefresh, AdminSignup } from './auth';
 import {
   getClubInfo,
   patchClubInfo,
@@ -50,6 +51,7 @@ export const handlers = [
   PassList,
   FailList,
   AdminLogin,
+  AdminSignup,
   emailCheckHandler,
   verifyResetCodeHandler,
   resetPasswordHandler,
@@ -67,6 +69,7 @@ export const handlers = [
   PatchMemo,
   DeleteMemo,
   PutConnectApplicant,
+  PostFinishForm,
   AdminRefresh,
   deleteClubMember,
   patchClubMember,

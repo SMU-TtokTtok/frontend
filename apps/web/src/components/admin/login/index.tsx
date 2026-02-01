@@ -7,6 +7,8 @@ import Input from '@/common/ui/input';
 import { z } from 'zod';
 import { useLoginMutation } from '@/hooks/useAdminMutation';
 import { MESSAGE } from '@/common/constants/message';
+import Link from 'next/link';
+import { ROUTES } from '@/common/constants/routes';
 
 const loginSchema = z.object({
   login: z.string().min(1, MESSAGE.error.adminLogin),
@@ -56,7 +58,9 @@ function LoginPage() {
           errorMessage={errors.password?.message}
           {...register('password')}
         />
-
+        <Link href={ROUTES.ADMIN_SIGNUP} className={S.AdminSignUp}>
+          회원가입
+        </Link>
         <Button type="submit" variant="secondary" className={S.adminLoginButton}>
           로그인
         </Button>

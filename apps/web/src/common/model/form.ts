@@ -13,3 +13,26 @@ export interface getForm {
   subTitle: string;
   questions: Question[];
 }
+
+export interface TempDataAnswer {
+  questionId: string;
+  value: string | string[] | null;
+}
+
+export interface TempData {
+  name: string | null;
+  age: number | null;
+  major: string | null;
+  email: string | null;
+  phone: string | null;
+  studentStatus: 'ENROLLED' | 'ABSENCE' | null;
+  grade: 'FIRST_GRADE' | 'SECOND_GRADE' | 'THIRD_GRADE' | 'FOURTH_GRADE' | null;
+  gender: 'MALE' | 'FEMALE' | null;
+  applyFormId: string | null;
+  answers: TempDataAnswer[] | [];
+}
+
+export interface getTempData {
+  hasTempData: boolean;
+  data: TempData | null;
+}

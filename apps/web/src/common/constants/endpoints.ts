@@ -10,6 +10,7 @@ export const API = {
   },
   ADMIN: {
     LOGIN: '/auth/login',
+    SIGNUP: '/auth/join',
     LOGOUT: '/auth/logout',
     RE_ISSUE: '/auth/re-issue',
     APPLICANTS: '/applies',
@@ -25,6 +26,7 @@ export const API = {
       `/applies/${applicantId}/memos/${memoId}`,
     FORMS: (clubId: string) => `/forms/${clubId}`,
     FORMS_UPDATE: (formId: string) => `/forms/${formId}`,
+    FORMS_FINISH: (formId: string) => `/forms/finish/${formId}`,
     APPLICANTS_CONNECTION: (clubId: string) => `/applies/${clubId}/finalize`,
     FORMS_CREATE: (clubId: string) => `/forms/clubs/${clubId}`,
   },

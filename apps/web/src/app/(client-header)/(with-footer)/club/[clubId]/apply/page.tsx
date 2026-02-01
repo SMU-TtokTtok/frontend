@@ -1,11 +1,13 @@
 'use client';
 
 // import { useParams } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import * as S from '@/components/apply/index.css';
 import BackButton from '@/components/clubInfo/BackButton';
-import Form from '@/components/apply/Form';
 // import RightSide from '@/components/apply/RightSide';
 import { useParams } from 'next/navigation';
+
+const Form = dynamic(() => import('@/components/apply/Form'), { ssr: false });
 
 export default function Page() {
   const params = useParams();

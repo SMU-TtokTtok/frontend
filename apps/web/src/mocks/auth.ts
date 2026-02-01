@@ -9,6 +9,28 @@ export const AdminLogin = http.post(`${API}/api/admin/auth/login`, async ({ requ
   return HttpResponse.json({ message: '로그인 실패' }, { status: 401 });
 });
 
+export const AdminSignup = http.post(`${API}/api/admin/auth/join`, async ({ request }) => {
+  const { username, password, clubName, clubUniv } = (await request.json()) as {
+    username: string;
+    password: string;
+    clubName: string;
+    clubUniv: string;
+  };
+
+  // 간단한 유효성 검사
+  if (!username || !password || !clubName || !clubUniv) {
+    return HttpResponse.json({ message: '모든 필드를 입력해주세요.' }, { status: 400 });
+  }
+
+  return HttpResponse.json(
+    {
+      success: true,
+      message: '회원가입이 완료되었습니다.',
+    },
+    { status: 200 },
+  );
+});
+
 export const AdminLogout = http.post(`${API}/api/admin/auth/logout`, async () => {
   return HttpResponse.json({ message: '로그아웃 성공' }, { status: 200 });
 });
