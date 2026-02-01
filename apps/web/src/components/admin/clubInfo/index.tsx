@@ -92,7 +92,7 @@ function AdminClubInfo() {
                 if (isEditing && fileInputRef.current) fileInputRef.current.click();
               }}
             >
-              <img
+               <Image
                 src={clubInfo?.profileImageUrl || clubImg}
                 alt="동아리 사진"
                 width={212}
