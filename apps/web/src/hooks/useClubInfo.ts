@@ -1,4 +1,5 @@
 import { useSuspenseQuery, useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { clubInfoKey } from './queries/key';
 import { getClubInfo } from '@/components/clubInfo/api/getClubInfo';
 import { getAdminClubInfo } from '@/components/admin/clubInfo/api/getClubInfo';
@@ -6,6 +7,7 @@ import { patchIsRecruting } from '@/components/admin/clubInfo/api/patchIsRecruti
 import { patchClubInfo } from '@/components/admin/clubInfo/api/pactchClubInfo';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import { CustomHttpError } from '@/common/apis/apiClient';
+import { ROUTES } from '@/common/constants/routes';
 
 export const useClubInfo = (clubId: string) => {
   const { clubInfo } = clubInfoKey;
@@ -60,6 +62,7 @@ export const useRecruitmentToggle = (handleModalOpen: () => void, clubId: string
 
 export const useAdminClubPatch = (handleModalOpen: () => void, clubId: string) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
   const { adminClubInfo } = clubInfoKey;
 
   const patchClubInfoMutation = useMutation({
@@ -76,7 +79,12 @@ export const useAdminClubPatch = (handleModalOpen: () => void, clubId: string) =
     },
     onError: (error) => {
       const customError = error as CustomHttpError;
-      if (customError.status !== 401) {
+      if (customError.status === 404) {
+        const shouldNavigate = confirm('지원폼이 아직 제작되지 않았습니다. 지원폼 제작 페이지로 이동하시겠습니까?');
+        if (shouldNavigate) {
+          router.push(ROUTES.ADMIN_APPLICATIONS_CREATE);
+        }
+      } else if (customError.status !== 401) {
         alert('동아리 정보 수정에 실패했습니다');
       }
     },
