@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import DOMPurify from 'dompurify';
 import * as S from './clubIntro.css';
 import Button from '@/common/ui/button/index';
@@ -11,14 +11,7 @@ interface ClubIntroProps {
 }
 
 const ClubIntro = ({ introduction }: ClubIntroProps) => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   const sanitizedIntroduction = useMemo(() => {
-    if (!isClient) return introduction;
     return DOMPurify.sanitize(introduction, {
       ALLOWED_TAGS: [
         'p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
@@ -28,7 +21,7 @@ const ClubIntro = ({ introduction }: ClubIntroProps) => {
       ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'class', 'style'],
       ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
     });
-  }, [introduction, isClient]);
+  }, [introduction]);
 
   return (
     <div className={S.container}>
