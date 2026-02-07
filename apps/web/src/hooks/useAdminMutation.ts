@@ -9,7 +9,7 @@ import { CustomHttpError } from '@/common/apis/apiClient';
 
 export const useLoginMutation = () => {
   const router = useRouter();
-
+  const queryClient = useQueryClient();
   const loginMutation = useMutation({
     mutationFn: async ({ login, password }: AdminLoginForm) => {
       const response = await postLogin({ login, password });
@@ -18,6 +18,7 @@ export const useLoginMutation = () => {
     onSuccess: (data) => {
       localStorage.setItem('admin_access_token', data.accessToken || '');
       localStorage.setItem('admin_refresh_token', data.refreshToken || '');
+      queryClient.invalidateQueries({ queryKey: [adminProfileKey.adminProfile] });
       router.push(ROUTES.ADMIN);
     },
     onError: (error) => {

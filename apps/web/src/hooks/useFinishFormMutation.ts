@@ -22,7 +22,9 @@ export const useFinishFormMutation = () => {
     },
     onError: (error) => {
       const customError = error as CustomHttpError;
-      if (customError.status !== 401) {
+      if (customError.status === 404) {
+        alert('지원 폼을 찾을 수 없어요.\n 지원폼을 만들어주세요.');
+      } else if (customError.status !== 401) {
         alert('지원자 평가 종료에 실패했습니다.');
       }
     },

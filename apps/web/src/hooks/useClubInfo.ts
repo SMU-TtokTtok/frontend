@@ -20,7 +20,7 @@ export const useClubInfo = (clubId: string) => {
 export const useAdminClubInfo = (clubId: string) => {
   const { adminClubInfo } = clubInfoKey;
   const { data, isLoading, refetch } = useQuery({
-    queryKey: adminClubInfo,
+    queryKey: [adminClubInfo, clubId],
     queryFn: () => getAdminClubInfo(clubId),
     enabled: !!clubId,
   });
@@ -37,7 +37,7 @@ export const useRecruitmentToggle = (handleModalOpen: () => void, clubId: string
       return response;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: adminClubInfo });
+      queryClient.invalidateQueries({ queryKey: [adminClubInfo, clubId] });
       handleModalOpen();
     },
     onError: (error: CustomHttpError) => {
@@ -71,7 +71,7 @@ export const useAdminClubPatch = (handleModalOpen: () => void, clubId: string) =
       return response;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: adminClubInfo });
+      queryClient.invalidateQueries({ queryKey: [adminClubInfo, clubId] });
       handleModalOpen();
     },
     onError: (error) => {
