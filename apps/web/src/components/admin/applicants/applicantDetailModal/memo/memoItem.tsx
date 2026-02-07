@@ -18,6 +18,7 @@ function MemoItem({ memo, onUpdate, onDelete, onSave }: MemoItemProps) {
         className={S.memoItemTextarea}
         value={memo.content}
         placeholder="메모를 입력하세요"
+        maxLength={500}
         onChange={(e) => onUpdate(String(memo.id), e.target.value)}
       />
       <div className={S.buttonGroup}>
