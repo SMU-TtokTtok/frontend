@@ -37,7 +37,7 @@ export default function Form({ clubId }: { clubId: string }) {
   const { data: clubData } = useClubInfo(clubId);
   // formId가 있을 때만 임시저장 데이터 조회
   const { data: tempData } = useGetTempData(clubData?.formId || '');
-  const { handlePostForm } = usePostForm(handleEditModalOpen);
+  const { handlePostForm, isSubmitting } = usePostForm(handleEditModalOpen);
   const { handlePostTempData } = usePostTempData(handleTempSaveModalOpen);
   const {
     register,
@@ -397,8 +397,8 @@ export default function Form({ clubId }: { clubId: string }) {
           >
             임시저장
           </Button>
-          <Button type="submit" variant="primary" className={S.submitButton}>
-            제출하기
+          <Button type="submit" variant="primary" className={S.submitButton} disabled={isSubmitting}>
+            {isSubmitting ? '제출 중...' : '제출하기'}
           </Button>
         </div>
         <Button
@@ -409,8 +409,8 @@ export default function Form({ clubId }: { clubId: string }) {
           >
             임시저장
           </Button>
-        <Button type="submit" variant="primary" className={S.submitButtonMobile}>
-          제출하기
+        <Button type="submit" variant="primary" className={S.submitButtonMobile} disabled={isSubmitting}>
+          {isSubmitting ? '제출 중...' : '제출하기'}
         </Button>
       </form>
       <ConfirmModal

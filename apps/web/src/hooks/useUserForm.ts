@@ -55,7 +55,7 @@ export const usePostForm = (handleEditModalOpen: () => void) => {
     postFormMutation.mutate({ body, clubId });
   };
 
-  return { handlePostForm };
+  return { handlePostForm, isSubmitting: postFormMutation.isPending };
 };
 
 export const usePostTempData = (handleTempSaveModalOpen: () => void) => {

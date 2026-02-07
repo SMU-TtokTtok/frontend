@@ -1,6 +1,7 @@
 'use client';
 
 import { Suspense, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import * as S from '@/components/clubInfo/index.css';
 import BackButton from '@/components/clubInfo/BackButton';
 import ClubProfile from '@/components/clubInfo/ClubProfile';
@@ -12,7 +13,7 @@ import LoadingSpinner from '@/common/ui/loading';
 import { useModal } from '@/hooks/useModal';
 import ConfirmModal from '@/common/components/confirmModal';
 
-export default function ClubInfoPage() {
+const ClubInfoPage = () => {
   const { clubId } = useParams();
   const { data } = useClubInfo(clubId as string);
   const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -52,4 +53,6 @@ export default function ClubInfoPage() {
       </ConfirmModal>
     </>
   );
-}
+};
+
+export default dynamic(() => Promise.resolve(ClubInfoPage), { ssr: false });
