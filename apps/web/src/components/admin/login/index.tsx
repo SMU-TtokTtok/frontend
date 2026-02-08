@@ -58,9 +58,20 @@ function LoginPage() {
           errorMessage={errors.password?.message}
           {...register('password')}
         />
-        <Link href={ROUTES.ADMIN_SIGNUP} className={S.AdminSignUp}>
-          회원가입
-        </Link>
+        <div className={S.AdminAuthContainer}>
+          <div className={S.AdminSignUp} title="아이디 찾기는 관리자에게 문의바랍니다">
+            아이디 찾기
+          </div>
+          <div className={S.AdminSignUp}>|</div>
+          <Link href={ROUTES.ADMIN_PASSWORD} className={S.AdminSignUp}>
+            비밀번호 재설정
+          </Link>
+          <div className={S.AdminSignUp}>|</div>
+          <Link href={ROUTES.ADMIN_SIGNUP} className={S.AdminSignUp}>
+            회원가입
+          </Link>
+        </div>
+       
         <Button type="submit" variant="secondary" className={S.adminLoginButton}>
           로그인
         </Button>
