@@ -6,4 +6,10 @@ export async function register() {
   }
 }
 
-export const onRequestError = Sentry.captureRequestError;
+export const onRequestError = (err: Error, requestInfo: { request: Request }) => {
+  // Don't send 401 errors to Sentry
+  if (err && typeof err === 'object' && 'status' in err && (err as any).status === 401) {
+    return;
+  }
+  Sentry.captureRequestError(err, requestInfo);
+};

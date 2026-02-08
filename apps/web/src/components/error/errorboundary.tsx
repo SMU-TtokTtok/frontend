@@ -32,6 +32,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error) {
+    // Don't send 401 errors to Sentry
+    if (error && typeof error === 'object' && 'status' in error && (error as any).status === 401) {
+      return;
+    }
     Sentry.captureException(error);
   }
 

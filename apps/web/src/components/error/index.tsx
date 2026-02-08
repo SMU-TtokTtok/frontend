@@ -15,6 +15,10 @@ function UnExpectedErrorPage({ error, reset, className }: ErrorPageProps) {
 
   useEffect(() => {
     if (error) {
+      // Don't send 401 errors to Sentry
+      if (error && typeof error === 'object' && 'status' in error && (error as any).status === 401) {
+        return;
+      }
       Sentry.captureException(error);
     }
   }, [error]);
