@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/nextjs';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 export async function register() {
   if (process.env.NEXT_RUNTIME === 'nodejs') {
@@ -13,18 +14,13 @@ interface RequestContext {
   [key: string]: unknown;
 }
 
-interface ErrorWithStatus extends Error {
-  status?: number;
-}
-
 export const onRequestError = (
   err: Error,
   requestInfo: { request: Request },
   context?: RequestContext,
 ) => {
   // Don't send 401 errors to Sentry
-  const errorWithStatus = err as ErrorWithStatus;
-  if (errorWithStatus.status === 401) {
+  if (err instanceof CustomHttpError && err.status === 401) {
     return;
   }
   // Pass all three parameters to captureRequestError for complete diagnostic data
