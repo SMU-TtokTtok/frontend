@@ -1,6 +1,7 @@
 import { Component, createElement, ReactNode } from 'react';
 import { ErrorBoundaryContext } from '@/common/store/errorContext';
 import * as Sentry from '@sentry/nextjs';
+import { CustomHttpError } from '@/common/apis/apiClient';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 interface ErrorBoundaryProps {
@@ -33,7 +34,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   componentDidCatch(error: Error) {
     // Don't send 401 errors to Sentry
-    if (error && typeof error === 'object' && 'status' in error && (error as any).status === 401) {
+    if (error instanceof CustomHttpError && error.status === 401) {
       return;
     }
     Sentry.captureException(error);
