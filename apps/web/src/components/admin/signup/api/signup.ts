@@ -4,6 +4,7 @@ import { API } from '@/common/constants/endpoints';
 export interface AdminSignupForm {
   username: string;
   password: string;
+  email: string;
   clubName: string;
   clubUniv: string;
 }

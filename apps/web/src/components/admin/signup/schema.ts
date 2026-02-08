@@ -19,6 +19,7 @@ export const signupSchema = z.object({
     .refine((val) => !/[\u3131-\u3163\uac00-\ud7a3]/.test(val), {
       message: '비밀번호에 한글을 사용할 수 없습니다.',
     }),
+  email: z.string().email('올바른 이메일 형식을 입력해주세요.'),
   clubName: z.string().min(1, '동아리 이름을 입력해주세요.'),
   clubUniv: z.enum(univItems, {
     errorMap: () => ({ message: '단과대를 선택해주세요.' }),

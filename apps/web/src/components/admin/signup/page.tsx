@@ -68,6 +68,17 @@ function SignupPage() {
           {...register('password')}
         />
 
+        <label className={S.Label({ isFirst: false })}>이메일</label>
+        <Input
+          type="email"
+          variant="secondary"
+          placeholder="이메일을 입력하세요"
+          className={S.Input}
+          isError={!!errors.email}
+          errorMessage={errors.email?.message}
+          {...register('email')}
+        />
+
         <label className={S.Label({ isFirst: false })}>동아리 이름</label>
         <Input
           type="text"
