@@ -6,18 +6,13 @@ export async function register() {
   }
 }
 
-export const onRequestError = (err: Error, requestInfo: { request: Request }) => {
+export const onRequestError = (err: Error, requestInfo: { request: Request }, context?: any) => {
   // Don't send 401 errors to Sentry
   if (err && typeof err === 'object' && 'status' in err && (err as any).status === 401) {
     return;
   }
-  // Use captureException instead of captureRequestError to avoid type issues
-  Sentry.captureException(err, {
-    contexts: {
-      request: {
-        url: requestInfo.request.url,
-        method: requestInfo.request.method,
-      },
-    },
-  });
+  // Pass all three parameters to captureRequestError for complete diagnostic data
+  // context may contain router kind, route path, route type for better error tracking
+  // Use type assertion to match Sentry's expected RequestInfo type
+  Sentry.captureRequestError(err, requestInfo as any, context);
 };
