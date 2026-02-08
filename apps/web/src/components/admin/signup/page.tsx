@@ -33,10 +33,10 @@ function SignupPage() {
 
   return (
     <div className={S.Container}>
-      <h3 className={S.SignupText}>동아리 운영진 회원가입</h3>
+      <h3 className={S.SignupText}>동아리 계정 회원가입</h3>
       <p className={S.SignupDescription}>
         동아리 모집 및 관리를 위해 <br />
-        운영진 계정을 생성해 주세요.
+        동아리 계정을 생성해 주세요.
       </p>
       <form
         className={S.BoxContainer}
