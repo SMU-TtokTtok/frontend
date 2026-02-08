@@ -1,5 +1,5 @@
 import Modal from '@/common/ui/modal/modal';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useRef } from 'react';
 import { usePreventScroll } from '@/hooks/usepreventScroll';
 import React from 'react';
 import * as S from './applicantDetailModal.css';
@@ -19,11 +19,12 @@ function ApplicantDetailModal({
   onClose,
   isOpen,
 }: PropsWithChildren<ApplicantDetailModalProps>) {
-  usePreventScroll(isOpen);
+  const preventScrollRef = useRef<HTMLDivElement>(null);
+  usePreventScroll(isOpen, preventScrollRef);
   const ref = useOutsideClick(() => onClose());
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal ref={preventScrollRef} isOpen={isOpen} onClose={onClose}>
       <Modal.Content ref={ref} className={S.applicantDetailModal}>
         <QueryErrorBoundary>
           <ApplicantHeader applicantId={applicantId} />
