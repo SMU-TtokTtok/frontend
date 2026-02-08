@@ -11,7 +11,7 @@ export const AdminApplicationForm = http.get(
 );
 
 export const postApplicantForm = http.post(
-  `${BASE_API}/api/admin${API.ADMIN.FORMS(':clubId')}`,
+  `${BASE_API}/api/admin${API.ADMIN.FORMS_CREATE(':clubId')}`,
   ({ request }) => {
     return HttpResponse.json({ success: true, data: request.body }, { status: 200 });
   },

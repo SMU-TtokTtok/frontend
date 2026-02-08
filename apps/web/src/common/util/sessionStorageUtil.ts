@@ -16,3 +16,20 @@ export const loadFromSession = <T = any>(key: string): T | null => {
     return null;
   }
 };
+
+export const clearFormSession = () => {
+  const formKeys = [
+    'recruitStartDate',
+    'recruitEndDate',
+    'maxApplyCount',
+    'selectedGrades',
+    'applicableGrades',
+    'hasInterview',
+    'interviewStartDate',
+    'interviewEndDate',
+  ];
+
+  formKeys.forEach((key) => {
+    sessionStorage.removeItem(key);
+  });
+};
