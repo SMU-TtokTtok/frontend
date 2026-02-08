@@ -16,7 +16,9 @@ export const useAdminSignupMutation = () => {
 
     onError: (error) => {
       const customError = error as CustomHttpError;
-      if (customError.status !== 401) {
+      if (customError.status === 409) {
+        alert('이미 존재하는 아이디입니다.');
+      } else if (customError.status !== 401) {
         alert('회원가입 중 오류가 발생했습니다.');
       }
     },

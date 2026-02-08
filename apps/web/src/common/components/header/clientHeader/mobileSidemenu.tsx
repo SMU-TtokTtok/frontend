@@ -55,7 +55,7 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
               <Image src={arrowNav} alt="이동하기" />
             </Link>
             <Link href={ROUTES.ADMIN_LOGIN} className={S.MenuItem}>
-              <span>동아리 운영진 로그인</span>
+              <span>동아리 로그인</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
             {installable && (
@@ -76,7 +76,7 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
               <Image src={arrowNav} alt="이동하기" />
             </Link>
             <Link href={ROUTES.ADMIN_LOGIN} className={S.MenuItem}>
-              <span>동아리 운영진 로그인</span>
+              <span>동아리 로그인</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
             {installable && (

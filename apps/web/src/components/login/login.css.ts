@@ -192,3 +192,9 @@ export const CheckboxText = style({
     },
   },
 });
+
+export const AdminAuthContainer = style({
+  display: 'flex',
+  gap: '10px',
+  justifyContent: 'flex-end',
+});

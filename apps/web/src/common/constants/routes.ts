@@ -12,6 +12,7 @@ export const ROUTES = {
   ADMIN: '/admin',
   ADMIN_LOGIN: '/admin/login',
   ADMIN_SIGNUP: '/admin/signup',
+  ADMIN_PASSWORD: '/admin/password',
   ADMIN_APPLICATIONS: '/admin/applicants?evaluation=DOCUMENT&sort=GRADE',
   ADMIN_CLUB_MEMBER: '/admin/clubMember',
   ADMIN_CLUB_MEMBER_ADD: '/admin/clubMember/add',
