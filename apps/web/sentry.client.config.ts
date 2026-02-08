@@ -3,6 +3,7 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from '@sentry/nextjs';
+import { CustomHttpError } from '@/common/apis/apiClient';
 
 Sentry.init({
   dsn: 'https://40484f988d805d1c90b4a46b42d8f6af@o4509802545741824.ingest.us.sentry.io/4509802549805056',
@@ -25,7 +26,7 @@ Sentry.init({
   // Filter out 401 errors from being sent to Sentry
   beforeSend(event, hint) {
     const error = hint.originalException;
-    if (error && typeof error === 'object' && 'status' in error && error.status === 401) {
+    if (error instanceof CustomHttpError && error.status === 401) {
       return null; // Don't send 401 errors to Sentry
     }
     // Check if error message contains 401
