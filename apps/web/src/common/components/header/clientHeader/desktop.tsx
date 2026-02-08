@@ -81,6 +81,12 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
               <Button className={S.ButtonStyle} variant="secondary">
                 회원가입
               </Button>
+            
+            </Link>
+            <Link href={ROUTES.ADMIN_LOGIN}>
+              <Button className={S.ButtonStyle} variant="secondary">
+                동아리 로그인
+              </Button>
             </Link>
           </>
         )}
