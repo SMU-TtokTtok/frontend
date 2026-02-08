@@ -34,9 +34,9 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
   const { handleLogout } = useLogoutMutation();
   return (
     <Header isVisible={isVisible} className={S.DesktopInnerWrapper}>
-      <Link href={ROUTES.HOME}>
-        <Image src={Mainlogo} className={S.Logo} alt="Main Logo" />
-      </Link>
+        <Link href={ROUTES.HOME}>
+          <Image src={Mainlogo} className={S.Logo} alt="Main Logo" />
+        </Link>
       <div className={S.RightArea}>
         <InputCombobox
           className={S.InputCombobox}
@@ -52,6 +52,11 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
         />
         {userName ? (
           <>
+            <Link href={ROUTES.ADMIN_LOGIN}>
+              <Button className={S.ButtonStyle2} variant="primary">
+                동아리 로그인
+              </Button>
+            </Link>
             <Link href={ROUTES.APPLIED}>
               <Button className={S.ButtonStyle2} variant="primary">
                 내 지원내역
