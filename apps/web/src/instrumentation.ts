@@ -11,5 +11,13 @@ export const onRequestError = (err: Error, requestInfo: { request: Request }) =>
   if (err && typeof err === 'object' && 'status' in err && (err as any).status === 401) {
     return;
   }
-  Sentry.captureRequestError(err, requestInfo);
+  // Use captureException instead of captureRequestError to avoid type issues
+  Sentry.captureException(err, {
+    contexts: {
+      request: {
+        url: requestInfo.request.url,
+        method: requestInfo.request.method,
+      },
+    },
+  });
 };
