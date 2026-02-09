@@ -5,6 +5,8 @@ import Image from 'next/image';
 import errorIcon from '@/assets/error.svg';
 import { useRouter } from 'next/navigation';
 import Button from '@/common/ui/button';
+import { CustomHttpError } from '@/common/apis/apiClient';
+
 interface ErrorPageProps {
   error?: Error;
   reset?: () => void;
@@ -15,6 +17,10 @@ function UnExpectedErrorPage({ error, reset, className }: ErrorPageProps) {
 
   useEffect(() => {
     if (error) {
+      // Don't send 401 errors to Sentry
+      if (error instanceof CustomHttpError && error.status === 401) {
+        return;
+      }
       Sentry.captureException(error);
     }
   }, [error]);

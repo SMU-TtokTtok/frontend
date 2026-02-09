@@ -20,6 +20,10 @@ export const memoContainer = style({
       marginTop: '20px',
       marginLeft: '20px',
       padding: '14px 12px',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'start',
+      alignItems: 'center',
     },
   },
 });
@@ -46,12 +50,14 @@ export const memoHeader = style({
   justifyContent: 'space-between',
   alignItems: 'center',
   marginBottom: '16px',
+  width: '100%',
 });
 
 export const memoList = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '16px',
+  width: '100%',
 });
 
 export const memoItemContainer = style({
@@ -67,12 +73,16 @@ export const memoItemContainer = style({
 
 export const memoItemTextarea = style({
   width: '100%',
-  resize: 'none',
+  minHeight: '80px',
+  resize: 'vertical',
   borderRadius: '4px',
   fontSize: vars.fonts.body2,
   color: vars.colors.surface.on_surf_var,
   transition: 'background-color 0.3s ease-in-out',
   marginBottom: '8px',
+  padding: '8px',
+  border: 'none',
+  outline: 'none',
   selectors: {
     '&:hover': {
       backgroundColor: vars.colors.surface.cont_1_var,
@@ -84,6 +94,7 @@ export const memoItemTextarea = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       fontSize: vars.fonts.m_body1,
+      minHeight: '120px',
     },
   },
 });

@@ -11,6 +11,7 @@ export const API = {
   ADMIN: {
     LOGIN: '/auth/login',
     SIGNUP: '/auth/join',
+    PASSWORD: '/auth/reset-password',
     LOGOUT: '/auth/logout',
     RE_ISSUE: '/auth/re-issue',
     APPLICANTS: '/applies',

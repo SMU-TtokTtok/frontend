@@ -34,7 +34,7 @@ export default function BasicInfoSection({ register, errors }: BasicInfoSectionP
           </div>
           <input
             size={1}
-            type="text"
+            type="number"
             className={S.FormInput}
             placeholder="나이를 입력해주세요."
             {...register('age')}

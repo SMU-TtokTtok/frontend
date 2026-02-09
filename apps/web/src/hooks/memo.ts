@@ -35,6 +35,9 @@ export const usePostMemo = () => {
         queryClient.setQueryData([applicantInfo], context.previousData);
       }
       const customError = err as CustomHttpError;
+      if (customError.status === 400) {
+        alert('메모를 입력해주세요.');
+      }
       if (customError.status !== 401) {
         alert('메모 추가 중 오류가 발생했습니다.');
       }
@@ -126,7 +129,9 @@ export const usePatchMemo = () => {
         queryClient.setQueryData([applicantInfo], context.previousData);
       }
       const customError = err as CustomHttpError;
-      if (customError.status !== 401) {
+      if (customError.status === 400) {
+        alert('메모를 입력해주세요.');
+      } else if (customError.status !== 401) {
         alert('메모 수정 중 오류가 발생했습니다.');
       }
     },

@@ -30,10 +30,10 @@ function LoginPage() {
 
   return (
     <div className={S.Container}>
-      <h3 className={S.LoginText}>동아리 운영진 로그인</h3>
+      <h3 className={S.LoginText}>동아리 계정 로그인</h3>
       <p className={S.LoginDescription}>
         동아리 모집 및 관리를 위해 <br />
-        운영진 계정으로 로그인해 주세요.
+        동아리 계정으로 로그인해 주세요.
       </p>
       <form className={S.BoxContainer} onSubmit={handleSubmit(handleLogin)}>
         <label className={S.AuthText({ password: false })}>아이디</label>
@@ -58,9 +58,20 @@ function LoginPage() {
           errorMessage={errors.password?.message}
           {...register('password')}
         />
-        <Link href={ROUTES.ADMIN_SIGNUP} className={S.AdminSignUp}>
-          회원가입
-        </Link>
+        <div className={S.AdminAuthContainer}>
+          <div className={S.AdminSignUp} title="아이디 찾기는 관리자에게 문의바랍니다" onClick={() => alert('아이디 찾기는 관리자에게 문의바랍니다')}>
+            아이디 찾기
+          </div>
+          <div className={S.AdminSignUp}>|</div>
+          <Link href={ROUTES.ADMIN_PASSWORD} className={S.AdminSignUp}>
+            비밀번호 재설정
+          </Link>
+          <div className={S.AdminSignUp}>|</div>
+          <Link href={ROUTES.ADMIN_SIGNUP} className={S.AdminSignUp}>
+            회원가입
+          </Link>
+        </div>
+       
         <Button type="submit" variant="secondary" className={S.adminLoginButton}>
           로그인
         </Button>

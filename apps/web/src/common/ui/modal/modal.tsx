@@ -1,5 +1,10 @@
 'use client';
-import React, { PropsWithChildren } from 'react';
+import React, {
+  PropsWithChildren,
+  forwardRef,
+  ForwardRefExoticComponent,
+  RefAttributes,
+} from 'react';
 import ModalProvider from './modalProvider';
 import { type ModalContextProps } from '@/common/store/modalContext';
 import { createPortal } from 'react-dom';
@@ -8,16 +13,27 @@ import Body from './body';
 import * as S from './modal.css';
 import Header from './header';
 
-function Modal({
-  children,
-  isOpen,
-  onClose = (event?: React.SyntheticEvent) => {
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+interface ModalComponent extends ForwardRefExoticComponent<
+  PropsWithChildren<ModalContextProps> & RefAttributes<HTMLDivElement>
+> {
+  Content: typeof Content;
+  Body: typeof Body;
+  Header: typeof Header;
+}
+
+const Modal = forwardRef<HTMLDivElement, PropsWithChildren<ModalContextProps>>(function Modal(
+  {
+    children,
+    isOpen,
+    onClose = (event?: React.SyntheticEvent) => {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    },
   },
-}: PropsWithChildren<ModalContextProps>) {
+  ref,
+) {
   const modalProps: ModalContextProps = {
     isOpen,
     onClose,
@@ -27,14 +43,18 @@ function Modal({
 
   return createPortal(
     <ModalProvider value={modalProps}>
-      {isOpen && <div className={S.modalBase}>{children}</div>}
+      {isOpen && (
+        <div ref={ref} className={S.modalBase}>
+          {children}
+        </div>
+      )}
     </ModalProvider>,
     document.body,
   );
-}
-
-export default Modal;
+}) as ModalComponent;
 
 Modal.Content = Content;
 Modal.Body = Body;
 Modal.Header = Header;
+
+export default Modal;
