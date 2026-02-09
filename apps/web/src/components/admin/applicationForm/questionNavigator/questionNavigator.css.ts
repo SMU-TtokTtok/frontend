@@ -26,6 +26,10 @@ export const sequenceItem = style({
   color: vars.colors.surface.on_surf,
   fontWeight: '500',
   cursor: 'pointer',
+  wordBreak: 'break-word',
+  overflowWrap: 'break-word',
+  whiteSpace: 'normal',
+  lineHeight: '1.5',
 
   ':hover': {
     color: vars.colors.primary.default,
@@ -36,5 +40,13 @@ export const sequenceItem = style({
 export const itemContainer = style({
   padding: '8px 0',
   width: '100%',
+  minHeight: 'auto',
+  height: 'auto',
   borderBottom: `1px solid ${vars.colors.surface.cont_2}`,
+});
+
+export const listContainer = style({
+  minHeight: '100px',
+  maxHeight: '320px',
+  overflowY: 'auto',
 });

@@ -1,19 +1,28 @@
 import { useEffect } from 'react';
 
-export const usePreventScroll = (isOpen: boolean): void => {
-  const preventTouchMove = (event: TouchEvent) => event.preventDefault();
-
+export const usePreventScroll = (
+  isOpen: boolean,
+  allowScrollRef?: React.RefObject<HTMLElement | null>,
+) => {
   useEffect(() => {
-    if (isOpen) {
-      document.documentElement.style.overflow = 'hidden';
-      document.addEventListener('touchmove', preventTouchMove, {
-        passive: false,
-      });
-    }
+    if (!isOpen) return;
+
+    const prevOverflow = document.documentElement.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+
+    const onTouchMove = (e: TouchEvent) => {
+      const allowEl = allowScrollRef?.current;
+      if (allowEl && e.target instanceof Node && allowEl.contains(e.target)) {
+        return;
+      }
+      e.preventDefault();
+    };
+
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
 
     return () => {
-      document.documentElement.style.overflow = 'auto';
-      document.removeEventListener('touchmove', preventTouchMove);
+      document.documentElement.style.overflow = prevOverflow;
+      document.removeEventListener('touchmove', onTouchMove);
     };
-  }, [isOpen]);
+  }, [isOpen, allowScrollRef]);
 };
