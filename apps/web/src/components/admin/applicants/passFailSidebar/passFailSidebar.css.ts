@@ -78,7 +78,7 @@ export const buttonWrapper = style({
     },
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       position: 'absolute',
-      top: '310px',
+      top: '330px',
       right: '0px',
       marginTop: '0px',
       display: 'flex',

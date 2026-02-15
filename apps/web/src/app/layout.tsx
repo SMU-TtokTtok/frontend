@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import '../common/styles/reset.css.ts';
 //import { MSWProvider } from '@/mocks/mswProvider';
@@ -32,6 +32,14 @@ export const metadata: Metadata = {
     apple: '/mainlogo_blue.svg',
   },
 };
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 const pretendard = localFont({
   src: '../fonts/PretendardVariable.woff2',
   display: 'swap',
@@ -48,10 +56,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${pretendard.variable}`}>
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
       </head>

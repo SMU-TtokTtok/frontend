@@ -62,6 +62,11 @@ export const title = style({
   fontSize: vars.fonts.title2,
   fontWeight: 700,
   color: vars.colors.surface.on_surf,
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_title2,
+    },
+  },
 });
 
 export const searchTitle = style({

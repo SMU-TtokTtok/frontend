@@ -6,10 +6,19 @@ export const useScrollObserver = () => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
+    const TOP_LOCK_PX = 8;
+    const DELTA_THRESHOLD = 20;
+
     const handleScroll = () => {
       const currentScroll = window.scrollY;
 
-      if (Math.abs(currentScroll - lastScrollTop.current) < 20) return;
+      if (currentScroll <= TOP_LOCK_PX) {
+        setIsVisible(true);
+        lastScrollTop.current = currentScroll;
+        return;
+      }
+
+      if (Math.abs(currentScroll - lastScrollTop.current) < DELTA_THRESHOLD) return;
 
       if (currentScroll > lastScrollTop.current) {
         setIsVisible(false);

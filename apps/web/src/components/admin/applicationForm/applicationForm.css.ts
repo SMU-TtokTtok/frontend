@@ -30,6 +30,11 @@ export const emptyDescription = style({
   fontWeight: 600,
   color: vars.colors.surface.on_surf,
   textAlign: 'center',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_title4,
+    },
+  },
 });
 
 export const makeFormButton = style({
@@ -38,6 +43,12 @@ export const makeFormButton = style({
   fontWeight: 600,
   padding: '16px 24px',
   borderRadius: '6px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      padding: '12px 16px',
+    },
+  },
 });
 
 // form 수정 페이지
