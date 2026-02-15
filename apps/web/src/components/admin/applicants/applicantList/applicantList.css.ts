@@ -122,6 +122,11 @@ export const empty = style({
   justifyContent: 'center',
   alignItems: 'center',
   height: '190px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      fontSize: vars.fonts.m_body1,
+    },
+  },
 });
 
 export const menuIcon = style({
