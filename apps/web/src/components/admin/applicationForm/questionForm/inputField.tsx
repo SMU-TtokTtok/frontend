@@ -11,19 +11,21 @@ import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/a
 import { convertToKor } from '@/common/util/convertToKor';
 import { ZodFormattedError } from 'zod';
 interface InputFieldProps {
-  fieldId: number;
+  fieldId: string;
+  fieldIndex: number;
   field: ApplyFormField;
   errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
-  scrollRefs: React.RefObject<HTMLDivElement[]>;
+  scrollRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>;
   handleQuestionTypeChange: (type: QuestionType) => void;
-  handleUpdateField: (fieldId: number, data: ApplyFormField) => void;
-  handleDeleteField: (fieldId: number) => void;
-  handleEssentialChange: (fieldId: number, isEssential: boolean) => void;
+  handleUpdateField: (fieldId: string, data: ApplyFormField) => void;
+  handleDeleteField: (fieldId: string) => void;
+  handleEssentialChange: (fieldId: string, isEssential: boolean) => void;
 }
 
 function InputField({
   fieldId,
+  fieldIndex,
   field,
   errors,
   isSubmit,
@@ -36,7 +38,11 @@ function InputField({
   return (
     <div
       ref={(el) => {
-        if (el) scrollRefs.current[fieldId] = el as HTMLDivElement;
+        if (el) {
+          scrollRefs.current[fieldId] = el as HTMLDivElement;
+        } else {
+          scrollRefs.current[fieldId] = null;
+        }
       }}
     >
       <div className={S.fieldToolBar}>
@@ -90,7 +96,7 @@ function InputField({
           }}
         />
         {errors && isSubmit && (
-          <span className={S.errorMessage}>{errors.questions?.[fieldId]?.title?._errors}</span>
+          <span className={S.errorMessage}>{errors.questions?.[fieldIndex]?.title?._errors}</span>
         )}
       </div>
 

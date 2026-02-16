@@ -42,11 +42,14 @@ function ApplicationFormPage() {
   const [isSubmit, setIsSubmit] = useState(false);
   const { handleUpdateForm } = useUpdateFormMutation();
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
-  const scrollRefs = useRef<HTMLDivElement[]>([]);
+  const scrollRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const handleScrollTo = (index: number) => {
-    const target = scrollRefs.current[index];
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    const questionId = questionsData.questions[index]?.questionId;
+    if (questionId) {
+      const target = scrollRefs.current[questionId];
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   const mergeFormData = {

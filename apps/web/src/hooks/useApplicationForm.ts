@@ -24,6 +24,7 @@ export const useApplicationForm = () => {
 
     questions: [
       {
+        questionId: `temp-${Date.now()}-${Math.random()}`, // 임시 ID
         title: '',
         subTitle: '',
         questionType: 'SHORT_ANSWER' as QuestionType,
@@ -33,10 +34,15 @@ export const useApplicationForm = () => {
     ],
   });
 
-  const handleQuestionTypeChange = (type: QuestionType, fieldId: number) => {
+  const handleQuestionTypeChange = (type: QuestionType, fieldId: string) => {
+    console.log('handleQuestionTypeChange', type, fieldId);
     setQeustionsData((prev) => {
       const newQuestions = [...prev.questions];
-      newQuestions[fieldId].questionType = type;
+      const findQuestion = newQuestions.find((q) => q.questionId === fieldId);
+      if (findQuestion) {
+        findQuestion.questionType = type;
+      }
+      //newQuestions[fieldId].questionType = type;
       return { ...prev, questions: newQuestions };
     });
   };
@@ -51,6 +57,7 @@ export const useApplicationForm = () => {
     }
 
     const newBaseField = {
+      questionId: `temp-${Date.now()}-${Math.random()}`, // 임시 ID
       title: '',
       subTitle: '',
       questionType: 'SHORT_ANSWER' as QuestionType,
@@ -64,33 +71,42 @@ export const useApplicationForm = () => {
     }));
   };
 
-  const handleUpdateField = (fieldId: number, updatedField: ApplyFormField) => {
+  const handleUpdateField = (fieldId: string, updatedField: ApplyFormField) => {
     setQeustionsData((prev) => {
       const newQuestions = [...prev.questions];
-      newQuestions[fieldId] = updatedField;
+      const matchIndex = newQuestions.findIndex((q) => q.questionId === updatedField.questionId);
+      newQuestions[matchIndex] = updatedField;
+      //newQuestions[fieldId] = updatedField;
       return { ...prev, questions: newQuestions };
     });
   };
 
-  const handleDeleteField = (fieldId: number) => {
+  const handleDeleteField = (fieldId: string) => {
     setQeustionsData((prev) => {
-      const newQuestions = prev.questions.filter((_, index) => index !== fieldId);
+      const newQuestions = prev.questions.filter((field) => field.questionId !== fieldId);
+      //const newQuestions = prev.questions.filter((_, index) => index !== fieldId);
       return { ...prev, questions: newQuestions };
     });
   };
 
-  const handleEssentialChange = (fieldId: number, isEssential: boolean) => {
+  const handleEssentialChange = (fieldId: string, isEssential: boolean) => {
     setQeustionsData((prev) => {
       const newQuestions = [...prev.questions];
-      newQuestions[fieldId].isEssential = isEssential;
+      //newQuestions[fieldId].isEssential = isEssential;
+      const findQuestion = newQuestions.find((q) => q.questionId === fieldId);
+      if (findQuestion) {
+        findQuestion.isEssential = isEssential;
+      }
       return { ...prev, questions: newQuestions };
     });
   };
 
-  const handleOptionChange = (fieldId: number, optionIndex: number, value: string) => {
+  const handleOptionChange = (fieldId: string, optionIndex: number, value: string) => {
     setQeustionsData((prev) => {
       const newQuestions = [...prev.questions];
-      const field = newQuestions[fieldId];
+      //const field = newQuestions[fieldId];
+      const field = newQuestions.find((q) => q.questionId === fieldId);
+      if (!field) return prev;
       if (field.content) {
         field.content[optionIndex] = value;
       } else {
@@ -100,10 +116,16 @@ export const useApplicationForm = () => {
     });
   };
 
-  const handleOptionAdd = (fieldId: number) => {
+  const handleOptionAdd = (fieldId: string) => {
     setQeustionsData((prev) => {
       const newQuestions = prev.questions.map((field, index) => {
-        if (index === fieldId) {
+        // if (index === fieldId) {
+        //   return {
+        //     ...field,
+        //     content: [...field.content, ''],
+        //   };
+        // }
+        if (field.questionId === fieldId) {
           return {
             ...field,
             content: [...field.content, ''],
@@ -115,10 +137,16 @@ export const useApplicationForm = () => {
     });
   };
 
-  const handleOptionDelete = (fieldId: number, optionIndex: number) => {
+  const handleOptionDelete = (fieldId: string, optionIndex: number) => {
     setQeustionsData((prev) => {
       const newQuestions = prev.questions.map((field, index) => {
-        if (index === fieldId) {
+        // if (index === fieldId) {
+        //   return {
+        //     ...field,
+        //     content: field.content.filter((_, i) => i !== optionIndex),
+        //   };
+        // }
+        if (field.questionId === fieldId) {
           return {
             ...field,
             content: field.content.filter((_, i) => i !== optionIndex),

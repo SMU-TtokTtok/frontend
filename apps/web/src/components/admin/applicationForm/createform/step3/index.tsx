@@ -32,11 +32,14 @@ function FormQuestionStep() {
   const [isSubmit, setIsSubmit] = useState(false);
   const { handleCreateForm } = useCreateFormMutation();
   const { result, errors } = useApplicationFormValidation(questionsData);
-  const scrollRefs = useRef<HTMLDivElement[]>([]);
+  const scrollRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const handleScrollTo = (index: number) => {
-    const target = scrollRefs.current[index];
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const questionId = questionsData.questions[index]?.questionId;
+    if (questionId) {
+      const target = scrollRefs.current[questionId];
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   const handleReorderQuestions = (newOrder: ApplyFormField[]) => {
