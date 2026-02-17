@@ -37,13 +37,10 @@ export const useApplicationForm = () => {
   }));
 
   const handleQuestionTypeChange = (type: QuestionType, fieldId: string) => {
-    console.log('handleQuestionTypeChange', type, fieldId);
     setQeustionsData((prev) => {
-      const newQuestions = [...prev.questions];
-      const findQuestion = newQuestions.find((q) => q.questionId === fieldId);
-      if (findQuestion) {
-        findQuestion.questionType = type;
-      }
+      const newQuestions = prev.questions.map((q) =>
+        q.questionId === fieldId ? { ...q, questionType: type } : q,
+      );
       return { ...prev, questions: newQuestions };
     });
   };
@@ -74,9 +71,7 @@ export const useApplicationForm = () => {
 
   const handleUpdateField = (fieldId: string, updatedField: ApplyFormField) => {
     setQeustionsData((prev) => {
-      const newQuestions = [...prev.questions];
-      const matchIndex = newQuestions.findIndex((q) => q.questionId === updatedField.questionId);
-      newQuestions[matchIndex] = updatedField;
+      const newQuestions = prev.questions.map((q) => (q.questionId === fieldId ? updatedField : q));
       return { ...prev, questions: newQuestions };
     });
   };

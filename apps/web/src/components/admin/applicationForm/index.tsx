@@ -67,9 +67,9 @@ function ApplicationFormPage() {
     }
     if (errors) {
       const firstErrorFieldId = Object.keys(errors?.questions ?? {})[0];
-      const hasTittleError = errors?.title?._errors.length;
+      const hasTitleError = errors?.title?._errors.length;
       console.error('Validation errors:', errors);
-      if (hasTittleError) {
+      if (hasTitleError) {
         scrollRefs.current[SCROLL_REF_IDS.FORM_TITLE]?.scrollIntoView({
           behavior: 'smooth',
           block: 'center',
