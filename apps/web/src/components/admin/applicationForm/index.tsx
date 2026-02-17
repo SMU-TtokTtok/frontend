@@ -17,6 +17,7 @@ import LoadingSpinner from '@/common/ui/loading';
 import { useAuthStore } from '@/common/store/adminAuthStore';
 import QueryErrorBoundary from '@/components/error/queryErrorBoundary';
 import { ApplyFormField } from '@/common/model/applicationForm';
+import { SCROLL_REF_IDS } from './constants';
 
 function ApplicationFormPage() {
   const { profile } = useAuthStore((state) => state);
@@ -48,7 +49,7 @@ function ApplicationFormPage() {
     const questionId = questionsData.questions[index]?.questionId;
     if (questionId) {
       const target = scrollRefs.current[questionId];
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 
@@ -62,8 +63,22 @@ function ApplicationFormPage() {
 
     if (result.success) {
       handleUpdateForm(mergeFormData, handleModalOpen);
-    } else {
+      return;
+    }
+    if (errors) {
+      const firstErrorFieldId = Object.keys(errors?.questions ?? {})[0];
+      const hasTittleError = errors?.title?._errors.length;
       console.error('Validation errors:', errors);
+      if (hasTittleError) {
+        scrollRefs.current[SCROLL_REF_IDS.FORM_TITLE]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+        return;
+      }
+      if (firstErrorFieldId) {
+        handleScrollTo(Number(firstErrorFieldId));
+      }
     }
   };
   const handleReorderQuestions = (newOrder: ApplyFormField[]) => {

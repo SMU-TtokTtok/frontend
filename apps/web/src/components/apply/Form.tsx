@@ -18,7 +18,7 @@ import { TempDataAnswer, Question, TempData } from '@/common/model/form';
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 };
 
@@ -91,7 +91,7 @@ export default function Form({ clubId }: { clubId: string }) {
 
       for (const answer of answers) {
         if (!isMounted.current) break;
-        
+
         // questionId로 해당 질문의 인덱스 찾기
         const questionIndex = questions.findIndex(
           (q: Question) => q.questionId === answer.questionId,
@@ -123,25 +123,26 @@ export default function Form({ clubId }: { clubId: string }) {
                   if (!isMounted.current) return;
                   const blob = await response.blob();
                   if (!isMounted.current) return;
-                  
+
                   // URL에서 파일명 추출 (쿼리 파라미터 제거)
                   let fileName = url.split('/').pop() || 'file';
                   fileName = fileName.split('?')[0]; // 쿼리 파라미터 제거
-                  
+
                   // UUID_원본파일명 형식에서 원본 파일명만 추출
                   // 예: "bf1c20ae-5343-4431-8965-3e73a0edaede_다운로드.png" -> "다운로드.png"
                   if (fileName.includes('_')) {
                     const parts = fileName.split('_');
                     if (parts.length > 1) {
                       // UUID 형식 체크 (8-4-4-4-12 형식)
-                      const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+                      const uuidPattern =
+                        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
                       if (uuidPattern.test(parts[0])) {
                         // UUID 부분 제거하고 원본 파일명만 사용
                         fileName = parts.slice(1).join('_');
                       }
                     }
                   }
-                  
+
                   const file = new File([blob], fileName, { type: blob.type });
 
                   const dataTransfer = new DataTransfer();
@@ -284,13 +285,17 @@ export default function Form({ clubId }: { clubId: string }) {
 
     const answers =
       currentFormData.questions?.map((question) => {
-        const questionType = clubData?.questions?.find((q) => q.questionId === question.questionId)?.questionType;
+        const questionType = clubData?.questions?.find(
+          (q) => q.questionId === question.questionId,
+        )?.questionType;
         let value: string | string[] | null;
 
         // questionType에 따라 타입을 좁혀서 처리
         if (questionType === 'CHECKBOX' && Array.isArray(question.value)) {
           // 체크박스의 경우: false가 아닌 값들만 필터링
-          const selectedValues = question.value.filter((val: string | boolean) => val !== false) as string[];
+          const selectedValues = question.value.filter(
+            (val: string | boolean) => val !== false,
+          ) as string[];
           value = selectedValues.length > 0 ? selectedValues : null;
         } else if (questionType === 'FILE' && question.value instanceof FileList) {
           // FileList의 경우 첫 번째 파일을 사용
@@ -301,12 +306,17 @@ export default function Form({ clubId }: { clubId: string }) {
             questionIds.push(question.questionId);
             formData.append('files', question.value[0]);
           }
-        } else if (questionType && ['RADIO', 'SHORT_ANSWER', 'LONG_ANSWER'].includes(questionType) && typeof question.value === 'string') {
+        } else if (
+          questionType &&
+          ['RADIO', 'SHORT_ANSWER', 'LONG_ANSWER'].includes(questionType) &&
+          typeof question.value === 'string'
+        ) {
           // 문자열 답변의 경우 빈 문자열이면 null, 아니면 그대로 사용
           value = question.value.trim() !== '' ? question.value : null;
         } else {
           // 기본 처리
-          value = question.value && String(question.value).trim() !== '' ? String(question.value) : null;
+          value =
+            question.value && String(question.value).trim() !== '' ? String(question.value) : null;
         }
 
         return {
@@ -397,19 +407,29 @@ export default function Form({ clubId }: { clubId: string }) {
           >
             임시저장
           </Button>
-          <Button type="submit" variant="primary" className={S.submitButton} disabled={isSubmitting}>
+          <Button
+            type="submit"
+            variant="primary"
+            className={S.submitButton}
+            disabled={isSubmitting}
+          >
             {isSubmitting ? '제출 중...' : '제출하기'}
           </Button>
         </div>
         <Button
-            variant="primary"
-            className={S.saveButton}
-            type="button"
-            onClick={handleSaveTempData}
-          >
-            임시저장
-          </Button>
-        <Button type="submit" variant="primary" className={S.submitButtonMobile} disabled={isSubmitting}>
+          variant="primary"
+          className={S.saveButton}
+          type="button"
+          onClick={handleSaveTempData}
+        >
+          임시저장
+        </Button>
+        <Button
+          type="submit"
+          variant="primary"
+          className={S.submitButtonMobile}
+          disabled={isSubmitting}
+        >
           {isSubmitting ? '제출 중...' : '제출하기'}
         </Button>
       </form>
@@ -420,13 +440,9 @@ export default function Form({ clubId }: { clubId: string }) {
       >
         지원이 완료되었습니다
       </ConfirmModal>
-      <ConfirmModal
-        isOpen={isTempSaveModalOpen}
-        onClose={handleTempSaveModalClose}
-      >
+      <ConfirmModal isOpen={isTempSaveModalOpen} onClose={handleTempSaveModalClose}>
         임시저장이 완료되었습니다
       </ConfirmModal>
     </>
   );
 }
-

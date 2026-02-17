@@ -8,6 +8,7 @@ import ApplicantInfoField from './applicantInfoField/applicantInfoField';
 import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import { ZodFormattedError } from 'zod';
 import SortableFieldWrapper from './sortableFieldWrapper';
+import { SCROLL_REF_IDS } from '../constants';
 export const questionTypes = [
   { type: 'SHORT_ANSWER', label: '단답형' },
   { type: 'LONG_ANSWER', label: '서술형' },
@@ -64,7 +65,16 @@ function QuestionForm({
   return (
     <div className={S.container}>
       <div className={S.header}>
-        <div className={S.titleContainer({ title: 'formTitle' })}>
+        <div
+          ref={(el) => {
+            if (el) {
+              scrollRefs.current[SCROLL_REF_IDS.FORM_TITLE] = el as HTMLDivElement;
+            } else {
+              scrollRefs.current[SCROLL_REF_IDS.FORM_TITLE] = null;
+            }
+          }}
+          className={S.titleContainer({ title: 'formTitle' })}
+        >
           <input
             className={S.title}
             value={formData.title ?? ''}
