@@ -7,6 +7,8 @@ import {
 import { loadFromSession } from '@/common/util/sessionStorageUtil';
 import { useState } from 'react';
 
+const generateTempId = () => `temp-${Date.now()}-${Math.random()}`;
+
 export const useApplicationForm = () => {
   const previousStepData: PreviousStepForm = {
     hasInterview: loadFromSession('hasInterview') ?? false,
@@ -18,13 +20,13 @@ export const useApplicationForm = () => {
     interviewEndDate: loadFromSession('interviewEndDate') ?? null,
   };
 
-  const [questionsData, setQeustionsData] = useState<QuestionStepForm>({
+  const [questionsData, setQeustionsData] = useState<QuestionStepForm>(() => ({
     title: '',
     subTitle: '',
 
     questions: [
       {
-        questionId: `temp-${Date.now()}-${Math.random()}`, // 임시 ID
+        questionId: generateTempId(),
         title: '',
         subTitle: '',
         questionType: 'SHORT_ANSWER' as QuestionType,
@@ -32,7 +34,7 @@ export const useApplicationForm = () => {
         content: [''],
       },
     ],
-  });
+  }));
 
   const handleQuestionTypeChange = (type: QuestionType, fieldId: string) => {
     console.log('handleQuestionTypeChange', type, fieldId);
@@ -42,7 +44,6 @@ export const useApplicationForm = () => {
       if (findQuestion) {
         findQuestion.questionType = type;
       }
-      //newQuestions[fieldId].questionType = type;
       return { ...prev, questions: newQuestions };
     });
   };
@@ -57,7 +58,7 @@ export const useApplicationForm = () => {
     }
 
     const newBaseField = {
-      questionId: `temp-${Date.now()}-${Math.random()}`, // 임시 ID
+      questionId: generateTempId(),
       title: '',
       subTitle: '',
       questionType: 'SHORT_ANSWER' as QuestionType,
@@ -76,7 +77,6 @@ export const useApplicationForm = () => {
       const newQuestions = [...prev.questions];
       const matchIndex = newQuestions.findIndex((q) => q.questionId === updatedField.questionId);
       newQuestions[matchIndex] = updatedField;
-      //newQuestions[fieldId] = updatedField;
       return { ...prev, questions: newQuestions };
     });
   };
@@ -84,7 +84,6 @@ export const useApplicationForm = () => {
   const handleDeleteField = (fieldId: string) => {
     setQeustionsData((prev) => {
       const newQuestions = prev.questions.filter((field) => field.questionId !== fieldId);
-      //const newQuestions = prev.questions.filter((_, index) => index !== fieldId);
       return { ...prev, questions: newQuestions };
     });
   };
@@ -92,7 +91,6 @@ export const useApplicationForm = () => {
   const handleEssentialChange = (fieldId: string, isEssential: boolean) => {
     setQeustionsData((prev) => {
       const newQuestions = [...prev.questions];
-      //newQuestions[fieldId].isEssential = isEssential;
       const findQuestion = newQuestions.find((q) => q.questionId === fieldId);
       if (findQuestion) {
         findQuestion.isEssential = isEssential;
@@ -104,7 +102,6 @@ export const useApplicationForm = () => {
   const handleOptionChange = (fieldId: string, optionIndex: number, value: string) => {
     setQeustionsData((prev) => {
       const newQuestions = [...prev.questions];
-      //const field = newQuestions[fieldId];
       const field = newQuestions.find((q) => q.questionId === fieldId);
       if (!field) return prev;
       if (field.content) {
@@ -119,12 +116,6 @@ export const useApplicationForm = () => {
   const handleOptionAdd = (fieldId: string) => {
     setQeustionsData((prev) => {
       const newQuestions = prev.questions.map((field, index) => {
-        // if (index === fieldId) {
-        //   return {
-        //     ...field,
-        //     content: [...field.content, ''],
-        //   };
-        // }
         if (field.questionId === fieldId) {
           return {
             ...field,
@@ -140,12 +131,6 @@ export const useApplicationForm = () => {
   const handleOptionDelete = (fieldId: string, optionIndex: number) => {
     setQeustionsData((prev) => {
       const newQuestions = prev.questions.map((field, index) => {
-        // if (index === fieldId) {
-        //   return {
-        //     ...field,
-        //     content: field.content.filter((_, i) => i !== optionIndex),
-        //   };
-        // }
         if (field.questionId === fieldId) {
           return {
             ...field,
