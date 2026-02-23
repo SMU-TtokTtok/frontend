@@ -11,6 +11,7 @@ interface ConfirmCancelModalProps {
   onConfirm: () => void;
   title: string;
   message: ReactNode;
+  confirmHref?: string;
 }
 
 function ConfirmCancelModal({
@@ -19,6 +20,7 @@ function ConfirmCancelModal({
   onConfirm,
   title,
   message,
+  confirmHref,
 }: ConfirmCancelModalProps) {
   usePreventScroll(isOpen);
   const ref = useOutsideClick(() => onClose());
@@ -41,9 +43,18 @@ function ConfirmCancelModal({
           <Button variant="tertiary" onClick={onClose} className={S.cancelButton}>
             취소
           </Button>
-          <Button variant="primary" onClick={handleConfirm} className={S.confirmButton}>
-            확인
-          </Button>
+          {confirmHref && (
+            <a href={confirmHref} target="_blank" rel="noopener noreferrer" className={S.toLink}>
+              <Button variant="primary" onClick={handleConfirm} className={S.confirmButton}>
+                확인
+              </Button>
+            </a>
+          )}
+          {!confirmHref && (
+            <Button variant="primary" onClick={handleConfirm} className={S.confirmButton}>
+              확인
+            </Button>
+          )}
         </div>
       </Modal.Content>
     </Modal>
