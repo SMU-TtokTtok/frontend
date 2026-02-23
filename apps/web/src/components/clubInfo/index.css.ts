@@ -32,14 +32,13 @@ export const container = style({
 });
 
 export const leftcontainer = style({
-  // maxWidth: '1038px',
+  maxWidth: '1038px',
   // width: '100%',
   display: 'flex',
   flexDirection: 'column',
   gap: '20px',
   flexGrow: 1,
   // flexShrink: 1,
-
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.largeDesktop}px)`]: {
       maxWidth: '100%',

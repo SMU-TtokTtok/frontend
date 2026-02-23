@@ -73,7 +73,7 @@ export const clubName = style({
 });
 
 export const imgStyle = style({
-  // objectFit: 'cover',
+  objectFit: 'cover',
   borderRadius: 8,
   alignSelf: 'stretch',
   width: '212px',
@@ -90,6 +90,7 @@ export const imgStyle = style({
       width: '100%',
       height: '100%',
       borderRadius: '100px',
+      aspectRatio: '1/1',
     },
   },
 });

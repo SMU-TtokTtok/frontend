@@ -11,6 +11,7 @@ export const clubProfile = style({
 
 export const imageStyle = style({
   borderRadius: '8px',
+  objectFit: 'cover',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -20,6 +21,7 @@ export const imageStyle = style({
       position: 'absolute',
       top: '22px',
       left: '18px',
+      aspectRatio: '1/1',
     },
   },
 });
