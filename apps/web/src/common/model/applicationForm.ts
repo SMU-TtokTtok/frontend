@@ -4,6 +4,7 @@ export type Question_KO_Type = '텍스트' | '단답형' | '체크박스' | '라
 export type Gender = 'MALE' | 'FEMAIL';
 
 export type ApplyFormField = {
+  questionId?: string;
   title: string;
   subTitle: string;
   questionType: QuestionType;

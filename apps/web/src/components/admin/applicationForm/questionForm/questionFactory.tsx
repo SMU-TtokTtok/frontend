@@ -8,21 +8,23 @@ import FileField from './fileField';
 
 interface FormFieldFactoryProps {
   field: ApplyFormField;
-  scrollRefs: React.RefObject<HTMLDivElement[]>;
-  fieldId: number;
+  scrollRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>;
+  fieldId: string;
+  fieldIndex: number;
   errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
   handleQuestionTypeChange: (type: QuestionType) => void;
-  handleUpdateField: (fieldId: number, data: ApplyFormField) => void;
-  handleDeleteField: (fieldId: number) => void;
-  handleEssentialChange: (fieldId: number, isEssential: boolean) => void;
-  handleOptionChange: (fieldId: number, optionIndex: number, value: string) => void;
-  handleOptionAdd: (fieldId: number) => void;
-  handleOptionDelete: (fieldId: number, optionIndex: number) => void;
+  handleUpdateField: (fieldId: string, data: ApplyFormField) => void;
+  handleDeleteField: (fieldId: string) => void;
+  handleEssentialChange: (fieldId: string, isEssential: boolean) => void;
+  handleOptionChange: (fieldId: string, optionIndex: number, value: string) => void;
+  handleOptionAdd: (fieldId: string) => void;
+  handleOptionDelete: (fieldId: string, optionIndex: number) => void;
 }
 
 function FormFieldFactory({
   fieldId,
+  fieldIndex,
   field,
   scrollRefs,
   errors,
@@ -40,6 +42,7 @@ function FormFieldFactory({
       return (
         <TextAreaField
           fieldId={fieldId}
+          fieldIndex={fieldIndex}
           field={field}
           scrollRefs={scrollRefs}
           errors={errors}
@@ -54,6 +57,7 @@ function FormFieldFactory({
       return (
         <InputField
           fieldId={fieldId}
+          fieldIndex={fieldIndex}
           field={field}
           scrollRefs={scrollRefs}
           errors={errors}
@@ -68,6 +72,7 @@ function FormFieldFactory({
       return (
         <CheckboxField
           fieldId={fieldId}
+          fieldIndex={fieldIndex}
           field={field}
           scrollRefs={scrollRefs}
           errors={errors}
@@ -86,6 +91,7 @@ function FormFieldFactory({
       return (
         <RadioField
           fieldId={fieldId}
+          fieldIndex={fieldIndex}
           field={field}
           scrollRefs={scrollRefs}
           errors={errors}
@@ -104,6 +110,7 @@ function FormFieldFactory({
       return (
         <FileField
           fieldId={fieldId}
+          fieldIndex={fieldIndex}
           field={field}
           errors={errors}
           isSubmit={isSubmit}

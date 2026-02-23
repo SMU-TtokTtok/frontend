@@ -17,6 +17,7 @@ import LoadingSpinner from '@/common/ui/loading';
 import { useAuthStore } from '@/common/store/adminAuthStore';
 import QueryErrorBoundary from '@/components/error/queryErrorBoundary';
 import { ApplyFormField } from '@/common/model/applicationForm';
+import { SCROLL_REF_IDS } from './constants';
 
 function ApplicationFormPage() {
   const { profile } = useAuthStore((state) => state);
@@ -42,11 +43,14 @@ function ApplicationFormPage() {
   const [isSubmit, setIsSubmit] = useState(false);
   const { handleUpdateForm } = useUpdateFormMutation();
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
-  const scrollRefs = useRef<HTMLDivElement[]>([]);
+  const scrollRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const handleScrollTo = (index: number) => {
-    const target = scrollRefs.current[index];
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    const questionId = questionsData.questions[index]?.questionId;
+    if (questionId) {
+      const target = scrollRefs.current[questionId];
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   };
 
   const mergeFormData = {
@@ -59,8 +63,22 @@ function ApplicationFormPage() {
 
     if (result.success) {
       handleUpdateForm(mergeFormData, handleModalOpen);
-    } else {
+      return;
+    }
+    if (errors) {
+      const firstErrorFieldId = Object.keys(errors?.questions ?? {})[0];
+      const hasTitleError = errors?.title?._errors.length;
       console.error('Validation errors:', errors);
+      if (hasTitleError) {
+        scrollRefs.current[SCROLL_REF_IDS.FORM_TITLE]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+        return;
+      }
+      if (firstErrorFieldId) {
+        handleScrollTo(Number(firstErrorFieldId));
+      }
     }
   };
   const handleReorderQuestions = (newOrder: ApplyFormField[]) => {
