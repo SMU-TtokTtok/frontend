@@ -80,6 +80,8 @@
   color: #0000ee;
   text-decoration: underline;
   cursor: pointer;
+  display: block;
+  overflow-wrap: break-word;
 }
 
 .content-container a:visited {

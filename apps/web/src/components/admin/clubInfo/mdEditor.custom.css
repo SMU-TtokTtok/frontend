@@ -167,6 +167,8 @@
   color: #0000ee;
   text-decoration: underline;
   cursor: pointer;
+  display: block;
+  overflow-wrap: break-word;
 }
 
 .custom-tiptap-editor a:visited {
