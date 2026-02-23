@@ -12,7 +12,6 @@ import { signupSchema } from './schema';
 import { FILTER_CONFIG } from '@/common/constants';
 import { useState } from 'react';
 import SignupCompletePage from './complete/page';
-import { sign } from 'crypto';
 
 export type AdminSignupForm = z.infer<typeof signupSchema>;
 
