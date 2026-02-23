@@ -8,6 +8,7 @@ import ApplicantInfoField from './applicantInfoField/applicantInfoField';
 import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import { ZodFormattedError } from 'zod';
 import SortableFieldWrapper from './sortableFieldWrapper';
+import { SCROLL_REF_IDS } from '../constants';
 export const questionTypes = [
   { type: 'SHORT_ANSWER', label: '단답형' },
   { type: 'LONG_ANSWER', label: '서술형' },
@@ -23,15 +24,15 @@ interface QuestionFormProps {
   handleChangeTitle: (title: string) => void;
   handleChangeSubTitle: (subTitle: string) => void;
   handleAddField: () => void;
-  handleQuestionTypeChange: (type: QuestionType, index: number) => void;
-  handleUpdateField: (fieldId: number, data: ApplyFormField) => void;
-  handleDeleteField: (fieldId: number) => void;
-  handleEssentialChange: (fieldId: number, isEssential: boolean) => void;
-  handleOptionChange: (fieldId: number, optionIndex: number, value: string) => void;
-  handleOptionAdd: (fieldId: number) => void;
-  handleOptionDelete: (fieldId: number, optionIndex: number) => void;
+  handleQuestionTypeChange: (type: QuestionType, index: string) => void;
+  handleUpdateField: (fieldId: string, data: ApplyFormField) => void;
+  handleDeleteField: (fieldId: string) => void;
+  handleEssentialChange: (fieldId: string, isEssential: boolean) => void;
+  handleOptionChange: (fieldId: string, optionIndex: number, value: string) => void;
+  handleOptionAdd: (fieldId: string) => void;
+  handleOptionDelete: (fieldId: string, optionIndex: number) => void;
   handleReorderQuestions: (newOrder: ApplyFormField[]) => void;
-  scrollRefs: React.RefObject<HTMLDivElement[]>;
+  scrollRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>;
 }
 
 function QuestionForm({
@@ -64,7 +65,16 @@ function QuestionForm({
   return (
     <div className={S.container}>
       <div className={S.header}>
-        <div className={S.titleContainer({ title: 'formTitle' })}>
+        <div
+          ref={(el) => {
+            if (el) {
+              scrollRefs.current[SCROLL_REF_IDS.FORM_TITLE] = el as HTMLDivElement;
+            } else {
+              scrollRefs.current[SCROLL_REF_IDS.FORM_TITLE] = null;
+            }
+          }}
+          className={S.titleContainer({ title: 'formTitle' })}
+        >
           <input
             className={S.title}
             value={formData.title ?? ''}
@@ -93,7 +103,8 @@ function QuestionForm({
             <SortableFieldWrapper key={index} id={index.toString()}>
               <FormFieldFactory
                 key={index}
-                fieldId={index}
+                fieldId={field.questionId || index.toString()}
+                fieldIndex={index}
                 scrollRefs={scrollRefs}
                 field={field}
                 errors={errors}
@@ -104,7 +115,9 @@ function QuestionForm({
                 handleOptionChange={handleOptionChange}
                 handleOptionAdd={handleOptionAdd}
                 handleOptionDelete={handleOptionDelete}
-                handleQuestionTypeChange={(type) => handleQuestionTypeChange(type, index)}
+                handleQuestionTypeChange={(type) =>
+                  handleQuestionTypeChange(type, field.questionId || index.toString())
+                }
               />
             </SortableFieldWrapper>
           ))}

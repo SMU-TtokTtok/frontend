@@ -3,8 +3,10 @@ import Button from '@/common/ui/button';
 import * as S from './step4.css';
 import { ROUTES } from '@/common/constants/routes';
 import Link from 'next/link';
+import { useConfetti } from '@/hooks/useConfetti';
 
 function SuccessStep() {
+  useConfetti();
   return (
     <div className={S.step4Container}>
       <div className={S.innerWrapper}>

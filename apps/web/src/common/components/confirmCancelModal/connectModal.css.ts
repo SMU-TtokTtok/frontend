@@ -68,3 +68,8 @@ export const confirmButton = style({
   fontWeight: 600,
   width: '100%',
 });
+
+export const toLink = style({
+  textDecoration: 'none',
+  width: '100%',
+});
