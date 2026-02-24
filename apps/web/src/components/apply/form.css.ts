@@ -241,6 +241,8 @@ export const FormContentSubTitle = style({
   fontSize: vars.fonts.m_body1,
   fontWeight: '500',
   color: '#55637D',
+  overflowWrap: 'break-word',
+  wordBreak: 'break-word',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
