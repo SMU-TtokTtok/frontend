@@ -8,6 +8,7 @@ import { usePostFavorite } from '@/hooks/useFavoriteMutation';
 import { getKoreanType } from '@/common/util/getKoreanType';
 import { getKoreanCategory } from '@/common/util/getKoreanCategory';
 import clubImg from '@/assets/clubImg.svg';
+import { BREAKPOINTS } from '@/common/constants';
 
 export default function ClubProfile({
   clubIntro,
@@ -34,12 +35,13 @@ export default function ClubProfile({
 
   return (
     <div className={S.clubProfile}>
-        <Image
+      <Image
         src={profileImageUrl || clubImg}
         alt={name}
         width={212}
         height={206}
         className={S.imageStyle}
+        sizes={`(max-width: ${BREAKPOINTS.desktop}px) 58px, 212px`}
       />
       <div className={S.RightFlex}>
         <div className={S.type} style={{ marginBottom: '2px' }}>
