@@ -34,9 +34,9 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
   const { handleLogout } = useLogoutMutation();
   return (
     <Header isVisible={isVisible} className={S.DesktopInnerWrapper}>
-        <Link href={ROUTES.HOME}>
-          <Image src={Mainlogo} className={S.Logo} alt="Main Logo" />
-        </Link>
+      <Link href={ROUTES.HOME}>
+        <Image src={Mainlogo} className={S.Logo} alt="Main Logo" />
+      </Link>
       <div className={S.RightArea}>
         <InputCombobox
           className={S.InputCombobox}
@@ -49,6 +49,7 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
           onClick={handleNavigate}
           onKeyDown={handleKeyDown}
           placeholder="동아리 이름을 검색하세요."
+          aria-label="동아리 이름을 검색하세요."
         />
         {userName ? (
           <>
@@ -86,7 +87,6 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
               <Button className={S.ButtonStyle} variant="secondary">
                 회원가입
               </Button>
-            
             </Link>
             <Link href={ROUTES.ADMIN_LOGIN}>
               <Button className={S.ButtonStyle} variant="secondary">
