@@ -43,6 +43,8 @@ export const usePostForm = (handleEditModalOpen: () => void) => {
     onError: (error: CustomHttpError) => {
       if (error.status === 413) {
         alert('파일 용량이 너무 큽니다.');
+      } else if (error.status === 415) {
+        alert('유효하지 않은 파일형식입니다.');
       } else if (error.status === 409) {
         alert('이미 제출하였습니다');
       } else if (error.status !== 401) {
@@ -72,6 +74,8 @@ export const usePostTempData = (handleTempSaveModalOpen: () => void) => {
     onError: (error: CustomHttpError) => {
       if (error.status === 413) {
         alert('파일 용량이 너무 큽니다.');
+      } else if (error.status === 415) {
+        alert('유효하지 않은 파일형식입니다.');
       } else if (error.status !== 401) {
         alert('임시저장에 실패했습니다.');
       }
