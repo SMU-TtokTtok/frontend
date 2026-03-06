@@ -97,7 +97,9 @@ export default function Page() {
           <div className={S.BoxTitle}>이메일 인증</div>
           <div className={S.SubContainer}>
             <div className={S.SubDetailContainer}>
-              <div className={S.BoxSubTitle}>이메일</div>
+              <label htmlFor="studentId" className={S.BoxSubTitle}>
+                이메일
+              </label>
               <div className={S.InputButtonFlex}>
                 <div className={S.EmailBox}>
                   <Input
@@ -105,6 +107,7 @@ export default function Page() {
                     className={S.Input}
                     placeholder="학번을 입력하세요"
                     {...register('studentId')}
+                    id="studentId"
                   />
                   <div className={S.EmailText}>@sangmyung.kr</div>
                 </div>
@@ -123,12 +126,15 @@ export default function Page() {
               )}
             </div>
             <div className={S.SubDetailContainer}>
-              <div className={S.BoxSubTitle}>인증코드</div>
+              <label htmlFor="code" className={S.BoxSubTitle}>
+                인증코드
+              </label>
               <div className={S.InputButtonFlex}>
                 <Input
                   className={S.Input}
                   placeholder="인증코드를 입력하세요"
                   {...register('code')}
+                  id="code"
                 />
                 <Button
                   variant="secondary"
@@ -150,24 +156,30 @@ export default function Page() {
           </div>
           <div className={S.SubContainer}>
             <div className={S.SubDetailContainer}>
-              <div className={S.BoxSubTitle}>새 비밀번호</div>
+              <label htmlFor="password" className={S.BoxSubTitle}>
+                새 비밀번호
+              </label>
               <Input
                 className={S.Input}
                 placeholder="새 비밀번호를 입력하세요"
                 type="password"
                 {...register('password')}
                 disabled={!isVerified}
+                id="password"
               />
               {errors.password && <span className={S.ErrorMessage}>{errors.password.message}</span>}
             </div>
             <div className={S.SubDetailContainer}>
-              <div className={S.BoxSubTitle}>새 비밀번호 재입력</div>
+              <label htmlFor="passwordConfirm" className={S.BoxSubTitle}>
+                새 비밀번호 재입력
+              </label>
               <Input
                 className={S.Input}
                 placeholder="새 비밀번호를 재입력하세요"
                 type="password"
                 {...register('passwordConfirm')}
                 disabled={!isVerified}
+                id="passwordConfirm"
               />
               {errors.passwordConfirm && (
                 <span className={S.ErrorMessage}>{errors.passwordConfirm.message}</span>

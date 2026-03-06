@@ -107,13 +107,16 @@ export default function Page() {
             <div className={S.LabelText}>이메일 인증</div>
             <div className={S.LabelDetailBox}>
               <div className={S.FlexBox}>
-                <div className={S.LabelDetailText}>이메일</div>
+                <label htmlFor="studentId" className={S.LabelDetailText}>
+                  이메일
+                </label>
                 <div className={S.FlexBox2}>
                   <div className={S.EmailBox}>
                     <input
                       className={S.Input}
                       {...register('studentId')}
                       placeholder="학번을 입력하세요"
+                      id="studentId"
                     />
                     <div className={S.EmailText}>@sangmyung.kr</div>
                   </div>
@@ -130,12 +133,15 @@ export default function Page() {
                 {errors.studentId && <p className={S.ErrorText}>{errors.studentId.message}</p>}
               </div>
               <div className={S.FlexBox}>
-                <div className={S.LabelDetailText}>인증코드</div>
+                <label htmlFor="code" className={S.LabelDetailText}>
+                  인증코드
+                </label>
                 <div className={S.FlexBox2}>
                   <input
                     className={S.Input}
                     {...register('code')}
                     placeholder="인증코드를 입력하세요"
+                    id="code"
                   />
                   <Button
                     variant="secondary"
@@ -156,7 +162,9 @@ export default function Page() {
             <div className={S.LabelText}>비밀번호</div>
             <div className={S.LabelDetailBox}>
               <div className={S.FlexBox}>
-                <div className={S.LabelDetailText}>비밀번호</div>
+                <label htmlFor="password" className={S.LabelDetailText}>
+                  비밀번호
+                </label>
                 <div className={S.FlexBox2}>
                   <input
                     className={S.Input}
@@ -164,12 +172,15 @@ export default function Page() {
                     {...register('password')}
                     placeholder="비밀번호를 입력하세요"
                     disabled={!isVerified}
+                    id="password"
                   />
                 </div>
                 {errors.password && <p className={S.ErrorText}>{errors.password.message}</p>}
               </div>
               <div className={S.FlexBox}>
-                <div className={S.LabelDetailText}>비밀번호 재입력</div>
+                <label htmlFor="confirmPassword" className={S.LabelDetailText}>
+                  비밀번호 재입력
+                </label>
                 <div className={S.FlexBox2}>
                   <input
                     className={S.Input}
@@ -177,6 +188,7 @@ export default function Page() {
                     {...register('confirmPassword')}
                     placeholder="비밀번호를 재입력하세요"
                     disabled={!isVerified}
+                    id="confirmPassword"
                   />
                 </div>
                 {errors.confirmPassword && (
@@ -188,9 +200,9 @@ export default function Page() {
 
           {/* 이름 */}
           <div className={S.LabelBoxContainer} style={{ gap: '166px' }}>
-            <div className={S.LabelText} style={{ alignSelf: 'center' }}>
+            <label htmlFor="name" className={S.LabelText} style={{ alignSelf: 'center' }}>
               이름
-            </div>
+            </label>
             <div className={S.FlexBox}>
               <div className={S.FlexBox2}>
                 <input
@@ -198,6 +210,7 @@ export default function Page() {
                   placeholder="본인의 이름을 기재해주세요"
                   {...register('name')}
                   disabled={!isVerified}
+                  id="name"
                 />
               </div>
               {errors.name && <p className={S.ErrorText}>{errors.name.message}</p>}

@@ -75,6 +75,7 @@ function Mobile<T extends { id: string; name: string; clubType: string }>({
               onClick={handleNavigate}
               onKeyDown={handleKeyDown}
               placeholder="동아리 이름을 검색하세요."
+              aria-label="동아리 이름을 검색하세요."
             />
           </div>
         )}
