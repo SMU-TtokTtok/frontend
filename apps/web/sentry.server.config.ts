@@ -6,7 +6,7 @@ import * as Sentry from '@sentry/nextjs';
 import { CustomHttpError } from '@/common/apis/apiClient';
 
 Sentry.init({
-  dsn: 'https://40484f988d805d1c90b4a46b42d8f6af@o4509802545741824.ingest.us.sentry.io/4509802549805056',
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
 
   // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
   tracesSampleRate: 0.7,
