@@ -12,6 +12,7 @@ import { postEmail, postCode, postSignup } from '@/components/signup/api';
 import { CustomHttpError } from '@/common/apis/apiClient';
 import { useModal } from '@/hooks/useModal';
 import ConfirmCancelModal from '@/common/components/confirmCancelModal';
+import { trackGAEvent } from '@/lib/ga';
 
 export default function Page() {
   const [isComplete, setIsComplete] = useState(false);
@@ -30,7 +31,7 @@ export default function Page() {
 
   const handleSendEmail = async () => {
     const studentId = getValues('studentId');
-
+    trackGAEvent('email_request');
     // studentId가 9자리가 아니면 요청하지 않음
     if (studentId.length !== 9) {
       alert('학번은 9자리여야 합니다.');
@@ -41,11 +42,14 @@ export default function Page() {
       const email = `${studentId}@sangmyung.kr`;
       const response = await postEmail({ email });
       if (response.success) {
+        trackGAEvent('email_success');
         handleModalOpen();
       } else {
+        trackGAEvent('email_fail');
         alert(response.message);
       }
     } catch (error) {
+      trackGAEvent('email_error');
       console.error('이메일 전송 중 오류 발생:', error);
       alert('이메일 전송 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
@@ -56,20 +60,38 @@ export default function Page() {
       const studentId = getValues('studentId');
       const email = `${studentId}@sangmyung.kr`;
       const code = getValues('code');
+      trackGAEvent('verify_code_attempt', {
+        signup_step: 'email_verification',
+        has_student_id: Boolean(studentId),
+        has_code: Boolean(code),
+      });
       const response = await postCode({ email, code });
       if (response.success) {
+        trackGAEvent('verify_code_success', {
+          signup_step: 'email_verification',
+        });
         alert(response.message);
         setIsVerified(true);
       } else {
+        trackGAEvent('verify_code_fail', {
+          signup_step: 'email_verification',
+        });
         alert(response.message);
       }
     } catch (error) {
+      trackGAEvent('verify_code_error', {
+        signup_step: 'email_verification',
+      });
+
       console.error('인증 코드 확인 중 오류 발생:', error);
       alert('인증 코드 확인 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
   };
 
   const onSubmit = async (data: SignupForm) => {
+    trackGAEvent('signup_submit_attempt', {
+      signup_step: 'final_submit',
+    });
     try {
       const response = await postSignup({
         email: `${data.studentId}@sangmyung.kr`,
@@ -80,10 +102,17 @@ export default function Page() {
         termsAgreed: data.agree,
       });
       if (response.success) {
+        trackGAEvent('sign_up', {
+          method: 'school_email',
+        });
+
         setUserName(data.name);
         setIsComplete(true);
       }
     } catch (error: unknown) {
+      trackGAEvent('signup_submit_fail', {
+        signup_step: 'final_submit',
+      });
       if (error instanceof CustomHttpError && error.status === 400) {
         alert('이미 존재하는 사용자입니다');
       } else {
