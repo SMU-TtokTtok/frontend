@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import { BREAKPOINTS } from '@/common/constants';
+import { vars } from '@/common/styles/theme.css';
 
 export const wrapper = style({
   minHeight: '90vh',
@@ -7,7 +8,7 @@ export const wrapper = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#F5F5F6',
+  backgroundColor: vars.colors.surface.variant,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -23,7 +24,7 @@ export const container = style({
   justifyContent: 'center',
   padding: '54px 40px 70px 40px',
   borderRadius: '8px',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   gap: '16px',
   width: '500px',
 
@@ -59,7 +60,7 @@ export const stringTextContainer = style({
 export const stringText = style({
   fontSize: '23px',
   fontWeight: '600',
-  color: '#272E3B',
+  color: vars.colors.charcoal,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {

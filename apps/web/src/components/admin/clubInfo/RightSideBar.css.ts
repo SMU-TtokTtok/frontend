@@ -20,7 +20,7 @@ export const container = style({
 });
 
 export const contentBox = style({
-  background: 'white',
+  background: vars.colors.white,
   borderRadius: '8px',
   padding: '24px 26px',
   marginBottom: '20px',
@@ -56,7 +56,7 @@ export const grayText = style({
 });
 
 export const blackText = style({
-  color: '#030304',
+  color: vars.colors.surface.on_surf,
   fontSize: vars.fonts.body1,
   fontWeight: 500,
 

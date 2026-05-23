@@ -166,7 +166,7 @@ export const adminLoginButton = style({
 export const userInput = style({
   padding: '12px 16px',
   borderRadius: '6px',
-  backgroundColor: '#F8F8F9',
+  backgroundColor: vars.colors.surface.default,
   fontSize: '14px',
   selectors: {
     '&::placeholder': {

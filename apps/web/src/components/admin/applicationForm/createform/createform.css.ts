@@ -170,7 +170,7 @@ export const Title = style({
 export const descriptionInBox = style({
   fontSize: vars.fonts.title4,
   fontWeight: 500,
-  color: '#5A6379',
+  color: vars.colors.surface.outline,
   textAlign: 'center',
   marginTop: '10px',
   marginBottom: '32px',

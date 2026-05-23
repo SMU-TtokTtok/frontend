@@ -8,7 +8,7 @@ export const CompleteBox = style({
   left: '50%',
   transform: 'translate(-50%, -50%)',
 
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   borderRadius: '12px',
   padding: '48px',
   width: '100%',
@@ -40,7 +40,7 @@ export const CompleteTitle = style({
 
 export const CompleteText = style({
   fontSize: vars.fonts.body2,
-  color: '#272E3B',
+  color: vars.colors.charcoal,
   lineHeight: 1.6,
   marginBottom: '30px',
 

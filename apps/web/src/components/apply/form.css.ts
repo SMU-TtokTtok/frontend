@@ -77,7 +77,7 @@ export const BoxFlex = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '16px',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   padding: '22px 24px',
   borderRadius: '8px',
 });
@@ -85,7 +85,7 @@ export const BoxFlex = style({
 export const BoxTitle = style({
   fontSize: vars.fonts.title4,
   fontWeight: '700',
-  color: '#030304',
+  color: vars.colors.surface.on_surf,
 });
 
 export const BoxContentContainer = style({
@@ -96,7 +96,7 @@ export const BoxContentContainer = style({
 
 export const contentText = style({
   fontSize: vars.fonts.body2,
-  color: '#030304',
+  color: vars.colors.surface.on_surf,
 
   whiteSpace: 'nowrap',
   overflow: 'hidden',
@@ -122,7 +122,7 @@ export const contentContainer = style({
   flexDirection: 'column',
   gap: '18px',
   borderRadius: '8px',
-  background: 'white',
+  background: vars.colors.white,
   marginBottom: '200px',
   flexGrow: 1,
   flexShrink: 1,
@@ -187,7 +187,7 @@ export const FormSubTitle = style({
 export const FormBasicContainer = style({
   padding: '22px',
   borderRadius: '6px',
-  background: '#F8F8F9',
+  background: vars.colors.surface.default,
   display: 'flex',
   flexDirection: 'column',
   gap: '40px',
@@ -195,7 +195,7 @@ export const FormBasicContainer = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
       padding: '16px 14px',
-      backgroundColor: 'white',
+      backgroundColor: vars.colors.white,
       gap: '20px',
     },
   },
@@ -224,7 +224,7 @@ export const FormContentContainer = style({
 export const FormContentTitle = style({
   fontSize: vars.fonts.body1,
   fontWeight: '600',
-  color: '#030304',
+  color: vars.colors.surface.on_surf,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -234,7 +234,7 @@ export const FormContentTitle = style({
 });
 
 export const FormContentTitleEssential = style({
-  color: '#254FDB',
+  color: vars.colors.primary.default,
 });
 
 export const FormContentSubTitle = style({
@@ -254,7 +254,7 @@ export const FormContentSubTitle = style({
 export const FormInput = style({
   padding: '12px 16px',
   borderRadius: '6px',
-  background: 'white',
+  background: vars.colors.white,
   fontSize: vars.fonts.body2,
   lineHeight: '150%',
 
@@ -266,7 +266,7 @@ export const FormInput = style({
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      backgroundColor: '#F8F8F9',
+      backgroundColor: vars.colors.surface.default,
       padding: '10px 12px',
       fontSize: vars.fonts.m_body1,
       flexShrink: '1',
@@ -288,7 +288,7 @@ export const LabelContainer = style({
 export const RadioText = style({
   fontSize: vars.fonts.body2,
   fontWeight: '500',
-  color: '#272E3B',
+  color: vars.colors.charcoal,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -319,11 +319,11 @@ export const questionContainer = style({
   gap: '16px',
   borderRadius: '6px',
   padding: '22px',
-  background: '#F8F8F9',
+  background: vars.colors.surface.default,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      backgroundColor: 'white',
+      backgroundColor: vars.colors.white,
       padding: '16px 14px',
       gap: '12px',
     },
@@ -345,11 +345,11 @@ export const questionHeader = style({
 export const questionTitle = style({
   fontSize: vars.fonts.title4,
   fontWeight: '600',
-  color: '#030304',
+  color: vars.colors.surface.on_surf,
 });
 
 export const essential = style({
-  color: '#254FDB',
+  color: vars.colors.primary.default,
   fontSize: vars.fonts.title4,
   fontWeight: '600',
 });
@@ -376,7 +376,7 @@ export const checkboxItem = style({
 export const checkboxLabel = style({
   fontSize: vars.fonts.body2,
   fontWeight: '500',
-  color: '#272E3B',
+  color: vars.colors.charcoal,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -401,7 +401,7 @@ export const radioItem = style({
 export const radioLabel = style({
   fontSize: vars.fonts.body2,
   fontWeight: '500',
-  color: '#272E3B',
+  color: vars.colors.charcoal,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -413,7 +413,7 @@ export const radioLabel = style({
 export const shortAnswerInput = style({
   padding: '12px 16px',
   borderRadius: '6px',
-  background: 'white',
+  background: vars.colors.white,
   fontSize: vars.fonts.body2,
   lineHeight: '150%',
 
@@ -425,7 +425,7 @@ export const shortAnswerInput = style({
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      backgroundColor: '#F8F8F9',
+      backgroundColor: vars.colors.surface.default,
       padding: '10px 12px',
       fontSize: vars.fonts.m_body2,
     },
@@ -435,7 +435,7 @@ export const shortAnswerInput = style({
 export const longAnswerTextarea = style({
   padding: '12px 16px',
   borderRadius: '6px',
-  background: 'white',
+  background: vars.colors.white,
   fontSize: vars.fonts.body2,
   lineHeight: '150%',
   resize: 'vertical',
@@ -449,7 +449,7 @@ export const longAnswerTextarea = style({
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      backgroundColor: '#F8F8F9',
+      backgroundColor: vars.colors.surface.default,
       padding: '10px 12px',
       fontSize: vars.fonts.m_body2,
     },
@@ -459,14 +459,14 @@ export const longAnswerTextarea = style({
 export const fileInput = style({
   padding: '12px 16px',
   borderRadius: '6px',
-  background: 'white',
+  background: vars.colors.white,
   fontSize: vars.fonts.body2,
   lineHeight: '150%',
   border: '1px solid #E5E7EB',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      backgroundColor: '#F8F8F9',
+      backgroundColor: vars.colors.surface.default,
       padding: '10px 12px',
       fontSize: vars.fonts.m_body1,
     },
