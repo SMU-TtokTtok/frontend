@@ -13,17 +13,25 @@ export function buildImportPatch(ast) {
   for (const node of ast.program.body) {
     if (node.type !== 'ImportDeclaration') continue;
     lastImportEnd = node.end;
-    if (!node.source.value.includes('theme.css')) continue;
+    if (node.source.value !== THEME_IMPORT_SOURCE) continue;
     themeImportNode = node;
-    hasVars = node.specifiers.some((s) => s.type === 'ImportSpecifier' && s.local.name === 'vars');
+    hasVars = node.specifiers.some(
+      (s) => s.type === 'ImportSpecifier' && s.imported?.name === 'vars',
+    );
   }
 
   if (hasVars) return null;
 
   if (themeImportNode) {
-    const firstSpec = themeImportNode.specifiers[0];
-    if (!firstSpec) return null;
-    return { start: firstSpec.start, end: firstSpec.start, text: 'vars, ' };
+    const firstNamedSpec = themeImportNode.specifiers.find((s) => s.type === 'ImportSpecifier');
+    if (firstNamedSpec) {
+      return { start: firstNamedSpec.start, end: firstNamedSpec.start, text: 'vars, ' };
+    }
+    return {
+      start: themeImportNode.end,
+      end: themeImportNode.end,
+      text: `\nimport { vars } from '${THEME_IMPORT_SOURCE}';`,
+    };
   }
 
   return {

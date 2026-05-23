@@ -7,10 +7,10 @@
  * 대상: [KNOWN] 항목만 (theme.css.ts에 대응 토큰이 존재하는 것)
  *
  * 사용법:
- *   node scripts/codemode/codemod-color-tokens.mjs                     → dry-run (기본)
- *   node scripts/codemode/codemod-color-tokens.mjs --apply             → 실제 파일 수정
- *   node scripts/codemode/codemod-color-tokens.mjs --file src/...      → 단일 파일
- *   node scripts/codemode/codemod-color-tokens.mjs --file src/... --apply
++ *   node scripts/codemode/index.mjs                     → dry-run (기본)
++ *   node scripts/codemode/index.mjs --apply             → 실제 파일 수정
++ *   node scripts/codemode/index.mjs --file src/...      → 단일 파일
++ *   node scripts/codemode/index.mjs --file src/... --apply
  */
 
 import { readFileSync, writeFileSync } from 'fs';
