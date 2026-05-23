@@ -23,7 +23,11 @@ function extractColorsNode(callNode) {
   const themeArg = callNode.arguments[2];
   if (!themeArg || themeArg.type !== 'ObjectExpression') return null;
 
-  const colorsProp = themeArg.properties.find((p) => isColorsKey(p.key));
+  const colorsProp = themeArg.properties.find(
+    (p) =>
+      p.type === 'ObjectProperty' &&
+      isColorsKey(p.key.type === 'Identifier' ? p.key.name : p.key.value),
+  );
 
   return colorsProp?.value?.type === 'ObjectExpression' ? colorsProp.value : null;
 }
