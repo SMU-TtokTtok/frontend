@@ -1,26 +1,30 @@
-import { b, r, y, g, cy, d, m } from '../../lib/ansi.mjs';
+import type { Node } from '@babel/types';
+import { b, r, y, g, cy, d, m } from '../../lib/ansi';
+import type { Hit } from './scanner';
 
-function renderAstNode(node, indent = 0) {
+function renderAstNode(node: Node | null | undefined, indent = 0): void {
   if (!node || typeof node !== 'object') return;
   const pad = '  '.repeat(indent);
   const loc = node.loc ? d(` [${node.loc.start.line}:${node.loc.start.column}]`) : '';
   let label = cy(node.type) + loc;
 
-  if (node.type === 'Identifier') label += '  ' + b(node.name);
-  if (node.type === 'StringLiteral') label += '  ' + r(`"${node.value}"`);
-  if (node.type === 'NumericLiteral') label += '  ' + g(String(node.value));
+  if (node.type === 'Identifier') label += '  ' + b((node as { name: string }).name);
+  if (node.type === 'StringLiteral') label += '  ' + r(`"${(node as { value: string }).value}"`);
+  if (node.type === 'NumericLiteral') label += '  ' + g(String((node as { value: number }).value));
   console.log(`${pad}${label}`);
 
   if (node.type === 'ObjectProperty') {
-    renderAstNode(node.key, indent + 1);
-    renderAstNode(node.value, indent + 1);
+    renderAstNode((node as { key: Node; value: Node }).key, indent + 1);
+    renderAstNode((node as { key: Node; value: Node }).value, indent + 1);
   }
   if (node.type === 'ObjectExpression') {
-    console.log(`${pad}  ${d(`{ ${node.properties.length}개 프로퍼티 }`)}`);
+    console.log(
+      `${pad}  ${d(`{ ${(node as { properties: unknown[] }).properties.length}개 프로퍼티 }`)}`,
+    );
   }
 }
 
-export function printHit(hit, showAst = false) {
+export function printHit(hit: Hit, showAst = false): void {
   const locLabel = d(`${String(hit.line).padStart(4)}:${String(hit.col).padStart(2)}`);
   const kindLabel = hit.token ? g('[KNOWN]') : y('[UNKNOWN]');
   const exportLabel = hit.exportName ? m(`  ← ${hit.exportName}`) : '';
