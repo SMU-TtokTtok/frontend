@@ -31,7 +31,7 @@ export const contentFlex = style({
   display: 'flex',
   flexDirection: 'column',
   gap: '10px',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   padding: '24px 26px',
   borderRadius: '8px',
   marginBottom: '20px',

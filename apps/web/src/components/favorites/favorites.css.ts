@@ -9,7 +9,7 @@ export const lottieContainer = style({
 
 export const emptyText = style({
   width: '100%',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   height: '700px',
   display: 'flex',
   justifyContent: 'center',
@@ -19,7 +19,7 @@ export const emptyText = style({
   borderRadius: '8px',
   fontSize: vars.fonts.title3,
   fontWeight: 500,
-  color: '#E0E1E3',
+  color: vars.colors.surface.cont_3,
   marginTop: '20px',
   marginBottom: '180px',
 

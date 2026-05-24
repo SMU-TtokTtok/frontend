@@ -10,7 +10,7 @@ export const dropDownButtonStyle = styleVariants({
   error: {
     backgroundColor: vars.colors.error.base,
     border: `1px solid ${vars.colors.error.container}`,
-    color: '#BE3439',
+    color: vars.colors.error.primary,
   },
   tertiary: {
     backgroundColor: vars.colors.tertiary.base,

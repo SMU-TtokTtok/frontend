@@ -29,7 +29,7 @@ export const buttonStyle = styleVariants({
   },
   danger: {
     backgroundColor: vars.colors.error.base,
-    color: '#BE3439',
+    color: vars.colors.error.primary,
   },
   none: {},
 });

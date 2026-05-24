@@ -8,7 +8,7 @@ export const container = style({
   alignItems: 'center',
   padding: '10px 20px',
   borderRadius: '6px',
-  backgroundColor: '#F8F8F9',
+  backgroundColor: vars.colors.surface.default,
   flexGrow: 1,
 
   '@media': {
@@ -41,7 +41,7 @@ export const grade = style({
 export const name = style({
   fontSize: vars.fonts.body2,
   fontWeight: '600',
-  color: '#030304',
+  color: vars.colors.surface.on_surf,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -107,7 +107,7 @@ export const panelContainer = style({
 
 export const panelItem = style({
   padding: '8px 0',
-  color: '#292E39',
+  color: vars.colors.surface.on_surf_var,
   fontSize: vars.fonts.body2,
   fontWeight: 600,
   cursor: 'pointer',

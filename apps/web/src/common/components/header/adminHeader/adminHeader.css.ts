@@ -115,7 +115,7 @@ export const RightArea = style({
 export const RightAreaIcon = style({
   width: '20px',
   height: '20px',
-  backgroundColor: '#A5BDF5',
+  backgroundColor: vars.colors.primary.fixed_dim,
   borderRadius: '50%',
 });
 

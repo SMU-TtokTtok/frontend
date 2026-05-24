@@ -28,7 +28,7 @@ export const imageStyle = style({
 
 export const RightFlex = style({
   flex: '1 0 0',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   borderRadius: '8px',
   padding: '22px',
   minWidth: 0,

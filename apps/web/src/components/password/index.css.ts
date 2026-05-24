@@ -48,7 +48,7 @@ export const Title = style({
 export const BoxContainer = recipe({
   base: {
     padding: '32px',
-    backgroundColor: 'white',
+    backgroundColor: vars.colors.white,
     display: 'flex',
     borderRadius: '8px',
 
@@ -149,7 +149,7 @@ export const InputButtonFlex = style({
 export const Input = style({
   flex: '1 1 0',
   padding: '12px 16px',
-  backgroundColor: '#F8F8F9 !important',
+  backgroundColor: `${vars.colors.surface.default} !important`,
   lineHeight: '1.5',
   minWidth: '0',
   selectors: {

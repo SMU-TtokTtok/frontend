@@ -7,7 +7,7 @@ export const container = style({
   flex: '1 0 0',
   borderRadius: '8px',
   padding: '18px 24px',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   // marginBottom: '28px',
 
   minWidth: 0,
@@ -136,7 +136,7 @@ export const dropDownStyleWide = style({
 export const dropDownStyle2 = style({
   padding: '6px 0 6px 8px',
   borderRadius: '4px',
-  backgroundColor: '#E7E8EA',
+  backgroundColor: vars.colors.surface.cont_2,
   color: '#55637D',
   // minWidth: '80px',
   // width: '80px',
@@ -152,7 +152,7 @@ export const dropDownStyle2 = style({
 export const dropDownStyle2Wide = style({
   padding: '6px 0 6px 8px',
   borderRadius: '4px',
-  backgroundColor: '#F8F8F9',
+  backgroundColor: vars.colors.surface.default,
   color: '#55637D',
 
   width: '115px',
@@ -164,7 +164,7 @@ export const dropdownPanel = style({
   left: 0,
   // minWidth: '80px',
   width: '100%',
-  background: '#f8f8f9',
+  background: vars.colors.surface.default,
   border: '1px solid #e7e8ea',
   borderRadius: '4px',
   boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
@@ -178,7 +178,7 @@ export const dropdownItem = style({
   fontFamily: 'Pretendard Variable',
   fontWeight: 500,
   fontSize: '16px',
-  color: '#5a6379',
+  color: vars.colors.surface.outline,
   cursor: 'pointer',
   transition: 'background 0.15s',
   selectors: {
@@ -189,7 +189,7 @@ export const dropdownItem = style({
 });
 
 export const selectedDropdownItem = style({
-  background: '#e7e8ea',
+  background: vars.colors.surface.cont_2,
   color: '#2d3648',
 });
 
@@ -199,7 +199,7 @@ export const categoryDropdownPanel = style({
   left: 0,
   minWidth: '94px',
   width: '94px',
-  background: '#fff',
+  background: vars.colors.white,
   borderRadius: '8px',
   boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
   zIndex: 10,
@@ -215,19 +215,19 @@ export const categoryDropdownItem = style({
   fontFamily: 'Pretendard Variable',
   fontWeight: 600,
   fontSize: '16px',
-  color: '#292e39',
+  color: vars.colors.surface.on_surf_var,
   cursor: 'pointer',
   transition: 'background 0.15s',
   selectors: {
     '&:hover': {
-      background: '#f8f8f9',
+      background: vars.colors.surface.default,
     },
   },
 });
 
 export const selectedCategoryDropdownItem = style({
-  background: '#e7e8ea',
-  color: '#292e39',
+  background: vars.colors.surface.cont_2,
+  color: vars.colors.surface.on_surf_var,
 });
 
 export const recruitDropdownPanel = style({
@@ -236,7 +236,7 @@ export const recruitDropdownPanel = style({
   left: 0,
   minWidth: '80px',
   width: '80px',
-  background: '#fff',
+  background: vars.colors.white,
   borderRadius: '8px',
   boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
   zIndex: 10,
@@ -252,25 +252,25 @@ export const recruitDropdownItem = style({
   fontFamily: 'Pretendard Variable',
   fontWeight: 600,
   fontSize: '16px',
-  color: '#292e39',
+  color: vars.colors.surface.on_surf_var,
   cursor: 'pointer',
   transition: 'background 0.15s',
   selectors: {
     '&:hover': {
-      background: '#f8f8f9',
+      background: vars.colors.surface.default,
     },
   },
 });
 
 export const selectedRecruitDropdownItem = style({
-  background: '#e7e8ea',
-  color: '#292e39',
+  background: vars.colors.surface.cont_2,
+  color: vars.colors.surface.on_surf_var,
 });
 
 export const userInputTag = style({
   display: 'flex',
   alignItems: 'center',
-  background: '#f8f8f9',
+  background: vars.colors.surface.default,
   border: '1px solid #e7e8ea',
   borderRadius: '100px',
   padding: '4px 8px 4px 12px',
@@ -306,7 +306,7 @@ export const customFieldInput = style({
   fontSize: 16,
   fontWeight: 600,
   fontFamily: 'Pretendard Variable',
-  color: '#5a6379',
+  color: vars.colors.surface.outline,
   textAlign: 'center',
   outline: 'none',
   padding: 0,
@@ -327,7 +327,7 @@ export const customFieldSpan = style({
 export const customFieldText = style({
   fontWeight: 600,
   fontSize: 16,
-  color: '#5a6379',
+  color: vars.colors.surface.outline,
   lineHeight: '24px',
   textAlign: 'center',
   // whiteSpace: 'nowrap',
@@ -442,7 +442,7 @@ export const panelItem = style({
 
 export const panelItem2 = style({
   padding: '12px 0',
-  color: '#272E3B',
+  color: vars.colors.charcoal,
   fontSize: vars.fonts.body2,
   fontWeight: 600,
   cursor: 'pointer',
@@ -472,7 +472,7 @@ export const detailFlex = style({
   alignItems: 'center',
   borderRadius: '100px',
   padding: '4px 8px 4px 12px',
-  backgroundColor: '#F8F8F9',
+  backgroundColor: vars.colors.surface.default,
   border: '1px solid #E7E8EA',
 });
 export const detailInput = style({
@@ -487,7 +487,7 @@ export const detailInput = style({
 export const divider = style({
   display: 'none',
   height: '1px',
-  backgroundColor: '#EDEEF1',
+  backgroundColor: vars.colors.surface.cont_1_var,
   marginBottom: '14px',
 
   '@media': {

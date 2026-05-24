@@ -44,7 +44,7 @@ export const header = style({
   borderTopRightRadius: '8px',
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
-      backgroundColor: '#F5F5F6',
+      backgroundColor: vars.colors.surface.variant,
       height: '55px',
       padding: '0 20px',
     },
