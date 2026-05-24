@@ -7,6 +7,7 @@ import type {
   StringLiteral,
 } from '@babel/types';
 import { parseFile } from './parse';
+import { normalizeColor } from './color-utils';
 
 const traverse = (_traverse as unknown as { default: typeof _traverse }).default ?? _traverse;
 
@@ -52,8 +53,8 @@ function collectColorTokens(
     const currentPath = [...ancestorPath, key];
 
     if (op.value.type === 'StringLiteral') {
-      const hexValue = (op.value as StringLiteral).value.trim().toUpperCase();
-      tokenMap.set(hexValue, buildTokenPath(currentPath));
+      const normalized = normalizeColor((op.value as StringLiteral).value);
+      tokenMap.set(normalized, buildTokenPath(currentPath));
     } else if (op.value.type === 'ObjectExpression') {
       collectColorTokens(op.value as ObjectExpression, currentPath, tokenMap);
     }
