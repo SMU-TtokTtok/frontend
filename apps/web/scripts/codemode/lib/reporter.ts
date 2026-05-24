@@ -1,7 +1,14 @@
-import { b, r, g, y, d } from '../../lib/ansi.mjs';
-import { buildReplacement } from './transformer.mjs';
+import { b, r, g, y, d } from '../../lib/ansi';
+import { buildReplacement } from './transformer';
+import type { CollectorHit } from './collector';
+import type { Patch } from './transformer';
 
-export function printDiff(relPath, hits, importPatch, source) {
+export function printDiff(
+  relPath: string,
+  hits: CollectorHit[],
+  importPatch: Patch | null,
+  source: string,
+): void {
   const lines = source.split('\n');
 
   console.log(`\n${b(relPath)}`);
