@@ -1,6 +1,12 @@
 import _traverse from '@babel/traverse';
 import type { NodePath } from '@babel/traverse';
-import type { Identifier, Node, ObjectProperty, StringLiteral } from '@babel/types';
+import type {
+  Identifier,
+  Node,
+  ObjectProperty,
+  StringLiteral,
+  VariableDeclarator,
+} from '@babel/types';
 import path from 'path';
 import { CSS_NAMED_HEX, collectColor, normalizeColor } from '../../lib/color-utils';
 import { y } from '../../lib/ansi';
@@ -60,8 +66,15 @@ export function scanFile(filePath: string, tokenMap: Map<string, string>, ROOT: 
 
 function extractStringProperty(node: ObjectProperty): StringProperty | null {
   if (node.value.type !== 'StringLiteral') return null;
-  const keyName = node.key.type === 'Identifier' ? (node.key as Identifier).name : (node.key as StringLiteral).value;
-  return { valueNode: node.value as StringLiteral, keyName, raw: (node.value as StringLiteral).value };
+  const keyName =
+    node.key.type === 'Identifier'
+      ? (node.key as Identifier).name
+      : (node.key as StringLiteral).value;
+  return {
+    valueNode: node.value as StringLiteral,
+    keyName,
+    raw: (node.value as StringLiteral).value,
+  };
 }
 
 function resolveColorHit(
@@ -71,12 +84,28 @@ function resolveColorHit(
 ): Hit | null {
   const namedColorHit = resolveAsNamedColor(raw, tokenMap);
   if (namedColorHit) {
-    return makeHit(valueNode, keyName, raw, namedColorHit.normalized, namedColorHit.token, 'NAMED', nodePath);
+    return makeHit(
+      valueNode,
+      keyName,
+      raw,
+      namedColorHit.normalized,
+      namedColorHit.token,
+      'NAMED',
+      nodePath,
+    );
   }
 
   const hexColorHit = resolveAsHexColor(raw, tokenMap);
   if (hexColorHit) {
-    return makeHit(valueNode, keyName, raw, hexColorHit.normalized, hexColorHit.token, 'COLOR', nodePath);
+    return makeHit(
+      valueNode,
+      keyName,
+      raw,
+      hexColorHit.normalized,
+      hexColorHit.token,
+      'COLOR',
+      nodePath,
+    );
   }
 
   return null;
@@ -132,14 +161,16 @@ function collectParentTypes(nodePath: NodePath): string[] {
   return chain;
 }
 
-function isNamedDeclarator(node: Node): boolean {
-  return node.type === 'VariableDeclarator' && node.id?.type === 'Identifier';
+function isNamedDeclarator(node: Node): node is VariableDeclarator & { id: Identifier } {
+  return (
+    node.type === 'VariableDeclarator' && (node as VariableDeclarator).id?.type === 'Identifier'
+  );
 }
 
 function findExportName(nodePath: NodePath): string | null {
   let cur: NodePath | null = nodePath;
   while (cur) {
-    if (isNamedDeclarator(cur.node)) return (cur.node.id as Identifier).name;
+    if (isNamedDeclarator(cur.node)) return cur.node.id.name;
     cur = cur.parentPath;
   }
   return null;

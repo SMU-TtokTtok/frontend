@@ -40,7 +40,9 @@ console.log(`\n${b('▶ 디자인 토큰')} ${d(`${tokenMap.size}개 로드`)}`)
 
 if (!apply) {
   console.log(
-    `${y('  dry-run 모드')} — 실제 파일은 변경되지 않습니다. 적용하려면 ${b('--apply')} 를 추가하세요.\n`,
+    `${y('  dry-run 모드')} — 실제 파일은 변경되지 않습니다. 적용하려면 ${b(
+      '--apply',
+    )} 를 추가하세요.\n`,
   );
 } else {
   console.log(`${r('  --apply 모드')} — 파일을 실제로 수정합니다.\n`);
@@ -97,6 +99,8 @@ console.log(`  대상 파일: ${b(totalFiles + '개')}`);
 console.log(`  교체 항목: ${b(totalHits + '건')}`);
 if (!apply) {
   console.log(`\n  ${y('→ 실제 적용하려면:')} ${b('tsx scripts/codemode/index.ts --apply')}`);
-  console.log(`  ${y('→ 단일 파일 적용:')} ${b('tsx scripts/codemode/index.ts --file src/... --apply')}`);
+  console.log(
+    `  ${y('→ 단일 파일 적용:')} ${b('tsx scripts/codemode/index.ts --file src/... --apply')}`,
+  );
 }
 console.log('═'.repeat(64));

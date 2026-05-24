@@ -18,7 +18,9 @@ function renderAstNode(node: Node | null | undefined, indent = 0): void {
     renderAstNode((node as { key: Node; value: Node }).value, indent + 1);
   }
   if (node.type === 'ObjectExpression') {
-    console.log(`${pad}  ${d(`{ ${(node as { properties: unknown[] }).properties.length}개 프로퍼티 }`)}`);
+    console.log(
+      `${pad}  ${d(`{ ${(node as { properties: unknown[] }).properties.length}개 프로퍼티 }`)}`,
+    );
   }
 }
 

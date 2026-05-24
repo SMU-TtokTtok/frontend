@@ -25,7 +25,12 @@ export function collectHits(ast: File, tokenMap: Map<string, string>): Collector
       if (namedHex) {
         const token = tokenMap.get(namedHex);
         if (!token) return;
-        hits.push({ node: value as StringLiteral, token, rawValue: raw, line: value.loc!.start.line });
+        hits.push({
+          node: value as StringLiteral,
+          token,
+          rawValue: raw,
+          line: value.loc!.start.line,
+        });
         return;
       }
 
@@ -33,7 +38,12 @@ export function collectHits(ast: File, tokenMap: Map<string, string>): Collector
       const token = tokenMap.get(normalizeColor(raw));
       if (!token) return;
 
-      hits.push({ node: value as StringLiteral, token, rawValue: raw, line: value.loc!.start.line });
+      hits.push({
+        node: value as StringLiteral,
+        token,
+        rawValue: raw,
+        line: value.loc!.start.line,
+      });
     },
   });
 

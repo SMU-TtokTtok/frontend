@@ -48,8 +48,7 @@ function collectColorTokens(
     if (prop.type !== 'ObjectProperty') continue;
 
     const op = prop as ObjectProperty;
-    const key =
-      op.key.type === 'Identifier' ? op.key.name : (op.key as StringLiteral).value;
+    const key = op.key.type === 'Identifier' ? op.key.name : (op.key as StringLiteral).value;
     const currentPath = [...ancestorPath, key];
 
     if (op.value.type === 'StringLiteral') {

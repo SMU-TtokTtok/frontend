@@ -88,7 +88,10 @@ function printTokenMap(tokenMap: Map<string, string>): void {
   console.log();
 }
 
-function filterHits(hits: Hit[], { onlyKnown, onlyUnknown }: Pick<Args, 'onlyKnown' | 'onlyUnknown'>): Hit[] {
+function filterHits(
+  hits: Hit[],
+  { onlyKnown, onlyUnknown }: Pick<Args, 'onlyKnown' | 'onlyUnknown'>,
+): Hit[] {
   if (onlyKnown) return hits.filter((h) => h.token !== null);
   if (onlyUnknown) return hits.filter((h) => h.token === null);
   return hits;
@@ -100,7 +103,11 @@ function formatFileSummary(known: number, unknown: number): string {
     .join('  ');
 }
 
-function printFileHits(file: string, hits: Hit[], showAst: boolean): { known: number; unknown: number } {
+function printFileHits(
+  file: string,
+  hits: Hit[],
+  showAst: boolean,
+): { known: number; unknown: number } {
   const known = hits.filter((h) => h.token !== null).length;
   const unknown = hits.filter((h) => h.token === null).length;
 
@@ -115,8 +122,16 @@ function printFileHits(file: string, hits: Hit[], showAst: boolean): { known: nu
 function printSummary(totalKnown: number, totalUnknown: number): void {
   console.log(DIVIDER_THICK);
   console.log(b('[ 결과 요약 ]'));
-  console.log(`  ${g('[KNOWN]')}   테마 색상이 하드코딩된 곳: ${g(b(totalKnown + '건'))}  → 토큰으로 교체 필요`);
-  console.log(`  ${y('[UNKNOWN]')} 테마에 없는 색상:           ${y(b(totalUnknown + '건'))}  → 신규 토큰 추가 검토`);
+  console.log(
+    `  ${g('[KNOWN]')}   테마 색상이 하드코딩된 곳: ${g(
+      b(totalKnown + '건'),
+    )}  → 토큰으로 교체 필요`,
+  );
+  console.log(
+    `  ${y('[UNKNOWN]')} 테마에 없는 색상:           ${y(
+      b(totalUnknown + '건'),
+    )}  → 신규 토큰 추가 검토`,
+  );
   console.log(DIVIDER_THICK);
   console.log(d('\nTip: --ast 플래그로 원시 AST 노드 구조를 함께 볼 수 있습니다.'));
   console.log(d('     --file src/... 로 특정 파일만 볼 수 있습니다.\n'));

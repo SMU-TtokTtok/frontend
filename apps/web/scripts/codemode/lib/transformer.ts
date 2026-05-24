@@ -24,7 +24,10 @@ export function buildImportPatch(ast: File): Patch | null {
     if (node.source.value !== THEME_IMPORT_SOURCE) continue;
     themeImportNode = node as ImportDeclaration;
     hasVars = node.specifiers.some(
-      (s) => s.type === 'ImportSpecifier' && (s as ImportSpecifier).imported?.type === 'Identifier' && ((s as ImportSpecifier).imported as { name: string }).name === 'vars',
+      (s) =>
+        s.type === 'ImportSpecifier' &&
+        (s as ImportSpecifier).imported?.type === 'Identifier' &&
+        ((s as ImportSpecifier).imported as { name: string }).name === 'vars',
     );
   }
 

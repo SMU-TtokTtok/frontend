@@ -25,7 +25,12 @@ export function normalizeColor(raw: string): string {
   const shortHexMatch = v.match(/^#([0-9A-F]{3})$/);
   if (shortHexMatch) {
     const [, h] = shortHexMatch;
-    v = '#' + h.split('').map((c) => c + c).join('');
+    v =
+      '#' +
+      h
+        .split('')
+        .map((c) => c + c)
+        .join('');
   }
   return v;
 }
