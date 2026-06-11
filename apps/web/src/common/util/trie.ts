@@ -14,6 +14,10 @@ class Trie {
   }
 
   add(club: ClubItemInfo) {
+    if (!club.name) {
+      console.warn('Club name is missing:', club);
+      return;
+    }
     let node = this.root;
     for (const char of club.name.toLowerCase()) {
       if (!node.children.has(char)) {
@@ -21,10 +25,15 @@ class Trie {
       }
       node = node.children.get(char)!;
     }
-    node.clubs.push(club);
+    if (!node.clubs.some((c) => c.id === club.id)) {
+      node.clubs.push(club);
+    }
   }
 
   search(prefix: string): ClubItemInfo[] {
+    if (!prefix || !prefix.trim()) {
+      return [];
+    }
     let node = this.root;
     for (const char of prefix.toLowerCase()) {
       const next = node.children.get(char);
