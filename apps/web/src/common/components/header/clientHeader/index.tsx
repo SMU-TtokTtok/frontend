@@ -1,11 +1,11 @@
 'use client';
 
 import { useScrollObserver } from '@/hooks/useScrollObserver';
-import { useSearchClubInfinite } from '@/hooks/useSearchClubInfinite';
 import { useCombobox } from '@/hooks/useComboBox';
 import Desktop from './desktop';
 import Mobile from './mobile';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import useTrie from '@/common/store/trieStore';
 
 function ClientHeader() {
   const {
@@ -17,13 +17,16 @@ function ClientHeader() {
     handleKeyDown,
   } = useCombobox();
   const isVisible = useScrollObserver();
-  const { clubs: searchList } = useSearchClubInfinite({ debouncedSearch });
   const [userName, setUserName] = useState<string | null>(null);
+
+  const search = useTrie((state) => state.search);
+  const searchList = useMemo(() => search(debouncedSearch), [debouncedSearch, search]);
 
   useEffect(() => {
     const name = localStorage.getItem('name');
     setUserName(name);
   }, []);
+
   return (
     <>
       <Desktop
@@ -33,7 +36,7 @@ function ClientHeader() {
         handleSearchChange={handleSearchChange}
         handleNavigate={handleNavigate}
         handleKeyDown={handleKeyDown}
-        searchList={searchList ?? []}
+        searchList={searchList}
         userName={userName}
       />
       <Mobile
@@ -43,7 +46,7 @@ function ClientHeader() {
         handleSearchChange={handleSearchChange}
         handleNavigate={handleNavigate}
         handleKeyDown={handleKeyDown}
-        searchList={searchList ?? []}
+        searchList={searchList}
         userName={userName}
       />
     </>

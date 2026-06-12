@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { clubKey } from './queries/key';
 import {
   category,
@@ -30,7 +31,7 @@ export const useClubsInfinite = ({ enabled, selectedOptions }: UseClubListParams
           sort: selectedOptions.sort as sort,
           grades: selectedOptions.grades ? [selectedOptions.grades as grades] : undefined,
           clubUniv: selectedOptions.clubUniv as clubUniv,
-          size: 20,
+          size: 100,
           cursor: pageParam as string,
         }),
       initialPageParam: undefined,
@@ -38,7 +39,10 @@ export const useClubsInfinite = ({ enabled, selectedOptions }: UseClubListParams
       enabled,
     });
 
-  const clubs = data ? data.pages.flatMap((page) => page.clubs) : [];
+  const clubs = useMemo(
+    () => (data ? data.pages.flatMap((page) => page.clubs) : []),
+    [data],
+  );
 
   return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, clubs, isLoading };
 };
