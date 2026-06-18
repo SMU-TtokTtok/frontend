@@ -27,7 +27,6 @@ export default function ClubProfile({
     customCategory,
     recruiting,
     profileImageUrl,
-    clubMemberCount,
     bookmarked,
   } = clubIntro;
   const { handlePostFavorite } = usePostFavorite(handleModalOpen);
