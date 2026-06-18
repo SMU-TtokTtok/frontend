@@ -8,7 +8,7 @@ export const container = style({
   gap: '20px',
   borderRadius: '10px',
   padding: '20px 16px 16px 16px',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   marginBottom: '276px',
 
   '@media': {
@@ -21,7 +21,7 @@ export const container = style({
 export const title = style({
   fontSize: vars.fonts.title4,
   fontWeight: '600',
-  color: '#030304',
+  color: vars.colors.surface.on_surf,
 
   [`@media`]: {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {

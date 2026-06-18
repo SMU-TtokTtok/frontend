@@ -27,7 +27,7 @@ export const messageContainer = style({
   flexDirection: 'column',
   gap: '14px',
   padding: '26px 24px',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   borderRadius: '8px',
 
   [`@media`]: {
@@ -40,7 +40,7 @@ export const messageContainer = style({
 export const sectionTitle = style({
   fontSize: vars.fonts.title4,
   fontWeight: 600,
-  color: '#030304',
+  color: vars.colors.surface.on_surf,
 
   [`@media`]: {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -54,7 +54,7 @@ export const mainContainer = style({
   flexDirection: 'column',
   gap: '12px',
   padding: '18px 20px',
-  backgroundColor: '#F8F8F9',
+  backgroundColor: vars.colors.surface.default,
   borderRadius: '4px',
 
   [`@media`]: {

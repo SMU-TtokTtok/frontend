@@ -28,6 +28,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'www.ddock-ddock-smu.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.ddockddock-file.co.kr',
+        pathname: '/**',
+      },
     ],
   },
 };
@@ -39,15 +44,15 @@ const pwaConfig = withPWA({
   disable: process.env.NODE_ENV === 'development',
 });
 
-export default withSentryConfig(withAnalyzer(withVanillaExtract(pwaConfig(nextConfig))), {
-  org: 'sangmyung-univ-xe',
-  project: 'javascript-nextjs',
+const baseConfig = withAnalyzer(withVanillaExtract(pwaConfig(nextConfig)));
 
-  silent: true,
-
-  widenClientFileUpload: true,
-
-  disableLogger: true,
-
-  automaticVercelMonitors: true,
-});
+export default process.env.NODE_ENV === 'production'
+  ? withSentryConfig(baseConfig, {
+      org: 'sangmyung-univ-xe',
+      project: 'javascript-nextjs',
+      silent: true,
+      widenClientFileUpload: true,
+      disableLogger: true,
+      automaticVercelMonitors: true,
+    })
+  : baseConfig;

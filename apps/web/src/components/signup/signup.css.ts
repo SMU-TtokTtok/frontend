@@ -47,7 +47,7 @@ export const TitleText = style({
 
 export const LabelBoxContainer = style({
   borderRadius: '6px',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   padding: '32px',
   display: 'flex',
   // gap: '112px',
@@ -138,7 +138,7 @@ export const EmailText = style({
 });
 
 export const Input = style({
-  backgroundColor: '#F8F8F9',
+  backgroundColor: vars.colors.surface.default,
   borderRadius: '6px',
   padding: '12px 16px',
   fontSize: '16px',
@@ -148,7 +148,7 @@ export const Input = style({
 
   selectors: {
     '&::placeholder': {
-      color: '#E0E1E3',
+      color: vars.colors.surface.cont_3,
     },
     '&:disabled': {
       opacity: 0.5,
@@ -191,9 +191,9 @@ export const FlexPolicy = style({
 
 export const PolicyBox = style({
   padding: '20px 24px',
-  backgroundColor: '#F8F8F9',
+  backgroundColor: vars.colors.surface.default,
   borderRadius: '6px',
-  color: '#272E3B',
+  color: vars.colors.charcoal,
   fontSize: vars.fonts.body3,
   whiteSpace: 'pre-line',
   height: '220px',
@@ -208,7 +208,7 @@ export const FlexAgree = style({
 });
 
 export const AgreeText = style({
-  color: '#272E3B',
+  color: vars.colors.charcoal,
   fontSize: vars.fonts.body2,
 });
 

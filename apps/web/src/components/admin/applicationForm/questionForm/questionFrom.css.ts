@@ -15,7 +15,7 @@ export const container = style({
   width: '100%',
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
-      backgroundColor: '#f5f5f6',
+      backgroundColor: vars.colors.surface.variant,
       padding: '0',
     },
   },
@@ -126,7 +126,7 @@ export const formFeildBlock = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       padding: '0px 14px 14px 14px',
-      backgroundColor: '#ffffff',
+      backgroundColor: vars.colors.white,
     },
   },
 });
@@ -382,7 +382,7 @@ export const applicantInfoField = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       padding: '16px 14px',
-      backgroundColor: '#ffffff',
+      backgroundColor: vars.colors.white,
       marginBottom: '80px',
     },
   },
@@ -403,7 +403,7 @@ export const applicantInfoInput = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
       padding: '10px 12px',
-      backgroundColor: '#F8F8F9 !important',
+      backgroundColor: `${vars.colors.surface.default} !important`,
       fontSize: vars.fonts.m_body1,
     },
   },

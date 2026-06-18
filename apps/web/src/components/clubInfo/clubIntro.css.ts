@@ -48,7 +48,7 @@ export const headerItem2 = style({
   // fontWeight: 700,
   fontSize: vars.fonts.body2,
   color: '#55637D !important',
-  backgroundColor: '#EEEEF0 !important',
+  backgroundColor: `${vars.colors.surface.cont_1} !important`,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -61,7 +61,7 @@ export const headerItem2 = style({
 export const contentContainer = style({
   width: '100%',
   padding: '26px 28px',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   minHeight: '300px',
   borderRadius: '0 0 8px 8px',
 });

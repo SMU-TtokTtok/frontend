@@ -205,5 +205,5 @@ export const PersonWrapper = style({
 export const Nametext = style({
   fontSize: vars.fonts.body2,
   fontWeight: 700,
-  color: 'white',
+  color: vars.colors.white,
 });

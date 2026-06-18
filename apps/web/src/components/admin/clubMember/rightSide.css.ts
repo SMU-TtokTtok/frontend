@@ -7,7 +7,7 @@ export const sidebarTop = createVar();
 export const container = style({
   position: 'absolute',
   width: '330px',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   padding: '22px 26px',
   borderRadius: '8px',
   display: 'flex',
@@ -52,7 +52,7 @@ export const GradeText = style({
 
 export const NumberText = style({
   fontSize: vars.fonts.body1,
-  color: '#030304',
+  color: vars.colors.surface.on_surf,
   fontWeight: 500,
 
   '@media': {
@@ -99,7 +99,7 @@ export const Bar = style({
 export const divider = style({
   display: 'none',
   height: '1px',
-  backgroundColor: '#EEEEF0',
+  backgroundColor: vars.colors.surface.cont_1,
 
   [`@media`]: {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {

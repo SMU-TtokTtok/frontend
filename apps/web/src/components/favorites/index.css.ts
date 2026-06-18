@@ -47,7 +47,7 @@ export const HeaderContainer = recipe({
 
 export const SortFlex = style({
   display: 'flex',
-  backgroundColor: 'white',
+  backgroundColor: vars.colors.white,
   borderRadius: '8px',
   padding: '4px',
 

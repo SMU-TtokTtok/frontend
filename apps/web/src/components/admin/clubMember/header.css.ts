@@ -40,7 +40,7 @@ export const excelText = style({
 export const title = style({
   fontSize: vars.fonts.title2,
   fontWeight: 600,
-  color: '#030304',
+  color: vars.colors.surface.on_surf,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {

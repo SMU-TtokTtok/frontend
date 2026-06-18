@@ -37,7 +37,7 @@ export const buttonNotice = style({
   width: '50%',
   textAlign: 'center',
   padding: '22px 0',
-  backgroundColor: '#EEEEF0 !important',
+  backgroundColor: `${vars.colors.surface.cont_1} !important`,
   borderRadius: '6px 6px 0px 0px',
   color: '#55637D !important',
   fontSize: vars.fonts.body2,
