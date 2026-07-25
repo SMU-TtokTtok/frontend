@@ -28,7 +28,7 @@ export const ButtonStyle = style({
   padding: '8px 16px',
   fontWeight: '600',
   fontSize: vars.fonts.body3,
-  marginRight: '8px',
+  marginLeft: '8px',
   flexShrink: 0,
 });
 
@@ -187,10 +187,47 @@ export const ButtonStyle2 = style({
   },
 });
 
+export const SupportButton = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '2px',
+  height: '40px',
+  padding: '0 12px',
+  marginLeft: '8px',
+  borderRadius: '999px',
+  border: 'none',
+  background: 'transparent',
+  color: vars.colors.white,
+  fontSize: vars.fonts.body3,
+  fontWeight: 600,
+  cursor: 'pointer',
+  whiteSpace: 'nowrap',
+});
+
+export const AuthButton = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '2px',
+  height: '40px',
+  marginLeft: '8px',
+  borderRadius: '999px',
+  border: 'none',
+  backgroundColor: vars.colors.white,
+  color: vars.colors.primary.default,
+  fontSize: vars.fonts.body3,
+  fontWeight: 600,
+  cursor: 'pointer',
+  whiteSpace: 'nowrap',
+});
+
 export const PersonWrapper = style({
   display: 'flex',
   alignItems: 'center',
+  gap: '6px',
+  height: '25px',
+  marginLeft: '10px',
   marginRight: '30px',
+  cursor: 'pointer',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -205,5 +242,68 @@ export const PersonWrapper = style({
 export const Nametext = style({
   fontSize: vars.fonts.body2,
   fontWeight: 700,
+  lineHeight: '25px',
   color: vars.colors.white,
+});
+
+export const UserDropdownIcon = style({
+  display: 'block',
+  width: '18px',
+  height: '18px',
+  flexShrink: 0,
+  filter: 'brightness(0) invert(1)',
+  transition: 'transform 140ms ease-out',
+  transform: 'rotate(0deg)',
+});
+
+export const PrimaryDropdownIcon = style({
+  display: 'block',
+  width: '18px',
+  height: '18px',
+  flexShrink: 0,
+  transition: 'transform 140ms ease-out',
+  transform: 'rotate(0deg)',
+});
+
+export const UserDropdownIconOpen = style({
+  transform: 'rotate(180deg)',
+});
+
+export const UserDropdownPanel = style({
+  top: '38px',
+  left: '0',
+  right: 'auto',
+  width: '144px',
+  padding: '6px 0',
+});
+
+export const SupportDropdownPanel = style({
+  top: '42px',
+  left: '0',
+  right: 'auto',
+  width: '144px',
+  padding: '6px 0',
+});
+
+export const AuthDropdownPanel = style({
+  top: '48px',
+  left: '50%',
+  right: 'auto',
+  translate: '-50% 0',
+  width: '112px',
+  padding: '6px 0',
+});
+
+export const UserDropdownItem = style({
+  width: '100%',
+  padding: '10px 12px',
+  color: vars.colors.surface.on_surf,
+  fontSize: vars.fonts.body3,
+  fontWeight: 500,
+  whiteSpace: 'nowrap',
+  cursor: 'pointer',
+
+  ':hover': {
+    backgroundColor: vars.colors.surface.cont_1,
+  },
 });

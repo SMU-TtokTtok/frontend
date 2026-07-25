@@ -1,5 +1,16 @@
-import { style } from '@vanilla-extract/css';
+import { keyframes, style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
+
+const dropdownEnter = keyframes({
+  from: {
+    opacity: 0,
+    transform: 'translateY(-6px) scale(0.98)',
+  },
+  to: {
+    opacity: 1,
+    transform: 'translateY(0) scale(1)',
+  },
+});
 
 export const container = style({
   position: 'relative',
@@ -26,4 +37,6 @@ export const panel = style({
   borderRadius: '8px',
   zIndex: 100,
   overflow: 'hidden',
+  transformOrigin: 'top center',
+  animation: `${dropdownEnter} 140ms ease-out`,
 });
