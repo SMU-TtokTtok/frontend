@@ -227,6 +227,10 @@ export const PersonWrapper = style({
   height: '25px',
   marginLeft: '10px',
   marginRight: '30px',
+  padding: 0,
+  border: 'none',
+  background: 'transparent',
+  font: 'inherit',
   cursor: 'pointer',
 
   '@media': {
@@ -256,29 +260,12 @@ export const UserDropdownIcon = style({
   transform: 'rotate(0deg)',
 });
 
-export const PrimaryDropdownIcon = style({
-  display: 'block',
-  width: '18px',
-  height: '18px',
-  flexShrink: 0,
-  transition: 'transform 140ms ease-out',
-  transform: 'rotate(0deg)',
-});
-
 export const UserDropdownIconOpen = style({
   transform: 'rotate(180deg)',
 });
 
 export const UserDropdownPanel = style({
   top: '38px',
-  left: '0',
-  right: 'auto',
-  width: '144px',
-  padding: '6px 0',
-});
-
-export const SupportDropdownPanel = style({
-  top: '42px',
   left: '0',
   right: 'auto',
   width: '144px',
@@ -295,11 +282,17 @@ export const AuthDropdownPanel = style({
 });
 
 export const UserDropdownItem = style({
+  display: 'block',
   width: '100%',
   padding: '10px 12px',
+  border: 'none',
+  background: 'transparent',
   color: vars.colors.surface.on_surf,
   fontSize: vars.fonts.body3,
   fontWeight: 500,
+  fontFamily: 'inherit',
+  textAlign: 'left',
+  textDecoration: 'none',
   whiteSpace: 'nowrap',
   cursor: 'pointer',
 

@@ -7,8 +7,6 @@ import * as S from './index.css';
 import iosInstallGuideImage from './assets/images/ios-install-guide.webp';
 import androidInstallGuideImage from './assets/images/android-install-guide.webp';
 
-const INSTALL_GUIDE_QUESTION = '앱은 어떻게 설치하나요?';
-
 const FAQ_LIST = [
   {
     question: '똑똑 서비스는 어떤 서비스인가요?',
@@ -31,7 +29,7 @@ const FAQ_LIST = [
       '합격 여부는 동아리에서 직접 발표하며, 제출해주신 이메일 또는 동아리가 안내하는 방법으로 확인하실 수 있습니다.',
   },
   {
-    question: INSTALL_GUIDE_QUESTION,
+    question: '앱은 어떻게 설치하나요?',
     answer:
       '똑똑은 별도의 앱스토어 설치 없이 홈 화면에 추가하여 앱처럼 사용할 수 있어요.\n아래 방법을 따라 설치해 보세요.',
     hasInstallGuide: true,

@@ -246,14 +246,6 @@ export const installGuideTab = recipe({
   },
 });
 
-export const selectedDeviceText = style({
-  margin: '0 0 4px',
-  paddingLeft: '46px',
-  color: vars.colors.primary.default,
-  fontSize: vars.fonts.body3,
-  fontWeight: 500,
-});
-
 export const answerImage = style({
   display: 'block',
   width: '100%',

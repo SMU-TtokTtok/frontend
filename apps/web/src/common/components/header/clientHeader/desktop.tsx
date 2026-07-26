@@ -67,11 +67,15 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
           </Button>
         </Link>
         {userName ? (
-          <>
             <DropDown
               panelClassName={S.UserDropdownPanel}
               toggleButton={(open) => (
-                <div className={S.PersonWrapper}>
+                <button
+                  type="button"
+                  className={S.PersonWrapper}
+                  aria-haspopup="menu"
+                  aria-expanded={open}
+                >
                   <Image src={PersonWhiteIcon} alt="person_white" width={20} height={20} />
                   <p className={S.Nametext}>{userName}님</p>
                   <Image
@@ -79,23 +83,30 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
                     alt="드롭다운"
                     className={dropdownIconClassName(open)}
                   />
-                </div>
+                </button>
               )}
             >
-              <Link href={ROUTES.APPLIED}>
-                <li className={S.UserDropdownItem}>내 지원내역</li>
-              </Link>
-              <Link href={ROUTES.FAVORITES}>
-                <li className={S.UserDropdownItem}>즐겨찾기</li>
-              </Link>
-              <Link href={ROUTES.ADMIN_LOGIN}>
-                <li className={S.UserDropdownItem}>동아리 로그인</li>
-              </Link>
-              <li className={S.UserDropdownItem} onClick={handleLogout}>
-                로그아웃
+              <li>
+                <Link href={ROUTES.APPLIED} className={S.UserDropdownItem}>
+                  내 지원내역
+                </Link>
+              </li>
+              <li>
+                <Link href={ROUTES.FAVORITES} className={S.UserDropdownItem}>
+                  즐겨찾기
+                </Link>
+              </li>
+              <li>
+                <Link href={ROUTES.ADMIN_LOGIN} className={S.UserDropdownItem}>
+                  동아리 로그인
+                </Link>
+              </li>
+              <li>
+                <button type="button" className={S.UserDropdownItem} onClick={handleLogout}>
+                  로그아웃
+                </button>
               </li>
             </DropDown>
-          </>
         ) : (
           <DropDown
             panelClassName={S.AuthDropdownPanel}
