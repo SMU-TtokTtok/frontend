@@ -61,13 +61,12 @@ export default function RootLayout({
       </head>
       <body>
         <MSWProvider>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            {children}
+            {gaId && <GoogleAnalytics gaId={gaId} />}
+            <FCMProvider />
+          </QueryProvider>
         </MSWProvider>
-        {/* <QueryProvider>
-          {children}
-          {gaId && <GoogleAnalytics gaId={gaId} />}
-          <FCMProvider />
-        </QueryProvider> */}
       </body>
     </html>
   );
