@@ -4,7 +4,9 @@ import { fetchAppliedClubs } from '@/components/applied/api/getApplied';
 import { fetchPopularClubs } from '@/components/popular/api/getPopular';
 import { fetchSearchClubs } from '@/components/search/api/getSearch';
 import { Clubs } from '@/common/model/clubInfinite';
-import { userKey, clubMemberKey } from './queries/key';
+import { ClubBoardList } from '@/common/model/clubBoard';
+import { getClubBoards } from '@/components/clubInfo/api/getClubBoards';
+import { userKey, clubMemberKey, clubBoardKey } from './queries/key';
 import { getClubMember } from '@/components/admin/clubMember/api/getClubMember';
 import { ClubMember } from '@/components/admin/clubMember/api/getClubMember';
 import { useMemo } from 'react';
@@ -70,6 +72,26 @@ export const useSearchInfinite = ({ enabled, sort = 'latest', name }: UseInfinit
     });
 
   return { fetchNextPage, hasNextPage, isFetchingNextPage, refetch, data, isLoading };
+};
+
+export const useClubBoardInfinite = ({ enabled = true, clubId }: UseInfiniteParams) => {
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } =
+    useInfiniteQuery<ClubBoardList, Error>({
+      queryKey: [...clubBoardKey.clubBoardList, clubId],
+      queryFn: ({ pageParam }) =>
+        getClubBoards({ clubId: clubId!, size: 20, cursor: pageParam as string | undefined }),
+      initialPageParam: undefined, // 첫 요청은 cursor 없이
+      getNextPageParam: (lastPage) => (lastPage.hasNext ? lastPage.nextCursor : undefined),
+      enabled: enabled && Boolean(clubId),
+    });
+
+  const pages = data?.pages;
+  const boards = useMemo(() => {
+    if (!pages) return [];
+    return pages.flatMap((page) => page.boards || []);
+  }, [pages]);
+
+  return { boards, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading };
 };
 
 export const useClubMemberInfinite = ({ enabled, clubId }: UseInfiniteParams) => {

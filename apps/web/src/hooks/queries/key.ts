@@ -36,6 +36,11 @@ export const clubFormKey = {
   clubForm: ['clubForm'],
 } as const;
 
+export const clubBoardKey = {
+  clubBoardList: ['clubBoardList'],
+  clubBoardDetail: ['clubBoardDetail'],
+} as const;
+
 export const clubMemberKey = {
   clubMember: 'clubMember',
   gradeCount: 'gradeCount',
