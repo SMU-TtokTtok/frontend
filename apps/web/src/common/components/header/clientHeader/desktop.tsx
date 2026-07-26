@@ -6,8 +6,10 @@ import Link from 'next/link';
 import Mainlogo from '@/assets/mainlogo_wh.svg';
 import * as S from './clientHeader.css';
 import InputCombobox from '../../inputCombobox';
+import DropDown from '../../dropdown';
 import SearchIcon from '@/assets/search.svg';
-import person_white from '@/assets/person_white.svg';
+import DropdownIcon from '@/assets/dropdown.svg';
+import PersonWhiteIcon from '@/assets/user-round.svg';
 import { useLogoutMutation } from '@/hooks/useUserMutaion';
 
 interface DesktopProps<T> {
@@ -32,6 +34,9 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
   userName,
 }: DesktopProps<T>) {
   const { handleLogout } = useLogoutMutation();
+  const dropdownIconClassName = (open: boolean) =>
+    `${S.UserDropdownIcon} ${open ? S.UserDropdownIconOpen : ''}`;
+
   return (
     <Header isVisible={isVisible} className={S.DesktopInnerWrapper}>
       <Link href={ROUTES.HOME}>
@@ -48,52 +53,81 @@ function Desktop<T extends { id: string; name: string; clubType: string }>({
           onChange={handleSearchChange}
           onClick={handleNavigate}
           onKeyDown={handleKeyDown}
-          placeholder="동아리 이름을 검색하세요."
-          aria-label="동아리 이름을 검색하세요."
+          placeholder="동아리 이름을 검색해보세요."
+          aria-label="동아리 이름을 검색해보세요."
         />
+        <Link href={ROUTES.NOTICE}>
+          <Button className={S.SupportButton} variant="primary">
+            공지사항
+          </Button>
+        </Link>
+        <Link href={ROUTES.FAQ}>
+          <Button className={S.SupportButton} variant="primary">
+            자주 묻는 질문
+          </Button>
+        </Link>
         {userName ? (
-          <>
-            <Link href={ROUTES.ADMIN_LOGIN}>
-              <Button className={S.ButtonStyle2} variant="primary">
-                동아리 로그인
-              </Button>
-            </Link>
-            <Link href={ROUTES.APPLIED}>
-              <Button className={S.ButtonStyle2} variant="primary">
-                내 지원내역
-              </Button>
-            </Link>
-            <Link href={ROUTES.FAVORITES}>
-              <Button className={S.ButtonStyle2} variant="primary">
-                즐겨찾기
-              </Button>
-            </Link>
-            <Button className={S.ButtonStyle2} variant="primary" onClick={handleLogout}>
-              로그아웃
-            </Button>
-            <div className={S.PersonWrapper}>
-              <Image src={person_white} alt="person_white" width={25} height={25} />
-              <p className={S.Nametext}>{userName}님</p>
-            </div>
-          </>
+            <DropDown
+              panelClassName={S.UserDropdownPanel}
+              toggleButton={(open) => (
+                <button
+                  type="button"
+                  className={S.PersonWrapper}
+                  aria-haspopup="menu"
+                  aria-expanded={open}
+                >
+                  <Image src={PersonWhiteIcon} alt="person_white" width={20} height={20} />
+                  <p className={S.Nametext}>{userName}님</p>
+                  <Image
+                    src={DropdownIcon}
+                    alt="드롭다운"
+                    className={dropdownIconClassName(open)}
+                  />
+                </button>
+              )}
+            >
+              <li>
+                <Link href={ROUTES.APPLIED} className={S.UserDropdownItem}>
+                  내 지원내역
+                </Link>
+              </li>
+              <li>
+                <Link href={ROUTES.FAVORITES} className={S.UserDropdownItem}>
+                  즐겨찾기
+                </Link>
+              </li>
+              <li>
+                <Link href={ROUTES.ADMIN_LOGIN} className={S.UserDropdownItem}>
+                  동아리 로그인
+                </Link>
+              </li>
+              <li>
+                <button type="button" className={S.UserDropdownItem} onClick={handleLogout}>
+                  로그아웃
+                </button>
+              </li>
+            </DropDown>
         ) : (
-          <>
-            <Link href={ROUTES.LOGIN}>
-              <Button className={S.ButtonStyle} variant="secondary">
+          <DropDown
+            panelClassName={S.AuthDropdownPanel}
+            toggleButton={(open) => (
+              <Button className={S.AuthButton} variant="primary">
+                <Image src={PersonWhiteIcon} alt="person_white" width={20} height={20} />
                 로그인
+                <Image src={DropdownIcon} alt="" className={dropdownIconClassName(open)} />
               </Button>
+            )}
+          >
+            <Link href={ROUTES.LOGIN}>
+              <li className={S.UserDropdownItem}>로그인</li>
             </Link>
             <Link href={ROUTES.SIGNUP}>
-              <Button className={S.ButtonStyle} variant="secondary">
-                회원가입
-              </Button>
+              <li className={S.UserDropdownItem}>회원가입</li>
             </Link>
             <Link href={ROUTES.ADMIN_LOGIN}>
-              <Button className={S.ButtonStyle} variant="secondary">
-                동아리 로그인
-              </Button>
+              <li className={S.UserDropdownItem}>동아리 로그인</li>
             </Link>
-          </>
+          </DropDown>
         )}
       </div>
     </Header>

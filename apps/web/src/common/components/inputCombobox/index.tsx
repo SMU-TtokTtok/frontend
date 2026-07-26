@@ -43,7 +43,6 @@ function InputCombobox<T extends { id: string; name: string; clubType: string }>
   const boxRef = useOutsideClick<HTMLDivElement>(() => handleClose());
 
   return (
-    <>
       <div className={container}>
         <SearchBar
           placeholder={placeholder}
@@ -63,7 +62,6 @@ function InputCombobox<T extends { id: string; name: string; clubType: string }>
           />
         )}
       </div>
-    </>
   );
 }
 
