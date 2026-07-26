@@ -98,6 +98,10 @@ export const searchInput = style({
     color: vars.colors.surface.outline,
   },
 
+  ':focus': {
+    borderColor: vars.colors.primary.default,
+  },
+
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       width: '100%',
