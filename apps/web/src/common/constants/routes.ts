@@ -22,4 +22,5 @@ export const ROUTES = {
     `/admin/applicants/message?evaluation=${evaluation}`,
   FAQ: '/faq',
   NOTICE: '/notice',
+  NOTICE_DETAIL: (noticeId: string) => `/notice/${noticeId}`,
 };

@@ -35,6 +35,7 @@ import {
 } from './clubMember';
 import { postMessage } from './message';
 import { favortesClubs, appliedClubs, searchClubs, popularTotalClubs } from './userClubs';
+import { getNoticeDetail, getNotices } from './notices';
 
 export const handlers = [
   popularClubs,
@@ -86,4 +87,6 @@ export const handlers = [
   searchClubs,
   popularTotalClubs,
   getClubMember,
+  getNotices,
+  getNoticeDetail,
 ];

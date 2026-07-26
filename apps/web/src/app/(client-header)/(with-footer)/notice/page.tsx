@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Notice from '@/components/notice';
 
 export const metadata: Metadata = {
   title: '공지사항',
@@ -6,8 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function NoticePage() {
-  return <div>
-    <h1>공지사항</h1>
-    <p>공지사항 내용</p>
-  </div>;
+  return <Notice />;
 }
