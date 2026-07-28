@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
-import '../common/styles/reset.css.ts';
+import '../common/styles/reset.css';
 import { MSWProvider } from '@/mocks/mswProvider';
 import QueryProvider from './queryProvider';
-//import GoogleAnalytics from '@/components/googleAnalytics';
-//import FCMProvider from '@/fcm/FCMProvider';
+import GoogleAnalytics from '@/components/googleAnalytics';
+import FCMProvider from '@/fcm/FCMProvider';
 
 export const metadata: Metadata = {
   title: '똑똑',
@@ -61,13 +61,12 @@ export default function RootLayout({
       </head>
       <body>
         <MSWProvider>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            {children}
+            {gaId && <GoogleAnalytics gaId={gaId} />}
+            <FCMProvider />
+          </QueryProvider>
         </MSWProvider>
-        {/* <QueryProvider>
-          {children}
-          {gaId && <GoogleAnalytics gaId={gaId} />}
-          <FCMProvider />
-        </QueryProvider> */}
       </body>
     </html>
   );

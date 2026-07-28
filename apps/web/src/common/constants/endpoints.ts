@@ -6,6 +6,8 @@ export const API = {
     CLUBS: '/api/clubs',
     POPULAR_CLUBS: '/api/clubs/banner/popular',
     SEARCH: '/api/clubs/search',
+    NOTICES: '/api/notices',
+    NOTICE_DETAIL: (noticeId: string) => `/api/notices/${noticeId}`,
     FAVORITES_TOGGLE: (clubId: string) => `/api/favorites/toggle/${clubId}`,
   },
   ADMIN: {

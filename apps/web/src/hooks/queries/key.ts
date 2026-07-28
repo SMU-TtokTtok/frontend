@@ -27,6 +27,11 @@ export const userKey = {
   searchClubList: ['searchClubList'],
 } as const;
 
+export const noticeKey = {
+  list: ['noticeList'],
+  detail: ['noticeDetail'],
+} as const;
+
 export const clubInfoKey = {
   clubInfo: ['clubInfo'],
   adminClubInfo: ['adminClubInfo'],
