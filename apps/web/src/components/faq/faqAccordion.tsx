@@ -1,14 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
-import { Button } from '@ttockttock/ui';
 import * as S from './index.css';
-import iosInstallGuideImage from './assets/images/ios-install-guide.webp';
-import androidInstallGuideImage from './assets/images/android-install-guide.webp';
-import ArrowDropDown from '@/assets/dropdown.svg';
+import FaqItem from './faqItem';
 
-const FAQ_LIST = [
+export type FaqItemData = {
+  question: string;
+  answer: string;
+  hasInstallGuide?: boolean;
+};
+
+const FAQ_LIST: FaqItemData[] = [
   {
     question: '똑똑 서비스는 어떤 서비스인가요?',
     answer:
@@ -43,20 +45,12 @@ const FAQ_LIST = [
   {
     question: '모든 동아리가 등록되어 있나요?',
     answer:
-      '똑똑은은 동아리 신청을 끊임없이 받고 있습니다. 현재 약 20개의 동아리가 등록되어있습니다',
+      '똑똑은 동아리 신청을 끊임없이 받고 있습니다. 현재 약 20개의 동아리가 등록되어 있습니다',
   },
 ];
 
-const INSTALL_GUIDE_OPTIONS = [
-  { key: 'ios', label: 'iPhone', image: iosInstallGuideImage },
-  { key: 'android', label: 'Android', image: androidInstallGuideImage },
-] as const;
-
-type InstallGuidePlatform = (typeof INSTALL_GUIDE_OPTIONS)[number]['key'];
-
 export default function FaqAccordion() {
   const [openIndexes, setOpenIndexes] = useState<Set<number>>(new Set([0]));
-  const [installGuidePlatform, setInstallGuidePlatform] = useState<InstallGuidePlatform>('ios');
 
   const handleToggle = (index: number) => {
     setOpenIndexes((prev) => {
@@ -70,68 +64,20 @@ export default function FaqAccordion() {
     });
   };
 
+  const isDividerVisible = (index: number) =>
+    index > 0 && !openIndexes.has(index) && !openIndexes.has(index - 1);
+
   return (
     <div className={S.faqCard}>
-      {FAQ_LIST.map((item, index) => {
-        const isExpanded = openIndexes.has(index);
-        const showDivider = index > 0 && !isExpanded && !openIndexes.has(index - 1);
-        const selectedInstallGuide = INSTALL_GUIDE_OPTIONS.find(
-          (option) => option.key === installGuidePlatform,
-        );
-
-        return (
-          <div key={index} className={S.faqItem({ expanded: isExpanded })}>
-            {showDivider && <div className={S.divider} />}
-            <button
-              className={S.faqItemHeader}
-              onClick={() => handleToggle(index)}
-              aria-expanded={isExpanded}
-            >
-              <div className={S.questionGroup}>
-                <span className={S.qLabel}>Q</span>
-                <span className={S.questionText({ expanded: isExpanded })}>{item.question}</span>
-              </div>
-              <Image
-                src={ArrowDropDown}
-                alt="드롭다운"
-                className={S.arrowIcon({ expanded: isExpanded })}
-              />
-            </button>
-            {isExpanded && (
-              <div className={S.answerWrapper}>
-                <p className={S.answerText}>{item.answer}</p>
-                {item.hasInstallGuide && selectedInstallGuide && (
-                  <div className={S.installGuideWrapper}>
-                    <div className={S.installGuideTabs} role="tablist" aria-label="기기 선택">
-                      {INSTALL_GUIDE_OPTIONS.map((option) => {
-                        const isSelected = option.key === installGuidePlatform;
-
-                        return (
-                          <Button
-                            key={option.key}
-                            role="tab"
-                            aria-selected={isSelected}
-                            variant={isSelected ? 'primary' : 'none'}
-                            className={S.installGuideTab({ selected: isSelected })}
-                            onClick={() => setInstallGuidePlatform(option.key)}
-                          >
-                            {option.label}
-                          </Button>
-                        );
-                      })}
-                    </div>
-                    <Image
-                      src={selectedInstallGuide.image}
-                      alt={`${selectedInstallGuide.label} 앱 설치 가이드 이미지`}
-                      className={S.answerImage}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        );
-      })}
+      {FAQ_LIST.map((item, index) => (
+        <FaqItem
+          key={item.question}
+          item={item}
+          isExpanded={openIndexes.has(index)}
+          showDivider={isDividerVisible(index)}
+          onToggle={() => handleToggle(index)}
+        />
+      ))}
     </div>
   );
 }

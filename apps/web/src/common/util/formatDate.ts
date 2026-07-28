@@ -35,11 +35,15 @@ export function formatToMonthDay2(input: string | null): string {
   return `${month}.${day}`;
 }
 
-export const formatNoticeDate = (createdAt: string) =>
-  new Intl.DateTimeFormat('ko-KR', {
+export const formatNoticeDate = (createdAt: string) => {
+  const date = new Date(createdAt);
+  if (Number.isNaN(date.getTime())) return '';
+
+  return new Intl.DateTimeFormat('ko-KR', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
   })
-    .format(new Date(createdAt))
+    .format(date)
     .replace(/\s/g, '');
+};
