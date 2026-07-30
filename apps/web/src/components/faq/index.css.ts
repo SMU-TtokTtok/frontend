@@ -17,7 +17,6 @@ export const pageWrapper = style({
     },
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       paddingTop: '24px',
-      paddingBottom: '40px',
     },
   },
 });
