@@ -167,7 +167,6 @@ export const filterIcon = recipe({
   base: {
     width: '1.333rem',
     height: '1.333rem',
-    color: vars.colors.surface.outline,
     '@media': {
       [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
         width: '19px',
@@ -178,7 +177,8 @@ export const filterIcon = recipe({
   variants: {
     isActive: {
       true: {
-        color: vars.colors.primary.default,
+        filter:
+          'brightness(0) saturate(100%) invert(25%) sepia(92%) saturate(2483%) hue-rotate(221deg) brightness(89%) contrast(93%)',
       },
       false: {},
     },

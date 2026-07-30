@@ -5,6 +5,7 @@ import { FILTER_CONFIG } from '@/common/constants';
 import Button from '@/common/ui/button';
 import Image from 'next/image';
 import Arrow from '@/assets/drop.svg';
+import FilterIcon from '@/assets/filter_dropdown.svg';
 import React from 'react';
 import { FilterHeaderProps, getSelectedLabel } from './filterHeader';
 
@@ -49,20 +50,11 @@ function DropDownTabBar({
         aria-label={isFilterOpen ? '필터 닫기' : '필터 열기'}
         aria-pressed={isFilterOpen}
       >
-        <svg
+        <Image
+          src={FilterIcon}
+          alt="필터 토글"
           className={S.filterIcon({ isActive: isFilterOpen })}
-          viewBox="0 0 24 24"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M10 8H14M12 21V12M12 8V3M17 16H21M19 12V3M19 21V16M3 14H7M5 10V3M5 21V14"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        />
       </Button>
     </div>
   );
