@@ -278,7 +278,6 @@ export const AuthDropdownPanel = style({
   right: 'auto',
   translate: '-50% 0',
   width: '112px',
-  padding: '6px 0',
 });
 
 export const UserDropdownItem = style({
@@ -297,6 +296,7 @@ export const UserDropdownItem = style({
   cursor: 'pointer',
 
   ':hover': {
-    backgroundColor: vars.colors.surface.cont_1,
+    backgroundColor: vars.colors.primary.base,
+    color: vars.colors.primary.default,
   },
 });
