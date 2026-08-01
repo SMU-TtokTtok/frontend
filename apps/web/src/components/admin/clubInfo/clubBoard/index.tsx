@@ -17,7 +17,7 @@ interface AdminClubBoardProps {
   clubId: string;
 }
 
-/** 관리자 "동아리 정보 관리"의 게시글 탭 내용 */
+/** 관리자 "동아리 정보 관리"의 활동 탭 내용 */
 function AdminClubBoard({ clubId }: AdminClubBoardProps) {
   const [formState, setFormState] = useState<FormState>({ isOpen: false });
   const { ref, inView } = useInView();
@@ -51,7 +51,7 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
   };
 
   const handleDelete = (boardId: string) => {
-    if (window.confirm('이 게시글을 삭제할까요? 삭제하면 되돌릴 수 없어요.')) {
+    if (window.confirm('이 활동을 삭제할까요? 삭제하면 되돌릴 수 없어요.')) {
       deleteBoard(boardId);
     }
   };
@@ -59,13 +59,13 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
   return (
     <div className={S.panel}>
       <div className={S.header}>
-        <p className={S.description}>등록한 게시글은 동아리 상세 페이지의 게시글 탭에 보여요.</p>
+        <p className={S.description}>등록한 활동은 동아리 상세 페이지의 활동 탭에 보여요.</p>
         <Button
           variant="primary"
           className={S.createButton}
           onClick={() => setFormState({ isOpen: true, boardId: null })}
         >
-          게시글 등록
+          활동 등록
         </Button>
       </div>
 
@@ -73,7 +73,7 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
 
       {!isLoading &&
         (boards.length === 0 ? (
-          <p className={S.emptyText}>등록된 게시글이 없어요.</p>
+          <p className={S.emptyText}>등록된 활동이 없어요.</p>
         ) : (
           <ul className={S.grid}>
             {boards.map((board) => (
@@ -83,7 +83,7 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
                   <img
                     className={S.thumbnail}
                     src={board.thumbnailUrl}
-                    alt="게시글 대표 이미지"
+                    alt="활동 대표 이미지"
                     loading="lazy"
                   />
                 </div>

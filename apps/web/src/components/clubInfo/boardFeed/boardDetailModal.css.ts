@@ -101,16 +101,17 @@ export const contentPane = style({
   },
 });
 
+/** 제목이 주인공이므로 동아리명은 그 위에 얹히는 작은 라벨로 둔다 */
 export const clubName = style({
   flexShrink: 0,
   paddingRight: '44px', // 닫기 버튼과 겹치지 않게
-  fontSize: vars.fonts.title4,
-  fontWeight: 700,
-  color: vars.colors.surface.on_surf,
+  fontSize: vars.fonts.body2,
+  fontWeight: 500,
+  color: vars.colors.surface.on_surf_var,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      fontSize: vars.fonts.m_title4,
+      fontSize: vars.fonts.m_body2,
     },
   },
 });
@@ -126,14 +127,15 @@ export const titleRow = style({
 });
 
 export const title = style({
-  fontSize: vars.fonts.title3,
-  fontWeight: 600,
+  fontSize: vars.fonts.title2,
+  fontWeight: 700,
+  lineHeight: '140%',
   color: vars.colors.surface.on_surf,
   wordBreak: 'break-word',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      fontSize: vars.fonts.m_title4,
+      fontSize: vars.fonts.m_title3,
     },
   },
 });

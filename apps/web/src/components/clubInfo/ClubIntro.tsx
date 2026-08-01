@@ -44,7 +44,7 @@ const ClubIntro = ({ introduction, clubId }: ClubIntroProps) => {
           className={activeTab === 'FEED' ? S.headerItem1 : S.headerItem2}
           onClick={() => setActiveTab('FEED')}
         >
-          게시글
+          활동
         </Button>
       </div>
 

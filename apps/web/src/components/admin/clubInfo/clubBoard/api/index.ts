@@ -2,7 +2,7 @@ import { adminClient } from '@/common/apis/ttockTtockClient';
 import { ClubBoardCreateResponse, ClubBoardFormValues } from '@/common/model/clubBoard';
 
 /**
- * 게시글 생성/수정은 multipart/form-data로 보낸다.
+ * 활동 생성/수정은 multipart/form-data로 보낸다.
  * request 파트는 서버가 JSON으로 파싱하므로 Blob에 application/json 타입을 지정해야 한다.
  */
 const buildBoardFormData = (values: ClubBoardFormValues, thumbnail?: File | null) => {

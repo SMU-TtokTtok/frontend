@@ -2,16 +2,18 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 import { BREAKPOINTS } from '@/common/constants';
 
+/**
+ * 소개 탭과 달리 흰 패널을 두지 않는다.
+ * 카드 안에 갇히면 썸네일 여러 장이 활동 하나의 사진처럼 보여서, 배경 위에 그리드만 노출한다.
+ */
 export const container = style({
   width: '100%',
   minHeight: '300px',
-  padding: '26px 28px',
-  backgroundColor: vars.colors.white,
-  borderRadius: '0 0 8px 8px',
+  paddingTop: '20px', // 탭 버튼에 바로 붙지 않도록
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      padding: '16px',
+      paddingTop: '12px',
     },
   },
 });

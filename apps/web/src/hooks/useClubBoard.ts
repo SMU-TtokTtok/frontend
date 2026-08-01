@@ -39,8 +39,8 @@ export const useClubBoardMutation = ({ clubId, onSuccess }: UseClubBoardMutation
       onSuccess?.();
     },
     onError: (error) => {
-      console.error('게시글 생성 실패:', error);
-      alert('게시글 등록에 실패했어요. 잠시 후 다시 시도해주세요.');
+      console.error('활동 생성 실패:', error);
+      alert('활동 등록에 실패했어요. 잠시 후 다시 시도해주세요.');
     },
   });
 
@@ -62,8 +62,8 @@ export const useClubBoardMutation = ({ clubId, onSuccess }: UseClubBoardMutation
       onSuccess?.();
     },
     onError: (error) => {
-      console.error('게시글 수정 실패:', error);
-      alert('게시글 수정에 실패했어요. 잠시 후 다시 시도해주세요.');
+      console.error('활동 수정 실패:', error);
+      alert('활동 수정에 실패했어요. 잠시 후 다시 시도해주세요.');
     },
   });
 
@@ -73,8 +73,8 @@ export const useClubBoardMutation = ({ clubId, onSuccess }: UseClubBoardMutation
       invalidateList();
     },
     onError: (error) => {
-      console.error('게시글 삭제 실패:', error);
-      alert('게시글 삭제에 실패했어요. 잠시 후 다시 시도해주세요.');
+      console.error('활동 삭제 실패:', error);
+      alert('활동 삭제에 실패했어요. 잠시 후 다시 시도해주세요.');
     },
   });
 

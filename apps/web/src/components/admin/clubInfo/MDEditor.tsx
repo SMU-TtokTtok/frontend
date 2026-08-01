@@ -122,8 +122,8 @@ const icons = {
 };
 
 /**
- * 게시글 에디터에서도 같은 툴바를 재사용한다.
- * 게시글은 대표 이미지를 따로 등록하므로 본문 이미지 버튼은 숨길 수 있다.
+ * 활동 에디터에서도 같은 툴바를 재사용한다.
+ * 활동은 대표 이미지를 따로 등록하므로 본문 이미지 버튼은 숨길 수 있다.
  */
 export const CustomMenuBar = ({
   editor,
@@ -351,7 +351,7 @@ export default function MDEditor({
           className={activeTab === 'BOARD' ? S.buttonIntro : S.buttonNotice}
           onClick={() => setActiveTab('BOARD')}
         >
-          게시글
+          활동
         </Button>
       </div>
 

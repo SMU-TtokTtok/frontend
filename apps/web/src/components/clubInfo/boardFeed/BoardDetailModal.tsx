@@ -47,7 +47,7 @@ function BoardDetailModal({ clubId, boardId, onClose }: BoardDetailModalProps) {
         </button>
 
         {isLoading && <p className={S.stateText}>불러오는 중...</p>}
-        {isError && <p className={S.stateText}>게시글을 불러오지 못했어요.</p>}
+        {isError && <p className={S.stateText}>활동을 불러오지 못했어요.</p>}
 
         {data && (
           <>

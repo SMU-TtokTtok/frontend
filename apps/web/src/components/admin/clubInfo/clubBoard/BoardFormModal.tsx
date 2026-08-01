@@ -13,7 +13,7 @@ import * as S from './boardFormModal.css';
 
 interface BoardFormModalProps {
   clubId: string;
-  /** 값이 있으면 수정, null이면 새 게시글 */
+  /** 값이 있으면 수정, null이면 새 활동 */
   boardId: string | null;
   isSubmitting: boolean;
   onSubmit: (values: ClubBoardFormValues, thumbnail: File | null) => void;
@@ -111,7 +111,7 @@ function BoardFormModal({
         onClick={(event) => event.stopPropagation()}
         onSubmit={handleSubmit(handleFormSubmit)}
       >
-        <div className={S.title}>{isEditMode ? '게시글 수정' : '게시글 등록'}</div>
+        <div className={S.title}>{isEditMode ? '활동 수정' : '활동 등록'}</div>
 
         <div className={S.field}>
           <label htmlFor="boardTitle" className={S.label}>
