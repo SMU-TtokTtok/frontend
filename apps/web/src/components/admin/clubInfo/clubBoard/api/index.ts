@@ -1,4 +1,5 @@
 import { adminClient } from '@/common/apis/ttockTtockClient';
+import { API } from '@/common/constants/endpoints';
 import { ClubBoardCreateResponse, ClubBoardFormValues } from '@/common/model/clubBoard';
 
 /**
@@ -23,7 +24,7 @@ export const postClubBoard = async (
   thumbnail: File,
 ) => {
   const data = await adminClient.post<ClubBoardCreateResponse>(
-    `/clubs/${clubId}/boards`,
+    API.ADMIN.CLUB_BOARDS(clubId),
     buildBoardFormData(values, thumbnail),
   );
 
@@ -38,7 +39,7 @@ export const patchClubBoard = async (
   thumbnail?: File | null,
 ) => {
   const data = await adminClient.patch(
-    `/clubs/${clubId}/boards/${boardId}`,
+    API.ADMIN.CLUB_BOARD_DETAIL(clubId, boardId),
     buildBoardFormData(values, thumbnail),
   );
 
@@ -46,7 +47,7 @@ export const patchClubBoard = async (
 };
 
 export const deleteClubBoard = async (clubId: string, boardId: string) => {
-  const data = await adminClient.delete(`/clubs/${clubId}/boards/${boardId}`);
+  const data = await adminClient.delete(API.ADMIN.CLUB_BOARD_DETAIL(clubId, boardId));
 
   return data;
 };

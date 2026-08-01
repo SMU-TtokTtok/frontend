@@ -1,4 +1,5 @@
 import { mainClient } from '@/common/apis/ttockTtockClient';
+import { API } from '@/common/constants/endpoints';
 import { ClubBoardDetail, ClubBoardList } from '@/common/model/clubBoard';
 
 interface GetClubBoardsParams {
@@ -14,14 +15,14 @@ export const getClubBoards = async ({ clubId, size = 20, cursor }: GetClubBoards
   }
 
   const data = await mainClient.get<ClubBoardList>(
-    `/api/clubs/${clubId}/boards?${query.toString()}`,
+    `${API.USER.CLUB_BOARDS(clubId)}?${query.toString()}`,
   );
 
   return data;
 };
 
 export const getClubBoardDetail = async (clubId: string, boardId: string) => {
-  const data = await mainClient.get<ClubBoardDetail>(`/api/clubs/${clubId}/boards/${boardId}`);
+  const data = await mainClient.get<ClubBoardDetail>(API.USER.CLUB_BOARD_DETAIL(clubId, boardId));
 
   return data;
 };

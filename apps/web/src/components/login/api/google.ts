@@ -1,5 +1,6 @@
 import { BASE_URL } from '@/common/apis/ttockTtockClient';
 import { CustomHttpError } from '@/common/apis/apiClient';
+import { API } from '@/common/constants/endpoints';
 import type {
   ApiResponse,
   AuthSession,
@@ -34,7 +35,7 @@ const saveUserSession = (session: AuthSession) => {
 
 /** 구글 ID 토큰으로 로그인. 신규 사용자면 needsOnboarding: true가 내려온다. */
 export const postGoogleLogin = async (idToken: string) => {
-  const response = await postWithoutAuth<GoogleLoginData>('/api/user/auth/oauth/google', {
+  const response = await postWithoutAuth<GoogleLoginData>(API.USER.GOOGLE_LOGIN, {
     idToken,
   });
 
@@ -47,10 +48,7 @@ export const postGoogleLogin = async (idToken: string) => {
 
 /** 신규 사용자의 약관 동의 + 이름을 제출해 가입을 마치고 로그인한다. */
 export const postGoogleOnboarding = async (body: GoogleOnboardingBody) => {
-  const response = await postWithoutAuth<AuthSession>(
-    '/api/user/auth/oauth/google/complete',
-    body,
-  );
+  const response = await postWithoutAuth<AuthSession>(API.USER.GOOGLE_ONBOARDING, body);
 
   saveUserSession(response.data);
 
