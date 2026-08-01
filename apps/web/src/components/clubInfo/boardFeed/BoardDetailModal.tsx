@@ -18,11 +18,13 @@ function BoardDetailModal({ clubId, boardId, onClose }: BoardDetailModalProps) {
 
   usePreventScroll(true);
 
+  const content = data?.content;
+
   // 내용은 에디터가 만든 HTML이므로 소개글과 동일한 허용 목록으로 정화한다
   const sanitizedContent = useMemo(() => {
-    if (!data?.content) return '';
+    if (!content) return '';
 
-    return DOMPurify.sanitize(data.content, {
+    return DOMPurify.sanitize(content, {
       ALLOWED_TAGS: [
         'p', 'br', 'strong', 'em', 'u', 's', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
         'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'a', 'img',
@@ -31,7 +33,7 @@ function BoardDetailModal({ clubId, boardId, onClose }: BoardDetailModalProps) {
       ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'class', 'style', 'target', 'rel'],
       ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
     });
-  }, [data?.content]);
+  }, [content]);
 
   return (
     <div className={S.overlay} onClick={onClose} role="presentation">
