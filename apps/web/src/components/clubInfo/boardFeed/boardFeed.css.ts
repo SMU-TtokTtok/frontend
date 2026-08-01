@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { keyframes, style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 import { BREAKPOINTS } from '@/common/constants';
 
@@ -79,9 +79,24 @@ export const observerTarget = style({
   height: '1px',
 });
 
-export const loadingMore = style({
-  padding: '16px 0',
-  textAlign: 'center',
-  color: vars.colors.surface.outline,
-  fontSize: vars.fonts.body3,
+const shimmer = keyframes({
+  '0%': { backgroundPosition: '200% 0' },
+  '100%': { backgroundPosition: '-200% 0' },
+});
+
+/**
+ * 실제 썸네일과 같은 그리드·비율을 차지해 로딩 전후 레이아웃이 흔들리지 않게 한다(CLS 방지).
+ */
+export const skeletonItem = style({
+  aspectRatio: '1 / 1',
+  borderRadius: '4px',
+  backgroundImage: `linear-gradient(90deg, ${vars.colors.surface.cont_1} 25%, ${vars.colors.surface.cont_3} 50%, ${vars.colors.surface.cont_1} 75%)`,
+  backgroundSize: '200% 100%',
+  animation: `${shimmer} 1.4s ease-in-out infinite`,
+
+  '@media': {
+    'screen and (prefers-reduced-motion: reduce)': {
+      animation: 'none',
+    },
+  },
 });
