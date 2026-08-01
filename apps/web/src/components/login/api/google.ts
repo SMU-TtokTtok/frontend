@@ -1,6 +1,7 @@
 import { BASE_URL } from '@/common/apis/ttockTtockClient';
 import { CustomHttpError } from '@/common/apis/apiClient';
 import { API } from '@/common/constants/endpoints';
+import { saveUserSession } from '@/components/login/api';
 import type {
   ApiResponse,
   AuthSession,
@@ -25,12 +26,6 @@ const postWithoutAuth = async <T>(path: string, body: unknown): Promise<ApiRespo
   }
 
   return (await response.json()) as ApiResponse<T>;
-};
-
-const saveUserSession = (session: AuthSession) => {
-  localStorage.setItem('name', session.user.name);
-  localStorage.setItem('user_access_token', session.accessToken);
-  localStorage.setItem('user_refresh_token', session.refreshToken);
 };
 
 /** 구글 ID 토큰으로 로그인. 신규 사용자면 needsOnboarding: true가 내려온다. */
