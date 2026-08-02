@@ -1,12 +1,18 @@
 import { mainClient } from '@/common/apis/ttockTtockClient';
+import type { AuthSession } from '@/components/login/model';
+
+/** 로그인 성공 응답을 localStorage에 저장한다. 일반 로그인과 구글 로그인이 함께 쓴다. */
+export const saveUserSession = (session: AuthSession) => {
+  localStorage.setItem('name', session.user.name);
+  localStorage.setItem('user_access_token', session.accessToken);
+  localStorage.setItem('user_refresh_token', session.refreshToken);
+};
 
 export const postLogin = async (body: { email: string; password: string }) => {
   try {
     const data = await mainClient.post('/api/user/auth/login', body);
 
-    localStorage.setItem('name', data.data.user.name);
-    localStorage.setItem('user_access_token', data.data.accessToken);
-    localStorage.setItem('user_refresh_token', data.data.refreshToken);
+    saveUserSession(data.data);
 
     return data;
   } catch (error) {

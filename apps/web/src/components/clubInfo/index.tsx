@@ -45,7 +45,7 @@ const ClubInfoPage = () => {
                 handleModalOpen={handleModalOpen}
               />
               {!isLargeScreen && <RightSide clubIntro={data} clubId={clubId as string} />}
-              <ClubIntroduce introduction={data.content} />
+              <ClubIntroduce introduction={data.content} clubId={clubId as string} />
             </div>
 
             {isLargeScreen && <RightSide clubIntro={data} clubId={clubId as string} />}

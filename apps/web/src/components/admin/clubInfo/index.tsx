@@ -1,7 +1,7 @@
 'use client';
 
 import * as S from '@/components/admin/clubInfo/index.css';
-import clubImg from '@/assets/clubImg.svg';
+import clubDefaultProfile from '@/assets/clubDefaultProfile.png';
 import Image from 'next/image';
 import ClubBox from '@/components/admin/clubInfo/ClubBox';
 import MDEditor from '@/components/admin/clubInfo/MDEditor';
@@ -93,7 +93,7 @@ function AdminClubInfo() {
               }}
             >
                <Image
-                src={clubInfo?.profileImageUrl || clubImg}
+                src={clubInfo?.profileImageUrl || clubDefaultProfile}
                 alt="동아리 사진"
                 width={212}
                 height={224}

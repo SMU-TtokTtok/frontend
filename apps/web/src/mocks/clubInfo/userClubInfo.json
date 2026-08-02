@@ -1,16 +1,16 @@
 {
-  "name": "코딩클럽",
+  "name": "Coding Club",
   "clubType": "CENTRAL",
-  "clubCategory": "VOLUNTEER",
+  "clubCategory": "ACADEMIC",
   "customCategory": "IT",
   "recruiting": true,
-  "summary": "함께 공부하고 성장하는 개발자 커뮤니티입니다.",
+  "summary": "A student developer community that grows through study, projects, and code reviews.",
   "profileImageUrl": null,
   "clubMemberCount": 25,
-  "applyStartDate": null,
-  "applyDeadLine": null,
+  "applyStartDate": "2026-03-01",
+  "applyDeadLine": "2026-03-15",
   "grades": ["FIRST_GRADE", "SECOND_GRADE", "THIRD_GRADE", "FOURTH_GRADE"],
   "maxApplyCount": 10,
-  "content": "<h1>안녕하세요</h1><h2>안녕하세요</h2><h3>안녕하세요</h3><h4>안녕하세요</h4><p>안녕하세요</p>",
+  "content": "<h1>Coding Club</h1><p>We build web services, practice algorithms, and learn modern development workflows together.</p><h2>Main Activities</h2><ul><li>Weekly web study</li><li>Team projects</li><li>Hackathon preparation</li><li>Code review sessions</li></ul>",
   "bookmarked": true
 }

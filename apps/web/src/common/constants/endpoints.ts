@@ -9,6 +9,11 @@ export const API = {
     NOTICES: '/api/notices',
     NOTICE_DETAIL: (noticeId: string) => `/api/notices/${noticeId}`,
     FAVORITES_TOGGLE: (clubId: string) => `/api/favorites/toggle/${clubId}`,
+    GOOGLE_LOGIN: '/api/user/auth/oauth/google',
+    GOOGLE_ONBOARDING: '/api/user/auth/oauth/google/complete',
+    CLUB_BOARDS: (clubId: string) => `/api/clubs/${clubId}/boards`,
+    CLUB_BOARD_DETAIL: (clubId: string, boardId: string) =>
+      `/api/clubs/${clubId}/boards/${boardId}`,
   },
   ADMIN: {
     LOGIN: '/auth/login',
@@ -32,5 +37,7 @@ export const API = {
     FORMS_FINISH: (formId: string) => `/forms/finish/${formId}`,
     APPLICANTS_CONNECTION: (clubId: string) => `/applies/${clubId}/finalize`,
     FORMS_CREATE: (clubId: string) => `/forms/clubs/${clubId}`,
+    CLUB_BOARDS: (clubId: string) => `/clubs/${clubId}/boards`,
+    CLUB_BOARD_DETAIL: (clubId: string, boardId: string) => `/clubs/${clubId}/boards/${boardId}`,
   },
 };

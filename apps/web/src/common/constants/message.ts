@@ -19,4 +19,13 @@ export const MESSAGE = {
     sessionExpired: '세션이 만료되었습니다. 다시 로그인해주세요.',
     loginRequired: '로그인이 필요합니다. 로그인해주세요.',
   },
+  googleLogin: {
+    failed: '구글 로그인에 실패했어요. 잠시 후 다시 시도해주세요.',
+    invalidToken: '구글 로그인에 실패했어요. 다시 시도해주세요.',
+    emailNotVerified: '구글 계정의 이메일 인증이 필요해요. 구글에서 이메일 인증 후 시도해주세요.',
+    alreadyLinked: '이미 다른 구글 계정과 연동된 이메일이에요. 이메일 로그인을 이용해주세요.',
+    onboardingExpired: '인증 시간이 만료되었어요. 구글 로그인부터 다시 시도해주세요.',
+    onboardingInvalid: '약관 동의와 이름을 다시 확인해주세요.',
+    onboardingConflict: '가입 처리 중 문제가 발생했어요. 구글 로그인부터 다시 시도해주세요.',
+  },
 };

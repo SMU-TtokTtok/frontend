@@ -1,16 +1,22 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import DOMPurify from 'dompurify';
 import * as S from './clubIntro.css';
 import Button from '@/common/ui/button/index';
+import BoardFeed from '@/components/clubInfo/boardFeed';
 import './editor.css';
+
+type ClubIntroTab = 'INTRO' | 'FEED';
 
 interface ClubIntroProps {
   introduction: string;
+  clubId: string;
 }
 
-const ClubIntro = ({ introduction }: ClubIntroProps) => {
+const ClubIntro = ({ introduction, clubId }: ClubIntroProps) => {
+  const [activeTab, setActiveTab] = useState<ClubIntroTab>('INTRO');
+
   const sanitizedIntroduction = useMemo(() => {
     return DOMPurify.sanitize(introduction, {
       ALLOWED_TAGS: [
@@ -26,15 +32,27 @@ const ClubIntro = ({ introduction }: ClubIntroProps) => {
   return (
     <div className={S.container}>
       <div className={S.headerContainer}>
-        <Button variant="secondary" className={S.headerItem1}>
-          소개
+        <Button
+          variant="secondary"
+          className={activeTab === 'INTRO' ? S.headerItem1 : S.headerItem2}
+          onClick={() => setActiveTab('INTRO')}
+        >
+          동아리 소개
         </Button>
-        {/* <Button variant="secondary" className={S.headerItem2}>
-          게시판
-        </Button> */}
+        <Button
+          variant="secondary"
+          className={activeTab === 'FEED' ? S.headerItem1 : S.headerItem2}
+          onClick={() => setActiveTab('FEED')}
+        >
+          활동
+        </Button>
       </div>
 
-      <div className="content-container" dangerouslySetInnerHTML={{ __html: sanitizedIntroduction }} />
+      {activeTab === 'INTRO' ? (
+        <div className="content-container" dangerouslySetInnerHTML={{ __html: sanitizedIntroduction }} />
+      ) : (
+        <BoardFeed clubId={clubId} />
+      )}
     </div>
   );
 };

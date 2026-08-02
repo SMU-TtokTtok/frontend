@@ -22,6 +22,7 @@ import {
   getImage,
 } from './clubInfo/adminClubInfo';
 import { getUserClubInfo } from './clubInfo/userClubInfo';
+import { getUserClubBoardDetail, getUserClubBoards } from './clubInfo/userClubBoards';
 import { emailCheckHandler, verifyResetCodeHandler, resetPasswordHandler } from './password';
 import { userLoginHandler, userSignupHandler, userEmailPostHandler } from './userAuth';
 import { getUserForm, postUserForm } from './userForm/userForm';
@@ -49,6 +50,8 @@ export const handlers = [
   patchClubInfo,
   patchRecruiting,
   getUserClubInfo,
+  getUserClubBoards,
+  getUserClubBoardDetail,
   PassList,
   FailList,
   AdminLogin,

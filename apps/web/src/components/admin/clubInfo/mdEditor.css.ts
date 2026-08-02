@@ -12,7 +12,7 @@ export const buttonContainer = style({
 });
 
 export const buttonIntro = style({
-  width: '100%',
+  flex: '1 0 0',
   textAlign: 'center',
   padding: '22px 0',
   backgroundColor: '#CAE0FF !important',
@@ -34,12 +34,19 @@ export const buttonIntro = style({
 });
 
 export const buttonNotice = style({
-  width: '50%',
+  flex: '1 0 0',
   textAlign: 'center',
   padding: '22px 0',
   backgroundColor: `${vars.colors.surface.cont_1} !important`,
   borderRadius: '6px 6px 0px 0px',
   color: '#55637D !important',
   fontSize: vars.fonts.body2,
-  // fontWeight: '700',
+  cursor: 'pointer',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body1,
+      padding: '16px 0',
+    },
+  },
 });
