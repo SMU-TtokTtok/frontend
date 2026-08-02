@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from '@/common/constants';
+﻿import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
 import { style, styleVariants } from '@vanilla-extract/css';
 export const checkboxContainer = style({

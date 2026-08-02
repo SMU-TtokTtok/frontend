@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import '../common/styles/reset.css';
-import { MSWProvider } from '@/mocks/mswProvider';
+// import { MSWProvider } from '@/mocks/mswProvider';
 import QueryProvider from './queryProvider';
 import GoogleAnalytics from '@/components/googleAnalytics';
 import FCMProvider from '@/fcm/FCMProvider';

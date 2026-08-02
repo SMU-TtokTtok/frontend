@@ -1,5 +1,5 @@
-import { keyframes, style } from '@vanilla-extract/css';
-import { BREAKPOINTS } from '@/common/constants';
+﻿import { keyframes, style } from '@vanilla-extract/css';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
 
 const skeletonShimmer = keyframes({

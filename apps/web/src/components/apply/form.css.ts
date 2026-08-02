@@ -1,6 +1,6 @@
-import { createVar, style } from '@vanilla-extract/css';
+﻿import { createVar, style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
-import { BREAKPOINTS } from '@/common/constants/index';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 export const sidebarTop = createVar();
 

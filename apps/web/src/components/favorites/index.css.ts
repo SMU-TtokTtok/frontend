@@ -1,7 +1,7 @@
-import { style } from '@vanilla-extract/css';
+﻿import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '@/common/styles/theme.css';
-import { BREAKPOINTS } from '@/common/constants/index';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 export const HeaderWrapper = style({
   display: 'flex',

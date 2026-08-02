@@ -1,8 +1,7 @@
-import { style } from '@vanilla-extract/css';
+﻿import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
-import { BREAKPOINTS } from '@/common/constants';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
-/** 관리자 "동아리 정보 관리"의 활동 탭 패널. 탭 버튼 아래에 이어 붙는다. */
 export const panel = style({
   width: '100%',
   minHeight: '300px',

@@ -1,6 +1,6 @@
-import { vars } from '@/common/styles/theme.css';
+﻿import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
-import { BREAKPOINTS } from '@/common/constants';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 export const container = style({
   display: 'flex',

@@ -40,22 +40,14 @@ const FAQ_LIST: FaqItemData[] = [
 ];
 
 export default function FaqAccordion() {
-  const [openIndexes, setOpenIndexes] = useState<Set<number>>(new Set([0]));
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const handleToggle = (index: number) => {
-    setOpenIndexes((prev) => {
-      const next = new Set(prev);
-      if (next.has(index)) {
-        next.delete(index);
-      } else {
-        next.add(index);
-      }
-      return next;
-    });
+    setOpenIndex((prev) => (prev === index ? null : index));
   };
 
   const isDividerVisible = (index: number) =>
-    index > 0 && !openIndexes.has(index) && !openIndexes.has(index - 1);
+    index > 0 && openIndex !== index && openIndex !== index - 1;
 
   return (
     <div className={S.faqCard}>
@@ -63,7 +55,7 @@ export default function FaqAccordion() {
         <FaqItem
           key={item.question}
           item={item}
-          isExpanded={openIndexes.has(index)}
+          isExpanded={openIndex === index}
           showDivider={isDividerVisible(index)}
           onToggle={() => handleToggle(index)}
         />

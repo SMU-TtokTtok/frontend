@@ -1,6 +1,6 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+﻿import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
-import { BREAKPOINTS } from '@/common/constants';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 export const overlay = style({
   position: 'fixed',
@@ -14,9 +14,9 @@ export const overlay = style({
 });
 
 /**
- * 데스크톱은 사진(왼쪽) + 내용(오른쪽) 2단, 좁아지면 위아래로 쌓인다.
- * 높이를 확정해야(height + minmax(0, 1fr)) 두 단의 높이가 맞고 내용 쪽에 스크롤이 생긴다.
- * 행 높이를 auto로 두면 내용만큼 늘어나 사진 아래에 빈 공간이 생기고 스크롤도 안 걸린다.
+ * ?곗뒪?ы넲? ?ъ쭊(?쇱そ) + ?댁슜(?ㅻⅨ履? 2?? 醫곸븘吏硫??꾩븘?섎줈 ?볦씤??
+ * ?믪씠瑜??뺤젙?댁빞(height + minmax(0, 1fr)) ???⑥쓽 ?믪씠媛 留욊퀬 ?댁슜 履쎌뿉 ?ㅽ겕濡ㅼ씠 ?앷릿??
+ * ???믪씠瑜?auto濡??먮㈃ ?댁슜留뚰겮 ?섏뼱???ъ쭊 ?꾨옒??鍮?怨듦컙???앷린怨??ㅽ겕濡ㅻ룄 ??嫄몃┛??
  */
 export const modal = style({
   position: 'relative',
@@ -58,8 +58,8 @@ export const closeButton = style({
 });
 
 /**
- * 사진 비율이 어떻든 잘리지 않게 contain. 정사각형이 아니면 남는 공간이 배경색으로 보인다.
- * 데스크톱에서는 모달 높이를 그대로 채우고, 모바일에서만 정사각형으로 잡는다.
+ * ?ъ쭊 鍮꾩쑉???대뼸???섎━吏 ?딄쾶 contain. ?뺤궗媛곹삎???꾨땲硫??⑤뒗 怨듦컙??諛곌꼍?됱쑝濡?蹂댁씤??
+ * ?곗뒪?ы넲?먯꽌??紐⑤떖 ?믪씠瑜?洹몃?濡?梨꾩슦怨? 紐⑤컮?쇱뿉?쒕쭔 ?뺤궗媛곹삎?쇰줈 ?〓뒗??
  */
 export const imagePane = style({
   backgroundColor: vars.colors.surface.default,
@@ -83,7 +83,7 @@ export const image = style({
   display: 'block',
 });
 
-/** 동아리명·제목은 고정하고 본문만 스크롤되도록 자신은 넘치지 않게 둔다 */
+/** ?숈븘由щ챸쨌?쒕ぉ? 怨좎젙?섍퀬 蹂몃Ц留??ㅽ겕濡ㅻ릺?꾨줉 ?먯떊? ?섏튂吏 ?딄쾶 ?붾떎 */
 export const contentPane = style({
   padding: '32px',
   display: 'flex',
@@ -101,10 +101,10 @@ export const contentPane = style({
   },
 });
 
-/** 제목이 주인공이므로 동아리명은 그 위에 얹히는 작은 라벨로 둔다 */
+/** ?쒕ぉ??二쇱씤怨듭씠誘濡??숈븘由щ챸? 洹??꾩뿉 ?뱁엳???묒? ?쇰꺼濡??붾떎 */
 export const clubName = style({
   flexShrink: 0,
-  paddingRight: '44px', // 닫기 버튼과 겹치지 않게
+  paddingRight: '44px', // ?リ린 踰꾪듉怨?寃뱀튂吏 ?딄쾶
   fontSize: vars.fonts.body2,
   fontWeight: 500,
   color: vars.colors.surface.on_surf_var,
@@ -153,9 +153,9 @@ export const date = style({
 });
 
 /**
- * 내용은 에디터가 만든 HTML이다.
- * 소개글용 .content-container는 패딩·min-height가 탭 패널 기준이라 쓰지 않고,
- * 자식 요소 스타일만 같은 크기 체계로 맞춘다.
+ * ?댁슜? ?먮뵒?곌? 留뚮뱺 HTML?대떎.
+ * ?뚭컻湲??.content-container???⑤뵫쨌min-height媛 ???⑤꼸 湲곗??대씪 ?곗? ?딄퀬,
+ * ?먯떇 ?붿냼 ?ㅽ??쇰쭔 媛숈? ?ш린 泥닿퀎濡?留욎텣??
  */
 export const content = style({
   flex: '1 1 0',
@@ -206,7 +206,7 @@ globalStyle(`${content} a`, {
   textDecoration: 'underline',
 });
 
-/** 빈 줄도 소개글과 동일하게 높이를 유지한다 */
+/** 鍮?以꾨룄 ?뚭컻湲怨??숈씪?섍쾶 ?믪씠瑜??좎??쒕떎 */
 globalStyle(`${content} p:empty:before`, {
   content: '\\00a0',
   display: 'block',
