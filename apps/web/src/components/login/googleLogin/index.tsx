@@ -6,8 +6,10 @@ import * as S from './googleLogin.css';
 
 const GIS_SCRIPT_SRC = 'https://accounts.google.com/gsi/client';
 
-/** GIS 버튼은 픽셀 단위 width만 받는다(200~400px). */
-const MIN_BUTTON_WIDTH = 200;
+/**
+ * GIS의 width는 "최소" 너비이고 상한이 400px이다.
+ * 슬롯보다 큰 값을 넘기면 그만큼 넘쳐 나오므로 항상 슬롯 너비 이하로 요청한다.
+ */
 const MAX_BUTTON_WIDTH = 400;
 
 interface GoogleLoginButtonProps {
@@ -25,9 +27,23 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
     onCredentialRef.current = onCredential;
   }, [onCredential]);
 
+  // 화면 회전·리사이즈로 카드 폭이 바뀌면 버튼도 다시 그려야 한다.
+  const [slotWidth, setSlotWidth] = useState(0);
   useEffect(() => {
     const buttonSlot = buttonSlotRef.current;
-    if (!isScriptReady || !clientId || !buttonSlot || !window.google) {
+    if (!buttonSlot) return;
+
+    const observer = new ResizeObserver(([entry]) => {
+      setSlotWidth(Math.floor(entry.contentRect.width));
+    });
+    observer.observe(buttonSlot);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const buttonSlot = buttonSlotRef.current;
+    if (!isScriptReady || !clientId || !buttonSlot || !window.google || !slotWidth) {
       return;
     }
 
@@ -35,6 +51,9 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       client_id: clientId,
       callback: ({ credential }) => onCredentialRef.current(credential),
     });
+
+    // 다시 그릴 때 이전 버튼이 남지 않도록 비운다.
+    buttonSlot.replaceChildren();
 
     window.google.accounts.id.renderButton(buttonSlot, {
       type: 'standard',
@@ -44,12 +63,9 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       shape: 'rectangular',
       logo_alignment: 'center',
       locale: 'ko',
-      width: Math.min(
-        MAX_BUTTON_WIDTH,
-        Math.max(MIN_BUTTON_WIDTH, buttonSlot.clientWidth || MIN_BUTTON_WIDTH),
-      ),
+      width: Math.min(MAX_BUTTON_WIDTH, slotWidth),
     });
-  }, [isScriptReady, clientId]);
+  }, [isScriptReady, clientId, slotWidth]);
 
   if (!clientId) {
     if (process.env.NODE_ENV !== 'production') {
