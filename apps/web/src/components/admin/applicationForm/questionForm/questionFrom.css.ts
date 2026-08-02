@@ -369,7 +369,6 @@ export const deleteOptionButton = style({
   },
 });
 
-// 湲곕낯 ?몄쟻?ы빆
 export const applicantInfoField = style({
   width: '100%',
   backgroundColor: vars.colors.surface.default,

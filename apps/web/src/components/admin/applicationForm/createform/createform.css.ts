@@ -198,7 +198,6 @@ export const TitleInBox = style({
   },
 });
 
-//硫댁젒,?쒕쪟 ?꾪삎 ?좏깮?섏씠吏
 export const selectTypeContainer = style({
   marginTop: '26px',
   backgroundColor: vars.colors.surface.bright,

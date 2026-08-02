@@ -1,7 +1,6 @@
 ﻿import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
 import { createVar, style } from '@vanilla-extract/css';
-// empty ?섏씠吏
 export const emptyContainer = style({
   padding: '44px 146px 0 382px',
   '@media': {
@@ -51,7 +50,6 @@ export const makeFormButton = style({
   },
 });
 
-// form ?섏젙 ?섏씠吏
 export const formContainer = style({
   paddingLeft: '280px',
   paddingRight: '374px',
