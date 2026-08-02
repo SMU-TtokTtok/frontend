@@ -4,7 +4,9 @@ import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import withPWA from 'next-pwa';
 
-const withVanillaExtract = createVanillaExtractPlugin();
+const withVanillaExtract = createVanillaExtractPlugin({
+  unstable_turbopack: { mode: 'auto' },
+});
 const withAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
