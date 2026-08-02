@@ -1,5 +1,5 @@
-import { style } from '@vanilla-extract/css';
-import { BREAKPOINTS } from '@/common/constants';
+﻿import { style } from '@vanilla-extract/css';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
 
 export const backFlex = style({

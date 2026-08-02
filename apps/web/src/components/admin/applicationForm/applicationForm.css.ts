@@ -1,7 +1,7 @@
-import { BREAKPOINTS } from '@/common/constants';
+﻿import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
 import { createVar, style } from '@vanilla-extract/css';
-// empty 페이지
+// empty ?섏씠吏
 export const emptyContainer = style({
   padding: '44px 146px 0 382px',
   '@media': {
@@ -51,7 +51,7 @@ export const makeFormButton = style({
   },
 });
 
-// form 수정 페이지
+// form ?섏젙 ?섏씠吏
 export const formContainer = style({
   paddingLeft: '280px',
   paddingRight: '374px',

@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from '@/common/constants';
+﻿import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
 import { style, styleVariants, createVar } from '@vanilla-extract/css';
 
@@ -189,7 +189,7 @@ export const plus = style({
 
 export const listContainer = style({
   width: '100%',
-  minHeight: '170px', //추가
+  minHeight: '170px', //異붽?
   position: 'relative',
 });
 

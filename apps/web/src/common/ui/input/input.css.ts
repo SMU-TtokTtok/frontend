@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from '@/common/constants';
+﻿import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
 import { style, styleVariants } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
@@ -23,23 +23,23 @@ export const baseinputStyle = recipe({
 });
 
 export const inputStyle = styleVariants({
-  //서치바
+  //?쒖튂諛?
   primary: {
     backgroundColor: vars.colors.surface.variant,
     color: vars.colors.black,
     fontWeight: 500,
 
-    '$:placeholder': {
+    '::placeholder': {
       color: vars.colors.surface.outline_var,
     },
   },
-  //로그인, 회원가입 관련
+  //濡쒓렇?? ?뚯썝媛??愿??
   secondary: {
     backgroundColor: vars.colors.surface.default,
     color: vars.colors.black,
     fontWeight: 400,
 
-    '$:placeholder': {
+    '::placeholder': {
       color: vars.colors.surface.cont_5,
     },
   },
@@ -48,7 +48,7 @@ export const inputStyle = styleVariants({
     color: vars.colors.black,
     fontWeight: 500,
 
-    '$:placeholder': {
+    '::placeholder': {
       color: vars.colors.surface.outline_var,
     },
   },

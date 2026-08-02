@@ -1,14 +1,14 @@
-import { style, keyframes } from '@vanilla-extract/css';
+﻿import { style, keyframes } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
 import { vars } from '@/common/styles/theme.css';
-import { BREAKPOINTS } from '@/common/constants';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 export const pageWrapper = style({
   width: '100%',
   backgroundColor: vars.colors.surface.variant,
   paddingTop: '62px',
   paddingBottom: '76px',
-  minHeight: '90vh',
+
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -17,6 +17,7 @@ export const pageWrapper = style({
     },
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       paddingTop: '24px',
+      paddingBottom: '0',
     },
   },
 });

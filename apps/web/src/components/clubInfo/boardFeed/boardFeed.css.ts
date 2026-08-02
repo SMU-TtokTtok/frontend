@@ -1,15 +1,15 @@
-import { keyframes, style } from '@vanilla-extract/css';
+﻿import { keyframes, style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
-import { BREAKPOINTS } from '@/common/constants';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 /**
- * 소개 탭과 달리 흰 패널을 두지 않는다.
- * 카드 안에 갇히면 썸네일 여러 장이 활동 하나의 사진처럼 보여서, 배경 위에 그리드만 노출한다.
+ * ?뚭컻 ??낵 ?щ━ ???⑤꼸???먯? ?딅뒗??
+ * 移대뱶 ?덉뿉 媛뉙엳硫??몃꽕???щ윭 ?μ씠 ?쒕룞 ?섎굹???ъ쭊泥섎읆 蹂댁뿬?? 諛곌꼍 ?꾩뿉 洹몃━?쒕쭔 ?몄텧?쒕떎.
  */
 export const container = style({
   width: '100%',
   minHeight: '300px',
-  paddingTop: '20px', // 탭 버튼에 바로 붙지 않도록
+  paddingTop: '20px', // ??踰꾪듉??諛붾줈 遺숈? ?딅룄濡?
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
@@ -18,7 +18,7 @@ export const container = style({
   },
 });
 
-/** 4열 썸네일 그리드 (디자인 기준). 화면이 좁아지면 3열 → 2열 */
+/** 4???몃꽕??洹몃━??(?붿옄??湲곗?). ?붾㈃??醫곸븘吏硫?3????2??*/
 export const grid = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(4, 1fr)',
@@ -85,7 +85,7 @@ const shimmer = keyframes({
 });
 
 /**
- * 실제 썸네일과 같은 그리드·비율을 차지해 로딩 전후 레이아웃이 흔들리지 않게 한다(CLS 방지).
+ * ?ㅼ젣 ?몃꽕?쇨낵 媛숈? 洹몃━?쑣룸퉬?⑥쓣 李⑥???濡쒕뵫 ?꾪썑 ?덉씠?꾩썐???붾뱾由ъ? ?딄쾶 ?쒕떎(CLS 諛⑹?).
  */
 export const skeletonItem = style({
   aspectRatio: '1 / 1',

@@ -60,19 +60,19 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
       </head>
       <body>
-        {/* <MSWProvider>
+        <MSWProvider>
           <QueryProvider>
             {children}
             {gaId && <GoogleAnalytics gaId={gaId} />}
             <FCMProvider />
           </QueryProvider>
-        </MSWProvider> */}
+        </MSWProvider>
 
-        <QueryProvider>
+        {/* <QueryProvider>
           {children}
           {gaId && <GoogleAnalytics gaId={gaId} />}
           <FCMProvider />
-        </QueryProvider>
+        </QueryProvider> */}
       </body>
     </html>
   );

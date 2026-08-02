@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from '@/common/constants';
+﻿import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
@@ -198,7 +198,7 @@ export const TitleInBox = style({
   },
 });
 
-//면접,서류 전형 선택페이지
+//硫댁젒,?쒕쪟 ?꾪삎 ?좏깮?섏씠吏
 export const selectTypeContainer = style({
   marginTop: '26px',
   backgroundColor: vars.colors.surface.bright,
@@ -403,7 +403,7 @@ export const buttonWrapper = style({
   },
 });
 
-// 모집기간 대상설정 페이지
+// 紐⑥쭛湲곌컙 ??곸꽕???섏씠吏
 export const targetMemberContainer = style({
   display: 'flex',
   justifyContent: 'start',

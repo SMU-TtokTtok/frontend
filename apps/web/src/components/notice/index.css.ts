@@ -1,6 +1,6 @@
-import { keyframes, style } from '@vanilla-extract/css';
+﻿import { keyframes, style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
-import { BREAKPOINTS } from '@/common/constants';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 const skeletonShimmer = keyframes({
   '0%': {
