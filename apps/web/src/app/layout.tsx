@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import '../common/styles/reset.css';
-import { MSWProvider } from '@/mocks/mswProvider';
+// import { MSWProvider } from '@/mocks/mswProvider';
 import QueryProvider from './queryProvider';
 import GoogleAnalytics from '@/components/googleAnalytics';
 import FCMProvider from '@/fcm/FCMProvider';
@@ -60,19 +60,19 @@ export default function RootLayout({
         <meta name="theme-color" content="#000000" />
       </head>
       <body>
-        <MSWProvider>
+        {/* <MSWProvider>
           <QueryProvider>
             {children}
             {gaId && <GoogleAnalytics gaId={gaId} />}
             <FCMProvider />
           </QueryProvider>
-        </MSWProvider>
+        </MSWProvider> */}
 
-        {/* <QueryProvider>
+        <QueryProvider>
           {children}
           {gaId && <GoogleAnalytics gaId={gaId} />}
           <FCMProvider />
-        </QueryProvider> */}
+        </QueryProvider>
       </body>
     </html>
   );
