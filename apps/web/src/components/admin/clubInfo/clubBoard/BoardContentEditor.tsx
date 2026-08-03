@@ -1,28 +1,126 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useEditor, EditorContent } from '@tiptap/react';
+import { EditorContent, useEditor } from '@tiptap/react';
+import type { Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
-import { CustomMenuBar } from '../MDEditor';
-import '../mdEditor.custom.css';
 import * as S from './boardContentEditor.css';
 
 interface BoardContentEditorProps {
-  /** 수정 모드에서 서버에서 받아온 기존 HTML */
   value: string;
   onChange: (html: string) => void;
-  /** 비어 있는지 판단할 때 쓰도록 순수 텍스트도 함께 넘긴다 */
   onTextChange: (text: string) => void;
 }
 
-/** 소개글 에디터와 동일한 확장/툴바를 쓰고, 모달에 맞게 크기만 조절한다 */
+interface MenuButton {
+  label: string;
+  title: string;
+  isActive: () => boolean;
+  onClick: () => void;
+  variant?: 'text' | 'icon';
+}
+
+function CompactMenuBar({ editor }: { editor: Editor }) {
+  const handleLinkClick = () => {
+    const previousUrl = editor.getAttributes('link').href;
+    const url = window.prompt('링크 URL을 입력하세요.', previousUrl || 'https://');
+
+    if (url === null) return;
+
+    if (url === '') {
+      editor.chain().focus().unsetLink().run();
+      return;
+    }
+
+    editor.chain().focus().setLink({ href: url, target: '_blank' }).run();
+  };
+
+  const menuButtons: MenuButton[] = [
+    {
+      label: 'H1',
+      title: '제목 1',
+      isActive: () => editor.isActive('heading', { level: 1 }),
+      onClick: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
+      variant: 'text',
+    },
+    {
+      label: 'H2',
+      title: '제목 2',
+      isActive: () => editor.isActive('heading', { level: 2 }),
+      onClick: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
+      variant: 'text',
+    },
+    {
+      label: 'H3',
+      title: '제목 3',
+      isActive: () => editor.isActive('heading', { level: 3 }),
+      onClick: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
+      variant: 'text',
+    },
+    {
+      label: '본문',
+      title: '본문',
+      isActive: () => editor.isActive('paragraph'),
+      onClick: () => editor.chain().focus().setParagraph().run(),
+      variant: 'text',
+    },
+    {
+      label: 'B',
+      title: '굵게',
+      isActive: () => editor.isActive('bold'),
+      onClick: () => editor.chain().focus().toggleBold().run(),
+      variant: 'icon',
+    },
+    {
+      label: 'I',
+      title: '기울임',
+      isActive: () => editor.isActive('italic'),
+      onClick: () => editor.chain().focus().toggleItalic().run(),
+      variant: 'icon',
+    },
+    {
+      label: 'S',
+      title: '취소선',
+      isActive: () => editor.isActive('strike'),
+      onClick: () => editor.chain().focus().toggleStrike().run(),
+      variant: 'icon',
+    },
+    {
+      label: '링크',
+      title: '링크',
+      isActive: () => editor.isActive('link'),
+      onClick: handleLinkClick,
+      variant: 'text',
+    },
+  ];
+
+  return (
+    <div className={S.menuBar} aria-label="본문 서식 도구">
+      {menuButtons.map((button) => (
+        <button
+          key={button.title}
+          type="button"
+          className={[
+            S.menuButton,
+            button.variant === 'icon' ? S.iconButton : S.textButton,
+            button.isActive() ? S.menuButtonActive : '',
+          ].join(' ')}
+          title={button.title}
+          onClick={button.onClick}
+        >
+          {button.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function BoardContentEditor({ value, onChange, onTextChange }: BoardContentEditorProps) {
   const editor = useEditor({
     extensions: [
       StarterKit,
-      // 첨부 버튼은 없지만, 기존 내용에 이미지가 있으면 수정 중 사라지지 않도록 확장은 유지한다
       Image,
       Link.configure({
         openOnClick: false,
@@ -52,7 +150,6 @@ function BoardContentEditor({ value, onChange, onTextChange }: BoardContentEdito
     };
   }, [editor, onChange, onTextChange]);
 
-  // 수정 모드에서 기존 내용이 뒤늦게 도착하면 한 번 채워준다
   useEffect(() => {
     if (!editor || !value) return;
     if (editor.getHTML() === value) return;
@@ -65,8 +162,7 @@ function BoardContentEditor({ value, onChange, onTextChange }: BoardContentEdito
 
   return (
     <div className={S.wrapper}>
-      {/* 대표 이미지를 따로 등록하므로 본문 이미지 첨부는 제외 */}
-      <CustomMenuBar editor={editor} showImageButton={false} />
+      <CompactMenuBar editor={editor} />
       <EditorContent editor={editor} />
     </div>
   );

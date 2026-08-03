@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '@/common/ui/button';
@@ -13,7 +13,6 @@ import * as S from './boardFormModal.css';
 
 interface BoardFormModalProps {
   clubId: string;
-  /** 값이 있으면 수정, null이면 새 활동 */
   boardId: string | null;
   isSubmitting: boolean;
   onSubmit: (values: ClubBoardFormValues, thumbnail: File | null) => void;
@@ -32,8 +31,6 @@ function BoardFormModal({
   const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [thumbnailError, setThumbnailError] = useState('');
-
-  // 내용은 에디터가 만드는 HTML. 빈 값 판단은 순수 텍스트로 한다.
   const [content, setContent] = useState('');
   const [contentText, setContentText] = useState('');
   const [contentError, setContentError] = useState('');
@@ -53,7 +50,6 @@ function BoardFormModal({
 
   usePreventScroll(true);
 
-  // 수정 모드에서 기존 내용이 도착하면 폼과 미리보기를 채운다
   useEffect(() => {
     if (detail) {
       reset({ title: detail.title });
@@ -62,7 +58,6 @@ function BoardFormModal({
     }
   }, [detail, reset]);
 
-  // 새로 고른 파일의 미리보기 URL은 교체/해제 시 반드시 정리한다
   useEffect(() => {
     if (!thumbnail) return;
 
@@ -75,7 +70,7 @@ function BoardFormModal({
   const handleContentChange = useCallback((html: string) => setContent(html), []);
   const handleContentTextChange = useCallback((text: string) => setContentText(text), []);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -95,7 +90,6 @@ function BoardFormModal({
     }
     setContentError('');
 
-    // 생성 시에는 썸네일이 필수, 수정 시에는 선택
     if (!isEditMode && !thumbnail) {
       setThumbnailError('대표 이미지를 등록해주세요.');
       return;
@@ -110,57 +104,80 @@ function BoardFormModal({
         className={S.modal}
         onClick={(event) => event.stopPropagation()}
         onSubmit={handleSubmit(handleFormSubmit)}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="boardFormTitle"
       >
-        <div className={S.title}>{isEditMode ? '활동 수정' : '활동 등록'}</div>
-
-        <div className={S.field}>
-          <label htmlFor="boardTitle" className={S.label}>
-            제목
-          </label>
-          <input
-            id="boardTitle"
-            className={S.input}
-            placeholder="활동 제목을 입력하세요"
-            {...register('title')}
-          />
-          {errors.title && <p className={S.errorText}>{errors.title.message}</p>}
-        </div>
-
-        <div className={S.field}>
-          <span className={S.label}>내용</span>
-          <BoardContentEditor
-            value={content}
-            onChange={handleContentChange}
-            onTextChange={handleContentTextChange}
-          />
-          {contentError && <p className={S.errorText}>{contentError}</p>}
-        </div>
-
-        <div className={S.field}>
-          <span className={S.label}>대표 이미지{isEditMode ? ' (변경할 때만 선택)' : ''}</span>
-          <div className={S.fileRow}>
-            <Button
-              type="button"
-              variant="secondary"
-              className={S.fileButton}
-              onClick={() => fileInputRef.current?.click()}
-            >
-              이미지 선택
-            </Button>
-            {thumbnail && <span className={S.fileName}>{thumbnail.name}</span>}
+        <div className={S.header}>
+          <div>
+            <h2 id="boardFormTitle" className={S.title}>
+              {isEditMode ? '활동 수정' : '활동 등록'}
+            </h2>
+            <p className={S.description}>동아리 활동 소식에 노출될 내용을 작성해주세요.</p>
           </div>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            style={{ display: 'none' }}
-            onChange={handleFileChange}
-          />
-          {previewUrl && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img className={S.preview} src={previewUrl} alt="대표 이미지 미리보기" />
-          )}
-          {thumbnailError && <p className={S.errorText}>{thumbnailError}</p>}
+          <button type="button" className={S.closeButton} onClick={onClose} aria-label="닫기">
+            ×
+          </button>
+        </div>
+
+        <div className={S.body}>
+          <div className={S.field}>
+            <label htmlFor="boardTitle" className={S.label}>
+              제목
+            </label>
+            <input
+              id="boardTitle"
+              className={S.input}
+              placeholder="활동 제목을 입력하세요"
+              {...register('title')}
+            />
+            {errors.title && <p className={S.errorText}>{errors.title.message}</p>}
+          </div>
+
+          <div className={S.field}>
+            <span className={S.label}>내용</span>
+            <BoardContentEditor
+              value={content}
+              onChange={handleContentChange}
+              onTextChange={handleContentTextChange}
+            />
+            {contentError && <p className={S.errorText}>{contentError}</p>}
+          </div>
+
+          <div className={S.field}>
+            <div className={S.labelRow}>
+              <span className={S.label}>대표 이미지</span>
+              {isEditMode && <span className={S.helperText}>변경할 때만 다시 선택</span>}
+            </div>
+            <div className={S.uploadBox}>
+              <div className={S.fileRow}>
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className={S.fileButton}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  이미지 선택
+                </Button>
+                <span className={S.fileName}>{thumbnail?.name ?? '선택된 파일 없음'}</span>
+              </div>
+
+              {previewUrl && (
+                <div className={S.previewFrame}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className={S.preview} src={previewUrl} alt="대표 이미지 미리보기" />
+                </div>
+              )}
+            </div>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              style={{ display: 'none' }}
+              onChange={handleFileChange}
+            />
+            {thumbnailError && <p className={S.errorText}>{thumbnailError}</p>}
+          </div>
         </div>
 
         <div className={S.buttonRow}>

@@ -48,7 +48,7 @@ const clubBoards: ClubBoardDetail[] = [
     boardId: 'board-5',
     title: 'Open Source Contribution Day',
     content:
-      '<p>We explored issue triage, pull request etiquette, and small first contributions to open source projects.</p>',
+      '<p>We explored issue triage, pull request etiquette, and small first contributions to open source projects.</p><p>We explored issue triage, pull request etiquette, and small first contributions to open source projects.</p><p>We explored issue triage, pull request etiquette, and small first contributions to open source projects.</p>',
     thumbnailUrl:
       'https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=800&q=80',
     clubName: 'Coding Club',
@@ -72,18 +72,20 @@ export const getUserClubBoards = http.get(`${BASE_API}/api/clubs/:clubId/boards`
   const cursor = url.searchParams.get('cursor');
   const startIndex = cursor ? clubBoards.findIndex((board) => board.boardId === cursor) + 1 : 0;
   const endIndex = startIndex + size;
-  const boards = clubBoards.slice(startIndex, endIndex).map(({ boardId, thumbnailUrl, createdAt }) => ({
-    boardId,
-    thumbnailUrl,
-    createdAt,
-  }));
+  const boards = clubBoards
+    .slice(startIndex, endIndex)
+    .map(({ boardId, thumbnailUrl, createdAt }) => ({
+      boardId,
+      thumbnailUrl,
+      createdAt,
+    }));
   const hasNext = endIndex < clubBoards.length;
 
   return HttpResponse.json(
     {
       boards,
       hasNext,
-      nextCursor: hasNext ? boards[boards.length - 1]?.boardId ?? null : null,
+      nextCursor: hasNext ? (boards[boards.length - 1]?.boardId ?? null) : null,
     },
     { status: 200 },
   );
