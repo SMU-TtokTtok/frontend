@@ -132,16 +132,7 @@ export const field = style({
 export const labelRow = style({
   display: 'flex',
   alignItems: 'baseline',
-  justifyContent: 'space-between',
-  gap: '12px',
-
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      alignItems: 'flex-start',
-      flexDirection: 'column',
-      gap: '4px',
-    },
-  },
+  gap: '4px',
 });
 
 export const label = style({
@@ -160,6 +151,19 @@ export const label = style({
 export const helperText = style({
   color: vars.colors.surface.outline,
   fontSize: vars.fonts.body3,
+  lineHeight: '150%',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      fontSize: vars.fonts.m_body2,
+    },
+  },
+});
+
+export const requiredText = style({
+  color: vars.colors.primary.default,
+  fontSize: vars.fonts.body3,
+  fontWeight: 600,
   lineHeight: '150%',
 
   '@media': {

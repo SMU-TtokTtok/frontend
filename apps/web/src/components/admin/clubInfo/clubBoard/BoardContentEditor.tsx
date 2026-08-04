@@ -11,7 +11,7 @@ import * as S from './boardContentEditor.css';
 interface BoardContentEditorProps {
   value: string;
   onChange: (html: string) => void;
-  onTextChange: (text: string) => void;
+  onTextChange?: (text: string) => void;
 }
 
 interface MenuButton {
@@ -155,7 +155,7 @@ function BoardContentEditor({ value, onChange, onTextChange }: BoardContentEdito
 
     const handleUpdate = () => {
       onChange(editor.getHTML());
-      onTextChange(editor.getText());
+      onTextChange?.(editor.getText());
     };
 
     editor.on('update', handleUpdate);
@@ -169,7 +169,7 @@ function BoardContentEditor({ value, onChange, onTextChange }: BoardContentEdito
     if (editor.getHTML() === value) return;
 
     editor.commands.setContent(value);
-    onTextChange(editor.getText());
+    onTextChange?.(editor.getText());
   }, [editor, value, onTextChange]);
 
   if (!editor) return null;

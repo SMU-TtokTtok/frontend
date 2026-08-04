@@ -19,21 +19,13 @@ interface BoardFormModalProps {
   onClose: () => void;
 }
 
-function BoardFormModal({
-  clubId,
-  boardId,
-  isSubmitting,
-  onSubmit,
-  onClose,
-}: BoardFormModalProps) {
+function BoardFormModal({ clubId, boardId, isSubmitting, onSubmit, onClose }: BoardFormModalProps) {
   const isEditMode = Boolean(boardId);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [thumbnailError, setThumbnailError] = useState('');
   const [content, setContent] = useState('');
-  const [contentText, setContentText] = useState('');
-  const [contentError, setContentError] = useState('');
 
   const { data: detail } = useClubBoardDetail(clubId, boardId);
 
@@ -68,7 +60,6 @@ function BoardFormModal({
   }, [thumbnail]);
 
   const handleContentChange = useCallback((html: string) => setContent(html), []);
-  const handleContentTextChange = useCallback((text: string) => setContentText(text), []);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -84,12 +75,6 @@ function BoardFormModal({
   };
 
   const handleFormSubmit = (values: ClubBoardForm) => {
-    if (!contentText.trim()) {
-      setContentError('내용을 입력해주세요.');
-      return;
-    }
-    setContentError('');
-
     if (!isEditMode && !thumbnail) {
       setThumbnailError('대표 이미지를 등록해주세요.');
       return;
@@ -97,6 +82,9 @@ function BoardFormModal({
 
     onSubmit({ title: values.title.trim(), content }, thumbnail);
   };
+
+  const fileStatusText =
+    thumbnail?.name ?? (isEditMode && previewUrl ? '기존 이미지 사용 중' : '선택된 파일 없음');
 
   return (
     <div className={S.overlay} onClick={onClose} role="presentation">
@@ -122,9 +110,12 @@ function BoardFormModal({
 
         <div className={S.body}>
           <div className={S.field}>
-            <label htmlFor="boardTitle" className={S.label}>
-              제목
-            </label>
+            <div className={S.labelRow}>
+              <label htmlFor="boardTitle" className={S.label}>
+                제목
+              </label>
+              <span className={S.requiredText}> *</span>
+            </div>
             <input
               id="boardTitle"
               className={S.input}
@@ -135,19 +126,17 @@ function BoardFormModal({
           </div>
 
           <div className={S.field}>
-            <span className={S.label}>내용</span>
-            <BoardContentEditor
-              value={content}
-              onChange={handleContentChange}
-              onTextChange={handleContentTextChange}
-            />
-            {contentError && <p className={S.errorText}>{contentError}</p>}
+            <div className={S.labelRow}>
+              <span className={S.label}>내용</span>
+              <span className={S.helperText}>(선택)</span>
+            </div>
+            <BoardContentEditor value={content} onChange={handleContentChange} />
           </div>
 
           <div className={S.field}>
             <div className={S.labelRow}>
               <span className={S.label}>대표 이미지</span>
-              {isEditMode && <span className={S.helperText}>변경할 때만 다시 선택</span>}
+              <span className={S.requiredText}> *</span>
             </div>
             <div className={S.uploadBox}>
               <div className={S.fileRow}>
@@ -159,7 +148,7 @@ function BoardFormModal({
                 >
                   이미지 선택
                 </Button>
-                <span className={S.fileName}>{thumbnail?.name ?? '선택된 파일 없음'}</span>
+                <span className={S.fileName}>{fileStatusText}</span>
               </div>
 
               {previewUrl && (
