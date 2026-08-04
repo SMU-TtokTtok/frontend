@@ -13,52 +13,98 @@ interface BoardDetailModalProps {
   onClose: () => void;
 }
 
+function BoardDetailSkeleton() {
+  return (
+    <>
+      <div className={S.skeletonImagePane} aria-hidden="true">
+        <div className={S.skeletonImage} />
+      </div>
+
+      <div className={S.skeletonContentPane} aria-hidden="true">
+        <div className={S.skeletonClubName} />
+        <div className={S.skeletonTitleGroup}>
+          <div className={S.skeletonTitle} />
+          <div className={S.skeletonDate} />
+        </div>
+        <div className={S.skeletonDivider} />
+        <div className={S.skeletonBody}>
+          <div className={S.skeletonLine} />
+          <div className={S.skeletonLine} />
+          <div className={S.skeletonLineShort} />
+        </div>
+      </div>
+    </>
+  );
+}
+
 function BoardDetailModal({ clubId, boardId, onClose }: BoardDetailModalProps) {
-  const { data, isLoading, isError } = useClubBoardDetail(clubId, boardId);
+  const { data, isLoading } = useClubBoardDetail(clubId, boardId);
 
   usePreventScroll(true);
 
   const content = data?.content;
 
-  // 내용은 에디터가 만든 HTML이므로 소개글과 동일한 허용 목록으로 정화한다
   const sanitizedContent = useMemo(() => {
     if (!content) return '';
 
     return DOMPurify.sanitize(content, {
       ALLOWED_TAGS: [
-        'p', 'br', 'strong', 'em', 'u', 's', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-        'ul', 'ol', 'li', 'blockquote', 'code', 'pre', 'a', 'img',
-        'table', 'thead', 'tbody', 'tr', 'th', 'td'
+        'p',
+        'br',
+        'strong',
+        'em',
+        'u',
+        's',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'ul',
+        'ol',
+        'li',
+        'blockquote',
+        'code',
+        'pre',
+        'a',
+        'img',
+        'table',
+        'thead',
+        'tbody',
+        'tr',
+        'th',
+        'td',
       ],
       ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'class', 'style', 'target', 'rel'],
-      ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+      ALLOWED_URI_REGEXP:
+        /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
     });
   }, [content]);
 
   return (
     <div className={S.overlay} onClick={onClose} role="presentation">
-      {/* 모달 내부 클릭이 오버레이까지 전파되어 닫히는 것을 막는다 */}
       <div
         className={S.modal}
         onClick={(event) => event.stopPropagation()}
         role="dialog"
         aria-modal="true"
+        aria-busy={isLoading}
       >
         <button type="button" className={S.closeButton} onClick={onClose} aria-label="닫기">
-          ✕
+          ×
         </button>
 
-        {isLoading && <p className={S.stateText}>불러오는 중...</p>}
-        {isError && <p className={S.stateText}>활동을 불러오지 못했어요.</p>}
+        {isLoading && <BoardDetailSkeleton />}
 
         {data && (
           <>
-            <div className={S.imagePane}>
+            <div className={S.imagePanel}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className={S.image} src={data.thumbnailUrl} alt={data.title} />
             </div>
 
-            <div className={S.contentPane}>
+            <div className={S.contentPanel}>
               <span className={S.clubName}>{data.clubName}</span>
               <div className={S.titleRow}>
                 <h2 className={S.title}>{data.title}</h2>

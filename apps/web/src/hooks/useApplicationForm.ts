@@ -8,6 +8,8 @@ import { loadFromSession } from '@/common/util/sessionStorageUtil';
 import { useState } from 'react';
 
 const generateTempId = () => `temp-${Date.now()}-${Math.random()}`;
+const isSameField = (field: ApplyFormField, index: number, fieldId: string) =>
+  field.questionId === fieldId || (!field.questionId && index.toString() === fieldId);
 
 export const useApplicationForm = () => {
   const previousStepData: PreviousStepForm = {
@@ -38,8 +40,8 @@ export const useApplicationForm = () => {
 
   const handleQuestionTypeChange = (type: QuestionType, fieldId: string) => {
     setQeustionsData((prev) => {
-      const newQuestions = prev.questions.map((q) =>
-        q.questionId === fieldId ? { ...q, questionType: type } : q,
+      const newQuestions = prev.questions.map((q, index) =>
+        isSameField(q, index, fieldId) ? { ...q, questionType: type } : q,
       );
       return { ...prev, questions: newQuestions };
     });
@@ -49,7 +51,10 @@ export const useApplicationForm = () => {
     if (newField) {
       setQeustionsData((prev) => ({
         ...prev,
-        questions: [...prev.questions, newField],
+        questions: [
+          ...prev.questions,
+          { ...newField, questionId: newField.questionId ?? generateTempId() },
+        ],
       }));
       return;
     }
@@ -71,39 +76,42 @@ export const useApplicationForm = () => {
 
   const handleUpdateField = (fieldId: string, updatedField: ApplyFormField) => {
     setQeustionsData((prev) => {
-      const newQuestions = prev.questions.map((q) => (q.questionId === fieldId ? updatedField : q));
+      const newQuestions = prev.questions.map((q, index) =>
+        isSameField(q, index, fieldId)
+          ? { ...updatedField, questionId: updatedField.questionId ?? q.questionId }
+          : q,
+      );
       return { ...prev, questions: newQuestions };
     });
   };
 
   const handleDeleteField = (fieldId: string) => {
     setQeustionsData((prev) => {
-      const newQuestions = prev.questions.filter((field) => field.questionId !== fieldId);
+      const newQuestions = prev.questions.filter(
+        (field, index) => !isSameField(field, index, fieldId),
+      );
       return { ...prev, questions: newQuestions };
     });
   };
 
   const handleEssentialChange = (fieldId: string, isEssential: boolean) => {
     setQeustionsData((prev) => {
-      const newQuestions = [...prev.questions];
-      const findQuestion = newQuestions.find((q) => q.questionId === fieldId);
-      if (findQuestion) {
-        findQuestion.isEssential = isEssential;
-      }
+      const newQuestions = prev.questions.map((q, index) =>
+        isSameField(q, index, fieldId) ? { ...q, isEssential } : q,
+      );
       return { ...prev, questions: newQuestions };
     });
   };
 
   const handleOptionChange = (fieldId: string, optionIndex: number, value: string) => {
     setQeustionsData((prev) => {
-      const newQuestions = [...prev.questions];
-      const field = newQuestions.find((q) => q.questionId === fieldId);
-      if (!field) return prev;
-      if (field.content) {
-        field.content[optionIndex] = value;
-      } else {
-        field.content = [value];
-      }
+      const newQuestions = prev.questions.map((field, index) => {
+        if (!isSameField(field, index, fieldId)) return field;
+
+        const content = field.content ? [...field.content] : [''];
+        content[optionIndex] = value;
+        return { ...field, content };
+      });
       return { ...prev, questions: newQuestions };
     });
   };
@@ -111,7 +119,7 @@ export const useApplicationForm = () => {
   const handleOptionAdd = (fieldId: string) => {
     setQeustionsData((prev) => {
       const newQuestions = prev.questions.map((field, index) => {
-        if (field.questionId === fieldId) {
+        if (isSameField(field, index, fieldId)) {
           return {
             ...field,
             content: [...field.content, ''],
@@ -126,7 +134,7 @@ export const useApplicationForm = () => {
   const handleOptionDelete = (fieldId: string, optionIndex: number) => {
     setQeustionsData((prev) => {
       const newQuestions = prev.questions.map((field, index) => {
-        if (field.questionId === fieldId) {
+        if (isSameField(field, index, fieldId)) {
           return {
             ...field,
             content: field.content.filter((_, i) => i !== optionIndex),

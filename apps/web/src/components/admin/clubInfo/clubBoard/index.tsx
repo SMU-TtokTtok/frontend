@@ -4,22 +4,34 @@ import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 import { useInView } from 'react-intersection-observer';
 import Button from '@/common/ui/button';
+import ConfirmCancelModal from '@/common/components/confirmCancelModal';
+import ConfirmModal from '@/common/components/confirmModal';
 import LoadingSpinner from '@/common/ui/loading';
 import { useClubBoardInfinite } from '@/hooks/useInfiniteCommon';
 import { useClubBoardMutation } from '@/hooks/useClubBoard';
+import { useModal } from '@/hooks/useModal';
 import { ClubBoardFormValues } from '@/common/model/clubBoard';
+import { DeleteIcon, EditIcon } from './BoardActionIcons';
 import BoardFormModal from './BoardFormModal';
 import * as S from './clubBoard.css';
 
 type FormState = { isOpen: false } | { isOpen: true; boardId: string | null };
+type FeedbackType = 'success' | 'error';
 
 interface AdminClubBoardProps {
   clubId: string;
 }
 
-/** 관리자 "동아리 정보 관리"의 활동 탭 내용 */
 function AdminClubBoard({ clubId }: AdminClubBoardProps) {
   const [formState, setFormState] = useState<FormState>({ isOpen: false });
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
+  const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [feedbackType, setFeedbackType] = useState<FeedbackType>('success');
+  const {
+    isOpen: isFeedbackModalOpen,
+    handleModalOpen: handleFeedbackModalOpen,
+    handleModalClose: handleFeedbackModalClose,
+  } = useModal();
   const { ref, inView } = useInView();
 
   const { boards, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
@@ -27,7 +39,38 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
 
   const { createBoard, updateBoard, deleteBoard, isSubmitting } = useClubBoardMutation({
     clubId,
-    onSuccess: () => setFormState({ isOpen: false }),
+    onSuccess: (action) => {
+      if (action === 'delete') {
+        setDeleteTargetId(null);
+      } else {
+        setFormState({ isOpen: false });
+      }
+
+      const successMessages = {
+        create: '활동 등록이 완료되었습니다.',
+        update: '활동 수정이 완료되었습니다.',
+        delete: '활동 삭제가 완료되었습니다.',
+      };
+
+      setFeedbackMessage(successMessages[action]);
+      setFeedbackType('success');
+      handleFeedbackModalOpen();
+    },
+    onError: (action) => {
+      if (action === 'delete') {
+        setDeleteTargetId(null);
+      }
+
+      const errorMessages = {
+        create: '활동 등록에 실패했어요. 잠시 후 다시 시도해주세요.',
+        update: '활동 수정에 실패했어요. 잠시 후 다시 시도해주세요.',
+        delete: '활동 삭제에 실패했어요. 잠시 후 다시 시도해주세요.',
+      };
+
+      setFeedbackMessage(errorMessages[action]);
+      setFeedbackType('error');
+      handleFeedbackModalOpen();
+    },
   });
 
   useEffect(() => {
@@ -44,16 +87,15 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
       return;
     }
 
-    // 생성은 모달에서 썸네일 필수 검증을 통과한 뒤에만 호출된다
     if (thumbnail) {
       createBoard({ values, thumbnail });
     }
   };
 
-  const handleDelete = (boardId: string) => {
-    if (window.confirm('이 활동을 삭제할까요? 삭제하면 되돌릴 수 없어요.')) {
-      deleteBoard(boardId);
-    }
+  const handleDeleteConfirm = () => {
+    if (!deleteTargetId) return;
+
+    deleteBoard(deleteTargetId);
   };
 
   return (
@@ -86,34 +128,39 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
                     alt="활동 대표 이미지"
                     loading="lazy"
                   />
+                  <div className={S.thumbnailDim} />
+                  <div className={S.cardActions}>
+                    <button
+                      type="button"
+                      className={S.actionButton}
+                      aria-label="활동 수정"
+                      onClick={() => setFormState({ isOpen: true, boardId: board.boardId })}
+                    >
+                      <EditIcon />
+                      <span className={S.actionLabel}>수정</span>
+                    </button>
+                    <button
+                      type="button"
+                      className={`${S.actionButton} ${S.deleteButton}`}
+                      aria-label="활동 삭제"
+                      onClick={() => setDeleteTargetId(board.boardId)}
+                    >
+                      <DeleteIcon />
+                      <span className={S.actionLabel}>삭제</span>
+                    </button>
+                  </div>
                 </div>
                 <div className={S.cardFooter}>
                   <span className={S.cardDate}>
                     {format(new Date(board.createdAt), 'yyyy.MM.dd')}
                   </span>
-                  <div className={S.cardActions}>
-                    <button
-                      type="button"
-                      className={S.actionButton}
-                      onClick={() => setFormState({ isOpen: true, boardId: board.boardId })}
-                    >
-                      수정
-                    </button>
-                    <button
-                      type="button"
-                      className={`${S.actionButton} ${S.deleteButton}`}
-                      onClick={() => handleDelete(board.boardId)}
-                    >
-                      삭제
-                    </button>
-                  </div>
                 </div>
               </li>
             ))}
           </ul>
         ))}
 
-      {isFetchingNextPage && <p className={S.loadingMore}>불러오는 중...</p>}
+      {isFetchingNextPage && <LoadingSpinner />}
       <div ref={ref} className={S.observerTarget} />
 
       {formState.isOpen && (
@@ -125,6 +172,28 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
           onClose={() => setFormState({ isOpen: false })}
         />
       )}
+
+      <ConfirmCancelModal
+        isOpen={Boolean(deleteTargetId)}
+        onClose={() => setDeleteTargetId(null)}
+        onConfirm={handleDeleteConfirm}
+        title="활동 삭제"
+        message={
+          <>
+            이 활동을 삭제할까요?
+            <br />
+            삭제하면 동아리 상세 페이지에서도 더 이상 보이지 않으며, 되돌릴 수 없어요.
+          </>
+        }
+      />
+
+      <ConfirmModal
+        type={feedbackType}
+        isOpen={isFeedbackModalOpen}
+        onClose={handleFeedbackModalClose}
+      >
+        {feedbackMessage}
+      </ConfirmModal>
     </div>
   );
 }

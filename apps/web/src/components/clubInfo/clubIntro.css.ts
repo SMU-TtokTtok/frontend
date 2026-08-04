@@ -5,6 +5,12 @@ import { BREAKPOINTS } from '@/common/constants/breakpoints';
 export const container = style({
   width: '100%',
   marginBottom: '180px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      marginBottom: '40px',
+    },
+  },
 });
 
 export const headerContainer = style({
@@ -64,4 +70,11 @@ export const contentContainer = style({
   backgroundColor: vars.colors.white,
   minHeight: '300px',
   borderRadius: '0 0 8px 8px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      minHeight: 'auto',
+      padding: '18px 16px',
+    },
+  },
 });
