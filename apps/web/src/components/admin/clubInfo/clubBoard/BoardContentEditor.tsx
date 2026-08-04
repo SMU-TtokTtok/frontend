@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { EditorContent, useEditor } from '@tiptap/react';
+import { EditorContent, useEditor, useEditorState } from '@tiptap/react';
 import type { Editor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
@@ -17,12 +17,26 @@ interface BoardContentEditorProps {
 interface MenuButton {
   label: string;
   title: string;
-  isActive: () => boolean;
+  isActive: boolean;
   onClick: () => void;
   variant?: 'text' | 'icon';
 }
 
 function CompactMenuBar({ editor }: { editor: Editor }) {
+  const activeStates = useEditorState({
+    editor,
+    selector: ({ editor: currentEditor }) => ({
+      heading1: currentEditor.isActive('heading', { level: 1 }),
+      heading2: currentEditor.isActive('heading', { level: 2 }),
+      heading3: currentEditor.isActive('heading', { level: 3 }),
+      paragraph: currentEditor.isActive('paragraph'),
+      bold: currentEditor.isActive('bold'),
+      italic: currentEditor.isActive('italic'),
+      strike: currentEditor.isActive('strike'),
+      link: currentEditor.isActive('link'),
+    }),
+  });
+
   const handleLinkClick = () => {
     const previousUrl = editor.getAttributes('link').href;
     const url = window.prompt('링크 URL을 입력하세요.', previousUrl || 'https://');
@@ -41,56 +55,56 @@ function CompactMenuBar({ editor }: { editor: Editor }) {
     {
       label: 'H1',
       title: '제목 1',
-      isActive: () => editor.isActive('heading', { level: 1 }),
+      isActive: activeStates.heading1,
       onClick: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
       variant: 'text',
     },
     {
       label: 'H2',
       title: '제목 2',
-      isActive: () => editor.isActive('heading', { level: 2 }),
+      isActive: activeStates.heading2,
       onClick: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
       variant: 'text',
     },
     {
       label: 'H3',
       title: '제목 3',
-      isActive: () => editor.isActive('heading', { level: 3 }),
+      isActive: activeStates.heading3,
       onClick: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
       variant: 'text',
     },
     {
       label: '본문',
       title: '본문',
-      isActive: () => editor.isActive('paragraph'),
+      isActive: activeStates.paragraph,
       onClick: () => editor.chain().focus().setParagraph().run(),
       variant: 'text',
     },
     {
       label: 'B',
       title: '굵게',
-      isActive: () => editor.isActive('bold'),
+      isActive: activeStates.bold,
       onClick: () => editor.chain().focus().toggleBold().run(),
       variant: 'icon',
     },
     {
       label: 'I',
       title: '기울임',
-      isActive: () => editor.isActive('italic'),
+      isActive: activeStates.italic,
       onClick: () => editor.chain().focus().toggleItalic().run(),
       variant: 'icon',
     },
     {
       label: 'S',
       title: '취소선',
-      isActive: () => editor.isActive('strike'),
+      isActive: activeStates.strike,
       onClick: () => editor.chain().focus().toggleStrike().run(),
       variant: 'icon',
     },
     {
       label: '링크',
       title: '링크',
-      isActive: () => editor.isActive('link'),
+      isActive: activeStates.link,
       onClick: handleLinkClick,
       variant: 'text',
     },
@@ -105,7 +119,7 @@ function CompactMenuBar({ editor }: { editor: Editor }) {
           className={[
             S.menuButton,
             button.variant === 'icon' ? S.iconButton : S.textButton,
-            button.isActive() ? S.menuButtonActive : '',
+            button.isActive ? S.menuButtonActive : '',
           ].join(' ')}
           title={button.title}
           onClick={button.onClick}

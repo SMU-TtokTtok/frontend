@@ -21,10 +21,11 @@ export const useClubBoardDetail = (clubId: string, boardId: string | null) => {
 
 interface UseClubBoardMutationParams {
   clubId: string;
-  onSuccess?: () => void;
+  onSuccess?: (action: 'create' | 'update' | 'delete') => void;
+  onError?: (action: 'create' | 'update' | 'delete', error: Error) => void;
 }
 
-export const useClubBoardMutation = ({ clubId, onSuccess }: UseClubBoardMutationParams) => {
+export const useClubBoardMutation = ({ clubId, onSuccess, onError }: UseClubBoardMutationParams) => {
   const queryClient = useQueryClient();
 
   const invalidateList = () => {
@@ -36,11 +37,11 @@ export const useClubBoardMutation = ({ clubId, onSuccess }: UseClubBoardMutation
       postClubBoard(clubId, values, thumbnail),
     onSuccess: () => {
       invalidateList();
-      onSuccess?.();
+      onSuccess?.('create');
     },
     onError: (error) => {
       console.error('활동 생성 실패:', error);
-      alert('활동 등록에 실패했어요. 잠시 후 다시 시도해주세요.');
+      onError?.('create', error);
     },
   });
 
@@ -59,11 +60,11 @@ export const useClubBoardMutation = ({ clubId, onSuccess }: UseClubBoardMutation
       queryClient.invalidateQueries({
         queryKey: [...clubBoardKey.clubBoardDetail, clubId, boardId],
       });
-      onSuccess?.();
+      onSuccess?.('update');
     },
     onError: (error) => {
       console.error('활동 수정 실패:', error);
-      alert('활동 수정에 실패했어요. 잠시 후 다시 시도해주세요.');
+      onError?.('update', error);
     },
   });
 
@@ -71,10 +72,11 @@ export const useClubBoardMutation = ({ clubId, onSuccess }: UseClubBoardMutation
     mutationFn: (boardId: string) => deleteClubBoard(clubId, boardId),
     onSuccess: () => {
       invalidateList();
+      onSuccess?.('delete');
     },
     onError: (error) => {
       console.error('활동 삭제 실패:', error);
-      alert('활동 삭제에 실패했어요. 잠시 후 다시 시도해주세요.');
+      onError?.('delete', error);
     },
   });
 

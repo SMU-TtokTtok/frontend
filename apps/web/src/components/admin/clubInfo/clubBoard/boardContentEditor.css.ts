@@ -91,7 +91,9 @@ globalStyle(`${wrapper} .custom-tiptap-editor`, {
   maxHeight: '320px',
   overflowY: 'auto',
   padding: '16px',
+  border: 'none',
   borderRadius: 0,
+  outline: 'none',
   backgroundColor: vars.colors.white,
   color: vars.colors.charcoal,
   fontSize: vars.fonts.body2,
@@ -100,6 +102,14 @@ globalStyle(`${wrapper} .custom-tiptap-editor`, {
   whiteSpace: 'pre-wrap',
   wordBreak: 'keep-all',
   overflowWrap: 'anywhere',
+});
+
+globalStyle(`${wrapper} .custom-tiptap-editor:focus`, {
+  outline: 'none',
+});
+
+globalStyle(`${wrapper} .custom-tiptap-editor.ProseMirror-focused`, {
+  outline: 'none',
 });
 
 globalStyle(`${wrapper} .custom-tiptap-editor p`, {

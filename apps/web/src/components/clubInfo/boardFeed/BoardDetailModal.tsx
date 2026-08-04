@@ -99,12 +99,12 @@ function BoardDetailModal({ clubId, boardId, onClose }: BoardDetailModalProps) {
 
         {data && (
           <>
-            <div className={S.imagePane}>
+            <div className={S.imagePanel}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className={S.image} src={data.thumbnailUrl} alt={data.title} />
             </div>
 
-            <div className={S.contentPane}>
+            <div className={S.contentPanel}>
               <span className={S.clubName}>{data.clubName}</span>
               <div className={S.titleRow}>
                 <h2 className={S.title}>{data.title}</h2>

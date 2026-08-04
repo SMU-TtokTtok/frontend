@@ -2,6 +2,13 @@ import { globalStyle, keyframes, style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
+const MODAL_STACK_BREAKPOINT = 1100;
+const TABLET_LANDSCAPE_BREAKPOINT = 1366;
+const STACKED_MODAL_MEDIA = [
+  `screen and (max-width: ${MODAL_STACK_BREAKPOINT}px)`,
+  `screen and (max-width: ${TABLET_LANDSCAPE_BREAKPOINT}px) and (pointer: coarse)`,
+];
+
 export const overlay = style({
   position: 'fixed',
   inset: 0,
@@ -15,7 +22,7 @@ export const overlay = style({
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      alignItems: 'flex-end',
+      alignItems: 'center',
       padding: '16px',
     },
   },
@@ -35,12 +42,12 @@ export const modal = style({
   boxShadow: '0 24px 80px rgba(3, 3, 4, 0.22)',
 
   '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      height: 'auto',
+    [STACKED_MODAL_MEDIA.join(', ')]: {
+      height: 'calc(100dvh - 32px)',
       maxHeight: '88vh',
       gridTemplateColumns: '1fr',
       gridTemplateRows: 'auto minmax(0, 1fr)',
-      overflowY: 'auto',
+      overflow: 'hidden',
     },
   },
 });
@@ -82,7 +89,7 @@ export const closeButton = style({
   },
 });
 
-export const imagePane = style({
+export const imagePanel = style({
   position: 'relative',
   backgroundColor: vars.colors.surface.default,
   display: 'flex',
@@ -90,6 +97,7 @@ export const imagePane = style({
   alignItems: 'center',
   minHeight: 0,
   overflow: 'hidden',
+  width: '100%',
 
   selectors: {
     '&::after': {
@@ -102,9 +110,10 @@ export const imagePane = style({
   },
 
   '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+    [STACKED_MODAL_MEDIA.join(', ')]: {
       aspectRatio: '4 / 3',
-      maxHeight: '360px',
+      gridColumn: '1 / -1',
+      maxHeight: 'min(360px, 40dvh)',
     },
   },
 });
@@ -116,7 +125,7 @@ export const image = style({
   display: 'block',
 });
 
-export const contentPane = style({
+export const contentPanel = style({
   padding: '42px 40px 36px',
   display: 'flex',
   flexDirection: 'column',
@@ -126,10 +135,11 @@ export const contentPane = style({
   backgroundColor: vars.colors.white,
 
   '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+    [STACKED_MODAL_MEDIA.join(', ')]: {
+      gridColumn: '1 / -1',
       padding: '24px 18px 28px',
       gap: '14px',
-      overflow: 'visible',
+      overflow: 'hidden',
     },
   },
 });
@@ -206,8 +216,9 @@ export const content = style({
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
-      flex: 'initial',
-      overflowY: 'visible',
+      flex: '1 1 0',
+      minHeight: 0,
+      overflowY: 'auto',
       paddingRight: 0,
     },
   },
@@ -354,7 +365,7 @@ const skeletonBase = style({
 });
 
 export const skeletonImagePane = style([
-  imagePane,
+  imagePanel,
   {
     padding: '28px',
   },
@@ -376,7 +387,7 @@ export const skeletonImage = style([
 ]);
 
 export const skeletonContentPane = style([
-  contentPane,
+  contentPanel,
   {
     gap: '20px',
   },
