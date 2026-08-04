@@ -12,7 +12,10 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./styles": "./dist/ui.css"
+    "./styles": {
+      "types": "./dist/styles.d.ts",
+      "default": "./dist/ui.css"
+    }
   },
   "files": [
     "dist"

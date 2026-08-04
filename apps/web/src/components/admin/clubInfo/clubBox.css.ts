@@ -1,7 +1,7 @@
-import { style } from '@vanilla-extract/css';
+﻿import { style } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 import { recipe } from '@vanilla-extract/recipes';
-import { BREAKPOINTS } from '@/common/constants';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 export const container = style({
   flex: '1 0 0',

@@ -1,6 +1,6 @@
-import { vars } from '@/common/styles/theme.css';
+﻿import { vars } from '@/common/styles/theme.css';
 import { createVar, style } from '@vanilla-extract/css';
-import { BREAKPOINTS } from '@/common/constants';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 export const sidebarTop = createVar();
 
@@ -12,7 +12,7 @@ export const container = style({
   flexGrow: 0,
   // right: '100px',
   transition: 'top 0.7s ease-out',
-  top: sidebarTop, // 동적 값이 들어갈 자리
+  top: sidebarTop, // ?숈쟻 媛믪씠 ?ㅼ뼱媛??먮━
   alignSelf: 'flex-start',
 
   '@media': {

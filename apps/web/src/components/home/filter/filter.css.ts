@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from '@/common/constants';
+﻿import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
@@ -33,11 +33,32 @@ export const innerWrapper = style({
   },
 });
 
-export const filterHeaderWrapper = style({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  marginBottom: '1.555rem',
+export const filterHeaderWrapper = recipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '1.555rem',
+    transition: 'margin-bottom 0.24s ease',
+  },
+  variants: {
+    isOpen: {
+      true: {
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+            marginBottom: '1.555rem',
+          },
+        },
+      },
+      false: {
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+            marginBottom: '0',
+          },
+        },
+      },
+    },
+  },
 });
 
 export const headerLeftSide = style({
@@ -46,6 +67,18 @@ export const headerLeftSide = style({
   alignItems: 'center',
   gap: '0.444rem',
 });
+
+export const headerLeftSideLayout = style({
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      width: '100%',
+    },
+  },
+});
+
 export const headerRightSide = style({
   display: 'flex',
   justifyContent: 'start',
@@ -103,6 +136,84 @@ export const headerLeftSideButton = recipe({
       },
     },
   },
+});
+
+export const filterIconButton = recipe({
+  base: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '38px',
+    height: '38px',
+    backgroundColor: vars.colors.surface.default,
+    borderRadius: '0.444rem',
+    '@media': {
+      [`screen and (min-width: ${BREAKPOINTS.tablet}px)`]: {
+        display: 'none',
+      },
+    },
+  },
+  variants: {
+    isActive: {
+      true: {
+        backgroundColor: vars.colors.primary.base,
+      },
+      false: {},
+    },
+  },
+});
+
+export const filterIcon = recipe({
+  base: {
+    width: '1.333rem',
+    height: '1.333rem',
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+        width: '19px',
+        height: '19px',
+      },
+    },
+  },
+  variants: {
+    isActive: {
+      true: {
+        filter:
+          'brightness(0) saturate(100%) invert(25%) sepia(92%) saturate(2483%) hue-rotate(221deg) brightness(89%) contrast(93%)',
+      },
+      false: {},
+    },
+  },
+});
+
+export const collapsibleFilterArea = recipe({
+  base: {
+    display: 'grid',
+    gridTemplateRows: '1fr',
+    opacity: 1,
+    overflow: 'hidden',
+    transition: 'grid-template-rows 0.24s ease, opacity 0.2s ease, visibility 0.24s ease',
+  },
+  variants: {
+    isOpen: {
+      true: {
+        visibility: 'visible',
+      },
+      false: {
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+            gridTemplateRows: '0fr',
+            opacity: 0,
+            pointerEvents: 'none',
+            visibility: 'hidden',
+          },
+        },
+      },
+    },
+  },
+});
+
+export const collapsibleFilterContent = style({
+  minHeight: 0,
 });
 
 export const selectionGroup = style({

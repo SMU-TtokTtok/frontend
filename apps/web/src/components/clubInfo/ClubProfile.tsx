@@ -7,7 +7,7 @@ import star_active from '@/assets/star_active.svg';
 import { usePostFavorite } from '@/hooks/useFavoriteMutation';
 import { getKoreanType } from '@/common/util/getKoreanType';
 import { getKoreanCategory } from '@/common/util/getKoreanCategory';
-import clubImg from '@/assets/clubImg.svg';
+import clubDefaultProfile from '@/assets/clubDefaultProfile.png';
 import { BREAKPOINTS } from '@/common/constants';
 
 export default function ClubProfile({
@@ -35,7 +35,7 @@ export default function ClubProfile({
   return (
     <div className={S.clubProfile}>
       <Image
-        src={profileImageUrl || clubImg}
+        src={profileImageUrl || clubDefaultProfile}
         alt={name}
         width={212}
         height={206}

@@ -6,6 +6,8 @@ import DropDownTabBar from './dropdownTabBar';
 import SortTabBar from './sortTabBar';
 export interface FilterHeaderProps {
   selectedOptions?: SearchQueryReturn;
+  isFilterOpen?: boolean;
+  onFilterToggle?: () => void;
 }
 
 type FilterKey = keyof typeof FILTER_CONFIG;
@@ -20,10 +22,14 @@ export const getSelectedLabel = (
   return option ? option.label : defaultLabel;
 };
 
-function FilterHeader({ selectedOptions }: FilterHeaderProps) {
+function FilterHeader({ selectedOptions, isFilterOpen, onFilterToggle }: FilterHeaderProps) {
   return (
-    <div className={S.filterHeaderWrapper}>
-      <DropDownTabBar selectedOptions={selectedOptions} />
+    <div className={S.filterHeaderWrapper({ isOpen: isFilterOpen })}>
+      <DropDownTabBar
+        selectedOptions={selectedOptions}
+        isFilterOpen={isFilterOpen}
+        onFilterToggle={onFilterToggle}
+      />
       <SortTabBar selectedOptions={selectedOptions} />
     </div>
   );

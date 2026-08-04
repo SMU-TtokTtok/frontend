@@ -1,4 +1,5 @@
 import { ROUTES } from './routes';
+export { BREAKPOINTS } from './breakpoints';
 import applicants from '@/assets/clinical_notes.svg';
 import applicants_selected from '@/assets/clinical_notes_selected.svg';
 import applicantsform from '@/assets/edit_document.svg';
@@ -15,13 +16,6 @@ export const FOOTER = {
     'https://buttoned-hoof-999.notion.site/213243ce95268015a2a2e6faa07e8b95?source=copy_link',
   feedbackUrl:
     'https://docs.google.com/forms/d/e/1FAIpQLSdBUL6ckgf38pAz7TOHlXF-EdZbyQJVhPpuPFgLfu21OZ8TvA/viewform?usp=header',
-} as const;
-
-export const BREAKPOINTS = {
-  mobile: 375,
-  tablet: 769,
-  desktop: 1024,
-  largeDesktop: 1439,
 } as const;
 
 export const ADMIN_SIDEBAR_ITEMS = [

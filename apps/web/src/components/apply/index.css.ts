@@ -1,5 +1,5 @@
-import { style } from '@vanilla-extract/css';
-import { BREAKPOINTS } from '@/common/constants/index';
+﻿import { style } from '@vanilla-extract/css';
+import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 export const wrapper = style({
   // paddingLeft: '264px',

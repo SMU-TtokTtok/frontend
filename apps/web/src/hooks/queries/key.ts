@@ -27,6 +27,11 @@ export const userKey = {
   searchClubList: ['searchClubList'],
 } as const;
 
+export const noticeKey = {
+  list: ['noticeList'],
+  detail: ['noticeDetail'],
+} as const;
+
 export const clubInfoKey = {
   clubInfo: ['clubInfo'],
   adminClubInfo: ['adminClubInfo'],
@@ -34,6 +39,11 @@ export const clubInfoKey = {
 
 export const clubFormKey = {
   clubForm: ['clubForm'],
+} as const;
+
+export const clubBoardKey = {
+  clubBoardList: ['clubBoardList'],
+  clubBoardDetail: ['clubBoardDetail'],
 } as const;
 
 export const clubMemberKey = {

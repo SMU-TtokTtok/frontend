@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from '@/common/constants';
+﻿import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { fadeInRight } from '@/common/styles/animation.css';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';

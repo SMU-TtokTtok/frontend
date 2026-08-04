@@ -22,6 +22,7 @@ import {
   getImage,
 } from './clubInfo/adminClubInfo';
 import { getUserClubInfo } from './clubInfo/userClubInfo';
+import { getUserClubBoardDetail, getUserClubBoards } from './clubInfo/userClubBoards';
 import { emailCheckHandler, verifyResetCodeHandler, resetPasswordHandler } from './password';
 import { userLoginHandler, userSignupHandler, userEmailPostHandler } from './userAuth';
 import { getUserForm, postUserForm } from './userForm/userForm';
@@ -35,6 +36,7 @@ import {
 } from './clubMember';
 import { postMessage } from './message';
 import { favortesClubs, appliedClubs, searchClubs, popularTotalClubs } from './userClubs';
+import { getNoticeDetail, getNotices } from './notices';
 
 export const handlers = [
   popularClubs,
@@ -48,6 +50,8 @@ export const handlers = [
   patchClubInfo,
   patchRecruiting,
   getUserClubInfo,
+  getUserClubBoards,
+  getUserClubBoardDetail,
   PassList,
   FailList,
   AdminLogin,
@@ -86,4 +90,6 @@ export const handlers = [
   searchClubs,
   popularTotalClubs,
   getClubMember,
+  getNotices,
+  getNoticeDetail,
 ];

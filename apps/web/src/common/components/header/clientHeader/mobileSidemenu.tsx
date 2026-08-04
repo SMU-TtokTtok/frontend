@@ -58,6 +58,14 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
               <span>동아리 로그인</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
+            <Link href={ROUTES.NOTICE} className={S.MenuItem}>
+              <span>공지사항</span>
+              <Image src={arrowNav} alt="이동하기" />
+            </Link>
+            <Link href={ROUTES.FAQ} className={S.MenuItem}>
+              <span>자주 묻는 질문</span>
+              <Image src={arrowNav} alt="이동하기" />
+            </Link>
             {installable && (
               <button onClick={handleInstall} className={S.MenuItem} type="button">
                 <span>앱 설치하기</span>
@@ -77,6 +85,14 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
             </Link>
             <Link href={ROUTES.ADMIN_LOGIN} className={S.MenuItem}>
               <span>동아리 로그인</span>
+              <Image src={arrowNav} alt="이동하기" />
+            </Link>
+            <Link href={ROUTES.NOTICE} className={S.MenuItem}>
+              <span>공지사항</span>
+              <Image src={arrowNav} alt="이동하기" />
+            </Link>
+            <Link href={ROUTES.FAQ} className={S.MenuItem}>
+              <span>자주 묻는 질문</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
             {installable && (

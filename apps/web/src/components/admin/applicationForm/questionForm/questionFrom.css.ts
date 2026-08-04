@@ -1,4 +1,4 @@
-import { BREAKPOINTS } from '@/common/constants';
+﻿import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
 import { style } from '@vanilla-extract/css';
 import { recipe } from '@vanilla-extract/recipes';
@@ -369,7 +369,6 @@ export const deleteOptionButton = style({
   },
 });
 
-// 기본 인적사항
 export const applicantInfoField = style({
   width: '100%',
   backgroundColor: vars.colors.surface.default,

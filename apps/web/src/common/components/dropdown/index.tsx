@@ -4,7 +4,7 @@ import * as S from './dropdown.css';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 interface Props {
   children: React.ReactNode;
-  toggleButton: React.ReactNode;
+  toggleButton: React.ReactNode | ((open: boolean) => React.ReactNode);
   panelClassName?: string;
   isOpen?: boolean;
 }
@@ -24,7 +24,7 @@ function DropDown({ children, toggleButton, panelClassName, isOpen = false }: Pr
           setOpen(!open);
         }}
       >
-        {toggleButton}
+        {typeof toggleButton === 'function' ? toggleButton(open) : toggleButton}
       </div>
       {open && (
         <ul className={`${S.panel} ${panelClassName}`} onClick={handleClose}>

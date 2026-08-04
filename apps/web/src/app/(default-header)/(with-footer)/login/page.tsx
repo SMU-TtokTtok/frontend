@@ -9,9 +9,14 @@ import { loginSchema, LoginForm } from '@/components/login/schema';
 import { ROUTES } from '@/common/constants/routes';
 import { postLogin } from '@/components/login/api';
 import { initializeAndSendFCMToken } from '@/fcm/fcmToken';
+import GoogleLoginButton from '@/components/login/googleLogin';
+import GoogleOnboarding from '@/components/login/googleOnboarding';
+import { useGoogleLogin } from '@/hooks/useGoogleLogin';
 
 export default function Page() {
   const router = useRouter();
+  const { onboarding, isPending, handleCredential, submitOnboarding, cancelOnboarding } =
+    useGoogleLogin();
 
   const {
     register,
@@ -46,6 +51,19 @@ export default function Page() {
       }
     }
   };
+
+  // 구글 신규 사용자는 약관 동의 + 이름 입력 화면을 한 번 거친다.
+  if (onboarding) {
+    return (
+      <GoogleOnboarding
+        email={onboarding.email}
+        suggestedName={onboarding.suggestedName}
+        isSubmitting={isPending}
+        onSubmit={submitOnboarding}
+        onCancel={cancelOnboarding}
+      />
+    );
+  }
 
   return (
     <div className={S.Container}>
@@ -95,6 +113,8 @@ export default function Page() {
         <Button type="submit" variant="secondary" className={S.Button}>
           로그인
         </Button>
+
+        <GoogleLoginButton onCredential={handleCredential} />
       </form>
     </div>
   );

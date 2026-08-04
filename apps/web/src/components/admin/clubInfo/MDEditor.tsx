@@ -12,6 +12,9 @@ import { useEffect, useState, useRef } from 'react';
 import { postImage } from './api/postImage';
 // import { getImageUrl } from './api/getUrl';
 import { useAuthStore } from '@/common/store/adminAuthStore';
+import AdminClubBoard from '@/components/admin/clubInfo/clubBoard';
+
+type ClubInfoTab = 'INTRO' | 'BOARD';
 
 const icons = {
   h1: (
@@ -118,7 +121,17 @@ const icons = {
   ),
 };
 
-const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
+/**
+ * 활동 에디터에서도 같은 툴바를 재사용한다.
+ * 활동은 대표 이미지를 따로 등록하므로 본문 이미지 버튼은 숨길 수 있다.
+ */
+export const CustomMenuBar = ({
+  editor,
+  showImageButton = true,
+}: {
+  editor: Editor | null;
+  showImageButton?: boolean;
+}) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { profile } = useAuthStore();
   const handleImageClick = () => {
@@ -230,19 +243,23 @@ const CustomMenuBar = ({ editor }: { editor: Editor | null }) => {
       >
         {icons.strike}
       </button>
-      <button onClick={handleImageClick} className="toolbar-btn" title="이미지" type="button">
-        {icons.image}
-      </button>
+      {showImageButton && (
+        <button onClick={handleImageClick} className="toolbar-btn" title="이미지" type="button">
+          {icons.image}
+        </button>
+      )}
       <button onClick={handleLinkClick} className="toolbar-btn" title="링크" type="button">
         {icons.hyperlink}
       </button>
-      <input
-        type="file"
-        accept="image/*"
-        ref={fileInputRef}
-        style={{ display: 'none' }}
-        onChange={handleFileChange}
-      />
+      {showImageButton && (
+        <input
+          type="file"
+          accept="image/*"
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+          onChange={handleFileChange}
+        />
+      )}
     </div>
   );
 };
@@ -258,6 +275,9 @@ export default function MDEditor({
 }) {
   const [htmlContent, setHtmlContent] = useState(introduction);
   const [isEditorInitialized, setIsEditorInitialized] = useState(false);
+  const [activeTab, setActiveTab] = useState<ClubInfoTab>('INTRO');
+  const { profile } = useAuthStore();
+  const clubId = profile?.clubId ?? '';
 
   const editor = useEditor({
     extensions: [
@@ -319,14 +339,25 @@ export default function MDEditor({
   return (
     <div className={S.container}>
       <div className={S.buttonContainer}>
-        <Button variant="secondary" className={S.buttonIntro}>
+        <Button
+          variant="secondary"
+          className={activeTab === 'INTRO' ? S.buttonIntro : S.buttonNotice}
+          onClick={() => setActiveTab('INTRO')}
+        >
           소개
         </Button>
-        {/* <Button variant="secondary" className={S.buttonNotice}>
-          게시판
-        </Button> */}
+        <Button
+          variant="secondary"
+          className={activeTab === 'BOARD' ? S.buttonIntro : S.buttonNotice}
+          onClick={() => setActiveTab('BOARD')}
+        >
+          활동
+        </Button>
       </div>
-      {isEditing ? (
+
+      {activeTab === 'BOARD' ? (
+        <AdminClubBoard clubId={clubId} />
+      ) : isEditing ? (
         <>
           <CustomMenuBar editor={editor} />
           <EditorContent editor={editor} />

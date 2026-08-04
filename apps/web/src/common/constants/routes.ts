@@ -20,4 +20,7 @@ export const ROUTES = {
   ADMIN_APPLICATIONS_CREATE: '/admin/createForm',
   ADMIN_APPLICATIONS_MESSAGE: (evaluation: string) =>
     `/admin/applicants/message?evaluation=${evaluation}`,
+  FAQ: '/faq',
+  NOTICE: '/notice',
+  NOTICE_DETAIL: (noticeId: string) => `/notice/${noticeId}`,
 };
