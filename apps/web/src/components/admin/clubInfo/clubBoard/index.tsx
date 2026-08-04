@@ -16,6 +16,7 @@ import BoardFormModal from './BoardFormModal';
 import * as S from './clubBoard.css';
 
 type FormState = { isOpen: false } | { isOpen: true; boardId: string | null };
+type FeedbackType = 'success' | 'error';
 
 interface AdminClubBoardProps {
   clubId: string;
@@ -25,6 +26,7 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
   const [formState, setFormState] = useState<FormState>({ isOpen: false });
   const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
   const [feedbackMessage, setFeedbackMessage] = useState('');
+  const [feedbackType, setFeedbackType] = useState<FeedbackType>('success');
   const {
     isOpen: isFeedbackModalOpen,
     handleModalOpen: handleFeedbackModalOpen,
@@ -51,6 +53,7 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
       };
 
       setFeedbackMessage(successMessages[action]);
+      setFeedbackType('success');
       handleFeedbackModalOpen();
     },
     onError: (action) => {
@@ -65,6 +68,7 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
       };
 
       setFeedbackMessage(errorMessages[action]);
+      setFeedbackType('error');
       handleFeedbackModalOpen();
     },
   });
@@ -183,7 +187,11 @@ function AdminClubBoard({ clubId }: AdminClubBoardProps) {
         }
       />
 
-      <ConfirmModal isOpen={isFeedbackModalOpen} onClose={handleFeedbackModalClose}>
+      <ConfirmModal
+        type={feedbackType}
+        isOpen={isFeedbackModalOpen}
+        onClose={handleFeedbackModalClose}
+      >
         {feedbackMessage}
       </ConfirmModal>
     </div>
