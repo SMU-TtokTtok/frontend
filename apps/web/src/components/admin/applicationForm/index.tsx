@@ -46,11 +46,9 @@ function ApplicationFormPage() {
   const scrollRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const handleScrollTo = (index: number) => {
-    const questionId = questionsData.questions[index]?.questionId;
-    if (questionId) {
-      const target = scrollRefs.current[questionId];
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    const questionId = questionsData.questions[index]?.questionId ?? index.toString();
+    const target = scrollRefs.current[questionId];
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   const mergeFormData = {
