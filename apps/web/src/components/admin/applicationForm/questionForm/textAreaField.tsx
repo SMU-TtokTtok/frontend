@@ -36,6 +36,10 @@ function TextAreaField({
   handleEssentialChange,
   scrollRefs,
 }: InputFieldProps) {
+  const hasTitleError = !!(
+    isSubmit && errors?.questions?.[fieldIndex]?.title?._errors.length
+  );
+
   return (
     <div
       ref={(el) => {
@@ -88,17 +92,14 @@ function TextAreaField({
 
       <div className={S.titleContainer({ title: 'questionTitle' })}>
         <input
-          className={S.questionTitle}
-          placeholder="질문 제목을 입력해주세요."
+          className={S.questionTitle({ isError: hasTitleError })}
+          placeholder="질문 제목을 입력해주세요.(필수)"
           value={field.title}
           onChange={(e) => {
             const newField = { ...field, title: e.target.value };
             handleUpdateField(fieldId, newField);
           }}
         />
-        {errors && isSubmit && (
-          <span className={S.errorMessage}>{errors.questions?.[fieldIndex]?.title?._errors}</span>
-        )}
       </div>
 
       <textarea

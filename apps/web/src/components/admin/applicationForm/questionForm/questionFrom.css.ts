@@ -39,27 +39,42 @@ export const header = style({
   },
 });
 
-export const title = style({
-  fontSize: vars.fonts.title4,
-  fontWeight: 600,
-  padding: '7px 5px',
-  width: '100%',
-  borderBottom: `1px solid ${vars.colors.primary.fixed}`,
-  transition: 'background-color 0.3s ease-in-out',
-  selectors: {
-    '&:hover': {
-      backgroundColor: vars.colors.surface.bright,
+export const title = recipe({
+  base: {
+    fontSize: vars.fonts.title4,
+    fontWeight: 600,
+    padding: '7px 5px',
+    width: '100%',
+    borderBottom: `1px solid ${vars.colors.primary.fixed}`,
+    transition: 'background-color 0.3s ease-in-out',
+    selectors: {
+      '&:hover': {
+        backgroundColor: vars.colors.surface.bright,
+      },
+      '&:focus': {
+        backgroundColor: vars.colors.surface.bright,
+      },
+      '&::placeholder': {
+        color: vars.colors.primary.on_cont,
+      },
     },
-    '&:focus': {
-      backgroundColor: vars.colors.surface.bright,
-    },
-    '&::placeholder': {
-      color: vars.colors.primary.on_cont,
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+        fontSize: vars.fonts.m_title3,
+      },
     },
   },
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
-      fontSize: vars.fonts.m_title3,
+  variants: {
+    isError: {
+      true: {
+        borderBottom: `1px solid ${vars.colors.error.primary}`,
+        selectors: {
+          '&::placeholder': {
+            color: vars.colors.error.primary,
+          },
+        },
+      },
+      false: {},
     },
   },
 });
@@ -230,25 +245,40 @@ export const deleteButton = style({
   },
 });
 
-export const questionTitle = style({
-  fontSize: vars.fonts.body1,
-  width: '100%',
-  fontWeight: 600,
-  color: vars.colors.surface.outline,
-  borderBottom: `1px solid ${vars.colors.surface.outline}`,
-  padding: '12px 5px',
-  transition: 'background-color 0.3s ease-in-out',
-  selectors: {
-    '&:hover': {
-      backgroundColor: vars.colors.surface.cont_1_var,
+export const questionTitle = recipe({
+  base: {
+    fontSize: vars.fonts.body1,
+    width: '100%',
+    fontWeight: 600,
+    color: vars.colors.surface.outline,
+    borderBottom: `1px solid ${vars.colors.surface.outline}`,
+    padding: '12px 5px',
+    transition: 'background-color 0.3s ease-in-out',
+    selectors: {
+      '&:hover': {
+        backgroundColor: vars.colors.surface.cont_1_var,
+      },
+      '&:focus': {
+        backgroundColor: vars.colors.surface.cont_1_var,
+      },
     },
-    '&:focus': {
-      backgroundColor: vars.colors.surface.cont_1_var,
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+        fontSize: vars.fonts.m_body1,
+      },
     },
   },
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
-      fontSize: vars.fonts.m_body1,
+  variants: {
+    isError: {
+      true: {
+        borderBottom: `1px solid ${vars.colors.error.primary}`,
+        selectors: {
+          '&::placeholder': {
+            color: vars.colors.error.primary,
+          },
+        },
+      },
+      false: {},
     },
   },
 });
@@ -369,20 +399,33 @@ export const deleteOptionButton = style({
   },
 });
 
-export const applicantInfoField = style({
-  width: '100%',
-  backgroundColor: vars.colors.surface.default,
-  padding: '22px',
-  marginBottom: '18px',
-  borderRadius: '6px',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '16px',
-  '@media': {
-    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
-      padding: '16px 14px',
-      backgroundColor: vars.colors.white,
-      marginBottom: '80px',
+export const applicantInfoField = recipe({
+  base: {
+    width: '100%',
+    backgroundColor: vars.colors.surface.default,
+    padding: '22px',
+    marginBottom: '18px',
+    borderRadius: '6px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+    '@media': {
+      [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+        padding: '16px 14px',
+        backgroundColor: vars.colors.white,
+      },
+    },
+  },
+  variants: {
+    hasRecommendTemplateSpacing: {
+      true: {
+        '@media': {
+          [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+            marginBottom: '80px',
+          },
+        },
+      },
+      false: {},
     },
   },
 });

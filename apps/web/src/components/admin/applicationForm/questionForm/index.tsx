@@ -33,6 +33,7 @@ interface QuestionFormProps {
   handleOptionDelete: (fieldId: string, optionIndex: number) => void;
   handleReorderQuestions: (newOrder: ApplyFormField[]) => void;
   scrollRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>;
+  hasRecommendTemplateSpacing?: boolean;
 }
 
 function QuestionForm({
@@ -51,6 +52,7 @@ function QuestionForm({
   handleOptionDelete,
   handleReorderQuestions,
   scrollRefs,
+  hasRecommendTemplateSpacing = false,
 }: QuestionFormProps) {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -62,6 +64,9 @@ function QuestionForm({
     const newQuestions = arrayMove(formData.questions, oldIndex, newIndex);
     handleReorderQuestions(newQuestions);
   };
+
+  const hasTitleError = !!(isSubmit && errors?.title?._errors[0]);
+
   return (
     <div className={S.container}>
       <div className={S.header}>
@@ -76,24 +81,21 @@ function QuestionForm({
           className={S.titleContainer({ title: 'formTitle' })}
         >
           <input
-            className={S.title}
+            className={S.title({ isError: hasTitleError })}
             value={formData.title ?? ''}
             onChange={(e) => handleChangeTitle(e.target.value)}
-            placeholder="지원폼 제목을 입력해주세요."
+            placeholder="지원폼 제목을 입력해주세요.(필수)"
           />
-          {isSubmit && errors && (
-            <span className={S.errorMessage}>{errors?.title?._errors[0]}</span>
-          )}
         </div>
 
         <textarea
           className={S.description}
           value={formData.subTitle ?? ''}
           onChange={(e) => handleChangeSubTitle(e.target.value)}
-          placeholder="동아리에 대한 간략한 소개를 해주세요.(선택)"
+          placeholder="동아리에 대한 한줄 소개를 해주세요.(선택)"
         />
       </div>
-      <ApplicantInfoField />
+      <ApplicantInfoField hasRecommendTemplateSpacing={hasRecommendTemplateSpacing} />
       <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
         <SortableContext
           items={formData.questions.map((_, index) => index.toString())}
