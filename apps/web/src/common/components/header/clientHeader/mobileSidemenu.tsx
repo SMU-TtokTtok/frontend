@@ -42,15 +42,15 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
               <span>로그아웃</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
-            <Link href={ROUTES.APPLIED} className={S.MenuItem}>
+            <Link href={ROUTES.APPLIED} className={S.MenuItem} onClick={handleClose}>
               <span>내 지원내역</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
-            <Link href={ROUTES.FAVORITES} className={S.MenuItem}>
+            <Link href={ROUTES.FAVORITES} className={S.MenuItem} onClick={handleClose}>
               <span>즐겨찾기</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
-            <Link href={ROUTES.POPULAR} className={S.MenuItem}>
+            <Link href={ROUTES.POPULAR} className={S.MenuItem} onClick={handleClose}>
               <span>인기 동아리</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
@@ -58,11 +58,11 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
               <span>동아리 로그인</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
-            <Link href={ROUTES.NOTICE} className={S.MenuItem}>
+            <Link href={ROUTES.NOTICE} className={S.MenuItem} onClick={handleClose}>
               <span>공지사항</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
-            <Link href={ROUTES.FAQ} className={S.MenuItem}>
+            <Link href={ROUTES.FAQ} className={S.MenuItem} onClick={handleClose}>
               <span>자주 묻는 질문</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
@@ -87,11 +87,11 @@ function MobileSideMenu({ setIsSideMenuOpen, userName }: MobileSideMenuProps) {
               <span>동아리 로그인</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
-            <Link href={ROUTES.NOTICE} className={S.MenuItem}>
+            <Link href={ROUTES.NOTICE} className={S.MenuItem} onClick={handleClose}>
               <span>공지사항</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>
-            <Link href={ROUTES.FAQ} className={S.MenuItem}>
+            <Link href={ROUTES.FAQ} className={S.MenuItem} onClick={handleClose}>
               <span>자주 묻는 질문</span>
               <Image src={arrowNav} alt="이동하기" />
             </Link>

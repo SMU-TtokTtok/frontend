@@ -17,13 +17,13 @@ export const useCombobox = () => {
     setIsComboBoxOpen(!!debouncedSearch);
   }, [debouncedSearch]);
 
-  const handleNavigate = () => {
-    router.push(ROUTES.SEARCH(debouncedSearch));
+  const handleNavigate = (keyword = searchdata) => {
+    router.push(ROUTES.SEARCH(keyword.trim()));
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleNavigate();
+      handleNavigate(e.currentTarget.value);
     }
   };
 

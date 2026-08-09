@@ -82,6 +82,7 @@ function FormQuestionStep() {
         handleChangeTitle={handleChangeTitle}
         handleChangeSubTitle={handleChangeSubTitle}
         handleReorderQuestions={handleReorderQuestions}
+        hasRecommendTemplateSpacing={true}
       />
       <div className={S.navigatorContainer}>
         <QuestionNavigator fields={questionsData.questions} handleScrollTo={handleScrollTo} />

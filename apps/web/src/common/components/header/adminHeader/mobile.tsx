@@ -38,7 +38,7 @@ function Mobile({ isVisible, handleLogoutClick, profile }: MobileProps) {
         onClick={handleToggleSideMenu}
       />
       {isSideMenuOpen && (
-        <MobiledSideMenu handleLogoutClick={handleLogoutClick} mobileRef={ref} profile={profile} />
+        <MobiledSideMenu handleLogoutClick={handleLogoutClick} mobileRef={ref} profile={profile} onSidebarToggle={handleToggleSideMenu}/>
       )}
     </Header>
   );
