@@ -17,8 +17,9 @@ export const useCombobox = () => {
     setIsComboBoxOpen(!!debouncedSearch);
   }, [debouncedSearch]);
 
-  const handleNavigate = (keyword = searchdata) => {
-    router.push(ROUTES.SEARCH(keyword.trim()));
+  const handleNavigate = (keyword?: string) => {
+    const searchKeyword = typeof keyword === 'string' ? keyword : searchdata;
+    router.push(ROUTES.SEARCH(searchKeyword.trim()));
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
