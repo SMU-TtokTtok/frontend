@@ -25,6 +25,7 @@ interface GoogleButtonConfiguration {
   logo_alignment?: 'left' | 'center';
   width?: number;
   locale?: string;
+  click_listener?: () => void;
 }
 
 interface GoogleAccountsId {

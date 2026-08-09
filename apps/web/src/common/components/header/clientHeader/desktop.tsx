@@ -17,7 +17,7 @@ interface DesktopProps<T> {
   isComboBoxOpen: boolean;
   setIsComboBoxOpen: (isOpen: boolean) => void;
   handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleNavigate: () => void;
+  handleNavigate: (keyword?: string) => void;
   handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   searchList: T[];
   userName: string | null;
