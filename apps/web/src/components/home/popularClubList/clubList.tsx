@@ -3,11 +3,21 @@ import ClubItem from '@/common/components/clubItem';
 import * as S from './popularClubList.css';
 import { usePopularClubList } from '@/hooks/usePopularClubList';
 import Empty from '@/common/components/empty';
-interface ClubListProps {
-  handleModalOpen: () => void;
-}
-function ClubList({ handleModalOpen }: ClubListProps) {
+import { useState } from 'react';
+import { useModal } from '@/hooks/useModal';
+import ConfirmModal from '@/common/components/confirmModal';
+
+function ClubList() {
   const { data } = usePopularClubList();
+  const { isOpen, handleModalClose, handleModalOpen } = useModal();
+  const [favoriteModalMessage, setFavoriteModalMessage] = useState('');
+
+  const handleFavoriteResult = (favorited: boolean) => {
+    setFavoriteModalMessage(
+      favorited ? '즐겨찾기에 추가했어요.' : '즐겨찾기를 취소했어요.',
+    );
+    handleModalOpen();
+  };
 
   return (
     <>
@@ -18,7 +28,7 @@ function ClubList({ handleModalOpen }: ClubListProps) {
               clubData={club}
               key={club.id}
               className={S.cardStyle}
-              handleModalOpen={handleModalOpen}
+              onFavoriteResult={handleFavoriteResult}
             />
           ))}
         </ul>
@@ -29,6 +39,9 @@ function ClubList({ handleModalOpen }: ClubListProps) {
             <Empty className={S.empty}>아직 인기동아리가 없어요!</Empty>
           </div>
         ))}
+      <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
+        {favoriteModalMessage}
+      </ConfirmModal>
     </>
   );
 }

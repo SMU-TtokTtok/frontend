@@ -2,9 +2,13 @@ import * as S from '../questionFrom.css';
 import LabelWithInput from './labelWithInput';
 import Checkbox from '@/common/ui/checkbox';
 
-function ApplicantInfoField() {
+interface ApplicantInfoFieldProps {
+  hasRecommendTemplateSpacing?: boolean;
+}
+
+function ApplicantInfoField({ hasRecommendTemplateSpacing = false }: ApplicantInfoFieldProps) {
   return (
-    <div className={S.applicantInfoField}>
+    <div className={S.applicantInfoField({ hasRecommendTemplateSpacing })}>
       <div className={S.infoFieldrawsort}>
         <LabelWithInput label="이름" placeholder="이름" disabled />
         <LabelWithInput label="나이" placeholder="나이" disabled />

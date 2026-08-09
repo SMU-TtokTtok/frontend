@@ -6,6 +6,29 @@ import { useDebounce } from '@/hooks/useDebounce';
 import { useSearchApplicant } from '@/hooks/useSearchAppliacant';
 import { ApplicantListParams } from './api/applicants';
 import Empty from '@/common/components/empty';
+import * as L from './applicantList/applicantList.css';
+
+const SEARCH_SKELETON_COUNT = 4;
+
+function SearchResultSkeleton() {
+  return (
+    <ul aria-label="지원자 검색 결과를 불러오는 중입니다.">
+      {Array.from({ length: SEARCH_SKELETON_COUNT }).map((_, index) => (
+        <li key={index} className={L.applicantItemWrapper} aria-hidden="true">
+          <div className={L.profileSection}>
+            <span className={`${L.skeletonBlock} ${L.skeletonMenu}`} />
+            <span className={`${L.skeletonBlock} ${L.skeletonGrade}`} />
+            <span className={`${L.skeletonBlock} ${L.skeletonName}`} />
+            <span className={L.verticalLine} />
+            <span className={`${L.skeletonBlock} ${L.skeletonDepartment}`} />
+          </div>
+          <span className={`${L.skeletonBlock} ${L.skeletonStatus}`} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 interface SearchResultProps {
   selectedOptions: ApplicantListParams;
   search: string;
@@ -19,13 +42,18 @@ function SearchResult({
   handleSelectApplicant,
 }: SearchResultProps) {
   const debouncedSearch = useDebounce(search);
-  const { applicants } = useSearchApplicant({
+  const { applicants, isLoading } = useSearchApplicant({
     debouncedSearch,
     evaluation: selectedOptions.evaluation,
   });
   const { handleApplicantStatus } = usePatchApplicantStatus({
     openConfirmModalWithMessage,
   });
+  const isDebouncing = search.trim() !== debouncedSearch.trim();
+
+  if (isDebouncing || isLoading) {
+    return <SearchResultSkeleton />;
+  }
 
   return (
     <ul>

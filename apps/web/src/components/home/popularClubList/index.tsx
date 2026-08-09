@@ -5,10 +5,7 @@ import Link from 'next/link';
 import { ROUTES } from '@/common/constants/routes';
 import LoadingSpinner from '@/common/ui/loading';
 import { Suspense } from 'react';
-interface PopularClubListProps {
-  handleModalOpen: () => void;
-}
-function PopularClubList({ handleModalOpen }: PopularClubListProps) {
+function PopularClubList() {
   return (
     <div>
       <div className={S.TitleWrapper}>
@@ -19,7 +16,7 @@ function PopularClubList({ handleModalOpen }: PopularClubListProps) {
       </div>
       <Suspense fallback={<LoadingSpinner />}>
         <Slider>
-          <ClubList handleModalOpen={handleModalOpen} />
+          <ClubList />
         </Slider>
       </Suspense>
     </div>

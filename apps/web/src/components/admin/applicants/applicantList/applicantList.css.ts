@@ -1,6 +1,15 @@
 ﻿import { BREAKPOINTS } from '@/common/constants/breakpoints';
 import { vars } from '@/common/styles/theme.css';
-import { style } from '@vanilla-extract/css';
+import { keyframes, style } from '@vanilla-extract/css';
+
+const skeletonShimmer = keyframes({
+  '0%': {
+    backgroundPosition: '100% 0',
+  },
+  '100%': {
+    backgroundPosition: '-100% 0',
+  },
+});
 
 export const applicantItemWrapper = style({
   padding: ' 10px 20px',
@@ -135,6 +144,70 @@ export const menuIcon = style({
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
       display: 'none',
+    },
+  },
+});
+
+export const skeletonBlock = style({
+  display: 'block',
+  flexShrink: 0,
+  borderRadius: '4px',
+  background: `linear-gradient(90deg, ${vars.colors.surface.cont_1} 25%, ${vars.colors.surface.cont_2} 37%, ${vars.colors.surface.cont_1} 63%)`,
+  backgroundSize: '200% 100%',
+  animation: `${skeletonShimmer} 1.2s ease-in-out infinite`,
+});
+
+export const skeletonMenu = style({
+  width: '24px',
+  height: '24px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      display: 'none',
+    },
+  },
+});
+
+export const skeletonGrade = style({
+  width: '49px',
+  height: '1.5rem',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      width: '39px',
+      height: '22px',
+    },
+  },
+});
+
+export const skeletonName = style({
+  width: '72px',
+  height: '20px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      width: '56px',
+      height: '18px',
+    },
+  },
+});
+
+export const skeletonDepartment = style({
+  width: '116px',
+  height: '18px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      width: '88px',
+      height: '16px',
+    },
+  },
+});
+
+export const skeletonStatus = style({
+  width: '92px',
+  height: '37px',
+  borderRadius: '100px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      width: '80px',
+      height: '29px',
     },
   },
 });

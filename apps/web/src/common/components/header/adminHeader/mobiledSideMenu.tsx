@@ -10,9 +10,10 @@ interface MobileSideMenuProps {
   handleLogoutClick: () => void;
   mobileRef: React.RefObject<HTMLDivElement | null>;
   profile: AdminProfile | null;
+  onSidebarToggle:()=>void
 }
 
-function MobiledSideMenu({ handleLogoutClick, mobileRef, profile }: MobileSideMenuProps) {
+function MobiledSideMenu({ handleLogoutClick, mobileRef, profile,onSidebarToggle }: MobileSideMenuProps) {
   return (
     <>
       <div className={S.MobileBackdrop} />
@@ -29,7 +30,7 @@ function MobiledSideMenu({ handleLogoutClick, mobileRef, profile }: MobileSideMe
         </button>
 
         {ADMIN_SIDEBAR_ITEMS.map(({ href, label }) => (
-          <Link key={href} href={href} className={S.MenuItem}>
+          <Link key={href} href={href} className={S.MenuItem} onClick={onSidebarToggle}>
             <span>{label}</span>
             <Image src={arrowNav} alt="이동하기" />
           </Link>

@@ -14,11 +14,13 @@ import { useEffect, useState } from 'react';
 interface ClubItemProps {
   clubData: ClubItemInfo;
   className?: string;
-  handleModalOpen: () => void;
+  onFavoriteResult: (favorited: boolean) => void;
 }
 
-function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
-  const { handlePostFavorite } = usePostFavorite(handleModalOpen);
+function ClubItem({ clubData, className, onFavoriteResult }: ClubItemProps) {
+  const { handlePostFavorite } = usePostFavorite((favorited) => {
+    onFavoriteResult(favorited);
+  });
   const [isBookmarked, setIsBookmarked] = useState<boolean>(clubData.bookmarked);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
@@ -54,42 +56,44 @@ function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
   )?.label;
 
   return (
-    <li className={`${S.container} ${className}`} onClick={handleClubDetail}>
-      <div className={S.headerWrapper}>
-        <p className={S.separation}>{clubType}</p>
-        <Image
-          src={isBookmarked ? ActiveStar : emptyStar}
-          className={S.star}
-          alt="즐겨찾기"
-          onClick={(e) => {
-            e.stopPropagation();
-            toggleBookmark();
-          }}
-        />
-      </div>
-      <div className={S.content}>
-        <div className={S.nameWrapper}>
-          <p className={S.name}>{clubData.name}</p>
-          {clubData.isDeadlineImminent && (
-            <Tag className={S.tagStyle} variant="red">
-              마감임박
+    <>
+      <li className={`${S.container} ${className}`} onClick={handleClubDetail}>
+        <div className={S.headerWrapper}>
+          <p className={S.separation}>{clubType}</p>
+          <Image
+            src={isBookmarked ? ActiveStar : emptyStar}
+            className={S.star}
+            alt="즐겨찾기"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleBookmark();
+            }}
+          />
+        </div>
+        <div className={S.content}>
+          <div className={S.nameWrapper}>
+            <p className={S.name}>{clubData.name}</p>
+            {clubData.isDeadlineImminent && (
+              <Tag className={S.tagStyle} variant="red">
+                마감임박
+              </Tag>
+            )}
+          </div>
+        </div>
+        <div className={S.categoryWrapper}>
+          <Tag key={clubData.clubCategory} className={S.tagStyle} variant="default">
+            {clubCategory}
+          </Tag>
+          {clubData.customCategory && clubData.customCategory !== '커스텀 카테고리' && (
+            <Tag key={clubData.customCategory} className={S.tagStyle} variant="default">
+              {clubData.customCategory}
             </Tag>
           )}
+          <span className={S.verticalLine} />
+          <RecruitStatus isRecruiting={clubData.recruiting} />
         </div>
-      </div>
-      <div className={S.categoryWrapper}>
-        <Tag key={clubData.clubCategory} className={S.tagStyle} variant="default">
-          {clubCategory}
-        </Tag>
-        {clubData.customCategory && clubData.customCategory !== '커스텀 카테고리' && (
-          <Tag key={clubData.customCategory} className={S.tagStyle} variant="default">
-            {clubData.customCategory}
-          </Tag>
-        )}
-        <span className={S.verticalLine} />
-        <RecruitStatus isRecruiting={clubData.recruiting} />
-      </div>
-    </li>
+      </li>
+    </>
   );
 }
 

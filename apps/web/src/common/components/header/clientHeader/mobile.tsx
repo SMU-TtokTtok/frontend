@@ -46,11 +46,29 @@ function Mobile<T extends { id: string; name: string; clubType: string }>({
     setIsSearchBarOpen(false);
   };
 
+  const closeSearchBar = () => {
+    setIsSearchBarOpen(false);
+    setIsComboBoxOpen(false);
+  };
+
+  const handleMobileNavigate = () => {
+    handleNavigate();
+    closeSearchBar();
+  };
+
+  const handleMobileKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    handleKeyDown(e);
+
+    if (e.key === 'Enter') {
+      closeSearchBar();
+    }
+  };
+
   usePreventScroll(isSearchBarOpen || isSideMenuOpen);
 
   return (
     <Header isVisible={isVisible} className={S.MobileInnerWrapper}>
-      <Link href={ROUTES.HOME}>
+      <Link href={ROUTES.HOME} onClick={closeSearchBar}>
         <Image src={mainlogo} className={S.Logo} alt="Main Logo" />
       </Link>
       <div className={S.RightArea}>
@@ -72,8 +90,8 @@ function Mobile<T extends { id: string; name: string; clubType: string }>({
               setIsComboBoxOpen={setIsComboBoxOpen}
               setIsSearchBarOpen={setIsSearchBarOpen}
               onChange={handleSearchChange}
-              onClick={handleNavigate}
-              onKeyDown={handleKeyDown}
+              onClick={handleMobileNavigate}
+              onKeyDown={handleMobileKeyDown}
               placeholder="동아리 이름을 검색하세요."
               aria-label="동아리 이름을 검색하세요."
             />

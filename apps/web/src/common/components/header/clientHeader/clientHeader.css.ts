@@ -269,7 +269,6 @@ export const UserDropdownPanel = style({
   left: '0',
   right: 'auto',
   width: '144px',
-  padding: '6px 0',
 });
 
 export const AuthDropdownPanel = style({
