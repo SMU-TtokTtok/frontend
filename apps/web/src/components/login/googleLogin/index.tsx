@@ -26,9 +26,7 @@ interface GoogleLoginButtonProps {
 export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonProps) {
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
   const buttonSlotRef = useRef<HTMLDivElement>(null);
-  const authAttemptStartedRef = useRef(false);
   const resetTimerRef = useRef<number | undefined>(undefined);
-  const recoveryTimerRef = useRef<number | undefined>(undefined);
   const [isScriptReady, setIsScriptReady] = useState(false);
   const [renderVersion, setRenderVersion] = useState(0);
 
@@ -37,13 +35,6 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
   useEffect(() => {
     onCredentialRef.current = onCredential;
   }, [onCredential]);
-
-  const clearRecoveryTimer = useCallback(() => {
-    if (!recoveryTimerRef.current) return;
-
-    window.clearTimeout(recoveryTimerRef.current);
-    recoveryTimerRef.current = undefined;
-  }, []);
 
   const queueButtonRender = useCallback((delay = 100) => {
     if (resetTimerRef.current) {
@@ -55,58 +46,13 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
     }, delay);
   }, []);
 
-  const handleAuthAttemptStart = useCallback(() => {
-    authAttemptStartedRef.current = true;
-
-    if (recoveryTimerRef.current) {
-      window.clearTimeout(recoveryTimerRef.current);
-    }
-
-    const isMobileLike =
-      window.matchMedia(`(max-width: 1023px)`).matches || window.navigator.maxTouchPoints > 0;
-
-    if (!isMobileLike) return;
-
-    // PWA standalone(iOS)에서는 구글 인증 시트를 닫아도 visibilitychange/focus가
-    // 안정적으로 발생하지 않아 위 리스너가 못 잡는 경우가 있어, 조건 없이 재렌더한다.
-    // 팝업은 별도 브라우징 컨텍스트라 부모 버튼을 다시 그려도 진행 중인 인증엔 영향 없다.
-    recoveryTimerRef.current = window.setTimeout(() => {
-      queueButtonRender(0);
-    }, 2500);
-  }, [queueButtonRender]);
-
-  // 사용자가 구글 인증 화면에서 취소/닫기를 누르면 GIS 버튼 iframe이 멈춘 상태로
-  // 남는 경우가 있어, 페이지가 다시 보일 때 버튼을 새로 그린다.
   useEffect(() => {
-    const resetButton = () => {
-      if (document.visibilityState !== 'visible') return;
-
-      if (authAttemptStartedRef.current) {
-        clearRecoveryTimer();
-      }
-
-      authAttemptStartedRef.current = false;
-      queueButtonRender();
-    };
-
-    window.addEventListener('focus', resetButton);
-    window.addEventListener('pageshow', resetButton);
-    document.addEventListener('visibilitychange', resetButton);
-
     return () => {
       if (resetTimerRef.current) {
         window.clearTimeout(resetTimerRef.current);
       }
-
-      if (recoveryTimerRef.current) {
-        window.clearTimeout(recoveryTimerRef.current);
-      }
-
-      window.removeEventListener('focus', resetButton);
-      window.removeEventListener('pageshow', resetButton);
-      document.removeEventListener('visibilitychange', resetButton);
     };
-  }, [clearRecoveryTimer, queueButtonRender]);
+  }, []);
 
   // 화면 회전·리사이즈로 카드 폭이 바뀌면 버튼도 다시 그려야 한다.
   const [slotWidth, setSlotWidth] = useState(0);
@@ -130,14 +76,19 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
     window.google.accounts.id.initialize({
       client_id: clientId,
       callback: ({ credential }) => {
-        authAttemptStartedRef.current = false;
-        clearRecoveryTimer();
+        queueButtonRender();
         onCredentialRef.current(credential);
+      },
+      // 사용자가 인증을 완료하지 않고 중간 iframe/시트를 닫았을 때 GIS가 보내주는 공식 신호.
+      // 타이머나 visibilitychange 추측 대신 이 콜백이 왔을 때만 버튼을 다시 그린다.
+      // (그래야 2.5초 넘게 걸리는 정상 인증 도중에 iframe이 날아가는 일이 없다)
+      intermediate_iframe_close_callback: () => {
+        queueButtonRender();
       },
       auto_select: false,
       use_fedcm_for_button: false,
     });
-  }, [isScriptReady, clientId, clearRecoveryTimer]);
+  }, [isScriptReady, clientId, queueButtonRender]);
 
   useEffect(() => {
     const buttonSlot = buttonSlotRef.current;
@@ -157,9 +108,8 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       logo_alignment: 'center',
       locale: 'ko',
       width: Math.min(MAX_BUTTON_WIDTH, Math.max(0, slotWidth - BUTTON_WIDTH_SAFETY_MARGIN)),
-      click_listener: handleAuthAttemptStart,
     });
-  }, [isScriptReady, clientId, slotWidth, renderVersion, handleAuthAttemptStart]);
+  }, [isScriptReady, clientId, slotWidth, renderVersion]);
 
   if (!clientId) {
     if (process.env.NODE_ENV !== 'production') {
