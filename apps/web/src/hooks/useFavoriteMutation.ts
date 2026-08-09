@@ -6,7 +6,10 @@ import { CustomHttpError } from '@/common/apis/apiClient';
 interface usePatchFavoriteParams {
   clubId: string;
 }
-export const usePostFavorite = (handleModalOpen: () => void) => {
+
+export type FavoriteModalOpenHandler = (favorited: boolean) => void;
+
+export const usePostFavorite = (handleModalOpen: FavoriteModalOpenHandler) => {
   const queryClient = useQueryClient();
   const { popularClubList, allClubList } = clubKey;
   const { favoritesClubList, appliedClubList, searchClubList } = userKey;
@@ -14,8 +17,8 @@ export const usePostFavorite = (handleModalOpen: () => void) => {
 
   const favoriteMutation = useMutation({
     mutationFn: ({ clubId }: usePatchFavoriteParams) => postFavorite(clubId),
-    onSuccess: (_, { clubId }) => {
-      handleModalOpen();
+    onSuccess: (data, { clubId }) => {
+      handleModalOpen(data.favorited);
       queryClient.invalidateQueries({
         predicate: (query) => query.queryKey[0] === allClubList,
       });

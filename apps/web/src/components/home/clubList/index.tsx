@@ -9,10 +9,9 @@ import Empty from '@/common/components/empty';
 import LoadingSpinner from '@/common/ui/loading';
 interface ClubListProps {
   selectedOptions: SearchQueryReturn;
-  handleModalOpen: () => void;
 }
 
-function ClubList({ selectedOptions, handleModalOpen }: ClubListProps) {
+function ClubList({ selectedOptions }: ClubListProps) {
   const { clubs, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useClubsInfinite({
     selectedOptions,
   });
@@ -39,7 +38,6 @@ function ClubList({ selectedOptions, handleModalOpen }: ClubListProps) {
                 key={index}
                 className={S.cardStyle}
                 clubData={club}
-                handleModalOpen={handleModalOpen}
               />
             ))}
         </ul>

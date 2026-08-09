@@ -3,10 +3,7 @@ import ClubItem from '@/common/components/clubItem';
 import * as S from './popularClubList.css';
 import { usePopularClubList } from '@/hooks/usePopularClubList';
 import Empty from '@/common/components/empty';
-interface ClubListProps {
-  handleModalOpen: () => void;
-}
-function ClubList({ handleModalOpen }: ClubListProps) {
+function ClubList() {
   const { data } = usePopularClubList();
 
   return (
@@ -18,7 +15,6 @@ function ClubList({ handleModalOpen }: ClubListProps) {
               clubData={club}
               key={club.id}
               className={S.cardStyle}
-              handleModalOpen={handleModalOpen}
             />
           ))}
         </ul>

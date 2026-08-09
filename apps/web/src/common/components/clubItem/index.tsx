@@ -11,14 +11,22 @@ import { ROUTES } from '@/common/constants/routes';
 import Tag from '@/common/ui/tag';
 import { FILTER_CONFIG } from '@/common/constants';
 import { useEffect, useState } from 'react';
+import { useModal } from '@/hooks/useModal';
+import ConfirmModal from '@/common/components/confirmModal';
 interface ClubItemProps {
   clubData: ClubItemInfo;
   className?: string;
-  handleModalOpen: () => void;
 }
 
-function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
-  const { handlePostFavorite } = usePostFavorite(handleModalOpen);
+function ClubItem({ clubData, className }: ClubItemProps) {
+  const { isOpen, handleModalClose, handleModalOpen } = useModal();
+  const [favoriteModalMessage, setFavoriteModalMessage] = useState('');
+  const { handlePostFavorite } = usePostFavorite((favorited) => {
+    setFavoriteModalMessage(
+      favorited ? '즐겨찾기에 담아두었어요.' : '즐겨찾기를 취소했어요.',
+    );
+    handleModalOpen();
+  });
   const [isBookmarked, setIsBookmarked] = useState<boolean>(clubData.bookmarked);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
@@ -54,42 +62,47 @@ function ClubItem({ clubData, className, handleModalOpen }: ClubItemProps) {
   )?.label;
 
   return (
-    <li className={`${S.container} ${className}`} onClick={handleClubDetail}>
-      <div className={S.headerWrapper}>
-        <p className={S.separation}>{clubType}</p>
-        <Image
-          src={isBookmarked ? ActiveStar : emptyStar}
-          className={S.star}
-          alt="즐겨찾기"
-          onClick={(e) => {
-            e.stopPropagation();
-            toggleBookmark();
-          }}
-        />
-      </div>
-      <div className={S.content}>
-        <div className={S.nameWrapper}>
-          <p className={S.name}>{clubData.name}</p>
-          {clubData.isDeadlineImminent && (
-            <Tag className={S.tagStyle} variant="red">
-              마감임박
+    <>
+      <li className={`${S.container} ${className}`} onClick={handleClubDetail}>
+        <div className={S.headerWrapper}>
+          <p className={S.separation}>{clubType}</p>
+          <Image
+            src={isBookmarked ? ActiveStar : emptyStar}
+            className={S.star}
+            alt="즐겨찾기"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleBookmark();
+            }}
+          />
+        </div>
+        <div className={S.content}>
+          <div className={S.nameWrapper}>
+            <p className={S.name}>{clubData.name}</p>
+            {clubData.isDeadlineImminent && (
+              <Tag className={S.tagStyle} variant="red">
+                마감임박
+              </Tag>
+            )}
+          </div>
+        </div>
+        <div className={S.categoryWrapper}>
+          <Tag key={clubData.clubCategory} className={S.tagStyle} variant="default">
+            {clubCategory}
+          </Tag>
+          {clubData.customCategory && clubData.customCategory !== '커스텀 카테고리' && (
+            <Tag key={clubData.customCategory} className={S.tagStyle} variant="default">
+              {clubData.customCategory}
             </Tag>
           )}
+          <span className={S.verticalLine} />
+          <RecruitStatus isRecruiting={clubData.recruiting} />
         </div>
-      </div>
-      <div className={S.categoryWrapper}>
-        <Tag key={clubData.clubCategory} className={S.tagStyle} variant="default">
-          {clubCategory}
-        </Tag>
-        {clubData.customCategory && clubData.customCategory !== '커스텀 카테고리' && (
-          <Tag key={clubData.customCategory} className={S.tagStyle} variant="default">
-            {clubData.customCategory}
-          </Tag>
-        )}
-        <span className={S.verticalLine} />
-        <RecruitStatus isRecruiting={clubData.recruiting} />
-      </div>
-    </li>
+      </li>
+      <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
+        {favoriteModalMessage}
+      </ConfirmModal>
+    </>
   );
 }
 
