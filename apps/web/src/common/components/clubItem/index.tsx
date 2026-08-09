@@ -11,27 +11,15 @@ import { ROUTES } from '@/common/constants/routes';
 import Tag from '@/common/ui/tag';
 import { FILTER_CONFIG } from '@/common/constants';
 import { useEffect, useState } from 'react';
-import { useModal } from '@/hooks/useModal';
-import ConfirmModal from '@/common/components/confirmModal';
 interface ClubItemProps {
   clubData: ClubItemInfo;
   className?: string;
-  onFavoriteResult?: (favorited: boolean) => void;
+  onFavoriteResult: (favorited: boolean) => void;
 }
 
 function ClubItem({ clubData, className, onFavoriteResult }: ClubItemProps) {
-  const { isOpen, handleModalClose, handleModalOpen } = useModal();
-  const [favoriteModalMessage, setFavoriteModalMessage] = useState('');
   const { handlePostFavorite } = usePostFavorite((favorited) => {
-    if (onFavoriteResult) {
-      onFavoriteResult(favorited);
-      return;
-    }
-
-    setFavoriteModalMessage(
-      favorited ? '즐겨찾기에 추가했어요.' : '즐겨찾기를 취소했어요.',
-    );
-    handleModalOpen();
+    onFavoriteResult(favorited);
   });
   const [isBookmarked, setIsBookmarked] = useState<boolean>(clubData.bookmarked);
   const [mounted, setMounted] = useState(false);
@@ -105,11 +93,6 @@ function ClubItem({ clubData, className, onFavoriteResult }: ClubItemProps) {
           <RecruitStatus isRecruiting={clubData.recruiting} />
         </div>
       </li>
-      {!onFavoriteResult && (
-        <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
-          {favoriteModalMessage}
-        </ConfirmModal>
-      )}
     </>
   );
 }
