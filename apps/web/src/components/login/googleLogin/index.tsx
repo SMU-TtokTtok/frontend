@@ -73,8 +73,7 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
   }, []);
 
   useEffect(() => {
-    const buttonSlot = buttonSlotRef.current;
-    if (!isScriptReady || !clientId || !buttonSlot || !window.google || !slotWidth) {
+    if (!isScriptReady || !clientId || !window.google) {
       return;
     }
 
@@ -84,6 +83,13 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       auto_select: false,
       use_fedcm_for_button: false,
     });
+  }, [isScriptReady, clientId]);
+
+  useEffect(() => {
+    const buttonSlot = buttonSlotRef.current;
+    if (!isScriptReady || !clientId || !buttonSlot || !window.google || !slotWidth) {
+      return;
+    }
 
     // 다시 그릴 때 이전 버튼이 남지 않도록 비운다.
     buttonSlot.replaceChildren();
