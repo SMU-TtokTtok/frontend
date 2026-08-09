@@ -20,6 +20,7 @@ export const useCombobox = () => {
   const handleNavigate = (keyword?: string) => {
     const searchKeyword = typeof keyword === 'string' ? keyword : searchdata;
     router.push(ROUTES.SEARCH(searchKeyword.trim()));
+    router.refresh();
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
