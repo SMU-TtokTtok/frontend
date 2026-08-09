@@ -5,7 +5,7 @@ import * as S from './inputCombobox.css';
 import SearchBar from '@/common/ui/searchBar';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 
-interface InputComboboxProps<T> extends InputHTMLAttributes<HTMLInputElement> {
+interface InputComboboxProps<T> extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onClick'> {
   variant?: 'primary';
   className?: string;
   iconStyle?: string;
@@ -14,7 +14,7 @@ interface InputComboboxProps<T> extends InputHTMLAttributes<HTMLInputElement> {
   isComboBoxOpen?: boolean;
   setIsComboBoxOpen: (isOpen: boolean) => void;
   setIsSearchBarOpen?: (isOpen: boolean) => void;
-  onClick?: () => void;
+  onClick?: (value: string) => void;
 }
 
 function InputCombobox<T extends { id: string; name: string; clubType: string }>({
