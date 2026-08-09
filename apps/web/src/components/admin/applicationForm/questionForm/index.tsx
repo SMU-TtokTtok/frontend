@@ -65,7 +65,9 @@ function QuestionForm({
     handleReorderQuestions(newQuestions);
   };
 
-  const hasTitleError = !!(isSubmit && errors?.title?._errors[0]);
+  const titleErrorMessage = errors?.title?._errors[0];
+  const hasTitleError = !!(isSubmit && titleErrorMessage);
+  const titleErrorId = 'form-title-error';
 
   return (
     <div className={S.container}>
@@ -85,7 +87,14 @@ function QuestionForm({
             value={formData.title ?? ''}
             onChange={(e) => handleChangeTitle(e.target.value)}
             placeholder="지원폼 제목을 입력해주세요.(필수)"
+            aria-invalid={hasTitleError}
+            aria-describedby={hasTitleError ? titleErrorId : undefined}
           />
+          {hasTitleError && (
+            <span id={titleErrorId} className={S.visuallyHidden}>
+              {titleErrorMessage}
+            </span>
+          )}
         </div>
 
         <textarea

@@ -133,6 +133,18 @@ export const errorMessage = style({
   marginLeft: '5px',
 });
 
+export const visuallyHidden = style({
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  padding: 0,
+  margin: '-1px',
+  overflow: 'hidden',
+  clip: 'rect(0, 0, 0, 0)',
+  whiteSpace: 'nowrap',
+  border: 0,
+});
+
 export const formFeildBlock = style({
   width: '100%',
   backgroundColor: vars.colors.surface.default,

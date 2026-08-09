@@ -60,17 +60,23 @@ globalStyle(
   {
     width: '100% !important',
     maxWidth: '100% !important',
-    outline: 'none !important',
-    boxShadow: 'none !important',
   },
 );
 
 globalStyle(
-  `${ButtonSlot}, ${ButtonSlot}:focus, ${ButtonSlot}:focus-visible, ${ButtonSlot} iframe:focus, ${ButtonSlot} iframe:focus-visible, ${ButtonSlot} [role='button']:focus, ${ButtonSlot} [role='button']:focus-visible`,
+  `${ButtonSlot}:focus:not(:focus-visible), ${ButtonSlot} iframe:focus:not(:focus-visible), ${ButtonSlot} [role='button']:focus:not(:focus-visible)`,
   {
     outline: 'none !important',
     boxShadow: 'none !important',
     borderColor: '#dadce0 !important',
+  },
+);
+
+globalStyle(
+  `${ButtonSlot}:focus-visible, ${ButtonSlot} iframe:focus-visible, ${ButtonSlot} [role='button']:focus-visible`,
+  {
+    outline: `2px solid ${vars.colors.primary.base} !important`,
+    outlineOffset: '2px',
   },
 );
 
