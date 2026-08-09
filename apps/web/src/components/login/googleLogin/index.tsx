@@ -31,6 +31,13 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
     onCredentialRef.current = onCredential;
   }, [onCredential]);
 
+  const clearRecoveryTimer = useCallback(() => {
+    if (!recoveryTimerRef.current) return;
+
+    window.clearTimeout(recoveryTimerRef.current);
+    recoveryTimerRef.current = undefined;
+  }, []);
+
   const queueButtonRender = useCallback((delay = 100) => {
     if (resetTimerRef.current) {
       window.clearTimeout(resetTimerRef.current);
@@ -66,9 +73,8 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
     const resetButton = () => {
       if (document.visibilityState !== 'visible') return;
 
-      if (authAttemptStartedRef.current && recoveryTimerRef.current) {
-        window.clearTimeout(recoveryTimerRef.current);
-        recoveryTimerRef.current = undefined;
+      if (authAttemptStartedRef.current) {
+        clearRecoveryTimer();
       }
 
       authAttemptStartedRef.current = false;
@@ -92,7 +98,7 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       window.removeEventListener('pageshow', resetButton);
       document.removeEventListener('visibilitychange', resetButton);
     };
-  }, [queueButtonRender]);
+  }, [clearRecoveryTimer, queueButtonRender]);
 
   // 화면 회전·리사이즈로 카드 폭이 바뀌면 버튼도 다시 그려야 한다.
   const [slotWidth, setSlotWidth] = useState(0);
@@ -117,12 +123,13 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       client_id: clientId,
       callback: ({ credential }) => {
         authAttemptStartedRef.current = false;
+        clearRecoveryTimer();
         onCredentialRef.current(credential);
       },
       auto_select: false,
       use_fedcm_for_button: false,
     });
-  }, [isScriptReady, clientId]);
+  }, [isScriptReady, clientId, clearRecoveryTimer]);
 
   useEffect(() => {
     const buttonSlot = buttonSlotRef.current;
