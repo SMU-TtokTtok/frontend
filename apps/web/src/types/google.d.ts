@@ -14,6 +14,8 @@ interface GoogleIdConfiguration {
   cancel_on_tap_outside?: boolean;
   use_fedcm_for_prompt?: boolean;
   use_fedcm_for_button?: boolean;
+  /** 사용자가 인증을 완료하지 않고 중간 iframe/팝업을 닫았을 때 호출된다. */
+  intermediate_iframe_close_callback?: () => void;
 }
 
 interface GoogleButtonConfiguration {
