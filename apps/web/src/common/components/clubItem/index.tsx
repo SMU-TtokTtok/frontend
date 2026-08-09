@@ -16,14 +16,20 @@ import ConfirmModal from '@/common/components/confirmModal';
 interface ClubItemProps {
   clubData: ClubItemInfo;
   className?: string;
+  onFavoriteResult?: (favorited: boolean) => void;
 }
 
-function ClubItem({ clubData, className }: ClubItemProps) {
+function ClubItem({ clubData, className, onFavoriteResult }: ClubItemProps) {
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
   const [favoriteModalMessage, setFavoriteModalMessage] = useState('');
   const { handlePostFavorite } = usePostFavorite((favorited) => {
+    if (onFavoriteResult) {
+      onFavoriteResult(favorited);
+      return;
+    }
+
     setFavoriteModalMessage(
-      favorited ? '즐겨찾기에 담아두었어요.' : '즐겨찾기를 취소했어요.',
+      favorited ? '즐겨찾기에 추가했어요.' : '즐겨찾기를 취소했어요.',
     );
     handleModalOpen();
   });
@@ -99,9 +105,11 @@ function ClubItem({ clubData, className }: ClubItemProps) {
           <RecruitStatus isRecruiting={clubData.recruiting} />
         </div>
       </li>
-      <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
-        {favoriteModalMessage}
-      </ConfirmModal>
+      {!onFavoriteResult && (
+        <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
+          {favoriteModalMessage}
+        </ConfirmModal>
+      )}
     </>
   );
 }

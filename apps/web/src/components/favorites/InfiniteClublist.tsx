@@ -3,7 +3,7 @@
 import { useInView } from 'react-intersection-observer';
 import * as S from '@/components/home/clubList/clubList.css';
 import ClubItem from '@/common/components/clubItem';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchQueryReturn } from '@/hooks/useSearchQuery';
 import * as F from './favorites.css';
 import Empty from '@/common/components/empty';
@@ -11,6 +11,8 @@ import { Clubs, ClubsInfiniteWithTotal } from '@/common/model/clubInfinite';
 import { ClubItemInfo } from '@/common/model/club';
 import type { InfiniteData } from '@tanstack/react-query';
 import LoadingSpinner from '@/common/ui/loading';
+import { useModal } from '@/hooks/useModal';
+import ConfirmModal from '@/common/components/confirmModal';
 
 interface InfiniteClubListProps {
   useInfinite: (params: { enabled: boolean; sort: string; name?: string }) => {
@@ -36,6 +38,8 @@ function InfiniteClubList({
 }: InfiniteClubListProps) {
   const sort = selectedOptions.sort || 'latest';
   const name = selectedOptions.name || '';
+  const { isOpen, handleModalClose, handleModalOpen } = useModal();
+  const [favoriteModalMessage, setFavoriteModalMessage] = useState('');
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, refetch, isLoading } = useInfinite({
     enabled: true,
     sort,
@@ -73,6 +77,13 @@ function InfiniteClubList({
     }
   }, [handleTotal, data]);
 
+  const handleFavoriteResult = (favorited: boolean) => {
+    setFavoriteModalMessage(
+      favorited ? '즐겨찾기에 추가했어요.' : '즐겨찾기를 취소했어요.',
+    );
+    handleModalOpen();
+  };
+
   if (isLoading) return <LoadingSpinner />;
 
   return (
@@ -87,6 +98,7 @@ function InfiniteClubList({
                 key={index}
                 className={S.cardStyle}
                 clubData={club}
+                onFavoriteResult={handleFavoriteResult}
               />
             ))}
           </ul>
@@ -101,6 +113,10 @@ function InfiniteClubList({
           <LoadingSpinner />
         </div>
       )}
+
+      <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
+        {favoriteModalMessage}
+      </ConfirmModal>
     </>
   );
 }
