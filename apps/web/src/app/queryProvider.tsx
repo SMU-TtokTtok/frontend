@@ -22,7 +22,13 @@ function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
-        throwOnError: true,
+        throwOnError: (error) => {
+          if (error instanceof CustomHttpError) {
+            return error.status !== HTTP_STATUS.UNAUTHORIZED && error.status !== HTTP_STATUS.FORBIDDEN;
+          }
+      
+          return true;
+        },
         staleTime: 60 * 1000,
         retry: 1,
       },
