@@ -12,6 +12,13 @@ const GIS_SCRIPT_SRC = 'https://accounts.google.com/gsi/client';
  */
 const MAX_BUTTON_WIDTH = 400;
 
+/**
+ * width는 최소값이라 좁은 슬롯(긴 한글 라벨)에서는 요청값보다 실제로 더 넓게 그려질 수 있다.
+ * ButtonSlot의 iframe이 100% 폭으로 고정돼 있어, 여유 없이 슬롯 너비 그대로 요청하면
+ * 초과분이 iframe 안에서 오른쪽으로 잘려 보인다. 약간의 여백을 둬서 그 여지를 흡수한다.
+ */
+const BUTTON_WIDTH_SAFETY_MARGIN = 8;
+
 interface GoogleLoginButtonProps {
   onCredential: (idToken: string) => void;
 }
@@ -60,10 +67,11 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
 
     if (!isMobileLike) return;
 
+    // PWA standalone(iOS)에서는 구글 인증 시트를 닫아도 visibilitychange/focus가
+    // 안정적으로 발생하지 않아 위 리스너가 못 잡는 경우가 있어, 조건 없이 재렌더한다.
+    // 팝업은 별도 브라우징 컨텍스트라 부모 버튼을 다시 그려도 진행 중인 인증엔 영향 없다.
     recoveryTimerRef.current = window.setTimeout(() => {
-      if (document.visibilityState === 'visible') {
-        queueButtonRender(0);
-      }
+      queueButtonRender(0);
     }, 2500);
   }, [queueButtonRender]);
 
@@ -148,7 +156,7 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       shape: 'rectangular',
       logo_alignment: 'center',
       locale: 'ko',
-      width: Math.min(MAX_BUTTON_WIDTH, slotWidth),
+      width: Math.min(MAX_BUTTON_WIDTH, Math.max(0, slotWidth - BUTTON_WIDTH_SAFETY_MARGIN)),
       click_listener: handleAuthAttemptStart,
     });
   }, [isScriptReady, clientId, slotWidth, renderVersion, handleAuthAttemptStart]);
