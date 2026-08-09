@@ -29,7 +29,7 @@ export const useSearchApplicant = ({
       },
       enabled,
     });
-  const applicants = data ? data.pages.flatMap((page) => page.applicants) : [];
+  const applicants = data ? data.pages.flatMap((page) => page.applicants ?? []) : [];
 
   return { applicants, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage, refetch };
 };

@@ -76,7 +76,7 @@ globalStyle(
   `${ButtonSlot}:focus-visible, ${ButtonSlot} iframe:focus-visible, ${ButtonSlot} [role='button']:focus-visible`,
   {
     outline: `2px solid ${vars.colors.primary.base} !important`,
-    outlineOffset: '2px',
+    outlineOffset: '-2px',
   },
 );
 

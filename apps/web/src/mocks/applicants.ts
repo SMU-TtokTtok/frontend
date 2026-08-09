@@ -14,7 +14,7 @@ export const PatchApplicantStatus = http.patch(
   ({ params }) => {
     const { applicantId } = params;
     const status = 'EVALUATING';
-    return HttpResponse.json({ id: applicantId, status }, { status: 500 });
+    return HttpResponse.json({ id: applicantId, status }, { status: 200 });
   },
 );
 
@@ -31,12 +31,26 @@ export const ApplicantSearch = http.get(
   ({ request }) => {
     const url = new URL(request.url);
     const search = url.searchParams.get('name') || '';
+    const cursor = Number(url.searchParams.get('cursor') ?? 1);
+    const size = Number(url.searchParams.get('size') ?? applicantList.applicants.length);
     const rawSearch = search.trim();
     const filteredApplicants = applicantList.applicants.filter((applicant) =>
       applicant.name.includes(rawSearch),
     );
+    const startIndex = (cursor - 1) * size;
+    const pagedApplicants = filteredApplicants.slice(startIndex, startIndex + size);
+    const totalPage = Math.ceil(filteredApplicants.length / size) || 1;
 
-    return HttpResponse.json(filteredApplicants, { status: 400 });
+    return HttpResponse.json(
+      {
+        ...applicantList,
+        currentPage: cursor,
+        totalPage,
+        totalCount: filteredApplicants.length,
+        applicants: pagedApplicants,
+      },
+      { status: 200 },
+    );
   },
 );
 
