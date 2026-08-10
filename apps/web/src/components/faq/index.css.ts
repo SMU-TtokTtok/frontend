@@ -203,6 +203,15 @@ export const installGuideWrapper = style({
   marginTop: '24px',
 });
 
+export const installGuideImagePreloadSlot = style({
+  position: 'absolute',
+  width: '1px',
+  height: '1px',
+  overflow: 'hidden',
+  opacity: 0,
+  pointerEvents: 'none',
+});
+
 export const installGuideTabs = style({
   display: 'inline-flex',
   overflow: 'hidden',

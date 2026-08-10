@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { Button } from '@ttockttock/ui';
 import * as S from './index.css';
 import iosInstallGuideImage from './assets/images/ios-install-guide.webp';
@@ -13,6 +12,26 @@ const INSTALL_GUIDE_OPTIONS = [
 ] as const;
 
 type InstallGuidePlatform = (typeof INSTALL_GUIDE_OPTIONS)[number]['key'];
+
+export function InstallGuideImagePreloader() {
+  return (
+    <div className={S.installGuideImagePreloadSlot} aria-hidden="true">
+      {INSTALL_GUIDE_OPTIONS.map(({ key, label, image }) => (
+        <img
+          key={key}
+          src={image.src}
+          alt=""
+          width={image.width}
+          height={image.height}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          data-install-guide={label}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default function InstallGuideSection() {
   const [platform, setPlatform] = useState<InstallGuidePlatform>('ios');
@@ -38,9 +57,11 @@ export default function InstallGuideSection() {
           );
         })}
       </div>
-      <Image
-        src={selectedGuide.image}
+      <img
+        src={selectedGuide.image.src}
         alt={`${selectedGuide.label} 앱 설치 가이드 이미지`}
+        width={selectedGuide.image.width}
+        height={selectedGuide.image.height}
         className={S.answerImage}
       />
     </div>
