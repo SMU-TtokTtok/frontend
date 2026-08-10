@@ -26,7 +26,9 @@ interface GoogleLoginButtonProps {
 export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonProps) {
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
   const buttonSlotRef = useRef<HTMLDivElement>(null);
+  const authAttemptStartedRef = useRef(false);
   const resetTimerRef = useRef<number | undefined>(undefined);
+  const recoveryTimerRef = useRef<number | undefined>(undefined);
   const [isScriptReady, setIsScriptReady] = useState(false);
   const [renderVersion, setRenderVersion] = useState(0);
 
@@ -35,6 +37,13 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
   useEffect(() => {
     onCredentialRef.current = onCredential;
   }, [onCredential]);
+
+  const clearRecoveryTimer = useCallback(() => {
+    if (!recoveryTimerRef.current) return;
+
+    window.clearTimeout(recoveryTimerRef.current);
+    recoveryTimerRef.current = undefined;
+  }, []);
 
   const queueButtonRender = useCallback((delay = 100) => {
     if (resetTimerRef.current) {
@@ -46,13 +55,50 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
     }, delay);
   }, []);
 
+  const handleAuthAttemptStart = useCallback(() => {
+    authAttemptStartedRef.current = true;
+    clearRecoveryTimer();
+
+    const isMobileLike =
+      window.matchMedia(`(max-width: 1023px)`).matches || window.navigator.maxTouchPoints > 0;
+
+    if (!isMobileLike) return;
+
+    recoveryTimerRef.current = window.setTimeout(() => {
+      if (document.visibilityState === 'visible') {
+        queueButtonRender(0);
+      }
+    }, 2500);
+  }, [clearRecoveryTimer, queueButtonRender]);
+
   useEffect(() => {
+    const resetButton = () => {
+      if (document.visibilityState !== 'visible') return;
+
+      if (authAttemptStartedRef.current) {
+        clearRecoveryTimer();
+      }
+
+      authAttemptStartedRef.current = false;
+      queueButtonRender();
+    };
+
+    window.addEventListener('focus', resetButton);
+    window.addEventListener('pageshow', resetButton);
+    document.addEventListener('visibilitychange', resetButton);
+
     return () => {
       if (resetTimerRef.current) {
         window.clearTimeout(resetTimerRef.current);
       }
+
+      clearRecoveryTimer();
+
+      window.removeEventListener('focus', resetButton);
+      window.removeEventListener('pageshow', resetButton);
+      document.removeEventListener('visibilitychange', resetButton);
     };
-  }, []);
+  }, [clearRecoveryTimer, queueButtonRender]);
 
   // 화면 회전·리사이즈로 카드 폭이 바뀌면 버튼도 다시 그려야 한다.
   const [slotWidth, setSlotWidth] = useState(0);
@@ -76,7 +122,8 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
     window.google.accounts.id.initialize({
       client_id: clientId,
       callback: ({ credential }) => {
-        queueButtonRender();
+        authAttemptStartedRef.current = false;
+        clearRecoveryTimer();
         onCredentialRef.current(credential);
       },
       // 사용자가 인증을 완료하지 않고 중간 iframe/시트를 닫았을 때 GIS가 보내주는 공식 신호.
@@ -108,8 +155,9 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       logo_alignment: 'center',
       locale: 'ko',
       width: Math.min(MAX_BUTTON_WIDTH, Math.max(0, slotWidth - BUTTON_WIDTH_SAFETY_MARGIN)),
+      click_listener: handleAuthAttemptStart,
     });
-  }, [isScriptReady, clientId, slotWidth, renderVersion]);
+  }, [isScriptReady, clientId, slotWidth, renderVersion, handleAuthAttemptStart]);
 
   if (!clientId) {
     if (process.env.NODE_ENV !== 'production') {

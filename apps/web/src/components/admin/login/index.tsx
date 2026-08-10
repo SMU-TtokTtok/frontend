@@ -59,10 +59,10 @@ function LoginPage() {
           {...register('password')}
         />
         <div className={S.AdminAuthContainer}>
-          <div className={S.AdminSignUp} title="아이디 찾기는 관리자에게 문의바랍니다" onClick={() => alert('아이디 찾기는 관리자에게 문의바랍니다')}>
+          {/* <div className={S.AdminSignUp} title="아이디 찾기는 관리자에게 문의바랍니다" onClick={() => alert('아이디 찾기는 관리자에게 문의바랍니다')}>
             아이디 찾기
-          </div>
-          <div className={S.AdminSignUp}>|</div>
+          </div> */}
+          {/* <div className={S.AdminSignUp}>|</div> */}
           <Link href={ROUTES.ADMIN_PASSWORD} className={S.AdminSignUp}>
             비밀번호 재설정
           </Link>

@@ -66,8 +66,8 @@ function SignupPage() {
           errorMessage={errors.password?.message}
           {...register('password')}
         />
-
-        <label className={S.Label({ isFirst: false })}>이메일</label>
+        {/* v2를 위한 임시 주석 */}
+        {/* <label className={S.Label({ isFirst: false })}>이메일</label>
         <Input
           type="email"
           variant="secondary"
@@ -76,7 +76,7 @@ function SignupPage() {
           isError={!!errors.email}
           errorMessage={errors.email?.message}
           {...register('email')}
-        />
+        /> */}
 
         <label className={S.Label({ isFirst: false })}>동아리 이름</label>
         <Input

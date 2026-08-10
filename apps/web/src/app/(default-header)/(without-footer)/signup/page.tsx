@@ -268,7 +268,7 @@ export default function Page() {
         isOpen={isOpen}
         onClose={handleModalClose}
         onConfirm={handleModalClose}
-        confirmHref="https://cloud.smu.ac.kr/t/smu.ac.kr"
+        confirmHref="https://cloud.smu.ac.kr/auth/sso/login"
         title="인증코드 발급"
         message={
           <>
