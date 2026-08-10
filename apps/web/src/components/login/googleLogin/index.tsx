@@ -27,6 +27,7 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
   const buttonSlotRef = useRef<HTMLDivElement>(null);
   const authAttemptStartedRef = useRef(false);
+  const canRecoverAuthButtonRef = useRef(false);
   const resetTimerRef = useRef<number | undefined>(undefined);
   const recoveryTimerRef = useRef<number | undefined>(undefined);
   const [isScriptReady, setIsScriptReady] = useState(false);
@@ -57,6 +58,7 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
 
   const handleAuthAttemptStart = useCallback(() => {
     authAttemptStartedRef.current = true;
+    canRecoverAuthButtonRef.current = false;
     clearRecoveryTimer();
 
     const isMobileLike =
@@ -65,21 +67,18 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
     if (!isMobileLike) return;
 
     recoveryTimerRef.current = window.setTimeout(() => {
-      if (document.visibilityState === 'visible') {
-        queueButtonRender(0);
-      }
+      canRecoverAuthButtonRef.current = true;
     }, 2500);
-  }, [clearRecoveryTimer, queueButtonRender]);
+  }, [clearRecoveryTimer]);
 
   useEffect(() => {
     const resetButton = () => {
       if (document.visibilityState !== 'visible') return;
+      if (!authAttemptStartedRef.current || !canRecoverAuthButtonRef.current) return;
 
-      if (authAttemptStartedRef.current) {
-        clearRecoveryTimer();
-      }
-
+      clearRecoveryTimer();
       authAttemptStartedRef.current = false;
+      canRecoverAuthButtonRef.current = false;
       queueButtonRender();
     };
 
@@ -123,6 +122,7 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       client_id: clientId,
       callback: ({ credential }) => {
         authAttemptStartedRef.current = false;
+        canRecoverAuthButtonRef.current = false;
         clearRecoveryTimer();
         onCredentialRef.current(credential);
       },
@@ -130,6 +130,9 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       // 타이머나 visibilitychange 추측 대신 이 콜백이 왔을 때만 버튼을 다시 그린다.
       // (그래야 2.5초 넘게 걸리는 정상 인증 도중에 iframe이 날아가는 일이 없다)
       intermediate_iframe_close_callback: () => {
+        authAttemptStartedRef.current = false;
+        canRecoverAuthButtonRef.current = false;
+        clearRecoveryTimer();
         queueButtonRender();
       },
       auto_select: false,
