@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import * as S from './index.css';
 import FaqItem from './faqItem';
+import { InstallGuideImagePreloader } from './installGuideSection';
 
 export type FaqItemData = {
   question: string;
@@ -50,16 +51,19 @@ export default function FaqAccordion() {
     index > 0 && openIndex !== index && openIndex !== index - 1;
 
   return (
-    <div className={S.faqCard}>
-      {FAQ_LIST.map((item, index) => (
-        <FaqItem
-          key={item.question}
-          item={item}
-          isExpanded={openIndex === index}
-          showDivider={isDividerVisible(index)}
-          onToggle={() => handleToggle(index)}
-        />
-      ))}
-    </div>
+    <>
+      <InstallGuideImagePreloader />
+      <div className={S.faqCard}>
+        {FAQ_LIST.map((item, index) => (
+          <FaqItem
+            key={item.question}
+            item={item}
+            isExpanded={openIndex === index}
+            showDivider={isDividerVisible(index)}
+            onToggle={() => handleToggle(index)}
+          />
+        ))}
+      </div>
+    </>
   );
 }
