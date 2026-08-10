@@ -24,7 +24,7 @@ export const useLoginMutation = () => {
     onError: (error) => {
       const customError = error as CustomHttpError;
       if (customError.status !== 401) {
-        alert('로그인 중 오류가 발생했습니다.');
+        alert('아이디 혹은 비밀번호를 확인해주세요');
       }
     },
   });

@@ -26,7 +26,10 @@ interface GoogleLoginButtonProps {
 export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonProps) {
   const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
   const buttonSlotRef = useRef<HTMLDivElement>(null);
+  const authAttemptStartedRef = useRef(false);
+  const canRecoverAuthButtonRef = useRef(false);
   const resetTimerRef = useRef<number | undefined>(undefined);
+  const recoveryTimerRef = useRef<number | undefined>(undefined);
   const [isScriptReady, setIsScriptReady] = useState(false);
   const [renderVersion, setRenderVersion] = useState(0);
 
@@ -35,6 +38,13 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
   useEffect(() => {
     onCredentialRef.current = onCredential;
   }, [onCredential]);
+
+  const clearRecoveryTimer = useCallback(() => {
+    if (!recoveryTimerRef.current) return;
+
+    window.clearTimeout(recoveryTimerRef.current);
+    recoveryTimerRef.current = undefined;
+  }, []);
 
   const queueButtonRender = useCallback((delay = 100) => {
     if (resetTimerRef.current) {
@@ -46,13 +56,48 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
     }, delay);
   }, []);
 
+  const handleAuthAttemptStart = useCallback(() => {
+    authAttemptStartedRef.current = true;
+    canRecoverAuthButtonRef.current = false;
+    clearRecoveryTimer();
+
+    const isMobileLike =
+      window.matchMedia(`(max-width: 1023px)`).matches || window.navigator.maxTouchPoints > 0;
+
+    if (!isMobileLike) return;
+
+    recoveryTimerRef.current = window.setTimeout(() => {
+      canRecoverAuthButtonRef.current = true;
+    }, 2500);
+  }, [clearRecoveryTimer]);
+
   useEffect(() => {
+    const resetButton = () => {
+      if (document.visibilityState !== 'visible') return;
+      if (!authAttemptStartedRef.current || !canRecoverAuthButtonRef.current) return;
+
+      clearRecoveryTimer();
+      authAttemptStartedRef.current = false;
+      canRecoverAuthButtonRef.current = false;
+      queueButtonRender();
+    };
+
+    window.addEventListener('focus', resetButton);
+    window.addEventListener('pageshow', resetButton);
+    document.addEventListener('visibilitychange', resetButton);
+
     return () => {
       if (resetTimerRef.current) {
         window.clearTimeout(resetTimerRef.current);
       }
+
+      clearRecoveryTimer();
+
+      window.removeEventListener('focus', resetButton);
+      window.removeEventListener('pageshow', resetButton);
+      document.removeEventListener('visibilitychange', resetButton);
     };
-  }, []);
+  }, [clearRecoveryTimer, queueButtonRender]);
 
   // 화면 회전·리사이즈로 카드 폭이 바뀌면 버튼도 다시 그려야 한다.
   const [slotWidth, setSlotWidth] = useState(0);
@@ -76,13 +121,18 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
     window.google.accounts.id.initialize({
       client_id: clientId,
       callback: ({ credential }) => {
-        queueButtonRender();
+        authAttemptStartedRef.current = false;
+        canRecoverAuthButtonRef.current = false;
+        clearRecoveryTimer();
         onCredentialRef.current(credential);
       },
       // 사용자가 인증을 완료하지 않고 중간 iframe/시트를 닫았을 때 GIS가 보내주는 공식 신호.
       // 타이머나 visibilitychange 추측 대신 이 콜백이 왔을 때만 버튼을 다시 그린다.
       // (그래야 2.5초 넘게 걸리는 정상 인증 도중에 iframe이 날아가는 일이 없다)
       intermediate_iframe_close_callback: () => {
+        authAttemptStartedRef.current = false;
+        canRecoverAuthButtonRef.current = false;
+        clearRecoveryTimer();
         queueButtonRender();
       },
       auto_select: false,
@@ -108,8 +158,9 @@ export default function GoogleLoginButton({ onCredential }: GoogleLoginButtonPro
       logo_alignment: 'center',
       locale: 'ko',
       width: Math.min(MAX_BUTTON_WIDTH, Math.max(0, slotWidth - BUTTON_WIDTH_SAFETY_MARGIN)),
+      click_listener: handleAuthAttemptStart,
     });
-  }, [isScriptReady, clientId, slotWidth, renderVersion]);
+  }, [isScriptReady, clientId, slotWidth, renderVersion, handleAuthAttemptStart]);
 
   if (!clientId) {
     if (process.env.NODE_ENV !== 'production') {
