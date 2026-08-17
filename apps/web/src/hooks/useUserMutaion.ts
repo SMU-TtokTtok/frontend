@@ -1,9 +1,12 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postLogout } from '@/components/login/api';
 import { CustomHttpError } from '@/common/apis/apiClient';
 import { clearFCMToken } from '@/fcm/fcmToken';
+import { userKey } from './queries/key';
 
 export const useLogoutMutation = () => {
+  const queryClient = useQueryClient();
+
   const logoutMutation = useMutation({
     mutationFn: async () => {
       await clearFCMToken();
@@ -13,6 +16,7 @@ export const useLogoutMutation = () => {
       localStorage.removeItem('name');
       localStorage.removeItem('user_access_token');
       localStorage.removeItem('user_refresh_token');
+      queryClient.invalidateQueries({ queryKey: userKey.favoritesClubList });
 
       window.location.href = '/login';
     },

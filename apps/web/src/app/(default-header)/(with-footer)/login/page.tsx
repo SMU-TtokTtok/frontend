@@ -3,10 +3,12 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 import * as S from '@/components/login/login.css';
 import Button from '@/common/ui/button/index';
 import { loginSchema, LoginForm } from '@/components/login/schema';
 import { ROUTES } from '@/common/constants/routes';
+import { userKey } from '@/hooks/queries/key';
 import { postLogin } from '@/components/login/api';
 import { initializeAndSendFCMToken } from '@/fcm/fcmToken';
 import GoogleLoginButton from '@/components/login/googleLogin';
@@ -16,6 +18,7 @@ import { useGoogleLogin } from '@/hooks/useGoogleLogin';
 
 export default function Page() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const {
     onboarding,
     completedSignupName,
@@ -45,6 +48,7 @@ export default function Page() {
       };
       const response = await postLogin(loginData);
       if (response.success) {
+        queryClient.invalidateQueries({ queryKey: userKey.favoritesClubList });
         // 로그인 성공 후 FCM 토큰 초기화 및 전달
         // 백그라운드에서 처리되므로 await하지 않아도 됩니다
         initializeAndSendFCMToken().catch((error) => {

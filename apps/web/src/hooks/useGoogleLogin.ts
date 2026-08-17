@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 import { CustomHttpError } from '@/common/apis/apiClient';
 import { HTTP_STATUS } from '@/common/constants/httpStatus';
 import { GA_EVENTS, GA_METHODS } from '@/common/constants/gaEvents';
@@ -8,6 +9,7 @@ import { ROUTES } from '@/common/constants/routes';
 import { postGoogleLogin, postGoogleOnboarding } from '@/components/login/api/google';
 import type { GoogleLoginNeedsOnboarding } from '@/components/login/model';
 import { initializeAndSendFCMToken } from '@/fcm/fcmToken';
+import { userKey } from '@/hooks/queries/key';
 import { trackGAEvent } from '@/lib/ga';
 
 type OnboardingState = Omit<GoogleLoginNeedsOnboarding, 'needsOnboarding'>;
@@ -28,17 +30,19 @@ const getLoginErrorMessage = (error: unknown) => {
 
 export const useGoogleLogin = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [onboarding, setOnboarding] = useState<OnboardingState | null>(null);
   const [completedSignupName, setCompletedSignupName] = useState('');
   const [isPending, setIsPending] = useState(false);
 
   const completeLogin = useCallback(() => {
+    queryClient.invalidateQueries({ queryKey: userKey.favoritesClubList });
     // FCM 토큰은 백그라운드에서 처리되므로 await하지 않는다.
     initializeAndSendFCMToken().catch((error) => {
       console.error('FCM 토큰 초기화 실패:', error);
     });
     router.push(ROUTES.HOME);
-  }, [router]);
+  }, [queryClient, router]);
 
   /** GIS 콜백에서 받은 ID 토큰으로 로그인한다. */
   const handleCredential = useCallback(
