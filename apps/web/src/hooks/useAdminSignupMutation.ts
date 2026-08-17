@@ -1,12 +1,9 @@
 'use client';
 import { useMutation } from '@tanstack/react-query';
 import { postAdminSignup, AdminSignupForm } from '@/components/admin/signup/api/signup';
-import { useRouter } from 'next/navigation';
-import { ROUTES } from '@/common/constants/routes';
 import { CustomHttpError } from '@/common/apis/apiClient';
 
 export const useAdminSignupMutation = () => {
-  const router = useRouter();
 
   const signupMutation = useMutation({
     mutationFn: async (signupData: AdminSignupForm) => {

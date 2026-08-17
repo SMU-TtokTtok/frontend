@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CustomHttpError } from '@/common/apis/apiClient';
 import { HTTP_STATUS } from '@/common/constants/httpStatus';
+import { GA_EVENTS, GA_METHODS } from '@/common/constants/gaEvents';
 import { MESSAGE } from '@/common/constants/message';
 import { ROUTES } from '@/common/constants/routes';
 import { postGoogleLogin, postGoogleOnboarding } from '@/components/login/api/google';
@@ -28,6 +29,7 @@ const getLoginErrorMessage = (error: unknown) => {
 export const useGoogleLogin = () => {
   const router = useRouter();
   const [onboarding, setOnboarding] = useState<OnboardingState | null>(null);
+  const [completedSignupName, setCompletedSignupName] = useState('');
   const [isPending, setIsPending] = useState(false);
 
   const completeLogin = useCallback(() => {
@@ -47,16 +49,18 @@ export const useGoogleLogin = () => {
       }
 
       setIsPending(true);
+      setCompletedSignupName('');
       try {
         const response = await postGoogleLogin(idToken);
 
         if (response.data.needsOnboarding) {
           const { onboardingToken, email, suggestedName } = response.data;
           setOnboarding({ onboardingToken, email, suggestedName });
+          trackGAEvent(GA_EVENTS.GOOGLE_SIGNUP_START, { method: GA_METHODS.GOOGLE });
           return;
         }
 
-        trackGAEvent('login', { method: 'google' });
+        trackGAEvent(GA_EVENTS.LOGIN, { method: GA_METHODS.GOOGLE });
         completeLogin();
       } catch (error) {
         console.error('구글 로그인 실패:', error);
@@ -70,6 +74,7 @@ export const useGoogleLogin = () => {
 
   const cancelOnboarding = useCallback(() => {
     setOnboarding(null);
+    setCompletedSignupName('');
   }, []);
 
   /** 약관 동의 + 이름을 제출해 가입을 마친다. 온보딩 토큰이 만료되면 구글 로그인부터 다시 시작한다. */
@@ -87,8 +92,9 @@ export const useGoogleLogin = () => {
           name,
         });
 
-        trackGAEvent('sign_up', { method: 'google' });
-        completeLogin();
+        trackGAEvent(GA_EVENTS.SIGN_UP, { method: GA_METHODS.GOOGLE });
+        setCompletedSignupName(name);
+        setOnboarding(null);
       } catch (error) {
         console.error('구글 회원가입 실패:', error);
 
@@ -108,14 +114,16 @@ export const useGoogleLogin = () => {
         setIsPending(false);
       }
     },
-    [completeLogin, onboarding],
+    [onboarding],
   );
 
   return {
     onboarding,
+    completedSignupName,
     isPending,
     handleCredential,
     submitOnboarding,
     cancelOnboarding,
+    completeLogin,
   };
 };

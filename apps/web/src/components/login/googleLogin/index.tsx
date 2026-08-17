@@ -3,6 +3,8 @@
 import Script from 'next/script';
 import { useEffect, useRef, useState } from 'react';
 
+import { GA_EVENTS } from '@/common/constants/gaEvents';
+import { trackGAEvent } from '@/lib/ga';
 import * as S from './googleLogin.css';
 
 const GIS_SCRIPT_SRC = 'https://accounts.google.com/gsi/client';
@@ -162,6 +164,7 @@ export default function GoogleLoginButton({
       <div
         ref={buttonSlotRef}
         className={S.ButtonSlot}
+        onClick={() => trackGAEvent(GA_EVENTS.GOOGLE_LOGIN_CLICK)}
       />
 
       <p className={S.GuideText}>

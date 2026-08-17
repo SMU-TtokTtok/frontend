@@ -7,12 +7,13 @@ export const Container = style({
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'column',
+
   gap: '24px',
   minHeight: 'inherit',
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
-      padding: '0 20px',
+      padding: '40px 20px',
       gap: '16px',
     },
   },
