@@ -22,6 +22,7 @@ interface BoardFormModalProps {
 function BoardFormModal({ clubId, boardId, isSubmitting, onSubmit, onClose }: BoardFormModalProps) {
   const isEditMode = Boolean(boardId);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
   const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [thumbnailError, setThumbnailError] = useState('');
@@ -40,7 +41,7 @@ function BoardFormModal({ clubId, boardId, isSubmitting, onSubmit, onClose }: Bo
     defaultValues: { title: '' },
   });
 
-  usePreventScroll(true);
+  usePreventScroll(true, scrollAreaRef);
 
   useEffect(() => {
     if (detail) {
@@ -108,7 +109,7 @@ function BoardFormModal({ clubId, boardId, isSubmitting, onSubmit, onClose }: Bo
           </button>
         </div>
 
-        <div className={S.body}>
+        <div ref={scrollAreaRef} className={S.body}>
           <div className={S.field}>
             <div className={S.labelRow}>
               <label htmlFor="boardTitle" className={S.label}>

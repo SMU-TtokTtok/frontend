@@ -110,6 +110,8 @@ export const body = style({
   flex: '1 1 auto',
   minHeight: 0,
   overflowY: 'auto',
+  overscrollBehavior: 'contain',
+  WebkitOverflowScrolling: 'touch',
   display: 'flex',
   flexDirection: 'column',
   gap: '22px',

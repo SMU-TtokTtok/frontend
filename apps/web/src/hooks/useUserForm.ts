@@ -22,14 +22,14 @@ export const useClubInfo = (clubId: string) => {
 export const useGetTempData = (formId: string) => {
   const { userTempData } = userTempDataKey;
 
-  const { data } = useSuspenseQuery({
+  const { data, isFetched } = useSuspenseQuery({
     queryKey: [userTempData, formId],
     queryFn: () => getFormData(formId),
   });
-  return { data };
+  return { data, isFetched };
 };
 
-export const usePostForm = (handleEditModalOpen: () => void) => {
+export const usePostForm = (handleEditModalOpen: () => void, onSuccess?: () => void) => {
   const queryClient = useQueryClient();
   const { appliedClubList } = userKey;
 
@@ -37,6 +37,7 @@ export const usePostForm = (handleEditModalOpen: () => void) => {
     mutationFn: ({ body, clubId }: { body: FormData; clubId: string }) =>
       postFormInfo(body, clubId),
     onSuccess: () => {
+      onSuccess?.();
       handleEditModalOpen();
       queryClient.invalidateQueries({ queryKey: appliedClubList });
     },
@@ -60,7 +61,7 @@ export const usePostForm = (handleEditModalOpen: () => void) => {
   return { handlePostForm, isSubmitting: postFormMutation.isPending };
 };
 
-export const usePostTempData = (handleTempSaveModalOpen: () => void) => {
+export const usePostTempData = (handleTempSaveModalOpen: () => void, onSuccess?: () => void) => {
   const queryClient = useQueryClient();
   const { userTempData } = userTempDataKey;
 
@@ -68,6 +69,7 @@ export const usePostTempData = (handleTempSaveModalOpen: () => void) => {
     mutationFn: ({ body, formId }: { body: FormData; formId: string }) =>
       postFormTempData(body, formId),
     onSuccess: (_data: unknown, variables: { body: FormData; formId: string }) => {
+      onSuccess?.();
       handleTempSaveModalOpen();
       queryClient.invalidateQueries({ queryKey: [userTempData, variables.formId] });
     },

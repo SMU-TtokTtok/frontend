@@ -8,11 +8,22 @@ import { ROUTES } from '@/common/constants/routes';
 
 interface SignupCompleteProps {
   userName: string;
+  onStart?: () => void;
 }
 
-export default function SignupComplete({ userName }: SignupCompleteProps) {
+export default function SignupComplete({ userName, onStart }: SignupCompleteProps) {
   const router = useRouter();
   useConfetti();
+
+  const handleStart = () => {
+    if (onStart) {
+      onStart();
+      return;
+    }
+
+    router.push(ROUTES.HOME);
+  };
+
   return (
     <div className={S.CompleteBox}>
       <div className={S.CompleteTitle}>회원가입 완료!</div>
@@ -24,7 +35,7 @@ export default function SignupComplete({ userName }: SignupCompleteProps) {
       <Button
         variant="primary"
         className={S.CompleteButton}
-        onClick={() => router.push(ROUTES.HOME)}
+        onClick={handleStart}
       >
         시작하기
       </Button>

@@ -12,6 +12,7 @@ import { signupSchema } from './schema';
 import { FILTER_CONFIG } from '@/common/constants';
 import { useState } from 'react';
 import SignupCompletePage from './complete/page';
+import { useClubSignupAnalytics } from '@/hooks/useClubSignupAnalytics';
 
 export type AdminSignupForm = z.infer<typeof signupSchema>;
 
@@ -25,6 +26,7 @@ function SignupPage() {
   });
   const [isComplete, setIsComplete] = useState(false);
   const { handleSignup, signupMutation } = useAdminSignupMutation();
+  const { trackSignupStart, trackSignupSubmit, trackSignupSuccess } = useClubSignupAnalytics();
 
   if (isComplete) {
     return <SignupCompletePage />;
@@ -39,8 +41,11 @@ function SignupPage() {
       </p>
       <form
         className={S.BoxContainer}
+        onChange={trackSignupStart}
         onSubmit={handleSubmit((data) => {
+          trackSignupSubmit();
           handleSignup(data, () => {
+            trackSignupSuccess();
             setIsComplete(true);
           });
         })}

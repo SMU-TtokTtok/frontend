@@ -3,6 +3,8 @@
 import Script from 'next/script';
 import { useEffect, useRef, useState } from 'react';
 
+import { GA_EVENTS } from '@/common/constants/gaEvents';
+import { trackGAEvent } from '@/lib/ga';
 import * as S from './googleLogin.css';
 
 const GIS_SCRIPT_SRC = 'https://accounts.google.com/gsi/client';
@@ -132,6 +134,7 @@ export default function GoogleLoginButton({
       logo_alignment: 'center',
       locale: 'ko',
       width: buttonWidth,
+      click_listener: () => trackGAEvent(GA_EVENTS.GOOGLE_LOGIN_CLICK),
     });
   }, [isScriptReady, clientId, slotWidth]);
 
@@ -159,10 +162,7 @@ export default function GoogleLoginButton({
         }}
       />
 
-      <div
-        ref={buttonSlotRef}
-        className={S.ButtonSlot}
-      />
+      <div ref={buttonSlotRef} className={S.ButtonSlot} />
 
       <p className={S.GuideText}>
         구글 계정으로 간편하게 로그인할 수 있어요.
