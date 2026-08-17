@@ -1,8 +1,18 @@
 ﻿import { createVar, style } from '@vanilla-extract/css';
+import { keyframes } from '@vanilla-extract/css';
 import { vars } from '@/common/styles/theme.css';
 import { BREAKPOINTS } from '@/common/constants/breakpoints';
 
 export const sidebarTop = createVar();
+
+const skeletonShimmer = keyframes({
+  '0%': {
+    backgroundPosition: '100% 0',
+  },
+  '100%': {
+    backgroundPosition: '-100% 0',
+  },
+});
 
 export const wrapper = style({
   display: 'flex',
@@ -500,4 +510,85 @@ export const hiddenCheckbox = style({
   left: '-9999px',
   opacity: 0,
   pointerEvents: 'none',
+});
+
+export const skeletonBlock = style({
+  display: 'block',
+  borderRadius: '6px',
+  background: 'linear-gradient(90deg, #eef1f5 25%, #f7f8fa 50%, #eef1f5 75%)',
+  backgroundSize: '200% 100%',
+  animation: `${skeletonShimmer} 1.2s ease-in-out infinite`,
+});
+
+export const formTitleSkeleton = style({
+  width: '42%',
+  height: '28px',
+});
+
+export const formSubTitleSkeleton = style({
+  width: '64%',
+  height: '20px',
+});
+
+export const sectionTitleSkeleton = style({
+  width: '140px',
+  height: '24px',
+});
+
+export const skeletonFieldGrid = style({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  gap: '20px 12px',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop}px)`]: {
+      gridTemplateColumns: '1fr',
+    },
+  },
+});
+
+export const skeletonFieldGroup = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '8px',
+});
+
+export const fieldLabelSkeleton = style({
+  width: '88px',
+  height: '18px',
+});
+
+export const inputSkeleton = style({
+  width: '100%',
+  height: '46px',
+});
+
+export const questionTitleSkeleton = style({
+  width: '48%',
+  height: '24px',
+});
+
+export const questionSubTitleSkeleton = style({
+  width: '72%',
+  height: '18px',
+});
+
+export const answerSkeleton = style({
+  width: '100%',
+  height: '48px',
+});
+
+export const sidebarTitleSkeleton = style({
+  width: '74px',
+  height: '24px',
+});
+
+export const sidebarItemSkeleton = style({
+  width: '100%',
+  height: '18px',
+});
+
+export const sidebarButtonSkeleton = style({
+  width: '100%',
+  height: '54px',
 });
