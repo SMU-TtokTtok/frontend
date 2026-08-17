@@ -145,7 +145,7 @@ export default function QuestionsSection({ questions, register, errors }: Questi
           <div key={index} className={S.questionContainer}>
             <div className={S.questionHeader}>
               <div className={S.FormContentTitle}>
-                {question.title}
+                {question.title}(최대 1GB까지 가능)
                 {question.isEssential && <span className={S.FormContentTitleEssential}>*</span>}
               </div>
               {question.subTitle && (

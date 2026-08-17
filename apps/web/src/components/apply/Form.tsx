@@ -14,6 +14,7 @@ import ConfirmModal from '@/common/components/confirmModal';
 import { useModal } from '@/hooks/useModal';
 import { ROUTES } from '@/common/constants/routes';
 import { TempDataAnswer, Question, TempData } from '@/common/model/form';
+import { useApplyFormAnalytics } from '@/hooks/useApplyFormAnalytics';
 
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId);
@@ -37,17 +38,35 @@ export default function Form({ clubId }: { clubId: string }) {
   const { data: clubData } = useClubInfo(clubId);
   // formId가 있을 때만 임시저장 데이터 조회
   const { data: tempData } = useGetTempData(clubData?.formId || '');
-  const { handlePostForm, isSubmitting } = usePostForm(handleEditModalOpen);
-  const { handlePostTempData } = usePostTempData(handleTempSaveModalOpen);
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
     watch,
+    getValues,
   } = useForm<ApplyFormData>({
     resolver: zodResolver(applyFormSchema),
   });
+
+  const {
+    trackFormStart,
+    trackTempSaveAttempt,
+    trackTempSaveSuccess,
+    trackSubmitAttempt,
+    trackSubmitSuccess,
+  } = useApplyFormAnalytics({
+    clubId,
+    formId: clubData?.formId,
+    questions: clubData?.questions,
+    tempData,
+    getValues,
+  });
+  const { handlePostForm, isSubmitting } = usePostForm(handleEditModalOpen, trackSubmitSuccess);
+  const { handlePostTempData } = usePostTempData(
+    handleTempSaveModalOpen,
+    trackTempSaveSuccess,
+  );
 
   // 질문 데이터가 로드되면 questionId 설정
   React.useEffect(() => {
@@ -274,6 +293,7 @@ export default function Form({ clubId }: { clubId: string }) {
       );
     }
 
+    trackSubmitAttempt();
     handlePostForm(formData, clubId);
   };
 
@@ -352,6 +372,7 @@ export default function Form({ clubId }: { clubId: string }) {
     }
 
     if (clubData?.formId) {
+      trackTempSaveAttempt();
       handlePostTempData(formData, clubData.formId);
     }
   };
@@ -360,9 +381,21 @@ export default function Form({ clubId }: { clubId: string }) {
     console.log('폼 에러:', errors);
   };
 
+  const handleFormChange = (event: React.FormEvent<HTMLFormElement>) => {
+    if (!event.nativeEvent.isTrusted) {
+      return;
+    }
+
+    trackFormStart();
+  };
+
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit, onError)} className={S.wrapper}>
+      <form
+        onSubmit={handleSubmit(onSubmit, onError)}
+        onChange={handleFormChange}
+        className={S.wrapper}
+      >
         <div className={S.contentContainer}>
           <div className={S.FormHeader}>
             <div className={S.FormTitle}>{clubData?.title} </div>
