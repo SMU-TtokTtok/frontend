@@ -134,6 +134,7 @@ export default function GoogleLoginButton({
       logo_alignment: 'center',
       locale: 'ko',
       width: buttonWidth,
+      click_listener: () => trackGAEvent(GA_EVENTS.GOOGLE_LOGIN_CLICK),
     });
   }, [isScriptReady, clientId, slotWidth]);
 
@@ -161,11 +162,7 @@ export default function GoogleLoginButton({
         }}
       />
 
-      <div
-        ref={buttonSlotRef}
-        className={S.ButtonSlot}
-        onClick={() => trackGAEvent(GA_EVENTS.GOOGLE_LOGIN_CLICK)}
-      />
+      <div ref={buttonSlotRef} className={S.ButtonSlot} />
 
       <p className={S.GuideText}>
         구글 계정으로 간편하게 로그인할 수 있어요.

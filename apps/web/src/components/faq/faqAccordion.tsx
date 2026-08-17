@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { StaticImageData } from 'next/image';
 import * as S from './index.css';
 import FaqItem from './faqItem';
@@ -49,21 +49,76 @@ const FAQ_LIST: FaqItemData[] = [
 export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [previewImage, setPreviewImage] = useState<FaqImagePreviewData | null>(null);
+  const previewDialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusedElementRef = useRef<HTMLElement | null>(null);
 
   const handleToggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
-  const handlePreviewClose = () => {
-    setPreviewImage(null);
+  const handlePreviewOpen = (image: FaqImagePreviewData) => {
+    previousFocusedElementRef.current =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setPreviewImage(image);
   };
+
+  const handlePreviewClose = useCallback(() => {
+    setPreviewImage(null);
+    requestAnimationFrame(() => {
+      previousFocusedElementRef.current?.focus();
+      previousFocusedElementRef.current = null;
+    });
+  }, []);
 
   useEffect(() => {
     if (!previewImage) return;
 
+    closeButtonRef.current?.focus();
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         handlePreviewClose();
+        return;
+      }
+
+      if (event.key !== 'Tab') {
+        return;
+      }
+
+      const dialog = previewDialogRef.current;
+      if (!dialog) return;
+
+      const focusableElements = Array.from(
+        dialog.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((element) => !element.hasAttribute('disabled') && element.tabIndex !== -1);
+
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (!dialog.contains(activeElement)) {
+        event.preventDefault();
+        firstElement.focus();
+        return;
+      }
+
+      if (event.shiftKey && activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+        return;
+      }
+
+      if (!event.shiftKey && activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
 
@@ -72,7 +127,7 @@ export default function FaqAccordion() {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [previewImage]);
+  }, [previewImage, handlePreviewClose]);
 
   const isDividerVisible = (index: number) =>
     index > 0 && openIndex !== index && openIndex !== index - 1;
@@ -88,21 +143,27 @@ export default function FaqAccordion() {
             isExpanded={openIndex === index}
             showDivider={isDividerVisible(index)}
             onToggle={() => handleToggle(index)}
-            onInstallGuideImageClick={setPreviewImage}
+            onInstallGuideImageClick={handlePreviewOpen}
           />
         ))}
       </div>
       {previewImage && (
         <div
+          ref={previewDialogRef}
           className={S.imagePreviewOverlay}
           role="dialog"
           aria-modal="true"
+          aria-label="설치 가이드 이미지 미리보기"
           onClick={handlePreviewClose}
         >
           <button
+            ref={closeButtonRef}
             type="button"
             className={S.imagePreviewCloseButton}
-            onClick={handlePreviewClose}
+            onClick={(event) => {
+              event.stopPropagation();
+              handlePreviewClose();
+            }}
             aria-label="닫기"
           >
             ×

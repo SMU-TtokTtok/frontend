@@ -22,11 +22,11 @@ export const useClubInfo = (clubId: string) => {
 export const useGetTempData = (formId: string) => {
   const { userTempData } = userTempDataKey;
 
-  const { data } = useSuspenseQuery({
+  const { data, isFetched } = useSuspenseQuery({
     queryKey: [userTempData, formId],
     queryFn: () => getFormData(formId),
   });
-  return { data };
+  return { data, isFetched };
 };
 
 export const usePostForm = (handleEditModalOpen: () => void, onSuccess?: () => void) => {

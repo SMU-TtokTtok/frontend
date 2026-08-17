@@ -10,6 +10,7 @@ interface UseApplyFormAnalyticsParams {
   formId?: string;
   questions?: Question[];
   tempData?: getTempData;
+  isTempDataFetched: boolean;
   getValues: UseFormGetValues<ApplyFormData>;
 }
 
@@ -59,6 +60,7 @@ export const useApplyFormAnalytics = ({
   formId,
   questions = [],
   tempData,
+  isTempDataFetched,
   getValues,
 }: UseApplyFormAnalyticsParams) => {
   const trackedStartFormIds = useRef(new Set<string>());
@@ -70,6 +72,7 @@ export const useApplyFormAnalytics = ({
   // tempData는 이후 임시저장/재조회로 값이 바뀔 수 있으므로, formId가 바뀔 때만 다시 캡처한다.
   if (
     formId &&
+    isTempDataFetched &&
     (!visitTempDataState.current || visitTempDataState.current.formId !== formId)
   ) {
     visitTempDataState.current = {
@@ -78,7 +81,12 @@ export const useApplyFormAnalytics = ({
     };
   }
 
-  const hasTempData = visitTempDataState.current?.hasTempData ?? false;
+  const initialTempDataState = visitTempDataState.current;
+  const isInitialTempDataReady = initialTempDataState?.formId === formId;
+  const hasTempData =
+    initialTempDataState && initialTempDataState.formId === formId
+      ? initialTempDataState.hasTempData
+      : false;
 
   const baseParams = useMemo(
     () => ({
@@ -156,20 +164,28 @@ export const useApplyFormAnalytics = ({
   }, [trackWithCurrentState]);
 
   useEffect(() => {
+    if (!isInitialTempDataReady) {
+      return;
+    }
+
     if (!shouldTrackOnce(trackedViewFormIds.current, formId)) {
       return;
     }
 
     trackGAEvent(GA_EVENTS.APPLY_FORM_VIEW, baseParams);
-  }, [baseParams, formId]);
+  }, [baseParams, formId, isInitialTempDataReady]);
 
   useEffect(() => {
-    if (!tempData?.hasTempData || !shouldTrackOnce(trackedResumeFormIds.current, formId)) {
+    if (
+      !isInitialTempDataReady ||
+      !hasTempData ||
+      !shouldTrackOnce(trackedResumeFormIds.current, formId)
+    ) {
       return;
     }
 
     trackGAEvent(GA_EVENTS.APPLY_RESUME, baseParams);
-  }, [baseParams, formId, tempData?.hasTempData]);
+  }, [baseParams, formId, hasTempData, isInitialTempDataReady]);
 
   return {
     trackFormStart,

@@ -37,7 +37,7 @@ export default function Form({ clubId }: { clubId: string }) {
   } = useModal();
   const { data: clubData } = useClubInfo(clubId);
   // formId가 있을 때만 임시저장 데이터 조회
-  const { data: tempData } = useGetTempData(clubData?.formId || '');
+  const { data: tempData, isFetched: isTempDataFetched } = useGetTempData(clubData?.formId || '');
   const {
     register,
     handleSubmit,
@@ -60,6 +60,7 @@ export default function Form({ clubId }: { clubId: string }) {
     formId: clubData?.formId,
     questions: clubData?.questions,
     tempData,
+    isTempDataFetched,
     getValues,
   });
   const { handlePostForm, isSubmitting } = usePostForm(handleEditModalOpen, trackSubmitSuccess);
