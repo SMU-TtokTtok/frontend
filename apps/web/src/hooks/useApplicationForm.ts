@@ -48,30 +48,23 @@ export const useApplicationForm = () => {
   };
 
   const handleAddField = ({ newField }: { newField?: ApplyFormField } = {}) => {
-    if (newField) {
-      setQeustionsData((prev) => ({
-        ...prev,
-        questions: [
-          ...prev.questions,
-          { ...newField, questionId: newField.questionId ?? generateTempId() },
-        ],
-      }));
-      return;
-    }
-
-    const newBaseField = {
-      questionId: generateTempId(),
-      title: '',
-      subTitle: '',
-      questionType: 'SHORT_ANSWER' as QuestionType,
-      isEssential: false,
-      content: [''],
-    };
+    const fieldToAdd: ApplyFormField = newField
+      ? { ...newField, questionId: generateTempId() }
+      : {
+          questionId: generateTempId(),
+          title: '',
+          subTitle: '',
+          questionType: 'SHORT_ANSWER' as QuestionType,
+          isEssential: false,
+          content: [''],
+        };
 
     setQeustionsData((prev) => ({
       ...prev,
-      questions: [...prev.questions, newBaseField],
+      questions: [...prev.questions, fieldToAdd],
     }));
+
+    return fieldToAdd.questionId as string;
   };
 
   const handleUpdateField = (fieldId: string, updatedField: ApplyFormField) => {
@@ -83,6 +76,32 @@ export const useApplicationForm = () => {
       );
       return { ...prev, questions: newQuestions };
     });
+  };
+
+  const handleAddFieldBelow = (fieldId: string) => {
+    const newField: ApplyFormField = {
+      questionId: generateTempId(),
+      title: '',
+      subTitle: '',
+      questionType: 'SHORT_ANSWER' as QuestionType,
+      isEssential: false,
+      content: [''],
+    };
+
+    setQeustionsData((prev) => {
+      const targetIndex = prev.questions.findIndex((q, index) =>
+        isSameField(q, index, fieldId),
+      );
+      if (targetIndex === -1) {
+        return { ...prev, questions: [...prev.questions, newField] };
+      }
+
+      const newQuestions = [...prev.questions];
+      newQuestions.splice(targetIndex + 1, 0, newField);
+      return { ...prev, questions: newQuestions };
+    });
+
+    return newField.questionId as string;
   };
 
   const handleDeleteField = (fieldId: string) => {
@@ -160,6 +179,7 @@ export const useApplicationForm = () => {
     setQeustionsData,
     handleQuestionTypeChange,
     handleAddField,
+    handleAddFieldBelow,
     handleUpdateField,
     handleDeleteField,
     handleEssentialChange,

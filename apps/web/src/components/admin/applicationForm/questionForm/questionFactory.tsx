@@ -16,6 +16,7 @@ interface FormFieldFactoryProps {
   handleQuestionTypeChange: (type: QuestionType) => void;
   handleUpdateField: (fieldId: string, data: ApplyFormField) => void;
   handleDeleteField: (fieldId: string) => void;
+  handleAddFieldBelow: (fieldId: string) => void;
   handleEssentialChange: (fieldId: string, isEssential: boolean) => void;
   handleOptionChange: (fieldId: string, optionIndex: number, value: string) => void;
   handleOptionAdd: (fieldId: string) => void;
@@ -32,6 +33,7 @@ function FormFieldFactory({
   handleQuestionTypeChange,
   handleUpdateField,
   handleDeleteField,
+  handleAddFieldBelow,
   handleEssentialChange,
   handleOptionChange,
   handleOptionAdd,
@@ -50,6 +52,7 @@ function FormFieldFactory({
           handleQuestionTypeChange={handleQuestionTypeChange}
           handleUpdateField={handleUpdateField}
           handleDeleteField={handleDeleteField}
+          handleAddFieldBelow={handleAddFieldBelow}
           handleEssentialChange={handleEssentialChange}
         />
       );
@@ -65,6 +68,7 @@ function FormFieldFactory({
           handleQuestionTypeChange={handleQuestionTypeChange}
           handleUpdateField={handleUpdateField}
           handleDeleteField={handleDeleteField}
+          handleAddFieldBelow={handleAddFieldBelow}
           handleEssentialChange={handleEssentialChange}
         />
       );
@@ -80,6 +84,7 @@ function FormFieldFactory({
           handleQuestionTypeChange={handleQuestionTypeChange}
           handleUpdateField={handleUpdateField}
           handleDeleteField={handleDeleteField}
+          handleAddFieldBelow={handleAddFieldBelow}
           handleEssentialChange={handleEssentialChange}
           handleOptionChange={handleOptionChange}
           handleOptionAdd={handleOptionAdd}
@@ -99,6 +104,7 @@ function FormFieldFactory({
           handleQuestionTypeChange={handleQuestionTypeChange}
           handleUpdateField={handleUpdateField}
           handleDeleteField={handleDeleteField}
+          handleAddFieldBelow={handleAddFieldBelow}
           handleEssentialChange={handleEssentialChange}
           handleOptionChange={handleOptionChange}
           handleOptionAdd={handleOptionAdd}
@@ -118,6 +124,7 @@ function FormFieldFactory({
           handleQuestionTypeChange={handleQuestionTypeChange}
           handleUpdateField={handleUpdateField}
           handleDeleteField={handleDeleteField}
+          handleAddFieldBelow={handleAddFieldBelow}
           handleEssentialChange={handleEssentialChange}
         />
       );

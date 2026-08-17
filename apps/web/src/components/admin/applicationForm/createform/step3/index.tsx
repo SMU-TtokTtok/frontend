@@ -19,7 +19,8 @@ function FormQuestionStep() {
     previousStepData,
     setQeustionsData,
     handleQuestionTypeChange,
-    handleAddField,
+    handleAddField: addField,
+    handleAddFieldBelow: addFieldBelow,
     handleUpdateField,
     handleDeleteField,
     handleEssentialChange,
@@ -34,10 +35,28 @@ function FormQuestionStep() {
   const { result, errors } = useApplicationFormValidation(questionsData);
   const scrollRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const handleScrollTo = (index: number) => {
-    const questionId = questionsData.questions[index]?.questionId ?? index.toString();
+  const scrollToQuestion = (questionId: string) => {
     const target = scrollRefs.current[questionId];
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleScrollTo = (index: number) => {
+    const questionId = questionsData.questions[index]?.questionId ?? index.toString();
+    scrollToQuestion(questionId);
+  };
+
+  const handleAddFieldBelow = (fieldId: string) => {
+    const newFieldId = addFieldBelow(fieldId);
+    requestAnimationFrame(() => {
+      scrollToQuestion(newFieldId);
+    });
+  };
+
+  const handleAddField = (param?: { newField?: ApplyFormField }) => {
+    const newFieldId = addField(param);
+    requestAnimationFrame(() => {
+      scrollToQuestion(newFieldId);
+    });
   };
 
   const handleReorderQuestions = (newOrder: ApplyFormField[]) => {
@@ -75,6 +94,7 @@ function FormQuestionStep() {
         handleUpdateField={handleUpdateField}
         scrollRefs={scrollRefs}
         handleDeleteField={handleDeleteField}
+        handleAddFieldBelow={handleAddFieldBelow}
         handleEssentialChange={handleEssentialChange}
         handleOptionChange={handleOptionChange}
         handleOptionAdd={handleOptionAdd}
