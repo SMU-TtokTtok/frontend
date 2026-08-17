@@ -9,8 +9,8 @@ import ClubIntroduce from '@/components/clubInfo/ClubIntro';
 import RightSide from '@/components/clubInfo/RightSide';
 import { useParams } from 'next/navigation';
 import { useClubInfo } from '@/hooks/useClubInfo';
-import LoadingSpinner from '@/common/ui/loading';
 import { useScrollTop } from '@/hooks/useScrollTop';
+import ClubInfoSkeleton from './ClubInfoSkeleton';
 
 const ClubInfoPage = () => {
   const { clubId } = useParams();
@@ -31,7 +31,7 @@ const ClubInfoPage = () => {
 
   return (
     <>
-      <Suspense fallback={<LoadingSpinner />}>
+      <Suspense fallback={<ClubInfoSkeleton />}>
         <div className={S.wrapper}>
           <div className={S.container}>
             <div className={S.leftcontainer}>
@@ -49,4 +49,7 @@ const ClubInfoPage = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(ClubInfoPage), { ssr: false });
+export default dynamic(() => Promise.resolve(ClubInfoPage), {
+  ssr: false,
+  loading: () => <ClubInfoSkeleton />,
+});

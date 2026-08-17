@@ -2,11 +2,11 @@
 import { useClubsInfinite } from '@/hooks/useClubsInfinite';
 import * as S from './clubList.css';
 import ClubItem from '@/common/components/clubItem';
+import ClubItemSkeleton from '@/common/components/clubItem/ClubItemSkeleton';
 import { SearchQueryReturn } from '@/hooks/useSearchQuery';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from 'react';
 import Empty from '@/common/components/empty';
-import LoadingSpinner from '@/common/ui/loading';
 import { useModal } from '@/hooks/useModal';
 import ConfirmModal from '@/common/components/confirmModal';
 interface ClubListProps {
@@ -36,7 +36,15 @@ function ClubList({ selectedOptions }: ClubListProps) {
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   if (isLoading) {
-    return <LoadingSpinner />;
+    return (
+      <div className={S.container} aria-busy="true" aria-label="동아리 목록을 불러오는 중입니다">
+        <ul className={S.innerWrapper}>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <ClubItemSkeleton key={index} className={S.cardStyle} />
+          ))}
+        </ul>
+      </div>
+    );
   }
 
   return (
@@ -56,6 +64,13 @@ function ClubList({ selectedOptions }: ClubListProps) {
       )}
       {isEmpty && <Empty className={S.emptyText}>동아리 목록이 없습니다</Empty>}
       <div ref={ref} />
+      {isFetchingNextPage && (
+        <ul className={S.innerWrapper} aria-hidden="true">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <ClubItemSkeleton key={index} className={S.cardStyle} />
+          ))}
+        </ul>
+      )}
       <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
         {favoriteModalMessage}
       </ConfirmModal>

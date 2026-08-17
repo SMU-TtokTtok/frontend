@@ -3,8 +3,19 @@ import ClubList from './clubList';
 import Slider from './slider';
 import Link from 'next/link';
 import { ROUTES } from '@/common/constants/routes';
-import LoadingSpinner from '@/common/ui/loading';
+import ClubItemSkeleton from '@/common/components/clubItem/ClubItemSkeleton';
 import { Suspense } from 'react';
+
+function PopularClubListSkeleton() {
+  return (
+    <ul className={S.PopularClubListWrapper} aria-hidden="true">
+      {Array.from({ length: 4 }).map((_, index) => (
+        <ClubItemSkeleton key={index} className={S.cardStyle} />
+      ))}
+    </ul>
+  );
+}
+
 function PopularClubList() {
   return (
     <div>
@@ -14,7 +25,13 @@ function PopularClubList() {
           <p className={S.Plus}>더보기</p>
         </Link>
       </div>
-      <Suspense fallback={<LoadingSpinner />}>
+      <Suspense
+        fallback={
+          <Slider>
+            <PopularClubListSkeleton />
+          </Slider>
+        }
+      >
         <Slider>
           <ClubList />
         </Slider>
