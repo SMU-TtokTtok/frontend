@@ -29,6 +29,7 @@ function ApplicationFormPage() {
     setQeustionsData,
     handleQuestionTypeChange,
     handleAddField,
+    handleAddFieldBelow: addFieldBelow,
     handleUpdateField,
     handleDeleteField,
     handleEssentialChange,
@@ -45,10 +46,21 @@ function ApplicationFormPage() {
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
   const scrollRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const handleScrollTo = (index: number) => {
-    const questionId = questionsData.questions[index]?.questionId ?? index.toString();
+  const scrollToQuestion = (questionId: string) => {
     const target = scrollRefs.current[questionId];
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  const handleScrollTo = (index: number) => {
+    const questionId = questionsData.questions[index]?.questionId ?? index.toString();
+    scrollToQuestion(questionId);
+  };
+
+  const handleAddFieldBelow = (fieldId: string) => {
+    const newFieldId = addFieldBelow(fieldId);
+    requestAnimationFrame(() => {
+      scrollToQuestion(newFieldId);
+    });
   };
 
   const mergeFormData = {
@@ -117,6 +129,7 @@ function ApplicationFormPage() {
             handleAddField={handleAddField}
             handleUpdateField={handleUpdateField}
             handleDeleteField={handleDeleteField}
+            handleAddFieldBelow={handleAddFieldBelow}
             handleEssentialChange={handleEssentialChange}
             handleOptionChange={handleOptionChange}
             handleOptionAdd={handleOptionAdd}

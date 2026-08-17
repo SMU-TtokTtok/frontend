@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import type { StaticImageData } from 'next/image';
 import { Button } from '@ttockttock/ui';
 import * as S from './index.css';
 import iosInstallGuideImage from './assets/images/ios-install-guide.webp';
@@ -12,6 +13,14 @@ const INSTALL_GUIDE_OPTIONS = [
 ] as const;
 
 type InstallGuidePlatform = (typeof INSTALL_GUIDE_OPTIONS)[number]['key'];
+type InstallGuideImage = {
+  src: StaticImageData;
+  alt: string;
+};
+
+type InstallGuideSectionProps = {
+  onImageClick?: (image: InstallGuideImage) => void;
+};
 
 export function InstallGuideImagePreloader() {
   return (
@@ -33,7 +42,7 @@ export function InstallGuideImagePreloader() {
   );
 }
 
-export default function InstallGuideSection() {
+export default function InstallGuideSection({ onImageClick }: InstallGuideSectionProps) {
   const [platform, setPlatform] = useState<InstallGuidePlatform>('ios');
   const selectedGuide = INSTALL_GUIDE_OPTIONS.find((option) => option.key === platform)!;
 
@@ -57,13 +66,24 @@ export default function InstallGuideSection() {
           );
         })}
       </div>
-      <img
+      <button
+        type="button"
+        className={S.answerImageButton}
+        onClick={() =>
+          onImageClick?.({
+            src: selectedGuide.image,
+            alt: `${selectedGuide.label} install guide image`,
+          })
+        }
+      >
+        <img
         src={selectedGuide.image.src}
         alt={`${selectedGuide.label} 앱 설치 가이드 이미지`}
         width={selectedGuide.image.width}
         height={selectedGuide.image.height}
         className={S.answerImage}
       />
+      </button>
     </div>
   );
 }

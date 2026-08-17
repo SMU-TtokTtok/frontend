@@ -247,14 +247,50 @@ export const horizonLine = style({
   },
 });
 
-export const deleteButton = style({
+export const fieldOptionButton = style({
   cursor: 'pointer',
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
-      width: '24px',
-      height: '24px',
+      width: '20px',
+      height: '20px',
     },
   },
+});
+
+export const fieldOptionList = style({
+  width: '140px',
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      width: '120px',
+    },
+  },
+});
+
+export const fieldOptionItem = style({
+  width: '100%',
+  cursor: 'pointer',
+  color: vars.colors.surface.on_surf,
+  fontSize: vars.fonts.body2,
+  fontWeight: 600,
+  textAlign: 'left',
+  padding: '12px 20px',
+  whiteSpace: 'nowrap',
+  selectors: {
+    '&:hover': {
+      backgroundColor: vars.colors.primary.base,
+      color: vars.colors.primary.default,
+    },
+  },
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.desktop - 1}px)`]: {
+      padding: '10px 12px',
+      fontSize: vars.fonts.m_body1,
+    },
+  },
+});
+
+export const fieldOptionItemDelete = style({
+  color: vars.colors.error.primary,
 });
 
 export const questionTitle = recipe({

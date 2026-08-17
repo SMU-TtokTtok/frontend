@@ -4,8 +4,8 @@ import DropDown from '@/common/components/dropdown';
 import DropDownButton from '@/common/ui/dropdownButton';
 import Checkbox from '@/common/ui/checkbox';
 import Image from 'next/image';
-import Delete from '@/assets/delete.svg';
 import check from '@/assets/check_radio.svg';
+import moreVert from '@/assets/more_vert.svg';
 import { questionTypes } from './index';
 
 import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
@@ -21,6 +21,7 @@ interface InputFieldProps {
   handleQuestionTypeChange: (type: QuestionType) => void;
   handleUpdateField: (fieldId: string, data: ApplyFormField) => void;
   handleDeleteField: (fieldId: string) => void;
+  handleAddFieldBelow: (fieldId: string) => void;
   handleEssentialChange: (fieldId: string, isEssential: boolean) => void;
 }
 
@@ -33,6 +34,7 @@ function TextAreaField({
   handleQuestionTypeChange,
   handleUpdateField,
   handleDeleteField,
+  handleAddFieldBelow,
   handleEssentialChange,
   scrollRefs,
 }: InputFieldProps) {
@@ -81,12 +83,22 @@ function TextAreaField({
             onChange={(e) => handleEssentialChange(fieldId, e.target.checked)}
           />
           <span className={S.horizonLine} />
-          <Image
-            src={Delete}
-            alt="항목 삭제하기"
-            className={S.deleteButton}
-            onClick={() => handleDeleteField(fieldId)}
-          />
+          <DropDown
+            toggleButton={
+              <Image src={moreVert} alt="항목 옵션 더보기" className={S.fieldOptionButton} />
+            }
+            panelClassName={S.fieldOptionList}
+          >
+            <li className={S.fieldOptionItem} onClick={() => handleAddFieldBelow(fieldId)}>
+              아래에 질문 추가
+            </li>
+            <li
+              className={`${S.fieldOptionItem} ${S.fieldOptionItemDelete}`}
+              onClick={() => handleDeleteField(fieldId)}
+            >
+              삭제
+            </li>
+          </DropDown>
         </div>
       </div>
 

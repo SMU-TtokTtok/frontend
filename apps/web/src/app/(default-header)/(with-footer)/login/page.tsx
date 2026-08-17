@@ -11,18 +11,25 @@ import { postLogin } from '@/components/login/api';
 import { initializeAndSendFCMToken } from '@/fcm/fcmToken';
 import GoogleLoginButton from '@/components/login/googleLogin';
 import GoogleOnboarding from '@/components/login/googleOnboarding';
+import SignupComplete from '@/components/signup/SignupComplete';
 import { useGoogleLogin } from '@/hooks/useGoogleLogin';
 
 export default function Page() {
   const router = useRouter();
-  const { onboarding, isPending, handleCredential, submitOnboarding, cancelOnboarding } =
-    useGoogleLogin();
+  const {
+    onboarding,
+    completedSignupName,
+    isPending,
+    handleCredential,
+    submitOnboarding,
+    cancelOnboarding,
+    completeLogin,
+  } = useGoogleLogin();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    // setError,
   } = useForm<LoginForm>({
     resolver: zodResolver(loginSchema),
     mode: 'onSubmit',
@@ -63,6 +70,10 @@ export default function Page() {
         onCancel={cancelOnboarding}
       />
     );
+  }
+
+  if (completedSignupName) {
+    return <SignupComplete userName={completedSignupName} onStart={completeLogin} />;
   }
 
   return (

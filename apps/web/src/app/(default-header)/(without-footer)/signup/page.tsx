@@ -10,6 +10,7 @@ import { signupSchema, SignupForm } from '@/components/signup/schema';
 import SignupComplete from '@/components/signup/SignupComplete';
 import { postEmail, postCode, postSignup } from '@/components/signup/api';
 import { CustomHttpError } from '@/common/apis/apiClient';
+import { GA_EVENTS, GA_METHODS } from '@/common/constants/gaEvents';
 import { useModal } from '@/hooks/useModal';
 import ConfirmCancelModal from '@/common/components/confirmCancelModal';
 import { trackGAEvent } from '@/lib/ga';
@@ -31,7 +32,7 @@ export default function Page() {
 
   const handleSendEmail = async () => {
     const studentId = getValues('studentId');
-    trackGAEvent('email_request');
+    trackGAEvent(GA_EVENTS.EMAIL_REQUEST);
     // studentId가 9자리가 아니면 요청하지 않음
     if (studentId.length !== 9) {
       alert('학번은 9자리여야 합니다.');
@@ -42,14 +43,14 @@ export default function Page() {
       const email = `${studentId}@sangmyung.kr`;
       const response = await postEmail({ email });
       if (response.success) {
-        trackGAEvent('email_success');
+        trackGAEvent(GA_EVENTS.EMAIL_SUCCESS);
         handleModalOpen();
       } else {
-        trackGAEvent('email_fail');
+        trackGAEvent(GA_EVENTS.EMAIL_FAIL);
         alert(response.message);
       }
     } catch (error) {
-      trackGAEvent('email_error');
+      trackGAEvent(GA_EVENTS.EMAIL_ERROR);
       console.error('이메일 전송 중 오류 발생:', error);
       alert('이메일 전송 중 오류가 발생했습니다. 다시 시도해주세요.');
     }
@@ -60,26 +61,26 @@ export default function Page() {
       const studentId = getValues('studentId');
       const email = `${studentId}@sangmyung.kr`;
       const code = getValues('code');
-      trackGAEvent('verify_code_attempt', {
+      trackGAEvent(GA_EVENTS.VERIFY_CODE_ATTEMPT, {
         signup_step: 'email_verification',
         has_student_id: Boolean(studentId),
         has_code: Boolean(code),
       });
       const response = await postCode({ email, code });
       if (response.success) {
-        trackGAEvent('verify_code_success', {
+        trackGAEvent(GA_EVENTS.VERIFY_CODE_SUCCESS, {
           signup_step: 'email_verification',
         });
         alert(response.message);
         setIsVerified(true);
       } else {
-        trackGAEvent('verify_code_fail', {
+        trackGAEvent(GA_EVENTS.VERIFY_CODE_FAIL, {
           signup_step: 'email_verification',
         });
         alert(response.message);
       }
     } catch (error) {
-      trackGAEvent('verify_code_error', {
+      trackGAEvent(GA_EVENTS.VERIFY_CODE_ERROR, {
         signup_step: 'email_verification',
       });
 
@@ -89,7 +90,7 @@ export default function Page() {
   };
 
   const onSubmit = async (data: SignupForm) => {
-    trackGAEvent('signup_submit_attempt', {
+    trackGAEvent(GA_EVENTS.SIGNUP_SUBMIT_ATTEMPT, {
       signup_step: 'final_submit',
     });
     try {
@@ -102,15 +103,15 @@ export default function Page() {
         termsAgreed: data.agree,
       });
       if (response.success) {
-        trackGAEvent('sign_up', {
-          method: 'school_email',
+        trackGAEvent(GA_EVENTS.SIGN_UP, {
+          method: GA_METHODS.SCHOOL_EMAIL,
         });
 
         setUserName(data.name);
         setIsComplete(true);
       }
     } catch (error: unknown) {
-      trackGAEvent('signup_submit_fail', {
+      trackGAEvent(GA_EVENTS.SIGNUP_SUBMIT_FAIL, {
         signup_step: 'final_submit',
       });
       if (error instanceof CustomHttpError && error.status === 400) {

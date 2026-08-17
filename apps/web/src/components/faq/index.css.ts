@@ -255,19 +255,83 @@ export const installGuideTab = recipe({
   },
 });
 
-export const answerImage = style({
+export const answerImageButton = style({
   display: 'block',
   width: '100%',
   maxWidth: '640px',
-  height: 'auto',
   marginTop: '4px',
+  padding: 0,
+  border: 'none',
+  background: 'transparent',
+  cursor: 'zoom-in',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      maxWidth: '100%',
+    },
+  },
+});
+
+export const answerImage = style({
+  display: 'block',
+  width: '100%',
+  height: 'auto',
   borderRadius: '8px',
   border: `1px solid ${vars.colors.surface.cont_2}`,
 
   '@media': {
     [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
-      maxWidth: '100%',
       borderRadius: '6px',
     },
   },
+});
+
+export const imagePreviewOverlay = style({
+  position: 'fixed',
+  inset: 0,
+  zIndex: 1000,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: '48px 20px',
+  backgroundColor: 'rgba(0, 0, 0, 0.72)',
+  cursor: 'zoom-out',
+});
+
+export const imagePreview = style({
+  display: 'block',
+  width: 'auto',
+  maxWidth: 'min(960px, 92vw)',
+  maxHeight: '86vh',
+  height: 'auto',
+  borderRadius: '8px',
+  backgroundColor: vars.colors.white,
+  boxShadow: '0 18px 60px rgba(0, 0, 0, 0.28)',
+  cursor: 'default',
+
+  '@media': {
+    [`screen and (max-width: ${BREAKPOINTS.tablet}px)`]: {
+      maxWidth: '94vw',
+      maxHeight: '82vh',
+      borderRadius: '6px',
+    },
+  },
+});
+
+export const imagePreviewCloseButton = style({
+  position: 'fixed',
+  top: '20px',
+  right: '20px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '40px',
+  height: '40px',
+  border: 'none',
+  borderRadius: '50%',
+  backgroundColor: 'rgba(255, 255, 255, 0.92)',
+  color: vars.colors.surface.on_surf,
+  fontSize: '28px',
+  lineHeight: 1,
+  cursor: 'pointer',
 });
