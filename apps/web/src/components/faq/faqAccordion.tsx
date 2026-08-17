@@ -1,9 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import type { StaticImageData } from 'next/image';
 import * as S from './index.css';
 import FaqItem from './faqItem';
 import { InstallGuideImagePreloader } from './installGuideSection';
+
+export type FaqImagePreviewData = {
+  src: StaticImageData;
+  alt: string;
+};
 
 export type FaqItemData = {
   question: string;
@@ -42,10 +48,31 @@ const FAQ_LIST: FaqItemData[] = [
 
 export default function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [previewImage, setPreviewImage] = useState<FaqImagePreviewData | null>(null);
 
   const handleToggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
+
+  const handlePreviewClose = () => {
+    setPreviewImage(null);
+  };
+
+  useEffect(() => {
+    if (!previewImage) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        handlePreviewClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [previewImage]);
 
   const isDividerVisible = (index: number) =>
     index > 0 && openIndex !== index && openIndex !== index - 1;
@@ -61,9 +88,35 @@ export default function FaqAccordion() {
             isExpanded={openIndex === index}
             showDivider={isDividerVisible(index)}
             onToggle={() => handleToggle(index)}
+            onInstallGuideImageClick={setPreviewImage}
           />
         ))}
       </div>
+      {previewImage && (
+        <div
+          className={S.imagePreviewOverlay}
+          role="dialog"
+          aria-modal="true"
+          onClick={handlePreviewClose}
+        >
+          <button
+            type="button"
+            className={S.imagePreviewCloseButton}
+            onClick={handlePreviewClose}
+            aria-label="닫기"
+          >
+            ×
+          </button>
+          <img
+            src={previewImage.src.src}
+            alt={previewImage.alt}
+            width={previewImage.src.width}
+            height={previewImage.src.height}
+            className={S.imagePreview}
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
     </>
   );
 }
