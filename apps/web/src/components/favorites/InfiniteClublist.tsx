@@ -3,6 +3,7 @@
 import { useInView } from 'react-intersection-observer';
 import * as S from '@/components/home/clubList/clubList.css';
 import ClubItem from '@/common/components/clubItem';
+import ClubItemSkeleton from '@/common/components/clubItem/ClubItemSkeleton';
 import { useEffect, useState } from 'react';
 import { SearchQueryReturn } from '@/hooks/useSearchQuery';
 import * as F from './favorites.css';
@@ -10,7 +11,6 @@ import Empty from '@/common/components/empty';
 import { Clubs, ClubsInfiniteWithTotal } from '@/common/model/clubInfinite';
 import { ClubItemInfo } from '@/common/model/club';
 import type { InfiniteData } from '@tanstack/react-query';
-import LoadingSpinner from '@/common/ui/loading';
 import { useModal } from '@/hooks/useModal';
 import ConfirmModal from '@/common/components/confirmModal';
 
@@ -84,7 +84,17 @@ function InfiniteClubList({
     handleModalOpen();
   };
 
-  if (isLoading) return <LoadingSpinner />;
+  if (isLoading) {
+    return (
+      <div className={S.container} aria-busy="true" aria-label={`${title} 목록을 불러오는 중입니다`}>
+        <ul className={S.innerWrapper}>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <ClubItemSkeleton key={index} className={S.cardStyle} />
+          ))}
+        </ul>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -109,8 +119,12 @@ function InfiniteClubList({
       <div ref={ref} style={{ height: 1 }} />
 
       {isFetchingNextPage && (
-        <div className={F.lottieContainer}>
-          <LoadingSpinner />
+        <div className={S.container}>
+          <ul className={S.innerWrapper} aria-hidden="true">
+            {Array.from({ length: 4 }).map((_, index) => (
+              <ClubItemSkeleton key={index} className={S.cardStyle} />
+            ))}
+          </ul>
         </div>
       )}
 

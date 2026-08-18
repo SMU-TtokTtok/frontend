@@ -9,21 +9,6 @@ interface NoticeDetailPageProps {
   }>;
 }
 
-export const revalidate = 60;
-export const dynamicParams = true;
-
-const fetchNoticeDetail = async (noticeId: string) => {
-  try {
-    return await getNoticeDetail({ noticeId });
-  } catch (error) {
-    if (error instanceof CustomHttpError && error.status === 404) {
-      throw new CustomHttpError(error.message, error.status);
-    }
-
-    throw error;
-  }
-};
-
 export async function generateMetadata({ params }: NoticeDetailPageProps): Promise<Metadata> {
   const { noticeId } = await params;
 
