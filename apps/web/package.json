@@ -7,7 +7,7 @@
     "build": "node scripts/inject-env.js && next build",
     "postbuild": "next-sitemap",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:design": "tsx scripts/analyzeDesign/index.ts --ast",
     "codemod": "tsx scripts/codemode/index.ts",
