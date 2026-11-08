@@ -108,6 +108,7 @@ export default function Form({ clubId }: { clubId: string }) {
   ) => {
     const loadAnswers = async () => {
       const fileLoadPromises: Promise<void>[] = [];
+      const expiredFileTitles: string[] = [];
 
       for (const answer of answers) {
         if (!isMounted.current) break;
@@ -141,6 +142,11 @@ export default function Form({ clubId }: { clubId: string }) {
                 try {
                   const response = await fetch(url, { signal: abortController.signal });
                   if (!isMounted.current) return;
+                  // 만료·삭제된 파일이면 저장소 오류 응답이 첨부로 들어가지 않게 건너뛴다
+                  if (!response.ok) {
+                    expiredFileTitles.push(question.title);
+                    return;
+                  }
                   const blob = await response.blob();
                   if (!isMounted.current) return;
 
@@ -192,8 +198,9 @@ export default function Form({ clubId }: { clubId: string }) {
                     }
                   }, 100);
                 } catch (error) {
-                  if (error instanceof Error && error.name !== 'AbortError') {
+                  if (!(error instanceof Error && error.name === 'AbortError')) {
                     console.error('파일 로드 실패:', error);
+                    expiredFileTitles.push(question.title);
                   }
                 }
               })();
@@ -211,6 +218,12 @@ export default function Form({ clubId }: { clubId: string }) {
       // 파일 로드 완료 대기
       if (isMounted.current) {
         await Promise.all(fileLoadPromises);
+      }
+
+      if (isMounted.current && expiredFileTitles.length > 0) {
+        alert(
+          `첨부 파일이 만료되었습니다. 다시 첨부해 주세요.\n${expiredFileTitles.map((title) => `- ${title}`).join('\n')}`,
+        );
       }
     };
     loadAnswers();

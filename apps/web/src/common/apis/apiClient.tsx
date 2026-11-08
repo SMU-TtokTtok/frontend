@@ -6,11 +6,13 @@ type HTTPMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT';
 
 export class CustomHttpError extends Error {
   status: number;
+  details?: string;
 
-  constructor(message: string, status: number) {
+  constructor(message: string, status: number, details?: string) {
     super(message);
     this.name = 'ApiError';
     this.status = status;
+    this.details = details;
   }
 }
 
@@ -79,9 +81,11 @@ export default class ApiClient {
       });
 
       if (!response.ok) {
+        const body = await response.json().catch(() => null);
         throw new CustomHttpError(
           `HTTP ${response.status}: ${response.statusText}`,
           response.status,
+          typeof body?.details === 'string' ? body.details : undefined,
         );
       }
 

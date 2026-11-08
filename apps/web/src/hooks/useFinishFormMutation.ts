@@ -2,6 +2,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postFinishForm } from '@/components/admin/applicants/api/applicants';
 import { CustomHttpError } from '@/common/apis/apiClient';
+import { getErrorMessage } from '@/common/util/getErrorMessage';
 import { applicantKey, applicationFormKey } from './queries/key';
 
 export const useFinishFormMutation = () => {
@@ -25,7 +26,7 @@ export const useFinishFormMutation = () => {
       if (customError.status === 404) {
         alert('지원 폼을 찾을 수 없어요.\n 지원폼을 만들어주세요.');
       } else if (customError.status !== 401) {
-        alert('지원자 평가 종료에 실패했습니다.');
+        alert(getErrorMessage(customError, '지원자 평가 종료에 실패했습니다.'));
       }
     },
   });
