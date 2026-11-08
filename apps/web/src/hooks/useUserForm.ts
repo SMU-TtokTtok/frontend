@@ -4,6 +4,7 @@ import { gethFormInfo } from '@/components/apply/api/getFormInfo';
 import { postFormInfo } from '@/components/apply/api/postFormInfo';
 import { postFormTempData } from '@/components/apply/api/postFormData';
 import { CustomHttpError } from '@/common/apis/apiClient';
+import { getErrorMessage } from '@/common/util/getErrorMessage';
 import { userKey } from './queries/key';
 import { userTempDataKey } from './queries/key';
 import { useQueryClient } from '@tanstack/react-query';
@@ -46,10 +47,10 @@ export const usePostForm = (handleEditModalOpen: () => void, onSuccess?: () => v
         alert('파일 용량이 너무 큽니다.');
       } else if (error.status === 415) {
         alert('유효하지 않은 파일형식입니다.');
-      } else if (error.status === 409) {
-        alert('이미 제출하였습니다');
       } else if (error.status !== 401) {
-        alert('제출에 실패했습니다');
+        alert(
+          getErrorMessage(error, error.status === 409 ? '이미 제출하였습니다' : '제출에 실패했습니다'),
+        );
       }
     },
   });
@@ -79,7 +80,7 @@ export const usePostTempData = (handleTempSaveModalOpen: () => void, onSuccess?:
       } else if (error.status === 415) {
         alert('유효하지 않은 파일형식입니다.');
       } else if (error.status !== 401) {
-        alert('임시저장에 실패했습니다.');
+        alert(getErrorMessage(error, '임시저장에 실패했습니다.'));
       }
     },
   });

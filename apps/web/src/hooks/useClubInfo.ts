@@ -7,6 +7,7 @@ import { patchIsRecruting } from '@/components/admin/clubInfo/api/patchIsRecruti
 import { patchClubInfo } from '@/components/admin/clubInfo/api/pactchClubInfo';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import { CustomHttpError } from '@/common/apis/apiClient';
+import { getErrorMessage } from '@/common/util/getErrorMessage';
 import { ROUTES } from '@/common/constants/routes';
 
 export const useClubInfo = (clubId: string) => {
@@ -46,7 +47,7 @@ export const useRecruitmentToggle = (handleModalOpen: () => void, clubId: string
       if (error.status === 404) {
         alert('지원 폼 제작이 완료되지 않았습니다');
       } else if (error.status !== 401) {
-        alert('모집 상태 변경에 실패했습니다');
+        alert(getErrorMessage(error, '모집 상태 변경에 실패했습니다'));
       }
     },
   });
@@ -85,7 +86,7 @@ export const useAdminClubPatch = (handleModalOpen: () => void, clubId: string) =
           router.push(ROUTES.ADMIN_APPLICATIONS_CREATE);
         }
       } else if (customError.status !== 401) {
-        alert('동아리 정보 수정에 실패했습니다');
+        alert(getErrorMessage(customError, '동아리 정보 수정에 실패했습니다'));
       }
     },
   });
