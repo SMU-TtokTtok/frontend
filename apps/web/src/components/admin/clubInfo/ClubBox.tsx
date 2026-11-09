@@ -59,7 +59,7 @@ export default function ClubBox(props: ClubBoxProps) {
 
   const handleCloseRecruit = () => {
     if (toggleAction === 'EXPIRED') {
-      alert('마감일이 지나 다시 모집할 수 없어요. 마감일을 늘려 저장한 뒤 눌러 주세요.');
+      alert('마감일이 지나 다시 모집할 수 없어요. 마감일을 늘려 저장한 뒤 모집 상태를 확인해 주세요.');
       return;
     }
     handleRecruitmentToggle(toggleAction);
