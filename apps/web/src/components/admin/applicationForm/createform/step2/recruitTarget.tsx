@@ -1,7 +1,7 @@
 import Button from '@/common/ui/button';
 import * as S from './step2.css';
 import { useEffect, useState } from 'react';
-import { saveToSession } from '@/common/util/sessionStorageUtil';
+import { loadFromSession, saveToSession } from '@/common/util/sessionStorageUtil';
 import { RecruitData } from '.';
 import { toggleGrade } from './recruitStepRules';
 interface RecruitTargetProps {
@@ -12,7 +12,10 @@ interface RecruitTargetProps {
 const gradeList = [1, 2, 3, 4];
 
 function RecruitTarget({ handleRecruitData }: RecruitTargetProps) {
-  const [selectedGrades, setSelectedGrades] = useState<number[]>([]);
+  // 3단계에서 돌아오면 세션의 학년을 다시 보여줘야 화면과 검증이 같은 값을 본다
+  const [selectedGrades, setSelectedGrades] = useState<number[]>(
+    () => loadFromSession<number[]>('applicableGrades') ?? [],
+  );
 
   // 검증이 렌더링 중 세션을 읽으므로, 다음 값을 세션에 먼저 쓰고 부모에 넘긴다
   const handleGradeWithSession = (grade: number) => {
