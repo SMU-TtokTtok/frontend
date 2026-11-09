@@ -6,6 +6,7 @@ import { formatDateToDot, formatDateToMonthDay } from '@/common/util/formatDate'
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import { getKoreanGrade } from '@/common/util/getKoreanGrade';
+import { getMaxRecruitEndDateString } from '@/common/util/recruitPeriod';
 
 interface RightSideBarProps extends AdminClubIntro {
   onEditClick: () => void;
@@ -56,6 +57,8 @@ export default function RightSideBar(props: RightSideBarProps) {
               <input
                 type="date"
                 value={applyDeadLine || ''}
+                min={applyStartDate || undefined}
+                max={getMaxRecruitEndDateString(applyStartDate)}
                 onChange={(e) => {
                   onChange({ applyDeadLine: e.target.value });
                 }}
