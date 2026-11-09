@@ -10,9 +10,11 @@ import moreVert from '@/assets/more_vert.svg';
 import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/applicationForm';
 import { convertToKor } from '@/common/util/convertToKor';
 import { ZodFormattedError } from 'zod';
+import { NO_LOCK, QuestionLock } from '../editLock';
 interface InputFieldProps {
   fieldId: string;
   fieldIndex: number;
+  lock?: QuestionLock;
   field: ApplyFormField;
   errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
@@ -27,6 +29,7 @@ interface InputFieldProps {
 function FileField({
   fieldId,
   fieldIndex,
+  lock = NO_LOCK,
   field,
   errors,
   isSubmit,
@@ -52,25 +55,31 @@ function FileField({
       }}
     >
       <div className={S.fieldToolBar}>
-        <DropDown
-          toggleButton={
-            <DropDownButton variant="form" className={S.dropDownButton}>
-              {convertToKor(field.questionType)}
-            </DropDownButton>
-          }
-        >
-          <ul className={S.dropDownList}>
-            {questionTypes.map((item) => (
-              <li
-                key={item.type}
-                className={S.dropDownListItem}
-                onClick={() => handleQuestionTypeChange(item.type as QuestionType)}
-              >
-                {item.label}
-              </li>
-            ))}
-          </ul>
-        </DropDown>
+        {lock.canChangeType ? (
+          <DropDown
+            toggleButton={
+              <DropDownButton variant="form" className={S.dropDownButton}>
+                {convertToKor(field.questionType)}
+              </DropDownButton>
+            }
+          >
+            <ul className={S.dropDownList}>
+              {questionTypes.map((item) => (
+                <li
+                  key={item.type}
+                  className={S.dropDownListItem}
+                  onClick={() => handleQuestionTypeChange(item.type as QuestionType)}
+                >
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </DropDown>
+        ) : (
+          <DropDownButton variant="form" className={S.dropDownButton} disabled>
+            {convertToKor(field.questionType)}
+          </DropDownButton>
+        )}
         <div className={S.optionContainer}>
           <Checkbox
             variant="primary"
@@ -79,6 +88,8 @@ function FileField({
             img={check}
             imgSize={S.checkImg}
             defaultChecked={field.isEssential}
+            checked={field.isEssential}
+            disabled={!field.isEssential && !lock.canSetEssential}
             onChange={(e) => handleEssentialChange(fieldId, e.target.checked)}
           />
           <span className={S.horizonLine} />
@@ -91,12 +102,14 @@ function FileField({
             <li className={S.fieldOptionItem} onClick={() => handleAddFieldBelow(fieldId)}>
               아래에 질문 추가
             </li>
-            <li
-              className={`${S.fieldOptionItem} ${S.fieldOptionItemDelete}`}
-              onClick={() => handleDeleteField(fieldId)}
-            >
-              삭제
-            </li>
+            {lock.canDelete && (
+              <li
+                className={`${S.fieldOptionItem} ${S.fieldOptionItemDelete}`}
+                onClick={() => handleDeleteField(fieldId)}
+              >
+                삭제
+              </li>
+            )}
           </DropDown>
         </div>
       </div>

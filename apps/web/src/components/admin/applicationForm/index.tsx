@@ -3,7 +3,7 @@ import { useAdminForm } from '@/hooks/useAdminForm';
 import * as S from './applicationForm.css';
 import EmptyPage from './emptyPage';
 import { useApplicationForm } from '@/hooks/useApplicationForm';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import QuestionForm from './questionForm';
 import { useApplicationFormValidation } from '@/hooks/useApplicationFormVaildation';
 import QuestionNavigator from './questionNavigator';
@@ -18,6 +18,7 @@ import { useAuthStore } from '@/common/store/adminAuthStore';
 import QueryErrorBoundary from '@/components/error/queryErrorBoundary';
 import { ApplyFormField } from '@/common/model/applicationForm';
 import { SCROLL_REF_IDS } from './constants';
+import { getQuestionLock } from './editLock';
 
 function ApplicationFormPage() {
   const { profile } = useAuthStore((state) => state);
@@ -100,6 +101,18 @@ function ApplicationFormPage() {
 
   const { barPosition } = useFollowSidebar({ initialPosition: 188 });
 
+  // 불러올 때의 질문. 지원서가 있으면 이 질문들의 편집을 잠근다
+  const originalQuestions = useMemo(
+    () => new Map((data?.questions ?? []).map((question) => [question.questionId, question])),
+    [data],
+  );
+  const hasApplicants = !!data?.hasApplicants;
+  const getLock = (field: ApplyFormField) =>
+    getQuestionLock(
+      field.questionId ? originalQuestions.get(field.questionId) : undefined,
+      hasApplicants,
+    );
+
   useEffect(() => {
     if (data) {
       setQeustionsData(data);
@@ -120,6 +133,11 @@ function ApplicationFormPage() {
     <>
       <form className={S.formContainer} onSubmit={handleSubmit}>
         <h3 className={S.title}>📋 지원폼 관리</h3>
+        {hasApplicants && (
+          <p className={S.lockNotice}>
+            지원서가 제출된 폼이라 기존 질문은 삭제하거나 유형을 바꿀 수 없어요.
+          </p>
+        )}
         <QueryErrorBoundary>
           <QuestionForm
             formData={questionsData}
@@ -138,6 +156,7 @@ function ApplicationFormPage() {
             handleChangeSubTitle={handleChangeSubTitle}
             handleReorderQuestions={handleReorderQuestions}
             scrollRefs={scrollRefs}
+            getLock={getLock}
           />
         </QueryErrorBoundary>
         <div
