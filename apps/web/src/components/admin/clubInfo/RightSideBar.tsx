@@ -11,6 +11,8 @@ import { getMaxRecruitEndDateString } from '@/common/util/recruitPeriod';
 interface RightSideBarProps extends AdminClubIntro {
   onEditClick: () => void;
   isEditing: boolean;
+  // 지원서가 제출된 폼은 시작일을 바꿀 수 없다
+  isStartDateLocked?: boolean;
   handleSave: () => void;
   onCancel: () => void;
   onChange: (fields: Partial<AdminClubIntro>) => void;
@@ -21,6 +23,7 @@ export default function RightSideBar(props: RightSideBarProps) {
   const {
     onEditClick,
     isEditing,
+    isStartDateLocked = false,
     handleSave,
     onCancel,
     applyStartDate,
@@ -48,6 +51,7 @@ export default function RightSideBar(props: RightSideBarProps) {
               <input
                 type="date"
                 value={applyStartDate || ''}
+                disabled={isStartDateLocked}
                 onChange={(e) => {
                   onChange({ applyStartDate: e.target.value });
                 }}
@@ -65,7 +69,9 @@ export default function RightSideBar(props: RightSideBarProps) {
                 className={S.dateInput}
               />
               <p className={S.dateHint}>
-                모집을 시작하려면 시작일이 오늘이거나 그 이전이어야 해요.
+                {isStartDateLocked
+                  ? '지원서가 제출된 폼이라 시작일은 바꿀 수 없어요.'
+                  : '모집을 시작하려면 시작일이 오늘이거나 그 이전이어야 해요.'}
               </p>
             </div>
           ) : (
