@@ -90,7 +90,7 @@ function ClubItem({ clubData, className, onFavoriteResult }: ClubItemProps) {
             </Tag>
           )}
           <span className={S.verticalLine} />
-          <RecruitStatus isRecruiting={clubData.recruiting} />
+          <RecruitStatus recruiting={clubData.recruiting} recruitState={clubData.recruitState} />
         </div>
       </li>
     </>

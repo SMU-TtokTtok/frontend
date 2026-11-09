@@ -1,9 +1,12 @@
+import { RecruitState } from './club';
+
 export interface ClubIntro {
   name: string;
   clubType: string;
   clubCategory: string;
   customCategory: string;
   recruiting: boolean;
+  recruitState?: RecruitState;
   summary: string;
   profileImageUrl: string;
   clubMemberCount: number;

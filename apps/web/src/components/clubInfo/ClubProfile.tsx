@@ -12,6 +12,7 @@ import { BREAKPOINTS } from '@/common/constants';
 import { useModal } from '@/hooks/useModal';
 import { useState } from 'react';
 import ConfirmModal from '@/common/components/confirmModal';
+import RecruitStatus from '@/common/components/clubItem/recruitStatus';
 
 export default function ClubProfile({
   clubIntro,
@@ -27,6 +28,7 @@ export default function ClubProfile({
     clubCategory,
     customCategory,
     recruiting,
+    recruitState,
     profileImageUrl,
     bookmarked,
   } = clubIntro;
@@ -71,9 +73,7 @@ export default function ClubProfile({
                 {customCategory}
               </Tag>
             )}
-            <Tag variant={recruiting ? 'secondary' : 'tertiary'} className={tagStyle}>
-              {recruiting ? '모집중' : '모집마감'}
-            </Tag>
+            <RecruitStatus recruiting={recruiting} recruitState={recruitState} className={tagStyle} />
           </div>
           <Image
             src={bookmarked ? star_active : star}

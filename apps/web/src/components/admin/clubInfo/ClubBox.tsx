@@ -16,6 +16,7 @@ import { getKoreanType } from '@/common/util/getKoreanType';
 import { getKoreanUniv } from '@/common/util/getKoreanUniv';
 import { getKoreanCategory } from '@/common/util/getKoreanCategory';
 import { useAuthStore } from '@/common/store/adminAuthStore';
+import RecruitStatus from '@/common/components/clubItem/recruitStatus';
 
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
@@ -34,6 +35,7 @@ export default function ClubBox(props: ClubBoxProps) {
     clubCategory,
     customCategory,
     recruiting,
+    recruitState,
     clubMemberCount,
     clubUniv,
   } = props;
@@ -187,12 +189,11 @@ export default function ClubBox(props: ClubBoxProps) {
               </Tag>
             )}
 
-            <Tag
-              variant={recruiting ? 'secondary' : 'tertiary'}
+            <RecruitStatus
+              recruiting={recruiting}
+              recruitState={recruitState}
               className={S.selectedTypeText({ position: 'footer' })}
-            >
-              {recruiting ? '모집중' : '모집마감'}
-            </Tag>
+            />
           </div>
           <Button
             variant="secondary"
