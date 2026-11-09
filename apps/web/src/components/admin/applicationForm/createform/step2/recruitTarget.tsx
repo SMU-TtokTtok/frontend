@@ -3,6 +3,7 @@ import * as S from './step2.css';
 import { useEffect, useState } from 'react';
 import { saveToSession } from '@/common/util/sessionStorageUtil';
 import { RecruitData } from '.';
+import { toggleGrade } from './recruitStepRules';
 interface RecruitTargetProps {
   recruitData: RecruitData;
   handleRecruitData: (key: keyof RecruitData, value: number[] | null) => void;
@@ -13,11 +14,12 @@ const gradeList = [1, 2, 3, 4];
 function RecruitTarget({ handleRecruitData }: RecruitTargetProps) {
   const [selectedGrades, setSelectedGrades] = useState<number[]>([]);
 
+  // 검증이 렌더링 중 세션을 읽으므로, 다음 값을 세션에 먼저 쓰고 부모에 넘긴다
   const handleGradeWithSession = (grade: number) => {
-    setSelectedGrades((prev) =>
-      prev.includes(grade) ? prev.filter((g) => g !== grade) : [...prev, grade],
-    );
-    handleRecruitData('applicableGrades', selectedGrades);
+    const next = toggleGrade(selectedGrades, grade);
+    setSelectedGrades(next);
+    saveToSession('applicableGrades', next);
+    handleRecruitData('applicableGrades', next);
   };
 
   useEffect(() => {

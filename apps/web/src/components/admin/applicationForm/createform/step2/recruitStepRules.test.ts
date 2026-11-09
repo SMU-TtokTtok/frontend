@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isRecruitStepValid, RecruitStepValues } from './recruitStepRules';
+import { isRecruitStepValid, RecruitStepValues, toggleGrade } from './recruitStepRules';
 
 const valid: RecruitStepValues = {
   recruitStartDate: '2026-03-01',
@@ -34,6 +34,16 @@ test('모집 인원은 1명 이상이어야 한다', () => {
 test('대상 학년은 1개 이상이어야 한다', () => {
   assert.equal(isRecruitStepValid({ ...valid, applicableGrades: [] }, false), false);
   assert.equal(isRecruitStepValid({ ...valid, applicableGrades: null }, false), false);
+});
+
+test('학년을 누른 직후의 값으로 검증한다', () => {
+  // 회귀: 이전에는 클릭 전 학년 목록으로 검증해 한 박자 늦게 반영됐다
+  const first = toggleGrade([], 1);
+  assert.deepEqual(first, [1]);
+  assert.equal(isRecruitStepValid({ ...valid, applicableGrades: first }, false), true);
+  const cleared = toggleGrade(first, 1);
+  assert.deepEqual(cleared, []);
+  assert.equal(isRecruitStepValid({ ...valid, applicableGrades: cleared }, false), false);
 });
 
 test('면접이 있으면 면접 일정이 있고 순서가 맞아야 한다', () => {

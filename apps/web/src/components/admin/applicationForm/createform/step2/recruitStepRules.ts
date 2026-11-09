@@ -9,6 +9,9 @@ export interface RecruitStepValues {
   interviewEndDate: string | null;
 }
 
+export const toggleGrade = (grades: number[], grade: number) =>
+  grades.includes(grade) ? grades.filter((g) => g !== grade) : [...grades, grade];
+
 // 서버 ApplyFormInputPolicy와 같은 규칙. 날짜는 'yyyy-MM-dd'라 문자열 비교로 순서를 본다
 export const isRecruitStepValid = (values: RecruitStepValues, withInterview: boolean) => {
   const { recruitStartDate, recruitEndDate, maxApplyCount, applicableGrades } = values;
