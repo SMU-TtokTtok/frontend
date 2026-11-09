@@ -8,6 +8,8 @@ import { patchClubInfo } from '@/components/admin/clubInfo/api/pactchClubInfo';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import { CustomHttpError } from '@/common/apis/apiClient';
 import { ROUTES } from '@/common/constants/routes';
+import { toRecruitState } from '@/common/util/recruitState';
+import { getRecruitToggleMessage, RecruitToggleAction } from '@/common/util/recruitToggle';
 
 export const useClubInfo = (clubId: string) => {
   const { clubInfo } = clubInfoKey;
@@ -29,18 +31,22 @@ export const useAdminClubInfo = (clubId: string) => {
   return { data, isLoading, refetch };
 };
 
-export const useRecruitmentToggle = (handleModalOpen: () => void, clubId: string) => {
+export const useRecruitmentToggle = (onToggled: (message: string) => void, clubId: string) => {
   const queryClient = useQueryClient();
   const { adminClubInfo } = clubInfoKey;
 
   const patchIsRecrutingMutation = useMutation({
-    mutationFn: async () => {
-      const response = await patchIsRecruting(clubId);
-      return response;
+    mutationFn: async (action: RecruitToggleAction) => {
+      await patchIsRecruting(clubId);
+      return action;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [adminClubInfo, clubId] });
-      handleModalOpen();
+    onSuccess: async (action) => {
+      // 되살리기는 마감 상태로 시작하므로, 다시 조회한 상태를 보고 안내를 고른다
+      await queryClient.refetchQueries({ queryKey: [adminClubInfo, clubId] });
+      const next = queryClient.getQueryData<AdminClubIntro>([adminClubInfo, clubId]);
+      onToggled(
+        getRecruitToggleMessage(action, toRecruitState(next?.recruitState, !!next?.recruiting)),
+      );
     },
     onError: (error: CustomHttpError) => {
       if (error.status === 404) {
@@ -51,8 +57,8 @@ export const useRecruitmentToggle = (handleModalOpen: () => void, clubId: string
     },
   });
 
-  const handleRecruitmentToggle = () => {
-    patchIsRecrutingMutation.mutate();
+  const handleRecruitmentToggle = (action: RecruitToggleAction) => {
+    patchIsRecrutingMutation.mutate(action);
   };
 
   return {

@@ -64,6 +64,9 @@ export default function RightSideBar(props: RightSideBarProps) {
                 }}
                 className={S.dateInput}
               />
+              <p className={S.dateHint}>
+                모집을 시작하려면 시작일이 오늘이거나 그 이전이어야 해요.
+              </p>
             </div>
           ) : (
             <div className={S.blackText}>

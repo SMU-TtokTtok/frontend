@@ -4,7 +4,7 @@ import Tag from '@/common/ui/tag/index';
 import Button from '@/common/ui/button';
 import person from '@/assets/person.svg';
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import editIcon from '@/assets/edit.svg';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import DropDown from '@/common/components/dropdown/index';
@@ -17,6 +17,9 @@ import { getKoreanUniv } from '@/common/util/getKoreanUniv';
 import { getKoreanCategory } from '@/common/util/getKoreanCategory';
 import { useAuthStore } from '@/common/store/adminAuthStore';
 import RecruitStatus from '@/common/components/clubItem/recruitStatus';
+import { toRecruitState } from '@/common/util/recruitState';
+import { getRecruitToggleAction, RECRUIT_TOGGLE_LABEL } from '@/common/util/recruitToggle';
+import { format } from 'date-fns';
 
 type ClubType = (typeof typeItems)[number];
 type ClubCategory = (typeof categoryItems)[number];
@@ -36,15 +39,30 @@ export default function ClubBox(props: ClubBoxProps) {
     customCategory,
     recruiting,
     recruitState,
+    applyDeadLine,
     clubMemberCount,
     clubUniv,
   } = props;
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
-  const { handleRecruitmentToggle } = useRecruitmentToggle(handleModalOpen, profile?.clubId ?? '');
+  const [toggleMessage, setToggleMessage] = useState('');
+  const { handleRecruitmentToggle } = useRecruitmentToggle((message) => {
+    setToggleMessage(message);
+    handleModalOpen();
+  }, profile?.clubId ?? '');
   const inputRef = useRef<HTMLInputElement>(null);
+  // ponytail: 브라우저 날짜 기준. 서버는 한국 시간으로 판정하므로 해외 시간대에서는 하루 어긋날 수 있다
+  const toggleAction = getRecruitToggleAction(
+    toRecruitState(recruitState, recruiting),
+    applyDeadLine,
+    format(new Date(), 'yyyy-MM-dd'),
+  );
 
   const handleCloseRecruit = () => {
-    handleRecruitmentToggle();
+    if (toggleAction === 'EXPIRED') {
+      alert('마감일이 지나 다시 모집할 수 없어요. 마감일을 늘려 저장한 뒤 눌러 주세요.');
+      return;
+    }
+    handleRecruitmentToggle(toggleAction);
   };
 
   return (
@@ -202,12 +220,12 @@ export default function ClubBox(props: ClubBoxProps) {
             }}
             className={S.finishedButton}
           >
-            {recruiting ? '지원 마감하기' : '모집 시작하기'}
+            {RECRUIT_TOGGLE_LABEL[toggleAction]}
           </Button>
         </div>
       </div>
       <ConfirmModal isOpen={isOpen} onClose={handleModalClose}>
-        {recruiting ? '모집이 시작되었습니다' : '지원마감이 완료되었습니다'}
+        {toggleMessage}
       </ConfirmModal>
     </>
   );
