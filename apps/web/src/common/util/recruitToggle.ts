@@ -24,8 +24,10 @@ export const RECRUIT_TOGGLE_LABEL: Record<RecruitToggleAction, string> = {
 };
 
 // 성공 뒤 다시 조회한 상태로 안내를 고른다. 되살린 폼은 마감 상태로 시작한다
+// 시작일 전에 시작하면 서버는 스위치만 켜고 UPCOMING이 된다 (시작 알림 없음)
 export const getRecruitToggleMessage = (action: RecruitToggleAction, nextState: RecruitState) => {
-  if (nextState === 'OPEN' || nextState === 'UPCOMING') return '모집이 시작되었습니다';
+  if (nextState === 'UPCOMING') return '모집 예정으로 바뀌었습니다. 시작일부터 지원을 받아요.';
+  if (nextState === 'OPEN') return '모집이 시작되었습니다';
   if (action === 'REACTIVATE') {
     return "이전 지원 폼을 불러왔습니다. 모집 기간을 확인한 뒤 '모집 시작하기'를 눌러 주세요.";
   }

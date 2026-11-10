@@ -29,6 +29,13 @@ test('다시 조회한 상태가 모집 중이면 시작 안내를 한다', () =
   assert.equal(getRecruitToggleMessage('REACTIVATE', 'OPEN'), '모집이 시작되었습니다');
 });
 
+test('시작일 전에 다시 시작하면 모집 예정 안내를 한다', () => {
+  assert.equal(
+    getRecruitToggleMessage('START', 'UPCOMING'),
+    '모집 예정으로 바뀌었습니다. 시작일부터 지원을 받아요.',
+  );
+});
+
 test('되살린 뒤 마감 상태면 되살리기 안내를 한다', () => {
   assert.match(getRecruitToggleMessage('REACTIVATE', 'CLOSED'), /이전 지원 폼을 불러왔습니다/);
 });

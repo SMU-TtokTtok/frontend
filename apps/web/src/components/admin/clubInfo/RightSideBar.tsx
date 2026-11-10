@@ -71,7 +71,7 @@ export default function RightSideBar(props: RightSideBarProps) {
               <p className={S.dateHint}>
                 {isStartDateLocked
                   ? '지원서가 제출된 폼이라 시작일은 바꿀 수 없어요.'
-                  : '모집을 시작하려면 시작일이 오늘이거나 그 이전이어야 해요.'}
+                  : '시작일 전에 모집을 시작하면 모집 예정으로 표시되고, 시작일부터 지원을 받아요.'}
               </p>
             </div>
           ) : (
