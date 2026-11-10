@@ -6,10 +6,13 @@ import { formatDateToDot, formatDateToMonthDay } from '@/common/util/formatDate'
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import { getKoreanGrade } from '@/common/util/getKoreanGrade';
+import { getMaxRecruitEndDateString } from '@/common/util/recruitPeriod';
 
 interface RightSideBarProps extends AdminClubIntro {
   onEditClick: () => void;
   isEditing: boolean;
+  // 지원서가 제출된 폼은 시작일을 바꿀 수 없다
+  isStartDateLocked?: boolean;
   handleSave: () => void;
   onCancel: () => void;
   onChange: (fields: Partial<AdminClubIntro>) => void;
@@ -20,6 +23,7 @@ export default function RightSideBar(props: RightSideBarProps) {
   const {
     onEditClick,
     isEditing,
+    isStartDateLocked = false,
     handleSave,
     onCancel,
     applyStartDate,
@@ -47,6 +51,7 @@ export default function RightSideBar(props: RightSideBarProps) {
               <input
                 type="date"
                 value={applyStartDate || ''}
+                disabled={isStartDateLocked}
                 onChange={(e) => {
                   onChange({ applyStartDate: e.target.value });
                 }}
@@ -56,11 +61,18 @@ export default function RightSideBar(props: RightSideBarProps) {
               <input
                 type="date"
                 value={applyDeadLine || ''}
+                min={applyStartDate || undefined}
+                max={getMaxRecruitEndDateString(applyStartDate)}
                 onChange={(e) => {
                   onChange({ applyDeadLine: e.target.value });
                 }}
                 className={S.dateInput}
               />
+              <p className={S.dateHint}>
+                {isStartDateLocked
+                  ? '지원서가 제출된 폼이라 시작일은 바꿀 수 없어요.'
+                  : '시작일 전에 모집을 시작하면 모집 예정으로 표시되고, 시작일부터 지원을 받아요.'}
+              </p>
             </div>
           ) : (
             <div className={S.blackText}>

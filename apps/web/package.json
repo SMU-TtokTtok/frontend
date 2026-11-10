@@ -8,6 +8,7 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
+    "test": "tsx --test \"src/**/*.test.ts\"",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:design": "tsx scripts/analyzeDesign/index.ts --ast",
     "codemod": "tsx scripts/codemode/index.ts",

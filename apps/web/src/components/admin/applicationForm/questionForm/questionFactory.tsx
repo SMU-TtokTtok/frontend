@@ -5,12 +5,14 @@ import CheckboxField from './checkboxField';
 import RadioField from './radioField';
 import { ZodFormattedError } from 'zod';
 import FileField from './fileField';
+import { QuestionLock } from '../editLock';
 
 interface FormFieldFactoryProps {
   field: ApplyFormField;
   scrollRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>;
   fieldId: string;
   fieldIndex: number;
+  lock?: QuestionLock;
   errors?: ZodFormattedError<QuestionStepForm>;
   isSubmit?: boolean;
   handleQuestionTypeChange: (type: QuestionType) => void;
@@ -26,6 +28,7 @@ interface FormFieldFactoryProps {
 function FormFieldFactory({
   fieldId,
   fieldIndex,
+  lock,
   field,
   scrollRefs,
   errors,
@@ -45,6 +48,7 @@ function FormFieldFactory({
         <TextAreaField
           fieldId={fieldId}
           fieldIndex={fieldIndex}
+          lock={lock}
           field={field}
           scrollRefs={scrollRefs}
           errors={errors}
@@ -61,6 +65,7 @@ function FormFieldFactory({
         <InputField
           fieldId={fieldId}
           fieldIndex={fieldIndex}
+          lock={lock}
           field={field}
           scrollRefs={scrollRefs}
           errors={errors}
@@ -77,6 +82,7 @@ function FormFieldFactory({
         <CheckboxField
           fieldId={fieldId}
           fieldIndex={fieldIndex}
+          lock={lock}
           field={field}
           scrollRefs={scrollRefs}
           errors={errors}
@@ -97,6 +103,7 @@ function FormFieldFactory({
         <RadioField
           fieldId={fieldId}
           fieldIndex={fieldIndex}
+          lock={lock}
           field={field}
           scrollRefs={scrollRefs}
           errors={errors}
@@ -117,6 +124,7 @@ function FormFieldFactory({
         <FileField
           fieldId={fieldId}
           fieldIndex={fieldIndex}
+          lock={lock}
           field={field}
           errors={errors}
           isSubmit={isSubmit}

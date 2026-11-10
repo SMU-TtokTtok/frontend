@@ -10,6 +10,7 @@ import { useState, useRef, useEffect } from 'react';
 import { AdminClubIntro } from '@/common/model/clubIntro';
 import EditIcon from '@/assets/edit-photo.svg';
 import { useAdminClubInfo, useAdminClubPatch } from '@/hooks/useClubInfo';
+import { useHasApplicants } from '@/hooks/useAdminForm';
 import ConfirmModal from '@/common/components/confirmModal';
 import { useModal } from '@/hooks/useModal';
 import { useAuthStore } from '@/common/store/adminAuthStore';
@@ -21,6 +22,7 @@ function AdminClubInfo() {
   const { profile } = useAuthStore();
 
   const { data, isLoading } = useAdminClubInfo(profile?.clubId ?? '');
+  const hasApplicants = useHasApplicants(profile?.clubId ?? '');
   const [clubInfo, setClubInfo] = useState<AdminClubIntro | null>(data || null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { isOpen, handleModalClose, handleModalOpen } = useModal();
@@ -130,6 +132,7 @@ function AdminClubInfo() {
             {...(clubInfo ?? emptyAdminClub)}
             onEditClick={() => setIsEditing(true)}
             isEditing={isEditing}
+            isStartDateLocked={hasApplicants}
             handleSave={handleSave}
             onCancel={() => {
               setIsEditing(false);

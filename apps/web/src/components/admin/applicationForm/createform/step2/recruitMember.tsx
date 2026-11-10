@@ -1,6 +1,6 @@
 import Input from '@/common/ui/input';
 import * as S from './step2.css';
-import { saveToSession } from '@/common/util/sessionStorageUtil';
+import { loadFromSession, saveToSession } from '@/common/util/sessionStorageUtil';
 import { RecruitData } from '.';
 interface RecruitMemberProps {
   handleRecruitData: (key: keyof RecruitData, value: number | null) => void;
@@ -24,6 +24,7 @@ function RecruitMember({ handleRecruitData }: RecruitMemberProps) {
         type="number"
         className={S.recruitMember}
         placeholder="숫자를 입력해주세요"
+        defaultValue={loadFromSession<number>('maxApplyCount') ?? undefined}
         onChange={handleSessionChange}
       />
     </div>
