@@ -39,4 +39,6 @@ export interface QuestionStepForm {
   title: string;
   subTitle: string;
   questions: ApplyFormField[];
+  // 관리자 폼 조회 응답. 제출된 지원서가 있으면 true (이전 서버는 보내지 않음)
+  hasApplicants?: boolean;
 }

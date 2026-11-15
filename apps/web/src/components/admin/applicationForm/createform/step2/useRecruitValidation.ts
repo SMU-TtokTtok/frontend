@@ -1,15 +1,15 @@
 import { loadFromSession } from '@/common/util/sessionStorageUtil';
+import { isRecruitStepValid } from './recruitStepRules';
 
-export const useRecruitValidation = (withInterview: boolean): boolean => {
-  const baseKeys = ['recruitStartDate', 'recruitEndDate', 'maxApplyCount', 'applicableGrades'];
-  const interviewKeys = ['interviewStartDate', 'interviewEndDate'];
-
-  const requiredKeys = withInterview ? [...baseKeys, ...interviewKeys] : baseKeys;
-
-  const hasSessionValue = (key: string): boolean => {
-    const value = loadFromSession(key);
-    return value !== null && value !== '';
-  };
-
-  return requiredKeys.every((key) => hasSessionValue(key));
-};
+export const useRecruitValidation = (withInterview: boolean): boolean =>
+  isRecruitStepValid(
+    {
+      recruitStartDate: loadFromSession('recruitStartDate'),
+      recruitEndDate: loadFromSession('recruitEndDate'),
+      maxApplyCount: loadFromSession('maxApplyCount'),
+      applicableGrades: loadFromSession('applicableGrades'),
+      interviewStartDate: loadFromSession('interviewStartDate'),
+      interviewEndDate: loadFromSession('interviewEndDate'),
+    },
+    withInterview,
+  );

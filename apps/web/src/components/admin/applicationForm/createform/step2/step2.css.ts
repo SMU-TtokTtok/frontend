@@ -50,6 +50,12 @@ export const required = style({
   color: vars.colors.primary.default,
 });
 
+export const hint = style({
+  marginTop: '8px',
+  fontSize: vars.fonts.body3,
+  color: vars.colors.surface.outline,
+});
+
 export const datePickerContainer = style({
   display: 'flex',
   justifyContent: 'start',

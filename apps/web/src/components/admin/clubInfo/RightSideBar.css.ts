@@ -145,3 +145,10 @@ export const dateInput = style({
     },
   },
 });
+
+export const dateHint = style({
+  width: '100%',
+  marginTop: '4px',
+  color: '#818181',
+  fontSize: vars.fonts.body3,
+});

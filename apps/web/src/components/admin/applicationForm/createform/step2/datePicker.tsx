@@ -1,11 +1,13 @@
 'use client';
 import Image from 'next/image';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import 'react-day-picker/dist/style.css';
 import { DayPicker } from 'react-day-picker';
 import { useDatePicker } from '@/hooks/useDatePicker';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { loadFromSession } from '@/common/util/sessionStorageUtil';
+import { getMaxRecruitEndDate } from '@/common/util/recruitPeriod';
 import * as S from './step2.css';
 import calendarIcon from '@/assets/calendar.svg';
 import { RecruitData } from '.';
@@ -26,6 +28,15 @@ function InputDate({ isStartDate, type, handleRecruitData }: InputDateProps) {
   };
   const calendarRef = useOutsideClick(handleCloseCalendar);
   const selectedDate = isStartDate ? startDate : endDate;
+  // 모집 마감일은 시작일부터 3개월 뒤 같은 날까지만 고를 수 있다
+  const recruitStart = loadFromSession<string>('recruitStartDate');
+  const disabledDays =
+    type === 'recruit' && !isStartDate && recruitStart
+      ? [
+          { before: parseISO(recruitStart) },
+          { after: getMaxRecruitEndDate(parseISO(recruitStart)) },
+        ]
+      : undefined;
 
   const handleSelect = (date?: Date) => {
     if (!date) return;
@@ -60,6 +71,7 @@ function InputDate({ isStartDate, type, handleRecruitData }: InputDateProps) {
             mode="single"
             selected={targetField === 'start' ? startDate! : endDate!}
             onSelect={handleSelect}
+            disabled={disabledDays}
             locale={ko}
             numberOfMonths={1}
             className="custom-calendar"

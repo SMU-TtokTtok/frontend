@@ -126,3 +126,12 @@ export const loading = style({
   width: '100vw',
   height: '100vh',
 });
+
+export const lockNotice = style({
+  marginTop: '12px',
+  padding: '12px 16px',
+  borderRadius: '8px',
+  backgroundColor: vars.colors.surface.cont_2,
+  color: vars.colors.surface.on_surf_var,
+  fontSize: vars.fonts.body2,
+});

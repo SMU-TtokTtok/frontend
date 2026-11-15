@@ -79,6 +79,8 @@ function FormQuestionStep() {
     }
     if (errors) {
       console.error('Validation errors:', errors);
+      const questionsError = errors.questions?._errors[0];
+      if (questionsError) alert(questionsError);
     }
   };
   return (

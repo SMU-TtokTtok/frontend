@@ -1,3 +1,6 @@
+// 서버 판정 모집 상태. 이전 서버는 보내지 않으므로 선택 필드
+export type RecruitState = 'UPCOMING' | 'OPEN' | 'CLOSED';
+
 export interface ClubItemInfo {
   id: string;
   name: string;
@@ -8,6 +11,7 @@ export interface ClubItemInfo {
   profileImageUrl: string;
   clubMemberCount: number;
   recruiting: boolean;
+  recruitState?: RecruitState;
   bookmarked: boolean;
   isDeadlineImminent: boolean;
 }

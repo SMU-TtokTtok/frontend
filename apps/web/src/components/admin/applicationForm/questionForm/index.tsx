@@ -9,6 +9,7 @@ import { QuestionStepForm, ApplyFormField, QuestionType } from '@/common/model/a
 import { ZodFormattedError } from 'zod';
 import SortableFieldWrapper from './sortableFieldWrapper';
 import { SCROLL_REF_IDS } from '../constants';
+import { QuestionLock } from '../editLock';
 export const questionTypes = [
   { type: 'SHORT_ANSWER', label: '단답형' },
   { type: 'LONG_ANSWER', label: '서술형' },
@@ -35,6 +36,8 @@ interface QuestionFormProps {
   handleReorderQuestions: (newOrder: ApplyFormField[]) => void;
   scrollRefs: React.MutableRefObject<Record<string, HTMLDivElement | null>>;
   hasRecommendTemplateSpacing?: boolean;
+  // 질문별 편집 잠금. 없으면 모든 편집을 허용한다
+  getLock?: (field: ApplyFormField) => QuestionLock;
 }
 
 function QuestionForm({
@@ -55,6 +58,7 @@ function QuestionForm({
   handleReorderQuestions,
   scrollRefs,
   hasRecommendTemplateSpacing = false,
+  getLock,
 }: QuestionFormProps) {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -118,6 +122,7 @@ function QuestionForm({
                 key={index}
                 fieldId={field.questionId || index.toString()}
                 fieldIndex={index}
+                lock={getLock?.(field)}
                 scrollRefs={scrollRefs}
                 field={field}
                 errors={errors}

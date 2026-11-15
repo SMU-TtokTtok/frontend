@@ -8,9 +8,15 @@ import { formatDateToDot2, formatToMonthDay2 } from '@/common/util/formatDate';
 import { useFollowSidebar } from '@/hooks/useFollowSidebar';
 import { sidebarTop } from './rightSide.css';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
+import { toRecruitState } from '@/common/util/recruitState';
+
+const APPLY_BUTTON_LABEL = { UPCOMING: '모집 예정', OPEN: '지원하기', CLOSED: '지원마감' };
 
 const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: string }) => {
-  const { applyStartDate, applyDeadLine, grades, maxApplyCount, recruiting } = clubIntro;
+  const { applyStartDate, applyDeadLine, grades, maxApplyCount, recruiting, recruitState } =
+    clubIntro;
+  const state = toRecruitState(recruitState, recruiting);
+  const isOpen = state === 'OPEN';
   const router = useRouter();
   // 커스텀 훅 사용
   const { barPosition } = useFollowSidebar({ initialPosition: 124 });
@@ -23,7 +29,7 @@ const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: st
       })}
     >
       <div className={S.contentFlex}>
-        {recruiting ? (
+        {state !== 'CLOSED' ? (
           <>
             <div className={S.itemFlex}>
               <div className={S.itemTitle}>모집기간</div>
@@ -45,14 +51,14 @@ const RightSide = ({ clubIntro, clubId }: { clubIntro: UserClubIntro; clubId: st
         )}
       </div>
       <Button
-        variant={recruiting ? 'primary' : 'tertiary'}
-        className={`${S.button} ${!recruiting ? S.buttonDisabled : ''}`}
-        disabled={!recruiting}
+        variant={isOpen ? 'primary' : 'tertiary'}
+        className={`${S.button} ${!isOpen ? S.buttonDisabled : ''}`}
+        disabled={!isOpen}
         onClick={() => {
           router.push(ROUTES.APPLIY_FORM(clubId));
         }}
       >
-        {recruiting ? '지원하기' : '지원마감'}
+        {APPLY_BUTTON_LABEL[state]}
       </Button>
     </div>
   );

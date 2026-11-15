@@ -39,7 +39,7 @@ const ApplyFormFieldSchema = z
 
 const ApplicationFormSchema = z.object({
   title: z.string().min(1, '폼 제목은 필수입니다.'),
-  questions: z.array(ApplyFormFieldSchema),
+  questions: z.array(ApplyFormFieldSchema).min(1, '질문을 1개 이상 추가해 주세요.'),
 });
 
 export const useApplicationFormValidation = (formData: QuestionStepForm) => {

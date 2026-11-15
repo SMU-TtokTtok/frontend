@@ -440,3 +440,14 @@ export const recruitConditionBox = style({
     },
   },
 });
+
+export const loading = style({
+  minHeight: '320px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: '12px',
+  color: vars.colors.surface.on_surf_var,
+  fontSize: vars.fonts.body1,
+});
