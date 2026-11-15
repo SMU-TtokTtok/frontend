@@ -81,11 +81,11 @@ export default class ApiClient {
       });
 
       if (!response.ok) {
-        const body = await response.json().catch(() => null);
+        const errorBody = await response.json().catch(() => null);
         throw new CustomHttpError(
           `HTTP ${response.status}: ${response.statusText}`,
           response.status,
-          typeof body?.details === 'string' ? body.details : undefined,
+          typeof errorBody?.details === 'string' ? errorBody.details : undefined,
         );
       }
 
