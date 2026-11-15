@@ -2,3 +2,13 @@
 dist
 .next
 node_modules
+
+# Claude and Codex agent configuration
+.claude/
+.codex/
+.agents/
+CLAUDE.md
+CLAUDE.local.md
+AGENTS.md
+AGENTS.override.md
+.mcp.json

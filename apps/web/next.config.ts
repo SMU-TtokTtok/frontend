@@ -3,6 +3,7 @@ import type { NextConfig } from 'next';
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
 import withBundleAnalyzer from '@next/bundle-analyzer';
 import withPWA from 'next-pwa';
+import path from 'node:path';
 
 const withVanillaExtract = createVanillaExtractPlugin({
   unstable_turbopack: { mode: 'auto' },
@@ -11,6 +12,9 @@ const withAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: path.resolve(__dirname, '../..'),
+  },
   images: {
     remotePatterns: [
       {

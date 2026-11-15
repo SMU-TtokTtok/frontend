@@ -117,9 +117,6 @@ importers:
       '@babel/types':
         specifier: ^7.29.0
         version: 7.29.0
-      '@eslint/eslintrc':
-        specifier: ^3
-        version: 3.3.3
       '@next/bundle-analyzer':
         specifier: ^16.1.1
         version: 16.1.1
