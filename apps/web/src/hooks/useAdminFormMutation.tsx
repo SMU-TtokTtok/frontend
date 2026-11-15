@@ -4,6 +4,7 @@ import { QuestionStepForm } from '@/common/model/applicationForm';
 import { patchApplicantForm } from '@/components/admin/applicationForm/api/applicationForm';
 import { applicationFormKey, clubFormKey } from './queries/key';
 import { CustomHttpError } from '@/common/apis/apiClient';
+import { getErrorMessage } from '@/common/util/getErrorMessage';
 export const useUpdateFormMutation = () => {
   const queryClient = useQueryClient();
   const { adminFormInfo } = applicationFormKey;
@@ -20,7 +21,7 @@ export const useUpdateFormMutation = () => {
     onError: (error) => {
       const customError = error as CustomHttpError;
       if (customError.status !== 401) {
-        alert('수정에 실패했습니다.');
+        alert(getErrorMessage(customError, '수정에 실패했습니다.'));
       }
     },
   });

@@ -5,6 +5,7 @@ import { ROUTES } from '@/common/constants/routes';
 import { QuestionStepForm } from '@/common/model/applicationForm';
 import { postApplicantForm } from '@/components/admin/applicationForm/createform/step3/api/step3';
 import { CustomHttpError } from '@/common/apis/apiClient';
+import { getErrorMessage } from '@/common/util/getErrorMessage';
 import { clearFormSession } from '@/common/util/sessionStorageUtil';
 
 export const useCreateFormMutation = () => {
@@ -22,7 +23,7 @@ export const useCreateFormMutation = () => {
     onError: (error) => {
       const customError = error as CustomHttpError;
       if (customError.status !== 401) {
-        alert('제출에 실패했습니다.');
+        alert(getErrorMessage(customError, '제출에 실패했습니다.'));
       }
     },
   });
