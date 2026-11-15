@@ -7,7 +7,7 @@ export const useStepTwoForm = () => {
     recruitStartDate: loadFromSession('recruitStartDate'),
     recruitEndDate: loadFromSession('recruitEndDate'),
     maxApplyCount: loadFromSession('maxApplyCount'),
-    applicableGrades: loadFromSession('selectedGrades'),
+    applicableGrades: loadFromSession('applicableGrades'),
     hasInterview: loadFromSession('hasInterview'),
     interviewStartDate: loadFromSession('interviewStartDate'),
     interviewEndDate: loadFromSession('interviewEndDate'),
